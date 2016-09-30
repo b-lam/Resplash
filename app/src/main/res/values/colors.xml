@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#36393c</color>
+    <color name="colorAccent">#26292c</color>
+    <color name="Link_Water">#d1d2d4</color>
+    <color name="primary_text_material_dark">#36393c</color>
+    <color name="Balck_Glass">#83000000</color>
+</resources>
