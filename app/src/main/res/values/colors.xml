@@ -7,4 +7,10 @@
     <color name="Link_Water">#d1d2d4</color>
     <color name="primary_text_material_dark">#36393c</color>
     <color name="Black_Glass">#6e000000</color>
+    <color name="Light_Grey">#f4f4f4</color>
+    <color name="primary_text_material_light">#000000</color>
+    <color name="secondary_text_material_light">#000000</color>
+    <color name="secondary_text_material_dark">#ffffff</color>
+    <color name="fab_pressed">#1f2225</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--<item-->
-        <!--android:id="@+id/action_settings"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/action_settings"-->
-        <!--app:showAsAction="never" />-->
+
+    <item android:id="@+id/action_search"
+        android:title="@string/menu_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/sort_by"
+        android:title="@string/menu_sort"
+        android:icon="@drawable/ic_sort_black_24dp"
+        app:showAsAction="ifRoom|withText">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item android:id="@+id/menu_item_featured_latest"
+                    android:title="@string/menu_item_latest"
+                    android:icon="@drawable/ic_trending_up_black_24dp"/>
+                <item android:id="@+id/menu_item_featured_oldest"
+                    android:title="@string/menu_item_oldest"
+                    android:icon="@drawable/ic_restore_black_24dp"/>
+                <item android:id="@+id/menu_item_featured_popular"
+                    android:title="@string/menu_item_popular"
+                    android:icon="@drawable/ic_whatshot_black_24dp"/>
+                <item android:id="@+id/menu_item_new_latest"
+                    android:title="@string/menu_item_latest"
+                    android:icon="@drawable/ic_trending_up_black_24dp"/>
+                <item android:id="@+id/menu_item_new_oldest"
+                    android:title="@string/menu_item_oldest"
+                    android:icon="@drawable/ic_restore_black_24dp"/>
+                <item android:id="@+id/menu_item_new_popular"
+                    android:title="@string/menu_item_popular"
+                    android:icon="@drawable/ic_whatshot_black_24dp"/>
+                <item android:id="@+id/menu_item_all"
+                    android:title="@string/menu_item_all"
+                    android:icon="@drawable/ic_filter_hdr_black_24dp"/>
+                <item android:id="@+id/menu_item_curated"
+                    android:title="@string/menu_item_curated"
+                    android:icon="@drawable/ic_favorite_black_24dp"/>
+                <item android:id="@+id/menu_item_featured"
+                    android:title="@string/menu_item_featured"
+                    android:icon="@drawable/ic_stars_black_24dp"/>
+            </group>
+        </menu>
+    </item>
+
 </menu>

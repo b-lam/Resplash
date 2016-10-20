@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.github.b_lam.resplash.SquareFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/item_image_grid">
+
+    <ImageView
+        android:id="@+id/item_image_grid_img"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:transitionName="imageCover"
+        android:background="@color/colorPrimary"/>
+
+</io.github.b_lam.resplash.SquareFrameLayout>

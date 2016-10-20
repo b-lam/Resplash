@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/title_quality_section">
+
+        <ListPreference
+            android:key="load_quality"
+            android:title="@string/title_load_quality_preference"
+            android:summary="@string/summary_load_quality_preference"
+            android:dialogTitle="@string/title_load_quality_preference"
+            android:entries="@array/quality_options"
+            android:entryValues="@array/quality_options"
+            android:defaultValue="Regular"/>
+
+        <ListPreference
+            android:key="download_quality"
+            android:title="@string/title_download_quality_preference"
+            android:summary="@string/summary_download_quality_preference"
+            android:dialogTitle="@string/title_download_quality_preference"
+            android:entries="@array/quality_options"
+            android:entryValues="@array/quality_options"
+            android:defaultValue="Raw"/>
+
+        <!--<CheckBoxPreference-->
+            <!--android:key="checkbox_preference"-->
+            <!--android:title="@string/title_checkbox_preference"-->
+            <!--android:defaultValue="@string/default_checkbox_preference"/>-->
+
+        <!--<EditTextPreference-->
+            <!--android:key="edittext_preference"-->
+            <!--android:title="@string/title_edittext_preference"-->
+            <!--android:summary="@string/summary_edittext_preference"-->
+            <!--android:dialogTitle="@string/dialog_title_edittext_preference"-->
+            <!--android:dependency="checkbox_preference" />-->
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_layout_section">
+        <ListPreference
+            android:key="item_layout"
+            android:title="@string/title_layout_preference"
+            android:summary="@string/summary_layout_preference"
+            android:dialogTitle="@string/title_layout_preference"
+            android:entries="@array/layout_options"
+            android:entryValues="@array/layout_options"
+            android:defaultValue="List"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/title_other_section">
+
+        <Preference
+        android:title="@string/title_intent_preference">
+        <intent android:action="android.intent.action.VIEW"
+        android:data="http://unsplash.com/" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

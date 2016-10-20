@@ -4,8 +4,71 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_share">Share</string>
+    <string name="action_view_on_unsplash">Open in browser</string>
+
+
+    <string name="download_complete">Download Complete</string>
+
+    <string name="APPLICATION_ID">392290b3eb423d477266bece8247597c52b3016bf324f9bacc8e7d65b78687bd</string>
+    <string name="APPLICATION_SECRET">d85dc1ef9792cf5311f5210ab35e0898b99fc528dced419d83a0d2835bd8b62a</string>
+
+    <string name="search_example">Example: \"Mountains\"</string>
+
+    <!-- ErrorView -->
+    <string name="error_http">Server Error</string>
+    <string name="error_http_subtitle">There seems to be a problem with the server.</string>
+    <string name="error_network">No connection</string>
+    <string name="error_network_subtitle">There seems to be a problem with your internet.</string>
+
+    <!-- Settings -->
+    <string name="title_quality_section">Quality</string>
+    <string name="title_load_quality_preference">Load Quality</string>
+    <string name="summary_load_quality_preference">Choose the quality of the images that are loaded</string>
+    <string name="title_download_quality_preference">Download Quality</string>
+    <string name="summary_download_quality_preference">Choose the quality of the images that are downloaded</string>
+    <array name="quality_options">
+        <item>Raw</item>
+        <item>Full</item>
+        <item>Regular</item>
+        <item>Small</item>
+        <item>Thumb</item>
+    </array>
+    <string name="title_layout_section">Layout</string>
+    <string name="title_layout_preference">Choose Layout</string>
+    <string name="summary_layout_preference">Choose how images are displayed</string>
+    <array name="layout_options">
+        <item>List</item>
+        <item>Cards</item>
+        <item>Grid</item>
+    </array>
+    <string name="title_other_section">Other</string>
+    <string name="title_intent_preference">Go to Unsplash.com</string>
+
+    <!-- Menu -->
+    <string name="menu_search">Search</string>
+    <string name="menu_sort">Sort by</string>
+    <string name="menu_item_latest">Latest</string>
+    <string name="menu_item_oldest">Oldest</string>
+    <string name="menu_item_popular">Popular</string>
+    <string name="menu_item_random">Random</string>
+    <string name="menu_item_all">All</string>
+    <string name="menu_item_curated">Curated</string>
+    <string name="menu_item_featured">Featured</string>
+
+    <!-- Intro -->
+    <string name="welcome">Welcome</string>
+    <string name="description">An Android Unsplash Client</string>
+    <string name="stats">Stats</string>
+    <string name="photo_info">Info</string>
+
+    <!-- Search -->
+    <string name="search_hint">Search</string>
+    <string name="search_title">Search</string>
+    <string name="action_clear_text">Clear text</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_results">No results</string>
+
 </resources>

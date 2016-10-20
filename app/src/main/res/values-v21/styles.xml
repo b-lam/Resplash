@@ -5,6 +5,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/Link_Water</item>
+        <item name="android:navigationBarColor">@color/Link_Water</item>
     </style>
 
 </resources>
