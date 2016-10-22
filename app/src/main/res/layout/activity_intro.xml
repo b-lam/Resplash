@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.github.b_lam.resplash.Activities.IntroActivity"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        android:id="@+id/activity_intro_bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <com.pixelcan.inkpageindicator.InkPageIndicator
+            android:id="@+id/activity_intro_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:animationDuration="300"
+            app:pageIndicatorColor="@color/Link_Water"
+            app:currentPageIndicatorColor="@color/colorAccent"
+            app:dotDiameter="8dp"
+            app:dotGap="8dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_intro_button"
+            android:text="Next"
+            android:background="@color/transparent"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignTop="@id/activity_intro_bottomBar"
+        android:background="@color/Link_Water" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/activity_intro_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/activity_intro_bottomBar">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/activity_intro_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <ImageButton
+        android:id="@+id/activity_intro_btnClose"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        style="@style/material_image_button"
+        android:src="@drawable/ic_close_black_24dp" />
+
+</RelativeLayout>

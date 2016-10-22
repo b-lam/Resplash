@@ -48,4 +48,56 @@
         <item name="android:layout_margin">8dp</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
     </style>
+
+    <style name = "IntroTitleStyle" parent="@android:style/TextAppearance.Large">
+        <item name ="android:textColor">#000000</item>
+        <item name ="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name ="android:textSize">25sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name ="android:layout_marginLeft">30dp</item>
+        <item name ="android:layout_marginRight">30dp</item>
+        <item name ="android:layout_marginTop">100dp</item>
+    </style>
+
+    <style name="IntroDescriptionStyle" parent="@android:style/TextAppearance.Small">
+        <item name ="android:textColor">#000000</item>
+        <item name ="android:textAlignment">center</item>
+        <item name ="android:textSize">16sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name ="android:layout_marginTop">50dp</item>
+        <item name ="android:layout_marginLeft">30dp</item>
+        <item name ="android:layout_marginRight">30dp</item>
+    </style>
+
+    <style name="material_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="about_entry">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="about_title_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="about_subtitle_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

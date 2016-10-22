@@ -35,6 +35,7 @@ public class Resplash extends Application{
     // Unsplash url.
     public static final String UNSPLASH_API_BASE_URL = "https://api.unsplash.com/";
     public static final String UNSPLASH_AUTH_BASE_URL = "https://unsplash.com/";
+    public static final String UNSPLASH_UPLOAD_URL = "https://unsplash.com/submit";
     public static final String UNSPLASH_URL = "https://unsplash.com/";
     public static final String UNSPLASH_JOIN_URL = "https://unsplash.com/join";
     public static final String UNSPLASH_LOGIN_CALLBACK = "unsplash-auth-callback";
@@ -43,10 +44,6 @@ public class Resplash extends Application{
             + "&redirect_uri=" + "resplash%3A%2F%2F" + UNSPLASH_LOGIN_CALLBACK
             + "&response_type=" + "code"
             + "&scope=" + "public+read_user+write_user+read_photos+write_photos+write_likes+read_collections+write_collections";
-
-    // application data.
-    public static final String AUTHOR_GITHUB = "https://github.com/b-lam";
-    public static final String MYSPLASH_GITHUB = "https://github.com/b-lam/Resplash";
 
     public static final String DATE_FORMAT = "yyyy/MM/dd";
     public static final String DOWNLOAD_PATH = Environment.getExternalStorageDirectory().toString() + "/Pictures/Resplash/";

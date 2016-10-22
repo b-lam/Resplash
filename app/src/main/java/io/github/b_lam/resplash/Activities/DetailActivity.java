@@ -71,9 +71,7 @@ public class DetailActivity extends AppCompatActivity {
     private Photo mPhoto;
     private PhotoDetails mPhotoDetails;
     private PhotoService mService;
-    private ImageDownloader imageDownloader;
     private SharedPreferences sharedPreferences;
-    private PhotoService.OnRequestPhotoDetailsListener mPhotoDetailsRequestListener;
     private Drawable colorIcon;
     final static int TYPE_DOWNLOAD = 1;
     final static int TYPE_WALLPAPER = 2;
@@ -140,7 +138,7 @@ public class DetailActivity extends AppCompatActivity {
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
 
-        mPhotoDetailsRequestListener = new PhotoService.OnRequestPhotoDetailsListener() {
+        PhotoService.OnRequestPhotoDetailsListener mPhotoDetailsRequestListener = new PhotoService.OnRequestPhotoDetailsListener() {
             @Override
             public void onRequestPhotoDetailsSuccess(Call<PhotoDetails> call, Response<PhotoDetails> response) {
                 Log.d(TAG, String.valueOf(response.code()));
@@ -343,7 +341,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void downloadFromURL(String url, final int type){
-        imageDownloader = new ImageDownloader(new ImageDownloader.OnImageLoaderListener() {
+        ImageDownloader imageDownloader = new ImageDownloader(new ImageDownloader.OnImageLoaderListener() {
             @Override
             public void onError(ImageDownloader.ImageError error) {
                 progressBar.setVisibility(View.INVISIBLE);

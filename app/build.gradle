@@ -6,7 +6,7 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "io.github.b_lam.resplash"
-        minSdkVersion 23
+        minSdkVersion 22
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -49,10 +49,11 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.6.0@aar') {
         transitive = true
     }
+    compile "com.mikepenz:iconics-core:2.8.1@aar"
+    compile 'com.mikepenz:community-material-typeface:1.5.54.2@aar'
     compile 'com.github.xiprox.errorview:library:2.+'
-    compile 'com.dmitrymalkovich.android:progress-fab:1.6'
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'com.github.clans:fab:1.6.4'
+    compile 'com.pacioianu.david:ink-page-indicator:1.2.0'
 }

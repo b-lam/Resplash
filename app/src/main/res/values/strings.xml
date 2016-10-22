@@ -7,13 +7,10 @@
     <string name="action_share">Share</string>
     <string name="action_view_on_unsplash">Open in browser</string>
 
-
     <string name="download_complete">Download Complete</string>
 
     <string name="APPLICATION_ID">392290b3eb423d477266bece8247597c52b3016bf324f9bacc8e7d65b78687bd</string>
     <string name="APPLICATION_SECRET">d85dc1ef9792cf5311f5210ab35e0898b99fc528dced419d83a0d2835bd8b62a</string>
-
-    <string name="search_example">Example: \"Mountains\"</string>
 
     <!-- ErrorView -->
     <string name="error_http">Server Error</string>
@@ -57,18 +54,61 @@
     <string name="menu_item_featured">Featured</string>
 
     <!-- Intro -->
-    <string name="welcome">Welcome</string>
-    <string name="description">An Android Unsplash Client</string>
-    <string name="stats">Stats</string>
-    <string name="photo_info">Info</string>
+    <string name="intro_welcome_title">Resplash</string>
+    <string name="intro_welcome_description">An Unsplash Android Client</string>
+    <string name="intro_download_title">Hi-Res Photos</string>
+    <string name="intro_download_description">Free (do whatever you want) high-resolution photos</string>
+    <string name="intro_done">Go</string>
+    <string name="intro_next">Next</string>
 
     <!-- Search -->
     <string name="search_hint">Search</string>
     <string name="search_title">Search</string>
     <string name="action_clear_text">Clear text</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- About -->
+    <string name="about_title">About</string>
+    <string name="about_unsplash_title">Unsplash.com</string>
+    <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
+    <string name="about_version_title">Version</string>
+    <string name="about_version_subtitle">1.0</string>
+    <string name="about_changelog_title">Changelog</string>
+    <string name="changelog">No changes yet</string>
+    <string name="about_introduction_title">Introduction</string>
+    <string name="about_github_title">GitHub</string>
+    <string name="about_author_title">Brandon Lam</string>
+    <string name="about_author_card_title">Author</string>
+    <string name="about_author_subtitle">Toronto, Ontario, Canada</string>
+    <string name="about_website_title">Visit website</string>
+    <string name="about_instagram_title">Follow on Instagram</string>
+    <string name="about_libraries_card_title">Libraries</string>
+    <string name="about_library1_title">Retrofit</string>
+    <string name="about_library1_subtitle">Type-safe HTTP client for Android and Java by Square, Inc.</string>
+    <string name="about_library2_title">Glide</string>
+    <string name="about_library2_subtitle">An image loading and caching library for Android focused on smooth scrolling</string>
+    <string name="about_library3_title">FastAdapter</string>
+    <string name="about_library3_subtitle">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
+    <string name="about_library4_title">Android-Iconics</string>
+    <string name="about_library4_subtitle">Use any icon font, or vector (.svg) as drawable in your application.</string>
+    <string name="about_library5_title">MaterialDrawer</string>
+    <string name="about_library5_subtitle">The flexible, easy to use, all in one drawer library for your Android project</string>
+    <string name="about_library6_title">InkPageIndicator</string>
+    <string name="about_library6_subtitle">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
+    <string name="about_library7_title">Butter Knife</string>
+    <string name="about_library7_subtitle">Bind Android views and callbacks to fields and methods</string>
+    <string name="about_library8_title">ErrorView</string>
+    <string name="about_library8_subtitle">A custom view that displays an error image, a title, and a subtitle given an HTTP status code</string>
+    <string name="about_library9_title">PhotoView</string>
+    <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
+    <string name="about_library10_title">FloatingActionButton</string>
+    <string name="about_library10_subtitle">Android Floating Action Button based on Material Design specification</string>
+
+    <string name="stats">Stats</string>
+    <string name="photo_info">Info</string>
+
     <string name="no_results">No results</string>
+
+    <string name="login">Login</string>
+    <string name="join">Join</string>
 
 </resources>

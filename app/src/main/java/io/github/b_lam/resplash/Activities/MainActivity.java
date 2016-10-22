@@ -16,7 +16,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,31 +24,39 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.bumptech.glide.GlideBuilder;
-import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
+import com.mikepenz.community_material_typeface_library.CommunityMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.b_lam.resplash.Fragments.CollectionFragment;
 import io.github.b_lam.resplash.Fragments.FeaturedFragment;
 import io.github.b_lam.resplash.Fragments.NewFragment;
 import io.github.b_lam.resplash.R;
+import io.github.b_lam.resplash.Resplash;
 
 public class MainActivity extends AppCompatActivity{
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.viewpager) ViewPager mViewPager;
     @BindView(R.id.tabs) TabLayout mTabLayout;
+    @BindView(R.id.fab_upload) FloatingActionButton fabUpload;
 
     private String TAG = "MainActivity";
-    public Drawer drawer;
+    public Drawer drawer = null;
+    private AccountHeader headerResult = null;
     private MenuItem mItemFeaturedLatest, mItemFeaturedOldest, mItemFeaturedPopular, mItemNewLatest, mItemNewOldest, mItemNewPopular, mItemAll, mItemCurated, mItemFeatured;
 
     @Override
@@ -62,7 +69,65 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(mToolbar);
         setTitle(getString(R.string.app_name));
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+
+                if (isFirstStart) {
+
+                    Intent i = new Intent(MainActivity.this, IntroActivity.class);
+                    startActivity(i);
+
+                    SharedPreferences.Editor e = getPrefs.edit();
+                    e.putBoolean("firstStart", false);
+                    e.apply();
+                }
+            }
+        }).start();
+
         isStoragePermissionGranted();
+
+        // Create a few sample profile
+        // NOTE you have to define the loader logic too. See the CustomApplication for more details
+        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460").withIdentifier(100);
+        final IProfile profile2 = new ProfileDrawerItem().withName("Bernat Borras").withEmail("alorma@github.com").withIcon(Uri.parse("https://avatars3.githubusercontent.com/u/887462?v=3&s=460")).withIdentifier(101);
+
+        // Create the AccountHeader
+        headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withTranslucentStatusBar(true)
+                .addProfiles(
+                        profile,
+                        profile2,
+                        //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
+                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account"),
+                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(R.drawable.ic_settings_black_24dp).withIdentifier(100001)
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+                        //sample usage of the onProfileChanged listener
+                        //if the clicked item has the identifier 1 add a new profile ;)
+                        if (profile instanceof IDrawerItem && profile.getIdentifier() == 100000) {
+                            int count = 100 + headerResult.getProfiles().size() + 1;
+                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman" + count).withEmail("batman" + count + "@gmail.com").withIdentifier(count);
+                            if (headerResult.getProfiles() != null) {
+                                //we know that there are 2 setting elements. set the new profile above them ;)
+                                headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
+                            } else {
+                                headerResult.addProfiles(newProfile);
+                            }
+                        }
+
+                        //false if you have not consumed the event and it should close the drawer
+                        return false;
+                    }
+                })
+                .withSavedInstance(savedInstanceState)
+                .build();
 
         drawer = new DrawerBuilder()
                 .withActivity(this)
@@ -71,6 +136,7 @@ public class MainActivity extends AppCompatActivity{
                 .withToolbar(mToolbar)
                 .withHeader(R.layout.nav_header_main)
                 .withDelayDrawerClickEvent(200)
+//                .withAccountHeader(headerResult)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Featured").withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)),
                         new PrimaryDrawerItem().withName("New").withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)),
@@ -78,7 +144,8 @@ public class MainActivity extends AppCompatActivity{
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName("Settings").withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("Github").withIcon(getDrawable(R.drawable.github_mark)).withSelectable(false)
+                        new PrimaryDrawerItem().withName("About").withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false),
+                        new PrimaryDrawerItem().withName("Login").withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_plus).sizeDp(24).paddingDp(4)).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
 
@@ -99,10 +166,10 @@ public class MainActivity extends AppCompatActivity{
                                     startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                                     break;
                                 case 7:
-                                    String url = "https://github.com/b-lam/Resplash";
-                                    Intent i = new Intent(Intent.ACTION_VIEW);
-                                    i.setData(Uri.parse(url));
-                                    startActivity(i);
+                                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                    break;
+                                case 8:
+                                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
                                     break;
                                 default:
                                     break;
@@ -146,6 +213,14 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        fabUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
 
