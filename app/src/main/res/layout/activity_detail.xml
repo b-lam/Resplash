@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.b_lam.resplash.Activities.DetailActivity"
+    tools:context="io.github.b_lam.resplash.activities.DetailActivity"
     android:clipToPadding="false">
 
     <android.support.design.widget.AppBarLayout

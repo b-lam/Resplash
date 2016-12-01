@@ -1,13 +1,13 @@
-package io.github.b_lam.resplash.Data.Service;
+package io.github.b_lam.resplash.data.service;
 
 import com.google.gson.GsonBuilder;
 
 
-import io.github.b_lam.resplash.Data.Api.SearchApi;
-import io.github.b_lam.resplash.Data.Data.SearchCollectionsResult;
-import io.github.b_lam.resplash.Data.Data.SearchPhotosResult;
-import io.github.b_lam.resplash.Data.Data.SearchUsersResult;
-import io.github.b_lam.resplash.Data.Tools.AuthInterceptor;
+import io.github.b_lam.resplash.data.api.SearchApi;
+import io.github.b_lam.resplash.data.data.SearchCollectionsResult;
+import io.github.b_lam.resplash.data.data.SearchPhotosResult;
+import io.github.b_lam.resplash.data.data.SearchUsersResult;
+import io.github.b_lam.resplash.data.tools.AuthInterceptor;
 import io.github.b_lam.resplash.Resplash;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;

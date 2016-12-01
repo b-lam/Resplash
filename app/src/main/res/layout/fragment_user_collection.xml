@@ -5,7 +5,7 @@
     android:id="@+id/user_collection_container"
     android:background="@color/md_white_1000"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="io.github.b_lam.resplash.Fragments.UserCollectionFragment">
+    tools:context="io.github.b_lam.resplash.fragments.UserCollectionFragment">
 
     <ProgressBar
         android:id="@+id/fragment_user_collection_progress"

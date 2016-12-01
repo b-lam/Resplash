@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Fragments;
+package io.github.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,10 +24,9 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import io.github.b_lam.resplash.Activities.CollectionDetailActivity;
-import io.github.b_lam.resplash.Activities.DetailActivity;
-import io.github.b_lam.resplash.Data.Data.Collection;
-import io.github.b_lam.resplash.Data.Service.CollectionService;
+import io.github.b_lam.resplash.activities.CollectionDetailActivity;
+import io.github.b_lam.resplash.data.data.Collection;
+import io.github.b_lam.resplash.data.service.CollectionService;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;

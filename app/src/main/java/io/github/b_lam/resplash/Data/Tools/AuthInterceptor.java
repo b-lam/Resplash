@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Data.Tools;
+package io.github.b_lam.resplash.data.tools;
 
 import java.io.IOException;
 

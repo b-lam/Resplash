@@ -1,9 +1,11 @@
-package io.github.b_lam.resplash.Activities;
+package io.github.b_lam.resplash.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
+import android.widget.ImageView;
+import com.bumptech.glide.Glide;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -36,14 +39,16 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-
+import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
+import com.mikepenz.materialdrawer.util.DrawerImageLoader;
+import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.b_lam.resplash.Fragments.CollectionFragment;
-import io.github.b_lam.resplash.Fragments.FeaturedFragment;
-import io.github.b_lam.resplash.Fragments.NewFragment;
+import io.github.b_lam.resplash.fragments.CollectionFragment;
+import io.github.b_lam.resplash.fragments.FeaturedFragment;
+import io.github.b_lam.resplash.fragments.NewFragment;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity{
 
     private String TAG = "MainActivity";
     public Drawer drawer = null;
-    private AccountHeader headerResult = null;
+    private AccountHeader drawerHeader = null;
     private MenuItem mItemFeaturedLatest, mItemFeaturedOldest, mItemFeaturedPopular, mItemNewLatest, mItemNewOldest, mItemNewPopular, mItemAll, mItemCurated, mItemFeatured;
 
     @Override
@@ -90,42 +95,68 @@ public class MainActivity extends AppCompatActivity{
 
         isStoragePermissionGranted();
 
-        // Create a few sample profile
+        DrawerImageLoader.init(new AbstractDrawerImageLoader() {
+            @Override
+            public void set(ImageView imageView, Uri uri, Drawable placeholder) {
+                Glide.with(imageView.getContext()).load(uri).placeholder(placeholder).into(imageView);
+            }
+
+            @Override
+            public void cancel(ImageView imageView) {
+                Glide.clear(imageView);
+            }
+
+            @Override
+            public Drawable placeholder(Context ctx, String tag) {
+                //define different placeholders for different imageView targets
+                //default tags are accessible via the DrawerImageLoader.Tags
+                //custom ones can be checked via string. see the CustomUrlBasePrimaryDrawerItem LINE 111
+                if (DrawerImageLoader.Tags.PROFILE.name().equals(tag)) {
+                    return DrawerUIUtils.getPlaceHolder(ctx);
+                } else if (DrawerImageLoader.Tags.ACCOUNT_HEADER.name().equals(tag)) {
+                    return new IconicsDrawable(ctx).iconText(" ").backgroundColorRes(com.mikepenz.materialdrawer.R.color.primary).sizeDp(56);
+                } else if ("customUrlItem".equals(tag)) {
+                    return new IconicsDrawable(ctx).iconText(" ").backgroundColorRes(R.color.md_red_500).sizeDp(56);
+                }
+
+                //we use the default one for DrawerImageLoader.Tags.PROFILE_DRAWER_ITEM.name()
+
+                return super.placeholder(ctx, tag);
+            }
+        });
+
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
-        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460").withIdentifier(100);
-        final IProfile profile2 = new ProfileDrawerItem().withName("Bernat Borras").withEmail("alorma@github.com").withIcon(Uri.parse("https://avatars3.githubusercontent.com/u/887462?v=3&s=460")).withIdentifier(101);
+        final IProfile profile = new ProfileDrawerItem().withName("Brandon Lam").withEmail("whoisbrandonlam@gmail.com").withIcon("https://images.unsplash.com/profile-1462642403018-51d1fa7ba175?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=6ed6fa25f925af9332ce3d6b6d2d6d81").withIdentifier(100);
 
         // Create the AccountHeader
-        headerResult = new AccountHeaderBuilder()
+        drawerHeader = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(true)
+                .withTextColorRes(R.color.colorText)
                 .addProfiles(
                         profile,
-                        profile2,
-                        //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account"),
-                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(R.drawable.ic_settings_black_24dp).withIdentifier(100001)
+                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Unsplash Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_plus).actionBar().paddingDp(5)).withOnDrawerItemClickListener(drawerItemClickListener),
+                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_settings).paddingDp(4)).withIdentifier(100001).withOnDrawerItemClickListener(drawerItemClickListener)
                 )
-                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-                    @Override
-                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        //sample usage of the onProfileChanged listener
-                        //if the clicked item has the identifier 1 add a new profile ;)
-                        if (profile instanceof IDrawerItem && profile.getIdentifier() == 100000) {
-                            int count = 100 + headerResult.getProfiles().size() + 1;
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman" + count).withEmail("batman" + count + "@gmail.com").withIdentifier(count);
-                            if (headerResult.getProfiles() != null) {
-                                //we know that there are 2 setting elements. set the new profile above them ;)
-                                headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
-                            } else {
-                                headerResult.addProfiles(newProfile);
-                            }
-                        }
-
-                        //false if you have not consumed the event and it should close the drawer
-                        return false;
-                    }
-                })
+//                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+//                    @Override
+//                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+//                        //sample usage of the onProfileChanged listener
+//                        //if the clicked item has the identifier 1 add a new profile ;)
+//                        if (profile instanceof IDrawerItem && profile.getIdentifier() == 100000) {
+//                            int count = 100 + drawerHeader.getProfiles().size() + 1;
+//                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman" + count).withEmail("batman" + count + "@gmail.com").withIdentifier(count);
+//                            if (drawerHeader.getProfiles() != null) {
+//                                //we know that there are 2 setting elements. set the new profile above them ;)
+//                                drawerHeader.addProfile(newProfile, drawerHeader.getProfiles().size() - 2);
+//                            } else {
+//                                drawerHeader.addProfiles(newProfile);
+//                            }
+//                        }
+//                        //false if you have not consumed the event and it should close the drawer
+//                        return false;
+//                    }
+//                })
                 .withSavedInstance(savedInstanceState)
                 .build();
 
@@ -134,50 +165,19 @@ public class MainActivity extends AppCompatActivity{
                 .withTranslucentStatusBar(false)
                 .withActionBarDrawerToggle(true)
                 .withToolbar(mToolbar)
-                .withHeader(R.layout.nav_header_main)
                 .withDelayDrawerClickEvent(200)
-//                .withAccountHeader(headerResult)
+                .withAccountHeader(drawerHeader)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Featured").withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)),
                         new PrimaryDrawerItem().withName("New").withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)),
                         new PrimaryDrawerItem().withName("Categories").withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("Settings").withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
+                        new PrimaryDrawerItem().withName("Settings").withIdentifier(4).withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("About").withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false),
-                        new PrimaryDrawerItem().withName("Login").withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_plus).sizeDp(24).paddingDp(4)).withSelectable(false)
+                        new PrimaryDrawerItem().withName("About").withIdentifier(5).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false),
+                        new PrimaryDrawerItem().withName("Login").withIdentifier(6).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_plus).sizeDp(24).paddingDp(4)).withSelectable(false)
                 )
-                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (drawerItem != null) {
-                            switch (position){
-                                case 1:
-                                    mViewPager.setCurrentItem(0);
-                                    break;
-                                case 2:
-                                    mViewPager.setCurrentItem(1);
-                                    break;
-                                case 3:
-                                    mViewPager.setCurrentItem(2);
-                                    break;
-                                case 5:
-                                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                                    break;
-                                case 7:
-                                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
-                                    break;
-                                case 8:
-                                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        return false;
-                    }
-                })
+                .withOnDrawerItemClickListener(drawerItemClickListener)
                 .build();
 
         drawer.getRecyclerView().setVerticalScrollBarEnabled(false);
@@ -225,6 +225,39 @@ public class MainActivity extends AppCompatActivity{
         });
 
     }
+
+    private Drawer.OnDrawerItemClickListener drawerItemClickListener = new Drawer.OnDrawerItemClickListener() {
+        @Override
+        public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+            if (drawerItem != null) {
+
+                Log.d(TAG, "Identifier: " + drawerItem.getIdentifier());
+
+                Intent intent = null;
+
+                if(drawerItem.getIdentifier() == 1){
+                    mViewPager.setCurrentItem(0);
+                }else if(drawerItem.getIdentifier() == 2){
+                    mViewPager.setCurrentItem(1);
+                }else if(drawerItem.getIdentifier() == 3){
+                    mViewPager.setCurrentItem(2);
+                }else if(drawerItem.getIdentifier() == 4){
+                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                }else if(drawerItem.getIdentifier() == 5){
+                    intent = new Intent(MainActivity.this, AboutActivity.class);
+                }else if(drawerItem.getIdentifier() == 6){
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
+                }else if(drawerItem.getIdentifier() == 100001){
+                    intent = new Intent(MainActivity.this, EditProfileActivity.class);
+                }
+
+                if (intent != null) {
+                    MainActivity.this.startActivity(intent);
+                }
+            }
+            return false;
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

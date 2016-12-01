@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Dialogs;
+package io.github.b_lam.resplash.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,9 +16,9 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.b_lam.resplash.Data.Data.Photo;
-import io.github.b_lam.resplash.Data.Data.PhotoStats;
-import io.github.b_lam.resplash.Data.Service.PhotoService;
+import io.github.b_lam.resplash.data.data.Photo;
+import io.github.b_lam.resplash.data.data.PhotoStats;
+import io.github.b_lam.resplash.data.service.PhotoService;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;

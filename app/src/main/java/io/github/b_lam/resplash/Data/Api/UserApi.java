@@ -1,8 +1,8 @@
-package io.github.b_lam.resplash.Data.Api;
+package io.github.b_lam.resplash.data.api;
 
 
-import io.github.b_lam.resplash.Data.Data.Me;
-import io.github.b_lam.resplash.Data.Data.User;
+import io.github.b_lam.resplash.data.data.Me;
+import io.github.b_lam.resplash.data.data.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;

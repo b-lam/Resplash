@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Data.Data;
+package io.github.b_lam.resplash.data.data;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -15,8 +15,6 @@ import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 

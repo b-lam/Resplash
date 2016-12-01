@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Network;
+package io.github.b_lam.resplash.network;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

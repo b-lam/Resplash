@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Fragments;
+package io.github.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,13 +22,12 @@ import com.mikepenz.fastadapter.adapters.FooterAdapter;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 import java.util.List;
-import butterknife.BindView;
+
 import butterknife.ButterKnife;
-import io.github.b_lam.resplash.Activities.CollectionDetailActivity;
-import io.github.b_lam.resplash.Data.Data.Collection;
-import io.github.b_lam.resplash.Data.Data.SearchCollectionsResult;
-import io.github.b_lam.resplash.Data.Service.CollectionService;
-import io.github.b_lam.resplash.Data.Service.SearchService;
+import io.github.b_lam.resplash.activities.CollectionDetailActivity;
+import io.github.b_lam.resplash.data.data.Collection;
+import io.github.b_lam.resplash.data.data.SearchCollectionsResult;
+import io.github.b_lam.resplash.data.service.SearchService;
 import io.github.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;

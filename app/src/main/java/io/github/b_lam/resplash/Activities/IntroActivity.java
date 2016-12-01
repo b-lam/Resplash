@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Activities;
+package io.github.b_lam.resplash.activities;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Fragments;
+package io.github.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -23,9 +24,9 @@ import com.mikepenz.fastadapter.adapters.FooterAdapter;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 import java.util.List;
-import io.github.b_lam.resplash.Activities.DetailActivity;
-import io.github.b_lam.resplash.Data.Data.Photo;
-import io.github.b_lam.resplash.Data.Service.PhotoService;
+import io.github.b_lam.resplash.activities.DetailActivity;
+import io.github.b_lam.resplash.data.data.Photo;
+import io.github.b_lam.resplash.data.service.PhotoService;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;
@@ -152,6 +153,10 @@ public class FeaturedFragment extends Fragment{
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
+//            ImageView imageView = (ImageView) v.findViewById(R.id.item_image_img);
+//            if(imageView.getDrawable() != null) {
+//                Resplash.getInstance().setDrawable(imageView.getDrawable());
+//            }
             startActivity(i);
             return false;
         }

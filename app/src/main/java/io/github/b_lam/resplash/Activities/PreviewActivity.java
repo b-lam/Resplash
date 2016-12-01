@@ -1,11 +1,8 @@
-package io.github.b_lam.resplash.Activities;
+package io.github.b_lam.resplash.activities;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +14,9 @@ import com.bumptech.glide.request.target.Target;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.b_lam.resplash.R;
+import io.github.b_lam.resplash.Resplash;
+import io.github.b_lam.resplash.Utils;
+import io.github.b_lam.resplash.data.data.Photo;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -25,6 +25,7 @@ public class PreviewActivity extends AppCompatActivity {
     @BindView(R.id.preview_image) PhotoView mPhotoView;
     @BindView(R.id.preview_progress) ProgressBar mProgressBar;
     PhotoViewAttacher mAttacher;
+    Photo mPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,12 @@ public class PreviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preview);
         ButterKnife.bind(this);
 
-        String url  = getIntent().getStringExtra("Link");
+        mPhoto = Resplash.getInstance().getPhoto();
 
         mAttacher = new PhotoViewAttacher(mPhotoView);
 
         Glide.with(this)
-                .load(url)
+                .load(mPhoto.urls.full)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

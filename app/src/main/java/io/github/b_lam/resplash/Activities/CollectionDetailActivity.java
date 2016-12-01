@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Activities;
+package io.github.b_lam.resplash.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,11 +36,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.b_lam.resplash.CircleImageView;
-import io.github.b_lam.resplash.Data.Data.Collection;
-import io.github.b_lam.resplash.Data.Data.Photo;
-import io.github.b_lam.resplash.Data.Service.CollectionService;
-import io.github.b_lam.resplash.Data.Service.PhotoService;
-import io.github.b_lam.resplash.Fragments.CollectionFragment;
+import io.github.b_lam.resplash.data.data.Collection;
+import io.github.b_lam.resplash.data.data.Photo;
+import io.github.b_lam.resplash.data.service.PhotoService;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;

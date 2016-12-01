@@ -1,19 +1,19 @@
-package io.github.b_lam.resplash.Data.Service;
+package io.github.b_lam.resplash.data.service;
 
 import com.google.gson.GsonBuilder;
 
 
 import java.util.List;
 
-import io.github.b_lam.resplash.Data.Api.PhotoApi;
-import io.github.b_lam.resplash.Data.Data.Collection;
-import io.github.b_lam.resplash.Data.Data.LikePhotoResult;
-import io.github.b_lam.resplash.Data.Data.Me;
-import io.github.b_lam.resplash.Data.Data.Photo;
-import io.github.b_lam.resplash.Data.Data.PhotoDetails;
-import io.github.b_lam.resplash.Data.Data.PhotoStats;
-import io.github.b_lam.resplash.Data.Data.User;
-import io.github.b_lam.resplash.Data.Tools.AuthInterceptor;
+import io.github.b_lam.resplash.data.api.PhotoApi;
+import io.github.b_lam.resplash.data.data.Collection;
+import io.github.b_lam.resplash.data.data.LikePhotoResult;
+import io.github.b_lam.resplash.data.data.Me;
+import io.github.b_lam.resplash.data.data.Photo;
+import io.github.b_lam.resplash.data.data.PhotoDetails;
+import io.github.b_lam.resplash.data.data.PhotoStats;
+import io.github.b_lam.resplash.data.data.User;
+import io.github.b_lam.resplash.data.tools.AuthInterceptor;
 import io.github.b_lam.resplash.Resplash;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;

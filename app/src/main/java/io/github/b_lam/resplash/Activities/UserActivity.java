@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Activities;
+package io.github.b_lam.resplash.activities;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -23,14 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.b_lam.resplash.Data.Data.User;
-import io.github.b_lam.resplash.Data.Service.UserService;
-import io.github.b_lam.resplash.Fragments.CollectionFragment;
-import io.github.b_lam.resplash.Fragments.FeaturedFragment;
-import io.github.b_lam.resplash.Fragments.NewFragment;
-import io.github.b_lam.resplash.Fragments.UserCollectionFragment;
-import io.github.b_lam.resplash.Fragments.UserLikesFragment;
-import io.github.b_lam.resplash.Fragments.UserPhotoFragment;
+import io.github.b_lam.resplash.data.data.User;
+import io.github.b_lam.resplash.data.service.UserService;
+import io.github.b_lam.resplash.fragments.UserCollectionFragment;
+import io.github.b_lam.resplash.fragments.UserLikesFragment;
+import io.github.b_lam.resplash.fragments.UserPhotoFragment;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;

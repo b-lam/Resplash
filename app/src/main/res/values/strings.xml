@@ -110,5 +110,6 @@
 
     <string name="login">Login</string>
     <string name="join">Join</string>
+    <string name="edit_title">Edit</string>
 
 </resources>

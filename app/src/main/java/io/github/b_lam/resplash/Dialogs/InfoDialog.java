@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Dialogs;
+package io.github.b_lam.resplash.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,19 +6,14 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.b_lam.resplash.Data.Data.Photo;
 
-import io.github.b_lam.resplash.Data.Data.PhotoDetails;
+import io.github.b_lam.resplash.data.data.PhotoDetails;
 import io.github.b_lam.resplash.R;
 
 

@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Fragments;
+package io.github.b_lam.resplash.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,13 +1,12 @@
-package io.github.b_lam.resplash.Data.Api;
+package io.github.b_lam.resplash.data.api;
 
 
 
 import java.util.List;
 
-import io.github.b_lam.resplash.Data.Data.ChangeCollectionPhotoResult;
-import io.github.b_lam.resplash.Data.Data.Collection;
-import io.github.b_lam.resplash.Data.Data.DeleteCollectionResult;
-import io.github.b_lam.resplash.Data.Data.Photo;
+import io.github.b_lam.resplash.data.data.ChangeCollectionPhotoResult;
+import io.github.b_lam.resplash.data.data.Collection;
+import io.github.b_lam.resplash.data.data.DeleteCollectionResult;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;

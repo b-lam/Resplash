@@ -1,6 +1,5 @@
-package io.github.b_lam.resplash.Data.Tools;
+package io.github.b_lam.resplash.data.tools;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
@@ -10,10 +9,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.b_lam.resplash.Data.Data.AccessToken;
-import io.github.b_lam.resplash.Data.Data.Me;
-import io.github.b_lam.resplash.Data.Data.User;
-import io.github.b_lam.resplash.Data.Service.UserService;
+import io.github.b_lam.resplash.data.data.AccessToken;
+import io.github.b_lam.resplash.data.data.Me;
+import io.github.b_lam.resplash.data.data.User;
+import io.github.b_lam.resplash.data.service.UserService;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -40,7 +39,7 @@ public class AuthManager
     private String avatar_path;
     private boolean authorized;
 
-    private static final String PREFERENCE_NAME = "mysplash_authorize_manager";
+    private static final String PREFERENCE_NAME = "resplash_authorize_manager";
     private static final String KEY_ACCESS_TOKEN = "access_token";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_FIRST_NAME = "first_name";

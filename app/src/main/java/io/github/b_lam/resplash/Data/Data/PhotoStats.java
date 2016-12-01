@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Data.Data;
+package io.github.b_lam.resplash.data.data;
 
 /**
  * Photo stats.

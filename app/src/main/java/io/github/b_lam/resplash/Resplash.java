@@ -2,17 +2,16 @@ package io.github.b_lam.resplash;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.b_lam.resplash.Activities.MainActivity;
-import io.github.b_lam.resplash.Data.Data.Collection;
-import io.github.b_lam.resplash.Data.Data.Photo;
-import io.github.b_lam.resplash.Data.Data.User;
+import io.github.b_lam.resplash.activities.MainActivity;
+import io.github.b_lam.resplash.data.data.Collection;
+import io.github.b_lam.resplash.data.data.Photo;
+import io.github.b_lam.resplash.data.data.User;
 
 /**
  * Created by Brandon on 10/6/2016.
@@ -46,8 +45,6 @@ public class Resplash extends Application{
             + "&scope=" + "public+read_user+write_user+read_photos+write_photos+write_likes+read_collections+write_collections";
 
     public static final String DATE_FORMAT = "yyyy/MM/dd";
-    public static final String DOWNLOAD_PATH = Environment.getExternalStorageDirectory().toString() + "/Pictures/Resplash/";
-    public static final String DOWNLOAD_FORMAT = ".jpg";
 
     public static final int DEFAULT_PER_PAGE = 30;
     public static final int SEARCH_PER_PAGE = 20;

@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Activities;
+package io.github.b_lam.resplash.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,13 +15,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -40,25 +36,22 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.b_lam.resplash.Data.Data.Photo;
-import io.github.b_lam.resplash.Data.Data.PhotoDetails;
-import io.github.b_lam.resplash.Data.Service.PhotoService;
-import io.github.b_lam.resplash.Dialogs.InfoDialog;
-import io.github.b_lam.resplash.Dialogs.StatsDialog;
-import io.github.b_lam.resplash.Network.ImageDownloader;
+import io.github.b_lam.resplash.data.data.Photo;
+import io.github.b_lam.resplash.data.data.PhotoDetails;
+import io.github.b_lam.resplash.data.service.PhotoService;
+import io.github.b_lam.resplash.dialogs.InfoDialog;
+import io.github.b_lam.resplash.dialogs.StatsDialog;
+import io.github.b_lam.resplash.network.ImageDownloader;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;
@@ -295,8 +288,8 @@ public class DetailActivity extends AppCompatActivity {
     public View.OnClickListener imageOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Resplash.getInstance().setPhoto(mPhoto);
             Intent i = new Intent(DetailActivity.this, PreviewActivity.class);
-            i.putExtra("Link", mPhoto.urls.full);
             startActivity(i);
         }
     };
@@ -363,14 +356,15 @@ public class DetailActivity extends AppCompatActivity {
                 if(type == TYPE_DOWNLOAD){
                     final Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     final Bitmap.CompressFormat mFormat = Bitmap.CompressFormat.JPEG;
-                    final File myImageFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Resplash"
+                    final File myImageFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Pictures" + File.separator + "Resplash"
                             + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + "." + mFormat.name().toLowerCase());
                     ImageDownloader.writeToDisk(myImageFile, result, new ImageDownloader.OnBitmapSaveListener() {
                         @Override
                         public void onBitmapSaved() {
                             Toast.makeText(DetailActivity.this, "Image saved", Toast.LENGTH_LONG).show();
-                            intent.setDataAndType(Uri.parse("file://" + myImageFile.getAbsolutePath()), "image/*");
+                            intent.setDataAndType(FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", myImageFile), "image/*");
                             sendNotification(intent);
                         }
 

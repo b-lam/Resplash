@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.b_lam.resplash.Activities.MainActivity">
+    tools:context="io.github.b_lam.resplash.activities.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

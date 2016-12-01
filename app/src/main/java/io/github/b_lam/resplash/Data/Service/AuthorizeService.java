@@ -1,8 +1,8 @@
-package io.github.b_lam.resplash.Data.Service;
+package io.github.b_lam.resplash.data.service;
 
 
-import io.github.b_lam.resplash.Data.Api.AuthorizeApi;
-import io.github.b_lam.resplash.Data.Data.AccessToken;
+import io.github.b_lam.resplash.data.api.AuthorizeApi;
+import io.github.b_lam.resplash.data.data.AccessToken;
 import io.github.b_lam.resplash.Resplash;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +25,7 @@ public class AuthorizeService {
                 .getAccessToken(
                         Resplash.APPLICATION_ID,
                         Resplash.SECRET,
-                        "mysplash://" + Resplash.UNSPLASH_LOGIN_CALLBACK,
+                        "resplash://" + Resplash.UNSPLASH_LOGIN_CALLBACK,
                         code,
                         "authorization_code");
         getAccessToken.enqueue(new Callback<AccessToken>() {

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_edit_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="io.github.b_lam.resplash.activities.EditProfileActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="scroll"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <EditText
+                android:id="@+id/username_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:hint="Username" />
+
+            <EditText
+                android:id="@+id/first_name_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:inputType="textPersonName"
+                android:hint="First name" />
+
+            <EditText
+                android:id="@+id/last_name_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:inputType="textPersonName"
+                android:hint="Last name" />
+
+            <EditText
+                android:id="@+id/email_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:inputType="textEmailAddress"
+                android:hint="Email address" />
+
+            <EditText
+                android:id="@+id/portfolio_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:hint="Personal site/portfolio" />
+
+            <EditText
+                android:id="@+id/instagram_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:hint="Instagram username" />
+
+            <EditText
+                android:id="@+id/location_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:hint="Location" />
+
+            <EditText
+                android:id="@+id/bio_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:inputType="textMultiLine"
+                android:hint="Bio" />
+
+            <Button
+                android:id="@+id/save_edit_button"
+                android:text="Save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/md_white_1000" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

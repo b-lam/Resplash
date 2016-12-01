@@ -1,9 +1,9 @@
-package io.github.b_lam.resplash.Data.Api;
+package io.github.b_lam.resplash.data.api;
 
 
-import io.github.b_lam.resplash.Data.Data.SearchCollectionsResult;
-import io.github.b_lam.resplash.Data.Data.SearchPhotosResult;
-import io.github.b_lam.resplash.Data.Data.SearchUsersResult;
+import io.github.b_lam.resplash.data.data.SearchCollectionsResult;
+import io.github.b_lam.resplash.data.data.SearchPhotosResult;
+import io.github.b_lam.resplash.data.data.SearchUsersResult;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

@@ -1,4 +1,4 @@
-package io.github.b_lam.resplash.Activities;
+package io.github.b_lam.resplash.activities;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.b_lam.resplash.Fragments.SearchCollectionFragment;
-import io.github.b_lam.resplash.Fragments.SearchPhotoFragment;
-import io.github.b_lam.resplash.Fragments.SearchUserFragment;
+import io.github.b_lam.resplash.fragments.SearchCollectionFragment;
+import io.github.b_lam.resplash.fragments.SearchPhotoFragment;
+import io.github.b_lam.resplash.fragments.SearchUserFragment;
 import io.github.b_lam.resplash.R;
 
 public class SearchActivity extends AppCompatActivity implements EditText.OnEditorActionListener{
