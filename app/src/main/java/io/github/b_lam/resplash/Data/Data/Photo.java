@@ -1,15 +1,22 @@
 package io.github.b_lam.resplash.data.data;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
@@ -17,6 +24,7 @@ import java.util.List;
 
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
+import io.github.b_lam.resplash.Utils;
 
 /**
  * Photo.
@@ -355,7 +363,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
     }
 
     @Override
-    public void bindView(Photo.ViewHolder holder, List payloads) {
+    public void bindView(final Photo.ViewHolder holder, List payloads) {
         super.bindView(holder, payloads);
 
         String url;
@@ -384,20 +392,45 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
         DisplayMetrics displaymetrics = Resplash.getInstance().getResources().getDisplayMetrics();
         float finalHeight = displaymetrics.widthPixels / ((float)width/(float)height);
 
+        ViewPropertyAnimation.Animator fadeAnimation = new ViewPropertyAnimation.Animator() {
+            @Override
+            public void animate(View view) {
+                ObjectAnimator fadeInAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).setDuration(700);
+                ObjectAnimator fadeOutAnim = ObjectAnimator.ofFloat(view, "alpha" , 1f, 0f).setDuration(500);
+                AnimatorSet animatorSet = new AnimatorSet();
+                animatorSet.playSequentially(fadeInAnim);
+                animatorSet.start();
+            }
+        };
+
         switch (sharedPreferences.getString("item_layout", "List")){
             case "List":
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .crossFade()
+                        .animate(fadeAnimation)
                         .diskCacheStrategy(DiskCacheStrategy.RESULT)
                         .into(holder.imageList);
 
                 holder.imageList.setMinimumHeight((int) finalHeight);
+                int colorFrom = Color.WHITE;
+                int colorTo = Color.parseColor(this.color);
+                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                colorAnimation.setDuration(1000);
+                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animator) {
+                        holder.imageList.setBackgroundColor((int) animator.getAnimatedValue());
+                    }
+
+                });
+                colorAnimation.start();
+
                 break;
             case "Cards":
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .crossFade()
+                        .animate(fadeAnimation)
                         .diskCacheStrategy(DiskCacheStrategy.RESULT)
                         .into(holder.imageCard);
 
@@ -407,7 +440,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "Grid":
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .crossFade()
+                        .animate(fadeAnimation)
                         .diskCacheStrategy(DiskCacheStrategy.RESULT)
                         .centerCrop()
                         .into(holder.imageGrid);

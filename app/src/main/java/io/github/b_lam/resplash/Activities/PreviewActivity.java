@@ -2,6 +2,7 @@ package io.github.b_lam.resplash.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -39,7 +40,7 @@ public class PreviewActivity extends AppCompatActivity {
         mAttacher = new PhotoViewAttacher(mPhotoView);
 
         Glide.with(this)
-                .load(mPhoto.urls.full)
+                .load(mPhoto.urls.regular)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -49,7 +50,6 @@ public class PreviewActivity extends AppCompatActivity {
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         mProgressBar.setVisibility(View.GONE);
-                        mPhotoView.setVisibility(View.VISIBLE);
                         return false;
                     }
                 })

@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|snap">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_collection_detail"

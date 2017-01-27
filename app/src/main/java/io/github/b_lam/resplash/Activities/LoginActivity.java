@@ -2,6 +2,7 @@ package io.github.b_lam.resplash.activities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.login_btn) Button btnLogin;
     @BindView(R.id.join_btn) Button btnJoin;
     @BindView(R.id.login_close) ImageButton btnClose;
+    @BindView(R.id.activity_login) RelativeLayout relativeLayout;
 
     private String TAG = "LoginActivity";
     private AuthorizeService mService;
@@ -87,11 +91,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.d(TAG, response.body().toString());
             AuthManager.getInstance().writeAccessToken(response.body());
             AuthManager.getInstance().refreshPersonalProfile();
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         } else {
-//            NotificationUtils.showSnackbar(
-//                    getString(R.string.feedback_request_token_failed),
-//                    Snackbar.LENGTH_SHORT);
+            Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
 //            setState(NORMAL_STATE);
         }
     }
@@ -99,9 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onRequestAccessTokenFailed(Call<AccessToken> call, Throwable t) {
         Log.d(TAG, t.toString());
-//        NotificationUtils.showSnackbar(
-//                getString(R.string.feedback_request_token_failed),
-//                Snackbar.LENGTH_SHORT);
+        Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
 //        setState(NORMAL_STATE);
     }
 }

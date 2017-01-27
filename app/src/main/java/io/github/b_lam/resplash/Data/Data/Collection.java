@@ -1,5 +1,6 @@
 package io.github.b_lam.resplash.data.data;
 
+import android.animation.ObjectAnimator;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.google.gson.annotations.SerializedName;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
@@ -296,17 +298,27 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
             DisplayMetrics displaymetrics = Resplash.getInstance().getResources().getDisplayMetrics();
             float finalHeight = displaymetrics.widthPixels / ((float)cover_photo.width/(float)cover_photo.height);
 
+            ViewPropertyAnimation.Animator fadeAnimation = new ViewPropertyAnimation.Animator() {
+                @Override
+                public void animate(View view) {
+                    view.setAlpha(0f);
+                    ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+                    fadeAnim.setDuration(500);
+                    fadeAnim.start();
+                }
+            };
+
             if(sharedPreferences.getString("item_layout", "List").equals("Cards")){
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .crossFade()
+                        .animate(fadeAnimation)
                         .diskCacheStrategy(DiskCacheStrategy.RESULT)
                         .into(holder.coverPhotoCard);
                 holder.coverPhotoCard.setMinimumHeight((int) finalHeight);
             }else{
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .crossFade()
+                        .animate(fadeAnimation)
                         .diskCacheStrategy(DiskCacheStrategy.RESULT)
                         .into(holder.coverPhoto);
                 holder.coverPhoto.setMinimumHeight((int) finalHeight);

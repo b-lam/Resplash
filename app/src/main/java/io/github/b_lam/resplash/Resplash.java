@@ -3,7 +3,6 @@ package io.github.b_lam.resplash;
 import android.app.Activity;
 import android.app.Application;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +27,16 @@ public class Resplash extends Application{
     private boolean activityInBackstage = false;
 
     // Unsplash data.
-    public static final String APPLICATION_ID = "392290b3eb423d477266bece8247597c52b3016bf324f9bacc8e7d65b78687bd";
-    public static final String SECRET = "d85dc1ef9792cf5311f5210ab35e0898b99fc528dced419d83a0d2835bd8b62a";
+    public static final String APPLICATION_ID = BuildConfig.UNSPLASH_APPLICATION_ID;
+    public static final String SECRET = BuildConfig.UNSPLASH_SECRET;
 
     // Unsplash url.
     public static final String UNSPLASH_API_BASE_URL = "https://api.unsplash.com/";
-    public static final String UNSPLASH_AUTH_BASE_URL = "https://unsplash.com/";
-    public static final String UNSPLASH_UPLOAD_URL = "https://unsplash.com/submit";
     public static final String UNSPLASH_URL = "https://unsplash.com/";
+    public static final String UNSPLASH_UPLOAD_URL = "https://unsplash.com/submit";
     public static final String UNSPLASH_JOIN_URL = "https://unsplash.com/join";
     public static final String UNSPLASH_LOGIN_CALLBACK = "unsplash-auth-callback";
-    public static final String UNSPLASH_LOGIN_URL = Resplash.UNSPLASH_AUTH_BASE_URL + "oauth/authorize"
+    public static final String UNSPLASH_LOGIN_URL = Resplash.UNSPLASH_URL + "oauth/authorize"
             + "?client_id=" + Resplash.APPLICATION_ID
             + "&redirect_uri=" + "resplash%3A%2F%2F" + UNSPLASH_LOGIN_CALLBACK
             + "&response_type=" + "code"

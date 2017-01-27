@@ -39,6 +39,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
+import com.mikepenz.community_material_typeface_library.CommunityMaterial;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -46,9 +50,11 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.b_lam.resplash.data.data.LikePhotoResult;
 import io.github.b_lam.resplash.data.data.Photo;
 import io.github.b_lam.resplash.data.data.PhotoDetails;
 import io.github.b_lam.resplash.data.service.PhotoService;
+import io.github.b_lam.resplash.data.tools.AuthManager;
 import io.github.b_lam.resplash.dialogs.InfoDialog;
 import io.github.b_lam.resplash.dialogs.StatsDialog;
 import io.github.b_lam.resplash.network.ImageDownloader;
@@ -73,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.imgFull) ImageView imgFull;
     @BindView(R.id.imgProfile) ImageView imgProfile;
     @BindView(R.id.btnLike) ImageButton btnLike;
+    @BindView(R.id.btnAddToCollection) ImageButton btnAddToCollection;
     @BindView(R.id.tvUser) TextView tvUser;
     @BindView(R.id.tvLocation) TextView tvLocation;
     @BindView(R.id.tvDate) TextView tvDate;
@@ -116,13 +123,16 @@ public class DetailActivity extends AppCompatActivity {
         fabStats.setOnClickListener(onClickListener);
         fabWallpaper.setOnClickListener(onClickListener);
 
-        Glide.with(DetailActivity.this)
-                .load(mPhoto.urls.regular)
-                .priority(Priority.HIGH)
-                .placeholder(R.drawable.placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .into(imgFull);
-
+        if(Resplash.getInstance().getDrawable() != null){
+            imgFull.setImageDrawable(Resplash.getInstance().getDrawable());
+        }else {
+            Glide.with(DetailActivity.this)
+                    .load(mPhoto.urls.regular)
+                    .priority(Priority.HIGH)
+                    .placeholder(R.drawable.placeholder)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .into(imgFull);
+        }
         Glide.with(DetailActivity.this)
                 .load(mPhoto.user.profile_image.large)
                 .priority(Priority.HIGH)
@@ -130,6 +140,8 @@ public class DetailActivity extends AppCompatActivity {
                 .into(imgProfile);
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
+
+        btnAddToCollection.setImageDrawable(new IconicsDrawable(this).icon(GoogleMaterial.Icon.gmd_add).paddingDp(4).colorRes(R.color.md_grey_500));
 
         PhotoService.OnRequestPhotoDetailsListener mPhotoDetailsRequestListener = new PhotoService.OnRequestPhotoDetailsListener() {
             @Override
@@ -154,6 +166,8 @@ public class DetailActivity extends AppCompatActivity {
                     colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
                     tvColor.setText(mPhotoDetails.color);
                     tvDownloads.setText(NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads) + " Downloads");
+                    like = mPhotoDetails.liked_by_user;
+                    updateHeartButton(like);
                     loadProgress.setVisibility(View.GONE);
                     content.setVisibility(View.VISIBLE);
                     floatingActionMenu.setVisibility(View.VISIBLE);
@@ -304,20 +318,37 @@ public class DetailActivity extends AppCompatActivity {
 
     public void updateHeartButton(boolean like){
 
-        if(like){
-            btnLike.setImageResource(R.drawable.ic_heart_red);
+        if(AuthManager.getInstance().isAuthorized()) {
+            if (like) {
+                btnLike.setImageResource(R.drawable.ic_heart_red);
+            } else {
+                btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+            }
         }else{
-            btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+            btnLike.setVisibility(View.GONE);
         }
     }
 
     public void likeImage(View view){
-        if(!like){
-            like = true;
-        }else{
-            like = false;
-        }
-        updateHeartButton(like);
+
+            like = !like;
+
+            PhotoService.OnSetLikeListener mSetLikeListener = new PhotoService.OnSetLikeListener() {
+                @Override
+                public void onSetLikeSuccess(Call<LikePhotoResult> call, Response<LikePhotoResult> response) {
+                }
+
+                @Override
+                public void onSetLikeFailed(Call<LikePhotoResult> call, Throwable t) {
+                }
+            };
+
+            mService.setLikeForAPhoto(mPhoto.id, like, mSetLikeListener);
+            updateHeartButton(like);
+    }
+
+    public void addToCollection(View view){
+
     }
 
     private void shareTextUrl() {

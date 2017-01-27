@@ -110,6 +110,7 @@
 
     <string name="login">Login</string>
     <string name="join">Join</string>
-    <string name="edit_title">Edit</string>
+    <string name="edit_title">Edit Profile</string>
+    <string name="request_token_failed">Access token request failed</string>
 
 </resources>

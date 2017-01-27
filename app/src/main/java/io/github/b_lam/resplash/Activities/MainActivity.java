@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,6 +28,8 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -46,13 +50,15 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.b_lam.resplash.data.data.Me;
+import io.github.b_lam.resplash.data.tools.AuthManager;
 import io.github.b_lam.resplash.fragments.CollectionFragment;
 import io.github.b_lam.resplash.fragments.FeaturedFragment;
 import io.github.b_lam.resplash.fragments.NewFragment;
 import io.github.b_lam.resplash.R;
 import io.github.b_lam.resplash.Resplash;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements AuthManager.OnAuthDataChangedListener{
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.viewpager) ViewPager mViewPager;
@@ -62,6 +68,9 @@ public class MainActivity extends AppCompatActivity{
     private String TAG = "MainActivity";
     public Drawer drawer = null;
     private AccountHeader drawerHeader = null;
+    private ProfileSettingDrawerItem drawerItemAddAccount, drawerItemViewProfile, drawerItemManageAccount, drawerItemLogout;
+    private IProfile profile;
+    private final IProfile profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail("Free high-resolution photos").withIcon(R.mipmap.ic_launcher);
     private MenuItem mItemFeaturedLatest, mItemFeaturedOldest, mItemFeaturedPopular, mItemNewLatest, mItemNewOldest, mItemNewPopular, mItemAll, mItemCurated, mItemFeatured;
 
     @Override
@@ -108,9 +117,6 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public Drawable placeholder(Context ctx, String tag) {
-                //define different placeholders for different imageView targets
-                //default tags are accessible via the DrawerImageLoader.Tags
-                //custom ones can be checked via string. see the CustomUrlBasePrimaryDrawerItem LINE 111
                 if (DrawerImageLoader.Tags.PROFILE.name().equals(tag)) {
                     return DrawerUIUtils.getPlaceHolder(ctx);
                 } else if (DrawerImageLoader.Tags.ACCOUNT_HEADER.name().equals(tag)) {
@@ -118,47 +124,27 @@ public class MainActivity extends AppCompatActivity{
                 } else if ("customUrlItem".equals(tag)) {
                     return new IconicsDrawable(ctx).iconText(" ").backgroundColorRes(R.color.md_red_500).sizeDp(56);
                 }
-
-                //we use the default one for DrawerImageLoader.Tags.PROFILE_DRAWER_ITEM.name()
-
                 return super.placeholder(ctx, tag);
             }
         });
 
-        // NOTE you have to define the loader logic too. See the CustomApplication for more details
-        final IProfile profile = new ProfileDrawerItem().withName("Brandon Lam").withEmail("whoisbrandonlam@gmail.com").withIcon("https://images.unsplash.com/profile-1462642403018-51d1fa7ba175?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=6ed6fa25f925af9332ce3d6b6d2d6d81").withIdentifier(100);
+        drawerItemAddAccount = new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Unsplash Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_plus).actionBar().paddingDp(5)).withIdentifier(100000).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemViewProfile = new ProfileSettingDrawerItem().withName("View Profile").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_account).paddingDp(4)).withIdentifier(100001).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemManageAccount = new ProfileSettingDrawerItem().withName("Manage Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_settings).paddingDp(4)).withIdentifier(100002).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemLogout = new ProfileSettingDrawerItem().withName("Logout").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_close_circle_outline).paddingDp(4)).withIdentifier(100003).withOnDrawerItemClickListener(drawerItemClickListener);
 
         // Create the AccountHeader
         drawerHeader = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(true)
                 .withTextColorRes(R.color.colorText)
-                .addProfiles(
-                        profile,
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Unsplash Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_plus).actionBar().paddingDp(5)).withOnDrawerItemClickListener(drawerItemClickListener),
-                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_settings).paddingDp(4)).withIdentifier(100001).withOnDrawerItemClickListener(drawerItemClickListener)
-                )
-//                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-//                    @Override
-//                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-//                        //sample usage of the onProfileChanged listener
-//                        //if the clicked item has the identifier 1 add a new profile ;)
-//                        if (profile instanceof IDrawerItem && profile.getIdentifier() == 100000) {
-//                            int count = 100 + drawerHeader.getProfiles().size() + 1;
-//                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman" + count).withEmail("batman" + count + "@gmail.com").withIdentifier(count);
-//                            if (drawerHeader.getProfiles() != null) {
-//                                //we know that there are 2 setting elements. set the new profile above them ;)
-//                                drawerHeader.addProfile(newProfile, drawerHeader.getProfiles().size() - 2);
-//                            } else {
-//                                drawerHeader.addProfiles(newProfile);
-//                            }
-//                        }
-//                        //false if you have not consumed the event and it should close the drawer
-//                        return false;
-//                    }
-//                })
+                .withProfileImagesClickable(false)
+                .withHeaderBackground(R.color.md_white_1000)
+                .withCurrentProfileHiddenInList(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
+
+        updateDrawerItems();
 
         drawer = new DrawerBuilder()
                 .withActivity(this)
@@ -170,12 +156,11 @@ public class MainActivity extends AppCompatActivity{
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Featured").withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)),
                         new PrimaryDrawerItem().withName("New").withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)),
-                        new PrimaryDrawerItem().withName("Categories").withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)),
+                        new PrimaryDrawerItem().withName("Collections").withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName("Settings").withIdentifier(4).withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("About").withIdentifier(5).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false),
-                        new PrimaryDrawerItem().withName("Login").withIdentifier(6).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_plus).sizeDp(24).paddingDp(4)).withSelectable(false)
+                        new PrimaryDrawerItem().withName("About").withIdentifier(5).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(drawerItemClickListener)
                 .build();
@@ -202,7 +187,6 @@ public class MainActivity extends AppCompatActivity{
                 }else{
                     drawer.setSelection(3);
                 }
-                Log.d(TAG, String.valueOf(tab.getPosition()));
             }
 
             @Override
@@ -231,8 +215,6 @@ public class MainActivity extends AppCompatActivity{
         public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
             if (drawerItem != null) {
 
-                Log.d(TAG, "Identifier: " + drawerItem.getIdentifier());
-
                 Intent intent = null;
 
                 if(drawerItem.getIdentifier() == 1){
@@ -245,10 +227,20 @@ public class MainActivity extends AppCompatActivity{
                     intent = new Intent(MainActivity.this, SettingsActivity.class);
                 }else if(drawerItem.getIdentifier() == 5){
                     intent = new Intent(MainActivity.this, AboutActivity.class);
-                }else if(drawerItem.getIdentifier() == 6){
+                }else if(drawerItem.getIdentifier() == 100000){
                     intent = new Intent(MainActivity.this, LoginActivity.class);
                 }else if(drawerItem.getIdentifier() == 100001){
+                    if(AuthManager.getInstance().isAuthorized()){
+                        intent = new Intent(MainActivity.this, UserActivity.class);
+                        intent.putExtra("username", AuthManager.getInstance().getUsername());
+                        intent.putExtra("name", AuthManager.getInstance().getFirstName() + " " + AuthManager.getInstance().getLastName());
+                    }
+                }else if(drawerItem.getIdentifier() == 100002){
                     intent = new Intent(MainActivity.this, EditProfileActivity.class);
+                }else if(drawerItem.getIdentifier() == 100003){
+                    AuthManager.getInstance().logout();
+                    updateDrawerItems();
+                    Toast.makeText(getApplicationContext(), "Logout - Success", Toast.LENGTH_SHORT).show();
                 }
 
                 if (intent != null) {
@@ -367,6 +359,28 @@ public class MainActivity extends AppCompatActivity{
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+        AuthManager.getInstance().addOnWriteDataListener(this);
+        if (AuthManager.getInstance().isAuthorized() && TextUtils.isEmpty(AuthManager.getInstance().getUsername())) {
+            AuthManager.getInstance().refreshPersonalProfile();
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateDrawerItems();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        AuthManager.getInstance().removeOnWriteDataListener(this);
+        AuthManager.getInstance().cancelRequest();
+    }
+
+    @Override
     public void onBackPressed() {
 
         if (drawer.isDrawerOpen()) {
@@ -448,5 +462,37 @@ public class MainActivity extends AppCompatActivity{
         public CharSequence getPageTitle(int position){
             return fragmentTitleList.get(position);
         }
+    }
+
+    private void updateDrawerItems(){
+        drawerHeader.clear();
+
+        if(!AuthManager.getInstance().isAuthorized()){
+            drawerHeader.addProfiles(drawerItemAddAccount, profileDefault);
+        }else{
+            if(AuthManager.getInstance().getAvatarPath() != null){
+                profile = new ProfileDrawerItem().withName(AuthManager.getInstance().getUsername()).withEmail(AuthManager.getInstance().getEmail()).withIcon(AuthManager.getInstance().getAvatarPath());
+            }else{
+                profile = profileDefault;
+            }
+            drawerHeader.addProfiles(drawerItemViewProfile, drawerItemManageAccount, drawerItemLogout, profile);
+        }
+    }
+
+    @Override
+    public void onWriteAccessToken() {
+    }
+
+    @Override
+    public void onWriteUserInfo() {
+    }
+
+    @Override
+    public void onWriteAvatarPath() {
+        updateDrawerItems();
+    }
+
+    @Override
+    public void onLogout() {
     }
 }

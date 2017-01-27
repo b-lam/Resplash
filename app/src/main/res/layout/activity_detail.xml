@@ -96,6 +96,16 @@
                         android:layout_marginLeft="20dp"
                         android:src="@drawable/ic_heart_outline_grey"
                         android:onClick="likeImage"/>
+                    <ImageButton
+                        android:id="@+id/btnAddToCollection"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_gravity="center"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
+                        android:layout_marginLeft="20dp"
+                        android:onClick="addToCollection"/>
                 </LinearLayout>
                 <TextView
                     android:id="@+id/tvLocation"

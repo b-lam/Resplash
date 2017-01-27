@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="io.github.b_lam.resplash.activities.EditProfileActivity">
+    tools:context="io.github.b_lam.resplash.activities.EditProfileActivity"
+    tools:ignore="MissingPrefix">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -36,49 +37,178 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp">
 
-            <EditText
-                android:id="@+id/username_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:hint="Username" />
+            <LinearLayout
+                style="@style/about_entry">
 
-            <EditText
-                android:id="@+id/first_name_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:inputType="textPersonName"
-                android:hint="First name" />
+                <ImageView
+                    app:ico_icon="cmd_account_card_details"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
 
-            <EditText
-                android:id="@+id/last_name_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:inputType="textPersonName"
-                android:hint="Last name" />
+                <EditText
+                    android:id="@+id/username_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:hint="Username" />
 
-            <EditText
-                android:id="@+id/email_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:inputType="textEmailAddress"
-                android:hint="Email address" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/portfolio_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:hint="Personal site/portfolio" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/Link_Water" />
 
-            <EditText
-                android:id="@+id/instagram_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:hint="Instagram username" />
+            <LinearLayout
+                style="@style/about_entry">
 
-            <EditText
-                android:id="@+id/location_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:hint="Location" />
+                <ImageView
+                    app:ico_icon="cmd_account_circle"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
 
-            <EditText
-                android:id="@+id/bio_edit_text"
-                style="@style/edit_profile_edit_text"
-                android:inputType="textMultiLine"
-                android:hint="Bio" />
+                <EditText
+                    android:id="@+id/first_name_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:inputType="textPersonName"
+                    android:hint="First name" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/Link_Water" />
+
+            <LinearLayout
+                style="@style/about_entry">
+
+                <ImageView
+                    app:ico_icon="cmd_account_circle"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
+
+                <EditText
+                    android:id="@+id/last_name_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:inputType="textPersonName"
+                    android:hint="Last name" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/Link_Water" />
+
+            <LinearLayout
+                style="@style/about_entry">
+
+                <ImageView
+                    app:ico_icon="cmd_email_outline"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
+
+                <EditText
+                    android:id="@+id/email_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:inputType="textEmailAddress"
+                    android:hint="Email address" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/Link_Water" />
+
+            <LinearLayout
+                style="@style/about_entry">
+
+                <ImageView
+                    app:ico_icon="cmd_compass_outline"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
+
+                <EditText
+                    android:id="@+id/portfolio_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:hint="Personal site/portfolio" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/Link_Water" />
+
+            <LinearLayout
+                style="@style/about_entry">
+
+                <ImageView
+                    app:ico_icon="cmd_instagram"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
+
+                <EditText
+                    android:id="@+id/instagram_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:hint="Instagram username" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/Link_Water" />
+
+            <LinearLayout
+                style="@style/about_entry">
+
+                <ImageView
+                    app:ico_icon="gmd_location_on"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
+
+                <EditText
+                    android:id="@+id/location_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:hint="Location" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/Link_Water" />
+
+            <LinearLayout
+                style="@style/about_entry">
+
+                <ImageView
+                    app:ico_icon="cmd_format_quote"
+                    app:ico_size="20dp"
+                    style="@style/material_icon" />
+
+                <EditText
+                    android:id="@+id/bio_edit_text"
+                    style="@style/edit_profile_edit_text"
+                    android:inputType="textMultiLine"
+                    android:hint="Bio" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/save_edit_button"

@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +20,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
-import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.FooterAdapter;
+import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 import java.util.List;
@@ -97,6 +98,7 @@ public class FeaturedFragment extends Fragment{
         mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerFeatured);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mImageRecycler.setLayoutManager(gridLayoutManager);
         mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -153,10 +155,10 @@ public class FeaturedFragment extends Fragment{
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
-//            ImageView imageView = (ImageView) v.findViewById(R.id.item_image_img);
-//            if(imageView.getDrawable() != null) {
-//                Resplash.getInstance().setDrawable(imageView.getDrawable());
-//            }
+            ImageView imageView = (ImageView) v.findViewById(R.id.item_image_img);
+            if(imageView.getDrawable() != null) {
+                Resplash.getInstance().setDrawable(imageView.getDrawable());
+            }
             startActivity(i);
             return false;
         }
@@ -173,6 +175,7 @@ public class FeaturedFragment extends Fragment{
             mImagesErrorView.setVisibility(View.GONE);
         }
 
+        Log.d(TAG, "Page " + mPage);
 
         PhotoService.OnRequestPhotosListener mPhotoRequestListener = new PhotoService.OnRequestPhotosListener() {
             @Override
@@ -180,7 +183,6 @@ public class FeaturedFragment extends Fragment{
                 Log.d(TAG, String.valueOf(response.code()));
                 if(response.code() == 200) {
                     mPhotos = response.body();
-                    mFooterAdapter.clear();
                     FeaturedFragment.this.updateAdapter(mPhotos);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
