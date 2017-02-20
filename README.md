@@ -14,9 +14,9 @@
 
 #Screenshots
 
-<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-1.png" width="300">
-<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-2.png" width="300">
-<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-4.png" width="300">
+<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-1.png" width="250">
+<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-2.png" width="250">
+<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-4.png" width="250">
 
 #Developed By
 
