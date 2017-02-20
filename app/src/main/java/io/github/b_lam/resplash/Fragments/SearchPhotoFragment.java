@@ -127,13 +127,11 @@ public class SearchPhotoFragment extends Fragment {
         mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPage = 1;
-                mPhotoAdapter.clear();
-                loadMore();
+                fetchNew();
             }
         });
 
-        loadMore();
+        fetchNew();
         return rootView;
     }
 
@@ -166,7 +164,6 @@ public class SearchPhotoFragment extends Fragment {
             mImagesErrorView.setVisibility(View.GONE);
         }
 
-
         SearchService.OnRequestPhotosListener mPhotoRequestListener = new SearchService.OnRequestPhotosListener() {
             @Override
             public void onRequestPhotosSuccess(Call<SearchPhotosResult> call, Response<SearchPhotosResult> response) {
@@ -175,6 +172,60 @@ public class SearchPhotoFragment extends Fragment {
                     mSearchPhotosResult = response.body();
                     mPhotos = mSearchPhotosResult.results;
                     mFooterAdapter.clear();
+                    SearchPhotoFragment.this.updateAdapter(mPhotos);
+                    mPage++;
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mImagesErrorView.setVisibility(View.GONE);
+                    if(mPhotoAdapter.getItemCount() == 0){
+                        mImageRecycler.setVisibility(View.GONE);
+                        mNoResultTextView.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    mImagesErrorView.setTitle(R.string.error_http);
+                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onRequestPhotosFailed(Call<SearchPhotosResult> call, Throwable t) {
+                Log.d(TAG, t.toString());
+                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setTitle(R.string.error_network);
+                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                mImagesProgress.setVisibility(View.GONE);
+                mImageRecycler.setVisibility(View.GONE);
+                mImagesErrorView.setVisibility(View.VISIBLE);
+                mSwipeContainer.setRefreshing(false);
+            }
+        };
+
+        if(mQuery != null) {
+            mService.searchPhotos(mQuery, mPage, mPhotoRequestListener);
+            mNoResultTextView.setVisibility(View.GONE);
+        }
+    }
+
+    public void fetchNew(){
+        if(mPhotos == null && mQuery != null){
+            mImagesProgress.setVisibility(View.VISIBLE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.GONE);
+        }
+
+        mPage = 1;
+
+        SearchService.OnRequestPhotosListener mPhotoRequestListener = new SearchService.OnRequestPhotosListener() {
+            @Override
+            public void onRequestPhotosSuccess(Call<SearchPhotosResult> call, Response<SearchPhotosResult> response) {
+                Log.d(TAG, String.valueOf(response.code()));
+                if(response.code() == 200) {
+                    mSearchPhotosResult = response.body();
+                    mPhotos = mSearchPhotosResult.results;
+                    mPhotoAdapter.clear();
                     SearchPhotoFragment.this.updateAdapter(mPhotos);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);

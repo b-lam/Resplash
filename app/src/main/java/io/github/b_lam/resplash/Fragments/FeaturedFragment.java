@@ -89,8 +89,6 @@ public class FeaturedFragment extends Fragment{
 
         setRetainInstance(true);
 
-        mPage = 1;
-
         View rootView = inflater.inflate(R.layout.fragment_featured, container, false);
         mImageRecycler = (RecyclerView) rootView.findViewById(R.id.fragment_featured_recycler);
         mImagesProgress = (ProgressBar) rootView.findViewById(R.id.fragment_featured_progress);
@@ -98,7 +96,6 @@ public class FeaturedFragment extends Fragment{
         mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerFeatured);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mImageRecycler.setLayoutManager(gridLayoutManager);
         mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -133,12 +130,11 @@ public class FeaturedFragment extends Fragment{
         mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPage = 1;
-                loadMore();
+                fetchNew();
             }
         });
 
-        loadMore();
+        fetchNew();
         return rootView;
     }
 
@@ -155,10 +151,6 @@ public class FeaturedFragment extends Fragment{
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
-            ImageView imageView = (ImageView) v.findViewById(R.id.item_image_img);
-            if(imageView.getDrawable() != null) {
-                Resplash.getInstance().setDrawable(imageView.getDrawable());
-            }
             startActivity(i);
             return false;
         }
@@ -183,6 +175,54 @@ public class FeaturedFragment extends Fragment{
                 Log.d(TAG, String.valueOf(response.code()));
                 if(response.code() == 200) {
                     mPhotos = response.body();
+                    mFooterAdapter.clear();
+                    FeaturedFragment.this.updateAdapter(mPhotos);
+                    mPage++;
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mImagesErrorView.setVisibility(View.GONE);
+                }else{
+                    mImagesErrorView.setTitle(R.string.error_http);
+                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
+                Log.d(TAG, t.toString());
+                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setTitle(R.string.error_network);
+                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                mImagesProgress.setVisibility(View.GONE);
+                mImageRecycler.setVisibility(View.GONE);
+                mImagesErrorView.setVisibility(View.VISIBLE);
+                mSwipeContainer.setRefreshing(false);
+            }
+        };
+
+        mService.requestCuratedPhotos(mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
+
+    }
+
+    public void fetchNew(){
+        if(mPhotos == null){
+            mImagesProgress.setVisibility(View.VISIBLE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.GONE);
+        }
+
+        mPage = 1;
+
+        PhotoService.OnRequestPhotosListener mPhotoRequestListener = new PhotoService.OnRequestPhotosListener() {
+            @Override
+            public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
+                Log.d(TAG, String.valueOf(response.code()));
+                if(response.code() == 200) {
+                    mPhotos = response.body();
+                    mPhotoAdapter.clear();
                     FeaturedFragment.this.updateAdapter(mPhotos);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
@@ -217,4 +257,5 @@ public class FeaturedFragment extends Fragment{
         mService.requestCuratedPhotos(mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
 
     }
+
 }

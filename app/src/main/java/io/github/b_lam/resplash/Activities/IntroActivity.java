@@ -112,7 +112,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
             TextView subtitle_textView = (TextView) itemView.findViewById(R.id.intro_description);
             switch (position) {
                 case 0:
-                    imageView.setImageResource(R.drawable.intro_welcome_image);
+                    imageView.setImageResource(R.drawable.intro_icon_image);
                     title_textView.setText(getString(R.string.intro_welcome_title));
                     subtitle_textView.setText(getString(R.string.intro_welcome_description));
                     break;

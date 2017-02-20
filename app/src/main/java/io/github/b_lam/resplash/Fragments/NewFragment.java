@@ -123,12 +123,11 @@ public class NewFragment extends Fragment {
         mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPage = 1;
-                loadMore();
+                fetchNew();
             }
         });
 
-        loadMore();
+        fetchNew();
         return rootView;
     }
 
@@ -181,6 +180,53 @@ public class NewFragment extends Fragment {
                     mImageRecycler.setVisibility(View.GONE);
                     mImagesErrorView.setVisibility(View.VISIBLE);
                 }
+            }
+
+            @Override
+            public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
+                Log.d(TAG, t.toString());
+                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setTitle(R.string.error_network);
+                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                mImagesProgress.setVisibility(View.GONE);
+                mImageRecycler.setVisibility(View.GONE);
+                mImagesErrorView.setVisibility(View.VISIBLE);
+                mSwipeContainer.setRefreshing(false);
+            }
+        };
+
+        mService.requestPhotos(mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
+
+    }
+
+    public void fetchNew(){
+        if(mPhotos == null){
+            mImagesProgress.setVisibility(View.VISIBLE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.GONE);
+        }
+
+        mPage = 1;
+
+        PhotoService.OnRequestPhotosListener mPhotoRequestListener = new PhotoService.OnRequestPhotosListener() {
+            @Override
+            public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
+                Log.d(TAG, String.valueOf(response.code()));
+                if(response.code() == 200) {
+                    mPhotos = response.body();
+                    mPhotoAdapter.clear();
+                    NewFragment.this.updateAdapter(mPhotos);
+                    mPage++;
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mImagesErrorView.setVisibility(View.GONE);
+                }else{
+                    mImagesErrorView.setTitle(R.string.error_http);
+                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                }
                 if(mSwipeContainer.isRefreshing()) {
                     Toast.makeText(getContext(), "Updated images!", Toast.LENGTH_SHORT).show();
                     mSwipeContainer.setRefreshing(false);
@@ -201,6 +247,5 @@ public class NewFragment extends Fragment {
         };
 
         mService.requestPhotos(mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
-
     }
 }

@@ -118,12 +118,11 @@ public class SearchCollectionFragment extends Fragment {
         mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPage = 1;
-                loadMore();
+                fetchNew();
             }
         });
 
-        loadMore();
+        fetchNew();
         return rootView;
     }
 
@@ -164,6 +163,61 @@ public class SearchCollectionFragment extends Fragment {
                     mSearchCollections = response.body();
                     mCollections = mSearchCollections.results;
                     mFooterAdapter.clear();
+                    SearchCollectionFragment.this.updateAdapter(mCollections);
+                    mPage++;
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mImagesErrorView.setVisibility(View.GONE);
+                    if(mCollectionAdapter.getItemCount() == 0){
+                        mImageRecycler.setVisibility(View.GONE);
+                        mNoResultTextView.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    mImagesErrorView.setTitle(R.string.error_http);
+                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onRequestCollectionsFailed(Call<SearchCollectionsResult> call, Throwable t) {
+                Log.d(TAG, t.toString());
+                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setTitle(R.string.error_network);
+                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                mImagesProgress.setVisibility(View.GONE);
+                mImageRecycler.setVisibility(View.GONE);
+                mImagesErrorView.setVisibility(View.VISIBLE);
+                mSwipeContainer.setRefreshing(false);
+            }
+        };
+
+        if(mQuery != null) {
+            mService.searchCollections(mQuery, mPage, mCollectionRequestListener);
+            mNoResultTextView.setVisibility(View.GONE);
+        }
+
+    }
+
+    public void fetchNew(){
+        if(mSearchCollections == null && mQuery != null){
+            mImagesProgress.setVisibility(View.VISIBLE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.GONE);
+        }
+
+        mPage = 1;
+
+        SearchService.OnRequestCollectionsListener mCollectionRequestListener = new SearchService.OnRequestCollectionsListener() {
+            @Override
+            public void onRequestCollectionsSuccess(Call<SearchCollectionsResult> call, Response<SearchCollectionsResult> response) {
+                Log.d(TAG, String.valueOf(response.code()));
+                if(response.code() == 200) {
+                    mSearchCollections = response.body();
+                    mCollections = mSearchCollections.results;
+                    mCollectionAdapter.clear();
                     SearchCollectionFragment.this.updateAdapter(mCollections);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);

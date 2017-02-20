@@ -412,19 +412,19 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                         .into(holder.imageList);
 
                 holder.imageList.setMinimumHeight((int) finalHeight);
-                int colorFrom = Color.WHITE;
-                int colorTo = Color.parseColor(this.color);
-                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-                colorAnimation.setDuration(1000);
-                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animator) {
-                        holder.imageList.setBackgroundColor((int) animator.getAnimatedValue());
-                    }
-
-                });
-                colorAnimation.start();
+//                int colorFrom = Color.WHITE;
+//                int colorTo = Color.parseColor(this.color);
+//                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+//                colorAnimation.setDuration(1000);
+//                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//
+//                    @Override
+//                    public void onAnimationUpdate(ValueAnimator animator) {
+//                        holder.imageList.setBackgroundColor((int) animator.getAnimatedValue());
+//                    }
+//
+//                });
+//                colorAnimation.start();
 
                 break;
             case "Cards":

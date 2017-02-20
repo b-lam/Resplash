@@ -15,7 +15,7 @@
         android:id="@+id/intro_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_gravity="center"
         android:src="@drawable/intro_welcome_image"/>
 

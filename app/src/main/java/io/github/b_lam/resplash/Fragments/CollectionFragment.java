@@ -114,12 +114,11 @@ public class CollectionFragment extends Fragment {
         mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPage = 1;
-                loadMore();
+                fetchNew();
             }
         });
 
-        loadMore();
+        fetchNew();
         return rootView;
     }
 
@@ -159,6 +158,58 @@ public class CollectionFragment extends Fragment {
                 if(response.code() == 200) {
                     mCollections = response.body();
                     mFooterAdapter.clear();
+                    CollectionFragment.this.updateAdapter(mCollections);
+                    mPage++;
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mImagesErrorView.setVisibility(View.GONE);
+                }else{
+                    mImagesErrorView.setTitle(R.string.error_http);
+                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onRequestCollectionsFailed(Call<List<Collection>> call, Throwable t) {
+                Log.d(TAG, t.toString());
+                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setTitle(R.string.error_network);
+                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                mImagesProgress.setVisibility(View.GONE);
+                mImageRecycler.setVisibility(View.GONE);
+                mImagesErrorView.setVisibility(View.VISIBLE);
+                mSwipeContainer.setRefreshing(false);
+            }
+        };
+
+        if(mType.equals("All")){
+            mService.requestAllCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        }else if(mType.equals("Curated")){
+            mService.requestCuratedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        }else if(mType.equals("Featured")){
+            mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        }
+    }
+
+    public void fetchNew(){
+        if(mCollections == null){
+            mImagesProgress.setVisibility(View.VISIBLE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.GONE);
+        }
+
+        mPage = 1;
+
+        CollectionService.OnRequestCollectionsListener mCollectionRequestListener = new CollectionService.OnRequestCollectionsListener() {
+            @Override
+            public void onRequestCollectionsSuccess(Call<List<Collection>> call, Response<List<Collection>> response) {
+                Log.d(TAG, String.valueOf(response.code()));
+                if(response.code() == 200) {
+                    mCollections = response.body();
+                    mCollectionAdapter.clear();
                     CollectionFragment.this.updateAdapter(mCollections);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);

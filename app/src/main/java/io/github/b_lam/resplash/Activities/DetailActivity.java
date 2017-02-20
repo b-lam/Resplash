@@ -79,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.imgFull) ImageView imgFull;
     @BindView(R.id.imgProfile) ImageView imgProfile;
     @BindView(R.id.btnLike) ImageButton btnLike;
-    @BindView(R.id.btnAddToCollection) ImageButton btnAddToCollection;
+//    @BindView(R.id.btnAddToCollection) ImageButton btnAddToCollection;
     @BindView(R.id.tvUser) TextView tvUser;
     @BindView(R.id.tvLocation) TextView tvLocation;
     @BindView(R.id.tvDate) TextView tvDate;
@@ -127,7 +127,7 @@ public class DetailActivity extends AppCompatActivity {
             imgFull.setImageDrawable(Resplash.getInstance().getDrawable());
         }else {
             Glide.with(DetailActivity.this)
-                    .load(mPhoto.urls.regular)
+                    .load(mPhoto.urls.full)
                     .priority(Priority.HIGH)
                     .placeholder(R.drawable.placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)
@@ -141,7 +141,7 @@ public class DetailActivity extends AppCompatActivity {
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
 
-        btnAddToCollection.setImageDrawable(new IconicsDrawable(this).icon(GoogleMaterial.Icon.gmd_add).paddingDp(4).colorRes(R.color.md_grey_500));
+//        btnAddToCollection.setImageDrawable(new IconicsDrawable(this).icon(GoogleMaterial.Icon.gmd_add).paddingDp(4).colorRes(R.color.md_grey_500));
 
         PhotoService.OnRequestPhotoDetailsListener mPhotoDetailsRequestListener = new PhotoService.OnRequestPhotoDetailsListener() {
             @Override

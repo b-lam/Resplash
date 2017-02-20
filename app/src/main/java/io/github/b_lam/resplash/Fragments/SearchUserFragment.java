@@ -116,12 +116,11 @@ public class SearchUserFragment extends Fragment {
         mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPage = 1;
-                loadMore();
+                fetchNew();
             }
         });
 
-        loadMore();
+        fetchNew();
         return rootView;
     }
 
@@ -179,8 +178,62 @@ public class SearchUserFragment extends Fragment {
                     mImageRecycler.setVisibility(View.GONE);
                     mImagesErrorView.setVisibility(View.VISIBLE);
                 }
+            }
+
+            @Override
+            public void onRequestUsersFailed(Call<SearchUsersResult> call, Throwable t) {
+                Log.d(TAG, t.toString());
+                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setTitle(R.string.error_network);
+                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                mImagesProgress.setVisibility(View.GONE);
+                mImageRecycler.setVisibility(View.GONE);
+                mImagesErrorView.setVisibility(View.VISIBLE);
+                mSwipeContainer.setRefreshing(false);
+            }
+        };
+
+        if(mQuery != null) {
+            mService.searchUsers(mQuery, mPage, mUserRequestListener);
+            mNoResultTextView.setVisibility(View.GONE);
+        }
+    }
+
+    public void fetchNew(){
+        if(mUsers == null && mQuery != null){
+            mImagesProgress.setVisibility(View.VISIBLE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.GONE);
+        }
+
+        mPage = 1;
+
+        final SearchService.OnRequestUsersListener mUserRequestListener = new SearchService.OnRequestUsersListener() {
+            @Override
+            public void onRequestUsersSuccess(Call<SearchUsersResult> call, Response<SearchUsersResult> response) {
+                Log.d(TAG, String.valueOf(response.code()));
+                if(response.code() == 200) {
+                    mSearchUserResult = response.body();
+                    mUsers = mSearchUserResult.results;
+                    mUserAdapter.clear();
+                    SearchUserFragment.this.updateAdapter(mUsers);
+                    mPage++;
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mImagesErrorView.setVisibility(View.GONE);
+                    if(mUserAdapter.getItemCount() == 0){
+                        mImageRecycler.setVisibility(View.GONE);
+                        mNoResultTextView.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    mImagesErrorView.setTitle(R.string.error_http);
+                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                }
                 if(mSwipeContainer.isRefreshing()) {
-                    Toast.makeText(getContext(), "Updated images!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Updated users!", Toast.LENGTH_SHORT).show();
                     mSwipeContainer.setRefreshing(false);
                 }
             }
