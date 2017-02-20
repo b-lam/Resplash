@@ -15,7 +15,6 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="50dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
@@ -23,6 +22,15 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Resplash"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/colorText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Free high-resolution photos"
+        android:textSize="14sp"
         android:textColor="@color/colorText" />
 
 </LinearLayout>

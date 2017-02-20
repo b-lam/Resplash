@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.b_lam.resplash.Activities.DetailActivity"
+    tools:context="com.b_lam.resplash.activities.DetailActivity"
     android:clipToPadding="false">
 
     <android.support.design.widget.AppBarLayout
@@ -68,14 +68,14 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:background="@color/Light_Grey">
-                    <io.github.b_lam.resplash.CircleImageView
+                    <com.b_lam.resplash.CircleImageView
                         android:layout_height="24dp"
                         android:layout_width="24dp"
                         android:id="@+id/imgProfile"
                         android:transitionName="profileTransition"
                         android:onClick="goToUserProfile"
                         android:clickable="true">
-                    </io.github.b_lam.resplash.CircleImageView>
+                    </com.b_lam.resplash.CircleImageView>
                     <TextView
                         android:id="@+id/tvUser"
                         android:layout_width="fill_parent"
@@ -96,6 +96,16 @@
                         android:layout_marginLeft="20dp"
                         android:src="@drawable/ic_heart_outline_grey"
                         android:onClick="likeImage"/>
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/btnAddToCollection"-->
+                        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_width="24dp"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:scaleType="fitCenter"-->
+                        <!--android:adjustViewBounds="true"-->
+                        <!--android:layout_marginLeft="20dp"-->
+                        <!--android:onClick="addToCollection"/>-->
                 </LinearLayout>
                 <TextView
                     android:id="@+id/tvLocation"

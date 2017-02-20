@@ -5,7 +5,7 @@
     android:id="@+id/search_user_container"
     android:background="@color/md_white_1000"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="io.github.b_lam.resplash.Fragments.SearchUserFragment">
+    tools:context="com.b_lam.resplash.fragments.SearchUserFragment">
 
     <TextView
         android:id="@+id/user_no_results"

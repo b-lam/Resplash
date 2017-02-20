@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clipToPadding="false"
-    tools:context="io.github.b_lam.resplash.Activities.CollectionDetailActivity">
+    tools:context="com.b_lam.resplash.activities.CollectionDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -44,13 +44,13 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:padding="13dp">
-            <io.github.b_lam.resplash.CircleImageView
+            <com.b_lam.resplash.CircleImageView
                 android:layout_height="30dp"
                 android:layout_width="30dp"
                 android:id="@+id/imgProfileCollection"
                 android:transitionName="profileTransition"
                 android:clickable="true">
-            </io.github.b_lam.resplash.CircleImageView>
+            </com.b_lam.resplash.CircleImageView>
             <TextView
                 android:id="@+id/tvUserCollection"
                 android:layout_width="wrap_content"

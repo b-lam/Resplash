@@ -5,7 +5,7 @@
     android:id="@+id/activity_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.b_lam.resplash.Activities.UserActivity">
+    tools:context="com.b_lam.resplash.activities.UserActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -41,7 +41,7 @@
                 android:layout_gravity="center"
                 android:gravity="center">
 
-                <io.github.b_lam.resplash.CircleImageView
+                <com.b_lam.resplash.CircleImageView
                     android:id="@+id/user_profile_picture"
                     android:layout_width="60dp"
                     android:layout_height="60dp"

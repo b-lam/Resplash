@@ -5,7 +5,7 @@
     android:id="@+id/activity_settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.b_lam.resplash.Activities.SettingsActivity">
+    tools:context="com.b_lam.resplash.activities.SettingsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
