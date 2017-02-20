@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
     android:gravity="center_horizontal"
-    tools:context="io.github.b_lam.resplash.activities.AboutActivity"
+    tools:context="com.b_lam.resplash.activities.AboutActivity"
     tools:ignore="MissingPrefix">
 
     <android.support.design.widget.AppBarLayout

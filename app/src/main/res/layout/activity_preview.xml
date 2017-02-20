@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_grey_900"
-    tools:context="io.github.b_lam.resplash.activities.PreviewActivity">
+    tools:context="com.b_lam.resplash.activities.PreviewActivity">
 
     <ProgressBar
         android:id="@+id/preview_progress"

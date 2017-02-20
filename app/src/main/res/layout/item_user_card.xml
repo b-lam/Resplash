@@ -24,7 +24,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
-            <io.github.b_lam.resplash.CircleImageView
+            <com.b_lam.resplash.CircleImageView
                 android:id="@+id/item_user_card_profile_picture"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

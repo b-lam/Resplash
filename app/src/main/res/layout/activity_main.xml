@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.b_lam.resplash.activities.MainActivity">
+    tools:context="com.b_lam.resplash.activities.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -46,5 +46,5 @@
         android:src="@drawable/ic_file_upload_white_24dp"
         app:layout_anchorGravity="bottom|right|end"
         app:fabSize="normal"
-        app:layout_behavior="io.github.b_lam.resplash.ScrollingFABBehavior" />
+        app:layout_behavior="com.b_lam.resplash.ScrollingFABBehavior" />
 </android.support.design.widget.CoordinatorLayout>
