@@ -46,6 +46,9 @@ import com.b_lam.resplash.network.ImageDownloader;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.Gson;
@@ -77,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.imgFull) ImageView imgFull;
     @BindView(R.id.imgProfile) ImageView imgProfile;
     @BindView(R.id.btnLike) ImageButton btnLike;
-//    @BindView(R.id.btnAddToCollection) ImageButton btnAddToCollection;
+    //    @BindView(R.id.btnAddToCollection) ImageButton btnAddToCollection;
     @BindView(R.id.tvUser) TextView tvUser;
     @BindView(R.id.tvLocation) TextView tvLocation;
     @BindView(R.id.tvDate) TextView tvDate;
@@ -200,19 +203,19 @@ public class DetailActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.VISIBLE);
                         switch (sharedPreferences.getString("download_quality", "Raw")) {
                             case "Raw":
-                                downloadFromURL(mPhoto.urls.raw, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.raw, TYPE_DOWNLOAD);
                                 break;
                             case "Full":
-                                downloadFromURL(mPhoto.urls.full, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.full, TYPE_DOWNLOAD);
                                 break;
                             case "Regular":
-                                downloadFromURL(mPhoto.urls.regular, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.regular, TYPE_DOWNLOAD);
                                 break;
                             case "Small":
-                                downloadFromURL(mPhoto.urls.small, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.small, TYPE_DOWNLOAD);
                                 break;
                             case "Thumb":
-                                downloadFromURL(mPhoto.urls.thumb, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.thumb, TYPE_DOWNLOAD);
                                 break;
                             default:
                                 throw new IllegalArgumentException("Invalid download quality");
@@ -225,7 +228,7 @@ public class DetailActivity extends AppCompatActivity {
                         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.MULTIPLY);
                         progressBar.setVisibility(View.VISIBLE);
 
-                        downloadFromURL(mPhoto.urls.raw, TYPE_WALLPAPER);
+                        downloadImage(mPhoto.urls.raw, TYPE_WALLPAPER);
                     }
 
                     break;
@@ -329,20 +332,20 @@ public class DetailActivity extends AppCompatActivity {
 
     public void likeImage(View view){
 
-            like = !like;
+        like = !like;
 
-            PhotoService.OnSetLikeListener mSetLikeListener = new PhotoService.OnSetLikeListener() {
-                @Override
-                public void onSetLikeSuccess(Call<LikePhotoResult> call, Response<LikePhotoResult> response) {
-                }
+        PhotoService.OnSetLikeListener mSetLikeListener = new PhotoService.OnSetLikeListener() {
+            @Override
+            public void onSetLikeSuccess(Call<LikePhotoResult> call, Response<LikePhotoResult> response) {
+            }
 
-                @Override
-                public void onSetLikeFailed(Call<LikePhotoResult> call, Throwable t) {
-                }
-            };
+            @Override
+            public void onSetLikeFailed(Call<LikePhotoResult> call, Throwable t) {
+            }
+        };
 
-            mService.setLikeForAPhoto(mPhoto.id, like, mSetLikeListener);
-            updateHeartButton(like);
+        mService.setLikeForAPhoto(mPhoto.id, like, mSetLikeListener);
+        updateHeartButton(like);
     }
 
     public void addToCollection(View view){
@@ -362,60 +365,44 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void downloadFromURL(String url, final int type){
-        ImageDownloader imageDownloader = new ImageDownloader(new ImageDownloader.OnImageLoaderListener() {
-            @Override
-            public void onError(ImageDownloader.ImageError error) {
-                progressBar.setVisibility(View.INVISIBLE);
-                progressBar.setProgress(0);
-                Log.e(TAG, "Image download error");
-                Toast.makeText(DetailActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-            }
+    public void downloadImage(String url, final int type){
+        Glide
+                .with(getApplicationContext())
+                .load(url)
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                        Bitmap.CompressFormat mFormat = Bitmap.CompressFormat.JPEG;
+                        final File myImageFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Pictures" + File.separator + "Resplash"
+                                + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + "." + mFormat.name().toLowerCase());
+                        final Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", myImageFile);
+                        ImageDownloader.writeToDisk(myImageFile, resource, new ImageDownloader.OnBitmapSaveListener() {
+                            @Override
+                            public void onBitmapSaved() {
+                                if(type == TYPE_DOWNLOAD) {
+                                    Intent intent = new Intent();
+                                    intent.setAction(Intent.ACTION_VIEW);
+                                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                    intent.setDataAndType(contentUri, "image/*");
+                                    Toast.makeText(DetailActivity.this, "Image saved", Toast.LENGTH_LONG).show();
+                                    sendNotification(intent);
+                                }else if (type == TYPE_WALLPAPER) {
+                                    Intent intent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(contentUri);
+                                    DetailActivity.this.startActivityForResult(intent, 13451);
+                                }
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
 
-            @Override
-            public void onProgressChange(int percent) {
-                Log.d(TAG, "Percent: " + percent);
-                progressBar.setProgress(percent);
-            }
-
-            @Override
-            public void onComplete(Bitmap result) {
-                progressBar.setVisibility(View.INVISIBLE);
-                progressBar.setProgress(0);
-                if(type == TYPE_DOWNLOAD){
-                    final Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    final Bitmap.CompressFormat mFormat = Bitmap.CompressFormat.JPEG;
-                    final File myImageFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Pictures" + File.separator + "Resplash"
-                            + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + "." + mFormat.name().toLowerCase());
-                    ImageDownloader.writeToDisk(myImageFile, result, new ImageDownloader.OnBitmapSaveListener() {
-                        @Override
-                        public void onBitmapSaved() {
-                            Toast.makeText(DetailActivity.this, "Image saved", Toast.LENGTH_LONG).show();
-                            intent.setDataAndType(FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", myImageFile), "image/*");
-                            sendNotification(intent);
-                        }
-
-                        @Override
-                        public void onBitmapSaveError(ImageDownloader.ImageError error) {
-                            Toast.makeText(DetailActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                            error.printStackTrace();
-                        }
-                    }, mFormat, false);
-                }else if(type == TYPE_WALLPAPER){
-                    WallpaperManager wallpaperManager = WallpaperManager.getInstance(DetailActivity.this);
-                    try {
-                        wallpaperManager.setBitmap(result);
-                        Toast.makeText(DetailActivity.this, "Wallpaper set", Toast.LENGTH_LONG).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
+                            @Override
+                            public void onBitmapSaveError(ImageDownloader.ImageError error) {
+                                Toast.makeText(DetailActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                error.printStackTrace();
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
+                        }, mFormat, true);
                     }
-                }
-            }
-        });
-
-        imageDownloader.download(url, true);
+                });
     }
 
     public void sendNotification(Intent intent) {
