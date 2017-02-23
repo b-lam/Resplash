@@ -1,6 +1,8 @@
-#Resplash
+#[Resplash]
 
-**Resplash** is powered by [Unsplash.com](https://unsplash.com/)
+<img src="https://github.com/b-lam/Resplash/blob/develop/design/Play%20Store/Resplash_Play_Store_Banner.jpg?raw=true" height="350">
+
+**[Resplash]** is powered by [Unsplash.com](https://unsplash.com/)
 
 * Browse 100000+ high-res photos
 * Material design
@@ -12,7 +14,7 @@
 
 #Download
 
-<a href="https://play.google.com/" target="_blank">
+<a href="https://play.google.com/store/apps/details?id=com.b_lam.resplash" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="70"/></a>
 
 #Screenshots
@@ -31,7 +33,7 @@
 
 	MIT License
 
-	Copyright (c) [2017] [Brandon Lam]
+	Copyright (c) 2017 Brandon Lam
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -51,5 +53,5 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
- [Resplash]:http://b-lam.github.io
+ [Resplash]:https://play.google.com/store/apps/details?id=com.b_lam.resplash
 
