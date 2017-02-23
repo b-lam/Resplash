@@ -1,9 +1,14 @@
 package com.b_lam.resplash.data.data;
 
 import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -390,7 +395,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
         ViewPropertyAnimation.Animator fadeAnimation = new ViewPropertyAnimation.Animator() {
             @Override
             public void animate(View view) {
-                ObjectAnimator fadeInAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).setDuration(700);
+                ObjectAnimator fadeInAnim = ObjectAnimator.ofFloat(view, "alpha", 0.75f, 1f).setDuration(500);
                 ObjectAnimator fadeOutAnim = ObjectAnimator.ofFloat(view, "alpha" , 1f, 0f).setDuration(500);
                 AnimatorSet animatorSet = new AnimatorSet();
                 animatorSet.playSequentially(fadeInAnim);
@@ -407,19 +412,19 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                         .into(holder.imageList);
 
                 holder.imageList.setMinimumHeight((int) finalHeight);
-//                int colorFrom = Color.WHITE;
-//                int colorTo = Color.parseColor(this.color);
-//                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-//                colorAnimation.setDuration(1000);
-//                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//
-//                    @Override
-//                    public void onAnimationUpdate(ValueAnimator animator) {
-//                        holder.imageList.setBackgroundColor((int) animator.getAnimatedValue());
-//                    }
-//
-//                });
-//                colorAnimation.start();
+                int colorFrom = Color.WHITE;
+                int colorTo = Color.parseColor(this.color);
+                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                colorAnimation.setDuration(1000);
+                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animator) {
+                        holder.imageList.setBackgroundColor((int) animator.getAnimatedValue());
+                    }
+
+                });
+                colorAnimation.start();
 
                 break;
             case "Cards":

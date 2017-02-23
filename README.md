@@ -2,10 +2,13 @@
 
 **Resplash** is powered by [Unsplash.com](https://unsplash.com/)
 
+* Browse 100000+ high-res photos
 * Material design
-* 100000+ high-res photos
 * Download raw photos
 * Set as wallpaper straight from the app
+* View user profiles, curated collections, photo stats and exif data
+* Login to like photos and update your profile
+* Various layout options
 
 #Download
 
