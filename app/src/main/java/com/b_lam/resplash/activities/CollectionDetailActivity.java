@@ -6,8 +6,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +71,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
     private PhotoService.OnRequestPhotosListener mPhotosRequestListener;
     private String mLayoutType;
     private PhotoService photoService;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +104,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
         mUserProfilePicture.setOnClickListener(userProfileOnClickListener);
         mUserCollection.setOnClickListener(userProfileOnClickListener);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         mLayoutType = sharedPreferences.getString("item_layout", "List");
         mPage = 1;
         if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
@@ -153,7 +158,26 @@ public class CollectionDetailActivity extends AppCompatActivity {
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getApplicationContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
-            startActivity(i);
+            String layout = sharedPreferences.getString("item_layout", "List");
+
+            ImageView imageView;
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || sharedPreferences.getString("item_layout", "List").equals("Grid")) {
+                startActivity(i);
+            } else if (layout.equals("Cards")) {
+                imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
+                if (imageView.getDrawable() != null)
+                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+                startActivity(i);
+            } else {
+                imageView = (ImageView) v.findViewById(R.id.item_image_img);
+                if (imageView.getDrawable() != null)
+                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+                v.setTransitionName("photoScale");
+                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(CollectionDetailActivity.this, p1);
+                startActivity(i, options.toBundle());
+            }
             return false;
         }
     };

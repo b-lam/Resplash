@@ -21,11 +21,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -207,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
-
     }
 
     private Drawer.OnDrawerItemClickListener drawerItemClickListener = new Drawer.OnDrawerItemClickListener() {

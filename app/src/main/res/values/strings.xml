@@ -55,7 +55,7 @@
 
     <!-- Intro -->
     <string name="intro_welcome_title">Resplash</string>
-    <string name="intro_welcome_description">An Unsplash Android Client</string>
+    <string name="intro_welcome_description">Powered by Unsplash</string>
     <string name="intro_download_title">Hi-Res Photos</string>
     <string name="intro_download_description">Free (do whatever you want) high-resolution photos</string>
     <string name="intro_done">Go</string>

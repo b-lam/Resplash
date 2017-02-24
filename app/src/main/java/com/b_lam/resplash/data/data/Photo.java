@@ -4,11 +4,15 @@ import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.ColorUtils;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -16,9 +20,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.activities.DetailActivity;
+import com.b_lam.resplash.activities.MainActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.ViewPropertyAnimation;
+import com.google.gson.Gson;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
@@ -425,7 +432,6 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
 
                 });
                 colorAnimation.start();
-
                 break;
             case "Cards":
                 Glide.with(holder.itemView.getContext())
