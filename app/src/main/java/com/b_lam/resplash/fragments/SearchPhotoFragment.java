@@ -3,9 +3,12 @@ package com.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +57,7 @@ public class SearchPhotoFragment extends Fragment {
     private FooterAdapter<ProgressItem> mFooterAdapter;
     private int mPage, mColumns;
     private String mQuery;
+    private SharedPreferences sharedPreferences;
 
     public SearchPhotoFragment() {
     }
@@ -72,7 +77,7 @@ public class SearchPhotoFragment extends Fragment {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         String mLayoutType = sharedPreferences.getString("item_layout", "List");
         if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
             mColumns = 1;
@@ -149,7 +154,28 @@ public class SearchPhotoFragment extends Fragment {
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
-            startActivity(i);
+
+            String layout = sharedPreferences.getString("item_layout", "List");
+
+            ImageView imageView;
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || sharedPreferences.getString("item_layout", "List").equals("Grid")) {
+                startActivity(i);
+            } else if (layout.equals("Cards")) {
+                imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
+                if (imageView.getDrawable() != null)
+                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+                startActivity(i);
+            } else {
+                imageView = (ImageView) v.findViewById(R.id.item_image_img);
+                if (imageView.getDrawable() != null)
+                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+//                v.setTransitionName("photoScale");
+//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
+//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1);
+//                startActivity(i, options.toBundle());
+                startActivity(i);
+            }
             return false;
         }
     };

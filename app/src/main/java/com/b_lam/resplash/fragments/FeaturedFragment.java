@@ -2,9 +2,12 @@ package com.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +16,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.DetailActivity;
+import com.b_lam.resplash.activities.MainActivity;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
 import com.google.gson.Gson;
@@ -52,6 +59,7 @@ public class FeaturedFragment extends Fragment{
     private FooterAdapter<ProgressItem> mFooterAdapter;
     private int mPage, mColumns;
     private String mSort;
+    private SharedPreferences sharedPreferences;
 
     public FeaturedFragment() {
         // Required empty public constructor
@@ -72,7 +80,7 @@ public class FeaturedFragment extends Fragment{
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         String mLayoutType = sharedPreferences.getString("item_layout", "List");
         mSort = getArguments().getString("sort", "latest");
         if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
@@ -82,7 +90,6 @@ public class FeaturedFragment extends Fragment{
         }
 
         mService = PhotoService.getService();
-
     }
 
     @Override
@@ -152,7 +159,37 @@ public class FeaturedFragment extends Fragment{
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
-            startActivity(i);
+
+            String layout = sharedPreferences.getString("item_layout", "List");
+
+            ImageView imageView;
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || sharedPreferences.getString("item_layout", "List").equals("Grid")) {
+                startActivity(i);
+            } else if (layout.equals("Cards")) {
+                imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
+                if (imageView.getDrawable() != null)
+                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+                startActivity(i);
+            } else {
+                imageView = (ImageView) v.findViewById(R.id.item_image_img);
+                if (imageView.getDrawable() != null)
+                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+//                v.setTransitionName("photoScale");
+//                View navigationBar = getActivity().findViewById(android.R.id.navigationBarBackground);
+//                View statusBar = getActivity().findViewById(android.R.id.statusBarBackground);
+//
+//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
+//                Pair<View, String> p2 = Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME);
+//                Pair<View, String> p3 = Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME);
+//
+//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1, p2, p3);
+//                startActivity(i, options.toBundle());
+                startActivity(i);
+            }
+
+
+
             return false;
         }
     };
@@ -205,7 +242,6 @@ public class FeaturedFragment extends Fragment{
         };
 
         mService.requestCuratedPhotos(mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
-
     }
 
     public void fetchNew(){

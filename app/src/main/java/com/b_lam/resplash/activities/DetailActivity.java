@@ -15,9 +15,12 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +29,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -126,9 +131,10 @@ public class DetailActivity extends AppCompatActivity {
 
         if(Resplash.getInstance().getDrawable() != null){
             imgFull.setImageDrawable(Resplash.getInstance().getDrawable());
+            Resplash.getInstance().setDrawable(null);
         }else {
             Glide.with(DetailActivity.this)
-                    .load(mPhoto.urls.full)
+                    .load(mPhoto.urls.regular)
                     .priority(Priority.HIGH)
                     .placeholder(R.drawable.placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)
@@ -169,7 +175,6 @@ public class DetailActivity extends AppCompatActivity {
                     tvDownloads.setText(NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads) + " Downloads");
                     like = mPhotoDetails.liked_by_user;
                     updateHeartButton(like);
-                    loadProgress.setVisibility(View.GONE);
                     content.setVisibility(View.VISIBLE);
                     floatingActionMenu.setVisibility(View.VISIBLE);
                 } else if (response.code() == 403) {
@@ -279,6 +284,7 @@ public class DetailActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case android.R.id.home:
+                getWindow().setExitTransition(null);
                 supportFinishAfterTransition();
                 return true;
             case R.id.action_share:
@@ -297,6 +303,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        getWindow().setExitTransition(null);
         supportFinishAfterTransition();
     }
 
