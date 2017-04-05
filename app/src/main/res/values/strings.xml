@@ -71,9 +71,9 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
     <string name="about_version_title">Version</string>
-    <string name="about_version_subtitle">1.0</string>
+    <string name="about_version_subtitle">1.0.1</string>
     <string name="about_changelog_title">Changelog</string>
-    <string name="changelog">No changes yet</string>
+    <string name="changelog">v1.0.0 - Initial Release \nv1.0.1 - Fixed loading bug</string>
     <string name="about_introduction_title">Introduction</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_author_title">Brandon Lam</string>

@@ -167,10 +167,11 @@ public class UserPhotoFragment extends Fragment {
                 imageView = (ImageView) v.findViewById(R.id.item_image_img);
                 if (imageView.getDrawable() != null)
                     Resplash.getInstance().setDrawable(imageView.getDrawable());
-                v.setTransitionName("photoScale");
-                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1);
-                startActivity(i, options.toBundle());
+//                v.setTransitionName("photoScale");
+//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
+//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1);
+//                startActivity(i, options.toBundle());
+                startActivity(i);
             }
             return false;
         }

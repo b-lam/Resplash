@@ -175,17 +175,20 @@ public class FeaturedFragment extends Fragment{
                 imageView = (ImageView) v.findViewById(R.id.item_image_img);
                 if (imageView.getDrawable() != null)
                     Resplash.getInstance().setDrawable(imageView.getDrawable());
-                v.setTransitionName("photoScale");
-                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1);
-                startActivity(i, options.toBundle());
+//                v.setTransitionName("photoScale");
+//                View navigationBar = getActivity().findViewById(android.R.id.navigationBarBackground);
+//                View statusBar = getActivity().findViewById(android.R.id.statusBarBackground);
+//
+//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
+//                Pair<View, String> p2 = Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME);
+//                Pair<View, String> p3 = Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME);
+//
+//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1, p2, p3);
+//                startActivity(i, options.toBundle());
+                startActivity(i);
             }
 
-            View navigationBar = getActivity().findViewById(android.R.id.navigationBarBackground);
-            View statusBar = getActivity().findViewById(android.R.id.statusBarBackground);
 
-            Pair<View, String> p2 = Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME);
-            Pair<View, String> p3 = Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME);
 
             return false;
         }
