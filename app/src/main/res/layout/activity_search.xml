@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/search_hint"
-                android:textColorHint="@color/Link_Water"
+                android:textColorHint="@color/md_grey_700"
                 android:textColor="@color/colorText"
                 android:imeOptions="actionSearch"
                 android:inputType="text"

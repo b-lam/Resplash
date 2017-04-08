@@ -8,8 +8,8 @@ android {
         applicationId "com.b_lam.resplash"
         minSdkVersion 22
         targetSdkVersion 25
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "UNSPLASH_APPLICATION_ID", UNSPLASH_APPLICATION_ID)
         buildConfigField("String", "UNSPLASH_SECRET", UNSPLASH_SECRET)
