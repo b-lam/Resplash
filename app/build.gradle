@@ -6,10 +6,10 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.b_lam.resplash"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "UNSPLASH_APPLICATION_ID", UNSPLASH_APPLICATION_ID)
         buildConfigField("String", "UNSPLASH_SECRET", UNSPLASH_SECRET)
