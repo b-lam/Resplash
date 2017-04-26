@@ -1,9 +1,12 @@
 package com.b_lam.resplash.data.service;
 
 
+import android.content.Context;
+
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.api.AuthorizeApi;
 import com.b_lam.resplash.data.data.AccessToken;
+import com.b_lam.resplash.data.tools.AuthManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,11 +24,11 @@ public class AuthorizeService {
 
     /** <br> data. */
 
-    public void requestAccessToken(String code, final OnRequestAccessTokenListener l) {
+    public void requestAccessToken(Context c, String code, final OnRequestAccessTokenListener l) {
         Call<AccessToken> getAccessToken = buildApi()
                 .getAccessToken(
-                        Resplash.APPLICATION_ID,
-                        Resplash.SECRET,
+                        Resplash.getAppId(c, true),
+                        Resplash.getSecret(c),
                         "resplash://" + Resplash.UNSPLASH_LOGIN_CALLBACK,
                         code,
                         "authorization_code");

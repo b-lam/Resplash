@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.b_lam.resplash.activities.CustomApiKeyActivity"
+    tools:ignore="MissingPrefix">
+
+    <ImageButton
+        android:id="@+id/custom_api_key_close_btn"
+        style="@style/material_image_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/ic_close_black_24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/custom_api_key_close_btn"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/about_entry">
+
+            <TextView
+                android:id="@+id/custom_api_key_description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:ems="10"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                android:text="@string/custom_api_key_description" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/Link_Water" />
+
+        <LinearLayout
+            style="@style/about_entry">
+
+            <ImageView
+                app:ico_icon="cmd_key_variant"
+                app:ico_size="20dp"
+                style="@style/material_icon" />
+
+            <EditText
+                android:id="@+id/custom_api_key_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:inputType="text"
+                android:maxLines="1"
+                android:hint="API Key" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/Link_Water" />
+
+        <LinearLayout
+            style="@style/about_entry">
+
+            <ImageView
+                app:ico_icon="cmd_key_variant"
+                app:ico_size="20dp"
+                style="@style/material_icon" />
+
+            <EditText
+                android:id="@+id/custom_api_secret_edit_text"
+                style="@style/edit_profile_edit_text"
+                android:inputType="text"
+                android:maxLines="1"
+                android:hint="Secret" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/Link_Water" />
+
+        <TextView
+            android:id="@+id/custom_api_key_redirect_uri_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:ems="10"
+            android:padding="10dp"
+            android:textColor="@color/colorAccent"
+            android:text="Redirect URI" />
+
+        <TextView
+            android:id="@+id/custom_api_key_redirect_uri_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:ems="10"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/redirect_uri" />
+
+        <Button
+            android:id="@+id/custom_api_key_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@color/md_white_1000" />
+
+    </LinearLayout>
+
+</RelativeLayout>

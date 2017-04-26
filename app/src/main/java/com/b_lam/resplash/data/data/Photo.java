@@ -420,7 +420,12 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
 
                 holder.imageList.setMinimumHeight((int) finalHeight);
                 int colorFrom = Color.WHITE;
-                int colorTo = Color.parseColor(this.color);
+                int colorTo;
+                if (this.color != null){
+                    colorTo = Color.parseColor(this.color);
+                }else{
+                    colorTo = Color.WHITE;
+                }
                 ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                 colorAnimation.setDuration(1000);
                 colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

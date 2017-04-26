@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 && intent.getData() != null
                 && !TextUtils.isEmpty(intent.getData().getAuthority())
                 && Resplash.UNSPLASH_LOGIN_CALLBACK.equals(intent.getData().getAuthority())) {
-            mService.requestAccessToken(intent.getData().getQueryParameter("code"), this);
+            mService.requestAccessToken(this, intent.getData().getQueryParameter("code"), this);
         }
     }
 
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.login_btn: {
-                Uri uri = Uri.parse(Resplash.UNSPLASH_LOGIN_URL);
+                Uri uri = Uri.parse(Resplash.getLoginUrl(this));
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
                 break;
             }

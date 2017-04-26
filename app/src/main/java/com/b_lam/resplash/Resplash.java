@@ -2,7 +2,11 @@ package com.b_lam.resplash;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.b_lam.resplash.activities.MainActivity;
 import com.b_lam.resplash.data.data.Collection;
@@ -13,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.b_lam.resplash.BuildConfig;
+import com.b_lam.resplash.data.tools.CustomApiManager;
 
 /**
  * Created by Brandon on 10/6/2016.
@@ -28,21 +33,12 @@ public class Resplash extends Application{
     private boolean myOwnCollection = false;
     private boolean activityInBackstage = false;
 
-    // Unsplash data.
-    public static final String APPLICATION_ID = BuildConfig.UNSPLASH_APPLICATION_ID;
-    public static final String SECRET = BuildConfig.UNSPLASH_SECRET;
-
     // Unsplash url.
     public static final String UNSPLASH_API_BASE_URL = "https://api.unsplash.com/";
     public static final String UNSPLASH_URL = "https://unsplash.com/";
     public static final String UNSPLASH_UPLOAD_URL = "https://unsplash.com/submit";
     public static final String UNSPLASH_JOIN_URL = "https://unsplash.com/join";
     public static final String UNSPLASH_LOGIN_CALLBACK = "unsplash-auth-callback";
-    public static final String UNSPLASH_LOGIN_URL = Resplash.UNSPLASH_URL + "oauth/authorize"
-            + "?client_id=" + Resplash.APPLICATION_ID
-            + "&redirect_uri=" + "resplash%3A%2F%2F" + UNSPLASH_LOGIN_CALLBACK
-            + "&response_type=" + "code"
-            + "&scope=" + "public+read_user+write_user+read_photos+write_photos+write_likes+read_collections+write_collections";
 
     public static final String DATE_FORMAT = "yyyy/MM/dd";
 
@@ -79,6 +75,46 @@ public class Resplash extends Application{
     public void onCreate() {
         super.onCreate();
         initialize();
+    }
+
+    public static String getAppId(Context c, boolean auth) {
+        if (isDebug(c)) {
+            return BuildConfig.DEV_APP_ID;
+        } else if (TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiKey())
+                || TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiSecret())) {
+            return BuildConfig.RELEASE_APP_ID;
+        } else {
+            return CustomApiManager.getInstance(c).getCustomApiKey();
+        }
+    }
+
+    public static String getSecret(Context c) {
+        if (isDebug(c)) {
+            return BuildConfig.DEV_SECRET;
+        } else if (TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiKey())
+                || TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiSecret())) {
+            return BuildConfig.RELEASE_SECRET;
+        } else {
+            return CustomApiManager.getInstance(c).getCustomApiSecret();
+        }
+    }
+
+    public static boolean isDebug(Context c) {
+        try {
+            return (c.getApplicationInfo().flags
+                    & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception ignored) {
+
+        }
+        return false;
+    }
+
+    public static String getLoginUrl(Context c){
+        return Resplash.UNSPLASH_URL + "oauth/authorize"
+                + "?client_id=" + Resplash.getAppId(c, true)
+                + "&redirect_uri=" + "resplash%3A%2F%2F" + Resplash.UNSPLASH_LOGIN_CALLBACK
+                + "&response_type=" + "code"
+                + "&scope=" + "public+read_user+write_user+read_photos+write_photos+write_likes+read_collections+write_collections";
     }
 
     private void initialize() {
