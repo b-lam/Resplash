@@ -233,7 +233,25 @@ public class DetailActivity extends AppCompatActivity {
                         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.MULTIPLY);
                         progressBar.setVisibility(View.VISIBLE);
 
-                        downloadImage(mPhoto.urls.raw, TYPE_WALLPAPER);
+                        switch (sharedPreferences.getString("wallpaper_quality", "Raw")) {
+                            case "Raw":
+                                downloadImage(mPhoto.urls.raw, TYPE_WALLPAPER);
+                                break;
+                            case "Full":
+                                downloadImage(mPhoto.urls.full, TYPE_WALLPAPER);
+                                break;
+                            case "Regular":
+                                downloadImage(mPhoto.urls.regular, TYPE_WALLPAPER);
+                                break;
+                            case "Small":
+                                downloadImage(mPhoto.urls.small, TYPE_WALLPAPER);
+                                break;
+                            case "Thumb":
+                                downloadImage(mPhoto.urls.thumb, TYPE_WALLPAPER);
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Invalid wallpaper quality");
+                        }
                     }
 
                     break;

@@ -2,6 +2,25 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
+        android:title="@string/title_general_section">
+
+        <ListPreference
+            android:key="language"
+            android:title="@string/title_language"
+            android:dialogTitle="@string/title_language"
+            android:entries="@array/language"
+            android:entryValues="@array/language"
+            android:defaultValue="English"/>
+
+        <Preference
+            android:title="@string/title_custom_api">
+            <intent
+                android:action="CustomApiKeyActivity"/>
+        </Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/title_quality_section">
 
         <ListPreference
@@ -18,6 +37,15 @@
             android:title="@string/title_download_quality_preference"
             android:summary="@string/summary_download_quality_preference"
             android:dialogTitle="@string/title_download_quality_preference"
+            android:entries="@array/quality_options"
+            android:entryValues="@array/quality_options"
+            android:defaultValue="Raw"/>
+
+        <ListPreference
+            android:key="wallpaper_quality"
+            android:title="@string/title_wallpaper_quality_preference"
+            android:summary="@string/summary_wallpaper_quality_preference"
+            android:dialogTitle="@string/title_wallpaper_quality_preference"
             android:entries="@array/quality_options"
             android:entryValues="@array/quality_options"
             android:defaultValue="Raw"/>
@@ -47,11 +75,12 @@
             android:entryValues="@array/layout_options"
             android:defaultValue="List"/>
     </PreferenceCategory>
+
     <PreferenceCategory
         android:title="@string/title_other_section">
 
         <Preference
-        android:title="@string/title_intent_preference">
+        android:title="@string/title_unsplash_intent_preference">
         <intent android:action="android.intent.action.VIEW"
         android:data="http://unsplash.com/" />
         </Preference>

@@ -9,9 +9,6 @@
 
     <string name="download_complete">Download Complete</string>
 
-    <string name="APPLICATION_ID">392290b3eb423d477266bece8247597c52b3016bf324f9bacc8e7d65b78687bd</string>
-    <string name="APPLICATION_SECRET">d85dc1ef9792cf5311f5210ab35e0898b99fc528dced419d83a0d2835bd8b62a</string>
-
     <!-- ErrorView -->
     <string name="error_http">Server Error</string>
     <string name="error_http_subtitle">There seems to be a problem with the server.</string>
@@ -24,6 +21,8 @@
     <string name="summary_load_quality_preference">Choose the quality of the images that are loaded</string>
     <string name="title_download_quality_preference">Download Quality</string>
     <string name="summary_download_quality_preference">Choose the quality of the images that are downloaded</string>
+    <string name="title_wallpaper_quality_preference">Wallpaper Quality</string>
+    <string name="summary_wallpaper_quality_preference">Choose the quality of the wallpapers set</string>
     <array name="quality_options">
         <item>Raw</item>
         <item>Full</item>
@@ -39,8 +38,14 @@
         <item>Cards</item>
         <item>Grid</item>
     </array>
+    <string name="title_general_section">General</string>
+    <string name="title_custom_api">Custom API Key</string>
+    <string name="title_language">Language</string>
+    <array name="language">
+        <item>English</item>
+    </array>
     <string name="title_other_section">Other</string>
-    <string name="title_intent_preference">Go to Unsplash.com</string>
+    <string name="title_unsplash_intent_preference">Go to Unsplash.com</string>
 
     <!-- Menu -->
     <string name="menu_search">Search</string>
@@ -60,6 +65,11 @@
     <string name="intro_download_description">Free (do whatever you want) high-resolution photos</string>
     <string name="intro_done">Go</string>
     <string name="intro_next">Next</string>
+
+    <!-- Custom API -->
+    <string name="custom_api_key_description">You can create your own Unsplash developer account and use your own API key\n\n(Leave blank to use the stock API key)</string>
+    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
+    <string name="api_key_empty_message">Error: Cannot leave field empty</string>
 
     <!-- Search -->
     <string name="search_hint">Search</string>
