@@ -16,8 +16,8 @@ import com.bumptech.glide.request.target.Target;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
 public class PreviewActivity extends AppCompatActivity {
 
