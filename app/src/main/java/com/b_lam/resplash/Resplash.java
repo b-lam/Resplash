@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.b_lam.resplash.activities.MainActivity;
@@ -32,6 +33,7 @@ public class Resplash extends Application{
     private Drawable drawable;
     private boolean myOwnCollection = false;
     private boolean activityInBackstage = false;
+    private static String TAG = "Resplash";
 
     // Unsplash url.
     public static final String UNSPLASH_API_BASE_URL = "https://api.unsplash.com/";
@@ -79,11 +81,14 @@ public class Resplash extends Application{
 
     public static String getAppId(Context c, boolean auth) {
         if (isDebug(c)) {
+            Log.d(TAG, "Using debug keys");
             return BuildConfig.DEV_APP_ID;
         } else if (TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiKey())
                 || TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiSecret())) {
+            Log.d(TAG, "Using release keys");
             return BuildConfig.RELEASE_APP_ID;
         } else {
+            Log.d(TAG, "Using custom keys");
             return CustomApiManager.getInstance(c).getCustomApiKey();
         }
     }
