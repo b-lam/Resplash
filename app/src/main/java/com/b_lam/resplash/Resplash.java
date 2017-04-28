@@ -41,6 +41,7 @@ public class Resplash extends Application{
     public static final String UNSPLASH_UPLOAD_URL = "https://unsplash.com/submit";
     public static final String UNSPLASH_JOIN_URL = "https://unsplash.com/join";
     public static final String UNSPLASH_LOGIN_CALLBACK = "unsplash-auth-callback";
+    public static final String UNSPLASH_UTM_PARAMETERS = "?utm_source=resplash&utm_medium=referral&utm_campaign=api-credit";
 
     public static final String DATE_FORMAT = "yyyy/MM/dd";
 

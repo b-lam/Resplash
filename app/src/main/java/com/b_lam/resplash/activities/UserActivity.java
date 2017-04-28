@@ -1,8 +1,10 @@
 package com.b_lam.resplash.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -140,10 +143,20 @@ public class UserActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.user, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
                 supportFinishAfterTransition();
+                return true;
+            case R.id.action_view_on_unsplash:
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mUser.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -157,7 +170,6 @@ public class UserActivity extends AppCompatActivity {
             mUserService.cancel();
         }
     }
-
 
     class PagerAdapter extends FragmentPagerAdapter {
 

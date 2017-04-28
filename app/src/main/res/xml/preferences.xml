@@ -82,7 +82,7 @@
         <Preference
         android:title="@string/title_unsplash_intent_preference">
         <intent android:action="android.intent.action.VIEW"
-        android:data="http://unsplash.com/" />
+        android:data="http://unsplash.com/?utm_source=resplash&amp;utm_medium=referral&amp;utm_campaign=api-credit"/>
         </Preference>
 
     </PreferenceCategory>

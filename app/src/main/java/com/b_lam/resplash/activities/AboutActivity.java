@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.b_lam.resplash.Resplash;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import butterknife.BindView;
@@ -80,7 +81,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.container_about_unsplash:
-                goToURL("https://unsplash.com/");
+                goToURL("https://unsplash.com/" + Resplash.UNSPLASH_UTM_PARAMETERS);
                 break;
 
             case R.id.container_about_changelog:
