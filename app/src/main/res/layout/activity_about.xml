@@ -163,6 +163,21 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/container_about_donate"
+                        style="@style/about_entry">
+
+                        <ImageView
+                            app:ico_icon="cmd_gift"
+                            app:ico_size="20dp"
+                            style="@style/material_icon" />
+
+                        <TextView
+                            android:text="@string/about_donate_title"
+                            style="@style/about_title_text"/>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

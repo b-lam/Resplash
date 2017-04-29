@@ -86,6 +86,7 @@
     <string name="changelog">v1.0.0 - Initial Release\nv1.0.1 - Fixed loading bug\nv1.0.2 - Changed to dark status bar icons\nv1.0.3 - Fixed navigation bar and preview status bar icons\nv1.0.4 - Bug fixes, added option to use custom API keys, added future support for more languages</string>
     <string name="about_introduction_title">Introduction</string>
     <string name="about_github_title">GitHub</string>
+    <string name="about_donate_title">Donate</string>
     <string name="about_author_title">Brandon Lam</string>
     <string name="about_author_card_title">Author</string>
     <string name="about_author_subtitle">Toronto, Ontario, Canada</string>

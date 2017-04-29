@@ -48,6 +48,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 (LinearLayout) findViewById(R.id.container_about_changelog),
                 (LinearLayout) findViewById(R.id.container_about_intro),
                 (LinearLayout) findViewById(R.id.container_about_github),
+                (LinearLayout) findViewById(R.id.container_about_donate),
                 (LinearLayout) findViewById(R.id.container_about_author),
                 (LinearLayout) findViewById(R.id.container_about_website),
                 (LinearLayout) findViewById(R.id.container_about_instagram),
@@ -98,6 +99,10 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.container_about_github:
                 goToURL("https://github.com/b-lam/Resplash");
+                break;
+
+            case R.id.container_about_donate:
+                startActivity(new Intent(AboutActivity.this, DonateActivity.class));
                 break;
 
             case R.id.container_about_website:
