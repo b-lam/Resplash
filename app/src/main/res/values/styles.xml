@@ -90,12 +90,14 @@
     <style name="about_title_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">3dp</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="about_subtitle_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">15dp</item>
         <item name="android:textSize">12sp</item>
     </style>
 

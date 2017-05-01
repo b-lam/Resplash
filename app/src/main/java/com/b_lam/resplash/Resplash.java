@@ -35,6 +35,8 @@ public class Resplash extends Application{
     private boolean activityInBackstage = false;
     private static String TAG = "Resplash";
 
+    public static final String GOOGLE_PLAY_LICENSE_KEY = BuildConfig.GOOGLE_PLAY_LICENSE_KEY;
+
     // Unsplash url.
     public static final String UNSPLASH_API_BASE_URL = "https://api.unsplash.com/";
     public static final String UNSPLASH_URL = "https://unsplash.com/";

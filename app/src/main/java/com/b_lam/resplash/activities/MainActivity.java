@@ -163,9 +163,9 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                         new PrimaryDrawerItem().withName("New").withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)),
                         new PrimaryDrawerItem().withName("Collections").withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("Settings").withIdentifier(4).withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
-                        new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("About").withIdentifier(5).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false)
+                        new PrimaryDrawerItem().withName("Support development").withIdentifier(4).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_heart).sizeDp(24).paddingDp(2)).withSelectable(false),
+                        new PrimaryDrawerItem().withName("Settings").withIdentifier(5).withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
+                        new PrimaryDrawerItem().withName("About").withIdentifier(6).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(drawerItemClickListener)
                 .build();
@@ -228,8 +228,10 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 }else if(drawerItem.getIdentifier() == 3){
                     mViewPager.setCurrentItem(2);
                 }else if(drawerItem.getIdentifier() == 4){
-                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    intent = new Intent(MainActivity.this, DonateActivity.class);
                 }else if(drawerItem.getIdentifier() == 5){
+                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                }else if(drawerItem.getIdentifier() == 6){
                     intent = new Intent(MainActivity.this, AboutActivity.class);
                 }else if(drawerItem.getIdentifier() == 100000){
                     intent = new Intent(MainActivity.this, LoginActivity.class);

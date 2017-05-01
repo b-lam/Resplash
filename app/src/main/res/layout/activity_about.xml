@@ -58,7 +58,10 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
                             android:src="@mipmap/ic_launcher"/>
 
                         <TextView
@@ -66,7 +69,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:text="@string/app_name"
-                            android:textSize="20sp" />
+                            android:textSize="22sp" />
 
                     </LinearLayout>
 
@@ -163,6 +166,57 @@
 
                     </LinearLayout>
 
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                android:layout_marginTop="10dp"
+                android:paddingTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textStyle="bold"
+                        android:text="@string/about_support_development_card_title" />
+
+                    <LinearLayout
+                        android:id="@+id/container_about_rate"
+                        style="@style/about_entry">
+
+                        <ImageView
+                            app:ico_icon="gmd_star"
+                            app:ico_size="20dp"
+                            style="@style/material_icon" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:text="@string/about_rate_title"
+                                style="@style/about_title_text"/>
+
+                            <TextView
+                                android:text="@string/about_rate_subtitle"
+                                style="@style/about_subtitle_text"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/container_about_donate"
                         style="@style/about_entry">
@@ -172,9 +226,48 @@
                             app:ico_size="20dp"
                             style="@style/material_icon" />
 
-                        <TextView
-                            android:text="@string/about_donate_title"
-                            style="@style/about_title_text"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:text="@string/about_donate_title"
+                                style="@style/about_title_text"/>
+
+                            <TextView
+                                android:text="@string/about_donate_subtitle"
+                                style="@style/about_subtitle_text"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/container_about_bug"
+                        style="@style/about_entry">
+
+                        <ImageView
+                            app:ico_icon="@string/gmd_bug_report"
+                            app:ico_size="20dp"
+                            style="@style/material_icon" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:text="@string/about_bug_title"
+                                style="@style/about_title_text"/>
+
+                            <TextView
+                                android:text="@string/about_bug_subtitle"
+                                style="@style/about_subtitle_text"
+                                android:paddingBottom="10dp"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
