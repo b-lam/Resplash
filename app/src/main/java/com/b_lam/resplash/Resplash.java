@@ -35,12 +35,15 @@ public class Resplash extends Application{
     private boolean activityInBackstage = false;
     private static String TAG = "Resplash";
 
+    public static final String GOOGLE_PLAY_LICENSE_KEY = BuildConfig.GOOGLE_PLAY_LICENSE_KEY;
+
     // Unsplash url.
     public static final String UNSPLASH_API_BASE_URL = "https://api.unsplash.com/";
     public static final String UNSPLASH_URL = "https://unsplash.com/";
     public static final String UNSPLASH_UPLOAD_URL = "https://unsplash.com/submit";
     public static final String UNSPLASH_JOIN_URL = "https://unsplash.com/join";
     public static final String UNSPLASH_LOGIN_CALLBACK = "unsplash-auth-callback";
+    public static final String UNSPLASH_UTM_PARAMETERS = "?utm_source=resplash&utm_medium=referral&utm_campaign=api-credit";
 
     public static final String DATE_FORMAT = "yyyy/MM/dd";
 

@@ -258,7 +258,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
                 shareTextUrl();
                 return true;
             case R.id.action_view_on_unsplash:
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mCollection.links.html));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mCollection.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
                 startActivity(i);
                 return true;
             default:
@@ -291,7 +291,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
             share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
             share.putExtra(Intent.EXTRA_SUBJECT, "Unsplash Collection");
-            share.putExtra(Intent.EXTRA_TEXT, mCollection.links.html);
+            share.putExtra(Intent.EXTRA_TEXT, mCollection.links.html + Resplash.UNSPLASH_UTM_PARAMETERS);
 
             startActivity(Intent.createChooser(share, "Share via"));
         }

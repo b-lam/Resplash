@@ -310,7 +310,7 @@ public class DetailActivity extends AppCompatActivity {
                 return true;
             case R.id.action_view_on_unsplash:
                 if(mPhotoDetails != null) {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mPhotoDetails.links.html));
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mPhotoDetails.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
                     startActivity(i);
                 }
                 return true;
@@ -384,7 +384,7 @@ public class DetailActivity extends AppCompatActivity {
             share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
             share.putExtra(Intent.EXTRA_SUBJECT, "Unsplash Image");
-            share.putExtra(Intent.EXTRA_TEXT, mPhoto.links.html);
+            share.putExtra(Intent.EXTRA_TEXT, mPhoto.links.html + Resplash.UNSPLASH_UTM_PARAMETERS);
 
             startActivity(Intent.createChooser(share, "Share via"));
         }

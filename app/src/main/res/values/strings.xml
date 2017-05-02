@@ -81,11 +81,18 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
     <string name="about_version_title">Version</string>
-    <string name="about_version_subtitle">1.0.4</string>
+    <string name="about_version_subtitle">1.0.5</string>
     <string name="about_changelog_title">Changelog</string>
-    <string name="changelog">v1.0.0 - Initial Release\nv1.0.1 - Fixed loading bug\nv1.0.2 - Changed to dark status bar icons\nv1.0.3 - Fixed navigation bar and preview status bar icons\nv1.0.4 - Bug fixes, added option to use custom API keys, added future support for more languages</string>
+    <string name="changelog">v1.0.0 - Initial Release\nv1.0.1 - Fixed loading bug\nv1.0.2 - Changed to dark status bar icons\nv1.0.3 - Fixed navigation bar and preview status bar icons\nv1.0.4 - Bug fixes, added option to use custom API keys, added future support for more languages\nv1.0.5 - Added various ways to support the development of Resplash, bug fixes</string>
     <string name="about_introduction_title">Introduction</string>
     <string name="about_github_title">GitHub</string>
+    <string name="about_support_development_card_title">Support development</string>
+    <string name="about_rate_title">Rate</string>
+    <string name="about_rate_subtitle">If you like Resplash, rate it on the Play Store</string>
+    <string name="about_donate_title">Donate</string>
+    <string name="about_donate_subtitle">If you really like Resplash, consider supporting its development by sending me a couple of dollars</string>
+    <string name="about_bug_title">Report bugs</string>
+    <string name="about_bug_subtitle">Report bugs or request new features</string>
     <string name="about_author_title">Brandon Lam</string>
     <string name="about_author_card_title">Author</string>
     <string name="about_author_subtitle">Toronto, Ontario, Canada</string>
@@ -112,6 +119,19 @@
     <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
     <string name="about_library10_title">FloatingActionButton</string>
     <string name="about_library10_subtitle">Android Floating Action Button based on Material Design specification</string>
+
+    <!-- Donate -->
+    <string name="donate_card_title">Support development</string>
+    <string name="donate_item1_title">Coffee</string>
+    <string name="donate_item1_subtitle">Keeps me awake through the late night coding sessions</string>
+    <string name="donate_item2_title">Smoothie</string>
+    <string name="donate_item2_subtitle">Sometimes I need to eat something healthy</string>
+    <string name="donate_item3_title">Pizza</string>
+    <string name="donate_item3_subtitle">Everyone likes pizza</string>
+    <string name="donate_item4_title">Fancy Meal</string>
+    <string name="donate_item4_subtitle">Gotta treat yourself once in a while</string>
+    <string name="donate_thanks">Thanks for donating!</string>
+    <string name="donate_loading">Loading products...</string>
 
     <string name="stats">Stats</string>
     <string name="photo_info">Info</string>
