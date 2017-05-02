@@ -21,6 +21,7 @@ import com.b_lam.resplash.util.billing.IabResult;
 import com.b_lam.resplash.util.billing.Inventory;
 import com.b_lam.resplash.util.billing.Purchase;
 import com.b_lam.resplash.util.billing.SkuDetails;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +53,8 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
     IabHelper mHelper;
     IabBroadcastReceiver mBroadcastReceiver;
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +110,9 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
         for (LinearLayout r : containers) {
             r.setOnClickListener(this);
         }
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_DONATE, null);
     }
 
     @Override

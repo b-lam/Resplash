@@ -74,6 +74,18 @@ public class Resplash extends Application{
     // permission code.
     public static final int WRITE_EXTERNAL_STORAGE = 1;
 
+    // Firebase
+    public static final String FIREBASE_EVENT_LOGIN = "unsplash_login";
+    public static final String FIREBASE_EVENT_VIEW_DONATE = "view_donate";
+    public static final String FIREBASE_EVENT_VIEW_ABOUT = "view_about";
+    public static final String FIREBASE_EVENT_RATE_FROM_APP = "rate_from_app";
+    public static final String FIREBASE_EVENT_DOWNLOAD = "download_photo";
+    public static final String FIREBASE_EVENT_SET_WALLPAPER = "set_wallpaper";
+    public static final String FIREBASE_EVENT_LIKE_PHOTO = "like_photo";
+    public static final String FIREBASE_EVENT_SHARE_PHOTO = "share_photo";
+    public static final String FIREBASE_EVENT_VIEW_PHOTO_STATS = "view_photo_stats";
+    public static final String FIREBASE_EVENT_VIEW_PHOTO_INFO = "view_photo_info";
+
     /** <br> life cycle. */
 
     @Override

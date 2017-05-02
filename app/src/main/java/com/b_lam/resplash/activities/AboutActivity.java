@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.b_lam.resplash.Resplash;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import butterknife.BindView;
@@ -24,6 +25,7 @@ import com.b_lam.resplash.R;
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar_about) Toolbar mToolbar;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,9 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         for (LinearLayout r : containers) {
             r.setOnClickListener(this);
         }
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_ABOUT, null);
     }
 
     @Override
@@ -104,6 +109,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.container_about_rate:
+                mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_RATE_FROM_APP, null);
                 goToURL("https://play.google.com/store/apps/details?id=com.b_lam.resplash");
                 break;
 

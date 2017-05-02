@@ -81,9 +81,9 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
     <string name="about_version_title">Version</string>
-    <string name="about_version_subtitle">1.0.5</string>
+    <string name="about_version_subtitle">1.0.6</string>
     <string name="about_changelog_title">Changelog</string>
-    <string name="changelog">v1.0.0 - Initial Release\nv1.0.1 - Fixed loading bug\nv1.0.2 - Changed to dark status bar icons\nv1.0.3 - Fixed navigation bar and preview status bar icons\nv1.0.4 - Bug fixes, added option to use custom API keys, added future support for more languages\nv1.0.5 - Added various ways to support the development of Resplash, bug fixes</string>
+    <string name="changelog">v1.0.0 - Initial Release\nv1.0.1 - Fixed loading bug\nv1.0.2 - Changed to dark status bar icons\nv1.0.3 - Fixed navigation bar and preview status bar icons\nv1.0.4 - Bug fixes, added option to use custom API keys, added future support for more languages\nv1.0.5 - Added various ways to support the development of Resplash, bug fixes\nv1.0.6 - Improved performance, added better analytics and crash reporting, bug fixes</string>
     <string name="about_introduction_title">Introduction</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_support_development_card_title">Support development</string>

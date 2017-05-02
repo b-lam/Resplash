@@ -39,7 +39,7 @@
             android:dialogTitle="@string/title_download_quality_preference"
             android:entries="@array/quality_options"
             android:entryValues="@array/quality_options"
-            android:defaultValue="Raw"/>
+            android:defaultValue="Full"/>
 
         <ListPreference
             android:key="wallpaper_quality"
@@ -48,7 +48,7 @@
             android:dialogTitle="@string/title_wallpaper_quality_preference"
             android:entries="@array/quality_options"
             android:entryValues="@array/quality_options"
-            android:defaultValue="Raw"/>
+            android:defaultValue="Full"/>
 
         <!--<CheckBoxPreference-->
             <!--android:key="checkbox_preference"-->

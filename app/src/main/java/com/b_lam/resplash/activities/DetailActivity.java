@@ -56,6 +56,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -80,6 +81,8 @@ public class DetailActivity extends AppCompatActivity {
     private Drawable colorIcon;
     final static int TYPE_DOWNLOAD = 1;
     final static int TYPE_WALLPAPER = 2;
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @BindView((R.id.toolbar_detail)) Toolbar toolbar;
     @BindView(R.id.imgFull) ImageView imgFull;
@@ -194,6 +197,8 @@ public class DetailActivity extends AppCompatActivity {
         mService.requestPhotoDetails(mPhoto, mPhotoDetailsRequestListener);
 
         imgFull.setOnClickListener(imageOnClickListener);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -202,11 +207,12 @@ public class DetailActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.fab_download:
                     if (mPhoto != null) {
+                        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_DOWNLOAD, null);
                         floatingActionMenu.close(true);
                         Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_SHORT).show();
                         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.MULTIPLY);
                         progressBar.setVisibility(View.VISIBLE);
-                        switch (sharedPreferences.getString("download_quality", "Raw")) {
+                        switch (sharedPreferences.getString("download_quality", "Full")) {
                             case "Raw":
                                 downloadImage(mPhoto.urls.raw, TYPE_DOWNLOAD);
                                 break;
@@ -229,11 +235,12 @@ public class DetailActivity extends AppCompatActivity {
                     break;
                 case R.id.fab_wallpaper:
                     if (mPhoto != null) {
+                        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SET_WALLPAPER, null);
                         floatingActionMenu.close(true);
                         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.MULTIPLY);
                         progressBar.setVisibility(View.VISIBLE);
 
-                        switch (sharedPreferences.getString("wallpaper_quality", "Raw")) {
+                        switch (sharedPreferences.getString("wallpaper_quality", "Full")) {
                             case "Raw":
                                 downloadImage(mPhoto.urls.raw, TYPE_WALLPAPER);
                                 break;
@@ -257,6 +264,7 @@ public class DetailActivity extends AppCompatActivity {
                     break;
                 case R.id.fab_info:
                     if (mPhoto != null) {
+                        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_PHOTO_INFO, null);
                         floatingActionMenu.close(true);
                         InfoDialog infoDialog = new InfoDialog();
                         infoDialog.setPhotoDetails(mPhotoDetails);
@@ -265,6 +273,7 @@ public class DetailActivity extends AppCompatActivity {
                     break;
                 case R.id.fab_stats:
                     if (mPhoto != null) {
+                        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_PHOTO_STATS, null);
                         floatingActionMenu.close(true);
                         StatsDialog statsDialog = new StatsDialog();
                         statsDialog.setPhoto(mPhoto);
@@ -306,6 +315,7 @@ public class DetailActivity extends AppCompatActivity {
                 supportFinishAfterTransition();
                 return true;
             case R.id.action_share:
+                mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SHARE_PHOTO, null);
                 shareTextUrl();
                 return true;
             case R.id.action_view_on_unsplash:
@@ -356,6 +366,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void likeImage(View view){
+
+        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LIKE_PHOTO, null);
 
         like = !like;
 
