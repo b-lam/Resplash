@@ -20,6 +20,8 @@ import com.b_lam.resplash.data.tools.AuthManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -32,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String TAG = "LoginActivity";
     private AuthorizeService mService;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnClose.setOnClickListener(this);
 
         mService = AuthorizeService.getService();
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     @Override
@@ -93,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             AuthManager.getInstance().refreshPersonalProfile();
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LOGIN, null);
             startActivity(intent);
         } else {
             Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();

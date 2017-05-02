@@ -324,7 +324,7 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
                 holder.coverPhoto.setMinimumHeight((int) finalHeight);
             }
         }else{
-            holder.coverPhoto.setImageResource(R.drawable.placeholder);
+            holder.coverPhotoCard.setImageResource(R.drawable.placeholder);
         }
 
         if(sharedPreferences.getString("item_layout", "List").equals("Cards")){
