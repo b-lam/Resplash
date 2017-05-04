@@ -93,6 +93,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.container_about_changelog:
+                mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_CHANGELOG, null);
                 new AlertDialog.Builder(AboutActivity.this)
                         .setTitle("Changelog")
                         .setMessage(getString(R.string.changelog))

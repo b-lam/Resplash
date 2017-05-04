@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.Photo;
@@ -37,21 +38,26 @@ public class PreviewActivity extends AppCompatActivity {
 
         mAttacher = new PhotoViewAttacher(mPhotoView);
 
-        Glide.with(this)
-                .load(mPhoto.urls.regular)
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        return false;
-                    }
+        if(mPhoto.urls.regular != null){
+            Glide.with(this)
+                    .load(mPhoto.urls.regular)
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
 
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        mProgressBar.setVisibility(View.GONE);
-                        return false;
-                    }
-                })
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(mPhotoView);
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            mProgressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(mPhotoView);
+        }else{
+            finish();
+            Toast.makeText(PreviewActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+        }
     }
 }

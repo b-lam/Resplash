@@ -25,10 +25,6 @@ public interface PhotoApi {
     String ORDER_BY_OLDEST = "oldest";
     String ORDER_BY_POPULAR = "popular";
 
-    String LANDSCAPE_ORIENTATION = "landscape";
-    String PORTRAIT_ORIENTATION = "portrait";
-    String SQUARE_ORIENTATION = "square";
-
     /** <br> interface. */
 
     @GET("photos")
@@ -56,10 +52,7 @@ public interface PhotoApi {
     Call<LikePhotoResult> unlikeAPhoto(@Path("id") String id);
 
     @GET("photos/{id}")
-    Call<PhotoDetails> getAPhoto(@Path("id") String id,
-                                 @Query("w") int w,
-                                 @Query("h") int h,
-                                 @Query("rect") String rect);
+    Call<PhotoDetails> getAPhoto(@Path("id") String id);
 
     @GET("users/{username}/photos")
     Call<List<Photo>> getUserPhotos(@Path("username") String username,
