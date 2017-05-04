@@ -131,8 +131,8 @@ public class PhotoService {
         });
     }
 
-    public void requestPhotoDetails(Photo p, final OnRequestPhotoDetailsListener l) {
-        Call<PhotoDetails> getAPhoto = buildApi(buildClient()).getAPhoto(p.id, p.width, p.height, "0,0," + p.width + "," + p.height);
+    public void requestPhotoDetails(String id, final OnRequestPhotoDetailsListener l) {
+        Call<PhotoDetails> getAPhoto = buildApi(buildClient()).getAPhoto(id);
         getAPhoto.enqueue(new Callback<PhotoDetails>() {
             @Override
             public void onResponse(Call<PhotoDetails> call, Response<PhotoDetails> response) {

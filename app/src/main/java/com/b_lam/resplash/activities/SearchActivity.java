@@ -148,10 +148,12 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if(mEditText.getText().toString().equals("")){
-                mActionClear.setVisible(false);
-            }else {
-                mActionClear.setVisible(true);
+            if(mActionClear != null) {
+                if (mEditText.getText().toString().equals("")) {
+                    mActionClear.setVisible(false);
+                } else {
+                    mActionClear.setVisible(true);
+                }
             }
         }
     };

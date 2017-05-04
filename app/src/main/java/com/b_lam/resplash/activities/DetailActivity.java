@@ -118,8 +118,10 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         mPhoto = new Gson().fromJson(getIntent().getStringExtra("Photo"), Photo.class);
+
         this.mService = PhotoService.getService();
 
         loadPreferences();
@@ -183,20 +185,22 @@ public class DetailActivity extends AppCompatActivity {
                 } else if (response.code() == 403) {
                     Toast.makeText(Resplash.getInstance().getApplicationContext(), "Can't make anymore requests.", Toast.LENGTH_LONG).show();
                 } else {
-                    mService.requestPhotoDetails(mPhoto, this);
+                    mService.requestPhotoDetails(mPhoto.id, this);
                 }
             }
 
             @Override
             public void onRequestPhotoDetailsFailed(Call<PhotoDetails> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mService.requestPhotoDetails(mPhoto, this);
+                mService.requestPhotoDetails(mPhoto.id, this);
             }
         };
 
-        mService.requestPhotoDetails(mPhoto, mPhotoDetailsRequestListener);
+        mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
 
         imgFull.setOnClickListener(imageOnClickListener);
+
+        progressBar.setScaleY(3f);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }

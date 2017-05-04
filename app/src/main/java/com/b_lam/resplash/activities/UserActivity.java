@@ -129,17 +129,23 @@ public class UserActivity extends AppCompatActivity {
                 } else if (response.code() == 403) {
                     Toast.makeText(Resplash.getInstance().getApplicationContext(), "Can't make anymore requests.", Toast.LENGTH_LONG).show();
                 } else {
-                    mUserService.requestUserProfile(username, this);
+                    if(username != null) {
+                        mUserService.requestUserProfile(username, this);
+                    }
                 }
             }
 
             @Override
             public void onRequestUserProfileFailed(Call<User> call, Throwable t) {
-                mUserService.requestUserProfile(username, this);
+                if(username != null) {
+                    mUserService.requestUserProfile(username, this);
+                }
             }
         };
 
-        mUserService.requestUserProfile(username, onRequestUserProfileListener);
+        if(username != null) {
+            mUserService.requestUserProfile(username, onRequestUserProfileListener);
+        }
     }
 
     @Override
@@ -155,8 +161,12 @@ public class UserActivity extends AppCompatActivity {
                 supportFinishAfterTransition();
                 return true;
             case R.id.action_view_on_unsplash:
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mUser.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
-                startActivity(i);
+                if(mUser.links.html != null) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mUser.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
+                    startActivity(i);
+                }else{
+                    Toast.makeText(UserActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
