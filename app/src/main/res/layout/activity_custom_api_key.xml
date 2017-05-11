@@ -61,7 +61,7 @@
                 style="@style/edit_profile_edit_text"
                 android:inputType="text"
                 android:maxLines="1"
-                android:hint="API Key" />
+                android:hint="@string/api_key_hint" />
 
         </LinearLayout>
 
@@ -85,7 +85,7 @@
                 style="@style/edit_profile_edit_text"
                 android:inputType="text"
                 android:maxLines="1"
-                android:hint="Secret" />
+                android:hint="@string/secret_hint" />
 
         </LinearLayout>
 
@@ -104,7 +104,7 @@
             android:ems="10"
             android:padding="10dp"
             android:textColor="@color/colorAccent"
-            android:text="Redirect URI" />
+            android:text="@string/redirect_uri_hint" />
 
         <TextView
             android:id="@+id/custom_api_key_redirect_uri_text"

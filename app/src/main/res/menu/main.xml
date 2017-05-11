@@ -10,7 +10,7 @@
     <item android:id="@+id/sort_by"
         android:title="@string/menu_sort"
         android:icon="@drawable/ic_sort_black_24dp"
-        app:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom">
         <menu>
             <group android:checkableBehavior="none">
                 <item android:id="@+id/menu_item_featured_latest"

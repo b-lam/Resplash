@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/activity_intro_button"
-            android:text="Next"
+            android:text="@string/next"
             android:background="@color/transparent"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true" />

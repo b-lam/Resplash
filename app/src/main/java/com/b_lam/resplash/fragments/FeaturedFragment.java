@@ -10,7 +10,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -23,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.Utils;
 import com.b_lam.resplash.activities.DetailActivity;
 import com.b_lam.resplash.activities.MainActivity;
 import com.b_lam.resplash.data.data.Photo;
@@ -81,14 +84,7 @@ public class FeaturedFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
-        String mLayoutType = sharedPreferences.getString("item_layout", "List");
         mSort = getArguments().getString("sort", "latest");
-        if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
-            mColumns = 1;
-        }else{
-            mColumns = 2;
-        }
-
         mService = PhotoService.getService();
     }
 
@@ -103,8 +99,9 @@ public class FeaturedFragment extends Fragment{
         mImagesErrorView = (ErrorView) rootView.findViewById(R.id.fragment_featured_error_view);
         mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerFeatured);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
-        mImageRecycler.setLayoutManager(gridLayoutManager);
+        mColumns = Utils.getGirdColumnCount(getContext());
+
+        mImageRecycler.setLayoutManager(new StaggeredGridLayoutManager(mColumns, StaggeredGridLayoutManager.VERTICAL));
         mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -152,6 +149,13 @@ public class FeaturedFragment extends Fragment{
         if (mService != null) {
             mService.cancel();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mColumns = Utils.getGirdColumnCount(getContext());
+        mImageRecycler.setLayoutManager(new StaggeredGridLayoutManager(mColumns, StaggeredGridLayoutManager.VERTICAL));
     }
 
     private FastAdapter.OnClickListener<Photo> onClickListener = new FastAdapter.OnClickListener<Photo>(){
@@ -273,7 +277,7 @@ public class FeaturedFragment extends Fragment{
                     mImagesErrorView.setVisibility(View.VISIBLE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
-                    Toast.makeText(getContext(), "Updated images!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
                     mSwipeContainer.setRefreshing(false);
                 }
             }

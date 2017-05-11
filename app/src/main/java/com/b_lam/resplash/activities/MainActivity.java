@@ -133,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
             }
         });
 
-        drawerItemAddAccount = new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Unsplash Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_plus).actionBar().paddingDp(5)).withIdentifier(100000).withOnDrawerItemClickListener(drawerItemClickListener);
-        drawerItemViewProfile = new ProfileSettingDrawerItem().withName("View Profile").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_account).paddingDp(4)).withIdentifier(100001).withOnDrawerItemClickListener(drawerItemClickListener);
-        drawerItemManageAccount = new ProfileSettingDrawerItem().withName("Manage Account").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_settings).paddingDp(4)).withIdentifier(100002).withOnDrawerItemClickListener(drawerItemClickListener);
-        drawerItemLogout = new ProfileSettingDrawerItem().withName("Logout").withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_close_circle_outline).paddingDp(4)).withIdentifier(100003).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemAddAccount = new ProfileSettingDrawerItem().withName(getString(R.string.main_add_account)).withDescription(getString(R.string.main_add_new_account)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_plus).actionBar().paddingDp(5)).withIdentifier(100000).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemViewProfile = new ProfileSettingDrawerItem().withName(getString(R.string.main_view_profile)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_account).paddingDp(4)).withIdentifier(100001).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemManageAccount = new ProfileSettingDrawerItem().withName(getString(R.string.main_manage_account)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_settings).paddingDp(4)).withIdentifier(100002).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemLogout = new ProfileSettingDrawerItem().withName(getString(R.string.main_logout)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_close_circle_outline).paddingDp(4)).withIdentifier(100003).withOnDrawerItemClickListener(drawerItemClickListener);
 
         // Create the AccountHeader
         drawerHeader = new AccountHeaderBuilder()
@@ -159,13 +159,13 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 .withDelayDrawerClickEvent(200)
                 .withAccountHeader(drawerHeader)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Featured").withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)),
-                        new PrimaryDrawerItem().withName("New").withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)),
-                        new PrimaryDrawerItem().withName("Collections").withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("Support development").withIdentifier(4).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_heart).sizeDp(24).paddingDp(2)).withSelectable(false),
-                        new PrimaryDrawerItem().withName("Settings").withIdentifier(5).withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
-                        new PrimaryDrawerItem().withName("About").withIdentifier(6).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false)
+                        new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(4).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_heart).sizeDp(24).paddingDp(2)).withSelectable(false),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(5).withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_about)).withIdentifier(6).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_information_outline).sizeDp(24).paddingDp(2)).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(drawerItemClickListener)
                 .build();
@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 }else if(drawerItem.getIdentifier() == 100003){
                     AuthManager.getInstance().logout();
                     updateDrawerItems();
-                    Toast.makeText(getApplicationContext(), "Logout - Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.main_logout_success), Toast.LENGTH_SHORT).show();
                 }
 
                 if (intent != null) {

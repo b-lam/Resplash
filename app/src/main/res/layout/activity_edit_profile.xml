@@ -48,7 +48,7 @@
                 <EditText
                     android:id="@+id/username_edit_text"
                     style="@style/edit_profile_edit_text"
-                    android:hint="Username" />
+                    android:hint="@string/username_hint" />
 
             </LinearLayout>
 
@@ -71,7 +71,7 @@
                     android:id="@+id/first_name_edit_text"
                     style="@style/edit_profile_edit_text"
                     android:inputType="textPersonName"
-                    android:hint="First name" />
+                    android:hint="@string/first_name_hint" />
 
             </LinearLayout>
 
@@ -94,7 +94,7 @@
                     android:id="@+id/last_name_edit_text"
                     style="@style/edit_profile_edit_text"
                     android:inputType="textPersonName"
-                    android:hint="Last name" />
+                    android:hint="@string/last_name_hint" />
 
             </LinearLayout>
 
@@ -117,7 +117,7 @@
                     android:id="@+id/email_edit_text"
                     style="@style/edit_profile_edit_text"
                     android:inputType="textEmailAddress"
-                    android:hint="Email address" />
+                    android:hint="@string/email_address_hint" />
 
             </LinearLayout>
 
@@ -139,7 +139,7 @@
                 <EditText
                     android:id="@+id/portfolio_edit_text"
                     style="@style/edit_profile_edit_text"
-                    android:hint="Personal site/portfolio" />
+                    android:hint="@string/personal_site_hint" />
 
             </LinearLayout>
 
@@ -161,7 +161,7 @@
                 <EditText
                     android:id="@+id/instagram_edit_text"
                     style="@style/edit_profile_edit_text"
-                    android:hint="Instagram username" />
+                    android:hint="@string/instagram_username_hint" />
 
             </LinearLayout>
 
@@ -183,7 +183,7 @@
                 <EditText
                     android:id="@+id/location_edit_text"
                     style="@style/edit_profile_edit_text"
-                    android:hint="Location" />
+                    android:hint="@string/location_hint" />
 
             </LinearLayout>
 
@@ -206,7 +206,7 @@
                     android:id="@+id/bio_edit_text"
                     style="@style/edit_profile_edit_text"
                     android:inputType="textMultiLine"
-                    android:hint="Bio" />
+                    android:hint="@string/bio_hint" />
 
             </LinearLayout>
 

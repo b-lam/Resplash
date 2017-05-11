@@ -114,25 +114,11 @@
                                 style="@style/about_title_text"/>
 
                             <TextView
+                                android:id="@+id/version_name"
                                 android:text="@string/about_version_subtitle"
                                 style="@style/about_subtitle_text"/>
 
                         </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_changelog"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            app:ico_icon="cmd_history"
-                            app:ico_size="20dp"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="@string/about_changelog_title"
-                            style="@style/about_title_text"/>
 
                     </LinearLayout>
 

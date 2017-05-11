@@ -66,14 +66,14 @@ public class StatsDialog extends DialogFragment implements PhotoService.OnReques
     @Override
     public void onRequestStatsSuccess(Call<PhotoStats> call, Response<PhotoStats> response) {
         if (response.isSuccessful() && response.body() != null) {
-            tvLikes.setText(NumberFormat.getInstance(Locale.CANADA).format(response.body().likes) + " Likes");
-            tvViews.setText(NumberFormat.getInstance(Locale.CANADA).format(response.body().views) + " Views");
-            tvDownloads.setText(NumberFormat.getInstance(Locale.CANADA).format(response.body().downloads) + " Downloads");
+            tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(response.body().likes)));
+            tvViews.setText(getString(R.string.views, NumberFormat.getInstance(Locale.CANADA).format(response.body().views)));
+            tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(response.body().downloads)));
             progressBar.setVisibility(View.GONE);
             statsContainer.setVisibility(View.VISIBLE);
         } else if (response.code() == 403) {
             dismiss();
-            Toast.makeText(Resplash.getInstance().getApplicationContext(), "Can't make anymore requests.", Toast.LENGTH_LONG).show();
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
         } else {
             service.requestStats(photo.id, this);
         }

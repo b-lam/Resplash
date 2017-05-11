@@ -75,13 +75,13 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
                 if (response.isSuccessful() && response.body() != null) {
                     AuthManager.getInstance().writeUserInfo(response.body());
                 } else {
-                    Toast.makeText(EditProfileActivity.this, "Failed to load profile", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this, getString(R.string.failed_to_load_profile), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onRequestMeProfileFailed(Call<Me> call, Throwable t) {
-                Toast.makeText(EditProfileActivity.this, "Failed to load profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileActivity.this, getString(R.string.failed_to_load_profile), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -159,7 +159,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
                     mBio.getText().toString(),
                     this);
         } else {
-            Toast.makeText(this, "Username cannot be blank", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.username_cannot_be_blank), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -167,16 +167,16 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
     public void onRequestMeProfileSuccess(Call<Me> call, Response<Me> response) {
         if (response.isSuccessful() && response.body() != null) {
             AuthManager.getInstance().writeUserInfo(response.body());
-            Toast.makeText(this, "Updated profile", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            Toast.makeText(this, "Cannot update profile", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.cannot_update_profile), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onRequestMeProfileFailed(Call<Me> call, Throwable t) {
-        Toast.makeText(this, "Cannot update profile", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.cannot_update_profile), Toast.LENGTH_SHORT).show();
     }
 
     @Override

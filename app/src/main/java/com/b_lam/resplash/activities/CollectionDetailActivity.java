@@ -98,7 +98,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
         }else{
             mCollectionDescription.setVisibility(View.GONE);
         }
-        mUserCollection.setText("By " + mCollection.user.name);
+        mUserCollection.setText(getString(R.string.by_author, mCollection.user.name));
         Glide.with(CollectionDetailActivity.this).load(mCollection.user.profile_image.medium).into(mUserProfilePicture);
 
         mUserProfilePicture.setOnClickListener(userProfileOnClickListener);
@@ -134,7 +134,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
             @Override
             public void onLoadMore(int currentPage) {
                 if(mPhotoAdapter.getItemCount() >= mCollection.total_photos){
-                    Toast.makeText(Resplash.getInstance().getApplicationContext(), "No more photos", Toast.LENGTH_LONG);
+                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG);
                 }else {
                     mFooterAdapter.clear();
                     mFooterAdapter.add(new ProgressItem().withEnabled(false));
@@ -216,7 +216,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
                     mImagesErrorView.setVisibility(View.VISIBLE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
-                    Toast.makeText(getApplicationContext(), "Updated photos!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
                     mSwipeContainer.setRefreshing(false);
                 }
             }
@@ -290,10 +290,10 @@ public class CollectionDetailActivity extends AppCompatActivity {
             share.setType("text/plain");
             share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            share.putExtra(Intent.EXTRA_SUBJECT, "Unsplash Collection");
+            share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.unsplash_collection));
             share.putExtra(Intent.EXTRA_TEXT, mCollection.links.html + Resplash.UNSPLASH_UTM_PARAMETERS);
 
-            startActivity(Intent.createChooser(share, "Share via"));
+            startActivity(Intent.createChooser(share, getString(R.string.share_via)));
         }
     }
 }

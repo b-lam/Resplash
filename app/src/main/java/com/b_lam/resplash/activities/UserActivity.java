@@ -87,7 +87,7 @@ public class UserActivity extends AppCompatActivity {
             public void onRequestUserProfileSuccess(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()){
                     mUser = response.body();
-                    tvUserLocation.setText(mUser.location != null ? mUser.location : "Unknown");
+                    tvUserLocation.setText(mUser.location != null ? mUser.location : getString(R.string.unknown));
                     if(mUser.portfolio_url != null) {
                         tvUserPortfolioUrl.setText(mUser.portfolio_url);
                         tvUserPortfolioUrl.setVisibility(View.VISIBLE);
@@ -118,16 +118,16 @@ public class UserActivity extends AppCompatActivity {
                     userCollectionFragment.setUser(mUser);
 
                     mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-                    mPagerAdapter.addFragment(userPhotoFragment, mUser.total_photos + " Photos");
-                    mPagerAdapter.addFragment(userLikesFragment, mUser.total_likes + " Likes");
-                    mPagerAdapter.addFragment(userCollectionFragment, mUser.total_collections + " Collections");
+                    mPagerAdapter.addFragment(userPhotoFragment, getString(R.string.photos, String.valueOf(mUser.total_photos)));
+                    mPagerAdapter.addFragment(userLikesFragment, getString(R.string.likes, String.valueOf(mUser.total_likes)));
+                    mPagerAdapter.addFragment(userCollectionFragment, mUser.total_collections + " " + getString(R.string.main_collections));
 
                     mViewPager.setAdapter(mPagerAdapter);
                     mViewPager.setOffscreenPageLimit(2);
                     mTabLayout.setupWithViewPager(mViewPager);
 
                 } else if (response.code() == 403) {
-                    Toast.makeText(Resplash.getInstance().getApplicationContext(), "Can't make anymore requests.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
                 } else {
                     if(username != null) {
                         mUserService.requestUserProfile(username, this);
