@@ -416,7 +416,7 @@ public class DetailActivity extends AppCompatActivity {
                     public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
                         Bitmap.CompressFormat mFormat = Bitmap.CompressFormat.JPEG;
                         final File myImageFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Pictures" + File.separator + "Resplash"
-                                + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + "." + mFormat.name().toLowerCase());
+                                + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + ".jpg");
                         final Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", myImageFile);
                         ImageDownloader.writeToDisk(myImageFile, resource, new ImageDownloader.OnBitmapSaveListener() {
                             @Override

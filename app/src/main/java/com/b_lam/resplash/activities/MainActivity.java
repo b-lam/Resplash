@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
             }
         });
 
-        drawerItemAddAccount = new ProfileSettingDrawerItem().withName(getString(R.string.main_add_account)).withDescription(getString(R.string.main_add_new_account)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_plus).actionBar().paddingDp(5)).withIdentifier(100000).withOnDrawerItemClickListener(drawerItemClickListener);
+        drawerItemAddAccount = new ProfileSettingDrawerItem().withName(getString(R.string.main_add_account)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_plus).actionBar().paddingDp(5)).withIdentifier(100000).withOnDrawerItemClickListener(drawerItemClickListener);
         drawerItemViewProfile = new ProfileSettingDrawerItem().withName(getString(R.string.main_view_profile)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_account).paddingDp(4)).withIdentifier(100001).withOnDrawerItemClickListener(drawerItemClickListener);
         drawerItemManageAccount = new ProfileSettingDrawerItem().withName(getString(R.string.main_manage_account)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_settings).paddingDp(4)).withIdentifier(100002).withOnDrawerItemClickListener(drawerItemClickListener);
         drawerItemLogout = new ProfileSettingDrawerItem().withName(getString(R.string.main_logout)).withIcon(new IconicsDrawable(this, CommunityMaterial.Icon.cmd_close_circle_outline).paddingDp(4)).withIdentifier(100003).withOnDrawerItemClickListener(drawerItemClickListener);

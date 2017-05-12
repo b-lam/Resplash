@@ -84,7 +84,13 @@ public class FeaturedFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        String mLayoutType = sharedPreferences.getString("item_layout", "List");
         mSort = getArguments().getString("sort", "latest");
+        if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
+            mColumns = 1;
+        }else{
+            mColumns = 2;
+        }
         mService = PhotoService.getService();
     }
 
@@ -99,9 +105,8 @@ public class FeaturedFragment extends Fragment{
         mImagesErrorView = (ErrorView) rootView.findViewById(R.id.fragment_featured_error_view);
         mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerFeatured);
 
-        mColumns = Utils.getGirdColumnCount(getContext());
-
-        mImageRecycler.setLayoutManager(new StaggeredGridLayoutManager(mColumns, StaggeredGridLayoutManager.VERTICAL));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
+        mImageRecycler.setLayoutManager(gridLayoutManager);
         mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -151,13 +156,6 @@ public class FeaturedFragment extends Fragment{
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mColumns = Utils.getGirdColumnCount(getContext());
-        mImageRecycler.setLayoutManager(new StaggeredGridLayoutManager(mColumns, StaggeredGridLayoutManager.VERTICAL));
-    }
-
     private FastAdapter.OnClickListener<Photo> onClickListener = new FastAdapter.OnClickListener<Photo>(){
         @Override
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
@@ -191,9 +189,6 @@ public class FeaturedFragment extends Fragment{
 //                startActivity(i, options.toBundle());
                 startActivity(i);
             }
-
-
-
             return false;
         }
     };

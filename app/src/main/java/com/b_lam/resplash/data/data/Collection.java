@@ -15,8 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.google.gson.annotations.SerializedName;
 import com.mikepenz.fastadapter.items.AbstractItem;
-import com.mikepenz.fastadapter.utils.ViewHolderFactory;
-
 import java.util.List;
 
 import com.b_lam.resplash.R;
@@ -338,6 +336,11 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
         }
     }
 
+    @Override
+    public ViewHolder getViewHolder(View v) {
+        return new ViewHolder(v);
+    }
+
     // Manually create the ViewHolder class
     protected static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -358,29 +361,5 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
                 collectionSize = (TextView) itemView.findViewById(R.id.item_collection_size);
             }
         }
-    }
-
-    //the static ViewHolderFactory which will be used to generate the ViewHolder for this Item
-    private static final ViewHolderFactory<? extends Collection.ViewHolder> FACTORY = new Collection.ItemFactory();
-
-    /**
-     * our ItemFactory implementation which creates the ViewHolder for our adapter.
-     * It is highly recommended to implement a ViewHolderFactory as it is 0-1ms faster for ViewHolder creation,
-     * and it is also many many times more efficient if you define custom listeners on views within your item.
-     */
-    protected static class ItemFactory implements ViewHolderFactory<Collection.ViewHolder> {
-        public Collection.ViewHolder create(View v) {
-            return new Collection.ViewHolder(v);
-        }
-    }
-
-    /**
-     * return our ViewHolderFactory implementation here
-     *
-     * @return
-     */
-    @Override
-    public ViewHolderFactory<? extends Collection.ViewHolder> getFactory() {
-        return FACTORY;
     }
 }
