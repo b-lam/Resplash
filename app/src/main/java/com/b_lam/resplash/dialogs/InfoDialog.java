@@ -46,13 +46,13 @@ public class InfoDialog extends DialogFragment {
     }
 
     public void initData(){
-        tvInfoDimensions.setText(photoDetails.width == 0 || photoDetails.height == 0 ? "-----" : "Dimension: " + photoDetails.width + " x " + photoDetails.height);
-        tvInfoMake.setText(photoDetails.exif.make == null ? "-----" : "Make: " + photoDetails.exif.make);
-        tvInfoModel.setText(photoDetails.exif.model == null ? "-----" : "Model: " + photoDetails.exif.model);
-        tvInfoExposure.setText(photoDetails.exif.exposure_time == null ? "-----" : "Exposure time: " + photoDetails.exif.exposure_time);
-        tvInfoAperture.setText(photoDetails.exif.aperture == null ? "-----" : "Aperture: " + photoDetails.exif.aperture);
-        tvInfoIso.setText(photoDetails.exif.iso == 0 ? "-----" : "ISO: " + String.valueOf(photoDetails.exif.iso));
-        tvInfoFocalLength.setText(photoDetails.exif.focal_length == null ? "-----" : "Focal Length: " + photoDetails.exif.focal_length);
+        tvInfoDimensions.setText(photoDetails.width == 0 || photoDetails.height == 0 ? "-----" : getString(R.string.photo_dimensions) + ": " + photoDetails.width + " x " + photoDetails.height);
+        tvInfoMake.setText(photoDetails.exif.make == null ? "-----" : getString(R.string.camera_make) + ": " + photoDetails.exif.make);
+        tvInfoModel.setText(photoDetails.exif.model == null ? "-----" : getString(R.string.camera_model) + ": " + photoDetails.exif.model);
+        tvInfoExposure.setText(photoDetails.exif.exposure_time == null ? "-----" : getString(R.string.exposure_time) + ": " + photoDetails.exif.exposure_time);
+        tvInfoAperture.setText(photoDetails.exif.aperture == null ? "-----" : getString(R.string.aperture) + ": " + photoDetails.exif.aperture);
+        tvInfoIso.setText(photoDetails.exif.iso == 0 ? "-----" : getString(R.string.iso) + ": " + String.valueOf(photoDetails.exif.iso));
+        tvInfoFocalLength.setText(photoDetails.exif.focal_length == null ? "-----" : getString(R.string.focal_length) + ": " + photoDetails.exif.focal_length);
     }
 
     public void setPhotoDetails(PhotoDetails photoDetails) {

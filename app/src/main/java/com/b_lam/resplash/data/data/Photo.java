@@ -4,30 +4,19 @@ import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.activities.DetailActivity;
-import com.b_lam.resplash.activities.MainActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.ViewPropertyAnimation;
-import com.google.gson.Gson;
 import com.mikepenz.fastadapter.items.AbstractItem;
-import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
 import java.util.List;
 
@@ -461,6 +450,11 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
         }
     }
 
+    @Override
+    public ViewHolder getViewHolder(View v) {
+        return new ViewHolder(v);
+    }
+
     // Manually create the ViewHolder class
     protected static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -487,29 +481,5 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                     throw new IllegalArgumentException("Invalid item layout");
             }
         }
-    }
-
-    //the static ViewHolderFactory which will be used to generate the ViewHolder for this Item
-    private static final ViewHolderFactory<? extends Photo.ViewHolder> FACTORY = new Photo.ItemFactory();
-
-    /**
-     * our ItemFactory implementation which creates the ViewHolder for our adapter.
-     * It is highly recommended to implement a ViewHolderFactory as it is 0-1ms faster for ViewHolder creation,
-     * and it is also many many times more efficient if you define custom listeners on views within your item.
-     */
-    protected static class ItemFactory implements ViewHolderFactory<Photo.ViewHolder> {
-        public Photo.ViewHolder create(View v) {
-            return new Photo.ViewHolder(v);
-        }
-    }
-
-    /**
-     * return our ViewHolderFactory implementation here
-     *
-     * @return
-     */
-    @Override
-    public ViewHolderFactory<? extends Photo.ViewHolder> getFactory() {
-        return FACTORY;
     }
 }

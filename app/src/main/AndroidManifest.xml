@@ -11,8 +11,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
-    <uses-feature android:name="android.hardware.screen.portrait" />
-
     <application
         android:name=".Resplash"
         android:allowBackup="true"
@@ -25,8 +23,16 @@
             android:name=".activities.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <data
+                    android:scheme="https"
+                    android:host="unsplash.com"
+                    android:path="/" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.SettingsActivity"
@@ -47,31 +53,25 @@
         </activity>
         <activity
             android:name=".activities.DetailActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".activities.SearchActivity"
             android:label=""
-            android:parentActivityName=".activities.MainActivity"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SearchActivity" />
         </activity>
         <activity
             android:name=".activities.CollectionDetailActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:label="@string/app_name">
         </activity>
         <activity android:name=".activities.PreviewActivity" />
-        <activity
-            android:name=".activities.IntroActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activities.IntroActivity" />
         <activity
             android:name=".activities.UserActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".activities.LoginActivity"
@@ -103,10 +103,11 @@
         <activity android:name=".activities.CustomApiKeyActivity">
             <intent-filter>
                 <action android:name="CustomApiKeyActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.DonateActivity"></activity>
+        <activity android:name=".activities.DonateActivity"/>
     </application>
 
 </manifest>

@@ -210,7 +210,7 @@ public class UserCollectionFragment extends Fragment {
                     mImagesErrorView.setVisibility(View.VISIBLE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
-                    Toast.makeText(getContext(), "Updated collections!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.updated_collections), Toast.LENGTH_SHORT).show();
                     mSwipeContainer.setRefreshing(false);
                 }
             }

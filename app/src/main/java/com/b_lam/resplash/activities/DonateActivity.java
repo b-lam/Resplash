@@ -245,7 +245,7 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
             if (mHelper == null) return;
 
             if (result.isSuccess()) {
-                alert("Thanks for your support!");
+                alert(getString(R.string.donate_thanks));
                 tvThanks.setVisibility(View.VISIBLE);
             }
             else {

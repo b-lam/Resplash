@@ -235,7 +235,7 @@ public class SearchUserFragment extends Fragment {
                     mImagesErrorView.setVisibility(View.VISIBLE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
-                    Toast.makeText(getContext(), "Updated users!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.updated_users), Toast.LENGTH_SHORT).show();
                     mSwipeContainer.setRefreshing(false);
                 }
             }

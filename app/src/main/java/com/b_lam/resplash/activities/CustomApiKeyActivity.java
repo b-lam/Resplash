@@ -59,7 +59,7 @@ public class CustomApiKeyActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.custom_api_key_save_btn:
                 CustomApiManager.getInstance(this).setCustomApi(this, mApiKeyEditText.getText().toString(), mApiSecretEditText.getText().toString());
-                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

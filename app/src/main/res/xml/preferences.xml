@@ -14,9 +14,13 @@
 
         <Preference
             android:title="@string/title_custom_api">
-            <intent
-                android:action="CustomApiKeyActivity"/>
+            <intent android:action="CustomApiKeyActivity"/>
         </Preference>
+
+        <Preference
+            android:title="@string/title_clear_cache"
+            android:key="@string/title_clear_cache"
+        />
 
     </PreferenceCategory>
 

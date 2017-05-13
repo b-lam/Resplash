@@ -1,7 +1,10 @@
 package com.b_lam.resplash;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.preference.PreferenceManager;
 
 import com.b_lam.resplash.R;
 
@@ -19,5 +22,34 @@ public class Utils {
         styledAttributes.recycle();
 
         return toolbarHeight;
+    }
+
+    public static boolean isTabletDevice(Context context) {
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
+    public static int getGirdColumnCount(Context context) {
+        if (isLandscape(context)) {
+            if (isTabletDevice(context)) {
+                return 3;
+            } else {
+                return 2;
+            }
+        } else {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+            String mLayoutType = sharedPreferences.getString("item_layout", "List");
+            if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
+                return 1;
+            }else{
+                return 2;
+            }
+        }
+    }
+
+    public static boolean isLandscape(Context context) {
+        return context.getResources()
+                .getConfiguration()
+                .orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 }

@@ -85,6 +85,7 @@
                     android:id="@+id/container_donate_item1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -92,7 +93,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        style="@style/about_entry">
+                        style="@style/donate_item_description">
 
                         <TextView
                             android:text="@string/donate_item1_title"
@@ -125,6 +126,7 @@
                     android:id="@+id/container_donate_item2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -132,7 +134,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        style="@style/about_entry">
+                        style="@style/donate_item_description">
 
                         <TextView
                             android:text="@string/donate_item2_title"
@@ -165,6 +167,7 @@
                     android:id="@+id/container_donate_item3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -172,7 +175,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        style="@style/about_entry">
+                        style="@style/donate_item_description">
 
                         <TextView
                             android:text="@string/donate_item3_title"
@@ -205,6 +208,7 @@
                     android:id="@+id/container_donate_item4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -212,7 +216,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        style="@style/about_entry">
+                        style="@style/donate_item_description">
 
                         <TextView
                             android:text="@string/donate_item4_title"

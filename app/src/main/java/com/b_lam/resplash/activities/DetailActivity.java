@@ -161,7 +161,7 @@ public class DetailActivity extends AppCompatActivity {
                 Log.d(TAG, String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     mPhotoDetails = response.body();
-                    tvUser.setText("Photo by " + mPhotoDetails.user.name);
+                    tvUser.setText(getString(R.string.by_author, mPhotoDetails.user.name));
                     if (mPhotoDetails.location != null) {
                         if (mPhotoDetails.location.city != null && mPhotoDetails.location.country != null) {
                             tvLocation.setText(mPhotoDetails.location.city + ", " + mPhotoDetails.location.country);
@@ -174,16 +174,16 @@ public class DetailActivity extends AppCompatActivity {
                         tvLocation.setText("-----");
                     }
                     tvDate.setText(mPhotoDetails.created_at.split("T")[0]);
-                    tvLikes.setText(NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.likes) + " Likes");
+                    tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.likes)));
                     colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
                     tvColor.setText(mPhotoDetails.color);
-                    tvDownloads.setText(NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads) + " Downloads");
+                    tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads)));
                     like = mPhotoDetails.liked_by_user;
                     updateHeartButton(like);
                     content.setVisibility(View.VISIBLE);
                     floatingActionMenu.setVisibility(View.VISIBLE);
                 } else if (response.code() == 403) {
-                    Toast.makeText(Resplash.getInstance().getApplicationContext(), "Can't make anymore requests.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
                 } else {
                     mService.requestPhotoDetails(mPhoto.id, this);
                 }
@@ -213,7 +213,7 @@ public class DetailActivity extends AppCompatActivity {
                     if (mPhoto != null) {
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_DOWNLOAD, null);
                         floatingActionMenu.close(true);
-                        Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.download_started), Toast.LENGTH_SHORT).show();
                         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.MULTIPLY);
                         progressBar.setVisibility(View.VISIBLE);
                         switch (sharedPreferences.getString("download_quality", "Full")) {
@@ -399,10 +399,10 @@ public class DetailActivity extends AppCompatActivity {
             share.setType("text/plain");
             share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            share.putExtra(Intent.EXTRA_SUBJECT, "Unsplash Image");
+            share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.unsplash_image));
             share.putExtra(Intent.EXTRA_TEXT, mPhoto.links.html + Resplash.UNSPLASH_UTM_PARAMETERS);
 
-            startActivity(Intent.createChooser(share, "Share via"));
+            startActivity(Intent.createChooser(share, getString(R.string.share_via)));
         }
     }
 
@@ -416,7 +416,7 @@ public class DetailActivity extends AppCompatActivity {
                     public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
                         Bitmap.CompressFormat mFormat = Bitmap.CompressFormat.JPEG;
                         final File myImageFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Pictures" + File.separator + "Resplash"
-                                + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + "." + mFormat.name().toLowerCase());
+                                + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + ".jpg");
                         final Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", myImageFile);
                         ImageDownloader.writeToDisk(myImageFile, resource, new ImageDownloader.OnBitmapSaveListener() {
                             @Override
@@ -426,7 +426,7 @@ public class DetailActivity extends AppCompatActivity {
                                     intent.setAction(Intent.ACTION_VIEW);
                                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                     intent.setDataAndType(contentUri, "image/*");
-                                    Toast.makeText(DetailActivity.this, "Image saved", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(DetailActivity.this, getString(R.string.image_saved), Toast.LENGTH_LONG).show();
                                     sendNotification(intent);
                                 }else if (type == TYPE_WALLPAPER) {
                                     Intent intent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(contentUri);
@@ -437,7 +437,7 @@ public class DetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onBitmapSaveError(ImageDownloader.ImageError error) {
-                                Toast.makeText(DetailActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(DetailActivity.this, getString(R.string.error) + ": " + error.getMessage(), Toast.LENGTH_LONG).show();
                                 error.printStackTrace();
                                 progressBar.setVisibility(View.INVISIBLE);
                             }
@@ -451,8 +451,8 @@ public class DetailActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_resplash_notification)
-                .setContentTitle("Download Wallpaper")
-                .setContentText("Download Complete")
+                .setContentTitle(getString(R.string.download_wallpaper))
+                .setContentText(getString(R.string.download_complete))
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 

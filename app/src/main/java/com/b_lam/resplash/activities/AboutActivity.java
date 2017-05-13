@@ -1,6 +1,8 @@
 package com.b_lam.resplash.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.b_lam.resplash.Resplash;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -25,6 +28,7 @@ import com.b_lam.resplash.R;
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar_about) Toolbar mToolbar;
+    @BindView(R.id.version_name) TextView mVersionName;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -47,7 +51,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 (LinearLayout) findViewById(R.id.container_about_unsplash),
                 (LinearLayout) findViewById(R.id.container_about_app),
                 (LinearLayout) findViewById(R.id.container_about_version),
-                (LinearLayout) findViewById(R.id.container_about_changelog),
                 (LinearLayout) findViewById(R.id.container_about_intro),
                 (LinearLayout) findViewById(R.id.container_about_github),
                 (LinearLayout) findViewById(R.id.container_about_rate),
@@ -70,6 +73,16 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
             r.setOnClickListener(this);
         }
 
+        PackageManager manager = getApplicationContext().getPackageManager();
+
+        try {
+            PackageInfo info = manager.getPackageInfo(getApplicationContext().getPackageName(), 0);
+            mVersionName.setText(info.versionName);
+
+        }catch (PackageManager.NameNotFoundException e){
+           return;
+        }
+
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_ABOUT, null);
     }
@@ -90,15 +103,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.container_about_unsplash:
                 goToURL("https://unsplash.com/" + Resplash.UNSPLASH_UTM_PARAMETERS);
-                break;
-
-            case R.id.container_about_changelog:
-                mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_CHANGELOG, null);
-                new AlertDialog.Builder(AboutActivity.this)
-                        .setTitle("Changelog")
-                        .setMessage(getString(R.string.changelog))
-                        .setPositiveButton("Ok", null)
-                        .show();
                 break;
 
             case R.id.container_about_intro:
