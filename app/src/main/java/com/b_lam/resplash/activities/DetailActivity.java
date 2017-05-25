@@ -48,6 +48,7 @@ import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.dialogs.InfoDialog;
 import com.b_lam.resplash.dialogs.StatsDialog;
 import com.b_lam.resplash.network.ImageDownloader;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -108,6 +109,9 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_detail);
 
         ButterKnife.bind(this);

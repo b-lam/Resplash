@@ -35,6 +35,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
+import com.b_lam.resplash.util.LocaleUtils;
 
 public class SearchActivity extends AppCompatActivity implements EditText.OnEditorActionListener{
 
@@ -49,6 +50,9 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_search);
 
         ButterKnife.bind(this);
@@ -61,9 +65,9 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         PagerAdapter mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addFragment(SearchPhotoFragment.newInstance(null), "Photos");
-        mPagerAdapter.addFragment(SearchCollectionFragment.newInstance(null), "Collections");
-        mPagerAdapter.addFragment(SearchUserFragment.newInstance(null), "Users");
+        mPagerAdapter.addFragment(SearchPhotoFragment.newInstance(null), getString(R.string.search_photos));
+        mPagerAdapter.addFragment(SearchCollectionFragment.newInstance(null), getString(R.string.search_collections));
+        mPagerAdapter.addFragment(SearchUserFragment.newInstance(null), getString(R.string.search_users));
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setupWithViewPager(mViewPager);

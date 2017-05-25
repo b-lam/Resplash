@@ -28,6 +28,7 @@ import com.b_lam.resplash.data.service.UserService;
 import com.b_lam.resplash.fragments.UserCollectionFragment;
 import com.b_lam.resplash.fragments.UserLikesFragment;
 import com.b_lam.resplash.fragments.UserPhotoFragment;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -60,6 +61,9 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_user);
 
         ButterKnife.bind(this);

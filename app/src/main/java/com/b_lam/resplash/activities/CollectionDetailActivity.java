@@ -31,6 +31,7 @@ import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.Collection;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -76,6 +77,9 @@ public class CollectionDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_collection_detail);
 
         ButterKnife.bind(this);

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.tools.CustomApiManager;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import butterknife.BindView;
@@ -30,6 +31,9 @@ public class CustomApiKeyActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_custom_api_key);
 
         ButterKnife.bind(this);

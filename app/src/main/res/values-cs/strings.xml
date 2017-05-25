@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Resplash</string>
+
+    <string name="navigation_drawer_open">Otevřít navigační menu</string>
+    <string name="navigation_drawer_close">Zavřít navigační menu</string>
+
+    <string name="action_share">Sdílet</string>
+    <string name="action_view_on_unsplash">Otevřít v prohlížeči</string>
+
+    <!-- ErrorView -->
+    <string name="error_http">Chyba Serveru</string>
+    <string name="error_http_subtitle">Zdá se, že došlo k problému se serverem.</string>
+    <string name="error_network">Žádné připojení</string>
+    <string name="error_network_subtitle">Zdá se, že máte problém s internetem.</string>
+
+    <!-- Settings -->
+    <string name="title_quality_section">Kvalita</string>
+    <string name="title_load_quality_preference">Kvalita Načtení</string>
+    <string name="summary_load_quality_preference">Zvolte kvalitu načtených obrázků</string>
+    <string name="title_download_quality_preference">Kvalita Stažení</string>
+    <string name="summary_download_quality_preference">Zvolte kvalitu stažených obrázků</string>
+    <string name="title_wallpaper_quality_preference">Kvalita Tapety</string>
+    <string name="summary_wallpaper_quality_preference">Zvolte kvalitu nastavené tapety</string>
+    <array name="quality_options">
+        <item>Raw</item>
+        <item>Plná</item>
+        <item>Normální</item>
+        <item>Malá</item>
+        <item>Miniatura</item>
+    </array>
+    <array name="quality_options_values">
+        <item>Raw</item>
+        <item>Full</item>
+        <item>Regular</item>
+        <item>Small</item>
+        <item>Thumb</item>
+    </array>
+    <string name="default_quality">Normální</string>
+    <string name="default_download_quality">Plná</string>
+    <string name="title_layout_section">Uspořádání</string>
+    <string name="title_layout_preference">Zvolte Uspořádání</string>
+    <string name="summary_layout_preference">Zvolte zbůsob zobrazování obrázků</string>
+    <array name="layout_options">
+        <item>Seznam</item>
+        <item>Karty</item>
+        <item>Mřížka</item>
+    </array>
+    <array name="layout_options_values">
+        <item>List</item>
+        <item>Cards</item>
+        <item>Grid</item>
+    </array>
+    <string name="default_layout">Seznam</string>
+    <string name="title_general_section">Obecná</string>
+    <string name="title_custom_api">Vlastní API Klíč</string>
+    <string name="title_clear_cache">Vymazat Mezipaměť</string>
+    <string name="cache_size">Velikost mezipaměti</string>
+    <string name="message_cache_cleared">Mezipaměť vymazána!</string>
+    <string name="title_language">Jazyk</string>
+    <array name="language">
+        <item>Angličtina</item>
+        <item>Čeština</item>
+    </array>
+    <array name="language_values">
+        <item>en</item>
+        <item>cs</item>
+    </array>
+    <string name="default_language">en</string>
+    <string name="restart">Restartujte</string>
+    <string name="restart_to_apply">Restartujte a použijte změny</string>
+    <string name="title_other_section">Ostatní</string>
+    <string name="title_unsplash_intent_preference">Otevřít Unsplash.com</string>
+
+    <!-- Menu -->
+    <string name="menu_search">Hledat</string>
+    <string name="menu_sort">Řadit podle</string>
+    <string name="menu_item_latest">Nejnovější</string>
+    <string name="menu_item_oldest">Nejstarší</string>
+    <string name="menu_item_popular">Oblíbené</string>
+    <string name="menu_item_random">Náhodně</string>
+    <string name="menu_item_all">Vše</string>
+    <string name="menu_item_curated">Kolekce</string>
+    <string name="menu_item_featured">Vybrané</string>
+
+    <!-- Main -->
+    <string name="main_unsplash_description">Fotografie Ve Vysokém Rozlišení</string>
+    <string name="main_add_account">Přidat Účet</string>
+    <string name="main_add_new_account">Přidat nový Unsplash účet</string>
+    <string name="main_view_profile">Zobrazit Profil</string>
+    <string name="main_manage_account">Spravovat Účet</string>
+    <string name="main_logout">Odhlásit se</string>
+    <string name="main_featured">Doporučené</string>
+    <string name="main_new">Nové</string>
+    <string name="main_collections">Sbírky</string>
+    <string name="main_support_development">Podpořit vývoj</string>
+    <string name="main_settings">Nastavení</string>
+    <string name="main_about">O nás</string>
+    <string name="main_logout_success">Odhlášení - úspěšné</string>
+
+    <!-- Intro -->
+    <string name="intro_welcome_title">Resplash</string>
+    <string name="intro_welcome_description">Poháněno díky Unsplash</string>
+    <string name="intro_download_title">Fotografie Ve Vysokém Rozlišení</string>
+    <string name="intro_download_description">Fotografie ve vysokém rozlišení se kterými si můžete dělat co chcete (a jsou zdarma)</string>
+    <string name="intro_done">Začít</string>
+    <string name="intro_next">Další</string>
+
+    <!-- Custom API -->
+    <string name="custom_api_key_description">Můžete si vytvořit svůj vlastní účet vývojáře na Unsplash a použít vlastní API klíč\n\n(Ponechte pole prázdné pro použití výchozího API klíče)</string>
+    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
+    <string name="api_key_empty_message">Chyba: Toto pole musíte vyplnit</string>
+    <string name="redirect_uri_hint">Přesměrovací URI</string>
+    <string name="secret_hint">Tajné</string>
+    <string name="api_key_hint">API Klíč</string>
+
+    <!-- Search -->
+    <string name="search_photos">Fotek</string>
+    <string name="search_collections">Sbírky</string>
+    <string name="search_users">Uživatelé</string>
+    <string name="search_hint">Hledat</string>
+    <string name="search_title">Vyhledat</string>
+    <string name="action_clear_text">Vymazat text</string>
+
+    <!-- InfoDialog -->
+    <string name="photo_dimensions">Rozlišení</string>
+    <string name="camera_make">Značka</string>
+    <string name="camera_model">Model</string>
+    <string name="exposure_time">Doba expozice</string>
+    <string name="aperture">Clona</string>
+    <string name="iso">ISO</string>
+    <string name="focal_length">Ohnisková vzdálenost</string>
+    <!-- About -->
+    <string name="about_title">O nás</string>
+    <string name="about_unsplash_title">Unsplash.com</string>
+    <string name="about_unsplash_subtitle">Fotografie ve vysokém rozlišení se kterými si můžete dělat co chcete (a jsou zdarma)</string>
+    <string name="about_version_title">Verze</string>
+    <string name="about_version_subtitle">1.0.0</string>
+    <string name="about_introduction_title">Úvod</string>
+    <string name="about_github_title">GitHub</string>
+    <string name="about_support_development_card_title">Podpořte vývoj</string>
+    <string name="about_rate_title">Hodnotit</string>
+    <string name="about_rate_subtitle">Líbí se Vám Resplash? Ohodnoťte jej v Obchodě Google Play</string>
+    <string name="about_donate_title">Podpořit</string>
+    <string name="about_donate_subtitle">Pokud se Vám Resplash vážně líbí, můžete podpořit vývoj tím, že mi pošlete pár korun</string>
+    <string name="about_bug_title">Nahlásit chyby</string>
+    <string name="about_bug_subtitle">Nahlásit chyby nebo požádat o nové funkce</string>
+    <string name="about_author_title">Brandon Lam</string>
+    <string name="about_author_card_title">Vývojář</string>
+    <string name="about_author_subtitle">Toronto, Ontario, Kanada</string>
+    <string name="about_website_title">Navštívit webové stránky</string>
+    <string name="about_instagram_title">Sledovat na Instagramu</string>
+    <string name="about_libraries_card_title">Knihovny</string>
+    <string name="about_library1_title">Retrofit</string>
+    <string name="about_library1_subtitle">Type-safe HTTP klient pro Android a Javu od společnosti Square, Inc.</string>
+    <string name="about_library2_title">Glide</string>
+    <string name="about_library2_subtitle">Knihovna pro načítání snímků a ukládání do mezipaměti pro Android zaměřena na plynulé posouvání</string>
+    <string name="about_library3_title">FastAdapter</string>
+    <string name="about_library3_subtitle">Rychlá a snadno použitelná adaptérová knihovna, která minimalizuje čas vývoje aplikací na zlomek</string>
+    <string name="about_library4_title">Android-Iconics</string>
+    <string name="about_library4_subtitle">Použijte libovolnou ikonu nebo vektor (.svg) jako “drawable” v aplikaci.</string>
+    <string name="about_library5_title">MaterialDrawer</string>
+    <string name="about_library5_subtitle">Flexibilní, snadno použitelná, “vše v jednom” knihovna pro váš Android projekt</string>
+    <string name="about_library6_title">InkPageIndicator</string>
+    <string name="about_library6_subtitle">InkPageIndicator vytvořen @nickbutcher pro Plaid a se zpětnou kompatibilitou až pro API 14+</string>
+    <string name="about_library7_title">Butter Knife</string>
+    <string name="about_library7_subtitle">Propojte Android views a callbacks s políčky a metodami</string>
+    <string name="about_library8_title">ErrorView</string>
+    <string name="about_library8_subtitle">Vlastní chybová hláška, která zobrazuje obrázek, název a podrobnosti o chybě spolu s chybovým kódem HTTP</string>
+    <string name="about_library9_title">PhotoView</string>
+    <string name="about_library9_subtitle">Implementace ImageView pro Android, který podporuje zoomování pomocí různých dotykových gest</string>
+    <string name="about_library10_title">FloatingActionButton</string>
+    <string name="about_library10_subtitle">Plovoucí akční tlačítko pro Android založené na Material Designu</string>
+
+    <!-- Donate -->
+    <string name="donate_card_title">Podpořit vývoj</string>
+    <string name="donate_item1_title">Kafe</string>
+    <string name="donate_item1_subtitle">Udržuje mě vzhůru během nocí strávených programováním</string>
+    <string name="donate_item2_title">Ovocný koktejl</string>
+    <string name="donate_item2_subtitle">Občas musím jíst taky něco zdravého</string>
+    <string name="donate_item3_title">Pizza</string>
+    <string name="donate_item3_subtitle">Kdo by něměl rád pizzu?</string>
+    <string name="donate_item4_title">Skvělé Jídlo</string>
+    <string name="donate_item4_subtitle">Jednou za čas si ho můžete dopřát</string>
+    <string name="donate_thanks">Díky za podporu!</string>
+    <string name="donate_loading">Načítání nabídek...</string>
+
+    <!-- Detail -->
+    <string name="stats">Statistiky</string>
+    <string name="photo_info">Podrobnosti</string>
+    <string name="set_as_wallpaper">Nastavit jako tapetu</string>
+    <string name="download">Stáhnout</string>
+
+    <string name="no_results">Žádné výsledky</string>
+    <string name="login">Přihlásit se</string>
+    <string name="join">Zaregistrovat se</string>
+    <string name="edit_title">Upravit profil</string>
+    <string name="request_token_failed">Požadavek na token k přístupu selhal</string>
+    <string name="error">Chyba</string>
+
+    <string name="by_author">Od %1$s</string>
+    <string name="no_more_photos">Žádné další fotky</string>
+    <string name="updated_photos">Aktualizované fotky!</string>
+    <string name="updated_collections">Aktualizované sbírky!</string>
+    <string name="updated_users">Aktualizovaní uživatelé!</string>
+    <string name="share_via">Sdílet přes</string>
+    <string name="unsplash_image">Obrázek Unsplash</string>
+    <string name="unsplash_collection">Sbírka Unsplash</string>
+    <string name="save">Uložit</string>
+    <string name="saved">Uloženo</string>
+    <string name="likes">%1$s Srdíček</string>
+    <string name="photos">%1$s Fotek</string>
+    <string name="views">%1$s Zobrazení</string>
+    <string name="downloads">%1$s Stažení</string>
+    <string name="cannot_make_anymore_requests">Nelze vytvořit více požadavků</string>
+    <string name="download_started">Stahování zahájeno</string>
+    <string name="image_saved">Obrázek uložen</string>
+    <string name="download_wallpaper">Stáhnout Tapetu</string>
+    <string name="download_complete">Stahování Dokončeno</string>
+    <string name="unknown">Neznámé</string>
+    <string name="cannot_update_profile">Nelze aktualizovat profil</string>
+    <string name="updated_profile">Profil aktualizován</string>
+    <string name="username_cannot_be_blank">Uživatelské jméno musí být vyplněno</string>
+    <string name="failed_to_load_profile">Nelze načíst profil</string>
+    <string name="next">Další</string>
+    <string name="username_hint">Uživatelské jméno</string>
+    <string name="first_name_hint">Jméno</string>
+    <string name="last_name_hint">Přijímení</string>
+    <string name="email_address_hint">Emailová adresa</string>
+    <string name="personal_site_hint">Osobní informace/portfolio</string>
+    <string name="instagram_username_hint">Uživatelské jméno na Instagramu</string>
+    <string name="location_hint">Země</string>
+    <string name="bio_hint">Bio</string>
+
+</resources>

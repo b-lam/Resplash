@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.b_lam.resplash.data.data.Me;
 import com.b_lam.resplash.data.service.UserService;
 import com.b_lam.resplash.data.tools.AuthManager;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import butterknife.BindView;
@@ -55,6 +56,9 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
     protected void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_edit_profile);
 
         ButterKnife.bind(this);

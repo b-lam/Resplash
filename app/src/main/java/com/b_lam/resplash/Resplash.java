@@ -3,8 +3,11 @@ package com.b_lam.resplash;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,9 +19,11 @@ import com.b_lam.resplash.data.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.b_lam.resplash.BuildConfig;
 import com.b_lam.resplash.data.tools.CustomApiManager;
+import com.b_lam.resplash.util.LocaleUtils;
 
 /**
  * Created by Brandon on 10/6/2016.
@@ -142,6 +147,7 @@ public class Resplash extends Application{
     private void initialize() {
         instance = this;
         activityList = new ArrayList<>();
+        LocaleUtils.loadLocale(this);
     }
 
     /** <br> data. */

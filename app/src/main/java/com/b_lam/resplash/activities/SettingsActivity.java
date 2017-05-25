@@ -1,31 +1,37 @@
 package com.b_lam.resplash.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
-import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
-import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.File;
+import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -36,6 +42,9 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_settings);
 
         ButterKnife.bind(this);
@@ -66,7 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
         NavUtils.navigateUpFromSameTask(this);
     }
 
-    public static class SettingsFragment extends PreferenceFragment {
+    public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
         private FirebaseAnalytics mFirebaseAnalytics;
 
@@ -103,7 +112,45 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            LocaleUtils.loadLocale(getActivity().getBaseContext());
+
+            if(key.equals("language")) {
+                showRestartSnackbar();
+            }
+        }
+
+        private void showRestartSnackbar() {
+            Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), getString(R.string.restart_to_apply), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.restart), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = getActivity().getIntent();
+                            getActivity().finish();
+                            startActivity(intent);
+                        }
+                    });
+
+            snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.md_white_1000));
+            snackbar.show();
+        }
     }
+
+
 
     private static long dirSize(File dir) {
         if (dir.exists()) {

@@ -39,6 +39,7 @@ import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.fragments.CollectionFragment;
 import com.b_lam.resplash.fragments.FeaturedFragment;
 import com.b_lam.resplash.fragments.NewFragment;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -75,12 +76,15 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
     private AccountHeader drawerHeader = null;
     private ProfileSettingDrawerItem drawerItemAddAccount, drawerItemViewProfile, drawerItemManageAccount, drawerItemLogout;
     private IProfile profile;
-    private final IProfile profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail("Free high-resolution photos").withIcon(R.drawable.intro_icon_image);
+    private IProfile profileDefault;
     private MenuItem mItemFeaturedLatest, mItemFeaturedOldest, mItemFeaturedPopular, mItemNewLatest, mItemNewOldest, mItemNewPopular, mItemAll, mItemCurated, mItemFeatured;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
@@ -108,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         }).start();
 
         isStoragePermissionGranted();
+
+        profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail(getString(R.string.main_unsplash_description)).withIcon(R.drawable.intro_icon_image);
 
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
             @Override
@@ -159,9 +165,9 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 .withDelayDrawerClickEvent(200)
                 .withAccountHeader(drawerHeader)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(4).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_heart).sizeDp(24).paddingDp(2)).withSelectable(false),
                         new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(5).withIcon(getDrawable(R.drawable.ic_settings_black_24dp)).withSelectable(false),
@@ -173,9 +179,9 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         drawer.getRecyclerView().setVerticalScrollBarEnabled(false);
 
         PagerAdapter mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), "Featured");
-        mPagerAdapter.addFragment(NewFragment.newInstance("latest"), "New");
-        mPagerAdapter.addFragment(CollectionFragment.newInstance("Featured"), "Collections");
+        mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), getString(R.string.main_featured));
+        mPagerAdapter.addFragment(NewFragment.newInstance("latest"), getString(R.string.main_new));
+        mPagerAdapter.addFragment(CollectionFragment.newInstance("Featured"), getString(R.string.main_collections));
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
 

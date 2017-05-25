@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.billing.IabBroadcastReceiver;
 import com.b_lam.resplash.util.billing.IabHelper;
 import com.b_lam.resplash.util.billing.IabResult;
@@ -59,6 +60,9 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_donate);
 
         ButterKnife.bind(this);

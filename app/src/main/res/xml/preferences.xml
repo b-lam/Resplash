@@ -9,8 +9,8 @@
             android:title="@string/title_language"
             android:dialogTitle="@string/title_language"
             android:entries="@array/language"
-            android:entryValues="@array/language"
-            android:defaultValue="English"/>
+            android:entryValues="@array/language_values"
+            android:defaultValue="@string/default_language"/>
 
         <Preference
             android:title="@string/title_custom_api">
@@ -33,8 +33,8 @@
             android:summary="@string/summary_load_quality_preference"
             android:dialogTitle="@string/title_load_quality_preference"
             android:entries="@array/quality_options"
-            android:entryValues="@array/quality_options"
-            android:defaultValue="Regular"/>
+            android:entryValues="@array/quality_options_values"
+            android:defaultValue="@string/default_load_quality"/>
 
         <ListPreference
             android:key="download_quality"
@@ -42,8 +42,8 @@
             android:summary="@string/summary_download_quality_preference"
             android:dialogTitle="@string/title_download_quality_preference"
             android:entries="@array/quality_options"
-            android:entryValues="@array/quality_options"
-            android:defaultValue="Full"/>
+            android:entryValues="@array/quality_options_values"
+            android:defaultValue="@string/default_download_quality"/>
 
         <ListPreference
             android:key="wallpaper_quality"
@@ -51,8 +51,8 @@
             android:summary="@string/summary_wallpaper_quality_preference"
             android:dialogTitle="@string/title_wallpaper_quality_preference"
             android:entries="@array/quality_options"
-            android:entryValues="@array/quality_options"
-            android:defaultValue="Full"/>
+            android:entryValues="@array/quality_options_values"
+            android:defaultValue="@string/default_download_quality"/>
 
         <!--<CheckBoxPreference-->
             <!--android:key="checkbox_preference"-->
@@ -76,7 +76,7 @@
             android:summary="@string/summary_layout_preference"
             android:dialogTitle="@string/title_layout_preference"
             android:entries="@array/layout_options"
-            android:entryValues="@array/layout_options"
+            android:entryValues="@array/layout_options_values"
             android:defaultValue="List"/>
     </PreferenceCategory>
 

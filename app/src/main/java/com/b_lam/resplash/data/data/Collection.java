@@ -329,10 +329,10 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
 
         if(sharedPreferences.getString("item_layout", "List").equals("Cards")){
             holder.collectionNameCard.setText(this.title);
-            holder.collectionSizeCard.setText(this.total_photos + " Photos");
+            holder.collectionSizeCard.setText(Resplash.getInstance().getResources().getString(R.string.photos, String.valueOf(this.total_photos)));
         }else{
             holder.collectionName.setText(this.title);
-            holder.collectionSize.setText(this.total_photos + " Photos");
+            holder.collectionSize.setText((Resplash.getInstance().getResources().getString(R.string.photos, String.valueOf(this.total_photos))));
         }
     }
 

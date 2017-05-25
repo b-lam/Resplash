@@ -28,6 +28,15 @@
         <item>Small</item>
         <item>Thumb</item>
     </array>
+    <array name="quality_options_values">
+        <item>Raw</item>
+        <item>Full</item>
+        <item>Regular</item>
+        <item>Small</item>
+        <item>Thumb</item>
+    </array>
+    <string name="default_load_quality">Regular</string>
+    <string name="default_download_quality">Full</string>
     <string name="title_layout_section">Layout</string>
     <string name="title_layout_preference">Choose Layout</string>
     <string name="summary_layout_preference">Choose how images are displayed</string>
@@ -36,6 +45,12 @@
         <item>Cards</item>
         <item>Grid</item>
     </array>
+    <array name="layout_options_values">
+        <item>List</item>
+        <item>Cards</item>
+        <item>Grid</item>
+    </array>
+    <string name="default_layout">List</string>
     <string name="title_general_section">General</string>
     <string name="title_custom_api">Custom API Key</string>
     <string name="title_clear_cache">Clear Cache</string>
@@ -44,7 +59,15 @@
     <string name="title_language">Language</string>
     <array name="language">
         <item>English</item>
+        <item>Czech</item>
     </array>
+    <array name="language_values">
+        <item>en</item>
+        <item>cs</item>
+    </array>
+    <string name="default_language">en</string>
+    <string name="restart">Restart</string>
+    <string name="restart_to_apply">Restart to apply changes</string>
     <string name="title_other_section">Other</string>
     <string name="title_unsplash_intent_preference">Go to Unsplash.com</string>
 
@@ -60,6 +83,7 @@
     <string name="menu_item_featured">Featured</string>
 
     <!-- Main -->
+    <string name="main_unsplash_description">Free high-resolution photos</string>
     <string name="main_add_account">Add Account</string>
     <string name="main_add_new_account">Add new Unsplash account</string>
     <string name="main_view_profile">View Profile</string>
@@ -90,6 +114,9 @@
     <string name="api_key_hint">API Key</string>
 
     <!-- Search -->
+    <string name="search_photos">Photos</string>
+    <string name="search_collections">Collections</string>
+    <string name="search_users">Users</string>
     <string name="search_hint">Search</string>
     <string name="search_title">Search</string>
     <string name="action_clear_text">Clear text</string>
@@ -157,8 +184,12 @@
     <string name="donate_thanks">Thanks for donating!</string>
     <string name="donate_loading">Loading products...</string>
 
+    <!-- Detail -->
     <string name="stats">Stats</string>
     <string name="photo_info">Info</string>
+    <string name="set_as_wallpaper">Set as wallpaper</string>
+    <string name="download">Download</string>
+
     <string name="no_results">No results</string>
     <string name="login">Login</string>
     <string name="join">Join</string>
@@ -174,6 +205,7 @@
     <string name="share_via">Share via</string>
     <string name="unsplash_image">Unsplash Image</string>
     <string name="unsplash_collection">Unsplash Collection</string>
+    <string name="save">Save</string>
     <string name="saved">Saved</string>
     <string name="likes">%1$s Likes</string>
     <string name="photos">%1$s Photos</string>
