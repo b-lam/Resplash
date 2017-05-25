@@ -36,7 +36,7 @@
         <item>Small</item>
         <item>Thumb</item>
     </array>
-    <string name="default_quality">Normální</string>
+    <string name="default_load_quality">Normální</string>
     <string name="default_download_quality">Plná</string>
     <string name="title_layout_section">Uspořádání</string>
     <string name="title_layout_preference">Zvolte Uspořádání</string>
