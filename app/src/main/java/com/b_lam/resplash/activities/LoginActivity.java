@@ -20,6 +20,7 @@ import com.b_lam.resplash.data.tools.AuthManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import retrofit2.Call;
@@ -39,6 +40,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);

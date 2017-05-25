@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.b_lam.resplash.util.LocaleUtils;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 import butterknife.BindView;
@@ -32,6 +33,9 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_intro);
 
         ButterKnife.bind(this);

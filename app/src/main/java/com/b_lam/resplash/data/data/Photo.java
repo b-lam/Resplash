@@ -435,7 +435,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                         .into(holder.imageCard);
 
                 holder.imageCard.setMinimumHeight((int) finalHeight);
-                holder.authorCard.setText("By " + this.user.name);
+                holder.authorCard.setText(Resplash.getInstance().getResources().getString(R.string.by_author, this.user.name));
                 break;
             case "Grid":
                 Glide.with(holder.itemView.getContext())

@@ -196,7 +196,7 @@
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/fab_pressed"
             fab:fab_size="mini"
-            fab:fab_label="Stats" />
+            fab:fab_label="@string/stats" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_info"
@@ -206,7 +206,7 @@
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/fab_pressed"
             fab:fab_size="mini"
-            fab:fab_label="Info" />
+            fab:fab_label="@string/photo_info" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_wallpaper"
@@ -216,7 +216,7 @@
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/fab_pressed"
             fab:fab_size="mini"
-            fab:fab_label="Set as wallpaper" />
+            fab:fab_label="@string/set_as_wallpaper" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_download"
@@ -226,7 +226,7 @@
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/fab_pressed"
             fab:fab_size="mini"
-            fab:fab_label="Download" />
+            fab:fab_label="@string/download" />
     </com.github.clans.fab.FloatingActionMenu>
 
     <ProgressBar

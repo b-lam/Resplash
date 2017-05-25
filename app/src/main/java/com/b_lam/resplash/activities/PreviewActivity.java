@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.Photo;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -30,6 +31,9 @@ public class PreviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setTheme(R.style.PreviewTheme);
         setContentView(R.layout.activity_preview);
         ButterKnife.bind(this);

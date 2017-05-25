@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
@@ -35,6 +36,9 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
         setContentView(R.layout.activity_about);
 
         ButterKnife.bind(this);
