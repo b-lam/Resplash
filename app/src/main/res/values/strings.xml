@@ -60,10 +60,12 @@
     <array name="language">
         <item>English</item>
         <item>Czech</item>
+        <item>Russian</item>
     </array>
     <array name="language_values">
         <item>en</item>
         <item>cs</item>
+        <item>ru</item>
     </array>
     <string name="default_language">en</string>
     <string name="restart">Restart</string>
