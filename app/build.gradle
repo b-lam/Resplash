@@ -29,6 +29,9 @@ android {
             applicationIdSuffix ".debug"
         }
     }
+    lintOptions {
+        disable 'MissingTranslation'
+    }
 }
 
 repositories {
