@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Resplash</string>
+
+    <string name="navigation_drawer_open">Открыть навигационную панель</string>
+    <string name="navigation_drawer_close">Закрыть навигационную панель</string>
+
+    <string name="action_share">Поделиться</string>
+    <string name="action_view_on_unsplash">Открыть в браузере</string>
+
+    <!-- ErrorView -->
+    <string name="error_http">Ошибка сервера</string>
+    <string name="error_http_subtitle">Кажется, что проблема с сервером.</string>
+    <string name="error_network">Нет соединения</string>
+    <string name="error_network_subtitle">Кажется, что проблема с вашим интернетом.</string>
+
+    <!-- Settings -->
+    <string name="title_quality_section">Качество</string>
+    <string name="title_load_quality_preference">Качество загружаемых</string>
+    <string name="summary_load_quality_preference">Выберите качество загружаемых фотографий</string>
+    <string name="title_download_quality_preference">Качество скачиваемых</string>
+    <string name="summary_download_quality_preference">Выберите качество скачиваемых фотографий</string>
+    <string name="title_wallpaper_quality_preference">Качество обоев</string>
+    <string name="summary_wallpaper_quality_preference">Выерите качество устанавливаемых обоев</string>
+    <array name="quality_options">
+        <item>Оригинальное</item>
+        <item>Высокое</item>
+        <item>Среднее</item>
+        <item>Низкое</item>
+        <item>Очень низкое</item>
+    </array>
+    <array name="quality_options_values">
+        <item>Оригинальное</item>
+        <item>Высокое</item>
+        <item>Среднее</item>
+        <item>Низкое</item>
+        <item>Очень низкое</item>
+    </array>
+    <string name="default_load_quality">Среднее</string>
+    <string name="default_download_quality">Высокое</string>
+    <string name="title_layout_section">Расположение</string>
+    <string name="title_layout_preference">Выберите расположение</string>
+    <string name="summary_layout_preference">Выберите, как будут отображаться фотографии</string>
+    <array name="layout_options">
+        <item>Списком</item>
+        <item>Карточками</item>
+        <item>Сеткой</item>
+    </array>
+    <array name="layout_options_values">
+        <item>Списком</item>
+        <item>Карточками</item>
+        <item>Сеткой</item>
+    </array>
+    <string name="default_layout">Списоком</string>
+    <string name="title_general_section">Общие</string>
+    <string name="title_custom_api">Пользовательский ключ API</string>
+    <string name="title_clear_cache">Очистить кэш</string>
+    <string name="cache_size">Размер кэша</string>
+    <string name="message_cache_cleared">Кэш очищен!</string>
+    <string name="title_language">Язык</string>
+    <array name="language">
+        <item>English</item>
+        <item>Český</item>
+        <item>Русский</item>
+    </array>
+    <array name="language_values">
+        <item>en</item>
+        <item>cs</item>
+        <item>ru</item>
+    </array>
+    <string name="default_language">ru</string>
+    <string name="title_theme">Тема</string>
+    <array name="theme">
+        <item>Светлая</item>
+        <item>Тёмная</item>
+    </array>
+    <array name="theme_values">
+        <item>Светлая</item>
+        <item>Тёмная</item>
+    </array>
+    <string name="default_theme">Светлая</string>
+    <string name="restart">Перезапуск</string>
+    <string name="restart_to_apply">Перезапустите, чтобы применить изменения</string>
+    <string name="title_other_section">Другие</string>
+    <string name="title_unsplash_intent_preference">Перейти на Unsplash.com</string>
+
+    <!-- Menu -->
+    <string name="menu_search">Поиск</string>
+    <string name="menu_sort">Сортировать по</string>
+    <string name="menu_item_latest">Последние</string>
+    <string name="menu_item_oldest">Старейшие</string>
+    <string name="menu_item_popular">Популярные</string>
+    <string name="menu_item_random">Случайные</string>
+    <string name="menu_item_all">Все</string>
+    <string name="menu_item_curated">Кураторские</string>
+    <string name="menu_item_featured">Рекомендуемые</string>
+
+    <!-- Main -->
+    <string name="main_unsplash_description">Бесплатные фотографии высокого разрешения</string>
+    <string name="main_add_account">Добавить аккаунт</string>
+    <string name="main_add_new_account">Добавить новый аккаунт Unsplash</string>
+    <string name="main_view_profile">Просмотреть профиль</string>
+    <string name="main_manage_account">Управление аккаунтом</string>
+    <string name="main_logout">Выйти</string>
+    <string name="main_featured">Рекомендуемые</string>
+    <string name="main_new">Новые</string>
+    <string name="main_collections">Коллекции</string>
+    <string name="main_support_development">Поддержать разработку</string>
+    <string name="main_settings">Настройки</string>
+    <string name="main_about">О приложении</string>
+    <string name="main_logout_success">Выход - Успешно</string>
+
+    <!-- Intro -->
+    <string name="intro_welcome_title">Resplash</string>
+    <string name="intro_welcome_description">Работает на Unsplash</string>
+    <string name="intro_download_title">Фотографии высокого разрешения</string>
+    <string name="intro_download_description">Бесплатные (делайте что хотите) фотографии высокого разрешения</string>
+    <string name="intro_done">Начать</string>
+    <string name="intro_next">Далее</string>
+
+    <!-- Custom API -->
+    <string name="custom_api_key_description">Вы можете создать свой собственный аккаунт разработчика Unsplash и использовать свой собственный ключ API\n\n(Оставьте пустым, чтобы использовать стандартный ключ API)</string>
+    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
+    <string name="api_key_empty_message">Ошибка: вы не может оставить поле пустым</string>
+    <string name="redirect_uri_hint">Перенаправление URI</string>
+    <string name="secret_hint">Секрет</string>
+    <string name="api_key_hint">Ключ API</string>
+
+    <!-- Search -->
+    <string name="search_photos">Фотографии</string>
+    <string name="search_collections">Коллекции</string>
+    <string name="search_users">Пользователи</string>
+    <string name="search_hint">Поиск</string>
+    <string name="search_title">Поиск</string>
+    <string name="action_clear_text">Удалить текст</string>
+
+    <!-- InfoDialog -->
+    <string name="photo_dimensions">Разрешение</string>
+    <string name="camera_make">Марка</string>
+    <string name="camera_model">Модель</string>
+    <string name="exposure_time">Экспозиция</string>
+    <string name="aperture">Апертура</string>
+    <string name="iso">ISO</string>
+    <string name="focal_length">Фокусное расстояние</string>
+    <!-- About -->
+    <string name="about_title">О приложении</string>
+    <string name="about_unsplash_title">Unsplash.com</string>
+    <string name="about_unsplash_subtitle">Бесплатные (делайте что хотите) фотографии высокого разрешения</string>
+    <string name="about_version_title">Версия</string>
+    <string name="about_version_subtitle">1.0.0</string>
+    <string name="about_introduction_title">Введение</string>
+    <string name="about_github_title">GitHub</string>
+    <string name="about_support_development_card_title">Поддержать разработку</string>
+    <string name="about_rate_title">Оценить</string>
+    <string name="about_rate_subtitle">Если вам нравится Resplash, оцените его в Play Маркете</string>
+    <string name="about_donate_title">Пожертвовать</string>
+    <string name="about_donate_subtitle">Если вам действительно нравится Resplash, подумайте о поддержке его развития, отправив мне несколько сотен рублей</string>
+    <string name="about_bug_title">Сообщить об ошибках</string>
+    <string name="about_bug_subtitle">Сообщить об ошибках или предложить новые функции</string>
+    <string name="about_author_title">Brandon Lam</string>
+    <string name="about_author_card_title">Автор</string>
+    <string name="about_author_subtitle">Торонто, Онтарио, Канада</string>
+    <string name="about_website_title">Посетить вебсайт</string>
+    <string name="about_instagram_title">Подписаться на Instagram</string>
+    <string name="about_libraries_card_title">Библиотеки</string>
+    <string name="about_library1_title">Retrofit</string>
+    <string name="about_library1_subtitle">Type-safe HTTP client for Android and Java by Square, Inc.</string>
+    <string name="about_library2_title">Glide</string>
+    <string name="about_library2_subtitle">Библиотека загрузки изображений и кеширования для Android, ориентированная на плавную прокрутку</string>
+    <string name="about_library3_title">FastAdapter</string>
+    <string name="about_library3_subtitle">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
+    <string name="about_library4_title">Android-Iconics</string>
+    <string name="about_library4_subtitle">Use any icon font, or vector (.svg) as drawable in your application.</string>
+    <string name="about_library5_title">MaterialDrawer</string>
+    <string name="about_library5_subtitle">The flexible, easy to use, all in one drawer library for your Android project</string>
+    <string name="about_library6_title">InkPageIndicator</string>
+    <string name="about_library6_subtitle">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
+    <string name="about_library7_title">Butter Knife</string>
+    <string name="about_library7_subtitle">Bind Android views and callbacks to fields and methods</string>
+    <string name="about_library8_title">ErrorView</string>
+    <string name="about_library8_subtitle">A custom view that displays an error image, a title, and a subtitle given an HTTP status code</string>
+    <string name="about_library9_title">PhotoView</string>
+    <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
+    <string name="about_library10_title">FloatingActionButton</string>
+    <string name="about_library10_subtitle">Плавающая кнопка действия Android на основе спецификаций Material Design</string>
+
+    <!-- Donate -->
+    <string name="donate_card_title">Поддержать разработку</string>
+    <string name="donate_item1_title">Кофе</string>
+    <string name="donate_item1_subtitle">Держит меня бодрым во время ночных сеансов написания кода</string>
+    <string name="donate_item2_title">Смузи</string>
+    <string name="donate_item2_subtitle">Иногда мне нужно есть что-то полезное</string>
+    <string name="donate_item3_title">Пицца</string>
+    <string name="donate_item3_subtitle">Все любят пиццу</string>
+    <string name="donate_item4_title">Причудливая еда</string>
+    <string name="donate_item4_subtitle">Могу побаловать себя время от времени</string>
+    <string name="donate_thanks">Спасибо, что пожертвовали!</string>
+    <string name="donate_loading">Загрузка продуктов...</string>
+
+    <!-- Detail -->
+    <string name="stats">Статистика</string>
+    <string name="photo_info">Информация</string>
+    <string name="set_as_wallpaper">Установить в качестве обоев</string>
+    <string name="download">Скачать</string>
+
+    <string name="no_results">Нет результатов</string>
+    <string name="login">Авторизоваться</string>
+    <string name="join">Присоединиться</string>
+    <string name="edit_title">Редактировать профиль</string>
+    <string name="request_token_failed">Ошибка доступа к токену</string>
+    <string name="error">Ошибка</string>
+
+    <string name="by_author">От %1$s</string>
+    <string name="no_more_photos">Больше нет фотографий</string>
+    <string name="updated_photos">Фотографии обновлены!</string>
+    <string name="updated_collections">Коллекции обновлены!</string>
+    <string name="updated_users">Пользователи обновлены!</string>
+    <string name="share_via">Поделиться с помощью</string>
+    <string name="unsplash_image">Фотографии Unsplash</string>
+    <string name="unsplash_collection">Коллекция Unsplash</string>
+    <string name="save">Сохранить</string>
+    <string name="saved">Сохранено</string>
+    <string name="likes">%1$s лайков</string>
+    <string name="photos">%1$s фотографий</string>
+    <string name="views">%1$s просмотров</string>
+    <string name="downloads">%1$s скачиваний</string>
+    <string name="cannot_make_anymore_requests">Больше не возможно сделать запросы.</string>
+    <string name="download_started">Загрузка началась</string>
+    <string name="image_saved">Фотография сохранена</string>
+    <string name="download_wallpaper">Скачать обои</string>
+    <string name="download_complete">Загрузка завершена</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="cannot_update_profile">Не удается обновить профиль</string>
+    <string name="updated_profile">Профиль обновлён</string>
+    <string name="username_cannot_be_blank">Имя пользователя не может быть пустым</string>
+    <string name="failed_to_load_profile">Не удалось загрузить профиль</string>
+    <string name="next">Далее</string>
+    <string name="username_hint">Имя пользователя</string>
+    <string name="first_name_hint">Имя</string>
+    <string name="last_name_hint">Фамилия</string>
+    <string name="email_address_hint">Email адрес</string>
+    <string name="personal_site_hint">Личный сайт/портфолио</string>
+    <string name="instagram_username_hint">Имя пользователя Instagram</string>
+    <string name="location_hint">Место нахождения</string>
+    <string name="bio_hint">Биография</string>
+
+</resources>

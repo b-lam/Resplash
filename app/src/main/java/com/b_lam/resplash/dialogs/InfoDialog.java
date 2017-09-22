@@ -37,7 +37,7 @@ public class InfoDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.info_dialog, null, false);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_info, null, false);
         ButterKnife.bind(this, view);
         initData();
         return new AlertDialog.Builder(getActivity())

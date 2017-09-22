@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
@@ -36,7 +37,7 @@
         </activity>
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="Settings"
+            android:label="@string/main_settings"
             android:configChanges="locale"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
@@ -54,6 +55,7 @@
         </activity>
         <activity
             android:name=".activities.DetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
         <activity

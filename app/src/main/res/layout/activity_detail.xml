@@ -51,7 +51,7 @@
                 android:scaleX="0.5"
                 android:scaleY="0.5"
                 style="?android:progressBarStyleLarge"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
             <LinearLayout
                 android:id="@+id/detail_content"
                 android:layout_width="match_parent"
@@ -180,6 +180,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
+        android:elevation="20dp"
         fab:menu_icon="@drawable/ic_expand_less_white_24dp"
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true"
@@ -232,7 +233,7 @@
     <ProgressBar
         android:id="@+id/progress_download"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:indeterminateOnly="true"
+        android:indeterminateOnly="false"
         android:layout_gravity="bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

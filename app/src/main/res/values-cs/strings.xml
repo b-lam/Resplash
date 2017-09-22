@@ -61,12 +61,24 @@
     <array name="language">
         <item>Angličtina</item>
         <item>Čeština</item>
+        <item>Ruština</item>
     </array>
     <array name="language_values">
         <item>en</item>
         <item>cs</item>
+        <item>ru</item>
     </array>
     <string name="default_language">en</string>
+    <string name="title_theme">Theme</string>
+    <array name="theme">
+        <item>Light</item>
+        <item>Dark</item>
+    </array>
+    <array name="theme_values">
+        <item>Light</item>
+        <item>Dark</item>
+    </array>
+    <string name="default_theme">Light</string>
     <string name="restart">Restartujte</string>
     <string name="restart_to_apply">Restartujte a použijte změny</string>
     <string name="title_other_section">Ostatní</string>
