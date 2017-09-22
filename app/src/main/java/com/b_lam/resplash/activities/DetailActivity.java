@@ -4,33 +4,26 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.app.DownloadManager;
 import android.app.WallpaperManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,7 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.LikePhotoResult;
 import com.b_lam.resplash.data.data.Photo;
@@ -47,31 +40,24 @@ import com.b_lam.resplash.data.service.PhotoService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.dialogs.InfoDialog;
 import com.b_lam.resplash.dialogs.StatsDialog;
-import com.b_lam.resplash.network.ImageDownloader;
+import com.b_lam.resplash.dialogs.WallpaperDialog;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity{
 
     final String TAG = "DetailActivity";
     private boolean like;
@@ -80,10 +66,15 @@ public class DetailActivity extends AppCompatActivity {
     private PhotoService mService;
     private SharedPreferences sharedPreferences;
     private Drawable colorIcon;
-    final static int TYPE_DOWNLOAD = 1;
-    final static int TYPE_WALLPAPER = 2;
+    private enum ActionType {DOWNLOAD, WALLPAPER}
+    private ActionType currentAction;
+    private WallpaperDialog wallpaperDialog;
+
+    private long downloadReference;
 
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    private DownloadManager downloadManager;
 
     @BindView((R.id.toolbar_detail)) Toolbar toolbar;
     @BindView(R.id.imgFull) ImageView imgFull;
@@ -105,6 +96,38 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.detail_content) LinearLayout content;
     @BindView(R.id.detail_progress) ProgressBar loadProgress;
 
+    IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            long reference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if (downloadReference == reference) {
+                DownloadManager.Query query = new DownloadManager.Query().setFilterById(reference);
+                Cursor cursor = downloadManager.query(query);
+                if (cursor.moveToFirst()) {
+                    int status  = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                    switch (status) {
+                        case DownloadManager.STATUS_SUCCESSFUL:
+                            getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, downloadManager.getUriForDownloadedFile(downloadReference)));
+                            if (currentAction == ActionType.WALLPAPER) {
+                                Uri uri = downloadManager.getUriForDownloadedFile(downloadReference);
+                                Log.d(TAG, uri.toString());
+                                Intent wallpaperIntent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(uri);
+                                DetailActivity.this.startActivityForResult(wallpaperIntent, 13451);
+                                wallpaperDialog.setDownloadFinished(true);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if (currentAction == ActionType.WALLPAPER) {
+                    wallpaperDialog.dismiss();
+                }
+                cursor.close();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +209,7 @@ public class DetailActivity extends AppCompatActivity {
                     updateHeartButton(like);
                     content.setVisibility(View.VISIBLE);
                     floatingActionMenu.setVisibility(View.VISIBLE);
+                    loadProgress.setVisibility(View.GONE);
                 } else if (response.code() == 403) {
                     Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
                 } else {
@@ -209,6 +233,61 @@ public class DetailActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mService != null) {
+            mService.cancel();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                getWindow().setExitTransition(null);
+                supportFinishAfterTransition();
+                return true;
+            case R.id.action_share:
+                mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SHARE_PHOTO, null);
+                shareTextUrl();
+                return true;
+            case R.id.action_view_on_unsplash:
+                if(mPhotoDetails != null) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mPhotoDetails.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
+                    startActivity(i);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+        getWindow().setExitTransition(null);
+        supportFinishAfterTransition();
+    }
+
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -218,23 +297,22 @@ public class DetailActivity extends AppCompatActivity {
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_DOWNLOAD, null);
                         floatingActionMenu.close(true);
                         Toast.makeText(getApplicationContext(), getString(R.string.download_started), Toast.LENGTH_SHORT).show();
-                        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.MULTIPLY);
-                        progressBar.setVisibility(View.VISIBLE);
+                        currentAction = ActionType.DOWNLOAD;
                         switch (sharedPreferences.getString("download_quality", "Full")) {
                             case "Raw":
-                                downloadImage(mPhoto.urls.raw, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.raw, ActionType.DOWNLOAD);
                                 break;
                             case "Full":
-                                downloadImage(mPhoto.urls.full, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.full, ActionType.DOWNLOAD);
                                 break;
                             case "Regular":
-                                downloadImage(mPhoto.urls.regular, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.regular, ActionType.DOWNLOAD);
                                 break;
                             case "Small":
-                                downloadImage(mPhoto.urls.small, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.small, ActionType.DOWNLOAD);
                                 break;
                             case "Thumb":
-                                downloadImage(mPhoto.urls.thumb, TYPE_DOWNLOAD);
+                                downloadImage(mPhoto.urls.thumb, ActionType.DOWNLOAD);
                                 break;
                             default:
                                 throw new IllegalArgumentException("Invalid download quality");
@@ -245,24 +323,31 @@ public class DetailActivity extends AppCompatActivity {
                     if (mPhoto != null) {
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SET_WALLPAPER, null);
                         floatingActionMenu.close(true);
-                        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.MULTIPLY);
-                        progressBar.setVisibility(View.VISIBLE);
+                        currentAction = ActionType.WALLPAPER;
+                        wallpaperDialog = new WallpaperDialog();
+                        wallpaperDialog.setListener(new WallpaperDialog.WallpaperDialogListener() {
+                            @Override
+                            public void onCancel() {
+                                downloadManager.remove(downloadReference);
+                            }
+                        });
+                        wallpaperDialog.show(getFragmentManager(), null);
 
                         switch (sharedPreferences.getString("wallpaper_quality", "Full")) {
                             case "Raw":
-                                downloadImage(mPhoto.urls.raw, TYPE_WALLPAPER);
+                                downloadImage(mPhoto.urls.raw, ActionType.WALLPAPER);
                                 break;
                             case "Full":
-                                downloadImage(mPhoto.urls.full, TYPE_WALLPAPER);
+                                downloadImage(mPhoto.urls.full, ActionType.WALLPAPER);
                                 break;
                             case "Regular":
-                                downloadImage(mPhoto.urls.regular, TYPE_WALLPAPER);
+                                downloadImage(mPhoto.urls.regular, ActionType.WALLPAPER);
                                 break;
                             case "Small":
-                                downloadImage(mPhoto.urls.small, TYPE_WALLPAPER);
+                                downloadImage(mPhoto.urls.small, ActionType.WALLPAPER);
                                 break;
                             case "Thumb":
-                                downloadImage(mPhoto.urls.thumb, TYPE_WALLPAPER);
+                                downloadImage(mPhoto.urls.thumb, ActionType.WALLPAPER);
                                 break;
                             default:
                                 throw new IllegalArgumentException("Invalid wallpaper quality");
@@ -308,41 +393,6 @@ public class DetailActivity extends AppCompatActivity {
 //        }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.detail, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case android.R.id.home:
-                getWindow().setExitTransition(null);
-                supportFinishAfterTransition();
-                return true;
-            case R.id.action_share:
-                mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SHARE_PHOTO, null);
-                shareTextUrl();
-                return true;
-            case R.id.action_view_on_unsplash:
-                if(mPhotoDetails != null) {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mPhotoDetails.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
-                    startActivity(i);
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed(){
-        getWindow().setExitTransition(null);
-        supportFinishAfterTransition();
-    }
-
     public View.OnClickListener imageOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -351,14 +401,6 @@ public class DetailActivity extends AppCompatActivity {
             startActivity(i);
         }
     };
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mService != null) {
-            mService.cancel();
-        }
-    }
 
     public void updateHeartButton(boolean like){
 
@@ -410,59 +452,18 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void downloadImage(String url, final int type){
-        Glide
-                .with(getApplicationContext())
-                .load(url)
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-                        Bitmap.CompressFormat mFormat = Bitmap.CompressFormat.JPEG;
-                        final File myImageFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Pictures" + File.separator + "Resplash"
-                                + File.separator + mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + ".jpg");
-                        final Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", myImageFile);
-                        ImageDownloader.writeToDisk(myImageFile, resource, new ImageDownloader.OnBitmapSaveListener() {
-                            @Override
-                            public void onBitmapSaved() {
-                                if(type == TYPE_DOWNLOAD) {
-                                    Intent intent = new Intent();
-                                    intent.setAction(Intent.ACTION_VIEW);
-                                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                    intent.setDataAndType(contentUri, "image/*");
-                                    Toast.makeText(DetailActivity.this, getString(R.string.image_saved), Toast.LENGTH_LONG).show();
-                                    sendNotification(intent);
-                                }else if (type == TYPE_WALLPAPER) {
-                                    Intent intent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(contentUri);
-                                    DetailActivity.this.startActivityForResult(intent, 13451);
-                                }
-                                progressBar.setVisibility(View.INVISIBLE);
-                            }
+    private void downloadImage(String url, ActionType actionType){
+        String filename = mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + Resplash.DOWNLOAD_PHOTO_FORMAT;
+        downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url))
+                .setTitle(filename)
+                .setDestinationInExternalPublicDir(Resplash.DOWNLOAD_PATH, filename)
+                .setVisibleInDownloadsUi(false)
+                .setNotificationVisibility(actionType == ActionType.DOWNLOAD ? DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED : DownloadManager.Request.VISIBILITY_VISIBLE);
 
-                            @Override
-                            public void onBitmapSaveError(ImageDownloader.ImageError error) {
-                                Toast.makeText(DetailActivity.this, getString(R.string.error) + ": " + error.getMessage(), Toast.LENGTH_LONG).show();
-                                error.printStackTrace();
-                                progressBar.setVisibility(View.INVISIBLE);
-                            }
-                        }, mFormat, true);
-                    }
-                });
-    }
+        request.allowScanningByMediaScanner();
 
-    public void sendNotification(Intent intent) {
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_resplash_notification)
-                .setContentTitle(getString(R.string.download_wallpaper))
-                .setContentText(getString(R.string.download_complete))
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
-
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        mNotificationManager.notify(001, mBuilder.build());
+        downloadReference = downloadManager.enqueue(request);
     }
 
     private void loadPreferences(){

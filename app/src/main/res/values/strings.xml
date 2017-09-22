@@ -68,6 +68,16 @@
         <item>ru</item>
     </array>
     <string name="default_language">en</string>
+    <string name="title_theme">Theme</string>
+    <array name="theme">
+        <item>Light</item>
+        <item>Dark</item>
+    </array>
+    <array name="theme_values">
+        <item>Light</item>
+        <item>Dark</item>
+    </array>
+    <string name="default_theme">Light</string>
     <string name="restart">Restart</string>
     <string name="restart_to_apply">Restart to apply changes</string>
     <string name="title_other_section">Other</string>
@@ -184,13 +194,15 @@
     <string name="donate_item4_title">Fancy Meal</string>
     <string name="donate_item4_subtitle">Gotta treat yourself once in a while</string>
     <string name="donate_thanks">Thanks for donating!</string>
-    <string name="donate_loading">Loading products...</string>
+    <string name="donate_loading">Loading products&#8230;</string>
 
     <!-- Detail -->
     <string name="stats">Stats</string>
     <string name="photo_info">Info</string>
     <string name="set_as_wallpaper">Set as wallpaper</string>
     <string name="download">Download</string>
+    <string name="setting_wallpaper">Setting wallpaper&#8230;</string>
+    <string name="cancel">Cancel</string>
 
     <string name="no_results">No results</string>
     <string name="login">Login</string>

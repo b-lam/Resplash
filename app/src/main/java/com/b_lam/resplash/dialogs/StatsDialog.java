@@ -42,7 +42,7 @@ public class StatsDialog extends DialogFragment implements PhotoService.OnReques
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.stats_dialog, null, false);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_stats, null, false);
         ButterKnife.bind(this, view);
         this.service = PhotoService.getService();
         service.requestStats(photo.id, this);
