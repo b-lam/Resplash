@@ -75,9 +75,6 @@ public class Resplash extends Application{
     public static int PEOPLE_PHOTOS_COUNT = 3410;
     public static int TECHNOLOGY_PHOTOS_COUNT = 350;
 
-    // activity code.
-    public static final int ME_ACTIVITY = 1;
-
     // permission code.
     public static final int WRITE_EXTERNAL_STORAGE = 1;
 
