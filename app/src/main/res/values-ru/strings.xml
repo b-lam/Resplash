@@ -62,11 +62,13 @@
         <item>English</item>
         <item>Český</item>
         <item>Русский</item>
+        <item>Cербский</item>
     </array>
     <array name="language_values">
         <item>en</item>
         <item>cs</item>
         <item>ru</item>
+        <item>sr</item>
     </array>
     <string name="default_language">ru</string>
     <string name="title_theme">Тема</string>
@@ -243,5 +245,7 @@
     <string name="instagram_username_hint">Имя пользователя Instagram</string>
     <string name="location_hint">Место нахождения</string>
     <string name="bio_hint">Биография</string>
+    <string name="cancel">Отмена</string>
+    <string name="setting_wallpaper">Настройка обоев&#8230;</string>
 
 </resources>

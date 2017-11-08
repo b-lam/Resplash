@@ -62,11 +62,13 @@
         <item>Енглески</item>
         <item>Чешки</item>
         <item>Руски</item>
+        <item>Српски</item>
     </array>
     <array name="language_values">
         <item>ен</item>
         <item>цз</item>
         <item>ру</item>
+        <item>sr</item>
     </array>
     <string name="default_language">ен</string>
     <string name="title_theme">Тема</string>
@@ -142,6 +144,7 @@
     <string name="aperture">Апертура</string>
     <string name="iso">ИСО</string>
     <string name="focal_length">Фокусна дужина</string>
+
     <!-- About -->
     <string name="about_title">О нама</string>
     <string name="about_unsplash_title">Unsplash.com</string>
