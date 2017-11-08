@@ -62,11 +62,13 @@
         <item>Angličtina</item>
         <item>Čeština</item>
         <item>Ruština</item>
+        <item>Srbština</item>
     </array>
     <array name="language_values">
         <item>en</item>
         <item>cs</item>
         <item>ru</item>
+        <item>sr</item>
     </array>
     <string name="default_language">en</string>
     <string name="title_theme">Theme</string>
@@ -243,5 +245,7 @@
     <string name="instagram_username_hint">Uživatelské jméno na Instagramu</string>
     <string name="location_hint">Země</string>
     <string name="bio_hint">Bio</string>
+    <string name="cancel">Zrušení</string>
+    <string name="setting_wallpaper">Nastavení tapety&#8230;</string>
 
 </resources>
