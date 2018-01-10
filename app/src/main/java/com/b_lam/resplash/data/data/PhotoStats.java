@@ -28,5 +28,6 @@ public class PhotoStats {
         public String self;
         public String html;
         public String download;
+        public String download_location;
     }
 }

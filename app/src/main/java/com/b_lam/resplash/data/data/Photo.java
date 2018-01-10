@@ -135,6 +135,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
         public String self;
         public String html;
         public String download;
+        public String download_location;
     }
 
     public static class CurrentUserCollections {
@@ -261,6 +262,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                 public String self;
                 public String html;
                 public String download;
+                public String download_location;
             }
 
             public static class Categories {

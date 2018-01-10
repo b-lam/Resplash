@@ -29,24 +29,12 @@
         <item>Низкое</item>
         <item>Очень низкое</item>
     </array>
-    <array name="quality_options_values">
-        <item>Оригинальное</item>
-        <item>Высокое</item>
-        <item>Среднее</item>
-        <item>Низкое</item>
-        <item>Очень низкое</item>
-    </array>
     <string name="default_load_quality">Среднее</string>
     <string name="default_download_quality">Высокое</string>
     <string name="title_layout_section">Расположение</string>
     <string name="title_layout_preference">Выберите расположение</string>
     <string name="summary_layout_preference">Выберите, как будут отображаться фотографии</string>
     <array name="layout_options">
-        <item>Списком</item>
-        <item>Карточками</item>
-        <item>Сеткой</item>
-    </array>
-    <array name="layout_options_values">
         <item>Списком</item>
         <item>Карточками</item>
         <item>Сеткой</item>
@@ -58,25 +46,8 @@
     <string name="cache_size">Размер кэша</string>
     <string name="message_cache_cleared">Кэш очищен!</string>
     <string name="title_language">Язык</string>
-    <array name="language">
-        <item>English</item>
-        <item>Český</item>
-        <item>Русский</item>
-        <item>Cербский</item>
-    </array>
-    <array name="language_values">
-        <item>en</item>
-        <item>cs</item>
-        <item>ru</item>
-        <item>sr</item>
-    </array>
-    <string name="default_language">ru</string>
     <string name="title_theme">Тема</string>
     <array name="theme">
-        <item>Светлая</item>
-        <item>Тёмная</item>
-    </array>
-    <array name="theme_values">
         <item>Светлая</item>
         <item>Тёмная</item>
     </array>

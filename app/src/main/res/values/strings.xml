@@ -62,12 +62,14 @@
         <item>Czech</item>
         <item>Russian</item>
         <item>Serbian</item>
+        <item>Chinese</item>
     </array>
     <array name="language_values">
         <item>en</item>
         <item>cs</item>
         <item>ru</item>
         <item>sr</item>
+        <item>zh</item>
     </array>
     <string name="default_language">en</string>
     <string name="title_theme">Theme</string>

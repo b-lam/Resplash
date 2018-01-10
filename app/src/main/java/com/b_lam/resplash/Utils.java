@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
-import android.view.View;
-
-import com.b_lam.resplash.R;
 
 /**
  * Created by Brandon on 10/7/2016.

@@ -38,6 +38,8 @@ public class SettingsActivity extends AppCompatActivity {
     @BindView(R.id.toolbar_settings) Toolbar toolbar;
 
     private final static String TAG = "SettingsActivity";
+    private static boolean settingChanged = false;
+    private static boolean activityRestarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +60,23 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.main_settings));
 
         getFragmentManager().beginTransaction().replace(R.id.pref_content, new SettingsFragment()).commit();
+
+        if (!activityRestarted) {
+            settingChanged = false;
+        }
+
+        activityRestarted = false;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                if (settingChanged) {
+                    NavUtils.navigateUpFromSameTask(this);
+                } else {
+                    onBackPressed();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -73,7 +85,11 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        NavUtils.navigateUpFromSameTask(this);
+        if (settingChanged) {
+            NavUtils.navigateUpFromSameTask(this);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -128,6 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            settingChanged = true;
             LocaleUtils.loadLocale(getActivity().getBaseContext());
 
             if(key.equals("language")) {
@@ -143,6 +160,8 @@ public class SettingsActivity extends AppCompatActivity {
                             Intent intent = getActivity().getIntent();
                             getActivity().finish();
                             startActivity(intent);
+                            activityRestarted = true;
+
                         }
                     });
 

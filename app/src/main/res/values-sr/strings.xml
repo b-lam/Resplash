@@ -29,24 +29,12 @@
         <item>Small</item>
         <item>Thumb</item>
     </array>
-    <array name="quality_options_values">
-        <item>Raw</item>
-        <item>Full</item>
-        <item>Regular</item>
-        <item>Small</item>
-        <item>Thumb</item>
-    </array>
     <string name="default_load_quality">Regular</string>
     <string name="default_download_quality">Full</string>
     <string name="title_layout_section">Распоред</string>
     <string name="title_layout_preference">Одаберите распоред</string>
     <string name="summary_layout_preference">Одаберите како желите да слике буду приказане</string>
     <array name="layout_options">
-        <item>Листа</item>
-        <item>Картице</item>
-        <item>Мрежа</item>
-    </array>
-    <array name="layout_options_values">
         <item>Листа</item>
         <item>Картице</item>
         <item>Мрежа</item>
@@ -58,25 +46,8 @@
     <string name="cache_size">Величина кеш меморије</string>
     <string name="message_cache_cleared">Кеш меморија очишћена</string>
     <string name="title_language">Језик</string>
-    <array name="language">
-        <item>Енглески</item>
-        <item>Чешки</item>
-        <item>Руски</item>
-        <item>Српски</item>
-    </array>
-    <array name="language_values">
-        <item>ен</item>
-        <item>цз</item>
-        <item>ру</item>
-        <item>sr</item>
-    </array>
-    <string name="default_language">ен</string>
     <string name="title_theme">Тема</string>
     <array name="theme">
-        <item>Светла</item>
-        <item>Тамна</item>
-    </array>
-    <array name="theme_values">
         <item>Светла</item>
         <item>Тамна</item>
     </array>

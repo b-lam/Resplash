@@ -132,6 +132,7 @@ public class PhotoDetails {
         public String self;
         public String html;
         public String download;
+        public String download_location;
     }
 
     public static class User {
@@ -284,6 +285,7 @@ public class PhotoDetails {
                 public String self;
                 public String html;
                 public String download;
+                public String download_location;
             }
 
             public static class Categories {
