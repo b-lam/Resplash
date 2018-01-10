@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -290,6 +291,25 @@ public class PhotoService {
         });
     }
 
+    public void reportDownload(String id, final OnReportDownloadListener l) {
+        Call<ResponseBody> reportDownload = buildApi(buildClient()).reportDownload(id);
+        reportDownload.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (l != null) {
+                    l.onReportDownloadSuccess(call, response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                if (l != null) {
+                    l.onReportDownloadFailed(call, t);
+                }
+            }
+        });
+    }
+
     public void cancel() {
         if (call != null) {
             call.cancel();
@@ -341,5 +361,10 @@ public class PhotoService {
     public interface OnRequestPhotoDetailsListener {
         void onRequestPhotoDetailsSuccess(Call<PhotoDetails> call, Response<PhotoDetails> response);
         void onRequestPhotoDetailsFailed(Call<PhotoDetails> call, Throwable t);
+    }
+
+    public interface OnReportDownloadListener {
+        void onReportDownloadSuccess(Call<ResponseBody> call, Response<ResponseBody> response);
+        void onReportDownloadFailed(Call<ResponseBody> call, Throwable t);
     }
 }

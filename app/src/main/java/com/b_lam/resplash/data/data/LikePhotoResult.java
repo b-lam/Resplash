@@ -63,6 +63,7 @@ public class LikePhotoResult {
             public String self;
             public String html;
             public String download;
+            public String download_location;
         }
     }
 

@@ -8,7 +8,9 @@ import com.b_lam.resplash.data.data.PhotoStats;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -83,4 +85,7 @@ public interface PhotoApi {
                                       @Query("query") String query,
                                       @Query("orientation") String orientation,
                                       @Query("count") int count);
+
+    @GET("photos/{id}/download")
+    Call<ResponseBody> reportDownload(@Path("id") String id);
 }

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -31,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.LikePhotoResult;
@@ -52,8 +54,10 @@ import com.google.gson.Gson;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -97,6 +101,7 @@ public class DetailActivity extends AppCompatActivity{
     @BindView(R.id.detail_progress) ProgressBar loadProgress;
 
     IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -126,6 +131,60 @@ public class DetailActivity extends AppCompatActivity{
                 }
                 cursor.close();
             }
+        }
+    };
+
+    PhotoService.OnRequestPhotoDetailsListener mPhotoDetailsRequestListener = new PhotoService.OnRequestPhotoDetailsListener() {
+        @Override
+        public void onRequestPhotoDetailsSuccess(Call<PhotoDetails> call, Response<PhotoDetails> response) {
+            Log.d(TAG, String.valueOf(response.code()));
+            if (response.isSuccessful()) {
+                mPhotoDetails = response.body();
+                tvUser.setText(getString(R.string.by_author, mPhotoDetails.user.name));
+                if (mPhotoDetails.location != null) {
+                    if (mPhotoDetails.location.city != null && mPhotoDetails.location.country != null) {
+                        tvLocation.setText(mPhotoDetails.location.city + ", " + mPhotoDetails.location.country);
+                    }else if(mPhotoDetails.location.city != null){
+                        tvLocation.setText(mPhotoDetails.location.city);
+                    }else if(mPhotoDetails.location.country != null){
+                        tvLocation.setText(mPhotoDetails.location.country);
+                    }
+                } else {
+                    tvLocation.setText("-----");
+                }
+                tvDate.setText(mPhotoDetails.created_at.split("T")[0]);
+                tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.likes)));
+                colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
+                tvColor.setText(mPhotoDetails.color);
+                tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads)));
+                like = mPhotoDetails.liked_by_user;
+                updateHeartButton(like);
+                content.setVisibility(View.VISIBLE);
+                floatingActionMenu.setVisibility(View.VISIBLE);
+                loadProgress.setVisibility(View.GONE);
+            } else if (response.code() == 403) {
+                Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
+            } else {
+                mService.requestPhotoDetails(mPhoto.id, this);
+            }
+        }
+
+        @Override
+        public void onRequestPhotoDetailsFailed(Call<PhotoDetails> call, Throwable t) {
+            Log.d(TAG, t.toString());
+            mService.requestPhotoDetails(mPhoto.id, this);
+        }
+    };
+
+    PhotoService.OnReportDownloadListener mReportDownloadListener = new PhotoService.OnReportDownloadListener() {
+        @Override
+        public void onReportDownloadSuccess(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+        }
+
+        @Override
+        public void onReportDownloadFailed(Call<ResponseBody> call, Throwable t) {
+
         }
     };
 
@@ -181,48 +240,6 @@ public class DetailActivity extends AppCompatActivity{
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
 
 //        btnAddToCollection.setImageDrawable(new IconicsDrawable(this).icon(GoogleMaterial.Icon.gmd_add).paddingDp(4).colorRes(R.color.md_grey_500));
-
-        PhotoService.OnRequestPhotoDetailsListener mPhotoDetailsRequestListener = new PhotoService.OnRequestPhotoDetailsListener() {
-            @Override
-            public void onRequestPhotoDetailsSuccess(Call<PhotoDetails> call, Response<PhotoDetails> response) {
-                Log.d(TAG, String.valueOf(response.code()));
-                if (response.isSuccessful()) {
-                    mPhotoDetails = response.body();
-                    tvUser.setText(getString(R.string.by_author, mPhotoDetails.user.name));
-                    if (mPhotoDetails.location != null) {
-                        if (mPhotoDetails.location.city != null && mPhotoDetails.location.country != null) {
-                            tvLocation.setText(mPhotoDetails.location.city + ", " + mPhotoDetails.location.country);
-                        }else if(mPhotoDetails.location.city != null){
-                            tvLocation.setText(mPhotoDetails.location.city);
-                        }else if(mPhotoDetails.location.country != null){
-                            tvLocation.setText(mPhotoDetails.location.country);
-                        }
-                    } else {
-                        tvLocation.setText("-----");
-                    }
-                    tvDate.setText(mPhotoDetails.created_at.split("T")[0]);
-                    tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.likes)));
-                    colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
-                    tvColor.setText(mPhotoDetails.color);
-                    tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads)));
-                    like = mPhotoDetails.liked_by_user;
-                    updateHeartButton(like);
-                    content.setVisibility(View.VISIBLE);
-                    floatingActionMenu.setVisibility(View.VISIBLE);
-                    loadProgress.setVisibility(View.GONE);
-                } else if (response.code() == 403) {
-                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
-                } else {
-                    mService.requestPhotoDetails(mPhoto.id, this);
-                }
-            }
-
-            @Override
-            public void onRequestPhotoDetailsFailed(Call<PhotoDetails> call, Throwable t) {
-                Log.d(TAG, t.toString());
-                mService.requestPhotoDetails(mPhoto.id, this);
-            }
-        };
 
         mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
 
@@ -453,6 +470,7 @@ public class DetailActivity extends AppCompatActivity{
     }
 
     private void downloadImage(String url, ActionType actionType){
+        mService.reportDownload(mPhoto.id, mReportDownloadListener);
         String filename = mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + Resplash.DOWNLOAD_PHOTO_FORMAT;
         downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url))

@@ -171,6 +171,7 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
             public String self;
             public String html;
             public String download;
+            public String download_location;
         }
 
         public static class Categories {
