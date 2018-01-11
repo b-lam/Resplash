@@ -129,7 +129,7 @@ public class User extends AbstractItem<User, User.ViewHolder> {
             case "Grid":
                 return R.id.item_user;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.id.item_user;
         }
     }
 
@@ -145,7 +145,7 @@ public class User extends AbstractItem<User, User.ViewHolder> {
             case "Grid":
                 return R.layout.item_user;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.layout.item_user;
         }    }
 
     @Override

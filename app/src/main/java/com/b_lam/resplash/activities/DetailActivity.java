@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.Utils;
 import com.b_lam.resplash.data.data.LikePhotoResult;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.data.PhotoDetails;
@@ -310,7 +311,7 @@ public class DetailActivity extends AppCompatActivity{
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.fab_download:
-                    if (mPhoto != null) {
+                    if (Utils.isStoragePermissionGranted(DetailActivity.this) && mPhoto != null) {
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_DOWNLOAD, null);
                         floatingActionMenu.close(true);
                         Toast.makeText(getApplicationContext(), getString(R.string.download_started), Toast.LENGTH_SHORT).show();
@@ -332,12 +333,12 @@ public class DetailActivity extends AppCompatActivity{
                                 downloadImage(mPhoto.urls.thumb, ActionType.DOWNLOAD);
                                 break;
                             default:
-                                throw new IllegalArgumentException("Invalid download quality");
+                                downloadImage(mPhoto.urls.full, ActionType.DOWNLOAD);
                         }
                     }
                     break;
                 case R.id.fab_wallpaper:
-                    if (mPhoto != null) {
+                    if (Utils.isStoragePermissionGranted(DetailActivity.this) && mPhoto != null) {
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SET_WALLPAPER, null);
                         floatingActionMenu.close(true);
                         currentAction = ActionType.WALLPAPER;
@@ -367,7 +368,7 @@ public class DetailActivity extends AppCompatActivity{
                                 downloadImage(mPhoto.urls.thumb, ActionType.WALLPAPER);
                                 break;
                             default:
-                                throw new IllegalArgumentException("Invalid wallpaper quality");
+                                downloadImage(mPhoto.urls.full, ActionType.WALLPAPER);
                         }
                     }
 

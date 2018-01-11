@@ -87,7 +87,7 @@ public class UserCollectionFragment extends Fragment {
                 return false;
             }
         });
-        mImageRecycler.setItemViewCacheSize(10);
+        mImageRecycler.setItemViewCacheSize(5);
         mCollectionAdapter = new FastItemAdapter<>();
 
         mCollectionAdapter.withOnClickListener(onClickListener);

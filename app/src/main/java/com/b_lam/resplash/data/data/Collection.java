@@ -245,7 +245,7 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
             case "Grid":
                 return R.id.item_collection;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.id.item_collection;
         }
     }
 
@@ -261,7 +261,7 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
             case "Grid":
                 return R.layout.item_collection;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.layout.item_collection;
         }    }
 
     @Override
@@ -271,7 +271,7 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
         String url;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
 
-        if(this.cover_photo != null) {
+        if (this.cover_photo != null && this.cover_photo.urls != null) {
             switch (sharedPreferences.getString("load_quality", "Regular")) {
                 case "Raw":
                     url = this.cover_photo.urls.raw;
@@ -289,7 +289,7 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
                     url = this.cover_photo.urls.thumb;
                     break;
                 default:
-                    throw new IllegalArgumentException("Invalid load quality");
+                    url = this.cover_photo.urls.regular;
             }
 
             DisplayMetrics displaymetrics = Resplash.getInstance().getResources().getDisplayMetrics();
@@ -299,7 +299,7 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
                 @Override
                 public void animate(View view) {
                     ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-                    fadeAnim.setDuration(750);
+                    fadeAnim.setDuration(500);
                     fadeAnim.start();
                 }
             };

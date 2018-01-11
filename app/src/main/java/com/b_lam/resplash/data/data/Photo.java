@@ -338,7 +338,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "Grid":
                 return R.id.item_image_grid;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.id.item_image;
         }
     }
 
@@ -354,7 +354,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "Grid":
                 return R.layout.item_image_grid;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.layout.item_image;
         }
     }
 
@@ -362,27 +362,29 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
     public void bindView(final Photo.ViewHolder holder, List payloads) {
         super.bindView(holder, payloads);
 
-        String url;
+        String url = "";
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
 
-        switch (sharedPreferences.getString("load_quality", "Regular")){
-            case "Raw":
-                url = this.urls.raw;
-                break;
-            case "Full":
-                url = this.urls.full;
-                break;
-            case "Regular":
-                url = this.urls.regular;
-                break;
-            case "Small":
-                url = this.urls.small;
-                break;
-            case "Thumb":
-                url = this.urls.thumb;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid download quality");
+        if (this.urls != null) {
+            switch (sharedPreferences.getString("load_quality", "Regular")) {
+                case "Raw":
+                    url = this.urls.raw;
+                    break;
+                case "Full":
+                    url = this.urls.full;
+                    break;
+                case "Regular":
+                    url = this.urls.regular;
+                    break;
+                case "Small":
+                    url = this.urls.small;
+                    break;
+                case "Thumb":
+                    url = this.urls.thumb;
+                    break;
+                default:
+                    url = this.urls.regular;
+            }
         }
 
         DisplayMetrics displaymetrics = Resplash.getInstance().getResources().getDisplayMetrics();
@@ -392,7 +394,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             @Override
             public void animate(View view) {
                 ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-                fadeAnim.setDuration(750);
+                fadeAnim.setDuration(500);
                 fadeAnim.start();
             }
         };
@@ -439,8 +441,6 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                         .apply(new RequestOptions().centerCrop())
                         .into(holder.imageGrid);
                 break;
-            default:
-                throw new IllegalArgumentException("Invalid item layout");
         }
     }
 
@@ -471,8 +471,6 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                 case "Grid":
                     imageGrid = (ImageView) itemView.findViewById(R.id.item_image_grid_img);
                     break;
-                default:
-                    throw new IllegalArgumentException("Invalid item layout");
             }
         }
     }

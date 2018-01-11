@@ -112,7 +112,7 @@ public class NewFragment extends Fragment {
                 return false;
             }
         });
-        mImageRecycler.setItemViewCacheSize(10);
+        mImageRecycler.setItemViewCacheSize(5);
         mPhotoAdapter = new FastItemAdapter<>();
 
         mPhotoAdapter.withOnClickListener(onClickListener);

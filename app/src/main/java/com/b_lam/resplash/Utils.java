@@ -1,17 +1,20 @@
 package com.b_lam.resplash;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 
 /**
  * Created by Brandon on 10/7/2016.
  */
 
 public class Utils {
-
 
     public static int getToolbarHeight(Context context) {
         final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
@@ -49,5 +52,20 @@ public class Utils {
         return context.getResources()
                 .getConfiguration()
                 .orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    public static boolean isStoragePermissionGranted(Activity activity) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(activity, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
     }
 }

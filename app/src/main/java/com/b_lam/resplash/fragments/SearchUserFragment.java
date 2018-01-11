@@ -98,7 +98,7 @@ public class SearchUserFragment extends Fragment {
                 return false;
             }
         });
-        mImageRecycler.setItemViewCacheSize(10);
+        mImageRecycler.setItemViewCacheSize(5);
         mUserAdapter = new FastItemAdapter<>();
 
         mUserAdapter.withOnClickListener(onClickListener);
