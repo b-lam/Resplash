@@ -22,8 +22,9 @@ import com.b_lam.resplash.data.service.SearchService;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
-import com.mikepenz.fastadapter.adapters.FooterAdapter;
+import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 
@@ -48,7 +49,7 @@ public class SearchCollectionFragment extends Fragment {
     private ProgressBar mImagesProgress;
     private ErrorView mImagesErrorView;
     private TextView mNoResultTextView;
-    private FooterAdapter<ProgressItem> mFooterAdapter;
+    private ItemAdapter mFooterAdapter;
     private int mPage;
     private String mQuery;
 
@@ -99,14 +100,16 @@ public class SearchCollectionFragment extends Fragment {
                 return false;
             }
         });
-        mImageRecycler.setItemViewCacheSize(20);
+        mImageRecycler.setItemViewCacheSize(10);
         mCollectionAdapter = new FastItemAdapter<>();
 
         mCollectionAdapter.withOnClickListener(onClickListener);
 
-        mFooterAdapter = new FooterAdapter<>();
+        mFooterAdapter = new ItemAdapter();
 
-        mImageRecycler.setAdapter(mFooterAdapter.wrap(mCollectionAdapter));
+        mCollectionAdapter.addAdapter(1, mFooterAdapter);
+
+        mImageRecycler.setAdapter(mCollectionAdapter);
 
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
@@ -136,7 +139,7 @@ public class SearchCollectionFragment extends Fragment {
         }
     }
 
-    private FastAdapter.OnClickListener<Collection> onClickListener = new FastAdapter.OnClickListener<Collection>(){
+    private OnClickListener<Collection> onClickListener = new OnClickListener<Collection>(){
         @Override
         public boolean onClick(View v, IAdapter<Collection> adapter, Collection item, int position) {
             Intent i = new Intent(getContext(), CollectionDetailActivity.class);
@@ -186,7 +189,7 @@ public class SearchCollectionFragment extends Fragment {
             @Override
             public void onRequestCollectionsFailed(Call<SearchCollectionsResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setRetryVisible(false);
                 mImagesErrorView.setTitle(R.string.error_network);
                 mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
@@ -245,7 +248,7 @@ public class SearchCollectionFragment extends Fragment {
             @Override
             public void onRequestCollectionsFailed(Call<SearchCollectionsResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setRetryVisible(false);
                 mImagesErrorView.setTitle(R.string.error_network);
                 mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);

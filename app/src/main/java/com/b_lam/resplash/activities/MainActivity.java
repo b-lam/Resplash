@@ -41,6 +41,7 @@ import com.b_lam.resplash.fragments.FeaturedFragment;
 import com.b_lam.resplash.fragments.NewFragment;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -118,12 +119,16 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
             @Override
             public void set(ImageView imageView, Uri uri, Drawable placeholder) {
-                Glide.with(imageView.getContext()).load(uri).placeholder(placeholder).into(imageView);
+                Glide.with(imageView.getContext())
+                        .load(uri)
+                        .apply(new RequestOptions()
+                                .placeholder(placeholder))
+                        .into(imageView);
             }
 
             @Override
             public void cancel(ImageView imageView) {
-                Glide.clear(imageView);
+                Glide.with(MainActivity.this).clear(imageView);
             }
 
             @Override

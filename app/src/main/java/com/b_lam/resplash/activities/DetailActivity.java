@@ -47,6 +47,7 @@ import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -226,15 +227,14 @@ public class DetailActivity extends AppCompatActivity{
         }else {
             Glide.with(DetailActivity.this)
                     .load(mPhoto.urls.regular)
-                    .priority(Priority.HIGH)
-                    .placeholder(R.drawable.placeholder)
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .apply(new RequestOptions()
+                            .priority(Priority.HIGH)
+                            .placeholder(R.drawable.placeholder))
                     .into(imgFull);
         }
         Glide.with(DetailActivity.this)
                 .load(mPhoto.user.profile_image.large)
-                .priority(Priority.HIGH)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .apply(new RequestOptions().priority(Priority.HIGH))
                 .into(imgProfile);
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());

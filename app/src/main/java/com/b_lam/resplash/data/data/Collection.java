@@ -8,15 +8,13 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.b_lam.resplash.Resplash;
+import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.ViewPropertyAnimation;
+import com.bumptech.glide.request.transition.ViewPropertyTransition;
 import com.google.gson.annotations.SerializedName;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import java.util.List;
-
 import com.b_lam.resplash.R;
 
 /**
@@ -297,12 +295,11 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
             DisplayMetrics displaymetrics = Resplash.getInstance().getResources().getDisplayMetrics();
             float finalHeight = displaymetrics.widthPixels / ((float)cover_photo.width/(float)cover_photo.height);
 
-            ViewPropertyAnimation.Animator fadeAnimation = new ViewPropertyAnimation.Animator() {
+            ViewPropertyTransition.Animator fadeAnimation = new ViewPropertyTransition.Animator() {
                 @Override
                 public void animate(View view) {
-                    view.setAlpha(0f);
                     ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-                    fadeAnim.setDuration(500);
+                    fadeAnim.setDuration(750);
                     fadeAnim.start();
                 }
             };
@@ -310,15 +307,13 @@ public class Collection extends AbstractItem<Collection, Collection.ViewHolder> 
             if(sharedPreferences.getString("item_layout", "List").equals("Cards")){
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .animate(fadeAnimation)
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                        .transition(GenericTransitionOptions.with(fadeAnimation))
                         .into(holder.coverPhotoCard);
                 holder.coverPhotoCard.setMinimumHeight((int) finalHeight);
             }else{
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .animate(fadeAnimation)
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                        .transition(GenericTransitionOptions.with(fadeAnimation))
                         .into(holder.coverPhoto);
                 holder.coverPhoto.setMinimumHeight((int) finalHeight);
             }

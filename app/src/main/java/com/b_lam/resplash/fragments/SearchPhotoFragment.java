@@ -30,8 +30,9 @@ import com.b_lam.resplash.data.service.SearchService;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
-import com.mikepenz.fastadapter.adapters.FooterAdapter;
+import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 
@@ -54,7 +55,7 @@ public class SearchPhotoFragment extends Fragment {
     private ProgressBar mImagesProgress;
     private ErrorView mImagesErrorView;
     private TextView mNoResultTextView;
-    private FooterAdapter<ProgressItem> mFooterAdapter;
+    private ItemAdapter mFooterAdapter;
     private int mPage, mColumns;
     private String mQuery;
     private SharedPreferences sharedPreferences;
@@ -112,14 +113,16 @@ public class SearchPhotoFragment extends Fragment {
                 return false;
             }
         });
-        mImageRecycler.setItemViewCacheSize(20);
+        mImageRecycler.setItemViewCacheSize(10);
         mPhotoAdapter = new FastItemAdapter<>();
 
         mPhotoAdapter.withOnClickListener(onClickListener);
 
-        mFooterAdapter = new FooterAdapter<>();
+        mFooterAdapter = new ItemAdapter();
 
-        mImageRecycler.setAdapter(mFooterAdapter.wrap(mPhotoAdapter));
+        mPhotoAdapter.addAdapter(1, mFooterAdapter);
+
+        mImageRecycler.setAdapter(mPhotoAdapter);
 
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
@@ -149,7 +152,7 @@ public class SearchPhotoFragment extends Fragment {
         }
     }
 
-    private FastAdapter.OnClickListener<Photo> onClickListener = new FastAdapter.OnClickListener<Photo>(){
+    private OnClickListener<Photo> onClickListener = new OnClickListener<Photo>(){
         @Override
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getContext(), DetailActivity.class);
@@ -220,7 +223,7 @@ public class SearchPhotoFragment extends Fragment {
             @Override
             public void onRequestPhotosFailed(Call<SearchPhotosResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setRetryVisible(false);
                 mImagesErrorView.setTitle(R.string.error_network);
                 mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
@@ -278,7 +281,7 @@ public class SearchPhotoFragment extends Fragment {
             @Override
             public void onRequestPhotosFailed(Call<SearchPhotosResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setRetryVisible(false);
                 mImagesErrorView.setTitle(R.string.error_network);
                 mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);

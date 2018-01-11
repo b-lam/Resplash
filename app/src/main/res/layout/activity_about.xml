@@ -235,7 +235,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="@string/gmd_bug_report"
+                            app:ico_icon="gmd_bug_report"
                             app:ico_size="20dp"
                             style="@style/material_icon" />
 

@@ -21,8 +21,9 @@ import com.b_lam.resplash.data.data.User;
 import com.b_lam.resplash.data.service.SearchService;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
-import com.mikepenz.fastadapter.adapters.FooterAdapter;
+import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 
@@ -46,7 +47,7 @@ public class SearchUserFragment extends Fragment {
     private ProgressBar mImagesProgress;
     private ErrorView mImagesErrorView;
     private TextView mNoResultTextView;
-    private FooterAdapter<ProgressItem> mFooterAdapter;
+    private ItemAdapter mFooterAdapter;
     private int mPage;
     private String mQuery;
 
@@ -97,14 +98,16 @@ public class SearchUserFragment extends Fragment {
                 return false;
             }
         });
-        mImageRecycler.setItemViewCacheSize(20);
+        mImageRecycler.setItemViewCacheSize(10);
         mUserAdapter = new FastItemAdapter<>();
 
         mUserAdapter.withOnClickListener(onClickListener);
 
-        mFooterAdapter = new FooterAdapter<>();
+        mFooterAdapter = new ItemAdapter();
 
-        mImageRecycler.setAdapter(mFooterAdapter.wrap(mUserAdapter));
+        mUserAdapter.addAdapter(1, mFooterAdapter);
+
+        mImageRecycler.setAdapter(mUserAdapter);
 
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
@@ -134,7 +137,7 @@ public class SearchUserFragment extends Fragment {
         }
     }
 
-    private FastAdapter.OnClickListener<User> onClickListener = new FastAdapter.OnClickListener<User>(){
+    private OnClickListener<User> onClickListener = new OnClickListener<User>(){
         @Override
         public boolean onClick(View v, IAdapter<User> adapter, User item, int position) {
             Intent intent = new Intent(getContext(), UserActivity.class);
@@ -185,7 +188,7 @@ public class SearchUserFragment extends Fragment {
             @Override
             public void onRequestUsersFailed(Call<SearchUsersResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setRetryVisible(false);
                 mImagesErrorView.setTitle(R.string.error_network);
                 mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
@@ -243,7 +246,7 @@ public class SearchUserFragment extends Fragment {
             @Override
             public void onRequestUsersFailed(Call<SearchUsersResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setRetryVisible(false);
                 mImagesErrorView.setTitle(R.string.error_network);
                 mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
