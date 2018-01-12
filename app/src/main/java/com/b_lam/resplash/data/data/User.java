@@ -129,7 +129,7 @@ public class User extends AbstractItem<User, User.ViewHolder> {
             case "Grid":
                 return R.id.item_user;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.id.item_user;
         }
     }
 
@@ -145,7 +145,7 @@ public class User extends AbstractItem<User, User.ViewHolder> {
             case "Grid":
                 return R.layout.item_user;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.layout.item_user;
         }    }
 
     @Override
@@ -157,14 +157,12 @@ public class User extends AbstractItem<User, User.ViewHolder> {
         if(sharedPreferences.getString("item_layout", "List").equals("Cards")){
             Glide.with(holder.itemView.getContext())
                     .load(this.profile_image.large)
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .into(holder.profilePictureCard);
             holder.nameCard.setText(this.name);
             holder.usernameCard.setText("@" + this.username);
         }else{
             Glide.with(holder.itemView.getContext())
                     .load(this.profile_image.large)
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .into(holder.profilePicture);
             holder.name.setText(this.name);
             holder.username.setText("@" + this.username);

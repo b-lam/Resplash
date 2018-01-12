@@ -48,7 +48,7 @@ public class WallpaperDialog extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
         super.onDismiss(dialogInterface);
-        if (!downloadFinished) {
+        if (!downloadFinished && listener != null) {
             listener.onCancel();
         }
         downloadFinished = false;

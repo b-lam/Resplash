@@ -34,10 +34,10 @@ import com.b_lam.resplash.data.service.PhotoService;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
-import com.mikepenz.fastadapter.adapters.FooterAdapter;
+import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 
@@ -67,7 +67,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
     private FastItemAdapter<Photo> mPhotoAdapter;
     private List<Photo> mPhotos;
     private List<Photo> mCurrentPhotos;
-    private FooterAdapter<ProgressItem> mFooterAdapter;
+    private ItemAdapter mFooterAdapter;
     private int mPage, mColumns;
     private PhotoService.OnRequestPhotosListener mPhotosRequestListener;
     private String mLayoutType;
@@ -130,9 +130,11 @@ public class CollectionDetailActivity extends AppCompatActivity {
 
         mPhotoAdapter.withOnClickListener(onClickListener);
 
-        mFooterAdapter = new FooterAdapter<>();
+        mFooterAdapter = new ItemAdapter<>();
 
-        mImageRecycler.setAdapter(mFooterAdapter.wrap(mPhotoAdapter));
+        mPhotoAdapter.addAdapter(1, mFooterAdapter);
+
+        mImageRecycler.setAdapter(mPhotoAdapter);
 
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
@@ -157,7 +159,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
         loadMore();
     }
 
-    private FastAdapter.OnClickListener<Photo> onClickListener = new FastAdapter.OnClickListener<Photo>(){
+    private OnClickListener<Photo> onClickListener = new OnClickListener<Photo>(){
         @Override
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
             Intent i = new Intent(getApplicationContext(), DetailActivity.class);
@@ -228,7 +230,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
             @Override
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.showRetryButton(false);
+                mImagesErrorView.setRetryVisible(false);
                 mImagesErrorView.setTitle(R.string.error_network);
                 mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);

@@ -35,12 +35,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.Utils;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.fragments.CollectionFragment;
 import com.b_lam.resplash.fragments.FeaturedFragment;
 import com.b_lam.resplash.fragments.NewFragment;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -111,19 +113,23 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
             }
         }).start();
 
-        isStoragePermissionGranted();
+        Utils.isStoragePermissionGranted(this);
 
         profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail(getString(R.string.main_unsplash_description)).withIcon(R.drawable.intro_icon_image);
 
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
             @Override
-            public void set(ImageView imageView, Uri uri, Drawable placeholder) {
-                Glide.with(imageView.getContext()).load(uri).placeholder(placeholder).into(imageView);
+            public void set(ImageView imageView, Uri uri, Drawable placeholder, String tag) {
+                Glide.with(MainActivity.this)
+                        .load(uri)
+                        .apply(new RequestOptions()
+                                .placeholder(placeholder))
+                        .into(imageView);
             }
 
             @Override
             public void cancel(ImageView imageView) {
-                Glide.clear(imageView);
+                Glide.with(MainActivity.this).clear(imageView);
             }
 
             @Override
@@ -165,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 .withDelayDrawerClickEvent(200)
                 .withAccountHeader(drawerHeader)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(1).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(2).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
                         new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(4).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_heart).sizeDp(24).paddingDp(2)).withSelectable(false),
@@ -179,8 +185,8 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         drawer.getRecyclerView().setVerticalScrollBarEnabled(false);
 
         PagerAdapter mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), getString(R.string.main_featured));
         mPagerAdapter.addFragment(NewFragment.newInstance("latest"), getString(R.string.main_new));
+        mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), getString(R.string.main_featured));
         mPagerAdapter.addFragment(CollectionFragment.newInstance("Featured"), getString(R.string.main_collections));
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
@@ -287,23 +293,23 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
 
         switch (mViewPager.getCurrentItem()){
             case 0:
-                mItemFeaturedLatest.setVisible(true);
-                mItemFeaturedOldest.setVisible(true);
-                mItemFeaturedPopular.setVisible(true);
-                mItemNewLatest.setVisible(false);
-                mItemNewOldest.setVisible(false);
-                mItemNewPopular.setVisible(false);
-                mItemAll.setVisible(false);
-                mItemCurated.setVisible(false);
-                mItemFeatured.setVisible(false);
-                break;
-            case 1:
                 mItemFeaturedLatest.setVisible(false);
                 mItemFeaturedOldest.setVisible(false);
                 mItemFeaturedPopular.setVisible(false);
                 mItemNewLatest.setVisible(true);
                 mItemNewOldest.setVisible(true);
                 mItemNewPopular.setVisible(true);
+                mItemAll.setVisible(false);
+                mItemCurated.setVisible(false);
+                mItemFeatured.setVisible(false);
+                break;
+            case 1:
+                mItemFeaturedLatest.setVisible(true);
+                mItemFeaturedOldest.setVisible(true);
+                mItemFeaturedPopular.setVisible(true);
+                mItemNewLatest.setVisible(false);
+                mItemNewOldest.setVisible(false);
+                mItemNewPopular.setVisible(false);
                 mItemAll.setVisible(false);
                 mItemCurated.setVisible(false);
                 mItemFeatured.setVisible(false);
@@ -399,34 +405,6 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
             drawer.closeDrawer();
         } else {
             super.onBackPressed();
-        }
-    }
-
-    public boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
-                return true;
-            } else {
-
-                Log.v(TAG,"Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG,"Permission is granted");
-            return true;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
-            //resume tasks needing this permission
         }
     }
 

@@ -1,6 +1,5 @@
 package com.b_lam.resplash.data.data;
 
-import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -13,13 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.b_lam.resplash.Resplash;
+import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.ViewPropertyAnimation;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.transition.ViewPropertyTransition;
 import com.mikepenz.fastadapter.items.AbstractItem;
-
 import java.util.List;
-
 import com.b_lam.resplash.R;
 
 /**
@@ -340,7 +338,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "Grid":
                 return R.id.item_image_grid;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.id.item_image;
         }
     }
 
@@ -356,7 +354,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "Grid":
                 return R.layout.item_image_grid;
             default:
-                throw new IllegalArgumentException("Invalid item layout");
+                return R.layout.item_image;
         }
     }
 
@@ -364,40 +362,40 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
     public void bindView(final Photo.ViewHolder holder, List payloads) {
         super.bindView(holder, payloads);
 
-        String url;
+        String url = "";
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
 
-        switch (sharedPreferences.getString("load_quality", "Regular")){
-            case "Raw":
-                url = this.urls.raw;
-                break;
-            case "Full":
-                url = this.urls.full;
-                break;
-            case "Regular":
-                url = this.urls.regular;
-                break;
-            case "Small":
-                url = this.urls.small;
-                break;
-            case "Thumb":
-                url = this.urls.thumb;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid download quality");
+        if (this.urls != null) {
+            switch (sharedPreferences.getString("load_quality", "Regular")) {
+                case "Raw":
+                    url = this.urls.raw;
+                    break;
+                case "Full":
+                    url = this.urls.full;
+                    break;
+                case "Regular":
+                    url = this.urls.regular;
+                    break;
+                case "Small":
+                    url = this.urls.small;
+                    break;
+                case "Thumb":
+                    url = this.urls.thumb;
+                    break;
+                default:
+                    url = this.urls.regular;
+            }
         }
 
         DisplayMetrics displaymetrics = Resplash.getInstance().getResources().getDisplayMetrics();
         float finalHeight = displaymetrics.widthPixels / ((float)width/(float)height);
 
-        ViewPropertyAnimation.Animator fadeAnimation = new ViewPropertyAnimation.Animator() {
+        ViewPropertyTransition.Animator fadeAnimation = new ViewPropertyTransition.Animator() {
             @Override
             public void animate(View view) {
-                ObjectAnimator fadeInAnim = ObjectAnimator.ofFloat(view, "alpha", 0.75f, 1f).setDuration(500);
-                ObjectAnimator fadeOutAnim = ObjectAnimator.ofFloat(view, "alpha" , 1f, 0f).setDuration(500);
-                AnimatorSet animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(fadeInAnim);
-                animatorSet.start();
+                ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+                fadeAnim.setDuration(500);
+                fadeAnim.start();
             }
         };
 
@@ -405,14 +403,13 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "List":
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .animate(fadeAnimation)
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                        .transition(GenericTransitionOptions.with(fadeAnimation))
                         .into(holder.imageList);
 
                 holder.imageList.setMinimumHeight((int) finalHeight);
                 int colorFrom = Color.WHITE;
                 int colorTo;
-                if (this.color != null){
+                if(this.color != null){
                     colorTo = Color.parseColor(this.color);
                 }else{
                     colorTo = Color.WHITE;
@@ -420,7 +417,6 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                 ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                 colorAnimation.setDuration(1000);
                 colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
                     @Override
                     public void onAnimationUpdate(ValueAnimator animator) {
                         holder.imageList.setBackgroundColor((int) animator.getAnimatedValue());
@@ -432,8 +428,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "Cards":
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .animate(fadeAnimation)
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                        .transition(GenericTransitionOptions.with(fadeAnimation))
                         .into(holder.imageCard);
 
                 holder.imageCard.setMinimumHeight((int) finalHeight);
@@ -442,13 +437,10 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
             case "Grid":
                 Glide.with(holder.itemView.getContext())
                         .load(url)
-                        .animate(fadeAnimation)
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                        .centerCrop()
+                        .transition(GenericTransitionOptions.with(fadeAnimation))
+                        .apply(new RequestOptions().centerCrop())
                         .into(holder.imageGrid);
                 break;
-            default:
-                throw new IllegalArgumentException("Invalid item layout");
         }
     }
 
@@ -479,8 +471,6 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                 case "Grid":
                     imageGrid = (ImageView) itemView.findViewById(R.id.item_image_grid_img);
                     break;
-                default:
-                    throw new IllegalArgumentException("Invalid item layout");
             }
         }
     }
