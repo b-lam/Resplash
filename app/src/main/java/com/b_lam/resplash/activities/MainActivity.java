@@ -171,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 .withDelayDrawerClickEvent(200)
                 .withAccountHeader(drawerHeader)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(1).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(2).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(1).withIcon(getDrawable(R.drawable.ic_trending_up_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(2).withIcon(getDrawable(R.drawable.ic_whatshot_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
                         new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(getDrawable(R.drawable.ic_collections_black_24dp)).withSelectedTextColorRes(R.color.md_black_1000),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(4).withIcon(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_heart).sizeDp(24).paddingDp(2)).withSelectable(false),
@@ -185,8 +185,8 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         drawer.getRecyclerView().setVerticalScrollBarEnabled(false);
 
         PagerAdapter mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), getString(R.string.main_featured));
         mPagerAdapter.addFragment(NewFragment.newInstance("latest"), getString(R.string.main_new));
+        mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), getString(R.string.main_featured));
         mPagerAdapter.addFragment(CollectionFragment.newInstance("Featured"), getString(R.string.main_collections));
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
@@ -293,23 +293,23 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
 
         switch (mViewPager.getCurrentItem()){
             case 0:
-                mItemFeaturedLatest.setVisible(true);
-                mItemFeaturedOldest.setVisible(true);
-                mItemFeaturedPopular.setVisible(true);
-                mItemNewLatest.setVisible(false);
-                mItemNewOldest.setVisible(false);
-                mItemNewPopular.setVisible(false);
-                mItemAll.setVisible(false);
-                mItemCurated.setVisible(false);
-                mItemFeatured.setVisible(false);
-                break;
-            case 1:
                 mItemFeaturedLatest.setVisible(false);
                 mItemFeaturedOldest.setVisible(false);
                 mItemFeaturedPopular.setVisible(false);
                 mItemNewLatest.setVisible(true);
                 mItemNewOldest.setVisible(true);
                 mItemNewPopular.setVisible(true);
+                mItemAll.setVisible(false);
+                mItemCurated.setVisible(false);
+                mItemFeatured.setVisible(false);
+                break;
+            case 1:
+                mItemFeaturedLatest.setVisible(true);
+                mItemFeaturedOldest.setVisible(true);
+                mItemFeaturedPopular.setVisible(true);
+                mItemNewLatest.setVisible(false);
+                mItemNewOldest.setVisible(false);
+                mItemNewPopular.setVisible(false);
                 mItemAll.setVisible(false);
                 mItemCurated.setVisible(false);
                 mItemFeatured.setVisible(false);
