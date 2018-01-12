@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -47,13 +46,11 @@ import com.b_lam.resplash.dialogs.WallpaperDialog;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
-
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -118,9 +115,27 @@ public class DetailActivity extends AppCompatActivity{
                             getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, downloadManager.getUriForDownloadedFile(downloadReference)));
                             if (currentAction == ActionType.WALLPAPER) {
                                 Uri uri = downloadManager.getUriForDownloadedFile(downloadReference);
-                                Log.d(TAG, uri.toString());
-                                Intent wallpaperIntent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(uri);
-                                DetailActivity.this.startActivityForResult(wallpaperIntent, 13451);
+                                Bundle params = new Bundle();
+                                params.putString("file_uri", uri.toString());
+                                try {
+                                    Log.d(TAG, "Crop and Set: " + uri.toString());
+                                    Intent wallpaperIntent = WallpaperManager.getInstance(context).getCropAndSetWallpaperIntent(uri);
+                                    wallpaperIntent.setDataAndType(uri, "image/jpg");
+                                    wallpaperIntent.putExtra("mimeType", "image/jpg");
+                                    startActivityForResult(wallpaperIntent, 13451);
+                                    mFirebaseAnalytics.logEvent("set_wallpaper", params);
+                                } catch (Exception e) {
+                                    Log.d(TAG, "Chooser: " + uri.toString());
+                                    Intent wallpaperIntent = new Intent(Intent.ACTION_ATTACH_DATA);
+                                    wallpaperIntent.setDataAndType(uri, "image/jpg");
+                                    wallpaperIntent.putExtra("mimeType", "image/jpg");
+                                    wallpaperIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                                    wallpaperIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    wallpaperIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                    wallpaperIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                                    startActivity(Intent.createChooser(wallpaperIntent, getString(R.string.set_as_wallpaper)));
+                                    mFirebaseAnalytics.logEvent("set_wallpaper_alternative", params);
+                                }
                                 wallpaperDialog.setDownloadFinished(true);
                             }
                             break;
