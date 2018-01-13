@@ -21,7 +21,6 @@ import com.b_lam.resplash.data.data.Collection;
 import com.b_lam.resplash.data.data.User;
 import com.b_lam.resplash.data.service.CollectionService;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -93,6 +92,8 @@ public class UserCollectionFragment extends Fragment {
         mCollectionAdapter.withOnClickListener(onClickListener);
 
         mFooterAdapter = new ItemAdapter();
+
+        mCollectionAdapter.addAdapter(1, mFooterAdapter);
 
         mImageRecycler.setAdapter(mCollectionAdapter);
 
