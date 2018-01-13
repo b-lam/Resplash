@@ -51,6 +51,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -237,21 +238,47 @@ public class DetailActivity extends AppCompatActivity{
         fabStats.setOnClickListener(onClickListener);
         fabWallpaper.setOnClickListener(onClickListener);
 
-        if(Resplash.getInstance().getDrawable() != null){
+        if (Resplash.getInstance().getDrawable() != null) {
             imgFull.setImageDrawable(Resplash.getInstance().getDrawable());
             Resplash.getInstance().setDrawable(null);
-        }else {
+        } else if (mPhoto.urls != null) {
+            String url;
+            switch (sharedPreferences.getString("load_quality", "Regular")) {
+                case "Raw":
+                    url = mPhoto.urls.raw;
+                    break;
+                case "Full":
+                    url = mPhoto.urls.full;
+                    break;
+                case "Regular":
+                    url = mPhoto.urls.regular;
+                    break;
+                case "Small":
+                    url = mPhoto.urls.small;
+                    break;
+                case "Thumb":
+                    url = mPhoto.urls.thumb;
+                    break;
+                default:
+                    url = mPhoto.urls.regular;
+            }
+
             Glide.with(DetailActivity.this)
-                    .load(mPhoto.urls.regular)
+                    .load(url)
                     .apply(new RequestOptions()
                             .priority(Priority.HIGH)
                             .placeholder(R.drawable.placeholder))
                     .into(imgFull);
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.error_loading_photo), Toast.LENGTH_SHORT).show();
         }
-        Glide.with(DetailActivity.this)
-                .load(mPhoto.user.profile_image.large)
-                .apply(new RequestOptions().priority(Priority.HIGH))
-                .into(imgProfile);
+
+        if (mPhoto.user.profile_image != null) {
+            Glide.with(DetailActivity.this)
+                    .load(mPhoto.user.profile_image.large)
+                    .apply(new RequestOptions().priority(Priority.HIGH))
+                    .into(imgProfile);
+        }
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
 

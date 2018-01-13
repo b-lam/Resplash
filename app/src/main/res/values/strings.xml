@@ -248,5 +248,6 @@
     <string name="instagram_username_hint">Instagram username</string>
     <string name="location_hint">Location</string>
     <string name="bio_hint">Bio</string>
+    <string name="error_loading_photo">There seems to be a problem loading this photo.</string>
 
 </resources>

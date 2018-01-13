@@ -180,7 +180,16 @@ public class UserCollectionFragment extends Fragment {
             }
         };
 
-        mService.requestUserCollections(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        if (mUser != null) {
+            mService.requestUserCollections(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        } else {
+            mImagesErrorView.setRetryVisible(false);
+            mImagesErrorView.setSubtitle(R.string.failed_to_load_profile);
+            mImagesProgress.setVisibility(View.GONE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.VISIBLE);
+            mSwipeContainer.setRefreshing(false);
+        }
     }
 
     public void fetchNew(){
@@ -230,7 +239,16 @@ public class UserCollectionFragment extends Fragment {
             }
         };
 
-        mService.requestUserCollections(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        if (mUser != null) {
+            mService.requestUserCollections(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        } else {
+            mImagesErrorView.setRetryVisible(false);
+            mImagesErrorView.setSubtitle(R.string.failed_to_load_profile);
+            mImagesProgress.setVisibility(View.GONE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.VISIBLE);
+            mSwipeContainer.setRefreshing(false);
+        }
     }
 
     public void setUser(User user){
