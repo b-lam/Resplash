@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
             @Override
             public void set(ImageView imageView, Uri uri, Drawable placeholder, String tag) {
-                Glide.with(MainActivity.this)
+                Glide.with(getApplicationContext())
                         .load(uri)
                         .apply(new RequestOptions()
                                 .placeholder(placeholder))
@@ -129,7 +129,9 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
 
             @Override
             public void cancel(ImageView imageView) {
-                Glide.with(MainActivity.this).clear(imageView);
+                if (!isFinishing()) {
+                    Glide.with(getApplicationContext()).clear(imageView);
+                }
             }
 
             @Override

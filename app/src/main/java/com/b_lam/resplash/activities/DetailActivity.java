@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -172,7 +173,7 @@ public class DetailActivity extends AppCompatActivity{
                 }
                 tvDate.setText(mPhotoDetails.created_at.split("T")[0]);
                 tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.likes)));
-                colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
+                if (mPhotoDetails.color != null) colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
                 tvColor.setText(mPhotoDetails.color);
                 tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads)));
                 like = mPhotoDetails.liked_by_user;
@@ -311,6 +312,9 @@ public class DetailActivity extends AppCompatActivity{
         if (mService != null) {
             mService.cancel();
         }
+
+        unbindDrawables(findViewById(R.id.activity_detail));
+        System.gc();
     }
 
     @Override
@@ -559,5 +563,17 @@ public class DetailActivity extends AppCompatActivity{
         set.setInterpolator(new OvershootInterpolator(2));
 
         floatingActionMenu.setIconToggleAnimatorSet(set);
+    }
+
+    private void unbindDrawables(View view) {
+        if (view.getBackground() != null) {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
     }
 }

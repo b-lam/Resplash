@@ -65,22 +65,26 @@ public class StatsDialog extends DialogFragment implements PhotoService.OnReques
 
     @Override
     public void onRequestStatsSuccess(Call<PhotoStats> call, Response<PhotoStats> response) {
-        if (response.isSuccessful() && response.body() != null) {
-            tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(response.body().likes)));
-            tvViews.setText(getString(R.string.views, NumberFormat.getInstance(Locale.CANADA).format(response.body().views)));
-            tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(response.body().downloads)));
-            progressBar.setVisibility(View.GONE);
-            statsContainer.setVisibility(View.VISIBLE);
-        } else if (response.code() == 403) {
-            dismiss();
-            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
-        } else {
-            service.requestStats(photo.id, this);
+        if (isAdded()) {
+            if (response.isSuccessful() && response.body() != null) {
+                tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(response.body().likes)));
+                tvViews.setText(getString(R.string.views, NumberFormat.getInstance(Locale.CANADA).format(response.body().views)));
+                tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(response.body().downloads)));
+                progressBar.setVisibility(View.GONE);
+                statsContainer.setVisibility(View.VISIBLE);
+            } else if (response.code() == 403) {
+                dismiss();
+                Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
+            } else {
+                service.requestStats(photo.id, this);
+            }
         }
     }
 
     @Override
     public void onRequestStatsFailed(Call<PhotoStats> call, Throwable t) {
-        service.requestStats(photo.id, this);
+        if (isAdded()) {
+            service.requestStats(photo.id, this);
+        }
     }
 }
