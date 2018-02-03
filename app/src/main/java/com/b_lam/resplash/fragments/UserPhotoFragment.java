@@ -194,39 +194,51 @@ public class UserPhotoFragment extends Fragment {
         PhotoService.OnRequestPhotosListener mPhotoRequestListener = new PhotoService.OnRequestPhotosListener() {
             @Override
             public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
-                Log.d(TAG, String.valueOf(response.code()));
-                if(response.code() == 200) {
-                    mPhotos = response.body();
-                    mFooterAdapter.clear();
-                    UserPhotoFragment.this.updateAdapter(mPhotos);
-                    mPage++;
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
-                }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                if (isAdded()) {
+                    Log.d(TAG, String.valueOf(response.code()));
+                    if (response.code() == 200) {
+                        mPhotos = response.body();
+                        mFooterAdapter.clear();
+                        UserPhotoFragment.this.updateAdapter(mPhotos);
+                        mPage++;
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.VISIBLE);
+                        mImagesErrorView.setVisibility(View.GONE);
+                    } else {
+                        mImagesErrorView.setTitle(R.string.error_http);
+                        mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.GONE);
+                        mImagesErrorView.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
             @Override
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
-                Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
-                mImagesProgress.setVisibility(View.GONE);
-                mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
-                mSwipeContainer.setRefreshing(false);
+                if (isAdded()) {
+                    Log.d(TAG, t.toString());
+                    mImagesErrorView.setRetryVisible(false);
+                    mImagesErrorView.setTitle(R.string.error_network);
+                    mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mSwipeContainer.setRefreshing(false);
+                }
             }
         };
 
-        mService.requestUserPhotos(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
-
+        if (mUser != null) {
+            mService.requestUserPhotos(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
+        } else {
+            mImagesErrorView.setRetryVisible(false);
+            mImagesErrorView.setSubtitle(R.string.failed_to_load_profile);
+            mImagesProgress.setVisibility(View.GONE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.VISIBLE);
+            mSwipeContainer.setRefreshing(false);
+        }
     }
 
     public void fetchNew(){
@@ -241,43 +253,55 @@ public class UserPhotoFragment extends Fragment {
         PhotoService.OnRequestPhotosListener mPhotoRequestListener = new PhotoService.OnRequestPhotosListener() {
             @Override
             public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
-                Log.d(TAG, String.valueOf(response.code()));
-                if(response.code() == 200) {
-                    mPhotos = response.body();
-                    mPhotoAdapter.clear();
-                    UserPhotoFragment.this.updateAdapter(mPhotos);
-                    mPage++;
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
-                }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
-                }
-                if(mSwipeContainer.isRefreshing()) {
-                    Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
-                    mSwipeContainer.setRefreshing(false);
+                if (isAdded()) {
+                    Log.d(TAG, String.valueOf(response.code()));
+                    if (response.code() == 200) {
+                        mPhotos = response.body();
+                        mPhotoAdapter.clear();
+                        UserPhotoFragment.this.updateAdapter(mPhotos);
+                        mPage++;
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.VISIBLE);
+                        mImagesErrorView.setVisibility(View.GONE);
+                    } else {
+                        mImagesErrorView.setTitle(R.string.error_http);
+                        mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.GONE);
+                        mImagesErrorView.setVisibility(View.VISIBLE);
+                    }
+                    if (mSwipeContainer.isRefreshing()) {
+                        Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
+                        mSwipeContainer.setRefreshing(false);
+                    }
                 }
             }
 
             @Override
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
-                Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
-                mImagesProgress.setVisibility(View.GONE);
-                mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
-                mSwipeContainer.setRefreshing(false);
+                if (isAdded()) {
+                    Log.d(TAG, t.toString());
+                    mImagesErrorView.setRetryVisible(false);
+                    mImagesErrorView.setTitle(R.string.error_network);
+                    mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mSwipeContainer.setRefreshing(false);
+                }
             }
         };
 
-        mService.requestUserPhotos(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
-
+        if (mUser != null) {
+            mService.requestUserPhotos(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
+        } else {
+            mImagesErrorView.setRetryVisible(false);
+            mImagesErrorView.setSubtitle(R.string.failed_to_load_profile);
+            mImagesProgress.setVisibility(View.GONE);
+            mImageRecycler.setVisibility(View.GONE);
+            mImagesErrorView.setVisibility(View.VISIBLE);
+            mSwipeContainer.setRefreshing(false);
+        }
     }
 
     public void setUser(User user){

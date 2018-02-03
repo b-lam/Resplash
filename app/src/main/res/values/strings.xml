@@ -63,6 +63,7 @@
         <item>Russian</item>
         <item>Serbian</item>
         <item>Chinese</item>
+        <item>Portuguese (Brazilian)</item>
     </array>
     <array name="language_values">
         <item>en</item>
@@ -70,6 +71,7 @@
         <item>ru</item>
         <item>sr</item>
         <item>zh</item>
+        <item>pt</item>
     </array>
     <string name="default_language">en</string>
     <string name="title_theme">Theme</string>
@@ -248,5 +250,6 @@
     <string name="instagram_username_hint">Instagram username</string>
     <string name="location_hint">Location</string>
     <string name="bio_hint">Bio</string>
+    <string name="error_loading_photo">There seems to be a problem loading this photo.</string>
 
 </resources>

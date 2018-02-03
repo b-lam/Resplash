@@ -2,6 +2,7 @@ package com.b_lam.resplash.activities;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,6 +36,14 @@ public class PreviewActivity extends AppCompatActivity {
 
         LocaleUtils.loadLocale(this);
 
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
         setTheme(R.style.PreviewTheme);
         setContentView(R.layout.activity_preview);
         ButterKnife.bind(this);
@@ -43,9 +52,30 @@ public class PreviewActivity extends AppCompatActivity {
 
         mAttacher = new PhotoViewAttacher(mPhotoView);
 
-        if(mPhoto.urls.regular != null){
+        if(mPhoto.urls != null){
+            String url;
+            switch ( PreferenceManager.getDefaultSharedPreferences(this).getString("load_quality", "Regular")) {
+                case "Raw":
+                    url = mPhoto.urls.raw;
+                    break;
+                case "Full":
+                    url = mPhoto.urls.full;
+                    break;
+                case "Regular":
+                    url = mPhoto.urls.regular;
+                    break;
+                case "Small":
+                    url = mPhoto.urls.small;
+                    break;
+                case "Thumb":
+                    url = mPhoto.urls.thumb;
+                    break;
+                default:
+                    url = mPhoto.urls.regular;
+            }
+
             Glide.with(this)
-                    .load(mPhoto.urls.regular)
+                    .load(url)
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

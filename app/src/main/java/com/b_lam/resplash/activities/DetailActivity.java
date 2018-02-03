@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -51,6 +52,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -171,7 +173,7 @@ public class DetailActivity extends AppCompatActivity{
                 }
                 tvDate.setText(mPhotoDetails.created_at.split("T")[0]);
                 tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.likes)));
-                colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
+                if (mPhotoDetails.color != null) colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
                 tvColor.setText(mPhotoDetails.color);
                 tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads)));
                 like = mPhotoDetails.liked_by_user;
@@ -237,21 +239,47 @@ public class DetailActivity extends AppCompatActivity{
         fabStats.setOnClickListener(onClickListener);
         fabWallpaper.setOnClickListener(onClickListener);
 
-        if(Resplash.getInstance().getDrawable() != null){
+        if (Resplash.getInstance().getDrawable() != null) {
             imgFull.setImageDrawable(Resplash.getInstance().getDrawable());
             Resplash.getInstance().setDrawable(null);
-        }else {
+        } else if (mPhoto.urls != null) {
+            String url;
+            switch (sharedPreferences.getString("load_quality", "Regular")) {
+                case "Raw":
+                    url = mPhoto.urls.raw;
+                    break;
+                case "Full":
+                    url = mPhoto.urls.full;
+                    break;
+                case "Regular":
+                    url = mPhoto.urls.regular;
+                    break;
+                case "Small":
+                    url = mPhoto.urls.small;
+                    break;
+                case "Thumb":
+                    url = mPhoto.urls.thumb;
+                    break;
+                default:
+                    url = mPhoto.urls.regular;
+            }
+
             Glide.with(DetailActivity.this)
-                    .load(mPhoto.urls.regular)
+                    .load(url)
                     .apply(new RequestOptions()
                             .priority(Priority.HIGH)
                             .placeholder(R.drawable.placeholder))
                     .into(imgFull);
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.error_loading_photo), Toast.LENGTH_SHORT).show();
         }
-        Glide.with(DetailActivity.this)
-                .load(mPhoto.user.profile_image.large)
-                .apply(new RequestOptions().priority(Priority.HIGH))
-                .into(imgProfile);
+
+        if (mPhoto.user.profile_image != null) {
+            Glide.with(DetailActivity.this)
+                    .load(mPhoto.user.profile_image.large)
+                    .apply(new RequestOptions().priority(Priority.HIGH))
+                    .into(imgProfile);
+        }
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
 
@@ -284,6 +312,9 @@ public class DetailActivity extends AppCompatActivity{
         if (mService != null) {
             mService.cancel();
         }
+
+        unbindDrawables(findViewById(R.id.activity_detail));
+        System.gc();
     }
 
     @Override
@@ -532,5 +563,17 @@ public class DetailActivity extends AppCompatActivity{
         set.setInterpolator(new OvershootInterpolator(2));
 
         floatingActionMenu.setIconToggleAnimatorSet(set);
+    }
+
+    private void unbindDrawables(View view) {
+        if (view.getBackground() != null) {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
     }
 }
