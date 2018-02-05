@@ -82,7 +82,6 @@ public class Resplash extends Application{
     public static final String FIREBASE_EVENT_LOGIN = "unsplash_login";
     public static final String FIREBASE_EVENT_VIEW_DONATE = "view_donate";
     public static final String FIREBASE_EVENT_VIEW_ABOUT = "view_about";
-    public static final String FIREBASE_EVENT_VIEW_CHANGELOG = "view_changelog";
     public static final String FIREBASE_EVENT_RATE_FROM_APP = "rate_from_app";
     public static final String FIREBASE_EVENT_DOWNLOAD = "download_photo";
     public static final String FIREBASE_EVENT_SET_WALLPAPER = "set_wallpaper";

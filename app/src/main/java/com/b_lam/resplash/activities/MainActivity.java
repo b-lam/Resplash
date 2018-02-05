@@ -222,8 +222,12 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         fabUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
-                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                try {
+                    Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
+                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

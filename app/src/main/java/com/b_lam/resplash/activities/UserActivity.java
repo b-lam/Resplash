@@ -165,7 +165,7 @@ public class UserActivity extends AppCompatActivity {
                 supportFinishAfterTransition();
                 return true;
             case R.id.action_view_on_unsplash:
-                if(mUser.links.html != null) {
+                if(mUser.links != null && mUser.links.html != null) {
                     Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mUser.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
                     startActivity(i);
                 }else{
