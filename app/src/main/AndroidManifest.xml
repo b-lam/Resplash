@@ -15,6 +15,7 @@
     <application
         android:name=".Resplash"
         android:allowBackup="true"
+        android:backupAgent=".util.ResplashBackupAgent"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="false"
@@ -84,15 +85,21 @@
                 <data
                     android:host="unsplash-auth-callback"
                     android:scheme="resplash" />
-
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.AboutActivity" />
         <activity android:name=".activities.EditProfileActivity" />
+        <activity android:name=".activities.CustomApiKeyActivity">
+            <intent-filter>
+                <action android:name="CustomApiKeyActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.DonateActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -104,14 +111,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".activities.CustomApiKeyActivity">
-            <intent-filter>
-                <action android:name="CustomApiKeyActivity" />
+        <meta-data android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIDEYkpmJmsiQ-I__T0lFHPG64bCYUXblnA0iBRQ" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.DonateActivity"/>
     </application>
 
 </manifest>

@@ -68,4 +68,12 @@ public class Utils {
             return true;
         }
     }
+
+    public static String getDefaultSharedPreferencesName(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return PreferenceManager.getDefaultSharedPreferencesName(context);
+        } else {
+            return context.getPackageName() + "_preferences";
+        }
+    }
 }

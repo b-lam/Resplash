@@ -39,7 +39,7 @@ public class AuthManager
     private String avatar_path;
     private boolean authorized;
 
-    private static final String PREFERENCE_NAME = "resplash_authorize_manager";
+    public static final String PREFERENCE_NAME = "resplash_authorize_manager";
     private static final String KEY_ACCESS_TOKEN = "access_token";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_FIRST_NAME = "first_name";
