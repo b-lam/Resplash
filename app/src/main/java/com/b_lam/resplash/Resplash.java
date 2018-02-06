@@ -50,7 +50,6 @@ public class Resplash extends Application{
     public static final int SEARCH_PER_PAGE = 20;
 
     public static final String RESPLASH_USER_GROUP = "resplash_user_group";
-    public static final int DEFAULT_USER_GROUP = 1;
 
     // permission code.
     public static final int WRITE_EXTERNAL_STORAGE = 1;
@@ -80,7 +79,7 @@ public class Resplash extends Application{
         if (isDebug(c)) {
             Log.d(TAG, "Using debug keys");
             return BuildConfig.DEV_APP_ID;
-        } else if (Utils.getUserGroup() == DEFAULT_USER_GROUP){
+        } else if (Utils.getUserGroup() == 1){
             Log.d(TAG, "Using release keys 1");
             return BuildConfig.RELEASE_APP_ID_1;
         } else {
@@ -92,7 +91,7 @@ public class Resplash extends Application{
     public static String getSecret(Context c) {
         if (isDebug(c)) {
             return BuildConfig.DEV_SECRET;
-        } else if (Utils.getUserGroup() == DEFAULT_USER_GROUP){
+        } else if (Utils.getUserGroup() == 1){
             return BuildConfig.RELEASE_SECRET_1;
         } else {
             return BuildConfig.RELEASE_SECRET_2;

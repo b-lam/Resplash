@@ -10,8 +10,6 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 
-import com.b_lam.resplash.data.tools.AuthManager;
-
 import java.util.Random;
 
 /**
@@ -92,13 +90,8 @@ public class Utils {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         int userGroup = sharedPreferences.getInt(Resplash.RESPLASH_USER_GROUP, 0);
         if (userGroup == 0) {
-            if (AuthManager.getInstance().isAuthorized()) {
-                userGroup = Resplash.DEFAULT_USER_GROUP;
-                setUserGroup(userGroup);
-            } else {
-                userGroup = new Random().nextInt(3) + 1;
-                setUserGroup(userGroup);
-            }
+            userGroup = new Random().nextInt(3) + 1;
+            setUserGroup(userGroup);
         }
 
         return userGroup;
