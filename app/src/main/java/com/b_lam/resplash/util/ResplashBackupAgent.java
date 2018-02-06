@@ -15,12 +15,13 @@ public class ResplashBackupAgent extends BackupAgentHelper {
 
     static final String DEFAULT_PREFS = Utils.getDefaultSharedPreferencesName(Resplash.getInstance());
     static final String AUTH_MANAGER_PREFS = AuthManager.PREFERENCE_NAME;
+    static final String USER_GROUP_PREFS = Resplash.RESPLASH_USER_GROUP;
 
     static final String PREFS_BACKUP_KEY = "resplash_prefs";
 
     @Override
     public void onCreate() {
-        SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, DEFAULT_PREFS, AUTH_MANAGER_PREFS);
+        SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, DEFAULT_PREFS, AUTH_MANAGER_PREFS, USER_GROUP_PREFS);
         addHelper(PREFS_BACKUP_KEY, helper);
     }
 }
