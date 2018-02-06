@@ -83,7 +83,7 @@ public class Utils {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(Resplash.RESPLASH_USER_GROUP, userGroup);
-        editor.commit();
+        editor.apply();
     }
 
     public static int getUserGroup() {
