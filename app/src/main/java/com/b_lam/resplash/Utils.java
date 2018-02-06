@@ -10,6 +10,8 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 
+import java.util.Random;
+
 /**
  * Created by Brandon on 10/7/2016.
  */
@@ -67,5 +69,31 @@ public class Utils {
         else {
             return true;
         }
+    }
+
+    public static String getDefaultSharedPreferencesName(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return PreferenceManager.getDefaultSharedPreferencesName(context);
+        } else {
+            return context.getPackageName() + "_preferences";
+        }
+    }
+
+    private static void setUserGroup(int userGroup) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(Resplash.RESPLASH_USER_GROUP, userGroup);
+        editor.apply();
+    }
+
+    public static int getUserGroup() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        int userGroup = sharedPreferences.getInt(Resplash.RESPLASH_USER_GROUP, 0);
+        if (userGroup == 0) {
+            userGroup = new Random().nextInt(3) + 1;
+            setUserGroup(userGroup);
+        }
+
+        return userGroup;
     }
 }

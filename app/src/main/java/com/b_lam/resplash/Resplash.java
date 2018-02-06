@@ -3,14 +3,9 @@ package com.b_lam.resplash;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.b_lam.resplash.activities.MainActivity;
 import com.b_lam.resplash.data.data.Collection;
@@ -19,10 +14,7 @@ import com.b_lam.resplash.data.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import com.b_lam.resplash.BuildConfig;
-import com.b_lam.resplash.data.tools.CustomApiManager;
 import com.b_lam.resplash.util.LocaleUtils;
 
 /**
@@ -57,23 +49,7 @@ public class Resplash extends Application{
     public static final int DEFAULT_PER_PAGE = 30;
     public static final int SEARCH_PER_PAGE = 20;
 
-    public static final int CATEGORY_TOTAL_NEW = 0;
-    public static final int CATEGORY_TOTAL_FEATURED = 1;
-    public static final int CATEGORY_BUILDINGS_ID = 2;
-    public static final int CATEGORY_FOOD_DRINK_ID = 3;
-    public static final int CATEGORY_NATURE_ID = 4;
-    public static final int CATEGORY_OBJECTS_ID = 8;
-    public static final int CATEGORY_PEOPLE_ID = 6;
-    public static final int CATEGORY_TECHNOLOGY_ID = 7;
-
-    public static int TOTAL_NEW_PHOTOS_COUNT = 14500;
-    public static int TOTAL_FEATURED_PHOTOS_COUNT = 900;
-    public static int BUILDING_PHOTOS_COUNT = 2720;
-    public static int FOOD_DRINK_PHOTOS_COUNT = 650;
-    public static int NATURE_PHOTOS_COUNT = 6910;
-    public static int OBJECTS_PHOTOS_COUNT = 2150;
-    public static int PEOPLE_PHOTOS_COUNT = 3410;
-    public static int TECHNOLOGY_PHOTOS_COUNT = 350;
+    public static final String RESPLASH_USER_GROUP = "resplash_user_group";
 
     // permission code.
     public static final int WRITE_EXTERNAL_STORAGE = 1;
@@ -82,7 +58,6 @@ public class Resplash extends Application{
     public static final String FIREBASE_EVENT_LOGIN = "unsplash_login";
     public static final String FIREBASE_EVENT_VIEW_DONATE = "view_donate";
     public static final String FIREBASE_EVENT_VIEW_ABOUT = "view_about";
-    public static final String FIREBASE_EVENT_VIEW_CHANGELOG = "view_changelog";
     public static final String FIREBASE_EVENT_RATE_FROM_APP = "rate_from_app";
     public static final String FIREBASE_EVENT_DOWNLOAD = "download_photo";
     public static final String FIREBASE_EVENT_SET_WALLPAPER = "set_wallpaper";
@@ -100,28 +75,26 @@ public class Resplash extends Application{
         initialize();
     }
 
-    public static String getAppId(Context c, boolean auth) {
+    public static String getAppId(Context c) {
         if (isDebug(c)) {
             Log.d(TAG, "Using debug keys");
             return BuildConfig.DEV_APP_ID;
-        } else if (TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiKey())
-                || TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiSecret())) {
-            Log.d(TAG, "Using release keys");
-            return BuildConfig.RELEASE_APP_ID;
+        } else if (Utils.getUserGroup() == 1){
+            Log.d(TAG, "Using release keys 1");
+            return BuildConfig.RELEASE_APP_ID_1;
         } else {
-            Log.d(TAG, "Using custom keys");
-            return CustomApiManager.getInstance(c).getCustomApiKey();
+            Log.d(TAG, "Using release keys 2");
+            return BuildConfig.RELEASE_APP_ID_2;
         }
     }
 
     public static String getSecret(Context c) {
         if (isDebug(c)) {
             return BuildConfig.DEV_SECRET;
-        } else if (TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiKey())
-                || TextUtils.isEmpty(CustomApiManager.getInstance(c).getCustomApiSecret())) {
-            return BuildConfig.RELEASE_SECRET;
+        } else if (Utils.getUserGroup() == 1){
+            return BuildConfig.RELEASE_SECRET_1;
         } else {
-            return CustomApiManager.getInstance(c).getCustomApiSecret();
+            return BuildConfig.RELEASE_SECRET_2;
         }
     }
 
@@ -137,7 +110,7 @@ public class Resplash extends Application{
 
     public static String getLoginUrl(Context c){
         return Resplash.UNSPLASH_URL + "oauth/authorize"
-                + "?client_id=" + Resplash.getAppId(c, true)
+                + "?client_id=" + Resplash.getAppId(c)
                 + "&redirect_uri=" + "resplash%3A%2F%2F" + Resplash.UNSPLASH_LOGIN_CALLBACK
                 + "&response_type=" + "code"
                 + "&scope=" + "public+read_user+write_user+read_photos+write_photos+write_likes+read_collections+write_collections";

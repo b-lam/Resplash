@@ -15,10 +15,11 @@
             android:id="@+id/item_collection_img"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
+            android:maxHeight="250dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:transitionName="imageCover"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:background="@color/colorPrimary"/>
 
         <FrameLayout

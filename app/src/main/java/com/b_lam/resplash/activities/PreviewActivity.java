@@ -52,7 +52,7 @@ public class PreviewActivity extends AppCompatActivity {
 
         mAttacher = new PhotoViewAttacher(mPhotoView);
 
-        if(mPhoto.urls != null){
+        if(mPhoto != null && mPhoto.urls != null){
             String url;
             switch ( PreferenceManager.getDefaultSharedPreferences(this).getString("load_quality", "Regular")) {
                 case "Raw":

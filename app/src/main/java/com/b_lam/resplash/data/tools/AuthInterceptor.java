@@ -25,7 +25,7 @@ public class AuthInterceptor implements Interceptor {
         } else {
             request = chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", "Client-ID " + Resplash.getAppId(Resplash.getInstance(), AuthManager.getInstance().isAuthorized()))
+                    .addHeader("Authorization", "Client-ID " + Resplash.getAppId(Resplash.getInstance()))
                     .build();
         }
         return chain.proceed(request);

@@ -149,34 +149,38 @@ public class UserCollectionFragment extends Fragment {
         CollectionService.OnRequestCollectionsListener mCollectionRequestListener = new CollectionService.OnRequestCollectionsListener() {
             @Override
             public void onRequestCollectionsSuccess(Call<List<Collection>> call, Response<List<Collection>> response) {
-                Log.d(TAG, String.valueOf(response.code()));
-                if(response.code() == 200) {
-                    mCollections = response.body();
-                    mFooterAdapter.clear();
-                    UserCollectionFragment.this.updateAdapter(mCollections);
-                    mPage++;
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
-                }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                if (isAdded()) {
+                    Log.d(TAG, String.valueOf(response.code()));
+                    if (response.code() == 200) {
+                        mCollections = response.body();
+                        mFooterAdapter.clear();
+                        UserCollectionFragment.this.updateAdapter(mCollections);
+                        mPage++;
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.VISIBLE);
+                        mImagesErrorView.setVisibility(View.GONE);
+                    } else {
+                        mImagesErrorView.setTitle(R.string.error_http);
+                        mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.GONE);
+                        mImagesErrorView.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
             @Override
             public void onRequestCollectionsFailed(Call<List<Collection>> call, Throwable t) {
-                Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
-                mImagesProgress.setVisibility(View.GONE);
-                mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
-                mSwipeContainer.setRefreshing(false);
+                if (isAdded()) {
+                    Log.d(TAG, t.toString());
+                    mImagesErrorView.setRetryVisible(false);
+                    mImagesErrorView.setTitle(R.string.error_network);
+                    mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mSwipeContainer.setRefreshing(false);
+                }
             }
         };
 
@@ -204,38 +208,42 @@ public class UserCollectionFragment extends Fragment {
         CollectionService.OnRequestCollectionsListener mCollectionRequestListener = new CollectionService.OnRequestCollectionsListener() {
             @Override
             public void onRequestCollectionsSuccess(Call<List<Collection>> call, Response<List<Collection>> response) {
-                Log.d(TAG, String.valueOf(response.code()));
-                if(response.code() == 200) {
-                    mCollections = response.body();
-                    mCollectionAdapter.clear();
-                    UserCollectionFragment.this.updateAdapter(mCollections);
-                    mPage++;
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
-                }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
-                    mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
-                }
-                if(mSwipeContainer.isRefreshing()) {
-                    Toast.makeText(getContext(), getString(R.string.updated_collections), Toast.LENGTH_SHORT).show();
-                    mSwipeContainer.setRefreshing(false);
+                if (isAdded()) {
+                    Log.d(TAG, String.valueOf(response.code()));
+                    if (response.code() == 200) {
+                        mCollections = response.body();
+                        mCollectionAdapter.clear();
+                        UserCollectionFragment.this.updateAdapter(mCollections);
+                        mPage++;
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.VISIBLE);
+                        mImagesErrorView.setVisibility(View.GONE);
+                    } else {
+                        mImagesErrorView.setTitle(R.string.error_http);
+                        mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
+                        mImagesProgress.setVisibility(View.GONE);
+                        mImageRecycler.setVisibility(View.GONE);
+                        mImagesErrorView.setVisibility(View.VISIBLE);
+                    }
+                    if (mSwipeContainer.isRefreshing()) {
+                        Toast.makeText(getContext(), getString(R.string.updated_collections), Toast.LENGTH_SHORT).show();
+                        mSwipeContainer.setRefreshing(false);
+                    }
                 }
             }
 
             @Override
             public void onRequestCollectionsFailed(Call<List<Collection>> call, Throwable t) {
-                Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
-                mImagesProgress.setVisibility(View.GONE);
-                mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
-                mSwipeContainer.setRefreshing(false);
+                if (isAdded()) {
+                    Log.d(TAG, t.toString());
+                    mImagesErrorView.setRetryVisible(false);
+                    mImagesErrorView.setTitle(R.string.error_network);
+                    mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
+                    mImagesProgress.setVisibility(View.GONE);
+                    mImageRecycler.setVisibility(View.GONE);
+                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mSwipeContainer.setRefreshing(false);
+                }
             }
         };
 
