@@ -113,7 +113,7 @@ public class AuthManager
             editor.putString(KEY_LAST_NAME, null);
             editor.putString(KEY_EMAIL, null);
             editor.putString(KEY_AVATAR_PATH, null);
-            editor.apply();
+            editor.commit();
         }
     }
 

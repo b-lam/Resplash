@@ -27,7 +27,7 @@ public class AuthorizeService {
     public void requestAccessToken(Context c, String code, final OnRequestAccessTokenListener l) {
         Call<AccessToken> getAccessToken = buildApi()
                 .getAccessToken(
-                        Resplash.getAppId(c, true),
+                        Resplash.getAppId(c),
                         Resplash.getSecret(c),
                         "resplash://" + Resplash.UNSPLASH_LOGIN_CALLBACK,
                         code,
