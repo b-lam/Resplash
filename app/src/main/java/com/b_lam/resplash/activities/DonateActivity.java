@@ -129,7 +129,11 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
         Log.d(TAG, "Destroying helper.");
         if (mHelper != null) {
-            mHelper.disposeWhenFinished();
+            try {
+                mHelper.disposeWhenFinished();
+            } catch (Exception e) {
+                Log.e(TAG, Log.getStackTraceString(e));
+            }
             mHelper = null;
         }
     }
