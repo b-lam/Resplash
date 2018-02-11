@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.AccessToken;
@@ -82,13 +83,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.login_btn: {
                 Uri uri = Uri.parse(Resplash.getLoginUrl(this));
-                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                if (intent.resolveActivity(getPackageManager()) != null)
+                    startActivity(intent);
+                else
+                    Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                 break;
             }
 
             case R.id.join_btn: {
                 Uri uri = Uri.parse(Resplash.UNSPLASH_JOIN_URL);
-                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                if (intent.resolveActivity(getPackageManager()) != null)
+                    startActivity(intent);
+                else
+                    Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                 break;
             }
         }

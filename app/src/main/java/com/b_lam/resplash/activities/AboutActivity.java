@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.LocaleUtils;
@@ -182,6 +183,10 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
     public void goToURL(String link) {
         Uri uri = Uri.parse(link);
-        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+        else
+            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 }

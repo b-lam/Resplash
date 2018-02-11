@@ -224,7 +224,11 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
             public void onClick(View view) {
                 try {
                     Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
-                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    if (intent.resolveActivity(getPackageManager()) != null)
+                        startActivity(intent);
+                    else
+                        Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

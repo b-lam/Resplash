@@ -165,10 +165,13 @@ public class UserActivity extends AppCompatActivity {
                 supportFinishAfterTransition();
                 return true;
             case R.id.action_view_on_unsplash:
-                if(mUser.links != null && mUser.links.html != null) {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(mUser.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
-                    startActivity(i);
-                }else{
+                if (mUser != null && mUser.links != null && mUser.links.html != null) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mUser.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
+                    if (intent.resolveActivity(getPackageManager()) != null)
+                        startActivity(intent);
+                    else
+                        Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(UserActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                 }
                 return true;
