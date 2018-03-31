@@ -178,7 +178,7 @@
     <string name="download">Stáhnout</string>
 
     <string name="no_results">Žádné výsledky</string>
-    <string name="login">Přihlásit se</string>
+    <string name="log_in">Přihlásit se</string>
     <string name="join">Zaregistrovat se</string>
     <string name="edit_title">Upravit profil</string>
     <string name="request_token_failed">Požadavek na token k přístupu selhal</string>

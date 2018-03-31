@@ -180,7 +180,7 @@
     <string name="cancel">Cancelar</string>
 
     <string name="no_results">Sem resultados</string>
-    <string name="login">Conectar</string>
+    <string name="log_in">Conectar</string>
     <string name="join">Entrar</string>
     <string name="edit_title">Editar Perfil</string>
     <string name="request_token_failed">Token de acesso falhou</string>

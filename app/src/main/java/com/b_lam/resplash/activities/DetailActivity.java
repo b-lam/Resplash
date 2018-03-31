@@ -66,7 +66,7 @@ import retrofit2.Response;
 public class DetailActivity extends AppCompatActivity{
 
     final String TAG = "DetailActivity";
-    private boolean like;
+    private boolean mPhotoLike = false;
     private Photo mPhoto;
     private PhotoDetails mPhotoDetails;
     private PhotoService mService;
@@ -176,8 +176,8 @@ public class DetailActivity extends AppCompatActivity{
                 if (mPhotoDetails.color != null) colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
                 tvColor.setText(mPhotoDetails.color);
                 tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads)));
-                like = mPhotoDetails.liked_by_user;
-                updateHeartButton(like);
+                mPhotoLike = mPhotoDetails.liked_by_user;
+                updateHeartButton(mPhotoLike);
                 content.setVisibility(View.VISIBLE);
                 floatingActionMenu.setVisibility(View.VISIBLE);
                 loadProgress.setVisibility(View.GONE);
@@ -192,6 +192,17 @@ public class DetailActivity extends AppCompatActivity{
         public void onRequestPhotoDetailsFailed(Call<PhotoDetails> call, Throwable t) {
             Log.d(TAG, t.toString());
             mService.requestPhotoDetails(mPhoto.id, this);
+        }
+    };
+
+    PhotoService.OnSetLikeListener mSetLikeListener = new PhotoService.OnSetLikeListener() {
+        @Override
+        public void onSetLikeSuccess(Call<LikePhotoResult> call, Response<LikePhotoResult> response) {
+            mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LIKE_PHOTO, null);
+        }
+
+        @Override
+        public void onSetLikeFailed(Call<LikePhotoResult> call, Throwable t) {
         }
     };
 
@@ -478,37 +489,19 @@ public class DetailActivity extends AppCompatActivity{
         }
     };
 
-    public void updateHeartButton(boolean like){
-
+    public void likeImage(View view){
         if(AuthManager.getInstance().isAuthorized()) {
-            if (like) {
-                btnLike.setImageResource(R.drawable.ic_heart_red);
-            } else {
-                btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
-            }
+            mPhotoLike = !mPhotoLike;
+            mService.setLikeForAPhoto(mPhoto.id, mPhotoLike, mSetLikeListener);
+            updateHeartButton(mPhotoLike);
         }else{
-            btnLike.setVisibility(View.GONE);
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, LoginActivity.class));
         }
     }
 
-    public void likeImage(View view){
-
-        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LIKE_PHOTO, null);
-
-        like = !like;
-
-        PhotoService.OnSetLikeListener mSetLikeListener = new PhotoService.OnSetLikeListener() {
-            @Override
-            public void onSetLikeSuccess(Call<LikePhotoResult> call, Response<LikePhotoResult> response) {
-            }
-
-            @Override
-            public void onSetLikeFailed(Call<LikePhotoResult> call, Throwable t) {
-            }
-        };
-
-        mService.setLikeForAPhoto(mPhoto.id, like, mSetLikeListener);
-        updateHeartButton(like);
+    public void updateHeartButton(boolean like){
+        btnLike.setImageResource(like ? R.drawable.ic_heart_red : R.drawable.ic_heart_outline_grey);
     }
 
     public void addToCollection(View view){

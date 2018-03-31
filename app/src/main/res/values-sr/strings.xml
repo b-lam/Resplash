@@ -181,7 +181,7 @@
     <string name="cancel">Откажи</string>
 
     <string name="no_results">нема резултата</string>
-    <string name="login">Улогуј се</string>
+    <string name="log_in">Улогуј се</string>
     <string name="join">Придружи се</string>
     <string name="edit_title">Измени профил</string>
     <string name="request_token_failed">Грешка код токена за приступ</string>
