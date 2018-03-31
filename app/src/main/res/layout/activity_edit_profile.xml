@@ -17,10 +17,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_edit_profile"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+            style="@style/ResplashToolbarTheme"
             app:layout_scrollFlags="scroll"/>
 
     </android.support.design.widget.AppBarLayout>
@@ -34,15 +31,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="cmd_account_card_details"
-                    app:ico_size="20dp"
+                    android:src="?attr/accountCardIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -57,14 +55,13 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@color/Link_Water" />
+                android:background="?attr/dividerColor" />
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="cmd_account_circle"
-                    app:ico_size="20dp"
+                    android:src="?attr/profileIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -80,14 +77,13 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@color/Link_Water" />
+                android:background="?attr/dividerColor" />
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="cmd_account_circle"
-                    app:ico_size="20dp"
+                    android:src="?attr/profileIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -103,14 +99,13 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@color/Link_Water" />
+                android:background="?attr/dividerColor" />
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="cmd_email_outline"
-                    app:ico_size="20dp"
+                    android:src="?attr/emailIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -126,14 +121,13 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@color/Link_Water" />
+                android:background="?attr/dividerColor" />
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="cmd_compass_outline"
-                    app:ico_size="20dp"
+                    android:src="?attr/exploreIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -148,14 +142,13 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@color/Link_Water" />
+                android:background="?attr/dividerColor" />
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="cmd_instagram"
-                    app:ico_size="20dp"
+                    android:src="?attr/instagramIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -170,14 +163,13 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@color/Link_Water" />
+                android:background="?attr/dividerColor" />
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="gmd_location_on"
-                    app:ico_size="20dp"
+                    android:src="?attr/locationIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -192,14 +184,13 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@color/Link_Water" />
+                android:background="?attr/dividerColor" />
 
             <LinearLayout
                 style="@style/about_entry">
 
                 <ImageView
-                    app:ico_icon="cmd_format_quote"
-                    app:ico_size="20dp"
+                    android:src="?attr/quoteIcon"
                     style="@style/material_icon" />
 
                 <EditText
@@ -212,13 +203,12 @@
 
             <Button
                 android:id="@+id/save_edit_button"
-                android:text="Save"
+                android:text="@string/save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/colorAccent"
-                android:textColor="@color/md_white_1000" />
+                android:theme="@style/ResplashButtonTheme" />
 
         </LinearLayout>
 

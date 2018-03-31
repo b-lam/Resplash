@@ -9,4 +9,63 @@
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="ThemeColor">
+        <attr name="colorPrimary" format="color"/>
+        <attr name="colorPrimaryDark" format="color"/>
+        <attr name="colorAccent" format="color"/>
+        <attr name="colorAccentDark" format="color"/>
+        <attr name="primaryTextColor" format="color"/>
+        <attr name="secondaryTextColor" format="color"/>
+        <attr name="dividerColor" format="color"/>
+        <attr name="menuIconColor" format="color"/>
+        <attr name="menuBackgroundColor" format="color"/>
+        <attr name="cardBackgroundColor" format="color"/>
+        <attr name="progressBarColor" format="color"/>
+        <attr name="previewBackgroundColor" format="color"/>
+        <attr name="toolbarPopupTheme" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ThemeDrawable">
+        <attr name="resplashLogo" format="reference"/>
+        <attr name="searchIcon" format="reference"/>
+        <attr name="sortIcon" format="reference"/>
+        <attr name="shareIcon" format="reference"/>
+        <attr name="browserIcon" format="reference"/>
+        <attr name="newIcon" format="reference"/>
+        <attr name="hotIcon" format="reference"/>
+        <attr name="collectionsIcon" format="reference"/>
+        <attr name="heartIcon" format="reference"/>
+        <attr name="settingsIcon" format="reference"/>
+        <attr name="infoIcon" format="reference"/>
+        <attr name="profileIcon" format="reference"/>
+        <attr name="cancelIcon" format="reference"/>
+        <attr name="closeIcon" format="reference"/>
+        <attr name="addIcon" format="reference"/>
+        <attr name="oldIcon" format="reference"/>
+        <attr name="mountainIcon" format="reference"/>
+        <attr name="starCircleIcon" format="reference"/>
+        <attr name="locationIcon" format="reference"/>
+        <attr name="calendarIcon" format="reference"/>
+        <attr name="downloadIcon" format="reference"/>
+        <attr name="paletteIcon" format="reference"/>
+        <attr name="viewsIcon" format="reference"/>
+        <attr name="dimensionsIcon" format="reference"/>
+        <attr name="imageIcon" format="reference"/>
+        <attr name="cameraIcon" format="reference"/>
+        <attr name="exposureIcon" format="reference"/>
+        <attr name="apertureIcon" format="reference"/>
+        <attr name="isoIcon" format="reference"/>
+        <attr name="focalLengthIcon" format="reference"/>
+        <attr name="introIcon" format="reference"/>
+        <attr name="gitHubIcon" format="reference"/>
+        <attr name="starIcon" format="reference"/>
+        <attr name="donateIcon" format="reference"/>
+        <attr name="bugReportIcon" format="reference"/>
+        <attr name="instagramIcon" format="reference"/>
+        <attr name="keyIcon" format="reference"/>
+        <attr name="emailIcon" format="reference"/>
+        <attr name="exploreIcon" format="reference"/>
+        <attr name="accountCardIcon" format="reference"/>
+        <attr name="quoteIcon" format="reference"/>
+    </declare-styleable>
 </resources>

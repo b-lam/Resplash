@@ -50,6 +50,7 @@
     <array name="theme">
         <item>Светла</item>
         <item>Тамна</item>
+        <item>Црн</item>
     </array>
     <string name="default_theme">Светла</string>
     <string name="restart">Поново покрени</string>

@@ -50,6 +50,7 @@
     <array name="theme">
         <item>Светлая</item>
         <item>Тёмная</item>
+        <item>Черный</item>
     </array>
     <string name="default_theme">Светлая</string>
     <string name="restart">Перезапуск</string>

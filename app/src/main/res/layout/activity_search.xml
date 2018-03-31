@@ -15,10 +15,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_search"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+            style="@style/ResplashToolbarTheme"
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <EditText
@@ -28,7 +25,7 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/search_hint"
                 android:textColorHint="@color/md_grey_700"
-                android:textColor="@color/colorText"
+                android:textColor="?attr/primaryTextColor"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1" />
@@ -39,7 +36,9 @@
             android:id="@+id/search_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@android:color/black"
+            app:tabIndicatorColor="?attr/primaryTextColor"
+            app:tabSelectedTextColor="?attr/primaryTextColor"
+            app:tabTextColor="?attr/secondaryTextColor"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
 

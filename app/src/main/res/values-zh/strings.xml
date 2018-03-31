@@ -50,6 +50,7 @@
     <array name="theme">
         <item>明亮</item>
         <item>深沉</item>
+        <item>黑色</item>
     </array>
     <string name="default_theme">明亮</string>
     <string name="restart">重启</string>

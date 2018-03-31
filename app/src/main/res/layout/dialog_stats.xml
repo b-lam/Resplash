@@ -10,15 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        style="?android:progressBarStyleLarge"/>
+        android:scaleX="0.75"
+        android:scaleY="0.75" />
+
     <LinearLayout
         android:id="@+id/stats_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/tvStatsDownloads"
             android:layout_width="match_parent"
@@ -28,8 +29,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_file_download_black_24dp"
+            android:drawableStart="?attr/downloadIcon"
             android:drawablePadding="20dp" />
+
         <TextView
             android:id="@+id/tvStatsLikes"
             android:layout_width="match_parent"
@@ -39,8 +41,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_favorite_black_24dp"
+            android:drawableStart="?attr/heartIcon"
             android:drawablePadding="20dp" />
+
         <TextView
             android:id="@+id/tvStatsViews"
             android:layout_width="match_parent"
@@ -50,7 +53,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_remove_red_eye_black_24dp"
+            android:drawableStart="?attr/viewsIcon"
             android:drawablePadding="20dp" />
+
     </LinearLayout>
 </LinearLayout>

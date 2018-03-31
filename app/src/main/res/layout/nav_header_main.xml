@@ -24,13 +24,13 @@
         android:text="@string/app_name"
         android:textStyle="bold"
         android:textSize="14sp"
-        android:textColor="@color/colorText" />
+        android:textColor="?attr/primaryTextColor" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Free high-resolution photos"
         android:textSize="14sp"
-        android:textColor="@color/colorText" />
+        android:textColor="?attr/primaryTextColor" />
 
 </LinearLayout>

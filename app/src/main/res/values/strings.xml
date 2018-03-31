@@ -78,10 +78,12 @@
     <array name="theme">
         <item>Light</item>
         <item>Dark</item>
+        <item>Black (AMOLED)</item>
     </array>
     <array name="theme_values">
         <item>Light</item>
         <item>Dark</item>
+        <item>Black</item>
     </array>
     <string name="default_theme">Light</string>
     <string name="restart">Restart</string>

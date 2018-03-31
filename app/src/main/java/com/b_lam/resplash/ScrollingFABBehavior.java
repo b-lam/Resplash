@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.b_lam.resplash.util.Utils;
+
 /**
  * Created by Brandon on 10/7/2016.
  */

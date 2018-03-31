@@ -35,7 +35,6 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.Utils;
 import com.b_lam.resplash.data.data.LikePhotoResult;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.data.PhotoDetails;
@@ -45,6 +44,8 @@ import com.b_lam.resplash.dialogs.InfoDialog;
 import com.b_lam.resplash.dialogs.StatsDialog;
 import com.b_lam.resplash.dialogs.WallpaperDialog;
 import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
+import com.b_lam.resplash.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
@@ -92,7 +93,6 @@ public class DetailActivity extends AppCompatActivity{
     @BindView(R.id.tvLikes) TextView tvLikes;
     @BindView(R.id.tvColor) TextView tvColor;
     @BindView(R.id.tvDownloads) TextView tvDownloads;
-    @BindView(R.id.progress_download) ProgressBar progressBar;
     @BindView(R.id.fab_menu) FloatingActionMenu floatingActionMenu;
     @BindView(R.id.fab_download) FloatingActionButton fabDownload;
     @BindView(R.id.fab_wallpaper) FloatingActionButton fabWallpaper;
@@ -209,16 +209,27 @@ public class DetailActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.DetailActivityThemeDark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.DetailActivityThemeBlack);
+                break;
+        }
+
         super.onCreate(savedInstanceState);
 
         LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_detail);
 
         ButterKnife.bind(this);
 
         Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material, getTheme());
-        upArrow.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        upArrow.setColorFilter(ThemeUtils.getThemeAttrColor(this, R.attr.menuIconColor), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -288,8 +299,6 @@ public class DetailActivity extends AppCompatActivity{
         mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
 
         imgFull.setOnClickListener(imageOnClickListener);
-
-        progressBar.setScaleY(3f);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }

@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_clear_text"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_close_black_24dp"
+        android:icon="?attr/closeIcon"
         android:title="@string/action_clear_text"
         app:showAsAction="always"
         android:visible="false"/>

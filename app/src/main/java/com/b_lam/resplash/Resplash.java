@@ -5,6 +5,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatDelegate;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.b_lam.resplash.activities.MainActivity;
@@ -16,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
+import com.b_lam.resplash.util.Utils;
 
 /**
  * Created by Brandon on 10/6/2016.
@@ -71,6 +76,15 @@ public class Resplash extends Application{
 
     @Override
     public void onCreate() {
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.ResplashTheme_Primary_Base_Dark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.ResplashTheme_Primary_Base_Black);
+                break;
+        }
+
         super.onCreate();
         initialize();
     }

@@ -6,7 +6,7 @@
         android:id="@+id/action_view_on_unsplash"
         android:orderInCategory="100"
         android:title="@string/action_view_on_unsplash"
-        android:icon="@drawable/ic_earth_black_24dp"
+        android:icon="?attr/browserIcon"
         app:showAsAction="ifRoom"/>
 
 </menu>

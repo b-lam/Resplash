@@ -50,6 +50,7 @@
     <array name="theme">
         <item>Claro</item>
         <item>Escuro</item>
+        <item>Preto</item>
     </array>
     <string name="default_theme">Claro</string>
     <string name="restart">Reiniciar</string>

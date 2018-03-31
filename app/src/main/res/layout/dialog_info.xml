@@ -19,7 +19,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_straighten_black_24dp"
+            android:drawableStart="?attr/dimensionsIcon"
             android:drawablePadding="20dp" />
         <TextView
             android:id="@+id/tvInfoMake"
@@ -30,7 +30,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_image_black_24dp"
+            android:drawableStart="?attr/imageIcon"
             android:drawablePadding="20dp" />
         <TextView
             android:id="@+id/tvInfoModel"
@@ -41,7 +41,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_camera_alt_black_24dp"
+            android:drawableStart="?attr/cameraIcon"
             android:drawablePadding="20dp" />
         <TextView
             android:id="@+id/tvInfoExposure"
@@ -52,7 +52,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_timelapse_black_24dp"
+            android:drawableStart="?attr/exposureIcon"
             android:drawablePadding="20dp" />
         <TextView
             android:id="@+id/tvInfoAperture"
@@ -63,7 +63,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_camera_black_24dp"
+            android:drawableStart="?attr/apertureIcon"
             android:drawablePadding="20dp" />
         <TextView
             android:id="@+id/tvInfoIso"
@@ -74,7 +74,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_iso_black_24dp"
+            android:drawableStart="?attr/isoIcon"
             android:drawablePadding="20dp" />
         <TextView
             android:id="@+id/tvInfoFocalLength"
@@ -85,7 +85,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/ic_all_out_black_24dp"
+            android:drawableStart="?attr/focalLengthIcon"
             android:drawablePadding="20dp" />
     </LinearLayout>
 </LinearLayout>
