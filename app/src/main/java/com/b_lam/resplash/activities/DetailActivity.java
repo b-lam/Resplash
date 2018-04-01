@@ -18,6 +18,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -43,6 +44,7 @@ import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.dialogs.InfoDialog;
 import com.b_lam.resplash.dialogs.StatsDialog;
 import com.b_lam.resplash.dialogs.WallpaperDialog;
+import com.b_lam.resplash.helpers.DownloadHelper;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.Utils;
@@ -54,6 +56,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -63,24 +66,25 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType;
+import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.DOWNLOAD;
+import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.WALLPAPER;
+
 public class DetailActivity extends AppCompatActivity{
 
-    final String TAG = "DetailActivity";
+    private static final String TAG = "DetailActivity";
     private boolean mPhotoLike = false;
     private Photo mPhoto;
     private PhotoDetails mPhotoDetails;
     private PhotoService mService;
     private SharedPreferences sharedPreferences;
     private Drawable colorIcon;
-    private enum ActionType {DOWNLOAD, WALLPAPER}
-    private ActionType currentAction;
+    private @DownloadType int currentAction;
     private WallpaperDialog wallpaperDialog;
 
     private long downloadReference;
 
     private FirebaseAnalytics mFirebaseAnalytics;
-
-    private DownloadManager downloadManager;
 
     @BindView((R.id.toolbar_detail)) Toolbar toolbar;
     @BindView(R.id.imgFull) ImageView imgFull;
@@ -108,35 +112,33 @@ public class DetailActivity extends AppCompatActivity{
         public void onReceive(Context context, Intent intent) {
             long reference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             if (downloadReference == reference) {
-                DownloadManager.Query query = new DownloadManager.Query().setFilterById(reference);
-                Cursor cursor = downloadManager.query(query);
-                if (cursor.moveToFirst()) {
-                    int status  = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                    switch (status) {
-                        case DownloadManager.STATUS_SUCCESSFUL:
-                            getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, downloadManager.getUriForDownloadedFile(downloadReference)));
-                            if (currentAction == ActionType.WALLPAPER) {
-                                Uri uri = downloadManager.getUriForDownloadedFile(downloadReference);
-                                Bundle params = new Bundle();
-                                params.putString("file_uri", uri.toString());
+                Cursor cursor = DownloadHelper.getInstance(DetailActivity.this).getDownloadCursor(downloadReference);
+                if (cursor != null) {
+                    switch (DownloadHelper.getInstance(DetailActivity.this).getDownloadStatus(cursor)) {
+                        case DownloadHelper.DownloadStatus.SUCCESS:
+                            File file = new File(DownloadHelper.getInstance(DetailActivity.this).getFilePath(downloadReference));
+                            Uri uri = FileProvider.getUriForFile(DetailActivity.this, "com.b_lam.resplash.fileprovider", file);
+                            getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+                            if (currentAction == WALLPAPER) {
                                 try {
                                     Log.d(TAG, "Crop and Set: " + uri.toString());
-                                    Intent wallpaperIntent = WallpaperManager.getInstance(context).getCropAndSetWallpaperIntent(uri);
-                                    wallpaperIntent.setDataAndType(uri, "image/jpg");
-                                    wallpaperIntent.putExtra("mimeType", "image/jpg");
+                                    Intent wallpaperIntent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(uri);
+                                    wallpaperIntent.setDataAndType(uri, "image/*");
+                                    wallpaperIntent.putExtra("mimeType", "image/*");
                                     startActivityForResult(wallpaperIntent, 13451);
-                                    mFirebaseAnalytics.logEvent("set_wallpaper", params);
+                                    mFirebaseAnalytics.logEvent("set_wallpaper", null);
                                 } catch (Exception e) {
+                                    e.printStackTrace();
                                     Log.d(TAG, "Chooser: " + uri.toString());
                                     Intent wallpaperIntent = new Intent(Intent.ACTION_ATTACH_DATA);
-                                    wallpaperIntent.setDataAndType(uri, "image/jpg");
-                                    wallpaperIntent.putExtra("mimeType", "image/jpg");
+                                    wallpaperIntent.setDataAndType(uri, "image/*");
+                                    wallpaperIntent.putExtra("mimeType", "image/*");
                                     wallpaperIntent.addCategory(Intent.CATEGORY_DEFAULT);
                                     wallpaperIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     wallpaperIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                     wallpaperIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                                     startActivity(Intent.createChooser(wallpaperIntent, getString(R.string.set_as_wallpaper)));
-                                    mFirebaseAnalytics.logEvent("set_wallpaper_alternative", params);
+                                    mFirebaseAnalytics.logEvent("set_wallpaper_alternative", null);
                                 }
                                 wallpaperDialog.setDownloadFinished(true);
                             }
@@ -144,11 +146,11 @@ public class DetailActivity extends AppCompatActivity{
                         default:
                             break;
                     }
+                    cursor.close();
                 }
-                if (currentAction == ActionType.WALLPAPER) {
+                if (currentAction == WALLPAPER) {
                     wallpaperDialog.dismiss();
                 }
-                cursor.close();
             }
         }
     };
@@ -305,8 +307,6 @@ public class DetailActivity extends AppCompatActivity{
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
 
-//        btnAddToCollection.setImageDrawable(new IconicsDrawable(this).icon(GoogleMaterial.Icon.gmd_add).paddingDp(4).colorRes(R.color.md_grey_500));
-
         mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
 
         imgFull.setOnClickListener(imageOnClickListener);
@@ -384,25 +384,25 @@ public class DetailActivity extends AppCompatActivity{
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_DOWNLOAD, null);
                         floatingActionMenu.close(true);
                         Toast.makeText(getApplicationContext(), getString(R.string.download_started), Toast.LENGTH_SHORT).show();
-                        currentAction = ActionType.DOWNLOAD;
+                        currentAction = DOWNLOAD;
                         switch (sharedPreferences.getString("download_quality", "Full")) {
                             case "Raw":
-                                downloadImage(mPhoto.urls.raw, ActionType.DOWNLOAD);
+                                downloadImage(mPhoto.urls.raw, DOWNLOAD);
                                 break;
                             case "Full":
-                                downloadImage(mPhoto.urls.full, ActionType.DOWNLOAD);
+                                downloadImage(mPhoto.urls.full, DOWNLOAD);
                                 break;
                             case "Regular":
-                                downloadImage(mPhoto.urls.regular, ActionType.DOWNLOAD);
+                                downloadImage(mPhoto.urls.regular, DOWNLOAD);
                                 break;
                             case "Small":
-                                downloadImage(mPhoto.urls.small, ActionType.DOWNLOAD);
+                                downloadImage(mPhoto.urls.small, DOWNLOAD);
                                 break;
                             case "Thumb":
-                                downloadImage(mPhoto.urls.thumb, ActionType.DOWNLOAD);
+                                downloadImage(mPhoto.urls.thumb, DOWNLOAD);
                                 break;
                             default:
-                                downloadImage(mPhoto.urls.full, ActionType.DOWNLOAD);
+                                downloadImage(mPhoto.urls.full, DOWNLOAD);
                         }
                     }
                     break;
@@ -410,34 +410,34 @@ public class DetailActivity extends AppCompatActivity{
                     if (Utils.isStoragePermissionGranted(DetailActivity.this) && mPhoto != null) {
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SET_WALLPAPER, null);
                         floatingActionMenu.close(true);
-                        currentAction = ActionType.WALLPAPER;
+                        currentAction = WALLPAPER;
                         wallpaperDialog = new WallpaperDialog();
                         wallpaperDialog.setListener(new WallpaperDialog.WallpaperDialogListener() {
                             @Override
                             public void onCancel() {
-                                downloadManager.remove(downloadReference);
+                                DownloadHelper.getInstance(DetailActivity.this).removeDownloadRequest(downloadReference);
                             }
                         });
                         wallpaperDialog.show(getFragmentManager(), null);
 
                         switch (sharedPreferences.getString("wallpaper_quality", "Full")) {
                             case "Raw":
-                                downloadImage(mPhoto.urls.raw, ActionType.WALLPAPER);
+                                downloadImage(mPhoto.urls.raw, WALLPAPER);
                                 break;
                             case "Full":
-                                downloadImage(mPhoto.urls.full, ActionType.WALLPAPER);
+                                downloadImage(mPhoto.urls.full, WALLPAPER);
                                 break;
                             case "Regular":
-                                downloadImage(mPhoto.urls.regular, ActionType.WALLPAPER);
+                                downloadImage(mPhoto.urls.regular, WALLPAPER);
                                 break;
                             case "Small":
-                                downloadImage(mPhoto.urls.small, ActionType.WALLPAPER);
+                                downloadImage(mPhoto.urls.small, WALLPAPER);
                                 break;
                             case "Thumb":
-                                downloadImage(mPhoto.urls.thumb, ActionType.WALLPAPER);
+                                downloadImage(mPhoto.urls.thumb, WALLPAPER);
                                 break;
                             default:
-                                downloadImage(mPhoto.urls.full, ActionType.WALLPAPER);
+                                downloadImage(mPhoto.urls.full, WALLPAPER);
                         }
                     }
 
@@ -469,15 +469,6 @@ public class DetailActivity extends AppCompatActivity{
         intent.putExtra("username", mPhotoDetails.user.username);
         intent.putExtra("name", mPhotoDetails.user.name);
         startActivity(intent);
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//            startActivity(intent);
-//        } else {
-//            if(imgProfile.getDrawable() != null) {
-//                Resplash.getInstance().setDrawable(imgProfile.getDrawable());
-//            }
-//            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, imgProfile, "profileTransition");
-//            ActivityCompat.startActivity(this, intent, options.toBundle());
-//        }
     }
 
     public View.OnClickListener imageOnClickListener = new View.OnClickListener() {
@@ -521,19 +512,10 @@ public class DetailActivity extends AppCompatActivity{
         }
     }
 
-    private void downloadImage(String url, ActionType actionType){
+    private void downloadImage(String url, @DownloadType int downloadType){
         mService.reportDownload(mPhoto.id, mReportDownloadListener);
-        String filename = mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Unknown") + Resplash.DOWNLOAD_PHOTO_FORMAT;
-        downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url))
-                .setTitle(filename)
-                .setDestinationInExternalPublicDir(Resplash.DOWNLOAD_PATH, filename)
-                .setVisibleInDownloadsUi(false)
-                .setNotificationVisibility(actionType == ActionType.DOWNLOAD ? DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED : DownloadManager.Request.VISIBILITY_VISIBLE);
-
-        request.allowScanningByMediaScanner();
-
-        downloadReference = downloadManager.enqueue(request);
+        String filename = mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Full") + Resplash.DOWNLOAD_PHOTO_FORMAT;
+        downloadReference = DownloadHelper.getInstance(this).addDownloadRequest(downloadType, url, filename);
     }
 
     private void loadPreferences(){

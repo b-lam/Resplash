@@ -73,7 +73,7 @@ public class ThemeUtils {
                     activity.getString(R.string.app_name),
                     icon, getThemeAttrColor(activity, R.attr.colorPrimary));
             activity.setTaskDescription(taskDescription);
-            icon.recycle();
+            if (icon != null) icon.recycle();
         }
     }
 }
