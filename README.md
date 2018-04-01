@@ -4,12 +4,17 @@
 
 **[Resplash]** is powered by [Unsplash.com](https://unsplash.com/)
 
+Beautiful, free photos.
+Gifted by the world’s most generous community of photographers.
+
 * Browse 100000+ high-res photos
+* New photos everyday
 * Material design
+* Dark and black (AMOLED) theme
 * Download raw photos
 * Set as wallpaper straight from the app
 * View user profiles, curated collections, photo stats and exif data
-* Login to like photos and update your profile
+* Log in to like photos and update your profile
 * Various layout options
 
 # Download
@@ -19,14 +24,12 @@
 
 # Screenshots
 
-<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-1.png" width="250">
-<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-2.png" width="250">
-<img src="https://b-lam.github.io/img/portfolio/resplash-screenshot-4.png" width="250">
+<img src="https://b-lam.github.io/img/resplash/resplash-1.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-2.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-3.png" width="250">
 
 # Developed By
 
 * Brandon Lam 
- * [b-lam.github.io](http://b-lam.github.io)
+ * [b-lam.github.io](https://b-lam.github.io)
  * [instagram.com/brandon.c.lam](https://www.instagram.com/brandon.c.lam/)
 
 # License
