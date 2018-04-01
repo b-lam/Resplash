@@ -1,4 +1,4 @@
-#[Resplash]
+# [Resplash]
 
 <img src="https://github.com/b-lam/Resplash/blob/develop/design/Play%20Store/Resplash_Play_Store_Banner.jpg?raw=true" width="750">
 
@@ -17,24 +17,22 @@ Gifted by the world’s most generous community of photographers.
 * Log in to like photos and update your profile
 * Various layout options
 
-#Download
+# Download
 
 <a href="https://play.google.com/store/apps/details?id=com.b_lam.resplash" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="70"/></a>
 
-#Screenshots
+# Screenshots
 
-<img src="https://b-lam.github.io/img/resplash/resplash-1.png" width="250">
-<img src="https://b-lam.github.io/img/resplash/resplash-2.png" width="250">
-<img src="https://b-lam.github.io/img/resplash/resplash-3.png" width="250">
+<img src="https://b-lam.github.io/img/resplash/resplash-1.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-2.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-3.png" width="250">
 
-#Developed By
+# Developed By
 
 * Brandon Lam 
  * [b-lam.github.io](https://b-lam.github.io)
  * [instagram.com/brandon.c.lam](https://www.instagram.com/brandon.c.lam/)
 
-#License
+# License
 
 	MIT License
 
