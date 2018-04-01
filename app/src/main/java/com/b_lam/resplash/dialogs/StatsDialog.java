@@ -45,7 +45,7 @@ public class StatsDialog extends DialogFragment implements PhotoService.OnReques
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_stats, null, false);
         ButterKnife.bind(this, view);
         this.service = PhotoService.getService();
-        service.requestStats(photo.id, this);
+        if (photo != null) service.requestStats(photo.id, this);
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .create();
