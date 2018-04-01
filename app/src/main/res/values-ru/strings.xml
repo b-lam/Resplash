@@ -50,6 +50,7 @@
     <array name="theme">
         <item>Светлая</item>
         <item>Тёмная</item>
+        <item>Черный</item>
     </array>
     <string name="default_theme">Светлая</string>
     <string name="restart">Перезапуск</string>
@@ -177,7 +178,7 @@
     <string name="download">Скачать</string>
 
     <string name="no_results">Нет результатов</string>
-    <string name="login">Авторизоваться</string>
+    <string name="log_in">Авторизоваться</string>
     <string name="join">Присоединиться</string>
     <string name="edit_title">Редактировать профиль</string>
     <string name="request_token_failed">Ошибка доступа к токену</string>

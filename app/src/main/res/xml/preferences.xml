@@ -12,6 +12,14 @@
             android:entryValues="@array/language_values"
             android:defaultValue="@string/default_language"/>
 
+        <ListPreference
+            android:key="theme"
+            android:title="@string/title_theme"
+            android:dialogTitle="@string/title_theme"
+            android:entries="@array/theme"
+            android:entryValues="@array/theme_values"
+            android:defaultValue="@string/default_theme"/>
+
         <Preference
             android:title="@string/title_custom_api">
             <intent android:action="CustomApiKeyActivity"/>
@@ -19,8 +27,7 @@
 
         <Preference
             android:title="@string/title_clear_cache"
-            android:key="@string/title_clear_cache"
-        />
+            android:key="@string/title_clear_cache" />
 
     </PreferenceCategory>
 

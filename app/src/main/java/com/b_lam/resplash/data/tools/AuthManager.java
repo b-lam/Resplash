@@ -319,12 +319,14 @@ public class AuthManager
             Toast.makeText(Resplash.getInstance(), "Too many requests", Toast.LENGTH_LONG);
 
         } else {
-            service.requestUserProfile(me.username, this);
+            if (me != null && me.username != null)
+                service.requestUserProfile(me.username, this);
         }
     }
 
     @Override
     public void onRequestUserProfileFailed(Call<User> call, Throwable t) {
-        service.requestUserProfile(me.username, this);
+        if (me != null && me.username != null)
+            service.requestUserProfile(me.username, this);
     }
 }

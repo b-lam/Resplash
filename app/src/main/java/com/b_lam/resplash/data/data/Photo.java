@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.util.ThemeUtils;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -407,12 +408,12 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                         .into(holder.imageList);
 
                 holder.imageList.setMinimumHeight((int) finalHeight);
-                int colorFrom = Color.WHITE;
+                int colorFrom = ThemeUtils.getThemeAttrColor(holder.itemView.getContext(), R.attr.colorPrimary);
                 int colorTo;
                 if(this.color != null){
                     colorTo = Color.parseColor(this.color);
                 }else{
-                    colorTo = Color.WHITE;
+                    colorTo = colorFrom;
                 }
                 ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                 colorAnimation.setDuration(1000);

@@ -10,6 +10,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:transitionName="imageCover"
-        android:background="@color/colorPrimary"/>
+        android:background="?attr/colorPrimary"/>
 
 </com.b_lam.resplash.SquareFrameLayout>

@@ -15,16 +15,16 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            style="@style/ResplashToolbarTheme"
             app:layout_scrollFlags="scroll|enterAlways|snap"/>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@android:color/black"
+            app:tabIndicatorColor="?attr/primaryTextColor"
+            app:tabSelectedTextColor="?attr/primaryTextColor"
+            app:tabTextColor="?attr/secondaryTextColor"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
 
@@ -40,11 +40,12 @@
         android:id="@+id/fab_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:backgroundTint="@color/colorAccent"
+        android:elevation="6dp"
         android:src="@drawable/ic_file_upload_white_24dp"
-        app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="?attr/colorAccent"
+        app:layout_anchorGravity="bottom|end"
         app:fabSize="normal"
         app:layout_behavior="com.b_lam.resplash.ScrollingFABBehavior" />
 </android.support.design.widget.CoordinatorLayout>

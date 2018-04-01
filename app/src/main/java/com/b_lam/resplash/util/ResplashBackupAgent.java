@@ -4,7 +4,6 @@ import android.app.backup.BackupAgentHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.Utils;
 import com.b_lam.resplash.data.tools.AuthManager;
 
 /**

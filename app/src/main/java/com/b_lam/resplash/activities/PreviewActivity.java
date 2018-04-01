@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -32,9 +34,20 @@ public class PreviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.PreviewActivityThemeDark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.PreviewActivityThemeBlack);
+                break;
+        }
+
         super.onCreate(savedInstanceState);
 
         LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -44,7 +57,6 @@ public class PreviewActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        setTheme(R.style.PreviewTheme);
         setContentView(R.layout.activity_preview);
         ButterKnife.bind(this);
 

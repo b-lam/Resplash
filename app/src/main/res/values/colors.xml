@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#36393c</color>
-    <color name="colorAccent">#26292c</color>
-    <color name="colorText">#000000</color>
-    <color name="Link_Water">#F5F5F5</color>
-    <color name="Old_Link_Water">#d1d2d4</color>
-    <color name="primary_text_material_dark">#36393c</color>
-    <color name="Black_Glass">#6e000000</color>
-    <color name="Light_Grey">#f4f4f4</color>
-    <color name="primary_text_material_light">#000000</color>
-    <color name="secondary_text_material_light">#000000</color>
-    <color name="secondary_text_material_dark">#ffffff</color>
-    <color name="fab_pressed">#1f2225</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
     <color name="transparent">#00ffffff</color>
+
+    <color name="colorPrimary_light">#ffffff</color>
+    <color name="colorPrimaryDark_light">#F5F5F5</color>
+    <color name="colorAccent_light">#26292c</color>
+    <color name="colorText_light">#000000</color>
+    <color name="colorTextSecondary_light">#96000000</color>
+    <color name="menuBackground_light">#ccffffff</color>
+    <color name="cardBackgroundColor_light">#ffffff</color>
+    <color name="progressBarColor_light">#000000</color>
+    <color name="rippleColor_light">#40000000</color>
+    <color name="previewBackgroundColor_light">#212121</color>
+
+    <color name="colorPrimary_dark">#212121</color>
+    <color name="colorPrimaryDark_dark">#1a1a1a</color>
+    <color name="colorAccent_dark">#1a1a1a</color>
+    <color name="colorText_dark">#ffffff</color>
+    <color name="colorTextSecondary_dark">#96ffffff</color>
+    <color name="menuBackground_dark">#cc000000</color>
+    <color name="cardBackgroundColor_dark">#303030</color>
+    <color name="progressBarColor_dark">#ffffff</color>
+    <color name="rippleColor_dark">#40ffffff</color>
+    <color name="previewBackgroundColor_dark">#212121</color>
+
+    <color name="colorPrimary_black">#000000</color>
+    <color name="colorPrimaryDark_black">#1a1a1a</color>
+    <color name="colorAccent_black">#1a1a1a</color>
+    <color name="colorText_black">#ffffff</color>
+    <color name="colorTextSecondary_black">#96ffffff</color>
+    <color name="menuBackground_black">#cc000000</color>
+    <color name="cardBackgroundColor_black">#1a1a1a</color>
+    <color name="progressBarColor_black">#ffffff</color>
+    <color name="rippleColor_black">#40ffffff</color>
+    <color name="previewBackgroundColor_black">#000000</color>
 </resources>

@@ -5,33 +5,24 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.Utils;
 import com.b_lam.resplash.activities.DetailActivity;
-import com.b_lam.resplash.activities.MainActivity;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -162,14 +153,14 @@ public class FeaturedFragment extends Fragment{
     private OnClickListener<Photo> onClickListener = new OnClickListener<Photo>(){
         @Override
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
-            Intent i = new Intent(getContext(), DetailActivity.class);
+            final Intent i = new Intent(getContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
 
             String layout = sharedPreferences.getString("item_layout", "List");
 
             ImageView imageView;
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || sharedPreferences.getString("item_layout", "List").equals("Grid")) {
+            if (layout.equals("Grid")) {
                 startActivity(i);
             } else if (layout.equals("Cards")) {
                 imageView = (ImageView) v.findViewById(R.id.item_image_card_img);

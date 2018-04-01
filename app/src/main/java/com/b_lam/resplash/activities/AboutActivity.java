@@ -3,24 +3,22 @@ package com.b_lam.resplash.activities;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.LayoutInflaterCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,17 +32,27 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.AboutActivityThemeDark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.AboutActivityThemeBlack);
+                break;
+        }
+
         super.onCreate(savedInstanceState);
 
         LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_about);
 
         ButterKnife.bind(this);
 
         Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material, getTheme());
-        upArrow.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
+        upArrow.setColorFilter(ThemeUtils.getThemeAttrColor(this, R.attr.menuIconColor), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -182,6 +190,10 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
     public void goToURL(String link) {
         Uri uri = Uri.parse(link);
-        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+        else
+            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 }

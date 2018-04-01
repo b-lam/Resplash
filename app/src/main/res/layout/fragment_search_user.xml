@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/search_user_container"
-    android:background="@color/md_white_1000"
+    android:background="?attr/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.b_lam.resplash.fragments.SearchUserFragment">
 
@@ -14,14 +14,14 @@
         android:layout_gravity="center"
         android:textSize="18sp"
         android:text="@string/no_results"/>
+
     <ProgressBar
         android:id="@+id/fragment_search_user_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        style="?android:progressBarStyleLarge"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
         android:visibility="gone"/>
 
     <tr.xip.errorview.ErrorView
@@ -30,6 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
+        app:ev_titleColor="?attr/primaryTextColor"
+        app:ev_subtitleColor="?attr/primaryTextColor"
         app:ev_retryVisible="false"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -37,6 +39,7 @@
         android:id="@+id/swipeContainerSearchUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_search_user_recycler"
             android:layout_width="match_parent"
@@ -45,6 +48,6 @@
             android:visibility="gone"
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

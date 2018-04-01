@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 import butterknife.BindView;
@@ -32,9 +34,20 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.IntroActivityThemeDark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.IntroActivityThemeBlack);
+                break;
+        }
+
         super.onCreate(savedInstanceState);
 
         LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_intro);
 

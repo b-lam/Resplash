@@ -20,11 +20,8 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_collection_detail"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:gravity="center"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                style="@style/ResplashToolbarTheme"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvCollectionDescription"
@@ -67,9 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        style="?android:progressBarStyleLarge"/>
+        android:scaleX="0.75"
+        android:scaleY="0.75" />
 
     <tr.xip.errorview.ErrorView
         android:id="@+id/fragment_collection_detail_error_view"

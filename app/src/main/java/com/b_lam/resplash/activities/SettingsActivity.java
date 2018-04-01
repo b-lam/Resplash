@@ -2,13 +2,10 @@ package com.b_lam.resplash.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.design.widget.Snackbar;
@@ -16,7 +13,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,11 +23,11 @@ import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
+import com.b_lam.resplash.util.Utils;
 import com.bumptech.glide.Glide;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
 import java.io.File;
-import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -43,16 +39,27 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.SettingsActivityThemeDark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.SettingsActivityThemeBlack);
+                break;
+        }
+
         super.onCreate(savedInstanceState);
 
         LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_settings);
 
         ButterKnife.bind(this);
 
         Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material, getTheme());
-        upArrow.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
+        upArrow.setColorFilter(ThemeUtils.getThemeAttrColor(this, R.attr.menuIconColor), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -149,6 +156,11 @@ public class SettingsActivity extends AppCompatActivity {
 
             if(key.equals("language")) {
                 showRestartSnackbar();
+                LocaleUtils.loadLocale(getActivity().getBaseContext());
+            }
+
+            if(key.equals("theme")) {
+                restartActivity();
             }
         }
 
@@ -157,20 +169,21 @@ public class SettingsActivity extends AppCompatActivity {
                     .setAction(getString(R.string.restart), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = getActivity().getIntent();
-                            getActivity().finish();
-                            startActivity(intent);
-                            activityRestarted = true;
-
+                            restartActivity();
                         }
                     });
-
-            snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.md_white_1000));
+            snackbar.getView().setBackgroundColor(ThemeUtils.getThemeAttrColor(getActivity(), R.attr.colorPrimaryDark));
+            snackbar.getView().setElevation(Utils.dpToPx(getActivity(), 6));
             snackbar.show();
         }
+
+        private void restartActivity(){
+            Intent intent = getActivity().getIntent();
+            getActivity().finish();
+            startActivity(intent);
+            activityRestarted = true;
+        }
     }
-
-
 
     private static long dirSize(File dir) {
         if (dir.exists()) {

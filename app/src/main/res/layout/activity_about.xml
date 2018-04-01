@@ -19,10 +19,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_about"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+            style="@style/ResplashToolbarTheme"
             app:layout_scrollFlags="scroll"/>
 
     </android.support.design.widget.AppBarLayout>
@@ -41,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
                 android:paddingTop="20dp">
 
                 <LinearLayout
@@ -78,8 +76,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_camera"
-                            app:ico_size="20dp"
+                            android:src="?attr/cameraIcon"
                             style="@style/material_icon" />
 
                         <LinearLayout
@@ -100,8 +97,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_information_outline"
-                            app:ico_size="20dp"
+                            android:src="?attr/infoIcon"
                             style="@style/material_icon" />
 
                         <LinearLayout
@@ -127,8 +123,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_book_open"
-                            app:ico_size="20dp"
+                            android:src="?attr/introIcon"
                             style="@style/material_icon" />
 
                         <TextView
@@ -142,8 +137,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_github_circle"
-                            app:ico_size="20dp"
+                            android:src="?attr/gitHubIcon"
                             style="@style/material_icon" />
 
                         <TextView
@@ -160,6 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
                 android:layout_marginTop="10dp"
                 android:paddingTop="20dp">
 
@@ -171,7 +166,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
@@ -182,8 +177,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="gmd_star"
-                            app:ico_size="20dp"
+                            android:src="?attr/starIcon"
                             style="@style/material_icon" />
 
                         <LinearLayout
@@ -208,8 +202,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_gift"
-                            app:ico_size="20dp"
+                            android:src="?attr/donateIcon"
                             style="@style/material_icon" />
 
 
@@ -235,8 +228,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="gmd_bug_report"
-                            app:ico_size="20dp"
+                            android:src="?attr/bugReportIcon"
                             style="@style/material_icon" />
 
                         <LinearLayout
@@ -265,6 +257,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
                 android:layout_marginTop="10dp"
                 android:paddingTop="20dp">
 
@@ -276,7 +269,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
@@ -287,8 +280,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_account"
-                            app:ico_size="20dp"
+                            android:src="?attr/profileIcon"
                             style="@style/material_icon" />
 
                         <LinearLayout
@@ -313,8 +305,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_earth"
-                            app:ico_size="20dp"
+                            android:src="?attr/browserIcon"
                             style="@style/material_icon" />
 
                         <TextView
@@ -328,8 +319,7 @@
                         style="@style/about_entry">
 
                         <ImageView
-                            app:ico_icon="cmd_instagram"
-                            app:ico_size="20dp"
+                            android:src="?attr/instagramIcon"
                             style="@style/material_icon" />
 
                         <TextView
@@ -346,6 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
                 android:layout_marginTop="10dp"
                 android:paddingTop="20dp">
 
@@ -357,7 +348,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
@@ -365,10 +356,7 @@
 
                     <LinearLayout
                         android:id="@+id/container_about_library1"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library1_title"
@@ -383,16 +371,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library2"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library2_title"
@@ -407,16 +390,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library3"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library3_title"
@@ -431,16 +409,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library4"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library4_title"
@@ -455,16 +428,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library5"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library5_title"
@@ -479,16 +447,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library6"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library6_title"
@@ -503,16 +466,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library7"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library7_title"
@@ -527,16 +485,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library8"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library8_title"
@@ -551,16 +504,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library9"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library9_title"
@@ -575,16 +523,11 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@color/Link_Water" />
+                        android:background="?attr/dividerColor" />
 
                     <LinearLayout
                         android:id="@+id/container_about_library10"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        style="@style/about_entry">
+                        style="@style/about_library">
 
                         <TextView
                             android:text="@string/about_library10_title"
@@ -595,12 +538,6 @@
                             style="@style/about_subtitle_text"/>
 
                     </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/Link_Water" />
 
                 </LinearLayout>
 

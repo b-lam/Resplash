@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/colorPrimary">
+            android:background="?attr/cardBackgroundColor">
 
             <ImageView
                 android:id="@+id/item_image_card_img"
@@ -28,33 +28,33 @@
                 android:adjustViewBounds="true"
                 android:transitionName="imageCover"
                 android:scaleType="fitXY"
-                android:background="@color/colorPrimary"/>
+                android:background="?attr/cardBackgroundColor"/>
 
             <FrameLayout
-            android:id="@+id/item_image_text_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@color/colorPrimary">
+                android:id="@+id/item_image_text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="?attr/cardBackgroundColor">
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:elevation="10dp"
-            android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:elevation="10dp"
+                android:orientation="vertical">
 
             <TextView
-            android:id="@+id/item_image_card_author"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/colorText"
-            android:lines="1"
-            android:ellipsize="end"
-            android:textSize="16sp" />
+                android:id="@+id/item_image_card_author"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="?attr/primaryTextColor"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textSize="16sp"/>
 
             </LinearLayout>
 

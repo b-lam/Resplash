@@ -1,10 +1,8 @@
 package com.b_lam.resplash.activities;
 
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -18,7 +16,7 @@ import com.b_lam.resplash.data.data.Me;
 import com.b_lam.resplash.data.service.UserService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.util.LocaleUtils;
-import com.mikepenz.iconics.context.IconicsLayoutInflater;
+import com.b_lam.resplash.util.ThemeUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,17 +52,27 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.EditProfileActivityThemeDark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.EditProfileActivityThemeBlack);
+                break;
+        }
+
         super.onCreate(savedInstanceState);
 
         LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_edit_profile);
 
         ButterKnife.bind(this);
 
         Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material, getTheme());
-        upArrow.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
+        upArrow.setColorFilter(ThemeUtils.getThemeAttrColor(this, R.attr.menuIconColor), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -171,7 +179,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
     public void onRequestMeProfileSuccess(Call<Me> call, Response<Me> response) {
         if (response.isSuccessful() && response.body() != null) {
             AuthManager.getInstance().writeUserInfo(response.body());
-            Toast.makeText(this, getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.updated_profile), Toast.LENGTH_SHORT).show();
             finish();
         } else {
             Toast.makeText(this, getString(R.string.cannot_update_profile), Toast.LENGTH_SHORT).show();

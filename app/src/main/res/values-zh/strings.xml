@@ -50,6 +50,7 @@
     <array name="theme">
         <item>明亮</item>
         <item>深沉</item>
+        <item>黑色</item>
     </array>
     <string name="default_theme">明亮</string>
     <string name="restart">重启</string>
@@ -179,7 +180,7 @@
     <string name="cancel">取消</string>
 
     <string name="no_results">没有结果</string>
-    <string name="login">登入</string>
+    <string name="log_in">登入</string>
     <string name="join">加入</string>
     <string name="edit_title">编辑资料</string>
     <string name="request_token_failed">Access token 请求失败</string>

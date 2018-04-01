@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingBottom="10dp"
     tools:context="com.b_lam.resplash.activities.DonateActivity">
 
     <LinearLayout
@@ -23,23 +20,23 @@
                 style="@style/material_image_button"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                app:srcCompat="@drawable/ic_close_black_24dp" />
+                android:src="?attr/closeIcon" />
 
         </RelativeLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/splash"
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp"/>
+            android:src="?attr/resplashLogo"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:id="@+id/donate_loading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="50dp">
+            android:paddingTop="25dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -50,9 +47,10 @@
                 android:textSize="16sp"/>
 
             <ProgressBar
-                style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scaleX="0.75"
+                android:scaleY="0.75"
                 android:paddingTop="15dp"/>
 
         </LinearLayout>
@@ -62,10 +60,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             android:visibility="gone"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginEnd="10dp"
+            android:paddingTop="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,16 +84,9 @@
 
                 <LinearLayout
                     android:id="@+id/container_donate_item1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    style="@style/donate_item_row">
 
                     <LinearLayout
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         style="@style/donate_item_description">
 
                         <TextView
@@ -118,22 +112,13 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@color/Link_Water" />
+                    android:background="?attr/dividerColor" />
 
                 <LinearLayout
                     android:id="@+id/container_donate_item2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    style="@style/donate_item_row">
 
                     <LinearLayout
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         style="@style/donate_item_description">
 
                         <TextView
@@ -159,22 +144,13 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@color/Link_Water" />
+                    android:background="?attr/dividerColor" />
 
                 <LinearLayout
                     android:id="@+id/container_donate_item3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    style="@style/donate_item_row">
 
                     <LinearLayout
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         style="@style/donate_item_description">
 
                         <TextView
@@ -200,22 +176,13 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@color/Link_Water" />
+                    android:background="?attr/dividerColor" />
 
                 <LinearLayout
                     android:id="@+id/container_donate_item4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal">
+                    style="@style/donate_item_row">
 
                     <LinearLayout
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         style="@style/donate_item_description">
 
                         <TextView
@@ -237,12 +204,6 @@
                         android:textAlignment="center"/>
 
                 </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/Link_Water" />
 
             </LinearLayout>
 
