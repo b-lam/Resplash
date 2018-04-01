@@ -34,6 +34,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.b_lam.resplash.BuildConfig;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.LikePhotoResult;
@@ -117,7 +118,7 @@ public class DetailActivity extends AppCompatActivity{
                     switch (DownloadHelper.getInstance(DetailActivity.this).getDownloadStatus(cursor)) {
                         case DownloadHelper.DownloadStatus.SUCCESS:
                             File file = new File(DownloadHelper.getInstance(DetailActivity.this).getFilePath(downloadReference));
-                            Uri uri = FileProvider.getUriForFile(DetailActivity.this, "com.b_lam.resplash.fileprovider", file);
+                            Uri uri = FileProvider.getUriForFile(DetailActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", file);
                             getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
                             if (currentAction == WALLPAPER) {
                                 try {
