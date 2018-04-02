@@ -24,8 +24,8 @@ public class SearchService {
 
     /** <br> data. */
 
-    public void searchPhotos(String query, int page, final OnRequestPhotosListener l) {
-        Call<SearchPhotosResult> searchPhotos = buildApi(buildClient()).searchPhotos(query, page);
+    public void searchPhotos(String query, int page, int per_page, String collections, String orientation, final OnRequestPhotosListener l) {
+        Call<SearchPhotosResult> searchPhotos = buildApi(buildClient()).searchPhotos(query, page, per_page, collections, orientation);
         searchPhotos.enqueue(new Callback<SearchPhotosResult>() {
             @Override
             public void onResponse(Call<SearchPhotosResult> call, retrofit2.Response<SearchPhotosResult> response) {
@@ -44,8 +44,8 @@ public class SearchService {
         call = searchPhotos;
     }
 
-    public void searchUsers(String query, int page, final OnRequestUsersListener l) {
-        Call<SearchUsersResult> searchUsers = buildApi(buildClient()).searchUsers(query, page);
+    public void searchUsers(String query, int page, int per_page, final OnRequestUsersListener l) {
+        Call<SearchUsersResult> searchUsers = buildApi(buildClient()).searchUsers(query, page, per_page);
         searchUsers.enqueue(new Callback<SearchUsersResult>() {
             @Override
             public void onResponse(Call<SearchUsersResult> call, retrofit2.Response<SearchUsersResult> response) {
@@ -64,8 +64,8 @@ public class SearchService {
         call = searchUsers;
     }
 
-    public void searchCollections(String query, int page, final OnRequestCollectionsListener l) {
-        Call<SearchCollectionsResult> searchCollections = buildApi(buildClient()).searchCollections(query, page);
+    public void searchCollections(String query, int page, int per_page, final OnRequestCollectionsListener l) {
+        Call<SearchCollectionsResult> searchCollections = buildApi(buildClient()).searchCollections(query, page, per_page);
         searchCollections.enqueue(new Callback<SearchCollectionsResult>() {
             @Override
             public void onResponse(Call<SearchCollectionsResult> call, retrofit2.Response<SearchCollectionsResult> response) {

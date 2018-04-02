@@ -11,12 +11,13 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:animateLayoutChanges="true">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_search"
-            style="@style/ResplashToolbarTheme"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
+            android:elevation="4dp"
+            style="@style/ResplashToolbarTheme">
 
             <EditText
                 android:id="@+id/search_editText"
@@ -28,7 +29,7 @@
                 android:textColor="?attr/primaryTextColor"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"/>
 
         </android.support.v7.widget.Toolbar>
 
@@ -36,11 +37,24 @@
             android:id="@+id/search_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
             app:tabIndicatorColor="?attr/primaryTextColor"
             app:tabSelectedTextColor="?attr/primaryTextColor"
             app:tabTextColor="?attr/secondaryTextColor"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
+
+        <Spinner
+            android:id="@+id/search_options_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:elevation="2dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:backgroundTint="?attr/primaryTextColor"
+            android:dropDownVerticalOffset="7dp"
+            app:popupTheme="?attr/toolbarPopupTheme"/>
 
     </android.support.design.widget.AppBarLayout>
 
