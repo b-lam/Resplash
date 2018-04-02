@@ -140,6 +140,12 @@
     <string name="search_hint">Search</string>
     <string name="search_title">Search</string>
     <string name="action_clear_text">Clear text</string>
+    <array name="search_photos_orientations">
+        <item>All</item>
+        <item>Landscape</item>
+        <item>Portrait</item>
+        <item>Squarish</item>
+    </array>
 
     <!-- InfoDialog -->
     <string name="photo_dimensions">Dimensions</string>
@@ -149,6 +155,7 @@
     <string name="aperture">Aperture</string>
     <string name="iso">ISO</string>
     <string name="focal_length">Focal length</string>
+
     <!-- About -->
     <string name="about_title">About</string>
     <string name="about_unsplash_title">Unsplash.com</string>

@@ -52,7 +52,6 @@ public class Resplash extends Application{
     public static final String DOWNLOAD_PHOTO_FORMAT = ".jpg";
 
     public static final int DEFAULT_PER_PAGE = 30;
-    public static final int SEARCH_PER_PAGE = 20;
 
     public static final String RESPLASH_USER_GROUP = "resplash_user_group";
 

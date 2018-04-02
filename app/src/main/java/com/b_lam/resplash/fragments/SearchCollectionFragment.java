@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.CollectionDetailActivity;
 import com.b_lam.resplash.data.data.Collection;
 import com.b_lam.resplash.data.data.SearchCollectionsResult;
@@ -200,7 +201,7 @@ public class SearchCollectionFragment extends Fragment {
         };
 
         if(mQuery != null) {
-            mService.searchCollections(mQuery, mPage, mCollectionRequestListener);
+            mService.searchCollections(mQuery, mPage, 30, mCollectionRequestListener);
             mNoResultTextView.setVisibility(View.GONE);
         }
 
@@ -259,7 +260,7 @@ public class SearchCollectionFragment extends Fragment {
         };
 
         if(mQuery != null) {
-            mService.searchCollections(mQuery, mPage, mCollectionRequestListener);
+            mService.searchCollections(mQuery, mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
             mNoResultTextView.setVisibility(View.GONE);
         }
 

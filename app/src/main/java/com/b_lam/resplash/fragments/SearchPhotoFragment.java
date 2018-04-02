@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.DetailActivity;
+import com.b_lam.resplash.activities.SearchActivity;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.data.SearchPhotosResult;
 import com.b_lam.resplash.data.service.SearchService;
@@ -234,7 +235,7 @@ public class SearchPhotoFragment extends Fragment {
         };
 
         if(mQuery != null) {
-            mService.searchPhotos(mQuery, mPage, mPhotoRequestListener);
+            mService.searchPhotos(mQuery, mPage, 30, null, null, mPhotoRequestListener);
             mNoResultTextView.setVisibility(View.GONE);
         }
     }
@@ -292,7 +293,7 @@ public class SearchPhotoFragment extends Fragment {
         };
 
         if(mQuery != null) {
-            mService.searchPhotos(mQuery, mPage, mPhotoRequestListener);
+            mService.searchPhotos(mQuery, mPage, Resplash.DEFAULT_PER_PAGE, null, ((SearchActivity) getActivity()).getSearchOrientation(), mPhotoRequestListener);
             mNoResultTextView.setVisibility(View.GONE);
         }
     }

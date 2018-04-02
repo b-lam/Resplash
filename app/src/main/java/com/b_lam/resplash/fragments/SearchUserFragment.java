@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.UserActivity;
 import com.b_lam.resplash.data.data.SearchUsersResult;
 import com.b_lam.resplash.data.data.User;
@@ -199,7 +200,7 @@ public class SearchUserFragment extends Fragment {
         };
 
         if(mQuery != null) {
-            mService.searchUsers(mQuery, mPage, mUserRequestListener);
+            mService.searchUsers(mQuery, mPage, 30, mUserRequestListener);
             mNoResultTextView.setVisibility(View.GONE);
         }
     }
@@ -257,7 +258,7 @@ public class SearchUserFragment extends Fragment {
         };
 
         if(mQuery != null) {
-            mService.searchUsers(mQuery, mPage, mUserRequestListener);
+            mService.searchUsers(mQuery, mPage, Resplash.DEFAULT_PER_PAGE, mUserRequestListener);
             mNoResultTextView.setVisibility(View.GONE);
         }
     }

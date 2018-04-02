@@ -23,7 +23,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.b_lam.resplash.fragments.SearchCollectionFragment;
@@ -39,12 +42,17 @@ import com.b_lam.resplash.R;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 
-public class SearchActivity extends AppCompatActivity implements EditText.OnEditorActionListener{
+public class SearchActivity extends AppCompatActivity implements EditText.OnEditorActionListener, AdapterView.OnItemSelectedListener{
+
+    private static final int SEARCH_PHOTO_PAGE = 0;
+    private static final int SEARCH_COLLECTION_PAGE = 1;
+    private static final int SEARCH_USER_PAGE = 2;
 
     @BindView(R.id.search_editText) EditText mEditText;
     @BindView(R.id.toolbar_search) Toolbar mToolbar;
     @BindView(R.id.search_tabs) TabLayout mTabLayout;
     @BindView(R.id.search_viewpager) ViewPager mViewPager;
+    @BindView(R.id.search_options_spinner) Spinner mSpinner;
 
     private String TAG = "SearchActivity";
     private MenuItem mActionClear;
@@ -83,7 +91,13 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
         mPagerAdapter.addFragment(SearchUserFragment.newInstance(null), getString(R.string.search_users));
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
+        mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.search_photos_orientations, R.layout.spinner_row);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(adapter);
+        mSpinner.setOnItemSelectedListener(this);
 
         mEditText.setOnEditorActionListener(this);
         mEditText.setFocusable(true);
@@ -110,7 +124,7 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
         inflater.inflate(R.menu.search, menu);
         mActionClear = menu.getItem(0);
 
-        if(!mEditText.getText().toString().equals(""))
+        if(!mEditText.getText().toString().isEmpty())
             mActionClear.setVisible(true);
 
         return true;
@@ -137,7 +151,7 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
         FragmentTransaction transactionUser = getSupportFragmentManager().beginTransaction();
 
         String text = textView.getText().toString();
-        if (!text.equals("")) {
+        if (!text.isEmpty()) {
             transactionPhoto.replace(R.id.search_photo_container, SearchPhotoFragment.newInstance(text)).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
             transactionCollection.replace(R.id.search_collection_container, SearchCollectionFragment.newInstance(text)).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
             transactionUser.replace(R.id.search_user_container, SearchUserFragment.newInstance(text)).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
@@ -166,7 +180,7 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
         @Override
         public void afterTextChanged(Editable editable) {
             if(mActionClear != null) {
-                if (mEditText.getText().toString().equals("")) {
+                if (mEditText.getText().toString().isEmpty()) {
                     mActionClear.setVisible(false);
                 } else {
                     mActionClear.setVisible(true);
@@ -174,6 +188,60 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
             }
         }
     };
+
+    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            switch (position) {
+                case SEARCH_PHOTO_PAGE:
+                    mSpinner.setVisibility(View.VISIBLE);
+                    break;
+                case SEARCH_COLLECTION_PAGE:
+                case SEARCH_USER_PAGE:
+                    mSpinner.setVisibility(View.GONE);
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        String text = mEditText.getText().toString();
+        if (!text.isEmpty()) {
+            FragmentTransaction transactionPhoto = getSupportFragmentManager().beginTransaction();
+            transactionPhoto.replace(R.id.search_photo_container, SearchPhotoFragment.newInstance(text)).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public String getSearchOrientation() {
+        switch (mSpinner.getSelectedItemPosition()) {
+            case 0:
+                return null;
+            case 1:
+                return "landscape";
+            case 2:
+                return "portrait";
+            case 3:
+                return "squarish";
+            default:
+                return null;
+        }
+    }
 
     class PagerAdapter extends FragmentPagerAdapter {
 
