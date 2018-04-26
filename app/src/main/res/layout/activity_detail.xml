@@ -56,6 +56,7 @@
                 android:id="@+id/detail_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -82,7 +83,7 @@
 
                     <TextView
                         android:id="@+id/tvUser"
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_gravity="center_vertical"
@@ -101,19 +102,47 @@
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
                         android:layout_marginStart="20dp"
-                        android:src="@drawable/ic_heart_outline_grey"
+                        android:src="@drawable/ic_heart_outline_grey_24dp"
+                        android:contentDescription="Like"
                         android:onClick="likeImage"/>
-                    <!--<ImageButton-->
-                    <!--android:id="@+id/btnAddToCollection"-->
-                    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="24dp"-->
-                    <!--android:scaleType="fitCenter"-->
-                    <!--android:adjustViewBounds="true"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:onClick="addToCollection"/>-->
+
+                    <ImageButton
+                        android:id="@+id/btnAddToCollection"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_gravity="center"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_bookmark_outline_grey_24dp"
+                        android:contentDescription="Add to collection"
+                        android:onClick="addToCollection"/>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:textColor="?attr/primaryTextColor"/>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:textColor="?attr/primaryTextColor"/>
 
                 <TextView
                     android:id="@+id/tvLocation"

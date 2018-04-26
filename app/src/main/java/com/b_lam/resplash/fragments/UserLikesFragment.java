@@ -1,11 +1,11 @@
 package com.b_lam.resplash.fragments;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
@@ -40,8 +40,6 @@ import java.util.List;
 import com.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;
-import tr.xip.errorview.ErrorView;
-
 
 public class UserLikesFragment extends Fragment {
 
@@ -52,7 +50,8 @@ public class UserLikesFragment extends Fragment {
     private RecyclerView mImageRecycler;
     private SwipeRefreshLayout mSwipeContainer;
     private ProgressBar mImagesProgress;
-    private ErrorView mImagesErrorView;
+    private ConstraintLayout mHttpErrorView;
+    private ConstraintLayout mNetworkErrorView;
     private ItemAdapter mFooterAdapter;
     private int mPage, mColumns;
     private String mSort;
@@ -97,10 +96,11 @@ public class UserLikesFragment extends Fragment {
         mPage = 1;
 
         View rootView = inflater.inflate(R.layout.fragment_user_likes, container, false);
-        mImageRecycler = (RecyclerView) rootView.findViewById(R.id.fragment_user_likes_recycler);
-        mImagesProgress = (ProgressBar) rootView.findViewById(R.id.fragment_user_likes_progress);
-        mImagesErrorView = (ErrorView) rootView.findViewById(R.id.fragment_user_likes_error_view);
-        mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerUserLikes);
+        mImageRecycler = rootView.findViewById(R.id.fragment_user_likes_recycler);
+        mImagesProgress = rootView.findViewById(R.id.fragment_user_likes_progress);
+        mHttpErrorView = rootView.findViewById(R.id.http_error_view);
+        mNetworkErrorView = rootView.findViewById(R.id.network_error_view);
+        mSwipeContainer = rootView.findViewById(R.id.swipeContainerUserLikes);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
         mImageRecycler.setLayoutManager(gridLayoutManager);
@@ -188,7 +188,8 @@ public class UserLikesFragment extends Fragment {
         if(mPhotos == null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
 
@@ -204,13 +205,13 @@ public class UserLikesFragment extends Fragment {
                         mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.VISIBLE);
-                        mImagesErrorView.setVisibility(View.GONE);
+                        mHttpErrorView.setVisibility(View.GONE);
+                        mNetworkErrorView.setVisibility(View.GONE);
                     } else {
-                        mImagesErrorView.setTitle(R.string.error_http);
-                        mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.GONE);
-                        mImagesErrorView.setVisibility(View.VISIBLE);
+                        mHttpErrorView.setVisibility(View.VISIBLE);
+                        mNetworkErrorView.setVisibility(View.GONE);
                     }
                 }
             }
@@ -219,12 +220,10 @@ public class UserLikesFragment extends Fragment {
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
                 if (isAdded()) {
                     Log.d(TAG, t.toString());
-                    mImagesErrorView.setRetryVisible(false);
-                    mImagesErrorView.setTitle(R.string.error_network);
-                    mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.VISIBLE);
                     mSwipeContainer.setRefreshing(false);
                 }
             }
@@ -233,11 +232,10 @@ public class UserLikesFragment extends Fragment {
         if (mUser != null) {
             mService.requestUserLikes(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
         } else {
-            mImagesErrorView.setRetryVisible(false);
-            mImagesErrorView.setSubtitle(R.string.failed_to_load_profile);
             mImagesProgress.setVisibility(View.GONE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.VISIBLE);
+            mHttpErrorView.setVisibility(View.VISIBLE);
+            mNetworkErrorView.setVisibility(View.GONE);
             mSwipeContainer.setRefreshing(false);
         }
     }
@@ -246,7 +244,8 @@ public class UserLikesFragment extends Fragment {
         if(mPhotos == null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
         mPage = 1;
@@ -263,13 +262,13 @@ public class UserLikesFragment extends Fragment {
                         mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.VISIBLE);
-                        mImagesErrorView.setVisibility(View.GONE);
+                        mHttpErrorView.setVisibility(View.GONE);
+                        mNetworkErrorView.setVisibility(View.GONE);
                     } else {
-                        mImagesErrorView.setTitle(R.string.error_http);
-                        mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.GONE);
-                        mImagesErrorView.setVisibility(View.VISIBLE);
+                        mHttpErrorView.setVisibility(View.VISIBLE);
+                        mNetworkErrorView.setVisibility(View.GONE);
                     }
                     if (mSwipeContainer.isRefreshing()) {
                         Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
@@ -282,12 +281,10 @@ public class UserLikesFragment extends Fragment {
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
                 if (isAdded()) {
                     Log.d(TAG, t.toString());
-                    mImagesErrorView.setRetryVisible(false);
-                    mImagesErrorView.setTitle(R.string.error_network);
-                    mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.VISIBLE);
                     mSwipeContainer.setRefreshing(false);
                 }
             }
@@ -296,11 +293,10 @@ public class UserLikesFragment extends Fragment {
         if (mUser != null) {
             mService.requestUserLikes(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mPhotoRequestListener);
         } else {
-            mImagesErrorView.setRetryVisible(false);
-            mImagesErrorView.setSubtitle(R.string.failed_to_load_profile);
             mImagesProgress.setVisibility(View.GONE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.VISIBLE);
+            mHttpErrorView.setVisibility(View.VISIBLE);
+            mNetworkErrorView.setVisibility(View.GONE);
             mSwipeContainer.setRefreshing(false);
         }
     }

@@ -8,10 +8,10 @@
     <string name="action_view_on_unsplash">Open in browser</string>
 
     <!-- ErrorView -->
-    <string name="error_http">Server Error</string>
-    <string name="error_http_subtitle">There seems to be a problem with the server.</string>
-    <string name="error_network">No connection</string>
-    <string name="error_network_subtitle">There seems to be a problem with your internet.</string>
+    <string name="error_http">Oops.</string>
+    <string name="error_http_subtitle">We seem to be out of requests for this hour\n\nPlease try again later</string>
+    <string name="error_network">Oops.</string>
+    <string name="error_network_subtitle">There seems to be a problem with your internet</string>
 
     <!-- Settings -->
     <string name="title_quality_section">Quality</string>
@@ -156,6 +156,24 @@
     <string name="iso">ISO</string>
     <string name="focal_length">Focal length</string>
 
+    <!-- Collections -->
+    <string name="add_to_collection">Add to collection</string>
+    <string name="create_new_collection">Create new collection</string>
+    <string name="create_a_new_collection">Create a new collection</string>
+    <string name="create">Create</string>
+    <string name="delete">Delete</string>
+    <string name="collection_name_hint">Name</string>
+    <string name="collection_description_hint">Description (optional)</string>
+    <string name="make_collection_private">Make collection private</string>
+    <string name="collection_name_is_required">Name is required</string>
+    <string name="failed_to_create_collection">Failed to create collection</string>
+    <string name="failed_to_save_collection">Failed to save collection</string>
+    <string name="failed_to_delete_collection">Failed to delete collection</string>
+    <string name="edit_collection">Edit collection</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
     <!-- About -->
     <string name="about_title">About</string>
     <string name="about_unsplash_title">Unsplash.com</string>
@@ -219,7 +237,7 @@
     <string name="setting_wallpaper">Setting wallpaper&#8230;</string>
     <string name="cancel">Cancel</string>
 
-    <string name="no_results">No results</string>
+    <string name="no_results">There\'s nothing here&#8230;</string>
     <string name="log_in">Log in</string>
     <string name="join">Join</string>
     <string name="edit_title">Edit Profile</string>
@@ -261,5 +279,4 @@
     <string name="bio_hint">Bio</string>
     <string name="error_loading_photo">There seems to be a problem loading this photo</string>
     <string name="need_to_log_in">You need to log in to do this</string>
-
 </resources>

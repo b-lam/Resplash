@@ -18,8 +18,8 @@ public interface UserApi {
 
     @GET("users/{username}")
     Call<User> getUserProfile(@Path("username") String username,
-                              @Query("w") int w,
-                              @Query("h") int h);
+                              @Query("w") Integer w,
+                              @Query("h") Integer h);
 
     @GET("me")
     Call<Me> getMeProfile();
@@ -31,5 +31,6 @@ public interface UserApi {
                              @Query("email") String email,
                              @Query("url") String url,
                              @Query("location") String location,
-                             @Query("bio") String bio);
+                             @Query("bio") String bio,
+                             @Query("instagram_username") String instagram_username);
 }

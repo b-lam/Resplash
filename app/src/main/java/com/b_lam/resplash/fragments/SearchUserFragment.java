@@ -2,6 +2,7 @@ package com.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,7 +21,6 @@ import com.b_lam.resplash.activities.UserActivity;
 import com.b_lam.resplash.data.data.SearchUsersResult;
 import com.b_lam.resplash.data.data.User;
 import com.b_lam.resplash.data.service.SearchService;
-import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;
-import tr.xip.errorview.ErrorView;
+
 
 public class SearchUserFragment extends Fragment {
 
@@ -46,8 +46,9 @@ public class SearchUserFragment extends Fragment {
     private RecyclerView mImageRecycler;
     private SwipeRefreshLayout mSwipeContainer;
     private ProgressBar mImagesProgress;
-    private ErrorView mImagesErrorView;
-    private TextView mNoResultTextView;
+    private ConstraintLayout mHttpErrorView;
+    private ConstraintLayout mNetworkErrorView;
+    private ConstraintLayout mNoResultView;
     private ItemAdapter mFooterAdapter;
     private int mPage;
     private String mQuery;
@@ -85,11 +86,12 @@ public class SearchUserFragment extends Fragment {
         mPage = 1;
 
         View rootView = inflater.inflate(R.layout.fragment_search_user, container, false);
-        mImageRecycler = (RecyclerView) rootView.findViewById(R.id.fragment_search_user_recycler);
-        mImagesProgress = (ProgressBar) rootView.findViewById(R.id.fragment_search_user_progress);
-        mImagesErrorView = (ErrorView) rootView.findViewById(R.id.fragment_search_user_error_view);
-        mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerSearchUser);
-        mNoResultTextView = (TextView) rootView.findViewById(R.id.user_no_results);
+        mImageRecycler = rootView.findViewById(R.id.fragment_search_user_recycler);
+        mImagesProgress = rootView.findViewById(R.id.fragment_search_user_progress);
+        mHttpErrorView = rootView.findViewById(R.id.http_error_view);
+        mNetworkErrorView = rootView.findViewById(R.id.network_error_view);
+        mSwipeContainer = rootView.findViewById(R.id.swipeContainerSearchUser);
+        mNoResultView = rootView.findViewById(R.id.no_results_view);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         mImageRecycler.setLayoutManager(gridLayoutManager);
@@ -157,7 +159,8 @@ public class SearchUserFragment extends Fragment {
         if(mUsers == null && mQuery != null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
         SearchService.OnRequestUsersListener mUserRequestListener = new SearchService.OnRequestUsersListener() {
@@ -172,36 +175,34 @@ public class SearchUserFragment extends Fragment {
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                     if(mUserAdapter.getItemCount() == 0){
                         mImageRecycler.setVisibility(View.GONE);
-                        mNoResultTextView.setVisibility(View.VISIBLE);
+                        mNoResultView.setVisibility(View.VISIBLE);
                     }
                 }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.VISIBLE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onRequestUsersFailed(Call<SearchUsersResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
                 mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
+                mHttpErrorView.setVisibility(View.GONE);
+                mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
             }
         };
 
         if(mQuery != null) {
             mService.searchUsers(mQuery, mPage, 30, mUserRequestListener);
-            mNoResultTextView.setVisibility(View.GONE);
+            mNoResultView.setVisibility(View.GONE);
         }
     }
 
@@ -209,7 +210,8 @@ public class SearchUserFragment extends Fragment {
         if(mUsers == null && mQuery != null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
         mPage = 1;
@@ -226,17 +228,17 @@ public class SearchUserFragment extends Fragment {
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                     if(mUserAdapter.getItemCount() == 0){
                         mImageRecycler.setVisibility(View.GONE);
-                        mNoResultTextView.setVisibility(View.VISIBLE);
+                        mNoResultView.setVisibility(View.VISIBLE);
                     }
                 }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.VISIBLE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
                     Toast.makeText(getContext(), getString(R.string.updated_users), Toast.LENGTH_SHORT).show();
@@ -247,19 +249,17 @@ public class SearchUserFragment extends Fragment {
             @Override
             public void onRequestUsersFailed(Call<SearchUsersResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
                 mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
+                mHttpErrorView.setVisibility(View.GONE);
+                mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
             }
         };
 
         if(mQuery != null) {
             mService.searchUsers(mQuery, mPage, Resplash.DEFAULT_PER_PAGE, mUserRequestListener);
-            mNoResultTextView.setVisibility(View.GONE);
+            mNoResultView.setVisibility(View.GONE);
         }
     }
 

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -32,6 +33,9 @@ import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.Collection;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
+import com.b_lam.resplash.data.tools.AuthManager;
+import com.b_lam.resplash.dialogs.EditCollectionDialog;
+import com.b_lam.resplash.dialogs.ManageCollectionsDialog;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.bumptech.glide.Glide;
@@ -50,14 +54,14 @@ import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;
-import tr.xip.errorview.ErrorView;
 
 public class CollectionDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.fragment_collection_detail_recycler) RecyclerView mImageRecycler;
     @BindView(R.id.swipeContainerCollectionDetail) SwipeRefreshLayout mSwipeContainer;
     @BindView(R.id.fragment_collection_detail_progress) ProgressBar mImagesProgress;
-    @BindView(R.id.fragment_collection_detail_error_view) ErrorView mImagesErrorView;
+    @BindView(R.id.http_error_view) ConstraintLayout mHttpErrorView;
+    @BindView(R.id.network_error_view) ConstraintLayout mNetworkErrorView;
     @BindView(R.id.toolbar_collection_detail) Toolbar mToolbar;
     @BindView(R.id.tvCollectionDescription) TextView mCollectionDescription;
     @BindView(R.id.tvUserCollection) TextView mUserCollection;
@@ -75,6 +79,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
     private String mLayoutType;
     private PhotoService photoService;
     private SharedPreferences sharedPreferences;
+    private MenuItem mEditButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,7 +216,8 @@ public class CollectionDetailActivity extends AppCompatActivity {
         if(mPhotos == null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
 
@@ -226,13 +232,13 @@ public class CollectionDetailActivity extends AppCompatActivity {
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.VISIBLE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
                     Toast.makeText(getApplicationContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
@@ -243,12 +249,10 @@ public class CollectionDetailActivity extends AppCompatActivity {
             @Override
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
                 mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
+                mHttpErrorView.setVisibility(View.GONE);
+                mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
             }
         };
@@ -262,7 +266,9 @@ public class CollectionDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.detail, menu);
+        getMenuInflater().inflate(R.menu.collection, menu);
+
+        mEditButton = menu.findItem(R.id.action_edit);
         return true;
     }
 
@@ -282,6 +288,15 @@ public class CollectionDetailActivity extends AppCompatActivity {
                     startActivity(intent);
                 else
                     Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_edit:
+                if(AuthManager.getInstance().isAuthorized()) {
+                    EditCollectionDialog editCollectionDialog = new EditCollectionDialog();
+                    editCollectionDialog.show(getFragmentManager(), null);
+                }else{
+                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(this, LoginActivity.class));
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

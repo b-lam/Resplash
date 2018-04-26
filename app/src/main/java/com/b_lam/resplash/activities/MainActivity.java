@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         super.onStart();
         AuthManager.getInstance().addOnWriteDataListener(this);
         if (AuthManager.getInstance().isAuthorized() && TextUtils.isEmpty(AuthManager.getInstance().getUsername())) {
-            AuthManager.getInstance().refreshPersonalProfile();
+            AuthManager.getInstance().requestPersonalProfile();
         }
     }
 

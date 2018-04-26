@@ -3,17 +3,20 @@ package com.b_lam.resplash.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.LocaleUtils;
@@ -37,13 +40,14 @@ import butterknife.ButterKnife;
 public class DonateActivity extends AppCompatActivity implements View.OnClickListener, IabBroadcastReceiver.IabBroadcastListener{
 
     @BindView(R.id.donate_close_btn) ImageButton btnClose;
-    @BindView(R.id.donate_thanks) TextView tvThanks;
+    @BindView(R.id.donate_thanks) ConstraintLayout mThanksView;
     @BindView(R.id.donate_loading) LinearLayout mLoadingProgress;
     @BindView(R.id.donate_products_card) CardView mProductCard;
     @BindView(R.id.donate_item1_price) TextView mProduct1Price;
     @BindView(R.id.donate_item2_price) TextView mProduct2Price;
     @BindView(R.id.donate_item3_price) TextView mProduct3Price;
     @BindView(R.id.donate_item4_price) TextView mProduct4Price;
+    @BindView(R.id.donate_thanks_animation) LottieAnimationView mAnimation;
 
     static final String TAG = "DonateActivity";
 
@@ -120,13 +124,20 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         LinearLayout[] containers = new LinearLayout[] {
-                (LinearLayout) findViewById(R.id.container_donate_item1),
-                (LinearLayout) findViewById(R.id.container_donate_item2),
-                (LinearLayout) findViewById(R.id.container_donate_item3),
-                (LinearLayout) findViewById(R.id.container_donate_item4)};
+                findViewById(R.id.container_donate_item1),
+                findViewById(R.id.container_donate_item2),
+                findViewById(R.id.container_donate_item3),
+                findViewById(R.id.container_donate_item4)};
         for (LinearLayout r : containers) {
             r.setOnClickListener(this);
         }
+
+        mAnimation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAnimation.playAnimation();
+            }
+        });
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_DONATE, null);
@@ -223,7 +234,7 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
             SkuDetails skuDetailsMeal = inventory.getSkuDetails(SKU_MEAL);
 
             if (coffee != null || smoothie != null || pizza != null || meal != null) {
-                tvThanks.setVisibility(View.VISIBLE);
+                mThanksView.setVisibility(View.VISIBLE);
             }
 
             if (skuDetailsCoffee != null && skuDetailsSmoothie != null && skuDetailsPizza != null && skuDetailsMeal != null) {
@@ -244,18 +255,17 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
             if (mHelper == null) return;
 
-            if (result.isFailure()) {
+            if (result.isSuccess()) {
+                showThanksDialog();
+            } else {
                 complain(result.toString());
-                return;
             }
 
-            Log.d(TAG, "Donation successful.");
-
-            try {
-                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
-            } catch (IabHelper.IabAsyncInProgressException e) {
-                return;
-            }
+//            try {
+//                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+//            } catch (IabHelper.IabAsyncInProgressException e) {
+//                return;
+//            }
         }
     };
 
@@ -266,10 +276,8 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
             if (mHelper == null) return;
 
             if (result.isSuccess()) {
-                alert(getString(R.string.donate_thanks));
-                tvThanks.setVisibility(View.VISIBLE);
-            }
-            else {
+                showThanksDialog();
+            } else {
                 complain(result.toString());
             }
         }
@@ -287,14 +295,21 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
     void complain(String message) {
         Log.e(TAG, "Resplash Error: " + message);
-//        alert("Error: " + message);
     }
 
-    void alert(String message) {
-        AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        bld.setMessage(message);
-        bld.setPositiveButton("OK", null);
-        Log.d(TAG, "Showing alert dialog: " + message);
-        bld.create().show();
+    void showThanksDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.donate_thanks_layout, null);
+        final LottieAnimationView animationView = view.findViewById(R.id.donate_thanks_animation);
+        animationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animationView.playAnimation();
+            }
+        });
+        builder.setView(view);
+        builder.setPositiveButton("OK", null);
+        builder.create().show();
     }
 }

@@ -6,7 +6,6 @@ import com.b_lam.resplash.data.data.Collection;
 import com.b_lam.resplash.data.data.LikePhotoResult;
 import com.b_lam.resplash.data.data.Me;
 import com.b_lam.resplash.data.data.Photo;
-import com.b_lam.resplash.data.data.PhotoDetails;
 import com.b_lam.resplash.data.data.PhotoStats;
 import com.b_lam.resplash.data.data.User;
 import com.b_lam.resplash.data.tools.AuthInterceptor;
@@ -72,8 +71,8 @@ public class PhotoService {
         call = getCuratedPhotos;
     }
 
-    public void requestStats(String id, final OnRequestStatsListener l) {
-        Call<PhotoStats> getStats = buildApi(buildClient()).getPhotoStats(id);
+    public void requestStats(String id, String resolution, int quantity, final OnRequestStatsListener l) {
+        Call<PhotoStats> getStats = buildApi(buildClient()).getPhotoStats(id, resolution, quantity);
         getStats.enqueue(new Callback<PhotoStats>() {
             @Override
             public void onResponse(Call<PhotoStats> call, Response<PhotoStats> response) {
@@ -133,17 +132,17 @@ public class PhotoService {
     }
 
     public void requestPhotoDetails(String id, final OnRequestPhotoDetailsListener l) {
-        Call<PhotoDetails> getAPhoto = buildApi(buildClient()).getAPhoto(id);
-        getAPhoto.enqueue(new Callback<PhotoDetails>() {
+        Call<Photo> getAPhoto = buildApi(buildClient()).getAPhoto(id);
+        getAPhoto.enqueue(new Callback<Photo>() {
             @Override
-            public void onResponse(Call<PhotoDetails> call, Response<PhotoDetails> response) {
+            public void onResponse(Call<Photo> call, Response<Photo> response) {
                 if (l != null) {
                     l.onRequestPhotoDetailsSuccess(call, response);
                 }
             }
 
             @Override
-            public void onFailure(Call<PhotoDetails> call, Throwable t) {
+            public void onFailure(Call<Photo> call, Throwable t) {
                 if (l != null) {
                     l.onRequestPhotoDetailsFailed(call, t);
                 }
@@ -359,8 +358,8 @@ public class PhotoService {
     }
 
     public interface OnRequestPhotoDetailsListener {
-        void onRequestPhotoDetailsSuccess(Call<PhotoDetails> call, Response<PhotoDetails> response);
-        void onRequestPhotoDetailsFailed(Call<PhotoDetails> call, Throwable t);
+        void onRequestPhotoDetailsSuccess(Call<Photo> call, Response<Photo> response);
+        void onRequestPhotoDetailsFailed(Call<Photo> call, Throwable t);
     }
 
     public interface OnReportDownloadListener {

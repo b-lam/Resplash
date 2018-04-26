@@ -126,4 +126,8 @@ public class Utils {
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return px / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
+
+    public static boolean isEmpty(String string) {
+        return string == null || string.trim().length() == 0;
+    }
 }

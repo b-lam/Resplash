@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (response.isSuccessful()) {
             Log.d(TAG, response.body().toString());
             AuthManager.getInstance().writeAccessToken(response.body());
-            AuthManager.getInstance().refreshPersonalProfile();
+            AuthManager.getInstance().requestPersonalProfile();
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LOGIN, null);

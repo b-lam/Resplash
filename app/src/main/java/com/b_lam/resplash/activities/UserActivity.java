@@ -145,22 +145,18 @@ public class UserActivity extends AppCompatActivity {
 
                 } else if (response.code() == 403) {
                     Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
-                } else {
-                    if(username != null) {
-                        mUserService.requestUserProfile(username, this);
-                    }
                 }
             }
 
             @Override
             public void onRequestUserProfileFailed(Call<User> call, Throwable t) {
-                if(username != null) {
-                    mUserService.requestUserProfile(username, this);
-                }
+                Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.failed_to_load_profile), Toast.LENGTH_LONG).show();
+                finish();
             }
         };
 
         if(username != null) {
+            mUserService.cancel();
             mUserService.requestUserProfile(username, onRequestUserProfileListener);
         }
     }

@@ -110,7 +110,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
         super.onStart();
         AuthManager.getInstance().addOnWriteDataListener(this);
         if (AuthManager.getInstance().isAuthorized() && TextUtils.isEmpty(AuthManager.getInstance().getUsername())) {
-            AuthManager.getInstance().refreshPersonalProfile();
+            AuthManager.getInstance().requestPersonalProfile();
         }
     }
 
@@ -169,6 +169,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
                     mPortfolio.getText().toString(),
                     mLocation.getText().toString(),
                     mBio.getText().toString(),
+                    mInstagram.getText().toString(),
                     this);
         } else {
             Toast.makeText(this, getString(R.string.username_cannot_be_blank), Toast.LENGTH_SHORT).show();

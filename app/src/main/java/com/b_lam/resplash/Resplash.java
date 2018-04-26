@@ -52,6 +52,8 @@ public class Resplash extends Application{
     public static final String DOWNLOAD_PHOTO_FORMAT = ".jpg";
 
     public static final int DEFAULT_PER_PAGE = 30;
+    public static final int DEFAULT_STATISTICS_QUANTITY = 30;
+    public static final String DEFAULT_STATISTICS_RESOLUTION = "days";
 
     public static final String RESPLASH_USER_GROUP = "resplash_user_group";
 
@@ -69,6 +71,7 @@ public class Resplash extends Application{
     public static final String FIREBASE_EVENT_SHARE_PHOTO = "share_photo";
     public static final String FIREBASE_EVENT_VIEW_PHOTO_STATS = "view_photo_stats";
     public static final String FIREBASE_EVENT_VIEW_PHOTO_INFO = "view_photo_info";
+    public static final String FIREBASE_EVENT_ADD_TO_COLLECTION = "add_to_collection";
     public static final String FIREBASE_EVENT_CLEAR_CACHE = "clear_cache";
 
     /** <br> life cycle. */

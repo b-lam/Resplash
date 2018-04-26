@@ -1,30 +1,24 @@
 package com.b_lam.resplash.data.data;
 
 /**
- * Category.
- * */
+ * Category
+ **/
 
 public class Category {
 
     /**
-     * id : 2
-     * title : Buildings
-     * photo_count : 3428
-     * links : {"self":"https://api.unsplash.com/categories/2","photos":"https://api.unsplash.com/categories/2/photos"}
+     "id": 6,
+     "title": "People",
+     "photo_count": 9844,
+     "links": {
+        "self": "https://api.unsplash.com/categories/6",
+        "photos": "https://api.unsplash.com/categories/6/photos"
+     }
      */
 
     public int id;
     public String title;
     public int photo_count;
-    /**
-     * self : https://api.unsplash.com/categories/2
-     * photos : https://api.unsplash.com/categories/2/photos
-     */
 
-    public Links links;
-
-    public static class Links {
-        public String self;
-        public String photos;
-    }
+    public CategoryLinks links;
 }

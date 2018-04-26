@@ -6,9 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +28,6 @@ import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.data.SearchPhotosResult;
 import com.b_lam.resplash.data.service.SearchService;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -42,7 +40,6 @@ import java.util.List;
 import com.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;
-import tr.xip.errorview.ErrorView;
 
 public class SearchPhotoFragment extends Fragment {
 
@@ -54,8 +51,9 @@ public class SearchPhotoFragment extends Fragment {
     private RecyclerView mImageRecycler;
     private SwipeRefreshLayout mSwipeContainer;
     private ProgressBar mImagesProgress;
-    private ErrorView mImagesErrorView;
-    private TextView mNoResultTextView;
+    private ConstraintLayout mHttpErrorView;
+    private ConstraintLayout mNetworkErrorView;
+    private ConstraintLayout mNoResultView;
     private ItemAdapter mFooterAdapter;
     private int mPage, mColumns;
     private String mQuery;
@@ -100,11 +98,12 @@ public class SearchPhotoFragment extends Fragment {
         mPage = 1;
 
         View rootView = inflater.inflate(R.layout.fragment_search_photo, container, false);
-        mImageRecycler = (RecyclerView) rootView.findViewById(R.id.fragment_search_photo_recycler);
-        mImagesProgress = (ProgressBar) rootView.findViewById(R.id.fragment_search_photo_progress);
-        mImagesErrorView = (ErrorView) rootView.findViewById(R.id.fragment_search_photo_error_view);
-        mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerSearchPhoto);
-        mNoResultTextView = (TextView) rootView.findViewById(R.id.photo_no_results);
+        mImageRecycler = rootView.findViewById(R.id.fragment_search_photo_recycler);
+        mImagesProgress = rootView.findViewById(R.id.fragment_search_photo_progress);
+        mHttpErrorView = rootView.findViewById(R.id.http_error_view);
+        mNetworkErrorView = rootView.findViewById(R.id.network_error_view);
+        mSwipeContainer = rootView.findViewById(R.id.swipeContainerSearchPhoto);
+        mNoResultView = rootView.findViewById(R.id.no_results_view);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
         mImageRecycler.setLayoutManager(gridLayoutManager);
@@ -192,7 +191,8 @@ public class SearchPhotoFragment extends Fragment {
         if(mPhotos == null && mQuery != null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
         SearchService.OnRequestPhotosListener mPhotoRequestListener = new SearchService.OnRequestPhotosListener() {
@@ -207,36 +207,34 @@ public class SearchPhotoFragment extends Fragment {
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                     if(mPhotoAdapter.getItemCount() == 0){
                         mImageRecycler.setVisibility(View.GONE);
-                        mNoResultTextView.setVisibility(View.VISIBLE);
+                        mNoResultView.setVisibility(View.VISIBLE);
                     }
                 }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.VISIBLE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onRequestPhotosFailed(Call<SearchPhotosResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
                 mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
+                mHttpErrorView.setVisibility(View.GONE);
+                mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
             }
         };
 
         if(mQuery != null) {
             mService.searchPhotos(mQuery, mPage, 30, null, null, mPhotoRequestListener);
-            mNoResultTextView.setVisibility(View.GONE);
+            mNoResultView.setVisibility(View.GONE);
         }
     }
 
@@ -244,7 +242,8 @@ public class SearchPhotoFragment extends Fragment {
         if(mPhotos == null && mQuery != null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
         mPage = 1;
@@ -261,17 +260,17 @@ public class SearchPhotoFragment extends Fragment {
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                     if(mPhotoAdapter.getItemCount() == 0){
                         mImageRecycler.setVisibility(View.GONE);
-                        mNoResultTextView.setVisibility(View.VISIBLE);
+                        mNoResultView.setVisibility(View.VISIBLE);
                     }
                 }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.VISIBLE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
                     Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
@@ -282,19 +281,17 @@ public class SearchPhotoFragment extends Fragment {
             @Override
             public void onRequestPhotosFailed(Call<SearchPhotosResult> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
                 mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
+                mHttpErrorView.setVisibility(View.GONE);
+                mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
             }
         };
 
         if(mQuery != null) {
             mService.searchPhotos(mQuery, mPage, Resplash.DEFAULT_PER_PAGE, null, ((SearchActivity) getActivity()).getSearchOrientation(), mPhotoRequestListener);
-            mNoResultTextView.setVisibility(View.GONE);
+            mNoResultView.setVisibility(View.GONE);
         }
     }
 }

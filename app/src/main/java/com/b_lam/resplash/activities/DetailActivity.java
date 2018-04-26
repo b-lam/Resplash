@@ -37,12 +37,13 @@ import android.widget.Toast;
 import com.b_lam.resplash.BuildConfig;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.data.data.Collection;
 import com.b_lam.resplash.data.data.LikePhotoResult;
 import com.b_lam.resplash.data.data.Photo;
-import com.b_lam.resplash.data.data.PhotoDetails;
 import com.b_lam.resplash.data.service.PhotoService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.dialogs.InfoDialog;
+import com.b_lam.resplash.dialogs.ManageCollectionsDialog;
 import com.b_lam.resplash.dialogs.StatsDialog;
 import com.b_lam.resplash.dialogs.WallpaperDialog;
 import com.b_lam.resplash.helpers.DownloadHelper;
@@ -59,6 +60,7 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -71,17 +73,18 @@ import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.DOWNLOAD;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.WALLPAPER;
 
-public class DetailActivity extends AppCompatActivity{
+public class DetailActivity extends AppCompatActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener{
 
     private static final String TAG = "DetailActivity";
     private boolean mPhotoLike = false;
+    private boolean mInCollection = false;
     private Photo mPhoto;
-    private PhotoDetails mPhotoDetails;
     private PhotoService mService;
     private SharedPreferences sharedPreferences;
     private Drawable colorIcon;
     private @DownloadType int currentAction;
     private WallpaperDialog wallpaperDialog;
+    private List<Collection> mCurrentUserCollections;
 
     private long downloadReference;
 
@@ -91,8 +94,10 @@ public class DetailActivity extends AppCompatActivity{
     @BindView(R.id.imgFull) ImageView imgFull;
     @BindView(R.id.imgProfile) ImageView imgProfile;
     @BindView(R.id.btnLike) ImageButton btnLike;
-    //    @BindView(R.id.btnAddToCollection) ImageButton btnAddToCollection;
+    @BindView(R.id.btnAddToCollection) ImageButton btnAddToCollection;
     @BindView(R.id.tvUser) TextView tvUser;
+    @BindView(R.id.tvTitle) TextView tvTitle;
+    @BindView(R.id.tvDescription) TextView tvDescription;
     @BindView(R.id.tvLocation) TextView tvLocation;
     @BindView(R.id.tvDate) TextView tvDate;
     @BindView(R.id.tvLikes) TextView tvLikes;
@@ -158,28 +163,43 @@ public class DetailActivity extends AppCompatActivity{
 
     PhotoService.OnRequestPhotoDetailsListener mPhotoDetailsRequestListener = new PhotoService.OnRequestPhotoDetailsListener() {
         @Override
-        public void onRequestPhotoDetailsSuccess(Call<PhotoDetails> call, Response<PhotoDetails> response) {
+        public void onRequestPhotoDetailsSuccess(Call<Photo> call, Response<Photo> response) {
             Log.d(TAG, String.valueOf(response.code()));
             if (response.isSuccessful()) {
-                mPhotoDetails = response.body();
-                tvUser.setText(getString(R.string.by_author, mPhotoDetails.user.name));
-                if (mPhotoDetails.location != null) {
-                    if (mPhotoDetails.location.city != null && mPhotoDetails.location.country != null) {
-                        tvLocation.setText(mPhotoDetails.location.city + ", " + mPhotoDetails.location.country);
-                    }else if(mPhotoDetails.location.city != null){
-                        tvLocation.setText(mPhotoDetails.location.city);
-                    }else if(mPhotoDetails.location.country != null){
-                        tvLocation.setText(mPhotoDetails.location.country);
+                mPhoto = response.body();
+                tvUser.setText(getString(R.string.by_author, mPhoto.user.name));
+                if (mPhoto.story != null && !Utils.isEmpty(mPhoto.story.title)) {
+                    tvTitle.setText(mPhoto.story.title);
+                } else {
+                    tvTitle.setVisibility(View.GONE);
+                }
+                if (!Utils.isEmpty(mPhoto.description)) {
+                    tvDescription.setText(mPhoto.description);
+                } else {
+                    tvDescription.setVisibility(View.GONE);
+                }
+                if (mPhoto.location != null) {
+                    if (mPhoto.location.title != null) {
+                        tvLocation.setText(mPhoto.location.title);
+                    } else if (mPhoto.location.city != null && mPhoto.location.country != null) {
+                        tvLocation.setText(mPhoto.location.city + ", " + mPhoto.location.country);
+                    }else if(mPhoto.location.city != null){
+                        tvLocation.setText(mPhoto.location.city);
+                    }else if(mPhoto.location.country != null){
+                        tvLocation.setText(mPhoto.location.country);
                     }
                 } else {
-                    tvLocation.setText("-----");
+                    tvLocation.setVisibility(View.GONE);
                 }
-                tvDate.setText(mPhotoDetails.created_at.split("T")[0]);
-                tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.likes)));
-                if (mPhotoDetails.color != null) colorIcon.setColorFilter(Color.parseColor(mPhotoDetails.color), PorterDuff.Mode.SRC_IN);
-                tvColor.setText(mPhotoDetails.color);
-                tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhotoDetails.downloads)));
-                mPhotoLike = mPhotoDetails.liked_by_user;
+                tvDate.setText(mPhoto.created_at.split("T")[0]);
+                tvLikes.setText(getString(R.string.likes, NumberFormat.getInstance(Locale.CANADA).format(mPhoto.likes)));
+                if (mPhoto.color != null) colorIcon.setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.SRC_IN);
+                tvColor.setText(mPhoto.color);
+                tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhoto.downloads)));
+                mCurrentUserCollections = mPhoto.current_user_collections;
+                mInCollection = mCurrentUserCollections.size() > 0;
+                updateCollectionButton(mInCollection);
+                mPhotoLike = mPhoto.liked_by_user;
                 updateHeartButton(mPhotoLike);
                 content.setVisibility(View.VISIBLE);
                 floatingActionMenu.setVisibility(View.VISIBLE);
@@ -192,7 +212,7 @@ public class DetailActivity extends AppCompatActivity{
         }
 
         @Override
-        public void onRequestPhotoDetailsFailed(Call<PhotoDetails> call, Throwable t) {
+        public void onRequestPhotoDetailsFailed(Call<Photo> call, Throwable t) {
             Log.d(TAG, t.toString());
             mService.requestPhotoDetails(mPhoto.id, this);
         }
@@ -347,7 +367,7 @@ public class DetailActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 getWindow().setExitTransition(null);
                 supportFinishAfterTransition();
@@ -357,8 +377,8 @@ public class DetailActivity extends AppCompatActivity{
                 shareTextUrl();
                 return true;
             case R.id.action_view_on_unsplash:
-                if(mPhotoDetails != null) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mPhotoDetails.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
+                if(mPhoto != null) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mPhoto.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
                     if (intent.resolveActivity(getPackageManager()) != null)
                         startActivity(intent);
                     else
@@ -448,7 +468,7 @@ public class DetailActivity extends AppCompatActivity{
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_PHOTO_INFO, null);
                         floatingActionMenu.close(true);
                         InfoDialog infoDialog = new InfoDialog();
-                        infoDialog.setPhotoDetails(mPhotoDetails);
+                        infoDialog.setPhoto(mPhoto);
                         infoDialog.show(getFragmentManager(), null);
                     }
                     break;
@@ -467,8 +487,8 @@ public class DetailActivity extends AppCompatActivity{
 
     public void goToUserProfile(View view){
         Intent intent = new Intent(this, UserActivity.class);
-        intent.putExtra("username", mPhotoDetails.user.username);
-        intent.putExtra("name", mPhotoDetails.user.name);
+        intent.putExtra("username", mPhoto.user.username);
+        intent.putExtra("name", mPhoto.user.name);
         startActivity(intent);
     }
 
@@ -493,15 +513,28 @@ public class DetailActivity extends AppCompatActivity{
     }
 
     public void updateHeartButton(boolean like){
-        btnLike.setImageResource(like ? R.drawable.ic_heart_red : R.drawable.ic_heart_outline_grey);
+        btnLike.setImageResource(like ? R.drawable.ic_heart_red_24dp : R.drawable.ic_heart_outline_grey_24dp);
     }
 
     public void addToCollection(View view){
+        if (AuthManager.getInstance().isAuthorized()) {
+            ManageCollectionsDialog manageCollectionsDialog = new ManageCollectionsDialog();
+            manageCollectionsDialog.setPhoto(mPhoto);
+            manageCollectionsDialog.show(getFragmentManager(), null);
+        } else {
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
 
+    public void updateCollectionButton(boolean inCollection) {
+        btnAddToCollection.setImageResource(inCollection ?
+                ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionSavedIcon) :
+                R.drawable.ic_bookmark_outline_grey_24dp);
     }
 
     private void shareTextUrl() {
-        if(mPhoto != null) {
+        if (mPhoto != null) {
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -563,5 +596,10 @@ public class DetailActivity extends AppCompatActivity{
             }
             ((ViewGroup) view).removeAllViews();
         }
+    }
+
+    @Override
+    public void onPhotoAddedToCollection() {
+
     }
 }

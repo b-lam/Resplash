@@ -7,14 +7,6 @@
     android:background="?attr/colorPrimary"
     tools:context="com.b_lam.resplash.fragments.SearchPhotoFragment">
 
-    <TextView
-        android:id="@+id/photo_no_results"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="18sp"
-        android:text="@string/no_results"/>
-
     <ProgressBar
         android:id="@+id/fragment_search_photo_progress"
         android:layout_width="wrap_content"
@@ -24,18 +16,25 @@
         android:scaleY="0.75"
         android:visibility="gone"/>
 
-    <tr.xip.errorview.ErrorView
-        android:id="@+id/fragment_search_photo_error_view"
+    <include layout="@layout/no_results_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        app:ev_titleColor="?attr/primaryTextColor"
-        app:ev_subtitleColor="?attr/primaryTextColor"
-        app:ev_retryVisible="false"/>
+        android:visibility="visible"/>
+
+    <include layout="@layout/http_error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <include layout="@layout/network_error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainerSearchPhoto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

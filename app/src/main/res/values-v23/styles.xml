@@ -14,6 +14,7 @@
         <item name="progressBarColor">@color/progressBarColor_light</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_light</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="selectionControlsTheme">@style/selectionControlsTheme_light</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
         <item name="android:textColor">@color/colorText_light</item>
@@ -75,6 +76,8 @@
         <item name="exploreIcon">@drawable/ic_explore_black_24dp</item>
         <item name="accountCardIcon">@drawable/ic_account_card_details_black_24dp</item>
         <item name="quoteIcon">@drawable/ic_format_quote_black_24dp</item>
+        <item name="collectionSavedIcon">@drawable/ic_bookmark_black_24dp</item>
+        <item name="editIcon">@drawable/ic_mode_edit_black_24dp</item>
     </style>
 
     <!-- Dark base activity theme -->
@@ -92,6 +95,7 @@
         <item name="progressBarColor">@color/progressBarColor_dark</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_dark</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="selectionControlsTheme">@style/selectionControlsTheme_dark</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
         <item name="android:textColor">@color/colorText_dark</item>
@@ -153,6 +157,8 @@
         <item name="exploreIcon">@drawable/ic_explore_white_24dp</item>
         <item name="accountCardIcon">@drawable/ic_account_card_details_white_24dp</item>
         <item name="quoteIcon">@drawable/ic_format_quote_white_24dp</item>
+        <item name="collectionSavedIcon">@drawable/ic_bookmark_white_24dp</item>
+        <item name="editIcon">@drawable/ic_mode_edit_white_24dp</item>
     </style>
 
     <!-- Black base activity theme -->
