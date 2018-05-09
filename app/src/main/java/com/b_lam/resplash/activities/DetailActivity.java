@@ -17,6 +17,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -126,26 +127,7 @@ public class DetailActivity extends AppCompatActivity implements ManageCollectio
                             Uri uri = FileProvider.getUriForFile(DetailActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", file);
                             getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
                             if (currentAction == WALLPAPER) {
-                                try {
-                                    Log.d(TAG, "Crop and Set: " + uri.toString());
-                                    Intent wallpaperIntent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(uri);
-                                    wallpaperIntent.setDataAndType(uri, "image/*");
-                                    wallpaperIntent.putExtra("mimeType", "image/*");
-                                    startActivityForResult(wallpaperIntent, 13451);
-                                    mFirebaseAnalytics.logEvent("set_wallpaper", null);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    Log.d(TAG, "Chooser: " + uri.toString());
-                                    Intent wallpaperIntent = new Intent(Intent.ACTION_ATTACH_DATA);
-                                    wallpaperIntent.setDataAndType(uri, "image/*");
-                                    wallpaperIntent.putExtra("mimeType", "image/*");
-                                    wallpaperIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                                    wallpaperIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    wallpaperIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                    wallpaperIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                                    startActivity(Intent.createChooser(wallpaperIntent, getString(R.string.set_as_wallpaper)));
-                                    mFirebaseAnalytics.logEvent("set_wallpaper_alternative", null);
-                                }
+                                setWallpaper(uri);
                                 wallpaperDialog.setDownloadFinished(true);
                             }
                             break;
@@ -404,7 +386,6 @@ public class DetailActivity extends AppCompatActivity implements ManageCollectio
                     if (Utils.isStoragePermissionGranted(DetailActivity.this) && mPhoto != null) {
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_DOWNLOAD, null);
                         floatingActionMenu.close(true);
-                        Toast.makeText(getApplicationContext(), getString(R.string.download_started), Toast.LENGTH_SHORT).show();
                         currentAction = DOWNLOAD;
                         switch (sharedPreferences.getString("download_quality", "Full")) {
                             case "Raw":
@@ -432,15 +413,6 @@ public class DetailActivity extends AppCompatActivity implements ManageCollectio
                         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_SET_WALLPAPER, null);
                         floatingActionMenu.close(true);
                         currentAction = WALLPAPER;
-                        wallpaperDialog = new WallpaperDialog();
-                        wallpaperDialog.setListener(new WallpaperDialog.WallpaperDialogListener() {
-                            @Override
-                            public void onCancel() {
-                                DownloadHelper.getInstance(DetailActivity.this).removeDownloadRequest(downloadReference);
-                            }
-                        });
-                        wallpaperDialog.show(getFragmentManager(), null);
-
                         switch (sharedPreferences.getString("wallpaper_quality", "Full")) {
                             case "Raw":
                                 downloadImage(mPhoto.urls.raw, WALLPAPER);
@@ -546,13 +518,60 @@ public class DetailActivity extends AppCompatActivity implements ManageCollectio
         }
     }
 
-    private void downloadImage(String url, @DownloadType int downloadType){
-        mService.reportDownload(mPhoto.id, mReportDownloadListener);
+    private void downloadImage(String url, @DownloadType int downloadType) {
         String filename = mPhoto.id + "_" + sharedPreferences.getString("download_quality", "Full") + Resplash.DOWNLOAD_PHOTO_FORMAT;
-        downloadReference = DownloadHelper.getInstance(this).addDownloadRequest(downloadType, url, filename);
+        if (DownloadHelper.getInstance(this).fileExists(filename)) {
+            if (downloadType == WALLPAPER) {
+                Uri uri = FileProvider.getUriForFile(DetailActivity.this,
+                        BuildConfig.APPLICATION_ID + ".fileprovider",
+                        new File(Environment.getExternalStorageDirectory() + Resplash.DOWNLOAD_PATH + filename));
+                setWallpaper(uri);
+
+            } else {
+                Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.file_exists), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            if (downloadType == WALLPAPER) {
+                wallpaperDialog = new WallpaperDialog();
+                wallpaperDialog.setListener(new WallpaperDialog.WallpaperDialogListener() {
+                    @Override
+                    public void onCancel() {
+                        DownloadHelper.getInstance(DetailActivity.this).removeDownloadRequest(downloadReference);
+                    }
+                });
+                wallpaperDialog.show(getFragmentManager(), null);
+            } else {
+                Toast.makeText(getApplicationContext(), getString(R.string.download_started), Toast.LENGTH_SHORT).show();
+            }
+            mService.reportDownload(mPhoto.id, mReportDownloadListener);
+            downloadReference = DownloadHelper.getInstance(this).addDownloadRequest(downloadType, url, filename);
+        }
     }
 
-    private void loadPreferences(){
+    private void setWallpaper(Uri uri) {
+        try {
+            Log.d(TAG, "Crop and Set: " + uri.toString());
+            Intent wallpaperIntent = WallpaperManager.getInstance(DetailActivity.this).getCropAndSetWallpaperIntent(uri);
+            wallpaperIntent.setDataAndType(uri, "image/*");
+            wallpaperIntent.putExtra("mimeType", "image/*");
+            startActivityForResult(wallpaperIntent, 13451);
+            mFirebaseAnalytics.logEvent("set_wallpaper", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, "Chooser: " + uri.toString());
+            Intent wallpaperIntent = new Intent(Intent.ACTION_ATTACH_DATA);
+            wallpaperIntent.setDataAndType(uri, "image/*");
+            wallpaperIntent.putExtra("mimeType", "image/*");
+            wallpaperIntent.addCategory(Intent.CATEGORY_DEFAULT);
+            wallpaperIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            wallpaperIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            wallpaperIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            startActivity(Intent.createChooser(wallpaperIntent, getString(R.string.set_as_wallpaper)));
+            mFirebaseAnalytics.logEvent("set_wallpaper_alternative", null);
+        }
+    }
+
+    private void loadPreferences() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
 

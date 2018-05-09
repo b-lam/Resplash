@@ -36,7 +36,7 @@ public class DownloadHelper {
     }
 
     @IntDef({
-            DOWNLOAD,
+            DownloadType.DOWNLOAD,
             DownloadType.WALLPAPER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface DownloadType {
@@ -126,8 +126,8 @@ public class DownloadHelper {
         return result;
     }
 
-    public boolean fileExists(String path) {
-        return new File(path).exists();
+    public boolean fileExists(String name) {
+        return new File(Environment.getExternalStorageDirectory() + Resplash.DOWNLOAD_PATH + name).exists();
     }
 
     public String getFileName(long id) {

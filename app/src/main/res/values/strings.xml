@@ -236,6 +236,7 @@
     <string name="download">Download</string>
     <string name="setting_wallpaper">Setting wallpaper&#8230;</string>
     <string name="cancel">Cancel</string>
+    <string name="file_exists">This has already been downloaded</string>
 
     <string name="no_results">There\'s nothing here&#8230;</string>
     <string name="log_in">Log in</string>
