@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.Collection;
+import com.b_lam.resplash.data.data.Photo;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.transition.ViewPropertyTransition;
@@ -27,6 +28,13 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
     public CollectionMiniItem (Collection collection) {
         super(collection);
     }
+
+    public CollectionMiniItem (Collection collection, Photo photo) {
+        super(collection);
+        mPhoto = photo;
+    }
+
+    private Photo mPhoto;
 
     // Fast Adapter methods
     @Override
@@ -86,6 +94,9 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
 
         if (getModel().privateX) holder.collectionPrivate.setVisibility(View.VISIBLE);
 
+        for (Collection userCollection : mPhoto.current_user_collections) {
+            if (getModel().id == userCollection.id) holder.collectionAdded.setVisibility(View.VISIBLE);
+        }
         holder.collectionSize.setText((Resplash.getInstance().getResources().getString(R.string.photos, String.valueOf(getModel().total_photos))));
         holder.collectionName.setText(getModel().title);
     }
@@ -97,6 +108,7 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
         holder.collectionSize.setText(null);
         holder.collectionName.setText(null);
         holder.collectionPrivate.setImageDrawable(null);
+        holder.collectionAdded.setImageDrawable(null);
     }
 
     @NonNull
@@ -112,6 +124,7 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
         @BindView(R.id.item_collection_mini_size) TextView collectionSize;
         @BindView(R.id.item_collection_mini_title) TextView collectionName;
         @BindView(R.id.item_collection_mini_private) ImageView collectionPrivate;
+        @BindView(R.id.item_collection_mini_added) ImageView collectionAdded;
 
         public ViewHolder(View view) {
             super(view);

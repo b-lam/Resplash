@@ -270,7 +270,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
         mProgressBar.setVisibility(View.GONE);
 
         for (Collection collection : collections) {
-            mCollectionAdapter.add(new CollectionMiniItem(collection));
+            mCollectionAdapter.add(new CollectionMiniItem(collection, mPhoto));
         }
 
         if (mCollectionAdapter.getAdapterItemCount() > 0) {
