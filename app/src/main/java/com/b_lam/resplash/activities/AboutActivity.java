@@ -27,7 +27,6 @@ import com.b_lam.resplash.R;
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar_about) Toolbar mToolbar;
-    @BindView(R.id.version_name) TextView mVersionName;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -62,9 +61,9 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         LinearLayout [] containers = new LinearLayout[] {
                 (LinearLayout) findViewById(R.id.container_about_unsplash),
                 (LinearLayout) findViewById(R.id.container_about_app),
-                (LinearLayout) findViewById(R.id.container_about_version),
                 (LinearLayout) findViewById(R.id.container_about_intro),
                 (LinearLayout) findViewById(R.id.container_about_github),
+                (LinearLayout) findViewById(R.id.container_about_privacy_policy),
                 (LinearLayout) findViewById(R.id.container_about_rate),
                 (LinearLayout) findViewById(R.id.container_about_donate),
                 (LinearLayout) findViewById(R.id.container_about_bug),
@@ -89,8 +88,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
         try {
             PackageInfo info = manager.getPackageInfo(getApplicationContext().getPackageName(), 0);
-            mVersionName.setText(info.versionName);
-
         }catch (PackageManager.NameNotFoundException e){
            return;
         }
@@ -123,6 +120,10 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.container_about_github:
                 goToURL("https://github.com/b-lam/Resplash");
+                break;
+
+            case R.id.container_about_privacy_policy:
+                goToURL("https://b-lam.github.io/projects/resplash/privacy_policy");
                 break;
 
             case R.id.container_about_rate:

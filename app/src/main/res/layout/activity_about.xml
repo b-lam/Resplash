@@ -93,32 +93,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/container_about_version"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/infoIcon"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="@string/about_version_title"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:id="@+id/version_name"
-                                android:text="@string/about_version_subtitle"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:id="@+id/container_about_intro"
                         style="@style/about_entry">
 
@@ -142,6 +116,20 @@
 
                         <TextView
                             android:text="@string/about_github_title"
+                            style="@style/about_title_text"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/container_about_privacy_policy"
+                        style="@style/about_entry">
+
+                        <ImageView
+                            android:src="?attr/infoIcon"
+                            style="@style/material_icon" />
+
+                        <TextView
+                            android:text="@string/about_privacy_policy_title"
                             style="@style/about_title_text"/>
 
                     </LinearLayout>
