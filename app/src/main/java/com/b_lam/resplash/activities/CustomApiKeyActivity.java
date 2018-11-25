@@ -1,10 +1,9 @@
 package com.b_lam.resplash.activities;
 
-import android.provider.Settings;
-import android.support.v4.view.LayoutInflaterCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.view.LayoutInflaterCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.b_lam.resplash.R;
-import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.tools.CustomApiManager;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;

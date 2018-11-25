@@ -3,7 +3,7 @@ package com.b_lam.resplash.data.data;
 import android.animation.ObjectAnimator;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;

@@ -111,7 +111,7 @@
             android:theme="@style/DonateActivityThemeLight"/>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.b_lam.resplash.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
