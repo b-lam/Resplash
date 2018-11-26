@@ -182,6 +182,7 @@
     <string name="about_version_subtitle">1.0.0</string>
     <string name="about_introduction_title">Introduction</string>
     <string name="about_github_title">GitHub</string>
+    <string name="about_privacy_policy_title">Privacy Policy</string>
     <string name="about_support_development_card_title">Support development</string>
     <string name="about_rate_title">Rate</string>
     <string name="about_rate_subtitle">If you like Resplash, rate it on the Play Store</string>

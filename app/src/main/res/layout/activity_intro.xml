@@ -13,16 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <com.pixelcan.inkpageindicator.InkPageIndicator
+        <com.rd.PageIndicatorView
             android:id="@+id/activity_intro_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            app:animationDuration="300"
-            app:currentPageIndicatorColor="?attr/colorAccent"
-            app:pageIndicatorColor="@color/md_grey_300"
-            app:dotDiameter="8dp"
-            app:dotGap="8dp" />
+            app:piv_animationType="worm"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="?attr/colorAccent"
+            app:piv_unselectedColor="@color/md_grey_300" />
 
         <Button
             android:layout_width="wrap_content"
@@ -41,13 +41,13 @@
         android:layout_alignTop="@id/activity_intro_bottomBar"
         android:background="?attr/dividerColor" />
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/activity_intro_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/activity_intro_bottomBar">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/activity_intro_viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -59,6 +59,6 @@
             android:src="?attr/closeIcon"
             style="@style/material_image_button" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>

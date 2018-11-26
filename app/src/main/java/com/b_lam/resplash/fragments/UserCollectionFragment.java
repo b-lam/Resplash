@@ -2,19 +2,14 @@ package com.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.CollectionDetailActivity;
 import com.b_lam.resplash.data.data.Collection;
@@ -31,7 +26,10 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import com.b_lam.resplash.R;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -83,12 +81,7 @@ public class UserCollectionFragment extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         mImageRecycler.setLayoutManager(gridLayoutManager);
-        mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
+        mImageRecycler.setOnTouchListener((v, event) -> false);
         mImageRecycler.setItemViewCacheSize(5);
         mCollectionAdapter = new FastItemAdapter<>();
 
@@ -109,12 +102,7 @@ public class UserCollectionFragment extends Fragment {
             }
         });
 
-        mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchNew();
-            }
-        });
+        mSwipeContainer.setOnRefreshListener(this::fetchNew);
 
         fetchNew();
         return rootView;
