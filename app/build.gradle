@@ -71,7 +71,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:9.0.0-rc2'
     implementation 'com.github.clans:fab:1.6.4'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
-    implementation 'com.airbnb.android:lottie:2.5.4'
+    implementation 'com.airbnb.android:lottie:2.8.0'
     implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 

@@ -1,12 +1,13 @@
 package com.b_lam.resplash.adapters;
 
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.b_lam.resplash.R;
 
-public class ManageCollectionsDialogPagerAdapter extends PagerAdapter{
+import androidx.viewpager.widget.PagerAdapter;
+
+public class ManageCollectionsDialogPagerAdapter extends PagerAdapter {
 
     public Object instantiateItem(ViewGroup collection, int position) {
 

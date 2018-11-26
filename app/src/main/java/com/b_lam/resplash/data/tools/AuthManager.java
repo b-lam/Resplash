@@ -2,7 +2,6 @@ package com.b_lam.resplash.data.tools;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.IntDef;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -15,6 +14,7 @@ import com.b_lam.resplash.data.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.IntDef;
 import retrofit2.Call;
 import retrofit2.Response;
 

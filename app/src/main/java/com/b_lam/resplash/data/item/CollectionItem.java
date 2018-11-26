@@ -3,8 +3,6 @@ package com.b_lam.resplash.data.item;
 import android.animation.ObjectAnimator;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +17,9 @@ import com.bumptech.glide.request.transition.ViewPropertyTransition;
 import com.mikepenz.fastadapter.items.ModelAbstractItem;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CollectionItem extends ModelAbstractItem<Collection, CollectionItem, CollectionItem.ViewHolder> {
 

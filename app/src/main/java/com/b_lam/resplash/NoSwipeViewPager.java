@@ -1,7 +1,6 @@
 package com.b_lam.resplash;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,6 +8,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
 
 import java.lang.reflect.Field;
+
+import androidx.viewpager.widget.ViewPager;
 
 public class NoSwipeViewPager extends ViewPager {
 

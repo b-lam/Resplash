@@ -3,9 +3,7 @@ package com.b_lam.resplash.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +27,9 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
