@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.billing.IabBroadcastReceiver;
 import com.b_lam.resplash.util.billing.IabHelper;
 import com.b_lam.resplash.util.billing.IabResult;
@@ -27,14 +25,13 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class DonateActivity extends AppCompatActivity implements View.OnClickListener, IabBroadcastReceiver.IabBroadcastListener{
+public class DonateActivity extends BaseActivity implements View.OnClickListener, IabBroadcastReceiver.IabBroadcastListener{
 
     @BindView(R.id.donate_close_btn) ImageButton btnClose;
     @BindView(R.id.donate_thanks) ConstraintLayout mThanksView;
@@ -62,20 +59,7 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.DonateActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.DonateActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_donate);
 

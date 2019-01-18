@@ -16,18 +16,15 @@ import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.AccessToken;
 import com.b_lam.resplash.data.service.AuthorizeService;
 import com.b_lam.resplash.data.tools.AuthManager;
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, AuthorizeService.OnRequestAccessTokenListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, AuthorizeService.OnRequestAccessTokenListener {
 
     @BindView(R.id.login_btn) Button btnLogin;
     @BindView(R.id.join_btn) Button btnJoin;
@@ -40,20 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.LoginActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.LoginActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_login);
 
@@ -126,7 +110,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
         } else {
             Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
-//            setState(NORMAL_STATE);
         }
     }
 
@@ -134,6 +117,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onRequestAccessTokenFailed(Call<AccessToken> call, Throwable t) {
         Log.d(TAG, t.toString());
         Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
-//        setState(NORMAL_STATE);
     }
 }

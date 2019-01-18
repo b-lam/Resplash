@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.b_lam.resplash.NoSwipeViewPager
+    <com.b_lam.resplash.views.NoSwipeViewPager
         android:id="@+id/manager_collections_dialog_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,5 +14,5 @@
 
         <include android:id="@+id/create_collection_layout"
             layout="@layout/create_collection_layout"/>
-    </com.b_lam.resplash.NoSwipeViewPager>
+    </com.b_lam.resplash.views.NoSwipeViewPager>
 </LinearLayout>

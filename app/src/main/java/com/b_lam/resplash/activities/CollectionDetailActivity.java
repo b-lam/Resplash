@@ -5,20 +5,17 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.b_lam.resplash.CircleImageView;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.data.Collection;
@@ -26,8 +23,8 @@ import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.dialogs.EditCollectionDialog;
-import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
+import com.b_lam.resplash.views.CircleImageView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.IAdapter;
@@ -39,7 +36,6 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -50,7 +46,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class CollectionDetailActivity extends AppCompatActivity {
+public class CollectionDetailActivity extends BaseActivity {
 
     @BindView(R.id.fragment_collection_detail_recycler) RecyclerView mImageRecycler;
     @BindView(R.id.swipeContainerCollectionDetail) SwipeRefreshLayout mSwipeContainer;
@@ -63,7 +59,9 @@ public class CollectionDetailActivity extends AppCompatActivity {
     @BindView(R.id.imgProfileCollection)
     CircleImageView mUserProfilePicture;
 
-    private String TAG = "CollectionDetails";
+    public final static String USER_COLLECTION_FLAG = "USER_COLLECTION_FLAG";
+
+    private final static String TAG = "CollectionDetails";
     private Collection mCollection;
     private FastItemAdapter<Photo> mPhotoAdapter;
     private List<Photo> mPhotos;
@@ -75,23 +73,11 @@ public class CollectionDetailActivity extends AppCompatActivity {
     private PhotoService photoService;
     private SharedPreferences sharedPreferences;
     private MenuItem mEditButton;
+    private boolean mIsUserCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.CollectionDetailActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.CollectionDetailActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_collection_detail);
 
@@ -105,6 +91,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mCollection = new Gson().fromJson(getIntent().getStringExtra("Collection"), Collection.class);
+        mIsUserCollection = getIntent().getBooleanExtra(USER_COLLECTION_FLAG, false);
 
         this.photoService = PhotoService.getService();
 
@@ -132,12 +119,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, mColumns);
         mImageRecycler.setLayoutManager(gridLayoutManager);
-        mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
+        mImageRecycler.setOnTouchListener((v, event) -> false);
 
         mPhotoAdapter = new FastItemAdapter<>();
 
@@ -162,12 +144,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
             }
         });
 
-        mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadMore();
-            }
-        });
+        mSwipeContainer.setOnRefreshListener(() -> loadMore());
 
         loadMore();
     }
@@ -181,7 +158,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
 
             ImageView imageView;
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || sharedPreferences.getString("item_layout", "List").equals("Grid")) {
+            if (sharedPreferences.getString("item_layout", "List").equals("Grid")) {
                 startActivity(i);
             } else if (layout.equals("Cards")) {
                 imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
@@ -220,7 +197,7 @@ public class CollectionDetailActivity extends AppCompatActivity {
             @Override
             public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
                 Log.d(TAG, String.valueOf(response.code()));
-                if(response.code() == 200) {
+                if (response.code() == 200) {
                     mPhotos = response.body();
                     mFooterAdapter.clear();
                     CollectionDetailActivity.this.updateAdapter(mPhotos);
@@ -229,13 +206,13 @@ public class CollectionDetailActivity extends AppCompatActivity {
                     mImageRecycler.setVisibility(View.VISIBLE);
                     mHttpErrorView.setVisibility(View.GONE);
                     mNetworkErrorView.setVisibility(View.GONE);
-                }else{
+                } else {
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
                     mHttpErrorView.setVisibility(View.VISIBLE);
                     mNetworkErrorView.setVisibility(View.GONE);
                 }
-                if(mSwipeContainer.isRefreshing()) {
+                if (mSwipeContainer.isRefreshing()) {
                     Toast.makeText(getApplicationContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
                     mSwipeContainer.setRefreshing(false);
                 }
@@ -252,9 +229,9 @@ public class CollectionDetailActivity extends AppCompatActivity {
             }
         };
 
-        if(mCollection.curated){
+        if (mCollection.curated) {
             photoService.requestCuratedCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, mPhotosRequestListener);
-        }else{
+        } else {
             photoService.requestCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, mPhotosRequestListener);
         }
     }
@@ -262,15 +239,21 @@ public class CollectionDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.collection, menu);
-
         mEditButton = menu.findItem(R.id.action_edit);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        mEditButton.setVisible(mIsUserCollection);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -285,10 +268,10 @@ public class CollectionDetailActivity extends AppCompatActivity {
                     Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_edit:
-                if(AuthManager.getInstance().isAuthorized()) {
+                if (AuthManager.getInstance().isAuthorized()) {
                     EditCollectionDialog editCollectionDialog = new EditCollectionDialog();
                     editCollectionDialog.show(getFragmentManager(), null);
-                }else{
+                } else {
                     Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
                     startActivity(new Intent(this, LoginActivity.class));
                 }

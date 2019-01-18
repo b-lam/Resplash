@@ -47,5 +47,5 @@
         app:backgroundTint="?attr/colorAccent"
         app:layout_anchorGravity="bottom|end"
         app:fabSize="normal"
-        app:layout_behavior="com.b_lam.resplash.ScrollingFABBehavior" />
+        app:layout_behavior="com.b_lam.resplash.views.ScrollingFABBehavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

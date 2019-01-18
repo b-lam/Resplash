@@ -1,9 +1,6 @@
 package com.b_lam.resplash.activities;
 
-import androidx.core.view.LayoutInflaterCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -13,14 +10,11 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.data.tools.CustomApiManager;
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
-import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CustomApiKeyActivity extends AppCompatActivity implements View.OnClickListener{
+public class CustomApiKeyActivity extends BaseActivity implements View.OnClickListener{
 
     @BindView(R.id.custom_api_key_close_btn) ImageButton mCloseButton;
     @BindView(R.id.custom_api_key_save_btn) Button mSaveButton;
@@ -29,21 +23,7 @@ public class CustomApiKeyActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.CustomApiActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.CustomApiActivityThemeBlack);
-                break;
-        }
-
-        LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_custom_api_key);
 

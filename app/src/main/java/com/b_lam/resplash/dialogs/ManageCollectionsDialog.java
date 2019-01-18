@@ -12,11 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.b_lam.resplash.NoSwipeViewPager;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.adapters.ManageCollectionsDialogPagerAdapter;
@@ -27,6 +25,7 @@ import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.item.CollectionMiniItem;
 import com.b_lam.resplash.data.service.CollectionService;
 import com.b_lam.resplash.data.tools.AuthManager;
+import com.b_lam.resplash.views.NoSwipeViewPager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mikepenz.fastadapter.IAdapter;
@@ -34,6 +33,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -57,10 +57,11 @@ public class ManageCollectionsDialog extends DialogFragment implements
     private CollectionService mService;
     private FastItemAdapter<CollectionMiniItem> mCollectionAdapter;
     private ItemAdapter mFooterAdapter;
-    private List<Collection> mCollections;
+    private List<CollectionMiniItem> mCollections;
     private Photo mPhoto;
     private Me mCurrentUser;
     private CollectionService.OnRequestCollectionsListener mCollectionRequestListener;
+    private ManageCollectionsDialogListener mManageCollectionsDialogListener;
     private int mPage = 1;
 
     @BindView(R.id.add_to_collection_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
@@ -168,7 +169,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
                     new CollectionService.OnRequestACollectionListener() {
                         @Override
                         public void onRequestACollectionSuccess(Call<Collection> call, Response<Collection> response) {
-                            init();
+                            // TODO: Add collection to list and update adapter
                             mViewPager.setCurrentItem(ADD_TO_COLLECTION_ID);
                             hideKeyboard();
                         }
@@ -187,23 +188,35 @@ public class ManageCollectionsDialog extends DialogFragment implements
         @Override
         public boolean onClick(View v, IAdapter<CollectionMiniItem> adapter, CollectionMiniItem collection, int position) {
             if (mPhoto != null) {
-                final ProgressBar mAddProgress = v.findViewById(R.id.item_collection_mini_progress);
-                final ImageView mAddStatus = v.findViewById(R.id.item_collection_mini_added);
-                mAddProgress.setVisibility(View.VISIBLE);
-                mService.addPhotoToCollection(collection.getModel().id, mPhoto.id, new CollectionService.OnChangeCollectionPhotoListener() {
+                final ProgressBar addProgress = v.findViewById(R.id.item_collection_mini_progress);
+                final CollectionService.OnChangeCollectionPhotoListener onChangeCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
                     @Override
                     public void onChangePhotoSuccess(Call<ChangeCollectionPhotoResult> call, Response<ChangeCollectionPhotoResult> response) {
-                        mAddProgress.setVisibility(View.GONE);
-                        mAddStatus.setVisibility(View.VISIBLE);
-                        init();
+                        addProgress.setVisibility(View.GONE);
+                        Log.d(TAG, String.valueOf(response.code()));
+                        if (response.isSuccessful() && response.body() != null) {
+                            setPhoto(response.body().photo);
+                            updateCollectionAtPosition(position, response.body().collection, response.body().photo);
+                            mManageCollectionsDialogListener.onCollectionUpdated(response.body().photo);
+                        }
                     }
 
                     @Override
                     public void onChangePhotoFailed(Call<ChangeCollectionPhotoResult> call, Throwable t) {
                         Log.d(TAG, t.toString());
+                        addProgress.setVisibility(View.GONE);
                     }
-                });
+                };
+
+                addProgress.setVisibility(View.VISIBLE);
+
+                if (isPhotoInCollection(mPhoto, collection.getModel())) {
+                    mService.deletePhotoFromCollection(collection.getModel().id, mPhoto.id, onChangeCollectionPhotoListener);
+                } else {
+                    mService.addPhotoToCollection(collection.getModel().id, mPhoto.id, onChangeCollectionPhotoListener);
+                }
             }
+
             return true;
         }
     };
@@ -212,8 +225,8 @@ public class ManageCollectionsDialog extends DialogFragment implements
         mPhoto = photo;
     }
 
-    public void setCollections(List<Collection> collections) {
-        mCollections = collections;
+    public void setListener(ManageCollectionsDialogListener manageCollectionsDialogListener) {
+        mManageCollectionsDialogListener = manageCollectionsDialogListener;
     }
 
     private void init() {
@@ -221,15 +234,6 @@ public class ManageCollectionsDialog extends DialogFragment implements
             if (AuthManager.getInstance().getMe() == null) {
                 requestProfile();
             } else {
-//                int listSize = AuthManager.getInstance()
-//                        .getCollectionsManager()
-//                        .getCollectionList()
-//                        .size();
-//                if (listSize > 0) {
-//                    AuthManager.getInstance().getCollectionsManager().clearCollections();
-//                    mCollectionAdapter.notifyItemRangeRemoved(1, listSize);
-//                    mCollectionAdapter.notifyItemChanged(1);
-//                }
                 mPage = 1;
                 requestCollections();
             }
@@ -247,10 +251,9 @@ public class ManageCollectionsDialog extends DialogFragment implements
             @Override
             public void onRequestCollectionsSuccess(Call<List<Collection>> call, Response<List<Collection>> response) {
                 Log.d(TAG, String.valueOf(response.code()));
-                if(response.code() == 200) {
-                    mCollections = response.body();
+                if (response.code() == 200) {
                     mCollectionAdapter.clear();
-                    updateAdapter(mCollections);
+                    initAdapter(response.body());
                     mPage++;
                 }
             }
@@ -264,18 +267,27 @@ public class ManageCollectionsDialog extends DialogFragment implements
         mService.requestUserCollections(mCurrentUser, mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
     }
 
-    public void updateAdapter(List<Collection> collections) {
+    public void initAdapter(List<Collection> collections) {
         mProgressBar.setVisibility(View.GONE);
 
+        mCollections = new ArrayList<>();
+
         for (Collection collection : collections) {
-            mCollectionAdapter.add(new CollectionMiniItem(collection, mPhoto));
+            mCollections.add(new CollectionMiniItem(collection, mPhoto));
         }
+
+        mCollectionAdapter.set(mCollections);
 
         if (mCollectionAdapter.getAdapterItemCount() > 0) {
             mSwipeRefreshLayout.setVisibility(View.VISIBLE);
         } else {
             mNoResultsView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void updateCollectionAtPosition(int position, Collection collection, Photo photo) {
+        mCollections.set(position, new CollectionMiniItem(collection, photo));
+        mCollectionAdapter.notifyAdapterItemChanged(position);
     }
 
     private void hideKeyboard() {
@@ -303,7 +315,14 @@ public class ManageCollectionsDialog extends DialogFragment implements
     @Override
     public void onLogout() { }
 
+    private boolean isPhotoInCollection(Photo photo, Collection collection) {
+        for (Collection userCollection : photo.current_user_collections) {
+            if (userCollection.id == collection.id) return true;
+        }
+        return false;
+    }
+
     public interface ManageCollectionsDialogListener {
-        void onPhotoAddedToCollection();
+        void onCollectionUpdated(Photo photo);
     }
 }

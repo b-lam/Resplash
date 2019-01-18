@@ -12,17 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.b_lam.resplash.R;
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
 import com.rd.PageIndicatorView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IntroActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
+public class IntroActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener{
 
     @BindView(R.id.activity_intro_btnClose) ImageButton btnClose;
     @BindView(R.id.activity_intro_button) Button btnNext;
@@ -33,20 +30,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.IntroActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.IntroActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_intro);
 
@@ -82,6 +66,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
     }
 
     @Override
@@ -91,6 +76,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
     }
 
     private void changeNextButtonText(int page){
@@ -102,7 +88,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     }
 
     class IntroPagerAdapter extends PagerAdapter{
-
         Context mContext;
         LayoutInflater mInflater;
 

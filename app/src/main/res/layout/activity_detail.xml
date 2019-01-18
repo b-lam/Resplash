@@ -71,7 +71,7 @@
                     android:paddingRight="20dp"
                     android:background="?attr/dividerColor">
 
-                    <com.b_lam.resplash.CircleImageView
+                    <com.b_lam.resplash.views.CircleImageView
                         android:layout_height="24dp"
                         android:layout_width="24dp"
                         android:id="@+id/imgProfile"
@@ -79,7 +79,7 @@
                         android:onClick="goToUserProfile"
                         android:clickable="true"
                         android:focusable="true">
-                    </com.b_lam.resplash.CircleImageView>
+                    </com.b_lam.resplash.views.CircleImageView>
 
                     <TextView
                         android:id="@+id/tvUser"

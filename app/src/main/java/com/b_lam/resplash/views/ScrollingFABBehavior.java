@@ -1,4 +1,4 @@
-package com.b_lam.resplash;
+package com.b_lam.resplash.views;
 
 import android.content.Context;
 import com.google.android.material.appbar.AppBarLayout;

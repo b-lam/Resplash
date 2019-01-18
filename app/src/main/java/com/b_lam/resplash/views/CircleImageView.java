@@ -1,4 +1,4 @@
-package com.b_lam.resplash;
+package com.b_lam.resplash.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,6 +17,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import com.b_lam.resplash.R;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;

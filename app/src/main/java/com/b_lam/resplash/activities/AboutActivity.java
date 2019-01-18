@@ -14,36 +14,21 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
+public class AboutActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar_about) Toolbar mToolbar;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.AboutActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.AboutActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_about);
 
@@ -72,11 +57,9 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 findViewById(R.id.container_about_library1),
                 findViewById(R.id.container_about_library2),
                 findViewById(R.id.container_about_library3),
-                findViewById(R.id.container_about_library4),
                 findViewById(R.id.container_about_library5),
                 findViewById(R.id.container_about_library6),
                 findViewById(R.id.container_about_library7),
-                findViewById(R.id.container_about_library8),
                 findViewById(R.id.container_about_library9),
                 findViewById(R.id.container_about_library10)};
         for (LinearLayout r : containers) {
@@ -158,10 +141,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 goToURL("https://github.com/mikepenz/FastAdapter");
                 break;
 
-            case R.id.container_about_library4:
-                goToURL("https://github.com/mikepenz/Android-Iconics");
-                break;
-
             case R.id.container_about_library5:
                 goToURL("https://github.com/mikepenz/MaterialDrawer");
                 break;
@@ -172,10 +151,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.container_about_library7:
                 goToURL("https://github.com/JakeWharton/butterknife");
-                break;
-
-            case R.id.container_about_library8:
-                goToURL("https://github.com/xiprox/ErrorView");
                 break;
 
             case R.id.container_about_library9:

@@ -19,9 +19,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,7 +45,6 @@ import com.b_lam.resplash.dialogs.ManageCollectionsDialog;
 import com.b_lam.resplash.dialogs.StatsDialog;
 import com.b_lam.resplash.dialogs.WallpaperDialog;
 import com.b_lam.resplash.helpers.DownloadHelper;
-import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.Utils;
 import com.bumptech.glide.Glide;
@@ -64,6 +60,8 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
@@ -74,7 +72,7 @@ import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.DOWNLOAD;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.WALLPAPER;
 
-public class DetailActivity extends AppCompatActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener{
+public class DetailActivity extends BaseActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener{
 
     private static final String TAG = "DetailActivity";
     private boolean mPhotoLike = false;
@@ -225,20 +223,7 @@ public class DetailActivity extends AppCompatActivity implements ManageCollectio
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.DetailActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.DetailActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_detail);
 
@@ -492,6 +477,7 @@ public class DetailActivity extends AppCompatActivity implements ManageCollectio
         if (AuthManager.getInstance().isAuthorized()) {
             ManageCollectionsDialog manageCollectionsDialog = new ManageCollectionsDialog();
             manageCollectionsDialog.setPhoto(mPhoto);
+            manageCollectionsDialog.setListener(this);
             manageCollectionsDialog.show(getFragmentManager(), null);
         } else {
             Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
@@ -618,7 +604,10 @@ public class DetailActivity extends AppCompatActivity implements ManageCollectio
     }
 
     @Override
-    public void onPhotoAddedToCollection() {
-
+    public void onCollectionUpdated(Photo photo) {
+        mPhoto = photo;
+        mCurrentUserCollections = mPhoto.current_user_collections;
+        mInCollection = mCurrentUserCollections.size() > 0;
+        updateCollectionButton(mInCollection);
     }
 }

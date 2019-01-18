@@ -75,20 +75,17 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
                     url = getModel().cover_photo.urls.regular;
             }
 
-            ViewPropertyTransition.Animator fadeAnimation = new ViewPropertyTransition.Animator() {
-                @Override
-                public void animate(View view) {
-                    ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-                    fadeAnim.setDuration(500);
-                    fadeAnim.start();
-                }
+            ViewPropertyTransition.Animator fadeAnimation = view -> {
+                ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+                fadeAnim.setDuration(500);
+                fadeAnim.start();
             };
 
             Glide.with(holder.itemView.getContext())
                     .load(url)
                     .transition(GenericTransitionOptions.with(fadeAnimation))
                     .into(holder.coverPhoto);
-        }else if(holder.coverPhoto != null){
+        } else if (holder.coverPhoto != null) {
             holder.coverPhoto.setImageResource(R.drawable.placeholder);
         }
 
@@ -97,6 +94,7 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
         for (Collection userCollection : mPhoto.current_user_collections) {
             if (getModel().id == userCollection.id) holder.collectionAdded.setVisibility(View.VISIBLE);
         }
+
         holder.collectionSize.setText((Resplash.getInstance().getResources().getString(R.string.photos, String.valueOf(getModel().total_photos))));
         holder.collectionName.setText(getModel().title);
     }

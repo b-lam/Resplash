@@ -122,6 +122,7 @@ public class UserCollectionFragment extends Fragment {
         public boolean onClick(View v, IAdapter<CollectionItem> adapter, CollectionItem item, int position) {
             Intent i = new Intent(getContext(), CollectionDetailActivity.class);
             i.putExtra("Collection", new Gson().toJson(item.getModel()));
+            i.putExtra(CollectionDetailActivity.USER_COLLECTION_FLAG, true);
             startActivity(i);
             return false;
         }

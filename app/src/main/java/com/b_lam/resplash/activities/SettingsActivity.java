@@ -8,28 +8,27 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.app.NavUtils;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.Utils;
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.io.File;
 
-public class SettingsActivity extends AppCompatActivity {
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class SettingsActivity extends BaseActivity {
 
     @BindView(R.id.toolbar_settings) Toolbar toolbar;
 
@@ -39,20 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.SettingsActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.SettingsActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_settings);
 
@@ -166,12 +152,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         private void showRestartSnackbar() {
             Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), getString(R.string.restart_to_apply), Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.restart), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            restartActivity();
-                        }
-                    });
+                    .setAction(getString(R.string.restart), v -> restartActivity());
             snackbar.getView().setBackgroundColor(ThemeUtils.getThemeAttrColor(getActivity(), R.attr.colorPrimaryDark));
             snackbar.getView().setElevation(Utils.dpToPx(getActivity(), 6));
             snackbar.show();
