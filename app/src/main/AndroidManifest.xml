@@ -21,11 +21,12 @@
         android:largeHeap="true"
         android:theme="@style/ResplashTheme.Primary.Base.Light"
         tools:replace="android:supportsRtl">
+
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/MainActivityThemeLight">
+            android:theme="@style/ResplashTheme.Primary.Base.Light">
             <intent-filter>
                 <data
                     android:scheme="https"
@@ -36,6 +37,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/main_settings"
@@ -46,6 +48,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SettingsActivity" />
         </activity>
+
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/SplashActivityTheme">
@@ -54,38 +57,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.DetailActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            android:theme="@style/DetailActivityThemeLight">
+            android:theme="@style/ResplashTheme.Primary.Base.Light">
         </activity>
+
         <activity
             android:name=".activities.SearchActivity"
-            android:label=""
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/SearchActivityThemeLight">
+            android:theme="@style/ResplashTheme.Primary.Base.Light">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SearchActivity" />
         </activity>
+
         <activity
             android:name=".activities.CollectionDetailActivity"
-            android:theme="@style/CollectionDetailActivityThemeLight"
+            android:theme="@style/ResplashTheme.Primary.Base.Light"
             android:label="@string/app_name">
         </activity>
+
         <activity android:name=".activities.PreviewActivity"
-            android:theme="@style/PreviewActivityThemeLight"/>
+            android:theme="@style/ResplashTheme.Primary.Base.Light"/>
+
         <activity android:name=".activities.IntroActivity"
-            android:theme="@style/IntroActivityThemeLight"/>
+            android:theme="@style/ResplashTheme.Primary.Base.Light"/>
+
         <activity
             android:name=".activities.UserActivity"
-            android:theme="@style/UserActivityThemeLight"
+            android:theme="@style/ResplashTheme.Primary.Base.Light"
             android:label="@string/app_name">
         </activity>
+
         <activity
             android:name=".activities.LoginActivity"
-            android:theme="@style/LoginActivityThemeLight"
+            android:theme="@style/ResplashTheme.Primary.Base.Light"
             android:launchMode="singleInstance">
             <intent-filter>
                 <data
@@ -96,19 +104,27 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.AboutActivity"
-            android:theme="@style/AboutActivityThemeLight"/>
+            android:theme="@style/ResplashTheme.Primary.Base.Light"/>
+
         <activity android:name=".activities.EditProfileActivity"
-            android:theme="@style/EditProfileActivityThemeLight"/>
+            android:theme="@style/ResplashTheme.Primary.Base.Light"/>
+
         <activity android:name=".activities.CustomApiKeyActivity"
-            android:theme="@style/CustomApiActivityThemeLight">
+            android:theme="@style/ResplashTheme.Primary.Base.Light">
             <intent-filter>
                 <action android:name="CustomApiKeyActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.DonateActivity"
-            android:theme="@style/DonateActivityThemeLight"/>
+            android:theme="@style/ResplashTheme.Primary.Base.Light"/>
+
+        <activity android:name=".activities.AutoWallpaperActivity"
+            android:label="@string/auto_wallpaper_title"
+            android:theme="@style/ResplashTheme.Primary.Base.Light"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -119,6 +135,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider" />
         </provider>
+
+        <service
+            android:name=".AutoWallpaperService"
+            android:label="@string/auto_wallpaper_title"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true">
+        </service>
 
         <meta-data android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIDEYkpmJmsiQ-I__T0lFHPG64bCYUXblnA0iBRQ" />

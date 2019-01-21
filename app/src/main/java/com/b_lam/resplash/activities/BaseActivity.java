@@ -13,11 +13,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.LIGHT:
+                setTheme(R.style.ResplashTheme_Primary_Base_Light);
+                break;
             case ThemeUtils.Theme.DARK:
-                setTheme(R.style.AboutActivityThemeDark);
+                setTheme(R.style.ResplashTheme_Primary_Base_Dark);
                 break;
             case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.AboutActivityThemeBlack);
+                setTheme(R.style.ResplashTheme_Primary_Base_Black);
                 break;
         }
 

@@ -210,24 +210,6 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
-    <style name="MainActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="MainActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="MainActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="DetailActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="DetailActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="DetailActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
     <style name="SettingsActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
         <item name="colorAccent">@color/colorText_light</item>
     </style>
@@ -238,96 +220,6 @@
 
     <style name="SettingsActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
         <item name="colorAccent">@color/colorText_black</item>
-    </style>
-
-    <style name="SearchActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="SearchActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="SearchActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="CollectionDetailActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="CollectionDetailActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="CollectionDetailActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="PreviewActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="PreviewActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="PreviewActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="IntroActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="IntroActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="IntroActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="UserActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="UserActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="UserActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="LoginActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="LoginActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="LoginActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="AboutActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="AboutActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="AboutActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="EditProfileActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="EditProfileActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="EditProfileActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="CustomApiActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="CustomApiActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="CustomApiActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="DonateActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="DonateActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="DonateActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
     </style>
 
     <style name="material_image_button">

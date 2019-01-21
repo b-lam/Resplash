@@ -40,6 +40,17 @@ public class SettingsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.LIGHT:
+                setTheme(R.style.SettingsActivityThemeLight);
+                break;
+            case ThemeUtils.Theme.DARK:
+                setTheme(R.style.SettingsActivityThemeDark);
+                break;
+            case ThemeUtils.Theme.BLACK:
+                setTheme(R.style.SettingsActivityThemeBlack);
+                break;
+        }
         setContentView(R.layout.activity_settings);
 
         ButterKnife.bind(this);

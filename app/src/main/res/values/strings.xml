@@ -112,6 +112,7 @@
     <string name="main_featured">Featured</string>
     <string name="main_new">New</string>
     <string name="main_collections">Collections</string>
+    <string name="main_auto_wallpaper">Auto Wallpaper</string>
     <string name="main_support_development">Support development</string>
     <string name="main_settings">Settings</string>
     <string name="main_about">About</string>
@@ -225,6 +226,9 @@
     <string name="donate_item4_subtitle">Gotta treat yourself once in a while</string>
     <string name="donate_thanks">Thanks for donating!</string>
     <string name="donate_loading">Loading products&#8230;</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Auto Wallpaper</string>
 
     <!-- Detail -->
     <string name="stats">Stats</string>

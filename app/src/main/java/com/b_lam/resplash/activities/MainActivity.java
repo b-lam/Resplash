@@ -159,9 +159,11 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                         new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(2).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.hotIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
                         new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionsIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(4).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.heartIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(5).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.settingsIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_about)).withIdentifier(6).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.infoIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor))
+                        new PrimaryDrawerItem().withName(getString(R.string.main_auto_wallpaper)).withIdentifier(4).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.heartIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(5).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.heartIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(6).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.settingsIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_about)).withIdentifier(7).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.infoIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor))
                 )
                 .withOnDrawerItemClickListener(drawerItemClickListener)
                 .build();
@@ -229,10 +231,12 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                 }else if(drawerItem.getIdentifier() == 3){
                     mViewPager.setCurrentItem(2);
                 }else if(drawerItem.getIdentifier() == 4){
-                    intent = new Intent(MainActivity.this, DonateActivity.class);
+                    intent = new Intent(MainActivity.this, AutoWallpaperActivity.class);
                 }else if(drawerItem.getIdentifier() == 5){
-                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    intent = new Intent(MainActivity.this, DonateActivity.class);
                 }else if(drawerItem.getIdentifier() == 6){
+                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                }else if(drawerItem.getIdentifier() == 7){
                     intent = new Intent(MainActivity.this, AboutActivity.class);
                 }else if(drawerItem.getIdentifier() == 100000){
                     intent = new Intent(MainActivity.this, LoginActivity.class);

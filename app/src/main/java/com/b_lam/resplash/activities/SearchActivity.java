@@ -67,6 +67,7 @@ public class SearchActivity extends BaseActivity implements EditText.OnEditorAct
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         PagerAdapter mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mPagerAdapter.addFragment(SearchPhotoFragment.newInstance(null), getString(R.string.search_photos));
