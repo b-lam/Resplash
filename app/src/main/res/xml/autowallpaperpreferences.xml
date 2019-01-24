@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:layout="@layout/preference_master_switch"
+        android:defaultValue="false"
+        android:key="auto_wallpaper"
+        android:title="@string/off" />
+
+    <PreferenceCategory
+        android:title="Conditions"
+        android:dependency="auto_wallpaper">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="check_box_preference_1"
+            android:title="On Wi-Fi"
+            android:summary="Device must be connected to a Wi-Fi network" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="check_box_preference_2"
+            android:title="Charging"
+            android:summary="Device must be connected to a power source" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="check_box_preference_2"
+            android:title="Idle"
+            android:summary="Device must be inactive" />
+
+        <ListPreference
+            android:key="auto_wallpaper_source"
+            android:title="Duration"
+            android:dialogTitle="Duration"
+            android:summary="Change wallpaper after a specified amount of time"
+            android:entries="@array/auto_wallpaper_source_options"
+            android:entryValues="@array/auto_wallpaper_source_options_values"
+            android:defaultValue="Random" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Source"
+        android:dependency="auto_wallpaper">
+
+        <ListPreference
+            android:key="auto_wallpaper_source"
+            android:title="Type"
+            android:dialogTitle="Type"
+            android:entries="@array/auto_wallpaper_source_options"
+            android:entryValues="@array/auto_wallpaper_source_options_values"
+            android:defaultValue="Random" />
+
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:key="edit_text_preference_1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Custom category" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

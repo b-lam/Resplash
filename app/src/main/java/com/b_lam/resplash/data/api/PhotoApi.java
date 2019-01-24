@@ -73,7 +73,7 @@ public interface PhotoApi {
                                                  @Query("per_page") Integer per_page);
 
     @GET("photos/random")
-    Call<List<Photo>> getRandomPhotos(@Query("category") Integer categoryId,
+    Call<List<Photo>> getRandomPhotos(@Query("collections") Integer collectionsId,
                                       @Query("featured") Boolean featured,
                                       @Query("username") String username,
                                       @Query("query") String query,

@@ -104,6 +104,8 @@ public class SettingsActivity extends BaseActivity {
         public void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
 
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this.getActivity());
+
             addPreferencesFromResource(R.xml.preferences);
 
             final Preference btnClearCache = findPreference(getString(R.string.title_clear_cache));
@@ -111,26 +113,21 @@ public class SettingsActivity extends BaseActivity {
             btnClearCache.setSummary(getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())) + " MB");
             Log.d(TAG, getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())));
 
-            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this.getActivity());
-            mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_CLEAR_CACHE, null);
-
-            btnClearCache.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    new AsyncTask<Void, Void, Void>() {
-                        protected void onPreExecute() {
-                        }
-                        protected Void doInBackground(Void... unused) {
-                            Glide.get(Resplash.getInstance()).clearDiskCache();
-                            return null;
-                        }
-                        protected void onPostExecute(Void unused) {
-                            btnClearCache.setSummary(getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())) + " MB");
-                            Toast.makeText(Resplash.getInstance(), getString(R.string.message_cache_cleared), Toast.LENGTH_SHORT).show();
-                        }
-                    }.execute();
-                    return true;
-                }
+            btnClearCache.setOnPreferenceClickListener(preference -> {
+                new AsyncTask<Void, Void, Void>() {
+                    protected void onPreExecute() {
+                    }
+                    protected Void doInBackground(Void... unused) {
+                        Glide.get(Resplash.getInstance()).clearDiskCache();
+                        return null;
+                    }
+                    protected void onPostExecute(Void unused) {
+                        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_CLEAR_CACHE, null);
+                        btnClearCache.setSummary(getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())) + " MB");
+                        Toast.makeText(Resplash.getInstance(), getString(R.string.message_cache_cleared), Toast.LENGTH_SHORT).show();
+                    }
+                }.execute();
+                return true;
             });
         }
 

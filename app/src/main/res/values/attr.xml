@@ -70,5 +70,6 @@
         <attr name="quoteIcon" format="reference"/>
         <attr name="collectionSavedIcon" format="reference"/>
         <attr name="editIcon" format="reference"/>
+        <attr name="autoWallpaperIcon" format="reference"/>
     </declare-styleable>
 </resources>

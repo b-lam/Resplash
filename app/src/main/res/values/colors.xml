@@ -11,6 +11,7 @@
     <color name="colorAccent_light">#26292c</color>
     <color name="colorText_light">#000000</color>
     <color name="colorTextSecondary_light">#96000000</color>
+    <color name="colorTextDisabled_light">#61000000</color>
     <color name="menuBackground_light">#ccffffff</color>
     <color name="cardBackgroundColor_light">#ffffff</color>
     <color name="progressBarColor_light">#000000</color>
@@ -21,7 +22,8 @@
     <color name="colorPrimaryDark_dark">#1a1a1a</color>
     <color name="colorAccent_dark">#1a1a1a</color>
     <color name="colorText_dark">#ffffff</color>
-    <color name="colorTextSecondary_dark">#96ffffff</color>
+    <color name="colorTextSecondary_dark">#B2ffffff</color>
+    <color name="colorTextDisabled_dark">#80ffffff</color>
     <color name="menuBackground_dark">#cc000000</color>
     <color name="cardBackgroundColor_dark">#303030</color>
     <color name="progressBarColor_dark">#ffffff</color>
@@ -32,10 +34,15 @@
     <color name="colorPrimaryDark_black">#1a1a1a</color>
     <color name="colorAccent_black">#1a1a1a</color>
     <color name="colorText_black">#ffffff</color>
-    <color name="colorTextSecondary_black">#96ffffff</color>
+    <color name="colorTextSecondary_black">#B2ffffff</color>
+    <color name="colorTextDisabled_black">#80ffffff</color>
     <color name="menuBackground_black">#cc000000</color>
     <color name="cardBackgroundColor_black">#1a1a1a</color>
     <color name="progressBarColor_black">#ffffff</color>
     <color name="rippleColor_black">#40ffffff</color>
     <color name="previewBackgroundColor_black">#000000</color>
+    <color name="switchSettingsBackgroundColorEnabled">#26292c</color>
+    <color name="switchSettingsBackgroundColorDisabled">#6126292C</color>
+    <color name="switchSettingsTextColorEnabled">#ffffff</color>
+    <color name="switchSettingsTextColorDisabled">#61FFFFFF</color>
 </resources>

@@ -167,26 +167,6 @@ public class CollectionService {
         call = getCollection;
     }
 
-    public void requestCuratedCollection(String id, final OnRequestACollectionListener l) {
-        Call<Collection> getCuratedCollection = buildApi(buildClient()).getCuratedCollection(id);
-        getCuratedCollection.enqueue(new Callback<Collection>() {
-            @Override
-            public void onResponse(Call<Collection> call, Response<Collection> response) {
-                if (l != null) {
-                    l.onRequestACollectionSuccess(call, response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Collection> call, Throwable t) {
-                if (l != null) {
-                    l.onRequestACollectionFailed(call, t);
-                }
-            }
-        });
-        call = getCuratedCollection;
-    }
-
     public void createCollection(String title, String description, boolean privateX,
                                  final OnRequestACollectionListener l) {
         Call<Collection> createCollection;

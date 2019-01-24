@@ -80,27 +80,25 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
         }
 
         Log.d(TAG, "Starting setup.");
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                Log.d(TAG, "Setup finished.");
+        mHelper.startSetup(result -> {
+            Log.d(TAG, "Setup finished.");
 
-                if (!result.isSuccess()) {
-                    complain("Problem setting up in-app billing: " + result);
-                    return;
-                }
+            if (!result.isSuccess()) {
+                complain("Problem setting up in-app billing: " + result);
+                return;
+            }
 
-                if (mHelper == null) return;
+            if (mHelper == null) return;
 
-                mBroadcastReceiver = new IabBroadcastReceiver(DonateActivity.this);
-                IntentFilter broadcastFilter = new IntentFilter(IabBroadcastReceiver.ACTION);
-                registerReceiver(mBroadcastReceiver, broadcastFilter);
+            mBroadcastReceiver = new IabBroadcastReceiver(DonateActivity.this);
+            IntentFilter broadcastFilter = new IntentFilter(IabBroadcastReceiver.ACTION);
+            registerReceiver(mBroadcastReceiver, broadcastFilter);
 
-                Log.d(TAG, "Setup successful. Querying inventory.");
-                try {
-                    mHelper.queryInventoryAsync(true, skus, null, mGotInventoryListener);
-                } catch (IabHelper.IabAsyncInProgressException e) {
-                    complain("Error querying inventory. Another async operation in progress.");
-                }
+            Log.d(TAG, "Setup successful. Querying inventory.");
+            try {
+                mHelper.queryInventoryAsync(true, skus, null, mGotInventoryListener);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                complain("Error querying inventory. Another async operation in progress.");
             }
         });
 
@@ -113,12 +111,7 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
             r.setOnClickListener(this);
         }
 
-        mAnimation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAnimation.playAnimation();
-            }
-        });
+        mAnimation.setOnClickListener(view -> mAnimation.playAnimation());
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_DONATE, null);

@@ -264,15 +264,13 @@ public class PhotoService {
         });
     }
 
-
-
     public void requestRandomPhotos(Integer categoryId, Boolean featured,
                                      String username, String query,
-                                     String orientation, final OnRequestPhotosListener l) {
+                                     String orientation, int count, final OnRequestPhotosListener l) {
         Call<List<Photo>> getRandomPhotos = buildApi(buildClient()).getRandomPhotos(
                 categoryId, featured,
                 username, query,
-                orientation, Resplash.DEFAULT_PER_PAGE);
+                orientation, count);
         getRandomPhotos.enqueue(new Callback<List<Photo>>() {
             @Override
             public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {

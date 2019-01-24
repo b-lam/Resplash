@@ -229,6 +229,16 @@
 
     <!-- Auto Wallpaper -->
     <string name="auto_wallpaper_title">Auto Wallpaper</string>
+    <array name="auto_wallpaper_source_options">
+        <item>Random</item>
+        <item>Featured</item>
+        <item>Custom</item>
+    </array>
+    <array name="auto_wallpaper_source_options_values">
+        <item>Random</item>
+        <item>Featured</item>
+        <item>Custom</item>
+    </array>
 
     <!-- Detail -->
     <string name="stats">Stats</string>
@@ -281,4 +291,6 @@
     <string name="bio_hint">Bio</string>
     <string name="error_loading_photo">There seems to be a problem loading this photo</string>
     <string name="need_to_log_in">You need to log in to do this</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
 </resources>

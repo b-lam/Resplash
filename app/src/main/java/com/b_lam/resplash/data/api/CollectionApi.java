@@ -45,9 +45,6 @@ public interface CollectionApi {
     @GET("collections/{id}")
     Call<Collection> getCollection(@Path("id") String id);
 
-    @GET("collections/curated/{id}")
-    Call<Collection> getCuratedCollection(@Path("id") String id);
-
     @POST("collections")
     Call<Collection> createCollection(@Query("title") String title,
                                       @Query("description") String description,
