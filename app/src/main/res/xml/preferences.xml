@@ -61,18 +61,6 @@
             android:entryValues="@array/quality_options_values"
             android:defaultValue="@string/default_download_quality"/>
 
-        <!--<CheckBoxPreference-->
-            <!--android:key="checkbox_preference"-->
-            <!--android:title="@string/title_checkbox_preference"-->
-            <!--android:defaultValue="@string/default_checkbox_preference"/>-->
-
-        <!--<EditTextPreference-->
-            <!--android:key="edittext_preference"-->
-            <!--android:title="@string/title_edittext_preference"-->
-            <!--android:summary="@string/summary_edittext_preference"-->
-            <!--android:dialogTitle="@string/dialog_title_edittext_preference"-->
-            <!--android:dependency="checkbox_preference" />-->
-
     </PreferenceCategory>
 
     <PreferenceCategory

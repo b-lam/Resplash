@@ -5,22 +5,17 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
-
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.util.Log;
 
 import com.b_lam.resplash.activities.MainActivity;
 import com.b_lam.resplash.data.data.Collection;
 import com.b_lam.resplash.data.data.Photo;
 import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
-import com.b_lam.resplash.util.Utils;
 
 /**
  * Created by Brandon on 10/6/2016.
@@ -95,22 +90,17 @@ public class Resplash extends Application{
         if (isDebug(c)) {
             Log.d(TAG, "Using debug keys");
             return BuildConfig.DEV_APP_ID;
-        } else if (Utils.getUserGroup() == 1){
-            Log.d(TAG, "Using release keys 1");
-            return BuildConfig.RELEASE_APP_ID_1;
         } else {
-            Log.d(TAG, "Using release keys 2");
-            return BuildConfig.RELEASE_APP_ID_2;
+            Log.d(TAG, "Using release keys");
+            return BuildConfig.RELEASE_APP_ID;
         }
     }
 
     public static String getSecret(Context c) {
         if (isDebug(c)) {
             return BuildConfig.DEV_SECRET;
-        } else if (Utils.getUserGroup() == 1){
-            return BuildConfig.RELEASE_SECRET_1;
         } else {
-            return BuildConfig.RELEASE_SECRET_2;
+            return BuildConfig.RELEASE_SECRET;
         }
     }
 

@@ -11,10 +11,8 @@ android {
         versionCode 19
         versionName "1.2.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "RELEASE_APP_ID_1", RELEASE_APP_ID_1)
-        buildConfigField("String", "RELEASE_SECRET_1", RELEASE_SECRET_1)
-        buildConfigField("String", "RELEASE_APP_ID_2", RELEASE_APP_ID_2)
-        buildConfigField("String", "RELEASE_SECRET_2", RELEASE_SECRET_2)
+        buildConfigField("String", "RELEASE_APP_ID", RELEASE_APP_ID)
+        buildConfigField("String", "RELEASE_SECRET", RELEASE_SECRET)
         buildConfigField("String", "DEV_APP_ID", DEV_APP_ID)
         buildConfigField("String", "DEV_SECRET", DEV_SECRET)
         buildConfigField("String", "GOOGLE_PLAY_LICENSE_KEY", GOOGLE_PLAY_LICENSE_KEY)
