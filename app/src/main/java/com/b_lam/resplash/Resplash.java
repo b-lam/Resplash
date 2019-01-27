@@ -74,6 +74,9 @@ public class Resplash extends Application{
     @Override
     public void onCreate() {
         switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.LIGHT:
+                setTheme(R.style.ResplashTheme_Primary_Base_Light);
+                break;
             case ThemeUtils.Theme.DARK:
                 setTheme(R.style.ResplashTheme_Primary_Base_Dark);
                 break;

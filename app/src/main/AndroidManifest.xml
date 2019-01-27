@@ -43,7 +43,7 @@
             android:label="@string/main_settings"
             android:configChanges="locale"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/SettingsActivityThemeLight">
+            android:theme="@style/ResplashTheme.Primary.Base.Light">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SettingsActivity" />

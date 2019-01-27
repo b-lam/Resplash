@@ -212,15 +212,15 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
-    <style name="SettingsActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
+    <style name="PreferenceThemeLight" parent="ResplashTheme.Primary.Base.Light">
         <item name="colorAccent">@color/colorText_light</item>
     </style>
 
-    <style name="SettingsActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
+    <style name="PreferenceThemeDark" parent="ResplashTheme.Primary.Base.Dark">
         <item name="colorAccent">@color/colorText_dark</item>
     </style>
 
-    <style name="SettingsActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
+    <style name="PreferenceThemeBlack" parent="ResplashTheme.Primary.Base.Black">
         <item name="colorAccent">@color/colorText_black</item>
     </style>
 

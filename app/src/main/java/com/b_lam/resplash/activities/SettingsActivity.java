@@ -23,12 +23,13 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.File;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NavUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_settings) Toolbar toolbar;
 
@@ -38,19 +39,24 @@ public class SettingsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         switch (ThemeUtils.getTheme(this)) {
             case ThemeUtils.Theme.LIGHT:
-                setTheme(R.style.SettingsActivityThemeLight);
+                setTheme(R.style.PreferenceThemeLight);
                 break;
             case ThemeUtils.Theme.DARK:
-                setTheme(R.style.SettingsActivityThemeDark);
+                setTheme(R.style.PreferenceThemeDark);
                 break;
             case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.SettingsActivityThemeBlack);
+                setTheme(R.style.PreferenceThemeBlack);
                 break;
         }
+
+        super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
+
         setContentView(R.layout.activity_settings);
 
         ButterKnife.bind(this);

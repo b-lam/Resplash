@@ -2,62 +2,66 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <CheckBoxPreference
-        android:layout="@layout/preference_master_switch"
-        android:defaultValue="false"
         android:key="auto_wallpaper"
-        android:title="@string/off" />
+        android:defaultValue="false"
+        android:title="@string/off"
+        android:layout="@layout/preference_master_switch" />
 
     <PreferenceCategory
-        android:title="Conditions"
+        android:key="auto_wallpaper_conditions"
+        android:title="@string/auto_wallpaper_conditions"
         android:dependency="auto_wallpaper">
 
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="check_box_preference_1"
-            android:title="On Wi-Fi"
-            android:summary="Device must be connected to a Wi-Fi network" />
+            android:key="auto_wallpaper_on_wifi"
+            android:defaultValue="true"
+            android:title="@string/auto_wallpaper_on_wifi"
+            android:summary="@string/auto_wallpaper_on_wifi_summary" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="check_box_preference_2"
-            android:title="Charging"
-            android:summary="Device must be connected to a power source" />
+            android:key="auto_wallpaper_charging"
+            android:defaultValue="true"
+            android:title="@string/auto_wallpaper_charging"
+            android:summary="@string/auto_wallpaper_charging_summary" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="check_box_preference_2"
-            android:title="Idle"
-            android:summary="Device must be inactive" />
+            android:key="auto_wallpaper_idle"
+            android:defaultValue="true"
+            android:title="@string/auto_wallpaper_idle"
+            android:summary="@string/auto_wallpaper_idle_summary" />
 
         <ListPreference
-            android:key="auto_wallpaper_source"
-            android:title="Duration"
-            android:dialogTitle="Duration"
-            android:summary="Change wallpaper after a specified amount of time"
-            android:entries="@array/auto_wallpaper_source_options"
-            android:entryValues="@array/auto_wallpaper_source_options_values"
-            android:defaultValue="Random" />
+            android:key="auto_wallpaper_interval"
+            android:defaultValue="@string/auto_wallpaper_interval_default"
+            android:title="@string/auto_wallpaper_interval"
+            android:dialogTitle="@string/auto_wallpaper_interval"
+            android:summary="@string/auto_wallpaper_interval_summary"
+            android:entries="@array/auto_wallpaper_interval_options"
+            android:entryValues="@array/auto_wallpaper_interval_values" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Source"
+        android:key="auto_wallpaper_source"
+        android:title="@string/auto_wallpaper_source"
         android:dependency="auto_wallpaper">
 
         <ListPreference
-            android:key="auto_wallpaper_source"
-            android:title="Type"
-            android:dialogTitle="Type"
-            android:entries="@array/auto_wallpaper_source_options"
-            android:entryValues="@array/auto_wallpaper_source_options_values"
-            android:defaultValue="Random" />
+            android:key="auto_wallpaper_category"
+            android:defaultValue="@string/auto_wallpaper_category_default"
+            android:title="@string/auto_wallpaper_category"
+            android:dialogTitle="@string/auto_wallpaper_category"
+            android:summary="@string/auto_wallpaper_category_summary"
+            android:entries="@array/auto_wallpaper_category_options"
+            android:entryValues="@array/auto_wallpaper_category_values" />
 
         <EditTextPreference
-            android:defaultValue="Default value"
-            android:key="edit_text_preference_1"
+            android:key="auto_wallpaper_custom_category"
+            android:defaultValue="@string/auto_wallpaper_custom_category_default"
+            android:title="@string/auto_wallpaper_custom_category"
+            android:summary="@string/auto_wallpaper_custom_category_summary"
             android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="Custom category" />
+            android:singleLine="true" />
 
     </PreferenceCategory>
 

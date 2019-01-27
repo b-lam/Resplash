@@ -4,23 +4,27 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.b_lam.resplash.R;
+import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.CheckBoxPreference;
+import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AutoWallpaperActivity extends BaseActivity {
+public class AutoWallpaperActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_auto_wallpaper) Toolbar toolbar;
 
@@ -28,19 +32,23 @@ public class AutoWallpaperActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         switch (ThemeUtils.getTheme(this)) {
             case ThemeUtils.Theme.LIGHT:
-                setTheme(R.style.SettingsActivityThemeLight);
+                setTheme(R.style.PreferenceThemeLight);
                 break;
             case ThemeUtils.Theme.DARK:
-                setTheme(R.style.SettingsActivityThemeDark);
+                setTheme(R.style.PreferenceThemeDark);
                 break;
             case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.SettingsActivityThemeBlack);
+                setTheme(R.style.PreferenceThemeBlack);
                 break;
         }
+
+        super.onCreate(savedInstanceState);
+
+        LocaleUtils.loadLocale(this);
+
+        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_auto_wallpaper);
 
@@ -73,6 +81,8 @@ public class AutoWallpaperActivity extends BaseActivity {
 
     public static class AutoWallpaperFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+        private EditTextPreference customCategoryPreference;
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.autowallpaperpreferences, rootKey);
@@ -85,6 +95,12 @@ public class AutoWallpaperActivity extends BaseActivity {
 
             boolean autoWallpaperEnabled = sharedPreferences.getBoolean("auto_wallpaper", false);
             enableAutoWallpaper(autoWallpaperEnabled);
+
+            customCategoryPreference = (EditTextPreference) findPreference("auto_wallpaper_custom_category");
+            boolean customCategorySelected = sharedPreferences
+                    .getString("auto_wallpaper_category", getString(R.string.auto_wallpaper_category_default))
+                    .equals("Custom");
+            showCustomCategoryPreference(customCategorySelected);
 
             return super.onCreateView(inflater, container, savedInstanceState);
         }
@@ -113,7 +129,12 @@ public class AutoWallpaperActivity extends BaseActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
+            if (key.equals("auto_wallpaper_category")) {
+                boolean customCategorySelected = sharedPreferences
+                        .getString("auto_wallpaper_category", getString(R.string.auto_wallpaper_category_default))
+                        .equals("Custom");
+                showCustomCategoryPreference(customCategorySelected);
+            }
         }
 
         private void enableAutoWallpaper(boolean enable) {
@@ -122,6 +143,15 @@ public class AutoWallpaperActivity extends BaseActivity {
                 checkBoxPreference.setTitle(R.string.on);
             } else {
                 checkBoxPreference.setTitle(R.string.off);
+            }
+        }
+
+        private void showCustomCategoryPreference(boolean show) {
+            PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("auto_wallpaper_source");
+            if (show) {
+                preferenceCategory.addPreference(customCategoryPreference);
+            } else {
+                preferenceCategory.removePreference(customCategoryPreference);
             }
         }
     }
