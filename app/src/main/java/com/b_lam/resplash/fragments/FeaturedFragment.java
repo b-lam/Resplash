@@ -165,23 +165,11 @@ public class FeaturedFragment extends Fragment{
                 startActivity(i);
             } else if (layout.equals("Cards")) {
                 imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
                 startActivity(i);
             } else {
                 imageView = (ImageView) v.findViewById(R.id.item_image_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
-//                v.setTransitionName("photoScale");
-//                View navigationBar = getActivity().findViewById(android.R.id.navigationBarBackground);
-//                View statusBar = getActivity().findViewById(android.R.id.statusBarBackground);
-//
-//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
-//                Pair<View, String> p2 = Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME);
-//                Pair<View, String> p3 = Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME);
-//
-//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1, p2, p3);
-//                startActivity(i, options.toBundle());
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
                 startActivity(i);
             }
             return false;

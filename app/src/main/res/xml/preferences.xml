@@ -26,8 +26,8 @@
         </Preference>
 
         <Preference
-            android:title="@string/title_clear_cache"
-            android:key="@string/title_clear_cache" />
+            android:key="clear_cache"
+            android:title="@string/title_clear_cache" />
 
     </PreferenceCategory>
 

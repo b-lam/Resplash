@@ -72,11 +72,16 @@ import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.DOWNLOAD;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.WALLPAPER;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 public class DetailActivity extends BaseActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener{
+
+    public static final String DETAIL_ACTIVITY_PHOTO_ID_KEY = "DETAIL_ACTIVITY_PHOTO_ID_KEY";
 
     private static final String TAG = "DetailActivity";
     private boolean mPhotoLike = false;
     private boolean mInCollection = false;
+    private boolean mLoadPhotoFromId = false;
     private Photo mPhoto;
     private PhotoService mService;
     private SharedPreferences sharedPreferences;
@@ -147,6 +152,9 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
             Log.d(TAG, String.valueOf(response.code()));
             if (response.isSuccessful()) {
                 mPhoto = response.body();
+                if (mLoadPhotoFromId) {
+                    loadInitialPhoto();
+                }
                 tvUser.setText(getString(R.string.by_author, mPhoto.user.name));
                 if (mPhoto.story != null && !Utils.isEmpty(mPhoto.story.title)) {
                     tvTitle.setText(mPhoto.story.title);
@@ -237,11 +245,24 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+        loadPreferences();
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        mService = PhotoService.getService();
+
         mPhoto = new Gson().fromJson(getIntent().getStringExtra("Photo"), Photo.class);
 
-        this.mService = PhotoService.getService();
+        String photoId = getIntent().getStringExtra(DETAIL_ACTIVITY_PHOTO_ID_KEY);
 
-        loadPreferences();
+        if (mPhoto != null) {
+            loadInitialPhoto();
+            mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
+        } else {
+            mLoadPhotoFromId = true;
+            mService.requestPhotoDetails(photoId, mPhotoDetailsRequestListener);
+        }
+
 
         floatingActionMenu.setClosedOnTouchOutside(true);
         createCustomAnimation();
@@ -251,55 +272,8 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         fabStats.setOnClickListener(onClickListener);
         fabWallpaper.setOnClickListener(onClickListener);
 
-        if (Resplash.getInstance().getDrawable() != null) {
-            imgFull.setImageDrawable(Resplash.getInstance().getDrawable());
-            Resplash.getInstance().setDrawable(null);
-        } else if (mPhoto.urls != null) {
-            String url;
-            switch (sharedPreferences.getString("load_quality", "Regular")) {
-                case "Raw":
-                    url = mPhoto.urls.raw;
-                    break;
-                case "Full":
-                    url = mPhoto.urls.full;
-                    break;
-                case "Regular":
-                    url = mPhoto.urls.regular;
-                    break;
-                case "Small":
-                    url = mPhoto.urls.small;
-                    break;
-                case "Thumb":
-                    url = mPhoto.urls.thumb;
-                    break;
-                default:
-                    url = mPhoto.urls.regular;
-            }
-
-            Glide.with(DetailActivity.this)
-                    .load(url)
-                    .apply(new RequestOptions()
-                            .priority(Priority.HIGH)
-                            .placeholder(R.drawable.placeholder))
-                    .into(imgFull);
-        } else {
-            Toast.makeText(getApplicationContext(), getString(R.string.error_loading_photo), Toast.LENGTH_SHORT).show();
-        }
-
-        if (mPhoto.user.profile_image != null) {
-            Glide.with(DetailActivity.this)
-                    .load(mPhoto.user.profile_image.large)
-                    .apply(new RequestOptions().priority(Priority.HIGH))
-                    .into(imgProfile);
-        }
-
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
 
-        mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
-
-        imgFull.setOnClickListener(imageOnClickListener);
-
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     @Override
@@ -418,7 +392,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                                 downloadImage(mPhoto.urls.full, WALLPAPER);
                         }
                     }
-
                     break;
                 case R.id.fab_info:
                     if (mPhoto != null) {
@@ -441,6 +414,53 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
             }
         }
     };
+
+    private void loadInitialPhoto() {
+        if (Resplash.getInstance().getDrawable() != null) {
+            imgFull.setImageDrawable(Resplash.getInstance().getDrawable());
+            Resplash.getInstance().setDrawable(null);
+        } else if (mPhoto.urls != null) {
+            String url;
+            switch (sharedPreferences.getString("load_quality", "Regular")) {
+                case "Raw":
+                    url = mPhoto.urls.raw;
+                    break;
+                case "Full":
+                    url = mPhoto.urls.full;
+                    break;
+                case "Regular":
+                    url = mPhoto.urls.regular;
+                    break;
+                case "Small":
+                    url = mPhoto.urls.small;
+                    break;
+                case "Thumb":
+                    url = mPhoto.urls.thumb;
+                    break;
+                default:
+                    url = mPhoto.urls.regular;
+            }
+
+            Glide.with(DetailActivity.this)
+                    .load(url)
+                    .apply(new RequestOptions()
+                            .priority(Priority.HIGH)
+                            .placeholder(R.drawable.placeholder))
+                    .transition(withCrossFade())
+                    .into(imgFull);
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.error_loading_photo), Toast.LENGTH_SHORT).show();
+        }
+
+        if (mPhoto.user.profile_image != null) {
+            Glide.with(DetailActivity.this)
+                    .load(mPhoto.user.profile_image.large)
+                    .apply(new RequestOptions().priority(Priority.HIGH))
+                    .into(imgProfile);
+        }
+
+        imgFull.setOnClickListener(imageOnClickListener);
+    }
 
     public void goToUserProfile(View view){
         Intent intent = new Intent(this, UserActivity.class);
@@ -519,12 +539,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         } else {
             if (downloadType == WALLPAPER) {
                 wallpaperDialog = new WallpaperDialog();
-                wallpaperDialog.setListener(new WallpaperDialog.WallpaperDialogListener() {
-                    @Override
-                    public void onCancel() {
-                        DownloadHelper.getInstance(DetailActivity.this).removeDownloadRequest(downloadReference);
-                    }
-                });
+                wallpaperDialog.setListener(() -> DownloadHelper.getInstance(DetailActivity.this).removeDownloadRequest(downloadReference));
                 wallpaperDialog.show(getFragmentManager(), null);
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.download_started), Toast.LENGTH_SHORT).show();

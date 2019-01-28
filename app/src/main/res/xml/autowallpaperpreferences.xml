@@ -65,4 +65,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:dependency="auto_wallpaper">
+
+        <Preference
+            android:key="auto_wallpaper_history"
+            android:title="@string/auto_wallpaper_history"
+            android:summary="@string/auto_wallpaper_history_summary" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

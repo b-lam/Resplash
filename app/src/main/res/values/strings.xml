@@ -276,6 +276,8 @@
     <string name="auto_wallpaper_custom_category">Custom Category</string>
     <string name="auto_wallpaper_custom_category_summary">Get wallpapers matching a search term</string>
     <string name="auto_wallpaper_custom_category_default">Wallpaper</string>
+    <string name="auto_wallpaper_history">Auto Wallpaper History</string>
+    <string name="auto_wallpaper_history_summary">Open the current wallpaper</string>
 
     <!-- Detail -->
     <string name="stats">Stats</string>

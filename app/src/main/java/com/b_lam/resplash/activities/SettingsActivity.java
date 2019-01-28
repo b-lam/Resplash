@@ -114,7 +114,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             addPreferencesFromResource(R.xml.preferences);
 
-            final Preference btnClearCache = findPreference(getString(R.string.title_clear_cache));
+            final Preference btnClearCache = findPreference("clear_cache");
 
             btnClearCache.setSummary(getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())) + " MB");
             Log.d(TAG, getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())));
