@@ -2,9 +2,9 @@ package com.b_lam.resplash.data.api;
 
 
 
-import com.b_lam.resplash.data.data.ChangeCollectionPhotoResult;
-import com.b_lam.resplash.data.data.Collection;
-import com.b_lam.resplash.data.data.DeleteCollectionResult;
+import com.b_lam.resplash.data.model.ChangeCollectionPhotoResult;
+import com.b_lam.resplash.data.model.Collection;
+import com.b_lam.resplash.data.model.DeleteCollectionResult;
 
 import java.util.List;
 

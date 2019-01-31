@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <com.b_lam.resplash.views.CircleImageView
+        android:id="@+id/wallpaper_thumbnail"
+        android:layout_height="60dp"
+        android:layout_width="60dp"
+        android:focusable="true"
+        android:clickable="true"
+        tools:src="@drawable/intro_welcome_image">
+    </com.b_lam.resplash.views.CircleImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/wallpaper_thumbnail"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/wallpaper_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="?attr/primaryTextColor"
+            tools:text="By Brandon Lam" />
+
+        <TextView
+            android:id="@+id/wallpaper_set_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="?attr/secondaryTextColor"
+            tools:text="4 days ago" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

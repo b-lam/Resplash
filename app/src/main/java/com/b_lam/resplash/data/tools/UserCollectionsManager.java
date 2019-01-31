@@ -1,6 +1,6 @@
 package com.b_lam.resplash.data.tools;
 
-import com.b_lam.resplash.data.data.Collection;
+import com.b_lam.resplash.data.model.Collection;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -143,16 +143,12 @@
     <string name="about_library2_subtitle">Библиотека загрузки изображений и кеширования для Android, ориентированная на плавную прокрутку</string>
     <string name="about_library3_title">FastAdapter</string>
     <string name="about_library3_subtitle">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
-    <string name="about_library4_title">Android-Iconics</string>
-    <string name="about_library4_subtitle">Use any icon font, or vector (.svg) as drawable in your application.</string>
     <string name="about_library5_title">MaterialDrawer</string>
     <string name="about_library5_subtitle">The flexible, easy to use, all in one drawer library for your Android project</string>
     <string name="about_library6_title">InkPageIndicator</string>
     <string name="about_library6_subtitle">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
     <string name="about_library7_title">Butter Knife</string>
     <string name="about_library7_subtitle">Bind Android views and callbacks to fields and methods</string>
-    <string name="about_library8_title">ErrorView</string>
-    <string name="about_library8_subtitle">A custom view that displays an error image, a title, and a subtitle given an HTTP status code</string>
     <string name="about_library9_title">PhotoView</string>
     <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
     <string name="about_library10_title">FloatingActionButton</string>

@@ -1,9 +1,9 @@
 package com.b_lam.resplash.data.api;
 
 
-import com.b_lam.resplash.data.data.LikePhotoResult;
-import com.b_lam.resplash.data.data.Photo;
-import com.b_lam.resplash.data.data.PhotoStats;
+import com.b_lam.resplash.data.model.LikePhotoResult;
+import com.b_lam.resplash.data.model.Photo;
+import com.b_lam.resplash.data.model.PhotoStats;
 
 import java.util.List;
 

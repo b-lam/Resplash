@@ -2,9 +2,9 @@ package com.b_lam.resplash.data.service;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.api.SearchApi;
-import com.b_lam.resplash.data.data.SearchCollectionsResult;
-import com.b_lam.resplash.data.data.SearchPhotosResult;
-import com.b_lam.resplash.data.data.SearchUsersResult;
+import com.b_lam.resplash.data.model.SearchCollectionsResult;
+import com.b_lam.resplash.data.model.SearchPhotosResult;
+import com.b_lam.resplash.data.model.SearchUsersResult;
 import com.b_lam.resplash.data.tools.AuthInterceptor;
 import com.google.gson.GsonBuilder;
 

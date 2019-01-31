@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.b_lam.resplash.R;
-import com.b_lam.resplash.data.data.Me;
+import com.b_lam.resplash.data.model.Me;
 import com.b_lam.resplash.data.service.UserService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.util.ThemeUtils;

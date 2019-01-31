@@ -8,12 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.b_lam.resplash.R;
+import com.b_lam.resplash.data.model.Photo;
+
 import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
-import com.b_lam.resplash.data.data.Photo;
 
 
 /**

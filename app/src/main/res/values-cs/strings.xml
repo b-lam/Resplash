@@ -143,16 +143,12 @@
     <string name="about_library2_subtitle">Knihovna pro načítání snímků a ukládání do mezipaměti pro Android zaměřena na plynulé posouvání</string>
     <string name="about_library3_title">FastAdapter</string>
     <string name="about_library3_subtitle">Rychlá a snadno použitelná adaptérová knihovna, která minimalizuje čas vývoje aplikací na zlomek</string>
-    <string name="about_library4_title">Android-Iconics</string>
-    <string name="about_library4_subtitle">Použijte libovolnou ikonu nebo vektor (.svg) jako “drawable” v aplikaci.</string>
     <string name="about_library5_title">MaterialDrawer</string>
     <string name="about_library5_subtitle">Flexibilní, snadno použitelná, “vše v jednom” knihovna pro váš Android projekt</string>
     <string name="about_library6_title">InkPageIndicator</string>
     <string name="about_library6_subtitle">InkPageIndicator vytvořen @nickbutcher pro Plaid a se zpětnou kompatibilitou až pro API 14+</string>
     <string name="about_library7_title">Butter Knife</string>
     <string name="about_library7_subtitle">Propojte Android views a callbacks s políčky a metodami</string>
-    <string name="about_library8_title">ErrorView</string>
-    <string name="about_library8_subtitle">Vlastní chybová hláška, která zobrazuje obrázek, název a podrobnosti o chybě spolu s chybovým kódem HTTP</string>
     <string name="about_library9_title">PhotoView</string>
     <string name="about_library9_subtitle">Implementace ImageView pro Android, který podporuje zoomování pomocí různých dotykových gest</string>
     <string name="about_library10_title">FloatingActionButton</string>

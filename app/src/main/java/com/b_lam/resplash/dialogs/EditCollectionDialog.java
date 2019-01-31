@@ -12,8 +12,8 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.b_lam.resplash.R;
-import com.b_lam.resplash.data.data.Collection;
-import com.b_lam.resplash.data.data.DeleteCollectionResult;
+import com.b_lam.resplash.data.model.Collection;
+import com.b_lam.resplash.data.model.DeleteCollectionResult;
 import com.b_lam.resplash.data.service.CollectionService;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;

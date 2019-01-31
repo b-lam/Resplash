@@ -46,6 +46,7 @@
                 android:layout_width="30dp"
                 android:id="@+id/imgProfileCollection"
                 android:transitionName="profileTransition"
+                android:focusable="true"
                 android:clickable="true">
             </com.b_lam.resplash.views.CircleImageView>
             <TextView
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:textSize="15sp"
+                android:focusable="true"
                 android:clickable="true"/>
         </LinearLayout>
 

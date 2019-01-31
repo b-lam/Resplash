@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.data.data.Photo;
+import com.b_lam.resplash.data.model.Photo;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;

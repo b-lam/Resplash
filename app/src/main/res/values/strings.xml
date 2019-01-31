@@ -277,7 +277,7 @@
     <string name="auto_wallpaper_custom_category_summary">Get wallpapers matching a search term</string>
     <string name="auto_wallpaper_custom_category_default">Wallpaper</string>
     <string name="auto_wallpaper_history">Auto Wallpaper History</string>
-    <string name="auto_wallpaper_history_summary">Open the current wallpaper</string>
+    <string name="auto_wallpaper_history_summary">View previously set wallpapers</string>
 
     <!-- Detail -->
     <string name="stats">Stats</string>
@@ -288,6 +288,7 @@
     <string name="cancel">Cancel</string>
     <string name="file_exists">This has already been downloaded</string>
 
+    <!-- Error -->
     <string name="no_results">There\'s nothing here&#8230;</string>
     <string name="log_in">Log in</string>
     <string name="join">Join</string>
@@ -332,4 +333,5 @@
     <string name="need_to_log_in">You need to log in to do this</string>
     <string name="on">On</string>
     <string name="off">Off</string>
+    <string name="remove_all">Remove all</string>
 </resources>

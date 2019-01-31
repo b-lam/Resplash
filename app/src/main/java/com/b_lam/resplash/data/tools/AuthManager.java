@@ -6,9 +6,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.data.data.AccessToken;
-import com.b_lam.resplash.data.data.Me;
-import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.data.model.AccessToken;
+import com.b_lam.resplash.data.model.Me;
+import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.service.UserService;
 
 import java.util.ArrayList;

@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.service.UserService;
 import com.b_lam.resplash.fragments.UserCollectionFragment;
 import com.b_lam.resplash.fragments.UserLikesFragment;

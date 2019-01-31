@@ -11,9 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.data.data.Photo;
-import com.b_lam.resplash.data.data.PhotoStats;
+import com.b_lam.resplash.data.model.Photo;
+import com.b_lam.resplash.data.model.PhotoStats;
 import com.b_lam.resplash.data.service.PhotoService;
 
 import java.text.NumberFormat;
@@ -21,7 +22,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;
 

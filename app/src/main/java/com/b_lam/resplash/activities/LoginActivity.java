@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.data.data.AccessToken;
+import com.b_lam.resplash.data.model.AccessToken;
 import com.b_lam.resplash.data.service.AuthorizeService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.google.android.material.snackbar.Snackbar;

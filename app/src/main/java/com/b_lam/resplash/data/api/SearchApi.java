@@ -1,9 +1,9 @@
 package com.b_lam.resplash.data.api;
 
 
-import com.b_lam.resplash.data.data.SearchCollectionsResult;
-import com.b_lam.resplash.data.data.SearchPhotosResult;
-import com.b_lam.resplash.data.data.SearchUsersResult;
+import com.b_lam.resplash.data.model.SearchCollectionsResult;
+import com.b_lam.resplash.data.model.SearchPhotosResult;
+import com.b_lam.resplash.data.model.SearchUsersResult;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

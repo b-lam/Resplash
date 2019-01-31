@@ -8,9 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.b_lam.resplash.activities.MainActivity;
-import com.b_lam.resplash.data.data.Collection;
-import com.b_lam.resplash.data.data.Photo;
-import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.data.model.Collection;
+import com.b_lam.resplash.data.model.Photo;
+import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 

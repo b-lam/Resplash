@@ -15,8 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.b_lam.resplash.AutoWallpaperService;
 import com.b_lam.resplash.R;
+import com.b_lam.resplash.data.service.AutoWallpaperService;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 
@@ -120,10 +120,7 @@ public class AutoWallpaperActivity extends AppCompatActivity {
                 CheckBoxPreference checkBoxPreference = (CheckBoxPreference) findPreference("auto_wallpaper");
                 enableAutoWallpaper(checkBoxPreference.isChecked());
             } else if (preference.getKey().equals("auto_wallpaper_history")) {
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                final Intent intent = new Intent(getContext(), DetailActivity.class);
-                intent.putExtra(DetailActivity.DETAIL_ACTIVITY_PHOTO_ID_KEY,
-                        sharedPreferences.getString(AutoWallpaperService.CURRENT_WALLPAPER_ID, null));
+                final Intent intent = new Intent(getContext(), WallpaperHistoryActivity.class);
                 startActivity(intent);
             }
 

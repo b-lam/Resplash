@@ -2,12 +2,12 @@ package com.b_lam.resplash.data.service;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.api.PhotoApi;
-import com.b_lam.resplash.data.data.Collection;
-import com.b_lam.resplash.data.data.LikePhotoResult;
-import com.b_lam.resplash.data.data.Me;
-import com.b_lam.resplash.data.data.Photo;
-import com.b_lam.resplash.data.data.PhotoStats;
-import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.data.model.Collection;
+import com.b_lam.resplash.data.model.LikePhotoResult;
+import com.b_lam.resplash.data.model.Me;
+import com.b_lam.resplash.data.model.Photo;
+import com.b_lam.resplash.data.model.PhotoStats;
+import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.tools.AuthInterceptor;
 import com.google.gson.GsonBuilder;
 

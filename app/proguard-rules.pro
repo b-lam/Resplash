@@ -21,6 +21,7 @@
   **[] $VALUES;
   public *;
 }
+-keep class org.ocpsoft.prettytime.i18n.**
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 -assumenosideeffects class android.util.Log {
     public static boolean isLoggable(java.lang.String, int);
