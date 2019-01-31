@@ -24,6 +24,7 @@
         <attr name="previewBackgroundColor" format="color"/>
         <attr name="toolbarPopupTheme" format="reference"/>
         <attr name="selectionControlsTheme" format="reference"/>
+        <attr name="actionBarTheme" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="ThemeDrawable">

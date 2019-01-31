@@ -38,7 +38,6 @@
                 android:id="@+id/imgFull"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/placeholder"
                 android:adjustViewBounds="true"
                 android:transitionName="photoScale"
                 android:scaleType="fitXY"/>

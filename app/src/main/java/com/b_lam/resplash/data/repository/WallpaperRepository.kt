@@ -5,8 +5,11 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.b_lam.resplash.data.db.Wallpaper
 import com.b_lam.resplash.data.db.WallpaperDatabase
+import java.util.concurrent.TimeUnit
 
 class WallpaperRepository(application: Application) {
+
+    private val ONE_WEEK = TimeUnit.DAYS.toMillis(7)
 
     private val mDatabase: WallpaperDatabase = WallpaperDatabase.getDatabase(application)
     private var mAllWallpapers: LiveData<List<Wallpaper>>
@@ -24,7 +27,7 @@ class WallpaperRepository(application: Application) {
     }
 
     fun deleteOldWallpapers() {
-        mDatabase.wallpaperDao().deleteOldWallpapers()
+        mDatabase.wallpaperDao().deleteOldWallpapers(System.currentTimeMillis(), ONE_WEEK)
     }
 
     fun addWallpaper(wallpaper: Wallpaper) {

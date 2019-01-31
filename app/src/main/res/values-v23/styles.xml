@@ -14,6 +14,7 @@
         <item name="progressBarColor">@color/progressBarColor_light</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_light</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="actionBarTheme">@style/ActionBarTheme_light</item>
         <item name="selectionControlsTheme">@style/selectionControlsTheme_light</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
@@ -96,6 +97,7 @@
         <item name="progressBarColor">@color/progressBarColor_dark</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_dark</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="actionBarTheme">@style/ActionBarTheme_dark</item>
         <item name="selectionControlsTheme">@style/selectionControlsTheme_dark</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>

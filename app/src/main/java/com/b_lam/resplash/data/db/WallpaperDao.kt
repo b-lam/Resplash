@@ -12,8 +12,8 @@ interface WallpaperDao {
     @Query("delete from wallpaper_table")
     fun deleteAllWallpapers()
 
-    @Query("delete from wallpaper_table where date")
-    fun deleteOldWallpapers()
+    @Query("delete from wallpaper_table where :now - date > :threshold")
+    fun deleteOldWallpapers(now: Long, threshold: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addWallpaper(wallpaper: Wallpaper)

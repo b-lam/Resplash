@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -71,7 +72,6 @@ import retrofit2.Response;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.DOWNLOAD;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.WALLPAPER;
-
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class DetailActivity extends BaseActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener{
@@ -445,7 +445,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                     .load(url)
                     .apply(new RequestOptions()
                             .priority(Priority.HIGH)
-                            .placeholder(R.drawable.placeholder))
+                            .placeholder(new ColorDrawable(ThemeUtils.getThemeAttrColor(this, R.attr.colorPrimary))))
                     .transition(withCrossFade())
                     .into(imgFull);
         } else {

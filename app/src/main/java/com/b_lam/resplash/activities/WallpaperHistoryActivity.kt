@@ -39,7 +39,11 @@ class WallpaperHistoryActivity : BaseActivity(), WallpaperListAdapter.OnItemClic
         mWallpaperHistoryRecyclerView = findViewById(R.id.recycler_view_wallpaper_history)
         mWallpaperListAdapter = WallpaperListAdapter(arrayListOf(), this)
 
-        mWallpaperHistoryRecyclerView!!.layoutManager = LinearLayoutManager(this)
+        val linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
+
+        mWallpaperHistoryRecyclerView!!.layoutManager = linearLayoutManager
         mWallpaperHistoryRecyclerView!!.adapter = mWallpaperListAdapter
 
         mWallpaperListViewModel = ViewModelProviders.of(this).get(WallpaperListViewModel::class.java)
@@ -47,6 +51,8 @@ class WallpaperHistoryActivity : BaseActivity(), WallpaperListAdapter.OnItemClic
         mWallpaperListViewModel!!.getAllWallpapers().observe(this, Observer { wallpapers ->
             mWallpaperListAdapter!!.addWallpapers(wallpapers!!)
         })
+
+        deleteOldWallpaperHistory()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
