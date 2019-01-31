@@ -278,6 +278,7 @@
     <string name="auto_wallpaper_custom_category_default">Wallpaper</string>
     <string name="auto_wallpaper_history">Auto Wallpaper History</string>
     <string name="auto_wallpaper_history_summary">View previously set wallpapers</string>
+    <string name="auto_wallpaper_info">Auto Wallpaper will refresh you home screen with a new random wallpaper based on the set conditions.</string>
 
     <!-- Detail -->
     <string name="stats">Stats</string>

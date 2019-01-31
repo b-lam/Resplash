@@ -7,6 +7,14 @@
         android:title="@string/off"
         android:layout="@layout/preference_master_switch" />
 
+    <PreferenceCategory>
+
+        <Preference
+            android:icon="?attr/infoIcon"
+            android:summary="@string/auto_wallpaper_info" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="auto_wallpaper_conditions"
         android:title="@string/auto_wallpaper_conditions"
@@ -72,6 +80,8 @@
             android:key="auto_wallpaper_history"
             android:title="@string/auto_wallpaper_history"
             android:summary="@string/auto_wallpaper_history_summary" />
+
+        <Preference/>
 
     </PreferenceCategory>
 
