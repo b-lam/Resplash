@@ -229,8 +229,8 @@
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true"
         fab:menu_backgroundColor="?attr/menuBackgroundColor"
-        fab:menu_colorNormal="?attr/colorAccent"
-        fab:menu_colorPressed="?attr/colorAccent"
+        fab:menu_colorNormal="?attr/fabColor"
+        fab:menu_colorPressed="?attr/fabColor"
         android:visibility="invisible">
 
         <com.github.clans.fab.FloatingActionButton
@@ -238,8 +238,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_timeline_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/stats" />
 
@@ -248,8 +248,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_info_outline_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/photo_info" />
 
@@ -258,8 +258,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_wallpaper_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/set_as_wallpaper" />
 
@@ -268,8 +268,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_file_download_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/download" />
     </com.github.clans.fab.FloatingActionMenu>

@@ -8,7 +8,7 @@
 
     <color name="colorPrimary_light">#ffffff</color>
     <color name="colorPrimaryDark_light">#F5F5F5</color>
-    <color name="colorAccent_light">#26292c</color>
+    <color name="colorAccent_light">#1a1a1a</color>
     <color name="colorText_light">#000000</color>
     <color name="colorTextSecondary_light">#96000000</color>
     <color name="colorTextDisabled_light">#61000000</color>

@@ -22,6 +22,7 @@
         <attr name="cardBackgroundColor" format="color"/>
         <attr name="progressBarColor" format="color"/>
         <attr name="previewBackgroundColor" format="color"/>
+        <attr name="fabColor" format="color"/>
         <attr name="toolbarPopupTheme" format="reference"/>
         <attr name="selectionControlsTheme" format="reference"/>
         <attr name="actionBarTheme" format="reference"/>

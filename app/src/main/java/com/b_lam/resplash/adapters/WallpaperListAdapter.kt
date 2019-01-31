@@ -10,6 +10,7 @@ import com.b_lam.resplash.R
 import com.b_lam.resplash.data.db.Wallpaper
 import com.b_lam.resplash.util.LocaleUtils
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
@@ -40,6 +41,7 @@ class WallpaperListAdapter(wallpapers: ArrayList<Wallpaper>, listener: OnItemCli
 
         Glide.with(holder.itemView.context)
                 .load(wallpaperThumbnail)
+                .transition(withCrossFade())
                 .into(holder.mThumbnailImageView)
 
         holder.mUserName.text = holder.itemView.context.getString(R.string.by_author, wallpaperUserName)
