@@ -24,6 +24,7 @@ public class AutoWallpaperService extends JobService {
     public final static String AUTO_WALLPAPER_CATEGORY_FEATURED_KEY = "auto_wallpaper_category_featured";
     public final static String AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY = "auto_wallpaper_category_custom";
     public final static String AUTO_WALLPAPER_QUALITY_KEY = "auto_wallpaper_quality";
+    public final static String AUTO_WALLPAPER_THUMBNAIL_KEY = "auto_wallpaper_thumbnail";
 
     private static final String TAG = "AutoWallpaperService";
 
@@ -87,26 +88,8 @@ public class AutoWallpaperService extends JobService {
     }
 
     private void downloadAndSetWallpaper(Photo photo, PhotoService photoService, JobParameters params) {
-        String photoUrl;
-        switch (params.getExtras().getString(AUTO_WALLPAPER_QUALITY_KEY, "Full")) {
-            case "Raw":
-                photoUrl = photo.urls.raw;
-                break;
-            case "Full":
-                photoUrl = photo.urls.full;
-                break;
-            case "Regular":
-                photoUrl = photo.urls.regular;
-                break;
-            case "Small":
-                photoUrl = photo.urls.small;
-                break;
-            case "Thumb":
-                photoUrl = photo.urls.thumb;
-                break;
-            default:
-                photoUrl = photo.urls.full;
-        }
+        String photoUrl = getUrlFromQuality(photo,
+                params.getExtras().getString(AUTO_WALLPAPER_QUALITY_KEY, "Full"));
 
         new Thread(() -> {
             URL url = null;
@@ -126,7 +109,7 @@ public class AutoWallpaperService extends JobService {
 
                     photoService.reportDownload(photo.id, null);
 
-                    addWallpaperToHistory(photo);
+                    addWallpaperToHistory(photo, params);
 
                     finish(params, false);
                 }
@@ -138,9 +121,30 @@ public class AutoWallpaperService extends JobService {
         }).start();
     }
 
-    private void addWallpaperToHistory(Photo photo) {
+    private void addWallpaperToHistory(Photo photo, JobParameters params) {
         WallpaperRepository repository = new WallpaperRepository(getApplication());
-        repository.addWallpaper(new Wallpaper(photo.id, photo.user.name, photo.urls.thumb, System.currentTimeMillis()));
+
+        String thumbnailUrl = getUrlFromQuality(photo,
+                params.getExtras().getString(AUTO_WALLPAPER_THUMBNAIL_KEY, "Regular"));
+
+        repository.addWallpaper(new Wallpaper(photo.id, photo.user.name, thumbnailUrl, System.currentTimeMillis()));
+    }
+
+    private String getUrlFromQuality(Photo photo, String quality) {
+        switch (quality) {
+            case "Raw":
+                return photo.urls.raw;
+            case "Full":
+                return photo.urls.full;
+            case "Regular":
+                return photo.urls.regular;
+            case "Small":
+                return photo.urls.small;
+            case "Thumb":
+                return photo.urls.thumb;
+            default:
+                return photo.urls.regular;
+        }
     }
 
     private void finish(final JobParameters params, final boolean wantsReschedule) {

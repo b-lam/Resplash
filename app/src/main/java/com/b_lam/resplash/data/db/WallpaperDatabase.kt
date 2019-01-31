@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [(Wallpaper::class)], version = 1, exportSchema = false)
+@Database(entities = [(Wallpaper::class)], version = 1)
 abstract class WallpaperDatabase : RoomDatabase() {
 
     companion object {

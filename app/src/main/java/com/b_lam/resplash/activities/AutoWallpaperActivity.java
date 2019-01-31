@@ -211,6 +211,9 @@ public class AutoWallpaperActivity extends AppCompatActivity {
                 extras.putString(AutoWallpaperService.AUTO_WALLPAPER_QUALITY_KEY,
                         sharedPreferences.getString("wallpaper_quality", "Full"));
 
+                extras.putString(AutoWallpaperService.AUTO_WALLPAPER_THUMBNAIL_KEY,
+                        sharedPreferences.getString("load_quality", "Regular"));
+
                 builder.setExtras(extras);
 
                 if (jobScheduler != null) {

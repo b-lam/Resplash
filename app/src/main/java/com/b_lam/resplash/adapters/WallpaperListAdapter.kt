@@ -3,12 +3,12 @@ package com.b_lam.resplash.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.db.Wallpaper
 import com.b_lam.resplash.util.LocaleUtils
-import com.b_lam.resplash.views.CircleImageView
 import com.bumptech.glide.Glide
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
@@ -24,7 +24,7 @@ class WallpaperListAdapter(wallpapers: ArrayList<Wallpaper>, listener: OnItemCli
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
-        return RecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_wallpaper_history, parent, false))
+        return RecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_wallpaper_history_card, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -56,7 +56,7 @@ class WallpaperListAdapter(wallpapers: ArrayList<Wallpaper>, listener: OnItemCli
     }
 
     class RecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var mThumbnailImageView: CircleImageView = itemView.findViewById(R.id.wallpaper_thumbnail)
+        var mThumbnailImageView = itemView.findViewById<ImageView>(R.id.wallpaper_thumbnail)
         var mUserName = itemView.findViewById<TextView>(R.id.wallpaper_user_name)!!
         var mSetDate = itemView.findViewById<TextView>(R.id.wallpaper_set_date)!!
 

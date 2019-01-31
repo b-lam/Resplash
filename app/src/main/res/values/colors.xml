@@ -4,7 +4,7 @@
     <color name="white">#ffffff</color>
     <color name="transparent">#00ffffff</color>
     <color name="error_red">#F44336</color>
-    <color name="black_overlay">#2c000000</color>
+    <color name="black_overlay">#40000000</color>
 
     <color name="colorPrimary_light">#ffffff</color>
     <color name="colorPrimaryDark_light">#F5F5F5</color>
