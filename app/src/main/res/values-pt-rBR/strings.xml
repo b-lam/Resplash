@@ -207,7 +207,7 @@
     <string name="file_exists">Isso já foi baixado</string>
     <string name="auto_wallpaper_info">Papel de parede automático irá atualizar sua tela inicial com um novo papel de parede aleatório com base nas condições estabelecidas.</string>
     <string name="auto_wallpaper_history_summary">Visualizar papéis de parede previamente definidos</string>
-    <string name="auto_wallpaper_history">Histórico de papel de parede automático</string>
+    <string name="auto_wallpaper_history">Histórico de Papel de Parede Automático</string>
     <string name="auto_wallpaper_custom_category_summary">Obter papéis de parede correspondentes a um termo de pesquisa</string>
     <string name="auto_wallpaper_custom_category">Categoria Personalizada</string>
     <string name="auto_wallpaper_category">Categoria</string>

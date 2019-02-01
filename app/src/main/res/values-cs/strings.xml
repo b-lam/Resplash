@@ -207,7 +207,7 @@
     <string name="file_exists">Toto již bylo staženo</string>
     <string name="auto_wallpaper_info">Automatické tapety obnoví domovskou obrazovku novou náhodnou tapetou na základě nastavených podmínek.</string>
     <string name="auto_wallpaper_history_summary">Zobrazení dříve nastavených tapet</string>
-    <string name="auto_wallpaper_history">Automatická historie tapet</string>
+    <string name="auto_wallpaper_history">Automatická Historie Tapet</string>
     <string name="auto_wallpaper_custom_category_summary">Získejte tapety odpovídající hledanému výrazu</string>
     <string name="auto_wallpaper_custom_category">Vlastní kategorie</string>
     <string name="auto_wallpaper_category">Kategorie</string>
