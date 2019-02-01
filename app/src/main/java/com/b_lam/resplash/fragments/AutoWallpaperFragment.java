@@ -119,14 +119,14 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
     public void scheduleAutoWallpaperJob(SharedPreferences sharedPreferences) {
         boolean autoWallpaperEnabled = sharedPreferences.getBoolean("auto_wallpaper", false);
 
+        JobScheduler jobScheduler = (JobScheduler) getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
+
         if (autoWallpaperEnabled) {
             boolean deviceOnWifiCondition = sharedPreferences.getBoolean("auto_wallpaper_on_wifi", true);
             boolean deviceChargingCondition = sharedPreferences.getBoolean("auto_wallpaper_charging", true);
             boolean deviceIdleCondition = sharedPreferences.getBoolean("auto_wallpaper_idle", true);
             String changeWallpaperInterval = sharedPreferences.getString("auto_wallpaper_interval", getString(R.string.auto_wallpaper_interval_default));
             long changeWallpaperIntervalMillis = TimeUnit.MINUTES.toMillis(Long.valueOf(changeWallpaperInterval));
-
-            JobScheduler jobScheduler = (JobScheduler) getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
             JobInfo.Builder builder = new JobInfo.Builder(AutoWallpaperService.AUTO_WALLPAPER_JOB_ID,
                     new ComponentName(getContext(), AutoWallpaperService.class));
@@ -165,6 +165,10 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
             if (jobScheduler != null) {
                 jobScheduler.cancel(AutoWallpaperService.AUTO_WALLPAPER_JOB_ID);
                 jobScheduler.schedule(builder.build());
+            }
+        } else {
+            if (jobScheduler != null) {
+                jobScheduler.cancelAll();
             }
         }
     }
