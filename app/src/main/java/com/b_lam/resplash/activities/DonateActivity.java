@@ -276,12 +276,7 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.donate_thanks_layout, null);
         final LottieAnimationView animationView = view.findViewById(R.id.donate_thanks_animation);
-        animationView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animationView.playAnimation();
-            }
-        });
+        animationView.setOnClickListener(v -> animationView.playAnimation());
         builder.setView(view);
         builder.setPositiveButton("OK", null);
         builder.create().show();

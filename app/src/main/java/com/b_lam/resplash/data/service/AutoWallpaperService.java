@@ -3,7 +3,6 @@ package com.b_lam.resplash.data.service;
 import android.app.WallpaperManager;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.util.Log;
 
 import com.b_lam.resplash.data.db.Wallpaper;
 import com.b_lam.resplash.data.model.Photo;
@@ -28,23 +27,24 @@ public class AutoWallpaperService extends JobService {
 
     private static final String TAG = "AutoWallpaperService";
 
+    private PhotoService photoService;
+
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.d(TAG, "onStartJob");
+        photoService = PhotoService.getService();
         new Thread(() -> changeWallpaper(params)).start();
         return true;
     }
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        Log.d(TAG, "onStopJob");
+        if (photoService != null) {
+            photoService.cancel();
+        }
         return true;
     }
 
     private void changeWallpaper(final JobParameters params) {
-
-        final PhotoService photoService = PhotoService.getService();
-
         final boolean featured = params.getExtras().getBoolean(AUTO_WALLPAPER_CATEGORY_FEATURED_KEY, false);
         final String customCategory = params.getExtras().getString(AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY, null);
 

@@ -140,6 +140,7 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
             builder.setRequiresCharging(deviceChargingCondition);
             builder.setRequiresDeviceIdle(deviceIdleCondition);
             builder.setPeriodic(changeWallpaperIntervalMillis);
+            builder.setPersisted(true);
 
             String category = sharedPreferences.getString("auto_wallpaper_category",
                     getString(R.string.auto_wallpaper_category_default));
