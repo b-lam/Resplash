@@ -239,14 +239,14 @@ public class CollectionDetailActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.collection, menu);
-        mEditButton = menu.findItem(R.id.action_edit);
+//        mEditButton = menu.findItem(R.id.action_edit); //TODO: Uncomment for collection management
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        mEditButton.setVisible(mIsUserCollection);
+//        mEditButton.setVisible(mIsUserCollection); //TODO: Uncomment for collection management
         return true;
     }
 

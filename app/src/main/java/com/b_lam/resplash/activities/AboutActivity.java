@@ -57,11 +57,13 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
                 findViewById(R.id.container_about_library1),
                 findViewById(R.id.container_about_library2),
                 findViewById(R.id.container_about_library3),
+                findViewById(R.id.container_about_library4),
                 findViewById(R.id.container_about_library5),
                 findViewById(R.id.container_about_library6),
                 findViewById(R.id.container_about_library7),
                 findViewById(R.id.container_about_library9),
-                findViewById(R.id.container_about_library10)};
+                findViewById(R.id.container_about_library10),
+                findViewById(R.id.container_about_library11)};
         for (LinearLayout r : containers) {
             r.setOnClickListener(this);
         }
@@ -141,6 +143,10 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
                 goToURL("https://github.com/mikepenz/FastAdapter");
                 break;
 
+            case R.id.container_about_library4:
+                goToURL("https://github.com/airbnb/lottie-android");
+                break;
+
             case R.id.container_about_library5:
                 goToURL("https://github.com/mikepenz/MaterialDrawer");
                 break;
@@ -159,6 +165,10 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
 
             case R.id.container_about_library10:
                 goToURL("https://github.com/Clans/FloatingActionButton");
+                break;
+
+            case R.id.container_about_library11:
+                goToURL("https://github.com/ocpsoft/prettytime");
                 break;
         }
     }

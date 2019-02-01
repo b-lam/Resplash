@@ -73,7 +73,7 @@
         <item>zh</item>
         <item>pt</item>
     </string-array>
-    <string name="default_language">en</string>
+    <string name="default_language" translatable="false">en</string>
     <string name="title_theme">Theme</string>
     <string-array name="theme">
         <item>Light</item>
@@ -112,7 +112,6 @@
     <string name="main_featured">Featured</string>
     <string name="main_new">New</string>
     <string name="main_collections">Collections</string>
-    <string name="main_auto_wallpaper">Auto Wallpaper</string>
     <string name="main_support_development">Support development</string>
     <string name="main_settings">Settings</string>
     <string name="main_about">About</string>
@@ -180,7 +179,7 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
     <string name="about_version_title">Version</string>
-    <string name="about_version_subtitle">1.0.0</string>
+    <string name="about_version_subtitle" translatable="false">1.0.0</string>
     <string name="about_introduction_title">Introduction</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_privacy_policy_title">Privacy Policy</string>
@@ -197,22 +196,26 @@
     <string name="about_website_title">Visit website</string>
     <string name="about_instagram_title">Follow on Instagram</string>
     <string name="about_libraries_card_title">Libraries</string>
-    <string name="about_library1_title">Retrofit</string>
-    <string name="about_library1_subtitle">Type-safe HTTP client for Android and Java by Square, Inc.</string>
-    <string name="about_library2_title">Glide</string>
-    <string name="about_library2_subtitle">An image loading and caching library for Android focused on smooth scrolling</string>
-    <string name="about_library3_title">FastAdapter</string>
-    <string name="about_library3_subtitle">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
-    <string name="about_library5_title">MaterialDrawer</string>
-    <string name="about_library5_subtitle">The flexible, easy to use, all in one drawer library for your Android project</string>
-    <string name="about_library6_title">InkPageIndicator</string>
-    <string name="about_library6_subtitle">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
-    <string name="about_library7_title">Butter Knife</string>
-    <string name="about_library7_subtitle">Bind Android views and callbacks to fields and methods</string>
-    <string name="about_library9_title">PhotoView</string>
-    <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
-    <string name="about_library10_title">FloatingActionButton</string>
-    <string name="about_library10_subtitle">Android Floating Action Button based on Material Design specification</string>
+    <string name="about_library1_title" translatable="false">Retrofit</string>
+    <string name="about_library1_subtitle" translatable="false">Type-safe HTTP client for Android and Java by Square, Inc.</string>
+    <string name="about_library2_title" translatable="false">Glide</string>
+    <string name="about_library2_subtitle" translatable="false">An image loading and caching library for Android focused on smooth scrolling</string>
+    <string name="about_library3_title" translatable="false">FastAdapter</string>
+    <string name="about_library3_subtitle" translatable="false">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
+    <string name="about_library4_title" translatable="false">Lottie</string>
+    <string name="about_library4_subtitle" translatable="false">Render After Effects animations natively on Android</string>
+    <string name="about_library5_title" translatable="false">MaterialDrawer</string>
+    <string name="about_library5_subtitle" translatable="false">The flexible, easy to use, all in one drawer library for your Android project</string>
+    <string name="about_library6_title" translatable="false">InkPageIndicator</string>
+    <string name="about_library6_subtitle" translatable="false">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
+    <string name="about_library7_title" translatable="false">Butter Knife</string>
+    <string name="about_library7_subtitle" translatable="false">Bind Android views and callbacks to fields and methods</string>
+    <string name="about_library9_title" translatable="false">PhotoView</string>
+    <string name="about_library9_subtitle" translatable="false">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
+    <string name="about_library10_title" translatable="false">FloatingActionButton</string>
+    <string name="about_library10_subtitle" translatable="false">Android Floating Action Button based on Material Design specification</string>
+    <string name="about_library11_title" translatable="false">PrettyTime</string>
+    <string name="about_library11_subtitle" translatable="false">Social Style Date and Time Formatting for Java</string>
 
     <!-- Donate -->
     <string name="donate_card_title">Support development</string>
@@ -258,7 +261,7 @@
         <item>1440</item>
         <item>2880</item>
     </string-array>
-    <string name="auto_wallpaper_interval_default">60</string>
+    <string name="auto_wallpaper_interval_default" translatable="false">60</string>
     <string name="auto_wallpaper_source">Source</string>
     <string name="auto_wallpaper_category">Category</string>
     <string name="auto_wallpaper_category_summary">Select the wallpaper category</string>
@@ -272,10 +275,10 @@
         <item>Featured</item>
         <item>Custom</item>
     </string-array>
-    <string name="auto_wallpaper_category_default">All</string>
+    <string name="auto_wallpaper_category_default" translatable="false">All</string>
     <string name="auto_wallpaper_custom_category">Custom Category</string>
     <string name="auto_wallpaper_custom_category_summary">Get wallpapers matching a search term</string>
-    <string name="auto_wallpaper_custom_category_default">Wallpaper</string>
+    <string name="auto_wallpaper_custom_category_default" translatable="false">Wallpaper</string>
     <string name="auto_wallpaper_history">Auto Wallpaper History</string>
     <string name="auto_wallpaper_history_summary">View previously set wallpapers</string>
     <string name="auto_wallpaper_info">Auto Wallpaper will refresh your home screen with a new random wallpaper based on the set conditions.</string>

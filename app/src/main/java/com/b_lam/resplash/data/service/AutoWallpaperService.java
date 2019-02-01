@@ -92,14 +92,12 @@ public class AutoWallpaperService extends JobService {
                 params.getExtras().getString(AUTO_WALLPAPER_QUALITY_KEY, "Full"));
 
         new Thread(() -> {
-            URL url = null;
             HttpURLConnection urlConnection = null;
-            InputStream inputStream = null;
 
             try {
-                url = new URL(photoUrl);
+                URL url = new URL(photoUrl);
                 urlConnection = (HttpURLConnection) url.openConnection();
-                inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
                 WallpaperManager.getInstance(getApplicationContext()).setStream(inputStream);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -112,9 +110,7 @@ public class AutoWallpaperService extends JobService {
                     addWallpaperToHistory(photo, params);
 
                     finish(params, false);
-                }
-
-                if (url == null || urlConnection == null || inputStream == null) {
+                } else {
                     finish(params, true);
                 }
             }

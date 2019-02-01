@@ -121,7 +121,6 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Fotografie ve vysokém rozlišení se kterými si můžete dělat co chcete (a jsou zdarma)</string>
     <string name="about_version_title">Verze</string>
-    <string name="about_version_subtitle">1.0.0</string>
     <string name="about_introduction_title">Úvod</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_support_development_card_title">Podpořte vývoj</string>
@@ -137,22 +136,6 @@
     <string name="about_website_title">Navštívit webové stránky</string>
     <string name="about_instagram_title">Sledovat na Instagramu</string>
     <string name="about_libraries_card_title">Knihovny</string>
-    <string name="about_library1_title">Retrofit</string>
-    <string name="about_library1_subtitle">Type-safe HTTP klient pro Android a Javu od společnosti Square, Inc.</string>
-    <string name="about_library2_title">Glide</string>
-    <string name="about_library2_subtitle">Knihovna pro načítání snímků a ukládání do mezipaměti pro Android zaměřena na plynulé posouvání</string>
-    <string name="about_library3_title">FastAdapter</string>
-    <string name="about_library3_subtitle">Rychlá a snadno použitelná adaptérová knihovna, která minimalizuje čas vývoje aplikací na zlomek</string>
-    <string name="about_library5_title">MaterialDrawer</string>
-    <string name="about_library5_subtitle">Flexibilní, snadno použitelná, “vše v jednom” knihovna pro váš Android projekt</string>
-    <string name="about_library6_title">InkPageIndicator</string>
-    <string name="about_library6_subtitle">InkPageIndicator vytvořen @nickbutcher pro Plaid a se zpětnou kompatibilitou až pro API 14+</string>
-    <string name="about_library7_title">Butter Knife</string>
-    <string name="about_library7_subtitle">Propojte Android views a callbacks s políčky a metodami</string>
-    <string name="about_library9_title">PhotoView</string>
-    <string name="about_library9_subtitle">Implementace ImageView pro Android, který podporuje zoomování pomocí různých dotykových gest</string>
-    <string name="about_library10_title">FloatingActionButton</string>
-    <string name="about_library10_subtitle">Plovoucí akční tlačítko pro Android založené na Material Designu</string>
 
     <!-- Donate -->
     <string name="donate_card_title">Podpořit vývoj</string>
@@ -215,5 +198,33 @@
     <string name="bio_hint">Bio</string>
     <string name="cancel">Zrušení</string>
     <string name="setting_wallpaper">Nastavení tapety&#8230;</string>
+    <string name="error_loading_photo">Zdá se, že při načítání této fotografie došlo k problému</string>
+    <string name="need_to_log_in">Chcete-li to provést, musíte se přihlásit</string>
+    <string name="next_wallpaper">Další tapeta</string>
+    <string name="remove_all">Odebrat všechny</string>
+    <string name="auto_wallpaper_title">Automatické Tapety</string>
+    <string name="auto_wallpaper_conditions">Podmínky</string>
+    <string name="file_exists">Toto již bylo staženo</string>
+    <string name="auto_wallpaper_info">Automatické tapety obnoví domovskou obrazovku novou náhodnou tapetou na základě nastavených podmínek.</string>
+    <string name="auto_wallpaper_history_summary">Zobrazení dříve nastavených tapet</string>
+    <string name="auto_wallpaper_history">Automatická historie tapet</string>
+    <string name="auto_wallpaper_custom_category_summary">Získejte tapety odpovídající hledanému výrazu</string>
+    <string name="auto_wallpaper_custom_category">Vlastní kategorie</string>
+    <string name="auto_wallpaper_category">Kategorie</string>
+    <string name="auto_wallpaper_category_summary">Vyberte kategorii tapety</string>
+    <string name="about_privacy_policy_title">Zásady ochrany osobních údajů</string>
+    <string name="auto_wallpaper_charging_summary">Zařízení musí být připojeno k napájecímu zdroji</string>
+    <string name="auto_wallpaper_on_wifi_summary">Zařízení musí být připojeno k síti Wifi</string>
+    <string name="auto_wallpaper_idle_summary">Zařízení musí být neaktivní</string>
+    <string name="auto_wallpaper_interval_summary">Vyberte interval automatické změny tapety</string>
+    <string name="auto_wallpaper_source">Zdroj</string>
+    <string name="auto_wallpaper_interval">Interval</string>
+    <string name="auto_wallpaper_charging">Nabíjení</string>
+    <string name="auto_wallpaper_on_wifi">Na Wifi</string>
+    <string name="auto_wallpaper_idle">Líný</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="on">Povoleno</string>
+    <string name="off">Zakázáno</string>
 
 </resources>

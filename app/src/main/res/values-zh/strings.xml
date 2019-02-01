@@ -121,7 +121,6 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">免费高清照片</string>
     <string name="about_version_title">版本</string>
-    <string name="about_version_subtitle">1.0.0</string>
     <string name="about_introduction_title">介绍</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_support_development_card_title">支持开发</string>
@@ -137,22 +136,6 @@
     <string name="about_website_title">访问网页</string>
     <string name="about_instagram_title">Follow on Instagram</string>
     <string name="about_libraries_card_title">Libraries</string>
-    <string name="about_library1_title">Retrofit</string>
-    <string name="about_library1_subtitle">Type-safe HTTP client for Android and Java by Square, Inc.</string>
-    <string name="about_library2_title">Glide</string>
-    <string name="about_library2_subtitle">An image loading and caching library for Android focused on smooth scrolling</string>
-    <string name="about_library3_title">FastAdapter</string>
-    <string name="about_library3_subtitle">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
-    <string name="about_library5_title">MaterialDrawer</string>
-    <string name="about_library5_subtitle">The flexible, easy to use, all in one drawer library for your Android project</string>
-    <string name="about_library6_title">InkPageIndicator</string>
-    <string name="about_library6_subtitle">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
-    <string name="about_library7_title">Butter Knife</string>
-    <string name="about_library7_subtitle">Bind Android views and callbacks to fields and methods</string>
-    <string name="about_library9_title">PhotoView</string>
-    <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
-    <string name="about_library10_title">FloatingActionButton</string>
-    <string name="about_library10_subtitle">Android Floating Action Button based on Material Design specification</string>
 
     <!-- Donate -->
     <string name="donate_card_title">支持开发</string>
@@ -215,5 +198,33 @@
     <string name="instagram_username_hint">Instagram 用户名</string>
     <string name="location_hint">地址</string>
     <string name="bio_hint">简介</string>
+    <string name="error_loading_photo">加载这张照片似乎有问题</string>
+    <string name="need_to_log_in">您需要登录才能执行此操作</string>
+    <string name="next_wallpaper">下一个壁纸</string>
+    <string name="remove_all">移除所有</string>
+    <string name="auto_wallpaper_title">自动壁纸</string>
+    <string name="auto_wallpaper_conditions">条件</string>
+    <string name="file_exists">这已经下载了</string>
+    <string name="auto_wallpaper_info">自动壁纸将根据设置条件使用新的随机壁纸刷新主屏幕。</string>
+    <string name="auto_wallpaper_history_summary">查看以前设置的壁纸</string>
+    <string name="auto_wallpaper_history">自动壁纸历史</string>
+    <string name="auto_wallpaper_custom_category_summary">获取与搜索词匹配的壁纸</string>
+    <string name="auto_wallpaper_custom_category">自定义类别</string>
+    <string name="auto_wallpaper_category">类别</string>
+    <string name="auto_wallpaper_category_summary">选择壁纸类别</string>
+    <string name="about_privacy_policy_title">隐私政策</string>
+    <string name="auto_wallpaper_charging_summary">设备必须连接到电源</string>
+    <string name="auto_wallpaper_on_wifi_summary">设备必须连接到Wi-Fi网络</string>
+    <string name="auto_wallpaper_idle_summary">设备必须处于非活动状</string>
+    <string name="auto_wallpaper_interval_summary">选择自动壁纸更改间隔</string>
+    <string name="auto_wallpaper_source">资源</string>
+    <string name="auto_wallpaper_interval">间隔</string>
+    <string name="auto_wallpaper_charging">充电</string>
+    <string name="auto_wallpaper_on_wifi">在Wifi上</string>
+    <string name="auto_wallpaper_idle">闲</string>
+    <string name="yes">是</string>
+    <string name="no">没有</string>
+    <string name="on">启用</string>
+    <string name="off">残</string>
 
 </resources>

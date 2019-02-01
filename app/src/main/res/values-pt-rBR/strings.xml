@@ -121,7 +121,6 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Fotos em HD gratuitas (faça o que quiser)</string>
     <string name="about_version_title">Versão</string>
-    <string name="about_version_subtitle">1.1.4</string>
     <string name="about_introduction_title">Introdução</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_support_development_card_title">Apoiar desenvolvimento</string>
@@ -137,22 +136,6 @@
     <string name="about_website_title">Visitar website</string>
     <string name="about_instagram_title">Me siga no Instagram</string>
     <string name="about_libraries_card_title">Bibliotecas</string>
-    <string name="about_library1_title">Retrofit</string>
-    <string name="about_library1_subtitle">Cliente HTTP\'s para Android e Java por Square, Inc.</string>
-    <string name="about_library2_title">Glide</string>
-    <string name="about_library2_subtitle">Uma biblioteca de cache e carregamento de imagem para o Android focada em rolagem</string>
-    <string name="about_library3_title">FastAdapter</string>
-    <string name="about_library3_subtitle">A biblioteca de adaptadores à prova de balas, rápida e fácil de usar, que minimiza o tempo de desenvolvimento em uma fração</string>
-    <string name="about_library5_title">MaterialDrawer</string>
-    <string name="about_library5_subtitle">A biblioteca flexível, fácil de usar, tudo em um conteiner para o seu projeto Android</string>
-    <string name="about_library6_title">InkPageIndicator</string>
-    <string name="about_library6_subtitle">InkPageIndicator criado por @nickbutcher para Plaid e apoiado por mim na API 14+</string>
-    <string name="about_library7_title">Butter Knife</string>
-    <string name="about_library7_subtitle">Vincular visualizações do Android e callbacks para campos e métodos</string>
-    <string name="about_library9_title">PhotoView</string>
-    <string name="about_library9_subtitle">Implementação do ImageView para Android que suporta o zoom, por vários gestos de multitoque</string>
-    <string name="about_library10_title">FloatingActionButton</string>
-    <string name="about_library10_subtitle">Botão de ação flutuante do Android com base na especificação do projeto de Material Design</string>
 
     <!-- Donate -->
     <string name="donate_card_title">Apoiar desenvolvimento</string>
@@ -216,5 +199,32 @@
     <string name="location_hint">Localização</string>
     <string name="bio_hint">Bio</string>
     <string name="error_loading_photo">Parece que ouve um problema ao carregar esta foto.</string>
+    <string name="need_to_log_in">Você precisa fazer login para fazer isso</string>
+    <string name="next_wallpaper">Próximo papel de parede</string>
+    <string name="remove_all">Deletar tudo</string>
+    <string name="auto_wallpaper_title">Papel de Parede Automático</string>
+    <string name="auto_wallpaper_conditions">Condições</string>
+    <string name="file_exists">Isso já foi baixado</string>
+    <string name="auto_wallpaper_info">Papel de parede automático irá atualizar sua tela inicial com um novo papel de parede aleatório com base nas condições estabelecidas.</string>
+    <string name="auto_wallpaper_history_summary">Visualizar papéis de parede previamente definidos</string>
+    <string name="auto_wallpaper_history">Histórico de papel de parede automático</string>
+    <string name="auto_wallpaper_custom_category_summary">Obter papéis de parede correspondentes a um termo de pesquisa</string>
+    <string name="auto_wallpaper_custom_category">Categoria Personalizada</string>
+    <string name="auto_wallpaper_category">Categoria</string>
+    <string name="auto_wallpaper_category_summary">Selecione a categoria de papel de parede</string>
+    <string name="about_privacy_policy_title">Política de Privacidade</string>
+    <string name="auto_wallpaper_charging_summary">O dispositivo deve estar conectado a uma fonte de energia</string>
+    <string name="auto_wallpaper_on_wifi_summary">O dispositivo deve estar conectado a uma rede Wi-Fi</string>
+    <string name="auto_wallpaper_idle_summary">O dispositivo deve estar inativo</string>
+    <string name="auto_wallpaper_interval_summary">Selecione o intervalo de mudança de papel de parede automático</string>
+    <string name="auto_wallpaper_source">Fonte</string>
+    <string name="auto_wallpaper_interval">Intervalo</string>
+    <string name="auto_wallpaper_charging">Carregamento</string>
+    <string name="auto_wallpaper_on_wifi">Em Wifi</string>
+    <string name="auto_wallpaper_idle">Inativo</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="on">Encantado</string>
+    <string name="off">Desativado</string>
 
 </resources>

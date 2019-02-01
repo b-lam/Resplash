@@ -202,7 +202,9 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         @Override
         public void onRequestPhotoDetailsFailed(Call<Photo> call, Throwable t) {
             Log.d(TAG, t.toString());
-            mService.requestPhotoDetails(mPhoto.id, this);
+            if (mPhoto != null) {
+                mService.requestPhotoDetails(mPhoto.id, this);
+            }
         }
     };
 
