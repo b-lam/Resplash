@@ -7,13 +7,14 @@
 Beautiful, free photos.
 Gifted by the world’s most generous community of photographers.
 
-* Browse 100000+ high-res photos
+* Browse 800000+ high-res photos
 * New photos everyday
 * Material design
 * Dark and black (AMOLED) theme
 * Download raw photos
 * Set as wallpaper straight from the app
-* View user profiles, curated collections, photo stats and exif data
+* Automatically refresh your home screen with a new random wallpaper
+* View user profiles, curated collections, photo stats and EXIF data
 * Log in to like photos and update your profile
 * Various layout options
 
