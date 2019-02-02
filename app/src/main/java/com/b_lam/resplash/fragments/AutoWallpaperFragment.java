@@ -27,6 +27,7 @@ import androidx.preference.PreferenceManager;
 
 public class AutoWallpaperFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private CheckBoxPreference mEnableAutoWallpaperPreference;
     private EditTextPreference mCustomCategoryPreference;
 
     private OnAutoWallpaperFragmentListener mCallback;
@@ -41,10 +42,12 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
+        mEnableAutoWallpaperPreference = findPreference("auto_wallpaper");
+
         boolean autoWallpaperEnabled = sharedPreferences.getBoolean("auto_wallpaper", false);
         enableAutoWallpaper(autoWallpaperEnabled);
 
-        mCustomCategoryPreference = (EditTextPreference) findPreference("auto_wallpaper_custom_category");
+        mCustomCategoryPreference = findPreference("auto_wallpaper_custom_category");
         boolean customCategorySelected = sharedPreferences
                 .getString("auto_wallpaper_category", getString(R.string.auto_wallpaper_category_default))
                 .equals("Custom");
@@ -55,10 +58,9 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference.getKey().equals("auto_wallpaper")) {
-            CheckBoxPreference checkBoxPreference = (CheckBoxPreference) findPreference("auto_wallpaper");
-            enableAutoWallpaper(checkBoxPreference.isChecked());
-        } else if (preference.getKey().equals("auto_wallpaper_history")) {
+        if (preference == mEnableAutoWallpaperPreference) {
+            enableAutoWallpaper(mEnableAutoWallpaperPreference.isChecked());
+        } else if (preference == findPreference("auto_wallpaper_history")) {
             final Intent intent = new Intent(getContext(), WallpaperHistoryActivity.class);
             startActivity(intent);
         }
@@ -99,11 +101,10 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
     private void enableAutoWallpaper(boolean enable) {
         mCallback.onAutoWallpaperEnableClicked(enable);
 
-        CheckBoxPreference checkBoxPreference = (CheckBoxPreference) findPreference("auto_wallpaper");
         if (enable) {
-            checkBoxPreference.setTitle(R.string.on);
+            mEnableAutoWallpaperPreference.setTitle(R.string.on);
         } else {
-            checkBoxPreference.setTitle(R.string.off);
+            mEnableAutoWallpaperPreference.setTitle(R.string.off);
         }
     }
 

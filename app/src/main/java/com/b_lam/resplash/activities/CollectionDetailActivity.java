@@ -103,7 +103,7 @@ public class CollectionDetailActivity extends BaseActivity {
             mCollectionDescription.setVisibility(View.GONE);
         }
         mUserCollection.setText(getString(R.string.by_author, mCollection.user.name));
-        Glide.with(CollectionDetailActivity.this).load(mCollection.user.profile_image.medium).into(mUserProfilePicture);
+        Glide.with(getApplicationContext()).load(mCollection.user.profile_image.medium).into(mUserProfilePicture);
 
         mUserProfilePicture.setOnClickListener(userProfileOnClickListener);
         mUserCollection.setOnClickListener(userProfileOnClickListener);

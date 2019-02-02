@@ -443,7 +443,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                     url = mPhoto.urls.regular;
             }
 
-            Glide.with(DetailActivity.this)
+            Glide.with(getApplicationContext())
                     .load(url)
                     .apply(new RequestOptions()
                             .priority(Priority.HIGH)
@@ -455,7 +455,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         }
 
         if (mPhoto.user.profile_image != null) {
-            Glide.with(DetailActivity.this)
+            Glide.with(getApplicationContext())
                     .load(mPhoto.user.profile_image.large)
                     .apply(new RequestOptions().priority(Priority.HIGH))
                     .into(imgProfile);

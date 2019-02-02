@@ -71,7 +71,7 @@ public class PreviewActivity extends BaseActivity {
                     url = mPhoto.urls.regular;
             }
 
-            Glide.with(this)
+            Glide.with(getApplicationContext())
                     .load(url)
                     .listener(new RequestListener<Drawable>() {
                         @Override
