@@ -7,15 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,16 +15,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.fragments.CollectionFragment;
 import com.b_lam.resplash.fragments.FeaturedFragment;
 import com.b_lam.resplash.fragments.NewFragment;
-import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -52,11 +45,16 @@ import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
 
-public class MainActivity extends AppCompatActivity implements AuthManager.OnAuthDataChangedListener{
+public class MainActivity extends BaseActivity implements AuthManager.OnAuthDataChangedListener{
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.viewpager) ViewPager mViewPager;
@@ -73,20 +71,7 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.MainActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.MainActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_main);
 
@@ -95,22 +80,19 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         setSupportActionBar(mToolbar);
         setTitle(getString(R.string.app_name));
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        new Thread(() -> {
+            SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+            boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
 
-                if (isFirstStart) {
+            if (isFirstStart) {
 
-                    Intent i = new Intent(MainActivity.this, IntroActivity.class);
-                    startActivity(i);
+                Intent i = new Intent(MainActivity.this, IntroActivity.class);
+                startActivity(i);
 
-                    SharedPreferences.Editor e = getPrefs.edit();
-                    e.putBoolean("firstStart", false);
-                    e.apply();
-                }
+                SharedPreferences.Editor e = getPrefs.edit();
+                e.putBoolean("firstStart", false);
+                e.apply();
             }
         }).start();
 
@@ -177,9 +159,11 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                         new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(2).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.hotIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
                         new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionsIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(4).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.heartIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(5).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.settingsIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_about)).withIdentifier(6).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.infoIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor))
+                        new PrimaryDrawerItem().withName(getString(R.string.auto_wallpaper_title)).withIdentifier(4).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.autoWallpaperIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(5).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.heartIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(6).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.settingsIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_about)).withIdentifier(7).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.infoIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor))
                 )
                 .withOnDrawerItemClickListener(drawerItemClickListener)
                 .build();
@@ -219,19 +203,16 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
             }
         });
 
-        fabUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    if (intent.resolveActivity(getPackageManager()) != null)
-                        startActivity(intent);
-                    else
-                        Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        fabUpload.setOnClickListener(view -> {
+            try {
+                Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                if (intent.resolveActivity(getPackageManager()) != null)
+                    startActivity(intent);
+                else
+                    Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -250,10 +231,12 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
                 }else if(drawerItem.getIdentifier() == 3){
                     mViewPager.setCurrentItem(2);
                 }else if(drawerItem.getIdentifier() == 4){
-                    intent = new Intent(MainActivity.this, DonateActivity.class);
+                    intent = new Intent(MainActivity.this, AutoWallpaperActivity.class);
                 }else if(drawerItem.getIdentifier() == 5){
-                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    intent = new Intent(MainActivity.this, DonateActivity.class);
                 }else if(drawerItem.getIdentifier() == 6){
+                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                }else if(drawerItem.getIdentifier() == 7){
                     intent = new Intent(MainActivity.this, AboutActivity.class);
                 }else if(drawerItem.getIdentifier() == 100000){
                     intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -342,7 +325,6 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         switch (item.getItemId()){
@@ -391,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
         super.onStart();
         AuthManager.getInstance().addOnWriteDataListener(this);
         if (AuthManager.getInstance().isAuthorized() && TextUtils.isEmpty(AuthManager.getInstance().getUsername())) {
-            AuthManager.getInstance().refreshPersonalProfile();
+            AuthManager.getInstance().requestPersonalProfile();
         }
     }
 
@@ -481,10 +463,12 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
 
     @Override
     public void onWriteAccessToken() {
+
     }
 
     @Override
     public void onWriteUserInfo() {
+
     }
 
     @Override
@@ -494,5 +478,6 @@ public class MainActivity extends AppCompatActivity implements AuthManager.OnAut
 
     @Override
     public void onLogout() {
+
     }
 }

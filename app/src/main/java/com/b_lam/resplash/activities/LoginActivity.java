@@ -3,9 +3,6 @@ package com.b_lam.resplash.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,22 +11,20 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.data.data.AccessToken;
+import com.b_lam.resplash.data.model.AccessToken;
 import com.b_lam.resplash.data.service.AuthorizeService;
 import com.b_lam.resplash.data.tools.AuthManager;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
-import com.google.firebase.analytics.FirebaseAnalytics;
-
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, AuthorizeService.OnRequestAccessTokenListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, AuthorizeService.OnRequestAccessTokenListener {
 
     @BindView(R.id.login_btn) Button btnLogin;
     @BindView(R.id.join_btn) Button btnJoin;
@@ -42,20 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.LoginActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.LoginActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_login);
 
@@ -121,14 +103,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (response.isSuccessful()) {
             Log.d(TAG, response.body().toString());
             AuthManager.getInstance().writeAccessToken(response.body());
-            AuthManager.getInstance().refreshPersonalProfile();
+            AuthManager.getInstance().requestPersonalProfile();
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LOGIN, null);
             startActivity(intent);
         } else {
             Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
-//            setState(NORMAL_STATE);
         }
     }
 
@@ -136,6 +117,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onRequestAccessTokenFailed(Call<AccessToken> call, Throwable t) {
         Log.d(TAG, t.toString());
         Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
-//        setState(NORMAL_STATE);
     }
 }

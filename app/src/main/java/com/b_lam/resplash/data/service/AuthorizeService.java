@@ -5,8 +5,7 @@ import android.content.Context;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.api.AuthorizeApi;
-import com.b_lam.resplash.data.data.AccessToken;
-import com.b_lam.resplash.data.tools.AuthManager;
+import com.b_lam.resplash.data.model.AccessToken;
 
 import retrofit2.Call;
 import retrofit2.Callback;

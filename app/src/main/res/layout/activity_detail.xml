@@ -38,7 +38,6 @@
                 android:id="@+id/imgFull"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/placeholder"
                 android:adjustViewBounds="true"
                 android:transitionName="photoScale"
                 android:scaleType="fitXY"/>
@@ -56,6 +55,7 @@
                 android:id="@+id/detail_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -70,7 +70,7 @@
                     android:paddingRight="20dp"
                     android:background="?attr/dividerColor">
 
-                    <com.b_lam.resplash.CircleImageView
+                    <com.b_lam.resplash.views.CircleImageView
                         android:layout_height="24dp"
                         android:layout_width="24dp"
                         android:id="@+id/imgProfile"
@@ -78,11 +78,11 @@
                         android:onClick="goToUserProfile"
                         android:clickable="true"
                         android:focusable="true">
-                    </com.b_lam.resplash.CircleImageView>
+                    </com.b_lam.resplash.views.CircleImageView>
 
                     <TextView
                         android:id="@+id/tvUser"
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_gravity="center_vertical"
@@ -101,19 +101,48 @@
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
                         android:layout_marginStart="20dp"
-                        android:src="@drawable/ic_heart_outline_grey"
+                        android:src="@drawable/ic_heart_outline_grey_24dp"
+                        android:contentDescription="Like"
                         android:onClick="likeImage"/>
-                    <!--<ImageButton-->
-                    <!--android:id="@+id/btnAddToCollection"-->
-                    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="24dp"-->
-                    <!--android:scaleType="fitCenter"-->
-                    <!--android:adjustViewBounds="true"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:onClick="addToCollection"/>-->
+
+                    <ImageButton
+                        android:id="@+id/btnAddToCollection"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_gravity="center"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_bookmark_outline_grey_24dp"
+                        android:contentDescription="Add to collection"
+                        android:onClick="addToCollection"
+                        android:visibility="gone"/>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:textColor="?attr/primaryTextColor"/>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:textColor="?attr/primaryTextColor"/>
 
                 <TextView
                     android:id="@+id/tvLocation"
@@ -201,8 +230,8 @@
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true"
         fab:menu_backgroundColor="?attr/menuBackgroundColor"
-        fab:menu_colorNormal="?attr/colorAccent"
-        fab:menu_colorPressed="?attr/colorAccent"
+        fab:menu_colorNormal="?attr/fabColor"
+        fab:menu_colorPressed="?attr/fabColor"
         android:visibility="invisible">
 
         <com.github.clans.fab.FloatingActionButton
@@ -210,8 +239,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_timeline_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/stats" />
 
@@ -220,8 +249,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_info_outline_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/photo_info" />
 
@@ -230,8 +259,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_wallpaper_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/set_as_wallpaper" />
 
@@ -240,8 +269,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_file_download_white_18dp"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_colorPressed="?attr/colorAccent"
+            fab:fab_colorNormal="?attr/fabColor"
+            fab:fab_colorPressed="?attr/fabColor"
             fab:fab_size="mini"
             fab:fab_label="@string/download" />
     </com.github.clans.fab.FloatingActionMenu>

@@ -22,7 +22,10 @@
         <attr name="cardBackgroundColor" format="color"/>
         <attr name="progressBarColor" format="color"/>
         <attr name="previewBackgroundColor" format="color"/>
+        <attr name="fabColor" format="color"/>
         <attr name="toolbarPopupTheme" format="reference"/>
+        <attr name="selectionControlsTheme" format="reference"/>
+        <attr name="actionBarTheme" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="ThemeDrawable">
@@ -67,5 +70,8 @@
         <attr name="exploreIcon" format="reference"/>
         <attr name="accountCardIcon" format="reference"/>
         <attr name="quoteIcon" format="reference"/>
+        <attr name="collectionSavedIcon" format="reference"/>
+        <attr name="editIcon" format="reference"/>
+        <attr name="autoWallpaperIcon" format="reference"/>
     </declare-styleable>
 </resources>

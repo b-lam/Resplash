@@ -2,8 +2,8 @@ package com.b_lam.resplash.data.service;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.api.UserApi;
-import com.b_lam.resplash.data.data.Me;
-import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.data.model.Me;
+import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.tools.AuthInterceptor;
 import com.google.gson.GsonBuilder;
 
@@ -65,11 +65,11 @@ public class UserService {
     }
 
     public void updateMeProfile(String username, String first_name, String last_name,
-                                String email, String url, String location, String bio,
+                                String email, String url, String location, String bio, String instagram_username,
                                 final OnRequestMeProfileListener l) {
         Call<Me> updateMeProfile = buildApi(buildClient()).updateMeProfile(
                 username, first_name, last_name,
-                email, url, location, bio);
+                email, url, location, bio, instagram_username);
         updateMeProfile.enqueue(new Callback<Me>() {
             @Override
             public void onResponse(Call<Me> call, Response<Me> response) {

@@ -3,28 +3,25 @@ package com.b_lam.resplash.activities;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.b_lam.resplash.data.data.Me;
+import com.b_lam.resplash.R;
+import com.b_lam.resplash.data.model.Me;
 import com.b_lam.resplash.data.service.UserService;
 import com.b_lam.resplash.data.tools.AuthManager;
-import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class EditProfileActivity extends AppCompatActivity implements UserService.OnRequestMeProfileListener, AuthManager.OnAuthDataChangedListener {
+public class EditProfileActivity extends BaseActivity implements UserService.OnRequestMeProfileListener, AuthManager.OnAuthDataChangedListener {
 
     @BindView(R.id.toolbar_edit_profile) Toolbar mToolbar;
     @BindView(R.id.username_edit_text) EditText mUsername;
@@ -39,8 +36,6 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
 
     private UserService mService;
 
-    private boolean backPressed = false;
-
     private final String KEY_UPDATE_PROFILE_USERNAME = "update_profile_username";
     private final String KEY_UPDATE_PROFILE_FIRSTNAME = "update_profile_firstname";
     private final String KEY_UPDATE_PROFILE_LASTNAME = "update_profile_lastname";
@@ -52,20 +47,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.EditProfileActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.EditProfileActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_edit_profile);
 
@@ -97,12 +79,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
             }
         });
 
-        mSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateProfile();
-            }
-        });
+        mSave.setOnClickListener(view -> updateProfile());
     }
 
     @Override
@@ -110,7 +87,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
         super.onStart();
         AuthManager.getInstance().addOnWriteDataListener(this);
         if (AuthManager.getInstance().isAuthorized() && TextUtils.isEmpty(AuthManager.getInstance().getUsername())) {
-            AuthManager.getInstance().refreshPersonalProfile();
+            AuthManager.getInstance().requestPersonalProfile();
         }
     }
 
@@ -158,7 +135,6 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
     }
 
     private void updateProfile(){
-
         String username = mUsername.getText().toString();
         if (!TextUtils.isEmpty(username)) {
             mService.updateMeProfile(
@@ -169,6 +145,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
                     mPortfolio.getText().toString(),
                     mLocation.getText().toString(),
                     mBio.getText().toString(),
+                    mInstagram.getText().toString(),
                     this);
         } else {
             Toast.makeText(this, getString(R.string.username_cannot_be_blank), Toast.LENGTH_SHORT).show();
@@ -193,6 +170,7 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
 
     @Override
     public void onWriteAccessToken() {
+
     }
 
     @Override
@@ -202,9 +180,11 @@ public class EditProfileActivity extends AppCompatActivity implements UserServic
 
     @Override
     public void onWriteAvatarPath() {
+
     }
 
     @Override
     public void onLogout() {
+
     }
 }

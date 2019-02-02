@@ -476,25 +476,6 @@
                         android:background="?attr/dividerColor" />
 
                     <LinearLayout
-                        android:id="@+id/container_about_library8"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library8_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library8_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
                         android:id="@+id/container_about_library9"
                         style="@style/about_library">
 
@@ -523,6 +504,25 @@
 
                         <TextView
                             android:text="@string/about_library10_subtitle"
+                            style="@style/about_subtitle_text"/>
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/dividerColor" />
+
+                    <LinearLayout
+                        android:id="@+id/container_about_library11"
+                        style="@style/about_library">
+
+                        <TextView
+                            android:text="@string/about_library11_title"
+                            style="@style/about_title_text"/>
+
+                        <TextView
+                            android:text="@string/about_library11_subtitle"
                             style="@style/about_subtitle_text"/>
 
                     </LinearLayout>

@@ -9,12 +9,14 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import androidx.core.app.ActivityCompat;
 import android.util.DisplayMetrics;
 
-import java.util.Random;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
+
+import java.util.Random;
+
+import androidx.core.app.ActivityCompat;
 
 /**
  * Created by Brandon on 10/7/2016.
@@ -83,13 +85,10 @@ public class Utils {
         }
     }
 
-    private static void setUserGroup(int userGroup) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Resplash.RESPLASH_USER_GROUP, userGroup);
-        editor.apply();
-    }
-
+    /**
+     * Used when multiple API keys were needed
+     */
+    @Deprecated
     public static int getUserGroup() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         int userGroup = sharedPreferences.getInt(Resplash.RESPLASH_USER_GROUP, 0);
@@ -99,6 +98,14 @@ public class Utils {
         }
 
         return userGroup;
+    }
+
+    @Deprecated
+    private static void setUserGroup(int userGroup) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(Resplash.RESPLASH_USER_GROUP, userGroup);
+        editor.apply();
     }
 
     /**
@@ -125,5 +132,9 @@ public class Utils {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return px / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
+    public static boolean isEmpty(String string) {
+        return string == null || string.trim().length() == 0;
     }
 }

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_collection_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/edit_collection_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="18dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="18dp"
+        android:text="@string/edit_collection"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_collection_name_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="60"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/textInputLayoutHintStyle"
+        app:counterOverflowTextAppearance="@style/textErrorStyle"
+        app:errorTextAppearance="@style/textErrorStyle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_collection_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:hint="@string/collection_name_hint"
+            android:theme="?attr/selectionControlsTheme"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="250"
+        app:hintTextAppearance="@style/textInputLayoutHintStyle"
+        app:counterOverflowTextAppearance="@style/textErrorStyle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_collection_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:hint="@string/collection_description_hint"
+            android:inputType="textMultiLine"
+            android:theme="?attr/selectionControlsTheme"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/edit_collection_make_private_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:checked="false"
+        android:text="@string/make_collection_private"
+        android:textColor="?attr/primaryTextColor"
+        android:theme="?attr/selectionControlsTheme" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_collection_action_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/edit_collection_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="64dp"
+            android:text="@string/delete"
+            android:textColor="@color/error_red"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/edit_collection_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="64dp"
+            android:text="@string/cancel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/edit_collection_save_button"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/edit_collection_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="64dp"
+            android:text="@string/save"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_collection_confirm_delete_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/edit_collection_confirm_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_sure"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/edit_collection_no_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="64dp"
+            android:text="@string/no"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/edit_collection_yes_button"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/edit_collection_yes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="64dp"
+            android:text="@string/yes"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

@@ -122,7 +122,6 @@
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Бесплатне (урадите шта год желите) фотографије високе резолуције</string>
     <string name="about_version_title">Верзија</string>
-    <string name="about_version_subtitle">1.0.0</string>
     <string name="about_introduction_title">Увод</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_support_development_card_title">Подржите програмера</string>
@@ -138,26 +137,6 @@
     <string name="about_website_title">Посетите интернет страницу</string>
     <string name="about_instagram_title">Запратите ме на Инстаграму</string>
     <string name="about_libraries_card_title">Библиотеке</string>
-    <string name="about_library1_title">Retrofit</string>
-    <string name="about_library1_subtitle">Type-safe HTTP client for Android and Java by Square, Inc.</string>
-    <string name="about_library2_title">Glide</string>
-    <string name="about_library2_subtitle">An image loading and caching library for Android focused on smooth scrolling</string>
-    <string name="about_library3_title">FastAdapter</string>
-    <string name="about_library3_subtitle">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
-    <string name="about_library4_title">Android-Iconics</string>
-    <string name="about_library4_subtitle">Use any icon font, or vector (.svg) as drawable in your application.</string>
-    <string name="about_library5_title">MaterialDrawer</string>
-    <string name="about_library5_subtitle">The flexible, easy to use, all in one drawer library for your Android project</string>
-    <string name="about_library6_title">InkPageIndicator</string>
-    <string name="about_library6_subtitle">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
-    <string name="about_library7_title">Butter Knife</string>
-    <string name="about_library7_subtitle">Bind Android views and callbacks to fields and methods</string>
-    <string name="about_library8_title">ErrorView</string>
-    <string name="about_library8_subtitle">A custom view that displays an error image, a title, and a subtitle given an HTTP status code</string>
-    <string name="about_library9_title">PhotoView</string>
-    <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
-    <string name="about_library10_title">FloatingActionButton</string>
-    <string name="about_library10_subtitle">Android Floating Action Button based on Material Design specification</string>
 
     <!-- Donate -->
     <string name="donate_card_title">Подржите развој</string>
@@ -220,5 +199,33 @@
     <string name="instagram_username_hint">Корисничко име на Инстаграму</string>
     <string name="location_hint">Локација</string>
     <string name="bio_hint">Биографија</string>
+    <string name="error_loading_photo">Изгледа да постоји проблем са учитавањем ове фотографије</string>
+    <string name="need_to_log_in">Морате се пријавити да бисте то урадили</string>
+    <string name="next_wallpaper">Следећа позадина</string>
+    <string name="remove_all">Уклони све</string>
+    <string name="auto_wallpaper_title">Аутоматиц Валлпапер</string>
+    <string name="auto_wallpaper_conditions">Услови</string>
+    <string name="file_exists">Ово је већ преузето</string>
+    <string name="auto_wallpaper_info">Аутоматски позадина ће освежити ваш почетни екран новом насумичном позадином на основу постављених услова.</string>
+    <string name="auto_wallpaper_history_summary">Прикажи претходно постављене позадине</string>
+    <string name="auto_wallpaper_history">Аутоматска историја позадина</string>
+    <string name="auto_wallpaper_custom_category_summary">Набавите позадине које одговарају изразу за претрагу</string>
+    <string name="auto_wallpaper_custom_category">Прилагођена категорија</string>
+    <string name="auto_wallpaper_category">Категорија</string>
+    <string name="auto_wallpaper_category_summary">Изаберите категорију позадине</string>
+    <string name="about_privacy_policy_title">Правила о приватности</string>
+    <string name="auto_wallpaper_charging_summary">Уређај мора бити повезан са извором напајања</string>
+    <string name="auto_wallpaper_on_wifi_summary">Уређај мора бити повезан са Вифи мрежом</string>
+    <string name="auto_wallpaper_idle_summary">Уређај мора бити неактиван</string>
+    <string name="auto_wallpaper_interval_summary">Изаберите интервал аутоматске промене позадине</string>
+    <string name="auto_wallpaper_source">Извор</string>
+    <string name="auto_wallpaper_interval">Интервал</string>
+    <string name="auto_wallpaper_charging">Пуњење</string>
+    <string name="auto_wallpaper_on_wifi">Он Вифи</string>
+    <string name="auto_wallpaper_idle">Неактиван</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
+    <string name="on">Омогућено</string>
+    <string name="off">Дисаблед</string>
 </resources>
 

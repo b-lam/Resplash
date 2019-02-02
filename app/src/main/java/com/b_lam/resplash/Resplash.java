@@ -5,22 +5,17 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
-
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.util.Log;
 
 import com.b_lam.resplash.activities.MainActivity;
-import com.b_lam.resplash.data.data.Collection;
-import com.b_lam.resplash.data.data.Photo;
-import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.data.model.Collection;
+import com.b_lam.resplash.data.model.Photo;
+import com.b_lam.resplash.data.model.User;
+import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
-import com.b_lam.resplash.util.Utils;
 
 /**
  * Created by Brandon on 10/6/2016.
@@ -52,7 +47,8 @@ public class Resplash extends Application{
     public static final String DOWNLOAD_PHOTO_FORMAT = ".jpg";
 
     public static final int DEFAULT_PER_PAGE = 30;
-    public static final int SEARCH_PER_PAGE = 20;
+    public static final int DEFAULT_STATISTICS_QUANTITY = 30;
+    public static final String DEFAULT_STATISTICS_RESOLUTION = "days";
 
     public static final String RESPLASH_USER_GROUP = "resplash_user_group";
 
@@ -70,6 +66,7 @@ public class Resplash extends Application{
     public static final String FIREBASE_EVENT_SHARE_PHOTO = "share_photo";
     public static final String FIREBASE_EVENT_VIEW_PHOTO_STATS = "view_photo_stats";
     public static final String FIREBASE_EVENT_VIEW_PHOTO_INFO = "view_photo_info";
+    public static final String FIREBASE_EVENT_ADD_TO_COLLECTION = "add_to_collection";
     public static final String FIREBASE_EVENT_CLEAR_CACHE = "clear_cache";
 
     /** <br> life cycle. */
@@ -77,6 +74,9 @@ public class Resplash extends Application{
     @Override
     public void onCreate() {
         switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.LIGHT:
+                setTheme(R.style.ResplashTheme_Primary_Base_Light);
+                break;
             case ThemeUtils.Theme.DARK:
                 setTheme(R.style.ResplashTheme_Primary_Base_Dark);
                 break;
@@ -93,22 +93,17 @@ public class Resplash extends Application{
         if (isDebug(c)) {
             Log.d(TAG, "Using debug keys");
             return BuildConfig.DEV_APP_ID;
-        } else if (Utils.getUserGroup() == 1){
-            Log.d(TAG, "Using release keys 1");
-            return BuildConfig.RELEASE_APP_ID_1;
         } else {
-            Log.d(TAG, "Using release keys 2");
-            return BuildConfig.RELEASE_APP_ID_2;
+            Log.d(TAG, "Using release keys");
+            return BuildConfig.RELEASE_APP_ID;
         }
     }
 
     public static String getSecret(Context c) {
         if (isDebug(c)) {
             return BuildConfig.DEV_SECRET;
-        } else if (Utils.getUserGroup() == 1){
-            return BuildConfig.RELEASE_SECRET_1;
         } else {
-            return BuildConfig.RELEASE_SECRET_2;
+            return BuildConfig.RELEASE_SECRET;
         }
     }
 

@@ -7,43 +7,28 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
 
-public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
+public class AboutActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar_about) Toolbar mToolbar;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.AboutActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.AboutActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_about);
 
@@ -58,27 +43,27 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setTitle(getString(R.string.about_title));
 
         LinearLayout [] containers = new LinearLayout[] {
-                (LinearLayout) findViewById(R.id.container_about_unsplash),
-                (LinearLayout) findViewById(R.id.container_about_app),
-                (LinearLayout) findViewById(R.id.container_about_intro),
-                (LinearLayout) findViewById(R.id.container_about_github),
-                (LinearLayout) findViewById(R.id.container_about_privacy_policy),
-                (LinearLayout) findViewById(R.id.container_about_rate),
-                (LinearLayout) findViewById(R.id.container_about_donate),
-                (LinearLayout) findViewById(R.id.container_about_bug),
-                (LinearLayout) findViewById(R.id.container_about_author),
-                (LinearLayout) findViewById(R.id.container_about_website),
-                (LinearLayout) findViewById(R.id.container_about_instagram),
-                (LinearLayout) findViewById(R.id.container_about_library1),
-                (LinearLayout) findViewById(R.id.container_about_library2),
-                (LinearLayout) findViewById(R.id.container_about_library3),
-                (LinearLayout) findViewById(R.id.container_about_library4),
-                (LinearLayout) findViewById(R.id.container_about_library5),
-                (LinearLayout) findViewById(R.id.container_about_library6),
-                (LinearLayout) findViewById(R.id.container_about_library7),
-                (LinearLayout) findViewById(R.id.container_about_library8),
-                (LinearLayout) findViewById(R.id.container_about_library9),
-                (LinearLayout) findViewById(R.id.container_about_library10)};
+                findViewById(R.id.container_about_unsplash),
+                findViewById(R.id.container_about_app),
+                findViewById(R.id.container_about_intro),
+                findViewById(R.id.container_about_github),
+                findViewById(R.id.container_about_privacy_policy),
+                findViewById(R.id.container_about_rate),
+                findViewById(R.id.container_about_donate),
+                findViewById(R.id.container_about_bug),
+                findViewById(R.id.container_about_author),
+                findViewById(R.id.container_about_website),
+                findViewById(R.id.container_about_instagram),
+                findViewById(R.id.container_about_library1),
+                findViewById(R.id.container_about_library2),
+                findViewById(R.id.container_about_library3),
+                findViewById(R.id.container_about_library4),
+                findViewById(R.id.container_about_library5),
+                findViewById(R.id.container_about_library6),
+                findViewById(R.id.container_about_library7),
+                findViewById(R.id.container_about_library9),
+                findViewById(R.id.container_about_library10),
+                findViewById(R.id.container_about_library11)};
         for (LinearLayout r : containers) {
             r.setOnClickListener(this);
         }
@@ -159,7 +144,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.container_about_library4:
-                goToURL("https://github.com/mikepenz/Android-Iconics");
+                goToURL("https://github.com/airbnb/lottie-android");
                 break;
 
             case R.id.container_about_library5:
@@ -174,16 +159,16 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 goToURL("https://github.com/JakeWharton/butterknife");
                 break;
 
-            case R.id.container_about_library8:
-                goToURL("https://github.com/xiprox/ErrorView");
-                break;
-
             case R.id.container_about_library9:
                 goToURL("https://github.com/chrisbanes/PhotoView");
                 break;
 
             case R.id.container_about_library10:
                 goToURL("https://github.com/Clans/FloatingActionButton");
+                break;
+
+            case R.id.container_about_library11:
+                goToURL("https://github.com/ocpsoft/prettytime");
                 break;
         }
     }

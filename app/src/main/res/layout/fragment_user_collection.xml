@@ -15,15 +15,17 @@
         android:scaleX="0.75"
         android:scaleY="0.75" />
 
-    <tr.xip.errorview.ErrorView
-        android:id="@+id/fragment_user_collection_error_view"
+    <include layout="@layout/http_error_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        app:ev_titleColor="?attr/primaryTextColor"
-        app:ev_subtitleColor="?attr/primaryTextColor"
-        app:ev_retryVisible="false"/>
+        android:visibility="gone"/>
+
+    <include layout="@layout/network_error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,7 +1,7 @@
 package com.b_lam.resplash.data.api;
 
 
-import com.b_lam.resplash.data.data.AccessToken;
+import com.b_lam.resplash.data.model.AccessToken;
 
 import retrofit2.Call;
 import retrofit2.http.POST;

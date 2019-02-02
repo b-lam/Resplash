@@ -8,10 +8,10 @@
     <string name="action_view_on_unsplash">Open in browser</string>
 
     <!-- ErrorView -->
-    <string name="error_http">Server Error</string>
-    <string name="error_http_subtitle">There seems to be a problem with the server.</string>
-    <string name="error_network">No connection</string>
-    <string name="error_network_subtitle">There seems to be a problem with your internet.</string>
+    <string name="error_http">Oops.</string>
+    <string name="error_http_subtitle">We seem to be out of requests for this hour\n\nPlease try again later</string>
+    <string name="error_network">Oops.</string>
+    <string name="error_network_subtitle">There seems to be a problem with your internet</string>
 
     <!-- Settings -->
     <string name="title_quality_section">Quality</string>
@@ -21,35 +21,35 @@
     <string name="summary_download_quality_preference">Choose the quality of the images that are downloaded</string>
     <string name="title_wallpaper_quality_preference">Wallpaper Quality</string>
     <string name="summary_wallpaper_quality_preference">Choose the quality of the wallpapers set</string>
-    <array name="quality_options">
+    <string-array name="quality_options">
         <item>Raw</item>
         <item>Full</item>
         <item>Regular</item>
         <item>Small</item>
         <item>Thumb</item>
-    </array>
-    <array name="quality_options_values">
+    </string-array>
+    <string-array name="quality_options_values">
         <item>Raw</item>
         <item>Full</item>
         <item>Regular</item>
         <item>Small</item>
         <item>Thumb</item>
-    </array>
+    </string-array>
     <string name="default_load_quality">Regular</string>
     <string name="default_download_quality">Full</string>
     <string name="title_layout_section">Layout</string>
     <string name="title_layout_preference">Choose Layout</string>
     <string name="summary_layout_preference">Choose how images are displayed</string>
-    <array name="layout_options">
+    <string-array name="layout_options">
         <item>List</item>
         <item>Cards</item>
         <item>Grid</item>
-    </array>
-    <array name="layout_options_values">
+    </string-array>
+    <string-array name="layout_options_values">
         <item>List</item>
         <item>Cards</item>
         <item>Grid</item>
-    </array>
+    </string-array>
     <string name="default_layout">List</string>
     <string name="title_general_section">General</string>
     <string name="title_custom_api">Custom API Key</string>
@@ -57,34 +57,34 @@
     <string name="cache_size">Cache size</string>
     <string name="message_cache_cleared">Cache cleared!</string>
     <string name="title_language">Language</string>
-    <array name="language">
+    <string-array name="language">
         <item>English</item>
         <item>Czech</item>
         <item>Russian</item>
         <item>Serbian</item>
         <item>Chinese</item>
         <item>Portuguese (Brazilian)</item>
-    </array>
-    <array name="language_values">
+    </string-array>
+    <string-array name="language_values">
         <item>en</item>
         <item>cs</item>
         <item>ru</item>
         <item>sr</item>
         <item>zh</item>
         <item>pt</item>
-    </array>
-    <string name="default_language">en</string>
+    </string-array>
+    <string name="default_language" translatable="false">en</string>
     <string name="title_theme">Theme</string>
-    <array name="theme">
+    <string-array name="theme">
         <item>Light</item>
         <item>Dark</item>
         <item>Black (AMOLED)</item>
-    </array>
-    <array name="theme_values">
+    </string-array>
+    <string-array name="theme_values">
         <item>Light</item>
         <item>Dark</item>
         <item>Black</item>
-    </array>
+    </string-array>
     <string name="default_theme">Light</string>
     <string name="restart">Restart</string>
     <string name="restart_to_apply">Restart to apply changes</string>
@@ -140,6 +140,12 @@
     <string name="search_hint">Search</string>
     <string name="search_title">Search</string>
     <string name="action_clear_text">Clear text</string>
+    <string-array name="search_photos_orientations">
+        <item>All</item>
+        <item>Landscape</item>
+        <item>Portrait</item>
+        <item>Squarish</item>
+    </string-array>
 
     <!-- InfoDialog -->
     <string name="photo_dimensions">Dimensions</string>
@@ -149,12 +155,31 @@
     <string name="aperture">Aperture</string>
     <string name="iso">ISO</string>
     <string name="focal_length">Focal length</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">Add to collection</string>
+    <string name="create_new_collection">Create new collection</string>
+    <string name="create_a_new_collection">Create a new collection</string>
+    <string name="create">Create</string>
+    <string name="delete">Delete</string>
+    <string name="collection_name_hint">Name</string>
+    <string name="collection_description_hint">Description (optional)</string>
+    <string name="make_collection_private">Make collection private</string>
+    <string name="collection_name_is_required">Name is required</string>
+    <string name="failed_to_create_collection">Failed to create collection</string>
+    <string name="failed_to_save_collection">Failed to save collection</string>
+    <string name="failed_to_delete_collection">Failed to delete collection</string>
+    <string name="edit_collection">Edit collection</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
     <!-- About -->
     <string name="about_title">About</string>
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
     <string name="about_version_title">Version</string>
-    <string name="about_version_subtitle">1.0.0</string>
+    <string name="about_version_subtitle" translatable="false">1.0.0</string>
     <string name="about_introduction_title">Introduction</string>
     <string name="about_github_title">GitHub</string>
     <string name="about_privacy_policy_title">Privacy Policy</string>
@@ -171,26 +196,26 @@
     <string name="about_website_title">Visit website</string>
     <string name="about_instagram_title">Follow on Instagram</string>
     <string name="about_libraries_card_title">Libraries</string>
-    <string name="about_library1_title">Retrofit</string>
-    <string name="about_library1_subtitle">Type-safe HTTP client for Android and Java by Square, Inc.</string>
-    <string name="about_library2_title">Glide</string>
-    <string name="about_library2_subtitle">An image loading and caching library for Android focused on smooth scrolling</string>
-    <string name="about_library3_title">FastAdapter</string>
-    <string name="about_library3_subtitle">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
-    <string name="about_library4_title">Android-Iconics</string>
-    <string name="about_library4_subtitle">Use any icon font, or vector (.svg) as drawable in your application.</string>
-    <string name="about_library5_title">MaterialDrawer</string>
-    <string name="about_library5_subtitle">The flexible, easy to use, all in one drawer library for your Android project</string>
-    <string name="about_library6_title">InkPageIndicator</string>
-    <string name="about_library6_subtitle">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
-    <string name="about_library7_title">Butter Knife</string>
-    <string name="about_library7_subtitle">Bind Android views and callbacks to fields and methods</string>
-    <string name="about_library8_title">ErrorView</string>
-    <string name="about_library8_subtitle">A custom view that displays an error image, a title, and a subtitle given an HTTP status code</string>
-    <string name="about_library9_title">PhotoView</string>
-    <string name="about_library9_subtitle">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
-    <string name="about_library10_title">FloatingActionButton</string>
-    <string name="about_library10_subtitle">Android Floating Action Button based on Material Design specification</string>
+    <string name="about_library1_title" translatable="false">Retrofit</string>
+    <string name="about_library1_subtitle" translatable="false">Type-safe HTTP client for Android and Java by Square, Inc.</string>
+    <string name="about_library2_title" translatable="false">Glide</string>
+    <string name="about_library2_subtitle" translatable="false">An image loading and caching library for Android focused on smooth scrolling</string>
+    <string name="about_library3_title" translatable="false">FastAdapter</string>
+    <string name="about_library3_subtitle" translatable="false">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
+    <string name="about_library4_title" translatable="false">Lottie</string>
+    <string name="about_library4_subtitle" translatable="false">Render After Effects animations natively on Android</string>
+    <string name="about_library5_title" translatable="false">MaterialDrawer</string>
+    <string name="about_library5_subtitle" translatable="false">The flexible, easy to use, all in one drawer library for your Android project</string>
+    <string name="about_library6_title" translatable="false">InkPageIndicator</string>
+    <string name="about_library6_subtitle" translatable="false">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
+    <string name="about_library7_title" translatable="false">Butter Knife</string>
+    <string name="about_library7_subtitle" translatable="false">Bind Android views and callbacks to fields and methods</string>
+    <string name="about_library9_title" translatable="false">PhotoView</string>
+    <string name="about_library9_subtitle" translatable="false">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
+    <string name="about_library10_title" translatable="false">FloatingActionButton</string>
+    <string name="about_library10_subtitle" translatable="false">Android Floating Action Button based on Material Design specification</string>
+    <string name="about_library11_title" translatable="false">PrettyTime</string>
+    <string name="about_library11_subtitle" translatable="false">Social Style Date and Time Formatting for Java</string>
 
     <!-- Donate -->
     <string name="donate_card_title">Support development</string>
@@ -205,6 +230,59 @@
     <string name="donate_thanks">Thanks for donating!</string>
     <string name="donate_loading">Loading products&#8230;</string>
 
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Auto Wallpaper</string>
+    <string name="auto_wallpaper_conditions">Conditions</string>
+    <string name="auto_wallpaper_on_wifi">On Wi-Fi</string>
+    <string name="auto_wallpaper_on_wifi_summary">Device must be connected to a Wi-Fi network</string>
+    <string name="auto_wallpaper_charging">Charging</string>
+    <string name="auto_wallpaper_charging_summary">Device must be connected to a power source</string>
+    <string name="auto_wallpaper_idle">Idle</string>
+    <string name="auto_wallpaper_idle_summary">Device must be inactive</string>
+    <string name="auto_wallpaper_interval">Interval</string>
+    <string name="auto_wallpaper_interval_summary">Select the auto wallpaper change interval</string>
+    <string-array name="auto_wallpaper_interval_options">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
+        <item>48 hours</item>
+    </string-array>
+    <string-array name="auto_wallpaper_interval_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>720</item>
+        <item>1440</item>
+        <item>2880</item>
+    </string-array>
+    <string name="auto_wallpaper_interval_default" translatable="false">60</string>
+    <string name="auto_wallpaper_source">Source</string>
+    <string name="auto_wallpaper_category">Category</string>
+    <string name="auto_wallpaper_category_summary">Select the wallpaper category</string>
+    <string-array name="auto_wallpaper_category_options">
+        <item>All</item>
+        <item>Featured</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="auto_wallpaper_category_values">
+        <item>All</item>
+        <item>Featured</item>
+        <item>Custom</item>
+    </string-array>
+    <string name="auto_wallpaper_category_default" translatable="false">All</string>
+    <string name="auto_wallpaper_custom_category">Custom Category</string>
+    <string name="auto_wallpaper_custom_category_summary">Get wallpapers matching a search term</string>
+    <string name="auto_wallpaper_custom_category_default" translatable="false">Wallpaper</string>
+    <string name="auto_wallpaper_history">Auto Wallpaper History</string>
+    <string name="auto_wallpaper_history_summary">View previously set wallpapers</string>
+    <string name="auto_wallpaper_info">Auto Wallpaper will refresh your home screen with a new random wallpaper based on the set conditions.</string>
+
     <!-- Detail -->
     <string name="stats">Stats</string>
     <string name="photo_info">Info</string>
@@ -212,8 +290,10 @@
     <string name="download">Download</string>
     <string name="setting_wallpaper">Setting wallpaper&#8230;</string>
     <string name="cancel">Cancel</string>
+    <string name="file_exists">This has already been downloaded</string>
 
-    <string name="no_results">No results</string>
+    <!-- Error -->
+    <string name="no_results">There\'s nothing here&#8230;</string>
     <string name="log_in">Log in</string>
     <string name="join">Join</string>
     <string name="edit_title">Edit Profile</string>
@@ -255,5 +335,8 @@
     <string name="bio_hint">Bio</string>
     <string name="error_loading_photo">There seems to be a problem loading this photo</string>
     <string name="need_to_log_in">You need to log in to do this</string>
-
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="next_wallpaper">Next Wallpaper</string>
+    <string name="remove_all">Remove all</string>
 </resources>

@@ -39,7 +39,7 @@
                 android:layout_gravity="center"
                 android:gravity="center">
 
-                <com.b_lam.resplash.CircleImageView
+                <com.b_lam.resplash.views.CircleImageView
                     android:id="@+id/user_profile_picture"
                     android:layout_width="60dp"
                     android:layout_height="60dp"

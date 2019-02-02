@@ -41,19 +41,21 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:padding="13dp">
-            <com.b_lam.resplash.CircleImageView
+            <com.b_lam.resplash.views.CircleImageView
                 android:layout_height="30dp"
                 android:layout_width="30dp"
                 android:id="@+id/imgProfileCollection"
                 android:transitionName="profileTransition"
+                android:focusable="true"
                 android:clickable="true">
-            </com.b_lam.resplash.CircleImageView>
+            </com.b_lam.resplash.views.CircleImageView>
             <TextView
                 android:id="@+id/tvUserCollection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:textSize="15sp"
+                android:focusable="true"
                 android:clickable="true"/>
         </LinearLayout>
 
@@ -67,13 +69,17 @@
         android:scaleX="0.75"
         android:scaleY="0.75" />
 
-    <tr.xip.errorview.ErrorView
-        android:id="@+id/fragment_collection_detail_error_view"
+    <include layout="@layout/http_error_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        app:ev_retryVisible="false"/>
+        android:visibility="gone"/>
+
+    <include layout="@layout/network_error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

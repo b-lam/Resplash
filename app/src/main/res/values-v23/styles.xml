@@ -13,12 +13,15 @@
         <item name="cardBackgroundColor">@color/cardBackgroundColor_light</item>
         <item name="progressBarColor">@color/progressBarColor_light</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_light</item>
+        <item name="fabColor">@color/colorAccent_light</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="actionBarTheme">@style/ActionBarTheme_light</item>
+        <item name="selectionControlsTheme">@style/selectionControlsTheme_light</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/colorText_light</item>
-        <item name="android:textColorPrimary">@color/colorText_light</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary_light</item>
+        <item name="android:textColor">@color/primary_text_color_selector_light</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_selector_light</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_selector_light</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyleLight</item>
@@ -42,6 +45,7 @@
         <item name="newIcon">@drawable/ic_trending_up_black_24dp</item>
         <item name="hotIcon">@drawable/ic_whatshot_black_24dp</item>
         <item name="collectionsIcon">@drawable/ic_collections_black_24dp</item>
+        <item name="autoWallpaperIcon">@drawable/baseline_compare_black_24</item>
         <item name="heartIcon">@drawable/ic_favorite_black_24dp</item>
         <item name="settingsIcon">@drawable/ic_settings_black_24dp</item>
         <item name="infoIcon">@drawable/ic_info_outline_black_24dp</item>
@@ -75,6 +79,8 @@
         <item name="exploreIcon">@drawable/ic_explore_black_24dp</item>
         <item name="accountCardIcon">@drawable/ic_account_card_details_black_24dp</item>
         <item name="quoteIcon">@drawable/ic_format_quote_black_24dp</item>
+        <item name="collectionSavedIcon">@drawable/ic_bookmark_black_24dp</item>
+        <item name="editIcon">@drawable/ic_mode_edit_black_24dp</item>
     </style>
 
     <!-- Dark base activity theme -->
@@ -91,12 +97,15 @@
         <item name="cardBackgroundColor">@color/cardBackgroundColor_dark</item>
         <item name="progressBarColor">@color/progressBarColor_dark</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_dark</item>
+        <item name="fabColor">@color/colorAccent_dark</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="actionBarTheme">@style/ActionBarTheme_dark</item>
+        <item name="selectionControlsTheme">@style/selectionControlsTheme_dark</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/colorText_dark</item>
-        <item name="android:textColorPrimary">@color/colorText_dark</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary_dark</item>
+        <item name="android:textColor">@color/primary_text_color_selector_dark</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_selector_dark</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_selector_dark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyleDark</item>
@@ -120,6 +129,7 @@
         <item name="newIcon">@drawable/ic_trending_up_white_24dp</item>
         <item name="hotIcon">@drawable/ic_whatshot_white_24dp</item>
         <item name="collectionsIcon">@drawable/ic_collections_white_24dp</item>
+        <item name="autoWallpaperIcon">@drawable/baseline_compare_white_24</item>
         <item name="heartIcon">@drawable/ic_favorite_white_24dp</item>
         <item name="settingsIcon">@drawable/ic_settings_white_24dp</item>
         <item name="infoIcon">@drawable/ic_info_outline_white_24dp</item>
@@ -153,6 +163,8 @@
         <item name="exploreIcon">@drawable/ic_explore_white_24dp</item>
         <item name="accountCardIcon">@drawable/ic_account_card_details_white_24dp</item>
         <item name="quoteIcon">@drawable/ic_format_quote_white_24dp</item>
+        <item name="collectionSavedIcon">@drawable/ic_bookmark_white_24dp</item>
+        <item name="editIcon">@drawable/ic_mode_edit_white_24dp</item>
     </style>
 
     <!-- Black base activity theme -->
@@ -169,12 +181,13 @@
         <item name="cardBackgroundColor">@color/cardBackgroundColor_black</item>
         <item name="progressBarColor">@color/progressBarColor_black</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_black</item>
+        <item name="fabColor">@color/colorAccent_black</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/colorText_black</item>
-        <item name="android:textColorPrimary">@color/colorText_black</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary_black</item>
+        <item name="android:textColor">@color/primary_text_color_selector_black</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_selector_black</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_selector_black</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/colorPrimary_black</item>

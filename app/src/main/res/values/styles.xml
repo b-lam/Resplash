@@ -14,12 +14,15 @@
         <item name="cardBackgroundColor">@color/cardBackgroundColor_light</item>
         <item name="progressBarColor">@color/progressBarColor_light</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_light</item>
+        <item name="fabColor">@color/colorAccent_light</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="actionBarTheme">@style/ActionBarTheme_light</item>
+        <item name="selectionControlsTheme">@style/selectionControlsTheme_light</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/colorText_light</item>
-        <item name="android:textColorPrimary">@color/colorText_light</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary_light</item>
+        <item name="android:textColor">@color/primary_text_color_selector_light</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_selector_light</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_selector_light</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/md_grey_500</item>
@@ -41,6 +44,7 @@
         <item name="newIcon">@drawable/ic_trending_up_black_24dp</item>
         <item name="hotIcon">@drawable/ic_whatshot_black_24dp</item>
         <item name="collectionsIcon">@drawable/ic_collections_black_24dp</item>
+        <item name="autoWallpaperIcon">@drawable/baseline_compare_black_24</item>
         <item name="heartIcon">@drawable/ic_favorite_black_24dp</item>
         <item name="settingsIcon">@drawable/ic_settings_black_24dp</item>
         <item name="infoIcon">@drawable/ic_info_outline_black_24dp</item>
@@ -74,6 +78,8 @@
         <item name="exploreIcon">@drawable/ic_explore_black_24dp</item>
         <item name="accountCardIcon">@drawable/ic_account_card_details_black_24dp</item>
         <item name="quoteIcon">@drawable/ic_format_quote_black_24dp</item>
+        <item name="collectionSavedIcon">@drawable/ic_bookmark_black_24dp</item>
+        <item name="editIcon">@drawable/ic_mode_edit_black_24dp</item>
     </style>
 
     <!-- Dark base activity theme -->
@@ -90,12 +96,15 @@
         <item name="cardBackgroundColor">@color/cardBackgroundColor_dark</item>
         <item name="progressBarColor">@color/progressBarColor_dark</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_dark</item>
+        <item name="fabColor">@color/colorAccent_dark</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="actionBarTheme">@style/ActionBarTheme_dark</item>
+        <item name="selectionControlsTheme">@style/selectionControlsTheme_dark</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/colorText_dark</item>
-        <item name="android:textColorPrimary">@color/colorText_dark</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary_dark</item>
+        <item name="android:textColor">@color/primary_text_color_selector_dark</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_selector_dark</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_selector_dark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark_dark</item>
@@ -117,6 +126,7 @@
         <item name="newIcon">@drawable/ic_trending_up_white_24dp</item>
         <item name="hotIcon">@drawable/ic_whatshot_white_24dp</item>
         <item name="collectionsIcon">@drawable/ic_collections_white_24dp</item>
+        <item name="autoWallpaperIcon">@drawable/baseline_compare_white_24</item>
         <item name="heartIcon">@drawable/ic_favorite_white_24dp</item>
         <item name="settingsIcon">@drawable/ic_settings_white_24dp</item>
         <item name="infoIcon">@drawable/ic_info_outline_white_24dp</item>
@@ -150,6 +160,8 @@
         <item name="exploreIcon">@drawable/ic_explore_white_24dp</item>
         <item name="accountCardIcon">@drawable/ic_account_card_details_white_24dp</item>
         <item name="quoteIcon">@drawable/ic_format_quote_white_24dp</item>
+        <item name="collectionSavedIcon">@drawable/ic_bookmark_white_24dp</item>
+        <item name="editIcon">@drawable/ic_mode_edit_white_24dp</item>
     </style>
 
     <!-- Black base activity theme -->
@@ -166,12 +178,13 @@
         <item name="cardBackgroundColor">@color/cardBackgroundColor_black</item>
         <item name="progressBarColor">@color/progressBarColor_black</item>
         <item name="previewBackgroundColor">@color/previewBackgroundColor_black</item>
+        <item name="fabColor">@color/colorAccent_black</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
 
         <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/colorText_black</item>
-        <item name="android:textColorPrimary">@color/colorText_black</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary_black</item>
+        <item name="android:textColor">@color/primary_text_color_selector_black</item>
+        <item name="android:textColorPrimary">@color/primary_text_color_selector_black</item>
+        <item name="android:textColorSecondary">@color/secondary_text_color_selector_black</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/colorPrimary_black</item>
@@ -198,130 +211,20 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="SplashActivityTheme" parent="ResplashTheme.Primary.Base.Light">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
-    <style name="MainActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="MainActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="MainActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="DetailActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="DetailActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="DetailActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="SettingsActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
+    <style name="PreferenceThemeLight" parent="ResplashTheme.Primary.Base.Light">
         <item name="colorAccent">@color/colorText_light</item>
     </style>
 
-    <style name="SettingsActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
+    <style name="PreferenceThemeDark" parent="ResplashTheme.Primary.Base.Dark">
         <item name="colorAccent">@color/colorText_dark</item>
     </style>
 
-    <style name="SettingsActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
+    <style name="PreferenceThemeBlack" parent="ResplashTheme.Primary.Base.Black">
         <item name="colorAccent">@color/colorText_black</item>
-    </style>
-
-    <style name="SearchActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="SearchActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="SearchActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="CollectionDetailActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="CollectionDetailActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="CollectionDetailActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="PreviewActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="PreviewActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="PreviewActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="IntroActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="IntroActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="IntroActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="UserActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="UserActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="UserActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="LoginActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="LoginActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="LoginActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="AboutActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="AboutActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="AboutActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="EditProfileActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="EditProfileActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="EditProfileActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="CustomApiActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="CustomApiActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="CustomApiActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-    </style>
-
-    <style name="DonateActivityThemeLight" parent="ResplashTheme.Primary.Base.Light">
-    </style>
-
-    <style name="DonateActivityThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-    </style>
-
-    <style name="DonateActivityThemeBlack" parent="ResplashTheme.Primary.Base.Black">
     </style>
 
     <style name="material_image_button">
@@ -358,6 +261,28 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="textInputLayoutHintStyle" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">?attr/primaryTextColor</item>
+    </style>
+
+    <style name="textErrorStyle" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/error_red</item>
+    </style>
+
+    <style name="selectionControlsTheme_light" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorText_light</item>
+        <item name="colorControlActivated">@color/colorText_light</item>
+    </style>
+
+    <style name="selectionControlsTheme_dark" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorText_dark</item>
+        <item name="colorControlActivated">@color/colorText_dark</item>
+    </style>
+
+    <style name="switchTheme">
+        <item name="colorControlActivated">@color/white</item>
     </style>
 
     <style name="ResplashDialogTheme_light" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -404,9 +329,17 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:theme">?attr/actionBarTheme</item>
         <item name="titleTextColor">?attr/primaryTextColor</item>
         <item name="popupTheme">?attr/toolbarPopupTheme</item>
+    </style>
+
+    <style name="ActionBarTheme_light" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorSecondary">@color/colorText_light</item>
+    </style>
+
+    <style name="ActionBarTheme_dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorSecondary">@color/colorText_dark</item>
     </style>
 
     <style name="about_entry">

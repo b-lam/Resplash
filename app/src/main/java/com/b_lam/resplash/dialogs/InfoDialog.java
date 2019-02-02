@@ -8,13 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.b_lam.resplash.data.data.PhotoDetails;
+import com.b_lam.resplash.R;
+import com.b_lam.resplash.data.model.Photo;
 
 import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.b_lam.resplash.R;
 
 
 /**
@@ -30,7 +30,7 @@ public class InfoDialog extends DialogFragment {
     @BindView(R.id.tvInfoIso) TextView tvInfoIso;
     @BindView(R.id.tvInfoFocalLength) TextView tvInfoFocalLength;
 
-    private PhotoDetails photoDetails;
+    private Photo mPhoto;
 
     DecimalFormat fAperture = new DecimalFormat("0.##");
     DecimalFormat fExposure = new DecimalFormat("0.##########");
@@ -46,16 +46,16 @@ public class InfoDialog extends DialogFragment {
     }
 
     public void initData(){
-        tvInfoDimensions.setText(photoDetails.width == 0 || photoDetails.height == 0 ? "-----" : getString(R.string.photo_dimensions) + ": " + photoDetails.width + " x " + photoDetails.height);
-        tvInfoMake.setText(photoDetails.exif.make == null ? "-----" : getString(R.string.camera_make) + ": " + photoDetails.exif.make);
-        tvInfoModel.setText(photoDetails.exif.model == null ? "-----" : getString(R.string.camera_model) + ": " + photoDetails.exif.model);
-        tvInfoExposure.setText(photoDetails.exif.exposure_time == null ? "-----" : getString(R.string.exposure_time) + ": " + photoDetails.exif.exposure_time);
-        tvInfoAperture.setText(photoDetails.exif.aperture == null ? "-----" : getString(R.string.aperture) + ": " + photoDetails.exif.aperture);
-        tvInfoIso.setText(photoDetails.exif.iso == 0 ? "-----" : getString(R.string.iso) + ": " + String.valueOf(photoDetails.exif.iso));
-        tvInfoFocalLength.setText(photoDetails.exif.focal_length == null ? "-----" : getString(R.string.focal_length) + ": " + photoDetails.exif.focal_length);
+        tvInfoDimensions.setText(mPhoto.width == 0 || mPhoto.height == 0 ? "-----" : getString(R.string.photo_dimensions) + ": " + mPhoto.width + " x " + mPhoto.height);
+        tvInfoMake.setText(mPhoto.exif.make == null ? "-----" : getString(R.string.camera_make) + ": " + mPhoto.exif.make);
+        tvInfoModel.setText(mPhoto.exif.model == null ? "-----" : getString(R.string.camera_model) + ": " + mPhoto.exif.model);
+        tvInfoExposure.setText(mPhoto.exif.exposure_time == null ? "-----" : getString(R.string.exposure_time) + ": " + mPhoto.exif.exposure_time);
+        tvInfoAperture.setText(mPhoto.exif.aperture == null ? "-----" : getString(R.string.aperture) + ": " + mPhoto.exif.aperture);
+        tvInfoIso.setText(mPhoto.exif.iso == 0 ? "-----" : getString(R.string.iso) + ": " + String.valueOf(mPhoto.exif.iso));
+        tvInfoFocalLength.setText(mPhoto.exif.focal_length == null ? "-----" : getString(R.string.focal_length) + ": " + mPhoto.exif.focal_length);
     }
 
-    public void setPhotoDetails(PhotoDetails photoDetails) {
-        this.photoDetails = photoDetails;
+    public void setPhoto(Photo photo) {
+        this.mPhoto = photo;
     }
 }

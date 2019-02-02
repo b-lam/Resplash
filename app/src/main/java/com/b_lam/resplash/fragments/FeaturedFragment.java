@@ -4,10 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,9 +13,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.DetailActivity;
-import com.b_lam.resplash.data.data.Photo;
+import com.b_lam.resplash.data.model.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.IAdapter;
@@ -31,10 +28,13 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import com.b_lam.resplash.R;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Response;
-import tr.xip.errorview.ErrorView;
 
 /**
  * Created by Brandon on 10/8/2016.
@@ -49,7 +49,8 @@ public class FeaturedFragment extends Fragment{
     private RecyclerView mImageRecycler;
     private SwipeRefreshLayout mSwipeContainer;
     private ProgressBar mImagesProgress;
-    private ErrorView mImagesErrorView;
+    private ConstraintLayout mHttpErrorView;
+    private ConstraintLayout mNetworkErrorView;
     private ItemAdapter mFooterAdapter;
     private int mPage, mColumns;
     private String mSort;
@@ -91,10 +92,11 @@ public class FeaturedFragment extends Fragment{
         setRetainInstance(true);
 
         View rootView = inflater.inflate(R.layout.fragment_featured, container, false);
-        mImageRecycler = (RecyclerView) rootView.findViewById(R.id.fragment_featured_recycler);
-        mImagesProgress = (ProgressBar) rootView.findViewById(R.id.fragment_featured_progress);
-        mImagesErrorView = (ErrorView) rootView.findViewById(R.id.fragment_featured_error_view);
-        mSwipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainerFeatured);
+        mImageRecycler = rootView.findViewById(R.id.fragment_featured_recycler);
+        mImagesProgress = rootView.findViewById(R.id.fragment_featured_progress);
+        mHttpErrorView = rootView.findViewById(R.id.http_error_view);
+        mNetworkErrorView = rootView.findViewById(R.id.network_error_view);
+        mSwipeContainer = rootView.findViewById(R.id.swipeContainerFeatured);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
         mImageRecycler.setLayoutManager(gridLayoutManager);
@@ -163,23 +165,11 @@ public class FeaturedFragment extends Fragment{
                 startActivity(i);
             } else if (layout.equals("Cards")) {
                 imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
                 startActivity(i);
             } else {
                 imageView = (ImageView) v.findViewById(R.id.item_image_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
-//                v.setTransitionName("photoScale");
-//                View navigationBar = getActivity().findViewById(android.R.id.navigationBarBackground);
-//                View statusBar = getActivity().findViewById(android.R.id.statusBarBackground);
-//
-//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
-//                Pair<View, String> p2 = Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME);
-//                Pair<View, String> p3 = Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME);
-//
-//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1, p2, p3);
-//                startActivity(i, options.toBundle());
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
                 startActivity(i);
             }
             return false;
@@ -194,7 +184,8 @@ public class FeaturedFragment extends Fragment{
         if(mPhotos == null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
         Log.d(TAG, "Page " + mPage);
@@ -210,25 +201,23 @@ public class FeaturedFragment extends Fragment{
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.VISIBLE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
                 mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
+                mHttpErrorView.setVisibility(View.GONE);
+                mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
             }
         };
@@ -240,7 +229,8 @@ public class FeaturedFragment extends Fragment{
         if(mPhotos == null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
-            mImagesErrorView.setVisibility(View.GONE);
+            mHttpErrorView.setVisibility(View.GONE);
+            mNetworkErrorView.setVisibility(View.GONE);
         }
 
         mPage = 1;
@@ -256,13 +246,13 @@ public class FeaturedFragment extends Fragment{
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
-                    mImagesErrorView.setVisibility(View.GONE);
+                    mHttpErrorView.setVisibility(View.GONE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }else{
-                    mImagesErrorView.setTitle(R.string.error_http);
-                    mImagesErrorView.setSubtitle(R.string.error_http_subtitle);
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.GONE);
-                    mImagesErrorView.setVisibility(View.VISIBLE);
+                    mHttpErrorView.setVisibility(View.VISIBLE);
+                    mNetworkErrorView.setVisibility(View.GONE);
                 }
                 if(mSwipeContainer.isRefreshing()) {
                     Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
@@ -273,12 +263,10 @@ public class FeaturedFragment extends Fragment{
             @Override
             public void onRequestPhotosFailed(Call<List<Photo>> call, Throwable t) {
                 Log.d(TAG, t.toString());
-                mImagesErrorView.setRetryVisible(false);
-                mImagesErrorView.setTitle(R.string.error_network);
-                mImagesErrorView.setSubtitle(R.string.error_network_subtitle);
                 mImagesProgress.setVisibility(View.GONE);
                 mImageRecycler.setVisibility(View.GONE);
-                mImagesErrorView.setVisibility(View.VISIBLE);
+                mHttpErrorView.setVisibility(View.GONE);
+                mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
             }
         };

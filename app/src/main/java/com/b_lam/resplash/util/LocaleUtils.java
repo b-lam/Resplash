@@ -21,4 +21,9 @@ public class LocaleUtils {
         configuration.setLocale(locale);
         context.getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
     }
+
+    public static Locale getLocale(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return new Locale(sharedPreferences.getString("language", "en"));
+    }
 }

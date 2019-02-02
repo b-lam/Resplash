@@ -8,26 +8,26 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.app.NavUtils;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.Utils;
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.io.File;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -40,11 +40,14 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         switch (ThemeUtils.getTheme(this)) {
+            case ThemeUtils.Theme.LIGHT:
+                setTheme(R.style.PreferenceThemeLight);
+                break;
             case ThemeUtils.Theme.DARK:
-                setTheme(R.style.SettingsActivityThemeDark);
+                setTheme(R.style.PreferenceThemeDark);
                 break;
             case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.SettingsActivityThemeBlack);
+                setTheme(R.style.PreferenceThemeBlack);
                 break;
         }
 
@@ -107,33 +110,30 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
 
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this.getActivity());
+
             addPreferencesFromResource(R.xml.preferences);
 
-            final Preference btnClearCache = findPreference(getString(R.string.title_clear_cache));
+            final Preference btnClearCache = findPreference("clear_cache");
 
             btnClearCache.setSummary(getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())) + " MB");
             Log.d(TAG, getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())));
 
-            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this.getActivity());
-            mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_CLEAR_CACHE, null);
-
-            btnClearCache.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    new AsyncTask<Void, Void, Void>() {
-                        protected void onPreExecute() {
-                        }
-                        protected Void doInBackground(Void... unused) {
-                            Glide.get(Resplash.getInstance()).clearDiskCache();
-                            return null;
-                        }
-                        protected void onPostExecute(Void unused) {
-                            btnClearCache.setSummary(getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())) + " MB");
-                            Toast.makeText(Resplash.getInstance(), getString(R.string.message_cache_cleared), Toast.LENGTH_SHORT).show();
-                        }
-                    }.execute();
-                    return true;
-                }
+            btnClearCache.setOnPreferenceClickListener(preference -> {
+                new AsyncTask<Void, Void, Void>() {
+                    protected void onPreExecute() {
+                    }
+                    protected Void doInBackground(Void... unused) {
+                        Glide.get(Resplash.getInstance()).clearDiskCache();
+                        return null;
+                    }
+                    protected void onPostExecute(Void unused) {
+                        mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_CLEAR_CACHE, null);
+                        btnClearCache.setSummary(getString(R.string.cache_size) + ": " + dirSize(Glide.getPhotoCacheDir(Resplash.getInstance())) + " MB");
+                        Toast.makeText(Resplash.getInstance(), getString(R.string.message_cache_cleared), Toast.LENGTH_SHORT).show();
+                    }
+                }.execute();
+                return true;
             });
         }
 
@@ -166,12 +166,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         private void showRestartSnackbar() {
             Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), getString(R.string.restart_to_apply), Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.restart), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            restartActivity();
-                        }
-                    });
+                    .setAction(getString(R.string.restart), v -> restartActivity());
             snackbar.getView().setBackgroundColor(ThemeUtils.getThemeAttrColor(getActivity(), R.attr.colorPrimaryDark));
             snackbar.getView().setElevation(Utils.dpToPx(getActivity(), 6));
             snackbar.show();

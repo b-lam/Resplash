@@ -3,20 +3,17 @@ package com.b_lam.resplash.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.cardview.widget.CardView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.billing.IabBroadcastReceiver;
 import com.b_lam.resplash.util.billing.IabHelper;
 import com.b_lam.resplash.util.billing.IabResult;
@@ -28,20 +25,23 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class DonateActivity extends AppCompatActivity implements View.OnClickListener, IabBroadcastReceiver.IabBroadcastListener{
+public class DonateActivity extends BaseActivity implements View.OnClickListener, IabBroadcastReceiver.IabBroadcastListener{
 
     @BindView(R.id.donate_close_btn) ImageButton btnClose;
-    @BindView(R.id.donate_thanks) TextView tvThanks;
+    @BindView(R.id.donate_thanks) ConstraintLayout mThanksView;
     @BindView(R.id.donate_loading) LinearLayout mLoadingProgress;
     @BindView(R.id.donate_products_card) CardView mProductCard;
     @BindView(R.id.donate_item1_price) TextView mProduct1Price;
     @BindView(R.id.donate_item2_price) TextView mProduct2Price;
     @BindView(R.id.donate_item3_price) TextView mProduct3Price;
     @BindView(R.id.donate_item4_price) TextView mProduct4Price;
+    @BindView(R.id.donate_thanks_animation) LottieAnimationView mAnimation;
 
     static final String TAG = "DonateActivity";
 
@@ -59,20 +59,7 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch (ThemeUtils.getTheme(this)) {
-            case ThemeUtils.Theme.DARK:
-                setTheme(R.style.DonateActivityThemeDark);
-                break;
-            case ThemeUtils.Theme.BLACK:
-                setTheme(R.style.DonateActivityThemeBlack);
-                break;
-        }
-
         super.onCreate(savedInstanceState);
-
-        LocaleUtils.loadLocale(this);
-
-        ThemeUtils.setRecentAppsHeaderColor(this);
 
         setContentView(R.layout.activity_donate);
 
@@ -93,38 +80,38 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         Log.d(TAG, "Starting setup.");
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                Log.d(TAG, "Setup finished.");
+        mHelper.startSetup(result -> {
+            Log.d(TAG, "Setup finished.");
 
-                if (!result.isSuccess()) {
-                    complain("Problem setting up in-app billing: " + result);
-                    return;
-                }
+            if (!result.isSuccess()) {
+                complain("Problem setting up in-app billing: " + result);
+                return;
+            }
 
-                if (mHelper == null) return;
+            if (mHelper == null) return;
 
-                mBroadcastReceiver = new IabBroadcastReceiver(DonateActivity.this);
-                IntentFilter broadcastFilter = new IntentFilter(IabBroadcastReceiver.ACTION);
-                registerReceiver(mBroadcastReceiver, broadcastFilter);
+            mBroadcastReceiver = new IabBroadcastReceiver(DonateActivity.this);
+            IntentFilter broadcastFilter = new IntentFilter(IabBroadcastReceiver.ACTION);
+            registerReceiver(mBroadcastReceiver, broadcastFilter);
 
-                Log.d(TAG, "Setup successful. Querying inventory.");
-                try {
-                    mHelper.queryInventoryAsync(true, skus, null, mGotInventoryListener);
-                } catch (IabHelper.IabAsyncInProgressException e) {
-                    complain("Error querying inventory. Another async operation in progress.");
-                }
+            Log.d(TAG, "Setup successful. Querying inventory.");
+            try {
+                mHelper.queryInventoryAsync(true, skus, null, mGotInventoryListener);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                complain("Error querying inventory. Another async operation in progress.");
             }
         });
 
         LinearLayout[] containers = new LinearLayout[] {
-                (LinearLayout) findViewById(R.id.container_donate_item1),
-                (LinearLayout) findViewById(R.id.container_donate_item2),
-                (LinearLayout) findViewById(R.id.container_donate_item3),
-                (LinearLayout) findViewById(R.id.container_donate_item4)};
+                findViewById(R.id.container_donate_item1),
+                findViewById(R.id.container_donate_item2),
+                findViewById(R.id.container_donate_item3),
+                findViewById(R.id.container_donate_item4)};
         for (LinearLayout r : containers) {
             r.setOnClickListener(this);
         }
+
+        mAnimation.setOnClickListener(view -> mAnimation.playAnimation());
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_VIEW_DONATE, null);
@@ -221,7 +208,7 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
             SkuDetails skuDetailsMeal = inventory.getSkuDetails(SKU_MEAL);
 
             if (coffee != null || smoothie != null || pizza != null || meal != null) {
-                tvThanks.setVisibility(View.VISIBLE);
+                mThanksView.setVisibility(View.VISIBLE);
             }
 
             if (skuDetailsCoffee != null && skuDetailsSmoothie != null && skuDetailsPizza != null && skuDetailsMeal != null) {
@@ -242,18 +229,17 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
             if (mHelper == null) return;
 
-            if (result.isFailure()) {
+            if (result.isSuccess()) {
+                showThanksDialog();
+            } else {
                 complain(result.toString());
-                return;
             }
 
-            Log.d(TAG, "Donation successful.");
-
-            try {
-                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
-            } catch (IabHelper.IabAsyncInProgressException e) {
-                return;
-            }
+//            try {
+//                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+//            } catch (IabHelper.IabAsyncInProgressException e) {
+//                return;
+//            }
         }
     };
 
@@ -264,10 +250,8 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
             if (mHelper == null) return;
 
             if (result.isSuccess()) {
-                alert(getString(R.string.donate_thanks));
-                tvThanks.setVisibility(View.VISIBLE);
-            }
-            else {
+                showThanksDialog();
+            } else {
                 complain(result.toString());
             }
         }
@@ -285,14 +269,16 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
 
     void complain(String message) {
         Log.e(TAG, "Resplash Error: " + message);
-//        alert("Error: " + message);
     }
 
-    void alert(String message) {
-        AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        bld.setMessage(message);
-        bld.setPositiveButton("OK", null);
-        Log.d(TAG, "Showing alert dialog: " + message);
-        bld.create().show();
+    void showThanksDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.donate_thanks_layout, null);
+        final LottieAnimationView animationView = view.findViewById(R.id.donate_thanks_animation);
+        animationView.setOnClickListener(v -> animationView.playAnimation());
+        builder.setView(view);
+        builder.setPositiveButton("OK", null);
+        builder.create().show();
     }
 }

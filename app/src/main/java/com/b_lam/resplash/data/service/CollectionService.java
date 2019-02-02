@@ -2,11 +2,11 @@ package com.b_lam.resplash.data.service;
 
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.api.CollectionApi;
-import com.b_lam.resplash.data.data.ChangeCollectionPhotoResult;
-import com.b_lam.resplash.data.data.Collection;
-import com.b_lam.resplash.data.data.DeleteCollectionResult;
-import com.b_lam.resplash.data.data.Me;
-import com.b_lam.resplash.data.data.User;
+import com.b_lam.resplash.data.model.ChangeCollectionPhotoResult;
+import com.b_lam.resplash.data.model.Collection;
+import com.b_lam.resplash.data.model.DeleteCollectionResult;
+import com.b_lam.resplash.data.model.Me;
+import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.tools.AuthInterceptor;
 import com.google.gson.GsonBuilder;
 
@@ -20,14 +20,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Collection service.
- * */
+ * Collection service
+ **/
 
 public class CollectionService {
-    // widget
+
     private Call call;
 
-    /** <br> data. */
     public void requestAllCollections(int page, int per_page, final OnRequestCollectionsListener l) {
         Call<List<Collection>> getAllCollections = buildApi(buildClient()).getAllCollections(page, per_page);
         getAllCollections.enqueue(new Callback<List<Collection>>() {
@@ -88,6 +87,26 @@ public class CollectionService {
         call = getFeaturedCollections;
     }
 
+    public void requestRelatedCollections(String id, final OnRequestCollectionsListener l) {
+        Call<List<Collection>> getRelatedCollections = buildApi(buildClient()).getRelatedCollections(id);
+        getRelatedCollections.enqueue(new Callback<List<Collection>>() {
+            @Override
+            public void onResponse(Call<List<Collection>> call, Response<List<Collection>> response) {
+                if (l != null) {
+                    l.onRequestCollectionsSuccess(call, response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Collection>> call, Throwable t) {
+                if (l != null) {
+                    l.onRequestCollectionsFailed(call, t);
+                }
+            }
+        });
+        call = getRelatedCollections;
+    }
+
     public void requestUserCollections(User u, int page, int per_page, final OnRequestCollectionsListener l) {
         Call<List<Collection>> getUserCollections = buildApi(buildClient()).getUserCollections(u.username, page, per_page);
         getUserCollections.enqueue(new Callback<List<Collection>>() {
@@ -126,6 +145,26 @@ public class CollectionService {
             }
         });
         call = getUserCollections;
+    }
+
+    public void requestCollection(String id, final OnRequestACollectionListener l) {
+        Call<Collection> getCollection = buildApi(buildClient()).getCollection(id);
+        getCollection.enqueue(new Callback<Collection>() {
+            @Override
+            public void onResponse(Call<Collection> call, Response<Collection> response) {
+                if (l != null) {
+                    l.onRequestACollectionSuccess(call, response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Collection> call, Throwable t) {
+                if (l != null) {
+                    l.onRequestACollectionFailed(call, t);
+                }
+            }
+        });
+        call = getCollection;
     }
 
     public void createCollection(String title, String description, boolean privateX,
