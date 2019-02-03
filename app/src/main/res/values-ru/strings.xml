@@ -226,5 +226,8 @@
     <string name="no">Нет</string>
     <string name="on">Включено</string>
     <string name="off">Инвалид</string>
+    <string name="auto_wallpaper_options">Опции</string>
+    <string name="auto_wallpaper_select_screen">Выберите экран</string>
+    <string name="auto_wallpaper_select_screen_summary">Выберите, к каким экранам применять обои</string>
 
 </resources>

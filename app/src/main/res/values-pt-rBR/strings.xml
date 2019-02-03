@@ -226,5 +226,8 @@
     <string name="no">Não</string>
     <string name="on">Encantado</string>
     <string name="off">Desativado</string>
+    <string name="auto_wallpaper_options">Opções</string>
+    <string name="auto_wallpaper_select_screen">Tela de seleção</string>
+    <string name="auto_wallpaper_select_screen_summary">Escolha em quais telas aplicar papel de parede</string>
 
 </resources>

@@ -170,17 +170,17 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                String screenSelect = sharedPreferences.getString("auto_wallpaper_screen_select",
-                        getString(R.string.auto_wallpaper_screen_select_default));
+                String screenSelect = sharedPreferences.getString("auto_wallpaper_select_screen",
+                        getString(R.string.auto_wallpaper_select_screen_default));
                 switch (screenSelect) {
                     case "Home screen":
-                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SCREEN_SELECT_KEY, WallpaperManager.FLAG_SYSTEM);
+                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_SYSTEM);
                         break;
                     case "Lock screen":
-                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SCREEN_SELECT_KEY, WallpaperManager.FLAG_LOCK);
+                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_LOCK);
                         break;
                     case "Both":
-                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SCREEN_SELECT_KEY, WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK);
+                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK);
                         break;
                 }
             }

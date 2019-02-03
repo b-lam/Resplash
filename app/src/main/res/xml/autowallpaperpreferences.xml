@@ -80,13 +80,13 @@
         android:dependency="auto_wallpaper">
 
         <ListPreference
-            android:key="auto_wallpaper_screen_select"
-            android:defaultValue="@string/auto_wallpaper_screen_select_default"
-            android:title="@string/auto_wallpaper_screen_select"
-            android:dialogTitle="@string/auto_wallpaper_screen_select"
-            android:summary="@string/auto_wallpaper_screen_select_summary"
-            android:entries="@array/auto_wallpaper_screen_select_options"
-            android:entryValues="@array/auto_wallpaper_screen_select_values" />
+            android:key="auto_wallpaper_select_screen"
+            android:defaultValue="@string/auto_wallpaper_select_screen_default"
+            android:title="@string/auto_wallpaper_select_screen"
+            android:dialogTitle="@string/auto_wallpaper_select_screen"
+            android:summary="@string/auto_wallpaper_select_screen_summary"
+            android:entries="@array/auto_wallpaper_select_screen_options"
+            android:entryValues="@array/auto_wallpaper_select_screen_values" />
 
     </PreferenceCategory>
 

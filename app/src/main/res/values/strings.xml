@@ -280,19 +280,19 @@
     <string name="auto_wallpaper_custom_category_summary">Get wallpapers matching a search term</string>
     <string name="auto_wallpaper_custom_category_default" translatable="false">Wallpaper</string>
     <string name="auto_wallpaper_options">Options</string>
-    <string name="auto_wallpaper_screen_select">Screen Select</string>
-    <string name="auto_wallpaper_screen_select_summary">Choose which screens wallpaper is applied to</string>
-    <string-array name="auto_wallpaper_screen_select_options">
+    <string name="auto_wallpaper_select_screen">Select Screen</string>
+    <string name="auto_wallpaper_select_screen_summary">Choose which screens to apply wallpaper to</string>
+    <string-array name="auto_wallpaper_select_screen_options">
         <item>Home screen</item>
         <item>Lock screen</item>
         <item>Both</item>
     </string-array>
-    <string-array name="auto_wallpaper_screen_select_values">
+    <string-array name="auto_wallpaper_select_screen_values">
         <item>Home screen</item>
         <item>Lock screen</item>
         <item>Both</item>
     </string-array>
-    <string name="auto_wallpaper_screen_select_default" translatable="false">Both</string>
+    <string name="auto_wallpaper_select_screen_default" translatable="false">Both</string>
     <string name="auto_wallpaper_history">Auto Wallpaper History</string>
     <string name="auto_wallpaper_history_summary">View previously set wallpapers</string>
     <string name="auto_wallpaper_info">Auto Wallpaper will refresh your home screen with a new random wallpaper based on the set conditions.</string>

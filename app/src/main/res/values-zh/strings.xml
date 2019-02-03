@@ -226,5 +226,8 @@
     <string name="no">没有</string>
     <string name="on">启用</string>
     <string name="off">残</string>
+    <string name="auto_wallpaper_options">选项</string>
+    <string name="auto_wallpaper_select_screen">选择屏幕</string>
+    <string name="auto_wallpaper_select_screen_summary">选择要应用壁纸的屏幕</string>
 
 </resources>

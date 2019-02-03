@@ -25,7 +25,7 @@ public class AutoWallpaperService extends JobService {
     public final static String AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY = "auto_wallpaper_category_custom";
     public final static String AUTO_WALLPAPER_QUALITY_KEY = "auto_wallpaper_quality";
     public final static String AUTO_WALLPAPER_THUMBNAIL_KEY = "auto_wallpaper_thumbnail";
-    public final static String AUTO_WALLPAPER_SCREEN_SELECT_KEY = "auto_wallpaper_screen_select";
+    public final static String AUTO_WALLPAPER_SELECT_SCREEN_KEY = "auto_wallpaper_select_screen";
 
     private static final String TAG = "AutoWallpaperService";
 
@@ -100,7 +100,8 @@ public class AutoWallpaperService extends JobService {
                 InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    final int screenSelect = params.getExtras().getInt(AUTO_WALLPAPER_SCREEN_SELECT_KEY, 0);
+                    final int screenSelect = params.getExtras().getInt(AUTO_WALLPAPER_SELECT_SCREEN_KEY,
+                            WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK);
                     WallpaperManager.getInstance(getApplicationContext()).setStream(inputStream, null,
                             true, screenSelect);
                 } else {
