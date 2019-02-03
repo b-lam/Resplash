@@ -32,7 +32,6 @@ android {
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
         debug {
             debuggable true
             applicationIdSuffix ".debug"
@@ -53,7 +52,7 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -90,7 +89,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
     kapt 'androidx.room:room-compiler:2.1.0-alpha04'
-
+    
     testImplementation 'junit:junit:4.12'
 }
 

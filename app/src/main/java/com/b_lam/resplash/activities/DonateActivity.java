@@ -3,6 +3,7 @@ package com.b_lam.resplash.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -45,6 +47,8 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
     @BindView(R.id.donate_thanks_animation) LottieAnimationView mAnimation;
 
     static final String TAG = "DonateActivity";
+
+    static final String DONATION_MADE_KEY = "donation_made";
 
     static final String SKU_COFFEE = "coffee";
     static final String SKU_SMOOTHIE = "smoothie";
@@ -208,10 +212,6 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
             SkuDetails skuDetailsPizza = inventory.getSkuDetails(SKU_PIZZA);
             SkuDetails skuDetailsMeal = inventory.getSkuDetails(SKU_MEAL);
 
-            if (coffee != null || smoothie != null || pizza != null || meal != null) {
-                mThanksView.setVisibility(View.VISIBLE);
-            }
-
             if (skuDetailsCoffee != null && skuDetailsSmoothie != null && skuDetailsPizza != null && skuDetailsMeal != null) {
                 mProduct1Price.setText(skuDetailsCoffee.getPrice());
                 mProduct2Price.setText(skuDetailsSmoothie.getPrice());
@@ -221,40 +221,53 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
                 mLoadingProgress.setVisibility(View.GONE);
                 mProductCard.setVisibility(View.VISIBLE);
             }
+
+            if (coffee != null || smoothie != null || pizza != null || meal != null ||
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(DONATION_MADE_KEY, false)) {
+                mThanksView.setVisibility(View.VISIBLE);
+            }
+
+            // Consume any unconsumed purchases
+            try {
+                if (coffee != null) mHelper.consumeAsync(coffee, mConsumeFinishedListener);
+                if (smoothie != null) mHelper.consumeAsync(smoothie, mConsumeFinishedListener);
+                if (pizza != null) mHelper.consumeAsync(pizza, mConsumeFinishedListener);
+                if (meal != null) mHelper.consumeAsync(meal, mConsumeFinishedListener);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                e.printStackTrace();
+            }
         }
     };
 
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
         public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-            Log.d(TAG, "Donation finished: " + result + ", donation: " + purchase);
+            Log.d(TAG, "Donation made: " + result + ", donation: " + purchase);
 
             if (mHelper == null) return;
 
             if (result.isSuccess()) {
                 showThanksDialog();
-            } else {
+
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    e.printStackTrace();
+                }
+            } else if (result.getResponse() != IabHelper.IABHELPER_USER_CANCELLED){
                 complain(result.toString());
             }
-
-//            try {
-//                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
-//            } catch (IabHelper.IabAsyncInProgressException e) {
-//                return;
-//            }
         }
     };
 
-    IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
-        public void onConsumeFinished(Purchase purchase, IabResult result) {
-            Log.d(TAG, "Donation finished. Donation: " + purchase + ", donation: " + result);
-
-            if (mHelper == null) return;
-
-            if (result.isSuccess()) {
-                showThanksDialog();
-            } else {
-                complain(result.toString());
-            }
+    IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = (purchase, result) -> {
+        if (result.isSuccess()) {
+            Log.d(TAG, "Donation consumed: " + result + ", donation: " + purchase);
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(DONATION_MADE_KEY, true);
+            editor.apply();
+        } else {
+            complain(result.toString());
         }
     };
 
