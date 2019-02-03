@@ -56,8 +56,7 @@ public class CollectionDetailActivity extends BaseActivity {
     @BindView(R.id.toolbar_collection_detail) Toolbar mToolbar;
     @BindView(R.id.tvCollectionDescription) TextView mCollectionDescription;
     @BindView(R.id.tvUserCollection) TextView mUserCollection;
-    @BindView(R.id.imgProfileCollection)
-    CircleImageView mUserProfilePicture;
+    @BindView(R.id.imgProfileCollection) CircleImageView mUserProfilePicture;
 
     public final static String USER_COLLECTION_FLAG = "USER_COLLECTION_FLAG";
 
@@ -135,7 +134,7 @@ public class CollectionDetailActivity extends BaseActivity {
             @Override
             public void onLoadMore(int currentPage) {
                 if(mPhotoAdapter.getItemCount() >= mCollection.total_photos){
-                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG);
+                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG).show();
                 }else {
                     mFooterAdapter.clear();
                     mFooterAdapter.add(new ProgressItem().withEnabled(false));
@@ -144,7 +143,7 @@ public class CollectionDetailActivity extends BaseActivity {
             }
         });
 
-        mSwipeContainer.setOnRefreshListener(() -> loadMore());
+        mSwipeContainer.setOnRefreshListener(this::loadMore);
 
         loadMore();
     }
@@ -161,18 +160,12 @@ public class CollectionDetailActivity extends BaseActivity {
             if (sharedPreferences.getString("item_layout", "List").equals("Grid")) {
                 startActivity(i);
             } else if (layout.equals("Cards")) {
-                imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
+                imageView = v.findViewById(R.id.item_image_card_img);
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
                 startActivity(i);
             } else {
-                imageView = (ImageView) v.findViewById(R.id.item_image_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
-//                v.setTransitionName("photoScale");
-//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
-//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(CollectionDetailActivity.this, p1);
-//                startActivity(i, options.toBundle());
+                imageView = v.findViewById(R.id.item_image_img);
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
                 startActivity(i);
             }
             return false;
@@ -239,20 +232,19 @@ public class CollectionDetailActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.collection, menu);
-//        mEditButton = menu.findItem(R.id.action_edit); //TODO: Uncomment for collection management
+        mEditButton = menu.findItem(R.id.action_edit);
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-//        mEditButton.setVisible(mIsUserCollection); //TODO: Uncomment for collection management
+        mEditButton.setVisible(mIsUserCollection);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();

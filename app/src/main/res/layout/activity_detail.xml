@@ -116,8 +116,8 @@
                         android:layout_marginStart="20dp"
                         android:src="@drawable/ic_bookmark_outline_grey_24dp"
                         android:contentDescription="Add to collection"
-                        android:onClick="addToCollection"
-                        android:visibility="gone"/>
+                        android:onClick="addToCollection"/>
+
                 </LinearLayout>
 
                 <TextView
