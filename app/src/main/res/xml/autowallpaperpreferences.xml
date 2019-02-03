@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="auto_wallpaper_preference_screen">
 
     <CheckBoxPreference
         android:key="auto_wallpaper"
@@ -70,6 +71,22 @@
             android:summary="@string/auto_wallpaper_custom_category_summary"
             android:selectAllOnFocus="true"
             android:singleLine="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="auto_wallpaper_options"
+        android:title="@string/auto_wallpaper_options"
+        android:dependency="auto_wallpaper">
+
+        <ListPreference
+            android:key="auto_wallpaper_select_screen"
+            android:defaultValue="@string/auto_wallpaper_select_screen_default"
+            android:title="@string/auto_wallpaper_select_screen"
+            android:dialogTitle="@string/auto_wallpaper_select_screen"
+            android:summary="@string/auto_wallpaper_select_screen_summary"
+            android:entries="@array/auto_wallpaper_select_screen_options"
+            android:entryValues="@array/auto_wallpaper_select_screen_values" />
 
     </PreferenceCategory>
 

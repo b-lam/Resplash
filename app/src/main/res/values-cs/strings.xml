@@ -226,5 +226,8 @@
     <string name="no">Ne</string>
     <string name="on">Povoleno</string>
     <string name="off">Zakázáno</string>
+    <string name="auto_wallpaper_options">Možnosti</string>
+    <string name="auto_wallpaper_select_screen">Vyberte obrazovku</string>
+    <string name="auto_wallpaper_select_screen_summary">Vyberte, které obrazovky chcete tapetu použít</string>
 
 </resources>

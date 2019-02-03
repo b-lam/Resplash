@@ -1,11 +1,13 @@
 package com.b_lam.resplash.fragments;
 
+import android.app.WallpaperManager;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.LayoutInflater;
@@ -18,12 +20,14 @@ import com.b_lam.resplash.data.service.AutoWallpaperService;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 public class AutoWallpaperFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -38,7 +42,7 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -52,6 +56,12 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
                 .getString("auto_wallpaper_category", getString(R.string.auto_wallpaper_category_default))
                 .equals("Custom");
         showCustomCategoryPreference(customCategorySelected);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            PreferenceScreen preferenceScreen = findPreference("auto_wallpaper_preference_screen");
+            PreferenceCategory optionsPreferenceCategory = findPreference("auto_wallpaper_options");
+            preferenceScreen.removePreference(optionsPreferenceCategory);
+        }
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -109,7 +119,7 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
     }
 
     private void showCustomCategoryPreference(boolean show) {
-        PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference("auto_wallpaper_source");
+        PreferenceCategory preferenceCategory = findPreference("auto_wallpaper_source");
         if (show) {
             preferenceCategory.addPreference(mCustomCategoryPreference);
         } else {
@@ -143,16 +153,36 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
             builder.setPeriodic(changeWallpaperIntervalMillis);
             builder.setPersisted(true);
 
-            String category = sharedPreferences.getString("auto_wallpaper_category",
-                    getString(R.string.auto_wallpaper_category_default));
             PersistableBundle extras = new PersistableBundle();
 
-            if (category.equals("Featured")) {
-                extras.putBoolean(AutoWallpaperService.AUTO_WALLPAPER_CATEGORY_FEATURED_KEY, true);
-            } else if (category.equals("Custom")) {
-                extras.putString(AutoWallpaperService.AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY,
-                        sharedPreferences.getString("auto_wallpaper_custom_category",
-                                getString(R.string.auto_wallpaper_custom_category_default)));
+            String category = sharedPreferences.getString("auto_wallpaper_category",
+                    getString(R.string.auto_wallpaper_category_default));
+
+            switch (category) {
+                case "Featured":
+                    extras.putBoolean(AutoWallpaperService.AUTO_WALLPAPER_CATEGORY_FEATURED_KEY, true);
+                    break;
+                case "Custom":
+                    extras.putString(AutoWallpaperService.AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY,
+                            sharedPreferences.getString("auto_wallpaper_custom_category",
+                                    getString(R.string.auto_wallpaper_custom_category_default)));
+                    break;
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                String screenSelect = sharedPreferences.getString("auto_wallpaper_select_screen",
+                        getString(R.string.auto_wallpaper_select_screen_default));
+                switch (screenSelect) {
+                    case "Home screen":
+                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_SYSTEM);
+                        break;
+                    case "Lock screen":
+                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_LOCK);
+                        break;
+                    case "Both":
+                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK);
+                        break;
+                }
             }
 
             extras.putString(AutoWallpaperService.AUTO_WALLPAPER_QUALITY_KEY,
