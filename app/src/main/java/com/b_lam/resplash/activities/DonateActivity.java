@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.b_lam.resplash.R;
@@ -268,6 +269,7 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
     }
 
     void complain(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Log.e(TAG, "Resplash Error: " + message);
     }
 
