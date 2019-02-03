@@ -131,7 +131,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                             getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
                             if (currentAction == WALLPAPER) {
                                 setWallpaper(uri);
-                                wallpaperDialog.setDownloadFinished(true);
+                                if (wallpaperDialog != null) wallpaperDialog.setDownloadFinished(true);
                             }
                             break;
                         default:
@@ -140,7 +140,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                     cursor.close();
                 }
                 if (currentAction == WALLPAPER) {
-                    wallpaperDialog.dismiss();
+                    if (wallpaperDialog != null) wallpaperDialog.dismiss();
                 }
             }
         }
@@ -275,7 +275,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         fabWallpaper.setOnClickListener(onClickListener);
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
-
     }
 
     @Override

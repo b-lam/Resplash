@@ -118,6 +118,7 @@
                         android:contentDescription="Add to collection"
                         android:onClick="addToCollection"
                         android:visibility="gone"/>
+
                 </LinearLayout>
 
                 <TextView
