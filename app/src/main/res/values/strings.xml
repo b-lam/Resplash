@@ -261,7 +261,7 @@
         <item>1440</item>
         <item>2880</item>
     </string-array>
-    <string name="auto_wallpaper_interval_default" translatable="false">60</string>
+    <string name="auto_wallpaper_interval_default" translatable="false">1440</string>
     <string name="auto_wallpaper_source">Source</string>
     <string name="auto_wallpaper_category">Category</string>
     <string name="auto_wallpaper_category_summary">Select the wallpaper category</string>
