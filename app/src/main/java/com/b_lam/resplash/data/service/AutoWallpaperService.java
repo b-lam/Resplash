@@ -3,6 +3,7 @@ package com.b_lam.resplash.data.service;
 import android.app.WallpaperManager;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.os.Build;
 
 import com.b_lam.resplash.data.db.Wallpaper;
 import com.b_lam.resplash.data.model.Photo;
@@ -24,6 +25,7 @@ public class AutoWallpaperService extends JobService {
     public final static String AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY = "auto_wallpaper_category_custom";
     public final static String AUTO_WALLPAPER_QUALITY_KEY = "auto_wallpaper_quality";
     public final static String AUTO_WALLPAPER_THUMBNAIL_KEY = "auto_wallpaper_thumbnail";
+    public final static String AUTO_WALLPAPER_SCREEN_SELECT_KEY = "auto_wallpaper_screen_select";
 
     private static final String TAG = "AutoWallpaperService";
 
@@ -88,17 +90,22 @@ public class AutoWallpaperService extends JobService {
     }
 
     private void downloadAndSetWallpaper(Photo photo, PhotoService photoService, JobParameters params) {
-        String photoUrl = getUrlFromQuality(photo,
-                params.getExtras().getString(AUTO_WALLPAPER_QUALITY_KEY, "Full"));
-
         new Thread(() -> {
             HttpURLConnection urlConnection = null;
 
             try {
+                final String photoUrl = getUrlFromQuality(photo, params.getExtras().getString(AUTO_WALLPAPER_QUALITY_KEY, "Full"));
                 URL url = new URL(photoUrl);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-                WallpaperManager.getInstance(getApplicationContext()).setStream(inputStream);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    final int screenSelect = params.getExtras().getInt(AUTO_WALLPAPER_SCREEN_SELECT_KEY, 0);
+                    WallpaperManager.getInstance(getApplicationContext()).setStream(inputStream, null,
+                            true, screenSelect);
+                } else {
+                    WallpaperManager.getInstance(getApplicationContext()).setStream(inputStream);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
