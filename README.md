@@ -1,6 +1,6 @@
 # [Resplash]
 
-<img src="https://github.com/b-lam/Resplash/blob/develop/design/Play%20Store/Resplash_Play_Store_Banner.jpg?raw=true" width="750">
+<img src="https://github.com/b-lam/Resplash/blob/master/design/Play_Store_Banner.jpg?raw=true" width="750">
 
 **[Resplash]** is powered by [Unsplash.com](https://unsplash.com/)
 
