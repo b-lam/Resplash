@@ -1,24 +1,16 @@
 package com.b_lam.resplash.fragments;
 
-import android.app.WallpaperManager;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.activities.WallpaperHistoryActivity;
-import com.b_lam.resplash.data.service.AutoWallpaperService;
-
-import java.util.concurrent.TimeUnit;
+import com.b_lam.resplash.data.tools.AutoWallpaperWorker;
 
 import androidx.annotation.NonNull;
 import androidx.preference.CheckBoxPreference;
@@ -56,6 +48,12 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
                 .getString("auto_wallpaper_category", getString(R.string.auto_wallpaper_category_default))
                 .equals("Custom");
         showCustomCategoryPreference(customCategorySelected);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            PreferenceCategory conditionsPreferenceCategory = findPreference("auto_wallpaper_conditions");
+            CheckBoxPreference deviceIdlePreference = findPreference("auto_wallpaper_idle");
+            conditionsPreferenceCategory.removePreference(deviceIdlePreference);
+        }
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             PreferenceScreen preferenceScreen = findPreference("auto_wallpaper_preference_screen");
@@ -100,7 +98,7 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
         }
 
         if (key.contains("auto_wallpaper")) {
-            scheduleAutoWallpaperJob(sharedPreferences);
+            AutoWallpaperWorker.Companion.scheduleAutoWallpaperJob(getContext());
         }
     }
 
@@ -124,83 +122,6 @@ public class AutoWallpaperFragment extends PreferenceFragmentCompat implements S
             preferenceCategory.addPreference(mCustomCategoryPreference);
         } else {
             preferenceCategory.removePreference(mCustomCategoryPreference);
-        }
-    }
-
-    public void scheduleAutoWallpaperJob(SharedPreferences sharedPreferences) {
-        boolean autoWallpaperEnabled = sharedPreferences.getBoolean("auto_wallpaper", false);
-
-        JobScheduler jobScheduler = (JobScheduler) getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-
-        if (autoWallpaperEnabled) {
-            boolean deviceOnWifiCondition = sharedPreferences.getBoolean("auto_wallpaper_on_wifi", true);
-            boolean deviceChargingCondition = sharedPreferences.getBoolean("auto_wallpaper_charging", true);
-            boolean deviceIdleCondition = sharedPreferences.getBoolean("auto_wallpaper_idle", true);
-            String changeWallpaperInterval = sharedPreferences.getString("auto_wallpaper_interval", getString(R.string.auto_wallpaper_interval_default));
-            long changeWallpaperIntervalMillis = TimeUnit.MINUTES.toMillis(Long.valueOf(changeWallpaperInterval));
-
-            JobInfo.Builder builder = new JobInfo.Builder(AutoWallpaperService.AUTO_WALLPAPER_JOB_ID,
-                    new ComponentName(getContext(), AutoWallpaperService.class));
-
-            if (deviceOnWifiCondition) {
-                builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
-            } else {
-                builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
-            }
-
-            builder.setRequiresCharging(deviceChargingCondition);
-            builder.setRequiresDeviceIdle(deviceIdleCondition);
-            builder.setPeriodic(changeWallpaperIntervalMillis);
-            builder.setPersisted(true);
-
-            PersistableBundle extras = new PersistableBundle();
-
-            String category = sharedPreferences.getString("auto_wallpaper_category",
-                    getString(R.string.auto_wallpaper_category_default));
-
-            switch (category) {
-                case "Featured":
-                    extras.putBoolean(AutoWallpaperService.AUTO_WALLPAPER_CATEGORY_FEATURED_KEY, true);
-                    break;
-                case "Custom":
-                    extras.putString(AutoWallpaperService.AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY,
-                            sharedPreferences.getString("auto_wallpaper_custom_category",
-                                    getString(R.string.auto_wallpaper_custom_category_default)));
-                    break;
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                String screenSelect = sharedPreferences.getString("auto_wallpaper_select_screen",
-                        getString(R.string.auto_wallpaper_select_screen_default));
-                switch (screenSelect) {
-                    case "Home screen":
-                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_SYSTEM);
-                        break;
-                    case "Lock screen":
-                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_LOCK);
-                        break;
-                    case "Both":
-                        extras.putInt(AutoWallpaperService.AUTO_WALLPAPER_SELECT_SCREEN_KEY, WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK);
-                        break;
-                }
-            }
-
-            extras.putString(AutoWallpaperService.AUTO_WALLPAPER_QUALITY_KEY,
-                    sharedPreferences.getString("wallpaper_quality", "Full"));
-
-            extras.putString(AutoWallpaperService.AUTO_WALLPAPER_THUMBNAIL_KEY,
-                    sharedPreferences.getString("load_quality", "Regular"));
-
-            builder.setExtras(extras);
-
-            if (jobScheduler != null) {
-                jobScheduler.cancel(AutoWallpaperService.AUTO_WALLPAPER_JOB_ID);
-                jobScheduler.schedule(builder.build());
-            }
-        } else {
-            if (jobScheduler != null) {
-                jobScheduler.cancelAll();
-            }
         }
     }
 

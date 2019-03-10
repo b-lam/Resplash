@@ -52,9 +52,10 @@
             android:theme="@style/SplashActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".activities.DetailActivity"
@@ -132,10 +133,14 @@
         </provider>
 
         <service
-            android:name=".data.service.AutoWallpaperService"
-            android:exported="true"
+            android:name=".data.service.WallpaperQuickTileService"
+            android:icon="@drawable/baseline_compare_black_24"
             android:label="@string/auto_wallpaper_title"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="com.google.android.backup.api_key"

@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
 import com.b_lam.resplash.R;
+import com.b_lam.resplash.data.tools.AutoWallpaperWorker;
 import com.b_lam.resplash.fragments.AutoWallpaperFragment;
 import com.b_lam.resplash.util.LocaleUtils;
 import com.b_lam.resplash.util.ThemeUtils;
@@ -99,13 +100,8 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
     }
 
     private void setNewWallpaper() {
-        AutoWallpaperFragment autoWallpaperFragment = (AutoWallpaperFragment)
-                getSupportFragmentManager().findFragmentById(R.id.auto_wallpaper_fragment_container);
-
-        if (autoWallpaperFragment != null) {
-            autoWallpaperFragment.scheduleAutoWallpaperJob(PreferenceManager.getDefaultSharedPreferences(this));
-            showSnackbar();
-        }
+        AutoWallpaperWorker.Companion.scheduleAutoWallpaperJobSingle(this, false);
+        showSnackbar();
     }
 
     private void setFloatingActionButtonVisibility(boolean visible) {

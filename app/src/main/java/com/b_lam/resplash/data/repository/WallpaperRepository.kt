@@ -1,17 +1,17 @@
 package com.b_lam.resplash.data.repository
 
-import android.app.Application
+import android.content.Context
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.b_lam.resplash.data.db.Wallpaper
 import com.b_lam.resplash.data.db.WallpaperDatabase
 import java.util.concurrent.TimeUnit
 
-class WallpaperRepository(application: Application) {
+class WallpaperRepository(context: Context) {
 
     private val ONE_WEEK = TimeUnit.DAYS.toMillis(7)
 
-    private val mDatabase: WallpaperDatabase = WallpaperDatabase.getDatabase(application)
+    private val mDatabase: WallpaperDatabase = WallpaperDatabase.getDatabase(context)
     private var mAllWallpapers: LiveData<List<Wallpaper>>
 
     init {
