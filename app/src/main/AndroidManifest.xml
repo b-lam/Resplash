@@ -133,6 +133,12 @@
         </provider>
 
         <service
+            android:name=".data.service.AutoWallpaperService"
+            android:exported="true"
+            android:label="@string/auto_wallpaper_title"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
             android:name=".data.service.WallpaperQuickTileService"
             android:icon="@drawable/baseline_compare_black_24"
             android:label="@string/auto_wallpaper_title"

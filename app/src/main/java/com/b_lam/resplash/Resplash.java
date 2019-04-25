@@ -52,6 +52,8 @@ public class Resplash extends Application{
 
     public static final String RESPLASH_USER_GROUP = "resplash_user_group";
 
+    public static final String NOTIFICATION_CHANNEL_ID = "resplash_notification_channel_id";
+
     // permission code.
     public static final int WRITE_EXTERNAL_STORAGE = 1;
 

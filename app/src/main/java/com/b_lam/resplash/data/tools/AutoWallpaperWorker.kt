@@ -1,17 +1,19 @@
 package com.b_lam.resplash.data.tools
 
+import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
-import android.widget.Toast
 import androidx.preference.PreferenceManager
 import androidx.work.*
+import androidx.work.impl.utils.futures.SettableFuture
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.db.Wallpaper
 import com.b_lam.resplash.data.model.Photo
 import com.b_lam.resplash.data.repository.WallpaperRepository
 import com.b_lam.resplash.data.service.PhotoService
+import com.google.common.util.concurrent.ListenableFuture
 import retrofit2.Call
 import retrofit2.Response
 import java.io.BufferedInputStream
@@ -19,7 +21,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
-class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+@SuppressLint("RestrictedApi")
+class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : ListenableWorker(context, workerParams) {
 
     private var photoService: PhotoService? = null
 
@@ -30,7 +33,8 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
         }
     }
 
-    override fun doWork(): Result {
+    override fun startWork(): ListenableFuture<Result> {
+        val future = SettableFuture.create<Result>()
         photoService = PhotoService.getService()
 
         val featured = inputData.getBoolean(AUTO_WALLPAPER_CATEGORY_FEATURED_KEY, false)
@@ -42,7 +46,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
                     val photos = response.body()
                     if (photos != null && !photos.isEmpty()) {
                         val photo = photos[0]
-                        downloadAndSetWallpaper(photo, photoService)
+                        downloadAndSetWallpaper(photo, photoService, future)
                     }
                 } else {
                     photoService!!.requestRandomPhotos(null, null, null, null, null, 1, object : PhotoService.OnRequestPhotosListener {
@@ -51,33 +55,29 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
                                 val photos = response.body()
                                 if (photos != null && !photos.isEmpty()) {
                                     val photo = photos[0]
-                                    downloadAndSetWallpaper(photo, photoService)
+                                    downloadAndSetWallpaper(photo, photoService, future)
                                 }
                             }
                         }
 
                         override fun onRequestPhotosFailed(call: Call<List<Photo>>, t: Throwable) {
-                            //TODO: Figure out how to retry
+                            future.set(Result.retry())
                         }
                     })
                 }
             }
 
             override fun onRequestPhotosFailed(call: Call<List<Photo>>, t: Throwable) {
-                //TODO: Figure out how to retry
+                future.set(Result.retry())
             }
         }
 
         photoService!!.requestRandomPhotos(null, featured, null, customCategory, null, 1, onRequestPhotosListener)
 
-        return Result.success()
+        return future
     }
 
-    private fun downloadAndSetWallpaper(photo: Photo, photoService: PhotoService?) {
-        if (inputData.getBoolean(AUTO_WALLPAPER_SHOW_NOTIFICATION_KEY, false)) {
-            Toast.makeText(applicationContext, R.string.setting_wallpaper, Toast.LENGTH_LONG).show()
-        }
-
+    private fun downloadAndSetWallpaper(photo: Photo, photoService: PhotoService?, future: SettableFuture<Result>) {
         Thread {
             var urlConnection: HttpURLConnection? = null
 
@@ -97,6 +97,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                future.set(Result.retry())
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect()
@@ -104,8 +105,10 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
                     photoService!!.reportDownload(photo.id, null)
 
                     addWallpaperToHistory(photo)
+
+                    future.set(Result.success())
                 } else {
-                    //TODO: Figure out how to retry
+                    future.set(Result.retry())
                 }
             }
         }.start()
@@ -134,17 +137,16 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
     companion object {
 
         private const val AUTO_WALLPAPER_JOB_ID = "auto_wallpaper_job"
-        private const val AUTO_WALLPAPER_SINGLE_JOB_ID = "auto_wallpaper_single_job"
+        const val AUTO_WALLPAPER_SINGLE_JOB_ID = "auto_wallpaper_single_job"
 
         const val AUTO_WALLPAPER_CATEGORY_FEATURED_KEY = "auto_wallpaper_category_featured"
         const val AUTO_WALLPAPER_CATEGORY_CUSTOM_KEY = "auto_wallpaper_category_custom"
         const val AUTO_WALLPAPER_QUALITY_KEY = "auto_wallpaper_quality"
         const val AUTO_WALLPAPER_THUMBNAIL_KEY = "auto_wallpaper_thumbnail"
         const val AUTO_WALLPAPER_SELECT_SCREEN_KEY = "auto_wallpaper_select_screen"
-        const val AUTO_WALLPAPER_SHOW_NOTIFICATION_KEY = "auto_wallpaper_show_notification"
 
         //Schedule wallpaper to change now regardless of conditions
-        fun scheduleAutoWallpaperJobSingle(context: Context, showToast: Boolean) {
+        fun scheduleAutoWallpaperJobSingle(context: Context) {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
             val autoWallpaperEnabled = sharedPreferences.getBoolean("auto_wallpaper", false)
@@ -155,7 +157,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
                 val changeWallpaperIntervalMinutes = changeWallpaperInterval!!.toLong()
 
                 val request = OneTimeWorkRequestBuilder<AutoWallpaperWorker>()
-                        .setInputData(getAutoWallpaperParams(context, sharedPreferences, showToast))
+                        .setInputData(getAutoWallpaperParams(context, sharedPreferences))
                         .build()
 
                 val requestFuture = OneTimeWorkRequestBuilder<FutureAutoWallpaperWorker>()
@@ -193,7 +195,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
                 }
 
                 val request = PeriodicWorkRequestBuilder<AutoWallpaperWorker>(changeWallpaperIntervalMinutes, TimeUnit.MINUTES)
-                        .setInputData(getAutoWallpaperParams(context, sharedPreferences, false))
+                        .setInputData(getAutoWallpaperParams(context, sharedPreferences))
                         .setConstraints(constraints.build())
                         .build()
 
@@ -203,7 +205,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
             }
         }
 
-        private fun getAutoWallpaperParams(context: Context, sharedPreferences: SharedPreferences, showToast: Boolean): Data {
+        private fun getAutoWallpaperParams(context: Context, sharedPreferences: SharedPreferences): Data {
             val builder = Data.Builder()
 
             val category = sharedPreferences.getString("auto_wallpaper_category",
@@ -231,8 +233,6 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Wo
 
             builder.putString(AUTO_WALLPAPER_THUMBNAIL_KEY,
                     sharedPreferences.getString("load_quality", "Regular"))
-
-            builder.putBoolean(AUTO_WALLPAPER_SHOW_NOTIFICATION_KEY, showToast)
 
             return builder.build()
         }

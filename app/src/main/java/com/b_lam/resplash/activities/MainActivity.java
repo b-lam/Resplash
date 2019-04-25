@@ -97,6 +97,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         }).start();
 
         Utils.isStoragePermissionGranted(this);
+        Utils.createNotificationChannel(this);
 
         profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail(getString(R.string.main_unsplash_description)).withIcon(R.drawable.intro_icon_image);
 

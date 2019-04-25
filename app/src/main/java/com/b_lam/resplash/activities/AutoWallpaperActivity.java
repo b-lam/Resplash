@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -100,7 +102,7 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
     }
 
     private void setNewWallpaper() {
-        AutoWallpaperWorker.Companion.scheduleAutoWallpaperJobSingle(this, false);
+        AutoWallpaperWorker.Companion.scheduleAutoWallpaperJobSingle(this);
         showSnackbar();
     }
 
@@ -116,6 +118,19 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
         Snackbar snackbar = Snackbar.make(coordinatorLayout, getString(R.string.setting_wallpaper), Snackbar.LENGTH_LONG);
         snackbar.getView().setBackgroundColor(ThemeUtils.getThemeAttrColor(this, R.attr.colorPrimaryDark));
         snackbar.getView().setElevation(Utils.dpToPx(this, 6));
-        snackbar.show();
+
+        WorkManager.getInstance().getWorkInfosForUniqueWorkLiveData(
+                AutoWallpaperWorker.AUTO_WALLPAPER_SINGLE_JOB_ID)
+                .observe(this, workInfos -> {
+                    if (workInfos != null) {
+                        if (workInfos.get(0).getState() == WorkInfo.State.SUCCEEDED ||
+                                workInfos.get(0).getState() == WorkInfo.State.FAILED ||
+                                workInfos.get(0).getState() == WorkInfo.State.CANCELLED) {
+                            snackbar.dismiss();
+                        } else if (workInfos.get(0).getState() == WorkInfo.State.RUNNING) {
+                            snackbar.show();
+                        }
+                    }
+                });
     }
 }
