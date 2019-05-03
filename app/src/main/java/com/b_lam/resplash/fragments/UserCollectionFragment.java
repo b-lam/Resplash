@@ -265,6 +265,7 @@ public class UserCollectionFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == USER_COLLECTION_UPDATE_CODE) {
             if (resultCode == RESULT_OK) {
                 fetchNew();

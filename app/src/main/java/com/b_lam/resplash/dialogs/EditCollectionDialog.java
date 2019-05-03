@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 
@@ -38,7 +40,13 @@ public class EditCollectionDialog extends DialogFragment {
     @BindView(R.id.edit_collection_make_private_checkbox) CheckBox mMakePrivateCheckBox;
     @BindView(R.id.edit_collection_confirm_delete_layout) ConstraintLayout mConfirmDeleteLayout;
     @BindView(R.id.edit_collection_action_button_layout) ConstraintLayout mActionButtonLayout;
+    @BindView(R.id.edit_collection_delete_button) Button mDeleteButton;
+    @BindView(R.id.edit_collection_cancel_button) Button mCancelButton;
+    @BindView(R.id.edit_collection_save_button) Button mSaveButton;
+    @BindView(R.id.edit_collection_yes_button) Button mYesButton;
+    @BindView(R.id.edit_collection_no_button) Button mNoButton;
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         setRetainInstance(true);
@@ -66,6 +74,7 @@ public class EditCollectionDialog extends DialogFragment {
     public void saveCollection() {
         if (mNameEditText.getText() != null && !mNameEditText.getText().toString().isEmpty()) {
             mNameTextInputLayout.setError(null);
+            disableButtons();
             mService.updateCollection(mCollection.id, mNameEditText.getText().toString(),
                     (mDescriptionEditText.getText() == null) ? "" : mDescriptionEditText.getText().toString(),
                     mMakePrivateCheckBox.isChecked(),
@@ -75,6 +84,7 @@ public class EditCollectionDialog extends DialogFragment {
                             if (response.isSuccessful()) {
                                 mEditCollectionDialogListener.onCollectionUpdated(response.body());
                             }
+                            enableButtons();
                             hideKeyboard();
                             dismiss();
                         }
@@ -82,6 +92,7 @@ public class EditCollectionDialog extends DialogFragment {
                         @Override
                         public void onRequestACollectionFailed(Call<Collection> call, Throwable t) {
                             Toast.makeText(getActivity(), R.string.failed_to_save_collection, Toast.LENGTH_SHORT).show();
+                            enableButtons();
                         }
                     });
         } else {
@@ -108,11 +119,13 @@ public class EditCollectionDialog extends DialogFragment {
 
     @OnClick(R.id.edit_collection_yes_button)
     public void deleteCollectionYes() {
+        disableButtons();
         mService.deleteCollection(mCollection.id,
                 new CollectionService.OnDeleteCollectionListener() {
                     @Override
                     public void onDeleteCollectionSuccess(Call<DeleteCollectionResult> call, Response<DeleteCollectionResult> response) {
                         mEditCollectionDialogListener.onCollectionDeleted();
+                        enableButtons();
                         hideKeyboard();
                         dismiss();
                     }
@@ -120,6 +133,7 @@ public class EditCollectionDialog extends DialogFragment {
                     @Override
                     public void onDeleteCollectionFailed(Call<DeleteCollectionResult> call, Throwable t) {
                         Toast.makeText(getActivity(), R.string.failed_to_delete_collection, Toast.LENGTH_SHORT).show();
+                        enableButtons();
                     }
                 });
     }
@@ -140,6 +154,22 @@ public class EditCollectionDialog extends DialogFragment {
                 inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
+    }
+
+    private void enableButtons() {
+        mDeleteButton.setEnabled(true);
+        mCancelButton.setEnabled(true);
+        mSaveButton.setEnabled(true);
+        mYesButton.setEnabled(true);
+        mNoButton.setEnabled(true);
+    }
+
+    private void disableButtons() {
+        mDeleteButton.setEnabled(false);
+        mCancelButton.setEnabled(false);
+        mSaveButton.setEnabled(false);
+        mYesButton.setEnabled(false);
+        mNoButton.setEnabled(false);
     }
 
     public interface EditCollectionDialogListener {

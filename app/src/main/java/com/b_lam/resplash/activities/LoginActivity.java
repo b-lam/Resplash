@@ -34,6 +34,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @BindView(R.id.login_close) ImageButton btnClose;
     @BindView(R.id.activity_login) RelativeLayout relativeLayout;
 
+    public static final int LOGIN_ACTIVITY_RESULT_CODE = 892;
+
     private String TAG = "LoginActivity";
     private AuthorizeService mService;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -106,10 +108,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         if (response.isSuccessful()) {
             AuthManager.getInstance().writeAccessToken(response.body());
             AuthManager.getInstance().requestPersonalProfile();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LOGIN, null);
-            startActivity(intent);
+            setResult(RESULT_OK);
+            finish();
         } else {
             Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
         }

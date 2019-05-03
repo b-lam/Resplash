@@ -278,6 +278,16 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LoginActivity.LOGIN_ACTIVITY_RESULT_CODE) {
+            if (resultCode == RESULT_OK) {
+                mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
+            }
+        }
+    }
+
+    @Override
     protected void onResume(){
         super.onResume();
         registerReceiver(receiver, filter);
@@ -609,7 +619,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
             manageCollectionsDialog.show(getSupportFragmentManager(), null);
         } else {
             Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivityForResult(new Intent(this, LoginActivity.class), LoginActivity.LOGIN_ACTIVITY_RESULT_CODE);
         }
     }
 

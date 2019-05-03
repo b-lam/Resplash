@@ -57,9 +57,11 @@
 
         <TextView
             android:id="@+id/item_collection_mini_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
             android:lines="1"
@@ -67,7 +69,8 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/item_collection_mini_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_collection_mini_progress"
             app:layout_constraintTop_toBottomOf="@+id/item_collection_mini_size"
             app:layout_constraintVertical_chainStyle="packed" />
 
