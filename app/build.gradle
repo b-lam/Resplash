@@ -60,12 +60,13 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
     implementation 'android.arch.work:work-runtime-ktx:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
-    implementation 'androidx.fragment:fragment:1.1.0-alpha06'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha4'
+    implementation 'androidx.fragment:fragment:1.1.0-alpha07'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha5'
     implementation 'androidx.preference:preference:1.1.0-alpha04'
-    implementation 'androidx.room:room-runtime:2.1.0-alpha06'
+    implementation 'androidx.room:room-runtime:2.1.0-alpha07'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.browser:browser:1.0.0'
     implementation 'com.google.android.material:material:1.1.0-alpha05'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -90,7 +91,7 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:10.1.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
-    kapt 'androidx.room:room-compiler:2.1.0-alpha06'
+    kapt 'androidx.room:room-compiler:2.1.0-alpha07'
 
     testImplementation 'junit:junit:4.12'
 }

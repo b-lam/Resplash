@@ -44,7 +44,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
             override fun onRequestPhotosSuccess(call: Call<List<Photo>>, response: Response<List<Photo>>) {
                 if (response.isSuccessful) {
                     val photos = response.body()
-                    if (photos != null && !photos.isEmpty()) {
+                    if (photos != null && photos.isNotEmpty()) {
                         val photo = photos[0]
                         downloadAndSetWallpaper(photo, photoService, future)
                     }
@@ -53,7 +53,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
                         override fun onRequestPhotosSuccess(call: Call<List<Photo>>, response: Response<List<Photo>>) {
                             if (response.isSuccessful) {
                                 val photos = response.body()
-                                if (photos != null && !photos.isEmpty()) {
+                                if (photos != null && photos.isNotEmpty()) {
                                     val photo = photos[0]
                                     downloadAndSetWallpaper(photo, photoService, future)
                                 }

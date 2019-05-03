@@ -82,13 +82,7 @@ class WallpaperQuickTileService : TileService(), LifecycleOwner {
                             AutoWallpaperWorker.AUTO_WALLPAPER_SINGLE_JOB_ID)
                             .observe(this@WallpaperQuickTileService, Observer { workInfos ->
                                 if (workInfos != null) {
-                                    if (workInfos[0].state == WorkInfo.State.SUCCEEDED ||
-                                            workInfos[0].state == WorkInfo.State.FAILED ||
-                                            workInfos[0].state == WorkInfo.State.CANCELLED) {
-                                        with(NotificationManagerCompat.from(applicationContext)) {
-                                            cancel(QUICK_TILE_SERVICE_NOTIFICATION_ID)
-                                        }
-                                    } else if (workInfos[0].state == WorkInfo.State.RUNNING) {
+                                    if (workInfos[0].state == WorkInfo.State.RUNNING) {
                                         val builder = NotificationCompat.Builder(applicationContext, Resplash.NOTIFICATION_CHANNEL_ID)
                                                 .setSmallIcon(R.drawable.ic_resplash_notification)
                                                 .setContentTitle(getString(R.string.setting_wallpaper))
@@ -96,8 +90,11 @@ class WallpaperQuickTileService : TileService(), LifecycleOwner {
                                                 .setPriority(NotificationCompat.PRIORITY_LOW)
 
                                         with(NotificationManagerCompat.from(applicationContext)) {
-                                            // notificationId is a unique int for each notification that you must define
                                             notify(QUICK_TILE_SERVICE_NOTIFICATION_ID, builder.build())
+                                        }
+                                    } else {
+                                        with(NotificationManagerCompat.from(applicationContext)) {
+                                            cancel(QUICK_TILE_SERVICE_NOTIFICATION_ID)
                                         }
                                     }
                                 }

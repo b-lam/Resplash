@@ -81,6 +81,7 @@
         <item name="quoteIcon">@drawable/ic_format_quote_black_24dp</item>
         <item name="collectionSavedIcon">@drawable/ic_bookmark_black_24dp</item>
         <item name="editIcon">@drawable/ic_mode_edit_black_24dp</item>
+        <item name="lockIcon">@drawable/baseline_lock_black_18</item>
     </style>
 
     <!-- Dark base activity theme -->
@@ -165,6 +166,7 @@
         <item name="quoteIcon">@drawable/ic_format_quote_white_24dp</item>
         <item name="collectionSavedIcon">@drawable/ic_bookmark_white_24dp</item>
         <item name="editIcon">@drawable/ic_mode_edit_white_24dp</item>
+        <item name="lockIcon">@drawable/ic_lock_white_18dp</item>
     </style>
 
     <!-- Black base activity theme -->

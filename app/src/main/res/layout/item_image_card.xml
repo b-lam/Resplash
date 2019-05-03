@@ -37,26 +37,26 @@
                 android:padding="10dp"
                 android:background="?attr/cardBackgroundColor">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:elevation="10dp"
-                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:elevation="10dp"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/item_image_card_author"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="?attr/primaryTextColor"
-                android:lines="1"
-                android:ellipsize="end"
-                android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/item_image_card_author"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="?attr/primaryTextColor"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textSize="16sp"/>
 
-            </LinearLayout>
+                </LinearLayout>
 
             </FrameLayout>
 

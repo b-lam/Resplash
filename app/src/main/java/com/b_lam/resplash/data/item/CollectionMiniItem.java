@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.model.Collection;
-import com.b_lam.resplash.data.model.Photo;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.transition.ViewPropertyTransition;
@@ -18,8 +20,6 @@ import com.mikepenz.fastadapter.items.ModelAbstractItem;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -29,12 +29,12 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
         super(collection);
     }
 
-    public CollectionMiniItem (Collection collection, Photo photo) {
+    public CollectionMiniItem (Collection collection, List<Collection> currentUserCollections) {
         super(collection);
-        mPhoto = photo;
+        mCurrentUserCollections = currentUserCollections;
     }
 
-    private Photo mPhoto;
+    private List<Collection> mCurrentUserCollections;
 
     // Fast Adapter methods
     @Override
@@ -89,10 +89,17 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
             holder.coverPhoto.setImageResource(R.drawable.placeholder);
         }
 
-        if (getModel().privateX) holder.collectionPrivate.setVisibility(View.VISIBLE);
+        holder.collectionPrivate.setVisibility(View.INVISIBLE);
+        holder.collectionAdded.setVisibility(View.INVISIBLE);
 
-        for (Collection userCollection : mPhoto.current_user_collections) {
-            if (getModel().id == userCollection.id) holder.collectionAdded.setVisibility(View.VISIBLE);
+        if (getModel().privateX) {
+            holder.collectionPrivate.setVisibility(View.VISIBLE);
+        }
+
+        for (Collection userCollection : mCurrentUserCollections) {
+            if (getModel().id == userCollection.id) {
+                holder.collectionAdded.setVisibility(View.VISIBLE);
+            }
         }
 
         holder.collectionSize.setText((Resplash.getInstance().getResources().getString(R.string.photos, String.valueOf(getModel().total_photos))));
@@ -102,16 +109,11 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
     @Override
     public void unbindView(ViewHolder holder) {
         super.unbindView(holder);
-        holder.coverPhoto.setImageDrawable(null);
-        holder.collectionSize.setText(null);
-        holder.collectionName.setText(null);
-        holder.collectionPrivate.setImageDrawable(null);
-        holder.collectionAdded.setImageDrawable(null);
     }
 
     @NonNull
     @Override
-    public ViewHolder getViewHolder(View v) {
+    public ViewHolder getViewHolder(@NonNull View v) {
         return new ViewHolder(v);
     }
 
@@ -124,7 +126,7 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
         @BindView(R.id.item_collection_mini_private) ImageView collectionPrivate;
         @BindView(R.id.item_collection_mini_added) ImageView collectionAdded;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             this.view = view;

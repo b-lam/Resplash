@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:src="@drawable/ic_check_circle_white_18dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -97,7 +97,7 @@
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginEnd="24dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:indeterminate="true"
             android:indeterminateTintMode="src_atop"
             android:indeterminateTint="@color/white"

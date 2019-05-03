@@ -32,7 +32,9 @@
                     android:host="unsplash.com"
                     android:path="/"
                     android:scheme="https" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
@@ -52,9 +54,12 @@
             android:theme="@style/SplashActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.shortcuts"
+
+            <meta-data
+                android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
@@ -85,7 +90,7 @@
             android:theme="@style/ResplashTheme.Primary.Base.Light" />
         <activity
             android:name=".activities.LoginActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:theme="@style/ResplashTheme.Primary.Base.Light">
             <intent-filter>
                 <data
@@ -107,6 +112,7 @@
             android:theme="@style/ResplashTheme.Primary.Base.Light">
             <intent-filter>
                 <action android:name="CustomApiKeyActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -137,7 +143,6 @@
             android:exported="true"
             android:label="@string/auto_wallpaper_title"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name=".data.service.WallpaperQuickTileService"
             android:icon="@drawable/baseline_compare_black_24"
@@ -151,7 +156,6 @@
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIDEYkpmJmsiQ-I__T0lFHPG64bCYUXblnA0iBRQ" />
-
     </application>
 
 </manifest>

@@ -16,6 +16,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.model.Collection;
@@ -36,23 +42,19 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class CollectionDetailActivity extends BaseActivity {
+public class CollectionDetailActivity extends BaseActivity implements EditCollectionDialog.EditCollectionDialogListener {
 
     @BindView(R.id.fragment_collection_detail_recycler) RecyclerView mImageRecycler;
     @BindView(R.id.swipeContainerCollectionDetail) SwipeRefreshLayout mSwipeContainer;
     @BindView(R.id.fragment_collection_detail_progress) ProgressBar mImagesProgress;
     @BindView(R.id.http_error_view) ConstraintLayout mHttpErrorView;
     @BindView(R.id.network_error_view) ConstraintLayout mNetworkErrorView;
+    @BindView(R.id.no_results_view) ConstraintLayout mNoResultsView;
     @BindView(R.id.toolbar_collection_detail) Toolbar mToolbar;
     @BindView(R.id.tvCollectionDescription) TextView mCollectionDescription;
     @BindView(R.id.tvUserCollection) TextView mUserCollection;
@@ -67,7 +69,6 @@ public class CollectionDetailActivity extends BaseActivity {
     private List<Photo> mCurrentPhotos;
     private ItemAdapter mFooterAdapter;
     private int mPage, mColumns;
-    private PhotoService.OnRequestPhotosListener mPhotosRequestListener;
     private String mLayoutType;
     private PhotoService photoService;
     private SharedPreferences sharedPreferences;
@@ -94,14 +95,8 @@ public class CollectionDetailActivity extends BaseActivity {
 
         this.photoService = PhotoService.getService();
 
-        setTitle(mCollection.title);
-        if (mCollection.description != null){
-            mCollectionDescription.setText(mCollection.description);
-            mCollectionDescription.setVisibility(View.VISIBLE);
-        }else{
-            mCollectionDescription.setVisibility(View.GONE);
-        }
-        mUserCollection.setText(getString(R.string.by_author, mCollection.user.name));
+        setCollectionText(mCollection);
+
         Glide.with(getApplicationContext()).load(mCollection.user.profile_image.medium).into(mUserProfilePicture);
 
         mUserProfilePicture.setOnClickListener(userProfileOnClickListener);
@@ -110,10 +105,15 @@ public class CollectionDetailActivity extends BaseActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         mLayoutType = sharedPreferences.getString("item_layout", "List");
         mPage = 1;
-        if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
+
+        if (mLayoutType.equals("List") || mLayoutType.equals("Cards")) {
             mColumns = 1;
-        }else{
+        } else {
             mColumns = 2;
+        }
+
+        if (mCollection.total_photos == 0) {
+            mNoResultsView.setVisibility(View.VISIBLE);
         }
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, mColumns);
@@ -133,8 +133,8 @@ public class CollectionDetailActivity extends BaseActivity {
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
             public void onLoadMore(int currentPage) {
-                if(mPhotoAdapter.getItemCount() >= mCollection.total_photos){
-                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG).show();
+                if(mPhotoAdapter.getItemCount() >= mCollection.total_photos && mPage < 1){
+                    Toast.makeText(getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG).show();
                 }else {
                     mFooterAdapter.clear();
                     mFooterAdapter.add(new ProgressItem().withEnabled(false));
@@ -172,13 +172,26 @@ public class CollectionDetailActivity extends BaseActivity {
         }
     };
 
+    private void setCollectionText(Collection collection) {
+        setTitle(collection.title);
+
+        if (collection.description != null) {
+            mCollectionDescription.setText(collection.description);
+            mCollectionDescription.setVisibility(View.VISIBLE);
+        } else {
+            mCollectionDescription.setVisibility(View.GONE);
+        }
+
+        mUserCollection.setText(getString(R.string.by_author, collection.user.name));
+    }
+
     public void updateAdapter(List<Photo> photos) {
         mCurrentPhotos = photos;
         mPhotoAdapter.add(mCurrentPhotos);
     }
 
     public void loadMore(){
-        if(mPhotos == null){
+        if (mPhotos == null) {
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
             mHttpErrorView.setVisibility(View.GONE);
@@ -186,7 +199,7 @@ public class CollectionDetailActivity extends BaseActivity {
         }
 
 
-        mPhotosRequestListener = new PhotoService.OnRequestPhotosListener() {
+        PhotoService.OnRequestPhotosListener photosRequestListener = new PhotoService.OnRequestPhotosListener() {
             @Override
             public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
                 Log.d(TAG, String.valueOf(response.code()));
@@ -223,9 +236,9 @@ public class CollectionDetailActivity extends BaseActivity {
         };
 
         if (mCollection.curated) {
-            photoService.requestCuratedCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, mPhotosRequestListener);
+            photoService.requestCuratedCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, photosRequestListener);
         } else {
-            photoService.requestCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, mPhotosRequestListener);
+            photoService.requestCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, photosRequestListener);
         }
     }
 
@@ -262,9 +275,11 @@ public class CollectionDetailActivity extends BaseActivity {
             case R.id.action_edit:
                 if (AuthManager.getInstance().isAuthorized()) {
                     EditCollectionDialog editCollectionDialog = new EditCollectionDialog();
-                    editCollectionDialog.show(getFragmentManager(), null);
+                    editCollectionDialog.show(getSupportFragmentManager(), null);
+                    editCollectionDialog.setListener(this);
+                    editCollectionDialog.setCollection(mCollection);
                 } else {
-                    Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
                     startActivity(new Intent(this, LoginActivity.class));
                 }
                 return true;
@@ -292,7 +307,7 @@ public class CollectionDetailActivity extends BaseActivity {
     };
 
     private void shareTextUrl() {
-        if(mCollection != null) {
+        if (mCollection != null) {
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -302,5 +317,18 @@ public class CollectionDetailActivity extends BaseActivity {
 
             startActivity(Intent.createChooser(share, getString(R.string.share_via)));
         }
+    }
+
+    @Override
+    public void onCollectionUpdated(Collection collection) {
+        mCollection = collection;
+        setCollectionText(mCollection);
+        setResult(RESULT_OK);
+    }
+
+    @Override
+    public void onCollectionDeleted() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

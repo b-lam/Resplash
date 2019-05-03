@@ -33,6 +33,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
+
 import com.b_lam.resplash.BuildConfig;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
@@ -61,8 +65,6 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
@@ -74,7 +76,7 @@ import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.DOWNLOAD;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.WALLPAPER;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class DetailActivity extends BaseActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener{
+public class DetailActivity extends BaseActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener {
 
     public static final String DETAIL_ACTIVITY_PHOTO_ID_KEY = "DETAIL_ACTIVITY_PHOTO_ID_KEY";
 
@@ -88,7 +90,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
     private Drawable colorIcon;
     private @DownloadType int currentAction;
     private WallpaperDialog wallpaperDialog;
-    private List<Collection> mCurrentUserCollections;
 
     private long downloadReference;
 
@@ -184,8 +185,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                 if (mPhoto.color != null) colorIcon.setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.SRC_IN);
                 tvColor.setText(mPhoto.color);
                 tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhoto.downloads)));
-                mCurrentUserCollections = mPhoto.current_user_collections;
-                mInCollection = mCurrentUserCollections.size() > 0;
+                mInCollection = mPhoto.current_user_collections.size() > 0;
                 updateCollectionButton(mInCollection);
                 mPhotoLike = mPhoto.liked_by_user;
                 updateHeartButton(mPhotoLike);
@@ -479,39 +479,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         }
     };
 
-    public void likeImage(View view){
-        if(AuthManager.getInstance().isAuthorized()) {
-            mPhotoLike = !mPhotoLike;
-            mService.setLikeForAPhoto(mPhoto.id, mPhotoLike, mSetLikeListener);
-            updateHeartButton(mPhotoLike);
-        }else{
-            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-    }
-
-    public void updateHeartButton(boolean like){
-        btnLike.setImageResource(like ? R.drawable.ic_heart_red_24dp : R.drawable.ic_heart_outline_grey_24dp);
-    }
-
-    public void addToCollection(View view){
-        if (AuthManager.getInstance().isAuthorized()) {
-            ManageCollectionsDialog manageCollectionsDialog = new ManageCollectionsDialog();
-            manageCollectionsDialog.setPhoto(mPhoto);
-            manageCollectionsDialog.setListener(this);
-            manageCollectionsDialog.show(getFragmentManager(), null);
-        } else {
-            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-    }
-
-    public void updateCollectionButton(boolean inCollection) {
-        btnAddToCollection.setImageResource(inCollection ?
-                ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionSavedIcon) :
-                R.drawable.ic_bookmark_outline_grey_24dp);
-    }
-
     private void shareTextUrl() {
         if (mPhoto != null) {
             Intent share = new Intent(Intent.ACTION_SEND);
@@ -619,11 +586,43 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         }
     }
 
+    public void likeImage(View view){
+        if(AuthManager.getInstance().isAuthorized()) {
+            mPhotoLike = !mPhotoLike;
+            mService.setLikeForAPhoto(mPhoto.id, mPhotoLike, mSetLikeListener);
+            updateHeartButton(mPhotoLike);
+        }else{
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    public void updateHeartButton(boolean like){
+        btnLike.setImageResource(like ? R.drawable.ic_heart_red_24dp : R.drawable.ic_heart_outline_grey_24dp);
+    }
+
+    public void addToCollection(View view){
+        if (AuthManager.getInstance().isAuthorized()) {
+            ManageCollectionsDialog manageCollectionsDialog = new ManageCollectionsDialog();
+            manageCollectionsDialog.setPhoto(mPhoto);
+            manageCollectionsDialog.setListener(this);
+            manageCollectionsDialog.show(getSupportFragmentManager(), null);
+        } else {
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    public void updateCollectionButton(boolean inCollection) {
+        btnAddToCollection.setImageResource(inCollection ?
+                ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionSavedIcon) :
+                R.drawable.ic_bookmark_outline_grey_24dp);
+    }
+
     @Override
-    public void onCollectionUpdated(Photo photo) {
-        mPhoto = photo;
-        mCurrentUserCollections = mPhoto.current_user_collections;
-        mInCollection = mCurrentUserCollections.size() > 0;
+    public void onCollectionUpdated(@NonNull List<Collection> currentUserCollections) {
+        mPhoto.current_user_collections = currentUserCollections;
+        mInCollection = currentUserCollections.size() > 0;
         updateCollectionButton(mInCollection);
     }
 }

@@ -2,7 +2,6 @@ package com.b_lam.resplash.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,18 +10,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.adapters.ManageCollectionsDialogPagerAdapter;
+import com.b_lam.resplash.data.item.CollectionMiniItem;
 import com.b_lam.resplash.data.model.ChangeCollectionPhotoResult;
 import com.b_lam.resplash.data.model.Collection;
 import com.b_lam.resplash.data.model.Me;
 import com.b_lam.resplash.data.model.Photo;
-import com.b_lam.resplash.data.item.CollectionMiniItem;
 import com.b_lam.resplash.data.service.CollectionService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.views.NoSwipeViewPager;
@@ -35,11 +42,8 @@ import com.mikepenz.fastadapter.listeners.OnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,10 +61,9 @@ public class ManageCollectionsDialog extends DialogFragment implements
     private CollectionService mService;
     private FastItemAdapter<CollectionMiniItem> mCollectionAdapter;
     private ItemAdapter mFooterAdapter;
-    private List<CollectionMiniItem> mCollections;
+    private List<Collection> mCurrentUserCollections;
     private Photo mPhoto;
     private Me mCurrentUser;
-    private CollectionService.OnRequestCollectionsListener mCollectionRequestListener;
     private ManageCollectionsDialogListener mManageCollectionsDialogListener;
     private int mPage = 1;
 
@@ -72,10 +75,15 @@ public class ManageCollectionsDialog extends DialogFragment implements
     @BindView(R.id.create_collection_name) TextInputEditText mNameEditText;
     @BindView(R.id.create_collection_description) TextInputEditText mDescriptionEditText;
     @BindView(R.id.create_collection_make_private_checkbox) CheckBox mMakePrivateCheckBox;
+    @BindView(R.id.create_collection_create_button) Button mCreateCollectionButton;
+    @BindView(R.id.create_collection_cancel_button) Button mCancelCollectionButton;
     @BindView(R.id.no_results_view) ConstraintLayout mNoResultsView;
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        setRetainInstance(true);
+
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_manage_collections, null, false);
         ButterKnife.bind(this, view);
 
@@ -116,9 +124,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
 
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -128,9 +134,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) { }
         });
 
         init();
@@ -161,21 +165,30 @@ public class ManageCollectionsDialog extends DialogFragment implements
 
     @OnClick(R.id.create_collection_create_button)
     public void createCollection() {
-        if (!mNameEditText.getText().toString().isEmpty()) {
+        if (mNameEditText.getText() != null && !mNameEditText.getText().toString().isEmpty()) {
             mNameTextInputLayout.setError(null);
+            mCreateCollectionButton.setEnabled(false);
+            mCancelCollectionButton.setEnabled(false);
             mService.createCollection(mNameEditText.getText().toString(),
-                    mDescriptionEditText.getText().toString(),
+                    (mDescriptionEditText.getText() == null) ? "" : mDescriptionEditText.getText().toString(),
                     mMakePrivateCheckBox.isChecked(),
                     new CollectionService.OnRequestACollectionListener() {
                         @Override
                         public void onRequestACollectionSuccess(Call<Collection> call, Response<Collection> response) {
-                            // TODO: Add collection to list and update adapter
+                            insertCollection(response.body());
+                            mNameEditText.setText("");
+                            mDescriptionEditText.setText("");
+                            mMakePrivateCheckBox.setChecked(false);
+                            mCreateCollectionButton.setEnabled(true);
+                            mCancelCollectionButton.setEnabled(true);
                             mViewPager.setCurrentItem(ADD_TO_COLLECTION_ID);
                             hideKeyboard();
                         }
 
                         @Override
                         public void onRequestACollectionFailed(Call<Collection> call, Throwable t) {
+                            mCreateCollectionButton.setEnabled(true);
+                            mCancelCollectionButton.setEnabled(true);
                             Toast.makeText(getActivity(), R.string.failed_to_create_collection, Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -186,34 +199,54 @@ public class ManageCollectionsDialog extends DialogFragment implements
 
     private OnClickListener<CollectionMiniItem> mOnCollectionClickListener = new OnClickListener<CollectionMiniItem>(){
         @Override
-        public boolean onClick(View v, IAdapter<CollectionMiniItem> adapter, CollectionMiniItem collection, int position) {
+        public boolean onClick(View v, @NonNull IAdapter<CollectionMiniItem> adapter, @NonNull CollectionMiniItem collection, int position) {
             if (mPhoto != null) {
                 final ProgressBar addProgress = v.findViewById(R.id.item_collection_mini_progress);
-                final CollectionService.OnChangeCollectionPhotoListener onChangeCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
+                final CollectionService.OnChangeCollectionPhotoListener onDeleteCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
                     @Override
                     public void onChangePhotoSuccess(Call<ChangeCollectionPhotoResult> call, Response<ChangeCollectionPhotoResult> response) {
-                        addProgress.setVisibility(View.GONE);
-                        Log.d(TAG, String.valueOf(response.code()));
+                        addProgress.setVisibility(View.INVISIBLE);
                         if (response.isSuccessful() && response.body() != null) {
-                            setPhoto(response.body().photo);
-                            updateCollectionAtPosition(position, response.body().collection, response.body().photo);
-                            mManageCollectionsDialogListener.onCollectionUpdated(response.body().photo);
+                            ListIterator<Collection> iterator = mCurrentUserCollections.listIterator();
+                            while (iterator.hasNext()) {
+                                if (iterator.next().id == response.body().collection.id) {
+                                    iterator.remove();
+                                }
+                            }
+                            updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
+                            mManageCollectionsDialogListener.onCollectionUpdated(mCurrentUserCollections);
                         }
                     }
 
                     @Override
                     public void onChangePhotoFailed(Call<ChangeCollectionPhotoResult> call, Throwable t) {
-                        Log.d(TAG, t.toString());
-                        addProgress.setVisibility(View.GONE);
+                        addProgress.setVisibility(View.INVISIBLE);
+                    }
+                };
+
+                final CollectionService.OnChangeCollectionPhotoListener onAddCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
+                    @Override
+                    public void onChangePhotoSuccess(Call<ChangeCollectionPhotoResult> call, Response<ChangeCollectionPhotoResult> response) {
+                        addProgress.setVisibility(View.INVISIBLE);
+                        if (response.isSuccessful() && response.body() != null) {
+                            mCurrentUserCollections.add(response.body().collection);
+                            updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
+                            mManageCollectionsDialogListener.onCollectionUpdated(mCurrentUserCollections);
+                        }
+                    }
+
+                    @Override
+                    public void onChangePhotoFailed(Call<ChangeCollectionPhotoResult> call, Throwable t) {
+                        addProgress.setVisibility(View.INVISIBLE);
                     }
                 };
 
                 addProgress.setVisibility(View.VISIBLE);
 
                 if (isPhotoInCollection(mPhoto, collection.getModel())) {
-                    mService.deletePhotoFromCollection(collection.getModel().id, mPhoto.id, onChangeCollectionPhotoListener);
+                    mService.deletePhotoFromCollection(collection.getModel().id, mPhoto.id, onDeleteCollectionPhotoListener);
                 } else {
-                    mService.addPhotoToCollection(collection.getModel().id, mPhoto.id, onChangeCollectionPhotoListener);
+                    mService.addPhotoToCollection(collection.getModel().id, mPhoto.id, onAddCollectionPhotoListener);
                 }
             }
 
@@ -223,6 +256,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
 
     public void setPhoto(Photo photo) {
         mPhoto = photo;
+        mCurrentUserCollections = photo.current_user_collections;
     }
 
     public void setListener(ManageCollectionsDialogListener manageCollectionsDialogListener) {
@@ -247,13 +281,15 @@ public class ManageCollectionsDialog extends DialogFragment implements
     private void requestCollections() {
         mService.cancel();
 
-        mCollectionRequestListener = new CollectionService.OnRequestCollectionsListener() {
+        mService.requestUserCollections(mCurrentUser, mPage, Resplash.DEFAULT_PER_PAGE, new CollectionService.OnRequestCollectionsListener() {
             @Override
             public void onRequestCollectionsSuccess(Call<List<Collection>> call, Response<List<Collection>> response) {
                 Log.d(TAG, String.valueOf(response.code()));
                 if (response.code() == 200) {
                     mCollectionAdapter.clear();
-                    initAdapter(response.body());
+                    if (response.body() != null) {
+                        initAdapter(response.body());
+                    }
                     mPage++;
                 }
             }
@@ -262,21 +298,19 @@ public class ManageCollectionsDialog extends DialogFragment implements
             public void onRequestCollectionsFailed(Call<List<Collection>> call, Throwable t) {
                 Log.d(TAG, t.toString());
             }
-        };
-
-        mService.requestUserCollections(mCurrentUser, mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        });
     }
 
-    public void initAdapter(List<Collection> collections) {
+    private void initAdapter(List<Collection> collections) {
         mProgressBar.setVisibility(View.GONE);
 
-        mCollections = new ArrayList<>();
+        List<CollectionMiniItem> allUserCollections = new ArrayList<>();
 
         for (Collection collection : collections) {
-            mCollections.add(new CollectionMiniItem(collection, mPhoto));
+            allUserCollections.add(new CollectionMiniItem(collection, mCurrentUserCollections));
         }
 
-        mCollectionAdapter.set(mCollections);
+        mCollectionAdapter.set(allUserCollections);
 
         if (mCollectionAdapter.getAdapterItemCount() > 0) {
             mSwipeRefreshLayout.setVisibility(View.VISIBLE);
@@ -285,16 +319,23 @@ public class ManageCollectionsDialog extends DialogFragment implements
         }
     }
 
-    private void updateCollectionAtPosition(int position, Collection collection, Photo photo) {
-        mCollections.set(position, new CollectionMiniItem(collection, photo));
+    private void insertCollection(Collection collection) {
+        mCollectionAdapter.add(0, new CollectionMiniItem(collection, mCurrentUserCollections));
+        mRecyclerView.smoothScrollToPosition(0);
+    }
+
+    private void updateCollectionAtPosition(int position, Collection collection, List<Collection> currentUserCollections) {
+        mCollectionAdapter.set(position, new CollectionMiniItem(collection, currentUserCollections));
         mCollectionAdapter.notifyAdapterItemChanged(position);
     }
 
     private void hideKeyboard() {
-        View view = getDialog().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) getDialog().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        if (getDialog() != null) {
+            View view = getDialog().getCurrentFocus();
+            if (view != null) {
+                InputMethodManager inputManager = (InputMethodManager) getDialog().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         }
     }
 
@@ -323,6 +364,6 @@ public class ManageCollectionsDialog extends DialogFragment implements
     }
 
     public interface ManageCollectionsDialogListener {
-        void onCollectionUpdated(Photo photo);
+        void onCollectionUpdated(List<Collection> currentUserCollections);
     }
 }
