@@ -39,6 +39,8 @@ import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
+import com.mikepenz.fastadapter_extensions.items.ProgressItem;
+import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,23 +106,22 @@ public class ManageCollectionsDialog extends DialogFragment implements
         mRecyclerView.setItemViewCacheSize(5);
 
         mCollectionAdapter = new FastItemAdapter<>();
+        mFooterAdapter = new ItemAdapter<>();
+
+        mCollectionAdapter.addAdapter(1, mFooterAdapter);
 
         mCollectionAdapter.withOnClickListener(mOnCollectionClickListener);
 
-        mFooterAdapter = new ItemAdapter();
-
-//        mCollectionAdapter.addAdapter(1, mFooterAdapter);
-
         mRecyclerView.setAdapter(mCollectionAdapter);
 
-//        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
-//            @Override
-//            public void onLoadMore(int currentPage) {
-//                mFooterAdapter.clear();
-//                mFooterAdapter.add(new ProgressItem().withEnabled(false));
-//                requestCollections();
-//            }
-//        });
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                mFooterAdapter.clear();
+                mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                requestCollections();
+            }
+        });
 
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -285,11 +286,9 @@ public class ManageCollectionsDialog extends DialogFragment implements
             @Override
             public void onRequestCollectionsSuccess(Call<List<Collection>> call, Response<List<Collection>> response) {
                 Log.d(TAG, String.valueOf(response.code()));
-                if (response.code() == 200) {
-                    mCollectionAdapter.clear();
-                    if (response.body() != null) {
-                        initAdapter(response.body());
-                    }
+                if (response.code() == 200 && response.body() != null) {
+                    mFooterAdapter.clear();
+                    updateAdapter(response.body());
                     mPage++;
                 }
             }
@@ -301,16 +300,16 @@ public class ManageCollectionsDialog extends DialogFragment implements
         });
     }
 
-    private void initAdapter(List<Collection> collections) {
+    private void updateAdapter(List<Collection> collections) {
         mProgressBar.setVisibility(View.GONE);
 
-        List<CollectionMiniItem> allUserCollections = new ArrayList<>();
+        List<CollectionMiniItem> userCollections = new ArrayList<>();
 
         for (Collection collection : collections) {
-            allUserCollections.add(new CollectionMiniItem(collection, mCurrentUserCollections));
+            userCollections.add(new CollectionMiniItem(collection, mCurrentUserCollections));
         }
 
-        mCollectionAdapter.set(allUserCollections);
+        mCollectionAdapter.add(userCollections);
 
         if (mCollectionAdapter.getAdapterItemCount() > 0) {
             mSwipeRefreshLayout.setVisibility(View.VISIBLE);
