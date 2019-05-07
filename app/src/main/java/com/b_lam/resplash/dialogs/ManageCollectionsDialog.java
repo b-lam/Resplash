@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
@@ -42,6 +43,8 @@ import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter_extensions.items.ProgressItem;
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -59,6 +62,13 @@ public class ManageCollectionsDialog extends DialogFragment implements
 
     private static final int ADD_TO_COLLECTION_ID = 0;
     private static final int CREATE_COLLECTION_ID = 1;
+
+    @IntDef({CollectionUpdateType.ADD, CollectionUpdateType.DELETE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface CollectionUpdateType {
+        int ADD = 0;
+        int DELETE = 1;
+    }
 
     private CollectionService mService;
     private FastItemAdapter<CollectionMiniItem> mCollectionAdapter;
@@ -183,6 +193,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
                             mCreateCollectionButton.setEnabled(true);
                             mCancelCollectionButton.setEnabled(true);
                             mViewPager.setCurrentItem(ADD_TO_COLLECTION_ID);
+                            mManageCollectionsDialogListener.onCollectionCreated(response.body());
                             hideKeyboard();
                         }
 
@@ -215,7 +226,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
                                 }
                             }
                             updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
-                            mManageCollectionsDialogListener.onCollectionUpdated(mCurrentUserCollections);
+                            mManageCollectionsDialogListener.onCollectionUpdated(CollectionUpdateType.DELETE, response.body().collection, mCurrentUserCollections);
                         }
                     }
 
@@ -232,7 +243,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
                         if (response.isSuccessful() && response.body() != null) {
                             mCurrentUserCollections.add(response.body().collection);
                             updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
-                            mManageCollectionsDialogListener.onCollectionUpdated(mCurrentUserCollections);
+                            mManageCollectionsDialogListener.onCollectionUpdated(CollectionUpdateType.ADD, response.body().collection, mCurrentUserCollections);
                         }
                     }
 
@@ -363,6 +374,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
     }
 
     public interface ManageCollectionsDialogListener {
-        void onCollectionUpdated(List<Collection> currentUserCollections);
+        void onCollectionUpdated(@CollectionUpdateType int updateType, Collection collection, List<Collection> currentUserCollections);
+        void onCollectionCreated(Collection collection);
     }
 }

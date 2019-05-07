@@ -61,19 +61,21 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
     @BindView(R.id.imgProfileCollection) CircleImageView mUserProfilePicture;
 
     public final static String USER_COLLECTION_FLAG = "USER_COLLECTION_FLAG";
+    public final static String COLLECTION_DETAIL_ID_FLAG = "COLLECTION_DETAIL_ID_FLAG";
+    public final static String PHOTO_REMOVED_FLAG = "PHOTO_REMOVED_FLAG";
+    public final static int COLLECTION_DETAIL_REQUEST_FLAG = 24503;
 
     private final static String TAG = "CollectionDetails";
     private Collection mCollection;
     private FastItemAdapter<Photo> mPhotoAdapter;
     private List<Photo> mPhotos;
-    private List<Photo> mCurrentPhotos;
     private ItemAdapter mFooterAdapter;
-    private int mPage, mColumns;
-    private String mLayoutType;
+    private int mPage;
     private PhotoService photoService;
     private SharedPreferences sharedPreferences;
     private MenuItem mEditButton;
-    private boolean mIsUserCollection;
+    private boolean mIsUserCollection = false;
+    private int mClickedPhotoPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +97,7 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
 
         this.photoService = PhotoService.getService();
 
-        setCollectionText(mCollection);
+        setCollection(mCollection);
 
         Glide.with(getApplicationContext()).load(mCollection.user.profile_image.medium).into(mUserProfilePicture);
 
@@ -103,20 +105,13 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
         mUserCollection.setOnClickListener(userProfileOnClickListener);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
-        mLayoutType = sharedPreferences.getString("item_layout", "List");
+
+        String layoutType = sharedPreferences.getString("item_layout", "List");
+        int columns = layoutType.equals("List") || layoutType.equals("Cards") ? 1 : 2;
+
         mPage = 1;
 
-        if (mLayoutType.equals("List") || mLayoutType.equals("Cards")) {
-            mColumns = 1;
-        } else {
-            mColumns = 2;
-        }
-
-        if (mCollection.total_photos == 0) {
-            mNoResultsView.setVisibility(View.VISIBLE);
-        }
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, mColumns);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, columns);
         mImageRecycler.setLayoutManager(gridLayoutManager);
         mImageRecycler.setOnTouchListener((v, event) -> false);
 
@@ -133,9 +128,9 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
             public void onLoadMore(int currentPage) {
-                if(mPhotoAdapter.getItemCount() >= mCollection.total_photos && mPage < 1){
+                if (mPhotoAdapter.getItemCount() >= mCollection.total_photos && mPage > 2) {
                     Toast.makeText(getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     mFooterAdapter.clear();
                     mFooterAdapter.add(new ProgressItem().withEnabled(false));
                     loadMore();
@@ -143,7 +138,10 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
             }
         });
 
-        mSwipeContainer.setOnRefreshListener(this::loadMore);
+        mSwipeContainer.setOnRefreshListener(() -> {
+            mPage = 1;
+            loadMore();
+        });
 
         loadMore();
     }
@@ -151,31 +149,34 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
     private OnClickListener<Photo> onClickListener = new OnClickListener<Photo>(){
         @Override
         public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
+            mClickedPhotoPosition = position;
             Intent i = new Intent(getApplicationContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
+            i.putExtra(COLLECTION_DETAIL_ID_FLAG, mCollection.id);
             String layout = sharedPreferences.getString("item_layout", "List");
 
-            ImageView imageView;
+            if (layout.equals("Cards")) {
+                ImageView imageView = v.findViewById(R.id.item_image_card_img);
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
+            } else if (layout.equals("List")){
+                ImageView imageView = v.findViewById(R.id.item_image_img);
+                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
+            }
 
-            if (sharedPreferences.getString("item_layout", "List").equals("Grid")) {
-                startActivity(i);
-            } else if (layout.equals("Cards")) {
-                imageView = v.findViewById(R.id.item_image_card_img);
-                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
-                startActivity(i);
+            if (mIsUserCollection) {
+                startActivityForResult(i, COLLECTION_DETAIL_REQUEST_FLAG);
             } else {
-                imageView = v.findViewById(R.id.item_image_img);
-                if (imageView.getDrawable() != null) Resplash.getInstance().setDrawable(imageView.getDrawable());
                 startActivity(i);
             }
+
             return false;
         }
     };
 
-    private void setCollectionText(Collection collection) {
+    private void setCollection(Collection collection) {
         setTitle(collection.title);
 
-        if (collection.description != null) {
+        if (collection.description != null && !collection.description.isEmpty()) {
             mCollectionDescription.setText(collection.description);
             mCollectionDescription.setVisibility(View.VISIBLE);
         } else {
@@ -186,8 +187,7 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
     }
 
     public void updateAdapter(List<Photo> photos) {
-        mCurrentPhotos = photos;
-        mPhotoAdapter.add(mCurrentPhotos);
+        mPhotoAdapter.add(photos);
     }
 
     public void loadMore(){
@@ -198,7 +198,6 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
             mNetworkErrorView.setVisibility(View.GONE);
         }
 
-
         PhotoService.OnRequestPhotosListener photosRequestListener = new PhotoService.OnRequestPhotosListener() {
             @Override
             public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
@@ -206,7 +205,7 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
                 if (response.code() == 200) {
                     mPhotos = response.body();
                     mFooterAdapter.clear();
-                    CollectionDetailActivity.this.updateAdapter(mPhotos);
+                    updateAdapter(mPhotos);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
                     mImageRecycler.setVisibility(View.VISIBLE);
@@ -235,10 +234,30 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
             }
         };
 
-        if (mCollection.curated) {
+        if (mCollection.total_photos == 0) {
+            mNoResultsView.setVisibility(View.VISIBLE);
+            mSwipeContainer.setEnabled(false);
+        } else if (mCollection.curated) {
             photoService.requestCuratedCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, photosRequestListener);
         } else {
             photoService.requestCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, photosRequestListener);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == COLLECTION_DETAIL_REQUEST_FLAG) {
+                if (data.getBooleanExtra(PHOTO_REMOVED_FLAG, false)) {
+                    mPhotoAdapter.remove(mClickedPhotoPosition);
+                    if (mPhotoAdapter.getAdapterItemCount() == 0) {
+                        mNoResultsView.setVisibility(View.VISIBLE);
+                        mSwipeContainer.setEnabled(false);
+                    }
+                }
+            }
+            setResult(RESULT_OK);
         }
     }
 
@@ -322,7 +341,7 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
     @Override
     public void onCollectionUpdated(Collection collection) {
         mCollection = collection;
-        setCollectionText(mCollection);
+        setCollection(mCollection);
         setResult(RESULT_OK);
     }
 

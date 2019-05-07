@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -72,7 +73,7 @@ public class UserCollectionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         setRetainInstance(true);
 
@@ -133,7 +134,7 @@ public class UserCollectionFragment extends Fragment {
     };
 
     public void updateAdapter(List<Collection> collections) {
-        for (Collection collection: collections) {
+        for (Collection collection : collections) {
             mCollectionAdapter.add(new CollectionItem(collection));
         }
     }
@@ -154,7 +155,7 @@ public class UserCollectionFragment extends Fragment {
                     if (response.code() == 200) {
                         mCollections = response.body();
                         mFooterAdapter.clear();
-                        UserCollectionFragment.this.updateAdapter(mCollections);
+                        updateAdapter(mCollections);
                         mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.VISIBLE);
@@ -193,8 +194,8 @@ public class UserCollectionFragment extends Fragment {
         }
     }
 
-    public void fetchNew(){
-        if(mCollections == null){
+    private void fetchNew(){
+        if (mCollections == null) {
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
             mHttpErrorView.setVisibility(View.GONE);
@@ -211,7 +212,7 @@ public class UserCollectionFragment extends Fragment {
                     if (response.code() == 200) {
                         mCollections = response.body();
                         mCollectionAdapter.clear();
-                        UserCollectionFragment.this.updateAdapter(mCollections);
+                        updateAdapter(mCollections);
                         mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.VISIBLE);

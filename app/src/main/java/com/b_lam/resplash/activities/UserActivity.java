@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -182,6 +183,22 @@ public class UserActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("position", mTabLayout.getSelectedTabPosition());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mViewPager.setCurrentItem(savedInstanceState.getInt("position"));
+    }
+
+    public User getUser() {
+        return mUser;
+    }
+
     public void setTabTitle(int position, String title) {
         mPagerAdapter.setPageTitle(position, title);
     }
@@ -191,7 +208,7 @@ public class UserActivity extends BaseActivity {
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentTitleList = new ArrayList<>();
 
-        public PagerAdapter(FragmentManager fm) {
+        PagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -205,6 +222,7 @@ public class UserActivity extends BaseActivity {
             fragmentTitleList.add(title);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return fragmentList.get(position);

@@ -7,12 +7,11 @@ import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.preference.PreferenceManager;
+
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
-import androidx.annotation.IntDef;
 import androidx.annotation.StringDef;
 
 import com.b_lam.resplash.R;
@@ -62,14 +61,12 @@ public class ThemeUtils {
     }
 
     public static void setRecentAppsHeaderColor(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Bitmap icon = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.ic_launcher);
-            ActivityManager.TaskDescription taskDescription
-                    = new ActivityManager.TaskDescription(
-                    activity.getString(R.string.app_name),
-                    icon, getThemeAttrColor(activity, R.attr.colorPrimary));
-            activity.setTaskDescription(taskDescription);
-            if (icon != null) icon.recycle();
-        }
+        Bitmap icon = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.ic_launcher);
+        ActivityManager.TaskDescription taskDescription
+                = new ActivityManager.TaskDescription(
+                activity.getString(R.string.app_name),
+                icon, getThemeAttrColor(activity, R.attr.colorPrimary));
+        activity.setTaskDescription(taskDescription);
+        if (icon != null) icon.recycle();
     }
 }

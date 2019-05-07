@@ -15,6 +15,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.tools.AuthManager;
@@ -45,12 +53,6 @@ import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -406,7 +408,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("position", mTabLayout.getSelectedTabPosition());
     }
@@ -422,7 +424,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentTitleList = new ArrayList<>();
 
-        public PagerAdapter(FragmentManager fm) {
+        PagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -436,6 +438,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             fragmentTitleList.add(title);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return fragmentList.get(position);

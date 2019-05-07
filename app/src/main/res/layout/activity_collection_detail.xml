@@ -36,6 +36,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/collection_detail_user_profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

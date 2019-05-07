@@ -2,26 +2,30 @@ package com.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.DetailActivity;
+import com.b_lam.resplash.activities.UserActivity;
 import com.b_lam.resplash.data.model.Photo;
 import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.service.PhotoService;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
@@ -30,17 +34,18 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class UserLikesFragment extends Fragment {
 
-    private String TAG = "UserLikesFragment";
+    public static final int USER_LIKES_UPDATE_CODE = 9279;
+    public final static String PHOTO_UNLIKE_FLAG = "PHOTO_REMOVED_FLAG";
+
+    private final String TAG = "UserLikesFragment";
+
     private PhotoService mService;
     private FastItemAdapter<Photo> mPhotoAdapter;
     private List<Photo> mPhotos;
@@ -53,7 +58,7 @@ public class UserLikesFragment extends Fragment {
     private int mPage, mColumns;
     private String mSort;
     private User mUser;
-    private SharedPreferences sharedPreferences;
+    private int mClickedPhotoPosition;
 
     public UserLikesFragment() {
     }
@@ -73,7 +78,7 @@ public class UserLikesFragment extends Fragment {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
         String mLayoutType = sharedPreferences.getString("item_layout", "List");
         mSort = getArguments().getString("sort", "latest");
         if(mLayoutType.equals("List") || mLayoutType.equals("Cards")){
@@ -86,7 +91,7 @@ public class UserLikesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         setRetainInstance(true);
 
@@ -101,12 +106,7 @@ public class UserLikesFragment extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), mColumns);
         mImageRecycler.setLayoutManager(gridLayoutManager);
-        mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
+        mImageRecycler.setOnTouchListener((v, event) -> false);
         mImageRecycler.setItemViewCacheSize(5);
         mPhotoAdapter = new FastItemAdapter<>();
 
@@ -127,12 +127,7 @@ public class UserLikesFragment extends Fragment {
             }
         });
 
-        mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchNew();
-            }
-        });
+        mSwipeContainer.setOnRefreshListener(this::fetchNew);
 
         fetchNew();
         return rootView;
@@ -146,36 +141,29 @@ public class UserLikesFragment extends Fragment {
         }
     }
 
-    private OnClickListener<Photo> onClickListener = new OnClickListener<Photo>(){
-        @Override
-        public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
-            Intent i = new Intent(getContext(), DetailActivity.class);
-            i.putExtra("Photo", new Gson().toJson(item));
-
-            String layout = sharedPreferences.getString("item_layout", "List");
-
-            ImageView imageView;
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || sharedPreferences.getString("item_layout", "List").equals("Grid")) {
-                startActivity(i);
-            } else if (layout.equals("Cards")) {
-                imageView = (ImageView) v.findViewById(R.id.item_image_card_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
-                startActivity(i);
-            } else {
-                imageView = (ImageView) v.findViewById(R.id.item_image_img);
-                if (imageView.getDrawable() != null)
-                    Resplash.getInstance().setDrawable(imageView.getDrawable());
-//                v.setTransitionName("photoScale");
-//                Pair<View, String> p1 = Pair.create(v, v.getTransitionName());
-//                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1);
-//                startActivity(i, options.toBundle());
-                startActivity(i);
-            }
-            return false;
-        }
+    private OnClickListener<Photo> onClickListener = (v, adapter, item, position) -> {
+        mClickedPhotoPosition = position;
+        Intent i = new Intent(getContext(), DetailActivity.class);
+        i.putExtra("Photo", new Gson().toJson(item));
+        startActivityForResult(i, USER_LIKES_UPDATE_CODE);
+        return false;
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == USER_LIKES_UPDATE_CODE) {
+                if (data.getBooleanExtra(PHOTO_UNLIKE_FLAG, false)) {
+                    mPhotoAdapter.remove(mClickedPhotoPosition);
+                    if (getActivity() instanceof UserActivity) {
+                        ((UserActivity) getActivity()).getUser().total_likes--;
+                        ((UserActivity) getActivity()).setTabTitle(1, getString(R.string.likes, String.valueOf(((UserActivity) getActivity()).getUser().total_likes)));
+                    }
+                }
+            }
+        }
+    }
 
     public void updateAdapter(List<Photo> photos) {
         mPhotoAdapter.add(photos);
@@ -237,7 +225,7 @@ public class UserLikesFragment extends Fragment {
         }
     }
 
-    public void fetchNew(){
+    private void fetchNew(){
         if(mPhotos == null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);

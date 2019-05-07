@@ -77,7 +77,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:gravity="center_vertical"
-                            android:drawableStart="?attr/locationIcon"
+                            android:drawableStart="?attr/locationSmallIcon"
                             android:drawablePadding="10dp"
                             android:layout_marginBottom="5dp"
                             android:visibility="visible"/>
@@ -89,7 +89,7 @@
                             android:layout_gravity="center_vertical"
                             android:textColorLink="?attr/primaryTextColor"
                             android:gravity="center_vertical"
-                            android:drawableStart="?attr/browserIcon"
+                            android:drawableStart="?attr/browserSmallIcon"
                             android:drawablePadding="10dp"
                             android:autoLink="web"
                             android:clickable="true"
