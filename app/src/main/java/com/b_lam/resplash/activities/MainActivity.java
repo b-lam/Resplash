@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.viewpager) ViewPager mViewPager;
     @BindView(R.id.tabs) TabLayout mTabLayout;
-    @BindView(R.id.fab_upload) FloatingActionButton fabUpload;
+    @BindView(R.id.fab_upload) FloatingActionButton mFabUpload;
 
     private String TAG = "MainActivity";
     public Drawer drawer = null;
@@ -206,7 +206,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             }
         });
 
-        fabUpload.setOnClickListener(view -> {
+        mFabUpload.setOnClickListener(view -> {
             try {
                 Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -216,6 +216,26 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                     Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        });
+
+        mToolbar.setOnClickListener(v -> {
+            switch (mViewPager.getCurrentItem()) {
+                case 0:
+                    if (mPagerAdapter.getFragment(0) instanceof NewFragment) {
+                        ((NewFragment) mPagerAdapter.getFragment(0)).scrollToTop();
+                    }
+                    break;
+                case 1:
+                    if (mPagerAdapter.getFragment(1) instanceof FeaturedFragment) {
+                        ((FeaturedFragment) mPagerAdapter.getFragment(1)).scrollToTop();
+                    }
+                    break;
+                case 2:
+                    if (mPagerAdapter.getFragment(2) instanceof CollectionFragment) {
+                        ((CollectionFragment) mPagerAdapter.getFragment(2)).scrollToTop();
+                    }
+                    break;
             }
         });
     }
@@ -403,10 +423,6 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         }
     }
 
-    private void loadPreferences(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    }
-
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -438,6 +454,10 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             fragmentTitleList.add(title);
         }
 
+        public Fragment getFragment(int position) {
+            return fragmentList.get(position);
+        }
+
         @NonNull
         @Override
         public Fragment getItem(int position) {
@@ -466,14 +486,10 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     }
 
     @Override
-    public void onWriteAccessToken() {
-
-    }
+    public void onWriteAccessToken() { }
 
     @Override
-    public void onWriteUserInfo() {
-
-    }
+    public void onWriteUserInfo() { }
 
     @Override
     public void onWriteAvatarPath() {
@@ -481,7 +497,5 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     }
 
     @Override
-    public void onLogout() {
-
-    }
+    public void onLogout() { }
 }

@@ -43,6 +43,8 @@ import static android.app.Activity.RESULT_OK;
 public class UserCollectionFragment extends Fragment {
 
     public static final int USER_COLLECTION_UPDATE_CODE = 8134;
+    public final static String COLLECTION_UPDATED_FLAG = "COLLECTION_UPDATED_FLAG";
+    public final static String COLLECTION_DELETED_FLAG = "COLLECTION_DELETED_FLAG";
 
     private final String TAG = "CollectionFragment";
 
@@ -57,6 +59,7 @@ public class UserCollectionFragment extends Fragment {
     private ItemAdapter mFooterAdapter;
     private int mPage;
     private User mUser;
+    private int mClickedCollectionPosition;
 
     public UserCollectionFragment() { }
 
@@ -103,9 +106,11 @@ public class UserCollectionFragment extends Fragment {
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
             public void onLoadMore(int currentPage) {
-                mFooterAdapter.clear();
-                mFooterAdapter.add(new ProgressItem().withEnabled(false));
-                loadMore();
+                mImageRecycler.post(() -> {
+                    mFooterAdapter.clear();
+                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                    loadMore();
+                });
             }
         });
 
@@ -124,6 +129,7 @@ public class UserCollectionFragment extends Fragment {
     }
 
     private OnClickListener<CollectionItem> onClickListener = (v, adapter, item, position) -> {
+        mClickedCollectionPosition = position;
         Intent i = new Intent(getContext(), CollectionDetailActivity.class);
         i.putExtra("Collection", new Gson().toJson(item.getModel()));
         if (mUser.id.equals(AuthManager.getInstance().getID())) {
@@ -218,11 +224,6 @@ public class UserCollectionFragment extends Fragment {
                         mImageRecycler.setVisibility(View.VISIBLE);
                         mHttpErrorView.setVisibility(View.GONE);
                         mNetworkErrorView.setVisibility(View.GONE);
-
-                        if (getActivity() instanceof UserActivity) {
-                            ((UserActivity) getActivity()).setTabTitle(2, mCollections.size() + " " + getString(R.string.main_collections));
-                        }
-
                     } else {
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.GONE);
@@ -269,7 +270,16 @@ public class UserCollectionFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == USER_COLLECTION_UPDATE_CODE) {
             if (resultCode == RESULT_OK) {
-                fetchNew();
+                if (data.getBooleanExtra(COLLECTION_DELETED_FLAG, false)) {
+                    mCollectionAdapter.remove(mClickedCollectionPosition);
+                    if (getActivity() instanceof UserActivity) {
+                        ((UserActivity) getActivity()).getUser().total_collections--;
+                        ((UserActivity) getActivity()).setTabTitle(2, ((UserActivity) getActivity()).getUser().total_collections + " " + getString(R.string.main_collections));
+                    }
+                }
+                if (data.getBooleanExtra(COLLECTION_UPDATED_FLAG, false)) {
+                    fetchNew();
+                }
             }
         }
     }

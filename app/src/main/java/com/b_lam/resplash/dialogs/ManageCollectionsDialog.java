@@ -193,7 +193,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
                             mCreateCollectionButton.setEnabled(true);
                             mCancelCollectionButton.setEnabled(true);
                             mViewPager.setCurrentItem(ADD_TO_COLLECTION_ID);
-                            mManageCollectionsDialogListener.onCollectionCreated(response.body());
+                            mManageCollectionsDialogListener.onCollectionCreated();
                             hideKeyboard();
                         }
 
@@ -375,6 +375,6 @@ public class ManageCollectionsDialog extends DialogFragment implements
 
     public interface ManageCollectionsDialogListener {
         void onCollectionUpdated(@CollectionUpdateType int updateType, Collection collection, List<Collection> currentUserCollections);
-        void onCollectionCreated(Collection collection);
+        void onCollectionCreated();
     }
 }

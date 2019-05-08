@@ -92,6 +92,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
     private Drawable colorIcon;
     private @DownloadType int currentAction;
     private WallpaperDialog wallpaperDialog;
+    private Intent mReturnIntent;
 
     private long downloadReference;
 
@@ -251,6 +252,8 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         mComingFromCollectionId = getIntent().getIntExtra(CollectionDetailActivity.COLLECTION_DETAIL_ID_FLAG, 0);
 
         String photoId = getIntent().getStringExtra(DETAIL_ACTIVITY_PHOTO_ID_KEY);
+
+        mReturnIntent = new Intent();
 
         if (mPhoto != null) {
             loadInitialPhoto();
@@ -631,20 +634,21 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         mInCollection = currentUserCollections.size() > 0;
         updateCollectionButton(mInCollection);
 
-        Intent returnIntent = new Intent();
-
-        if (collection.id == mComingFromCollectionId && updateType == ManageCollectionsDialog.CollectionUpdateType.DELETE) {
-            returnIntent.putExtra(CollectionDetailActivity.PHOTO_REMOVED_FLAG, true);
-            returnIntent.putExtra("photo_id", mPhoto.id);
+        if (collection.id == mComingFromCollectionId) {
+            if (updateType == ManageCollectionsDialog.CollectionUpdateType.DELETE) {
+                mReturnIntent.putExtra(CollectionDetailActivity.PHOTO_REMOVED_FLAG, true);
+                mReturnIntent.putExtra("photo_id", mPhoto.id);
+            } else {
+                mReturnIntent.removeExtra(CollectionDetailActivity.PHOTO_REMOVED_FLAG);
+                mReturnIntent.removeExtra("photo_id");
+            }
         }
 
-        setResult(RESULT_OK, returnIntent);
+        setResult(RESULT_OK, mReturnIntent);
     }
 
     @Override
-    public void onCollectionCreated(Collection collection) {
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("Collection", new Gson().toJson(collection));
-        setResult(RESULT_OK, returnIntent);
+    public void onCollectionCreated() {
+        setResult(RESULT_OK, mReturnIntent);
     }
 }

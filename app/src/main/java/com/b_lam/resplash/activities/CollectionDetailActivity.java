@@ -29,6 +29,7 @@ import com.b_lam.resplash.data.model.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.dialogs.EditCollectionDialog;
+import com.b_lam.resplash.fragments.UserCollectionFragment;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.views.CircleImageView;
 import com.bumptech.glide.Glide;
@@ -76,6 +77,8 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
     private MenuItem mEditButton;
     private boolean mIsUserCollection = false;
     private int mClickedPhotoPosition;
+    private Intent mReturnIntent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,8 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
         mCollection = new Gson().fromJson(getIntent().getStringExtra("Collection"), Collection.class);
         mIsUserCollection = getIntent().getBooleanExtra(USER_COLLECTION_FLAG, false);
 
+        mReturnIntent = new Intent();
+
         this.photoService = PhotoService.getService();
 
         setCollection(mCollection);
@@ -108,8 +113,6 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
 
         String layoutType = sharedPreferences.getString("item_layout", "List");
         int columns = layoutType.equals("List") || layoutType.equals("Cards") ? 1 : 2;
-
-        mPage = 1;
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, columns);
         mImageRecycler.setLayoutManager(gridLayoutManager);
@@ -131,18 +134,22 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
                 if (mPhotoAdapter.getItemCount() >= mCollection.total_photos && mPage > 2) {
                     Toast.makeText(getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG).show();
                 } else {
-                    mFooterAdapter.clear();
-                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
-                    loadMore();
+                    mImageRecycler.post(() -> {
+                        mFooterAdapter.clear();
+                        mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                        loadMore();
+                    });
                 }
             }
         });
 
         mSwipeContainer.setOnRefreshListener(() -> {
             mPage = 1;
+            mPhotoAdapter.clear();
             loadMore();
         });
 
+        mPage = 1;
         loadMore();
     }
 
@@ -257,7 +264,8 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
                     }
                 }
             }
-            setResult(RESULT_OK);
+            mReturnIntent.putExtra(UserCollectionFragment.COLLECTION_UPDATED_FLAG, true);
+            setResult(RESULT_OK, mReturnIntent);
         }
     }
 
@@ -342,12 +350,14 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
     public void onCollectionUpdated(Collection collection) {
         mCollection = collection;
         setCollection(mCollection);
-        setResult(RESULT_OK);
+        mReturnIntent.putExtra(UserCollectionFragment.COLLECTION_UPDATED_FLAG, true);
+        setResult(RESULT_OK, mReturnIntent);
     }
 
     @Override
     public void onCollectionDeleted() {
-        setResult(RESULT_OK);
+        mReturnIntent.putExtra(UserCollectionFragment.COLLECTION_DELETED_FLAG, true);
+        setResult(RESULT_OK, mReturnIntent);
         finish();
     }
 }

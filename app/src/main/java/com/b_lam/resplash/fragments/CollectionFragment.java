@@ -4,17 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.CollectionDetailActivity;
-import com.b_lam.resplash.data.model.Collection;
 import com.b_lam.resplash.data.item.CollectionItem;
+import com.b_lam.resplash.data.model.Collection;
 import com.b_lam.resplash.data.service.CollectionService;
 import com.google.gson.Gson;
 import com.mikepenz.fastadapter.IAdapter;
@@ -26,11 +31,6 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -41,7 +41,7 @@ public class CollectionFragment extends Fragment {
     private CollectionService mService;
     private FastItemAdapter<CollectionItem> mCollectionAdapter;
     private List<Collection> mCollections;
-    private RecyclerView mImageRecycler;
+    private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeContainer;
     private ProgressBar mImagesProgress;
     private ConstraintLayout mHttpErrorView;
@@ -49,6 +49,7 @@ public class CollectionFragment extends Fragment {
     private ItemAdapter mFooterAdapter;
     private int mPage;
     private String mType;
+    private GridLayoutManager mGridLayoutManager;
 
     public CollectionFragment() {
         // Required empty public constructor
@@ -82,21 +83,16 @@ public class CollectionFragment extends Fragment {
         mPage = 1;
 
         View rootView = inflater.inflate(R.layout.fragment_collection, container, false);
-        mImageRecycler = rootView.findViewById(R.id.fragment_collection_recycler);
+        mRecyclerView = rootView.findViewById(R.id.fragment_collection_recycler);
         mImagesProgress = rootView.findViewById(R.id.fragment_collection_progress);
         mHttpErrorView = rootView.findViewById(R.id.http_error_view);
         mNetworkErrorView = rootView.findViewById(R.id.network_error_view);
         mSwipeContainer = rootView.findViewById(R.id.swipeContainerCollection);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
-        mImageRecycler.setLayoutManager(gridLayoutManager);
-        mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
-        mImageRecycler.setItemViewCacheSize(5);
+        mGridLayoutManager = new GridLayoutManager(getActivity(), 1);
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
+        mRecyclerView.setOnTouchListener((v, event) -> false);
+        mRecyclerView.setItemViewCacheSize(5);
         mCollectionAdapter = new FastItemAdapter<>();
 
         mCollectionAdapter.withOnClickListener(onClickListener);
@@ -105,23 +101,20 @@ public class CollectionFragment extends Fragment {
 
         mCollectionAdapter.addAdapter(1, mFooterAdapter);
 
-        mImageRecycler.setAdapter(mCollectionAdapter);
+        mRecyclerView.setAdapter(mCollectionAdapter);
 
-        mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
             public void onLoadMore(int currentPage) {
-                mFooterAdapter.clear();
-                mFooterAdapter.add(new ProgressItem().withEnabled(false));
-                loadMore();
+                mRecyclerView.post(() -> {
+                    mFooterAdapter.clear();
+                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                    loadMore();
+                });
             }
         });
 
-        mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchNew();
-            }
-        });
+        mSwipeContainer.setOnRefreshListener(this::fetchNew);
 
         fetchNew();
         return rootView;
@@ -154,7 +147,7 @@ public class CollectionFragment extends Fragment {
     public void loadMore(){
         if(mCollections == null){
             mImagesProgress.setVisibility(View.VISIBLE);
-            mImageRecycler.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
             mHttpErrorView.setVisibility(View.GONE);
             mNetworkErrorView.setVisibility(View.GONE);
         }
@@ -169,12 +162,12 @@ public class CollectionFragment extends Fragment {
                     CollectionFragment.this.updateAdapter(mCollections);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.VISIBLE);
                     mHttpErrorView.setVisibility(View.GONE);
                     mNetworkErrorView.setVisibility(View.GONE);
                 }else{
                     mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.GONE);
+                    mRecyclerView.setVisibility(View.GONE);
                     mHttpErrorView.setVisibility(View.VISIBLE);
                     mNetworkErrorView.setVisibility(View.GONE);
                 }
@@ -184,7 +177,7 @@ public class CollectionFragment extends Fragment {
             public void onRequestCollectionsFailed(Call<List<Collection>> call, Throwable t) {
                 Log.d(TAG, t.toString());
                 mImagesProgress.setVisibility(View.GONE);
-                mImageRecycler.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.GONE);
                 mHttpErrorView.setVisibility(View.GONE);
                 mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
@@ -203,7 +196,7 @@ public class CollectionFragment extends Fragment {
     public void fetchNew(){
         if(mCollections == null){
             mImagesProgress.setVisibility(View.VISIBLE);
-            mImageRecycler.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
             mHttpErrorView.setVisibility(View.GONE);
             mNetworkErrorView.setVisibility(View.GONE);
         }
@@ -220,12 +213,12 @@ public class CollectionFragment extends Fragment {
                     CollectionFragment.this.updateAdapter(mCollections);
                     mPage++;
                     mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.VISIBLE);
                     mHttpErrorView.setVisibility(View.GONE);
                     mNetworkErrorView.setVisibility(View.GONE);
                 }else{
                     mImagesProgress.setVisibility(View.GONE);
-                    mImageRecycler.setVisibility(View.GONE);
+                    mRecyclerView.setVisibility(View.GONE);
                     mHttpErrorView.setVisibility(View.VISIBLE);
                     mNetworkErrorView.setVisibility(View.GONE);
                 }
@@ -239,7 +232,7 @@ public class CollectionFragment extends Fragment {
             public void onRequestCollectionsFailed(Call<List<Collection>> call, Throwable t) {
                 Log.d(TAG, t.toString());
                 mImagesProgress.setVisibility(View.GONE);
-                mImageRecycler.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.GONE);
                 mHttpErrorView.setVisibility(View.GONE);
                 mNetworkErrorView.setVisibility(View.VISIBLE);
                 mSwipeContainer.setRefreshing(false);
@@ -253,5 +246,12 @@ public class CollectionFragment extends Fragment {
         }else if(mType.equals("Featured")){
             mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
         }
+    }
+
+    public void scrollToTop() {
+        if (mGridLayoutManager.findFirstVisibleItemPosition() > 5) {
+            mRecyclerView.scrollToPosition(5);
+        }
+        mRecyclerView.smoothScrollToPosition(0);
     }
 }
