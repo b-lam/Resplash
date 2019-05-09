@@ -1,46 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/featured_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/featured_container"
-    android:background="?attr/colorPrimary"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.b_lam.resplash.fragments.FeaturedFragment">
 
-    <ProgressBar
-        android:id="@+id/fragment_featured_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:scaleX="0.75"
-        android:scaleY="0.75" />
-
-    <include layout="@layout/http_error_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
-
-    <include layout="@layout/network_error_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeContainerFeatured"
+    <include layout="@layout/fragment_base_photo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_featured_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:visibility="gone"
-            android:scrollbars="none"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

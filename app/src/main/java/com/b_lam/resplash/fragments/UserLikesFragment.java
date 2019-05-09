@@ -2,7 +2,11 @@ package com.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
@@ -71,6 +75,11 @@ public class UserLikesFragment extends BasePhotoFragment {
         Intent i = new Intent(getContext(), DetailActivity.class);
         i.putExtra("Photo", new Gson().toJson(photo));
         startActivityForResult(i, USER_LIKES_UPDATE_CODE);
+    }
+
+    @Override
+    View getView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_user_likes, container, false);
     }
 
     public void setUser(User user){

@@ -2,7 +2,13 @@ package com.b_lam.resplash.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.DetailActivity;
 import com.b_lam.resplash.data.model.Photo;
@@ -39,5 +45,10 @@ public class NewFragment extends BasePhotoFragment {
         Intent i = new Intent(getContext(), DetailActivity.class);
         i.putExtra("Photo", new Gson().toJson(photo));
         startActivity(i);
+    }
+
+    @Override
+    View getView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_new, container, false);
     }
 }

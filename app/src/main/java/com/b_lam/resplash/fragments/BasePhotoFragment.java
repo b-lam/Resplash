@@ -51,6 +51,7 @@ public abstract class BasePhotoFragment extends Fragment {
     private ItemAdapter mFooterAdapter;
     private List<Photo> mPhotos;
     private int mColumns;
+    private int mContainerId;
 
     private OnClickListener<Photo> mOnClickListener = (v, adapter, item, position) -> {
         onPhotoClick(item, position);
@@ -117,12 +118,14 @@ public abstract class BasePhotoFragment extends Fragment {
 
         setRetainInstance(true);
 
-        View rootView = inflater.inflate(R.layout.fragment_new, container, false);
-        mRecyclerView = rootView.findViewById(R.id.fragment_new_recycler);
-        mImagesProgress = rootView.findViewById(R.id.fragment_new_progress);
+        View rootView = getView(inflater, container, savedInstanceState);
+
+        mContainerId = container.getId();
+        mRecyclerView = rootView.findViewById(R.id.fragment_recycler_view);
+        mImagesProgress = rootView.findViewById(R.id.fragment_progress);
         mHttpErrorView = rootView.findViewById(R.id.http_error_view);
         mNetworkErrorView = rootView.findViewById(R.id.network_error_view);
-        mSwipeContainer = rootView.findViewById(R.id.swipeContainerNew);
+        mSwipeContainer = rootView.findViewById(R.id.fragment_swipe_refresh_layout);
 
         mGridLayoutManager = new GridLayoutManager(getContext(), mColumns);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
@@ -194,4 +197,5 @@ public abstract class BasePhotoFragment extends Fragment {
     }
 
     abstract void onPhotoClick(Photo photo, int position);
+    abstract View getView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 }
