@@ -8,10 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.b_lam.resplash.R;
-import com.b_lam.resplash.activities.WallpaperHistoryActivity;
-import com.b_lam.resplash.data.tools.AutoWallpaperWorker;
-
 import androidx.annotation.NonNull;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
@@ -20,6 +16,10 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+
+import com.b_lam.resplash.R;
+import com.b_lam.resplash.activities.WallpaperHistoryActivity;
+import com.b_lam.resplash.data.tools.AutoWallpaperWorker;
 
 public class AutoWallpaperFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 

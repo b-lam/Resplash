@@ -14,6 +14,7 @@ import com.b_lam.resplash.activities.DetailActivity;
 import com.b_lam.resplash.activities.UserActivity;
 import com.b_lam.resplash.data.model.Photo;
 import com.b_lam.resplash.data.model.User;
+import com.b_lam.resplash.data.tools.AuthManager;
 import com.google.gson.Gson;
 
 import static android.app.Activity.RESULT_OK;
@@ -41,7 +42,7 @@ public class UserLikesFragment extends BasePhotoFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
+        if (mUser.id.equals(AuthManager.getInstance().getID()) && resultCode == RESULT_OK) {
             if (requestCode == USER_LIKES_UPDATE_CODE) {
                 if (data.getBooleanExtra(PHOTO_UNLIKE_FLAG, false)) {
                     mItemAdapter.remove(mClickedPhotoPosition);

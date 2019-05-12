@@ -14,23 +14,20 @@ import com.b_lam.resplash.data.model.Photo
 import com.b_lam.resplash.data.repository.WallpaperRepository
 import com.b_lam.resplash.data.service.PhotoService
 import com.google.common.util.concurrent.ListenableFuture
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Response
-import java.io.BufferedInputStream
-import java.net.HttpURLConnection
-import java.net.URL
 import java.util.concurrent.TimeUnit
 
 @SuppressLint("RestrictedApi")
 class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : ListenableWorker(context, workerParams) {
 
-    private var photoService: PhotoService? = null
+    private lateinit var photoService: PhotoService
 
     override fun onStopped() {
         super.onStopped()
-        if (photoService != null) {
-            photoService!!.cancel()
-        }
+        photoService.cancel()
     }
 
     override fun startWork(): ListenableFuture<Result> {
@@ -49,7 +46,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
                         downloadAndSetWallpaper(photo, photoService, future)
                     }
                 } else {
-                    photoService!!.requestRandomPhotos(null, null, null, null, null, 1, object : PhotoService.OnRequestPhotosListener {
+                    photoService.requestRandomPhotos(null, null, null, null, null, 1, object : PhotoService.OnRequestPhotosListener {
                         override fun onRequestPhotosSuccess(call: Call<List<Photo>>, response: Response<List<Photo>>) {
                             if (response.isSuccessful) {
                                 val photos = response.body()
@@ -72,21 +69,19 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
             }
         }
 
-        photoService!!.requestRandomPhotos(null, featured, null, customCategory, null, 1, onRequestPhotosListener)
+        photoService.requestRandomPhotos(null, featured, null, customCategory, null, 1, onRequestPhotosListener)
 
         return future
     }
 
-    private fun downloadAndSetWallpaper(photo: Photo, photoService: PhotoService?, future: SettableFuture<Result>) {
+    private fun downloadAndSetWallpaper(photo: Photo, photoService: PhotoService, future: SettableFuture<Result>) {
         Thread {
-            var urlConnection: HttpURLConnection? = null
+            val request = Request.Builder()
+                    .url(getUrlFromQuality(photo, inputData.getString(AUTO_WALLPAPER_QUALITY_KEY)))
+                    .build()
 
-            try {
-                val photoUrl = getUrlFromQuality(photo, inputData.getString(AUTO_WALLPAPER_QUALITY_KEY))
-                val url = URL(photoUrl)
-                urlConnection = url.openConnection() as HttpURLConnection
-                val inputStream = BufferedInputStream(urlConnection.inputStream)
-
+            OkHttpClient().newCall(request).execute().use { response ->
+                val inputStream = response.body()?.byteStream()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     val screenSelect = inputData.getInt(AUTO_WALLPAPER_SELECT_SCREEN_KEY,
                             WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK)
@@ -95,21 +90,14 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
                 } else {
                     WallpaperManager.getInstance(applicationContext).setStream(inputStream)
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                future.set(Result.retry())
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect()
 
-                    photoService!!.reportDownload(photo.id, null)
+                photoService.reportDownload(photo.id, null)
 
-                    addWallpaperToHistory(photo)
+                addWallpaperToHistory(photo)
 
-                    future.set(Result.success())
-                } else {
-                    future.set(Result.retry())
-                }
+                future.set(Result.success())
+
+                response.close()
             }
         }.start()
     }

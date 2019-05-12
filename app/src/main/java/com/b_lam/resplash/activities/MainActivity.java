@@ -191,11 +191,11 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition() == 0){
+                if (tab.getPosition() == 0) {
                     drawer.setSelection(1);
-                }else if(tab.getPosition() == 1){
+                } else if(tab.getPosition() == 1) {
                     drawer.setSelection(2);
-                }else{
+                } else {
                     drawer.setSelection(3);
                 }
             }
@@ -460,7 +460,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         private final List<String> fragmentTitleList = new ArrayList<>();
 
         PagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager, RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -468,7 +468,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             return fragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        private void addFragment(Fragment fragment, String title) {
             fragmentList.add(fragment);
             fragmentTitleList.add(title);
         }
