@@ -70,6 +70,7 @@ public class Resplash extends Application{
     public static final String FIREBASE_EVENT_VIEW_PHOTO_INFO = "view_photo_info";
     public static final String FIREBASE_EVENT_ADD_TO_COLLECTION = "add_to_collection";
     public static final String FIREBASE_EVENT_CLEAR_CACHE = "clear_cache";
+    public static final String FIREBASE_EVENT_ENABLE_AUTO_WALLPAPER = "enable_auto_wallpaper";
 
     /** <br> life cycle. */
 

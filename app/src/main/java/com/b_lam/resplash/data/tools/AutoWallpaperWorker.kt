@@ -23,11 +23,11 @@ import java.util.concurrent.TimeUnit
 @SuppressLint("RestrictedApi")
 class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : ListenableWorker(context, workerParams) {
 
-    private lateinit var photoService: PhotoService
+    private var photoService: PhotoService? = null
 
     override fun onStopped() {
         super.onStopped()
-        photoService.cancel()
+        photoService?.cancel()
     }
 
     override fun startWork(): ListenableFuture<Result> {
@@ -46,7 +46,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
                         downloadAndSetWallpaper(photo, photoService, future)
                     }
                 } else {
-                    photoService.requestRandomPhotos(null, null, null, null, null, 1, object : PhotoService.OnRequestPhotosListener {
+                    photoService?.requestRandomPhotos(null, null, null, null, null, 1, object : PhotoService.OnRequestPhotosListener {
                         override fun onRequestPhotosSuccess(call: Call<List<Photo>>, response: Response<List<Photo>>) {
                             if (response.isSuccessful) {
                                 val photos = response.body()
@@ -69,12 +69,12 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
             }
         }
 
-        photoService.requestRandomPhotos(null, featured, null, customCategory, null, 1, onRequestPhotosListener)
+        photoService?.requestRandomPhotos(null, featured, null, customCategory, null, 1, onRequestPhotosListener)
 
         return future
     }
 
-    private fun downloadAndSetWallpaper(photo: Photo, photoService: PhotoService, future: SettableFuture<Result>) {
+    private fun downloadAndSetWallpaper(photo: Photo, photoService: PhotoService?, future: SettableFuture<Result>) {
         Thread {
             val request = Request.Builder()
                     .url(getUrlFromQuality(photo, inputData.getString(AUTO_WALLPAPER_QUALITY_KEY)))
@@ -91,7 +91,7 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
                     WallpaperManager.getInstance(applicationContext).setStream(inputStream)
                 }
 
-                photoService.reportDownload(photo.id, null)
+                photoService?.reportDownload(photo.id, null)
 
                 addWallpaperToHistory(photo)
 

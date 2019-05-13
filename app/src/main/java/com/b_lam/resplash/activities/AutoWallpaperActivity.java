@@ -6,15 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
-import com.b_lam.resplash.R;
-import com.b_lam.resplash.data.tools.AutoWallpaperWorker;
-import com.b_lam.resplash.fragments.AutoWallpaperFragment;
-import com.b_lam.resplash.util.LocaleUtils;
-import com.b_lam.resplash.util.ThemeUtils;
-import com.b_lam.resplash.util.Utils;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +13,18 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
+
+import com.b_lam.resplash.R;
+import com.b_lam.resplash.Resplash;
+import com.b_lam.resplash.data.tools.AutoWallpaperWorker;
+import com.b_lam.resplash.fragments.AutoWallpaperFragment;
+import com.b_lam.resplash.util.LocaleUtils;
+import com.b_lam.resplash.util.ThemeUtils;
+import com.b_lam.resplash.util.Utils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -32,6 +35,8 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
     @BindView(R.id.auto_wallpaper_coordinator_layout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.auto_wallpaper_fab) FloatingActionButton floatingActionButton;
     @BindView(R.id.toolbar_auto_wallpaper) Toolbar toolbar;
+
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,8 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
                 .replace(R.id.auto_wallpaper_fragment_container, new AutoWallpaperFragment())
                 .commit();
 
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         boolean enabled = PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean("auto_wallpaper", false);
         setFloatingActionButtonVisibility(enabled);
@@ -99,6 +106,10 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
     @Override
     public void onAutoWallpaperEnableClicked(boolean enabled) {
         setFloatingActionButtonVisibility(enabled);
+
+        if (enabled) {
+            firebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_ENABLE_AUTO_WALLPAPER, null);
+        }
     }
 
     private void setNewWallpaper() {
