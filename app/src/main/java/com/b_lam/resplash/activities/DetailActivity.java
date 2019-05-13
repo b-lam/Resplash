@@ -193,7 +193,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                 loadProgress.setVisibility(View.GONE);
             } else if (response.code() == 403) {
                 Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
-            } else {
+            } else if (mPhoto != null){
                 mService.requestPhotoDetails(mPhoto.id, this);
             }
         }
