@@ -13,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
@@ -27,9 +31,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.preference.PreferenceManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -46,9 +47,9 @@ public class DonateActivity extends BaseActivity implements View.OnClickListener
     @BindView(R.id.donate_item4_price) TextView mProduct4Price;
     @BindView(R.id.donate_thanks_animation) LottieAnimationView mAnimation;
 
-    static final String TAG = "DonateActivity";
+    private final String TAG = "DonateActivity";
 
-    static final String DONATION_MADE_KEY = "donation_made";
+    public static final String DONATION_MADE_KEY = "donation_made";
 
     static final String SKU_COFFEE = "coffee";
     static final String SKU_SMOOTHIE = "smoothie";

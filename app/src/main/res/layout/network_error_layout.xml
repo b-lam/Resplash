@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/no_results_text"/>
+        app:layout_constraintBottom_toTopOf="@id/network_error_view_title"/>
 
     <TextView
         android:id="@+id/network_error_view_title"

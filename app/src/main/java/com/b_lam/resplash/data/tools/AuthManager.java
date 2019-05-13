@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.IntDef;
+
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.model.AccessToken;
 import com.b_lam.resplash.data.model.Me;
@@ -14,7 +16,6 @@ import com.b_lam.resplash.data.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.IntDef;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -53,6 +54,7 @@ public class AuthManager
     private UserService service;
 
     private String access_token;
+    private String id;
     private String username;
     private String first_name;
     private String last_name;
@@ -60,10 +62,9 @@ public class AuthManager
     private String avatar_path;
     private boolean authorized;
 
-    private UserCollectionsManager collectionsManager; // cache of user's collections.
-
     public static final String PREFERENCE_NAME = "resplash_authorize_manager";
     private static final String KEY_ACCESS_TOKEN = "access_token";
+    private static final String KEY_ID = "id";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_FIRST_NAME = "first_name";
     private static final String KEY_LAST_NAME = "last_name";
@@ -82,7 +83,7 @@ public class AuthManager
 
     // if version code is increased, the user needs to log in again.
     private static final String KEY_VERSION = "version";
-    private static final int VERSION_CODE = 8;
+    private static final int VERSION_CODE = 9;
 
     private AuthManager() {
         SharedPreferences sharedPreferences = Resplash.getInstance()
@@ -96,13 +97,13 @@ public class AuthManager
         this.authorized = !TextUtils.isEmpty(access_token);
 
         if (authorized) {
+            this.id = sharedPreferences.getString(KEY_ID, null);
             this.username = sharedPreferences.getString(KEY_USERNAME, null);
             this.first_name = sharedPreferences.getString(KEY_FIRST_NAME, null);
             this.last_name = sharedPreferences.getString(KEY_LAST_NAME, null);
             this.email = sharedPreferences.getString(KEY_EMAIL, null);
             this.avatar_path = sharedPreferences.getString(KEY_AVATAR_PATH, null);
         }
-        this.collectionsManager = new UserCollectionsManager();
 
         this.me = null;
         this.user = null;
@@ -120,6 +121,7 @@ public class AuthManager
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt(KEY_VERSION, VERSION_CODE);
             editor.putString(KEY_ACCESS_TOKEN, null);
+            editor.putString(KEY_ID, null);
             editor.putString(KEY_USERNAME, null);
             editor.putString(KEY_FIRST_NAME, null);
             editor.putString(KEY_LAST_NAME, null);
@@ -135,6 +137,7 @@ public class AuthManager
         SharedPreferences.Editor editor = Resplash.getInstance()
                 .getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
         editor.putString(KEY_ACCESS_TOKEN, null);
+        editor.putString(KEY_ID, null);
         editor.putString(KEY_USERNAME, null);
         editor.putString(KEY_FIRST_NAME, null);
         editor.putString(KEY_LAST_NAME, null);
@@ -143,13 +146,13 @@ public class AuthManager
         editor.apply();
 
         this.access_token = null;
+        this.id = null;
         this.username = null;
         this.first_name = null;
         this.last_name = null;
         this.email = null;
         this.avatar_path = null;
         this.authorized = false;
-        this.collectionsManager.clearCollections();
 
         this.me = null;
         this.user = null;
@@ -188,6 +191,10 @@ public class AuthManager
         return access_token;
     }
 
+    public String getID() {
+        return id;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -216,10 +223,6 @@ public class AuthManager
         return state;
     }
 
-    public UserCollectionsManager getCollectionsManager() {
-        return collectionsManager;
-    }
-
     // setter.
 
     public void updateUser(User u) {
@@ -245,6 +248,7 @@ public class AuthManager
     public void writeUserInfo(Me me) {
         SharedPreferences.Editor editor = Resplash.getInstance()
                 .getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(KEY_ID, me.id);
         editor.putString(KEY_USERNAME, me.username);
         editor.putString(KEY_FIRST_NAME, me.first_name);
         editor.putString(KEY_LAST_NAME, me.last_name);
@@ -252,6 +256,7 @@ public class AuthManager
         editor.apply();
 
         this.me = me;
+        id = me.id;
         username = me.username;
         first_name = me.first_name;
         last_name = me.last_name;
@@ -265,6 +270,7 @@ public class AuthManager
     public void writeUserInfo(User user) {
         SharedPreferences.Editor editor = Resplash.getInstance()
                 .getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(KEY_ID, user.id);
         editor.putString(KEY_USERNAME, user.username);
         editor.putString(KEY_FIRST_NAME, user.first_name);
         editor.putString(KEY_LAST_NAME, user.last_name);

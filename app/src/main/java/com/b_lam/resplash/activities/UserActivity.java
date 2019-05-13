@@ -14,6 +14,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.model.User;
@@ -28,11 +35,6 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -67,7 +69,7 @@ public class UserActivity extends BaseActivity {
         username = getIntent().getStringExtra("username");
         name = getIntent().getStringExtra("name");
 
-        if(Resplash.getInstance().getDrawable() != null){
+        if (Resplash.getInstance().getDrawable() != null) {
             profilePicture.setImageDrawable(Resplash.getInstance().getDrawable());
             Resplash.getInstance().setDrawable(null);
         }
@@ -85,22 +87,22 @@ public class UserActivity extends BaseActivity {
         onRequestUserProfileListener = new UserService.OnRequestUserProfileListener() {
             @Override
             public void onRequestUserProfileSuccess(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     mUser = response.body();
                     tvUserLocation.setText(mUser.location != null ? mUser.location : getString(R.string.unknown));
-                    if(mUser.portfolio_url != null) {
+                    if (mUser.portfolio_url != null) {
                         tvUserPortfolioUrl.setText(mUser.portfolio_url);
                         tvUserPortfolioUrl.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         tvUserPortfolioUrl.setVisibility(View.GONE);
                     }
-                    if(mUser.bio != null){
+                    if (mUser.bio != null) {
                         tvUserBio.setText(mUser.bio);
                         tvUserBio.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         tvUserBio.setVisibility(View.GONE);
                     }
-                    if(Resplash.getInstance().getDrawable() == null){
+                    if (Resplash.getInstance().getDrawable() == null) {
                         Glide.with(getApplicationContext()).load(mUser.profile_image.large).into(profilePicture);
                     }
                     linkContainer.setVisibility(View.VISIBLE);
@@ -138,7 +140,7 @@ public class UserActivity extends BaseActivity {
             }
         };
 
-        if(username != null) {
+        if (username != null) {
             mUserService.cancel();
             mUserService.requestUserProfile(username, onRequestUserProfileListener);
         }
@@ -152,17 +154,18 @@ public class UserActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 supportFinishAfterTransition();
                 return true;
             case R.id.action_view_on_unsplash:
                 if (mUser != null && mUser.links != null && mUser.links.html != null) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mUser.links.html + Resplash.UNSPLASH_UTM_PARAMETERS));
-                    if (intent.resolveActivity(getPackageManager()) != null)
+                    if (intent.resolveActivity(getPackageManager()) != null) {
                         startActivity(intent);
-                    else
+                    } else {
                         Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(UserActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                 }
@@ -180,12 +183,32 @@ public class UserActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("position", mTabLayout.getSelectedTabPosition());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mViewPager.setCurrentItem(savedInstanceState.getInt("position"));
+    }
+
+    public User getUser() {
+        return mUser;
+    }
+
+    public void setTabTitle(int position, String title) {
+        mPagerAdapter.setPageTitle(position, title);
+    }
+
     class PagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentTitleList = new ArrayList<>();
 
-        public PagerAdapter(FragmentManager fm) {
+        PagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -199,6 +222,7 @@ public class UserActivity extends BaseActivity {
             fragmentTitleList.add(title);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return fragmentList.get(position);
@@ -207,6 +231,11 @@ public class UserActivity extends BaseActivity {
         @Override
         public CharSequence getPageTitle(int position){
             return fragmentTitleList.get(position);
+        }
+
+        private void setPageTitle(int position, String title) {
+            fragmentTitleList.set(position, title);
+            notifyDataSetChanged();
         }
     }
 }

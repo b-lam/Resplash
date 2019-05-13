@@ -33,6 +33,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
+
 import com.b_lam.resplash.BuildConfig;
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
@@ -45,6 +49,7 @@ import com.b_lam.resplash.dialogs.InfoDialog;
 import com.b_lam.resplash.dialogs.ManageCollectionsDialog;
 import com.b_lam.resplash.dialogs.StatsDialog;
 import com.b_lam.resplash.dialogs.WallpaperDialog;
+import com.b_lam.resplash.fragments.UserLikesFragment;
 import com.b_lam.resplash.helpers.DownloadHelper;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.Utils;
@@ -61,8 +66,6 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
@@ -74,7 +77,7 @@ import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.DOWNLOAD;
 import static com.b_lam.resplash.helpers.DownloadHelper.DownloadType.WALLPAPER;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class DetailActivity extends BaseActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener{
+public class DetailActivity extends BaseActivity implements ManageCollectionsDialog.ManageCollectionsDialogListener {
 
     public static final String DETAIL_ACTIVITY_PHOTO_ID_KEY = "DETAIL_ACTIVITY_PHOTO_ID_KEY";
 
@@ -82,13 +85,14 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
     private boolean mPhotoLike = false;
     private boolean mInCollection = false;
     private boolean mLoadPhotoFromId = false;
+    private int mComingFromCollectionId;
     private Photo mPhoto;
     private PhotoService mService;
     private SharedPreferences sharedPreferences;
     private Drawable colorIcon;
     private @DownloadType int currentAction;
     private WallpaperDialog wallpaperDialog;
-    private List<Collection> mCurrentUserCollections;
+    private Intent mReturnIntent;
 
     private long downloadReference;
 
@@ -124,18 +128,14 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
             if (downloadReference == reference) {
                 Cursor cursor = DownloadHelper.getInstance(DetailActivity.this).getDownloadCursor(downloadReference);
                 if (cursor != null) {
-                    switch (DownloadHelper.getInstance(DetailActivity.this).getDownloadStatus(cursor)) {
-                        case DownloadHelper.DownloadStatus.SUCCESS:
-                            File file = new File(DownloadHelper.getInstance(DetailActivity.this).getFilePath(downloadReference));
-                            Uri uri = FileProvider.getUriForFile(DetailActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", file);
-                            getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
-                            if (currentAction == WALLPAPER) {
-                                setWallpaper(uri);
-                                if (wallpaperDialog != null) wallpaperDialog.setDownloadFinished(true);
-                            }
-                            break;
-                        default:
-                            break;
+                    if (DownloadHelper.getInstance(DetailActivity.this).getDownloadStatus(cursor) == DownloadHelper.DownloadStatus.SUCCESS) {
+                        File file = new File(DownloadHelper.getInstance(DetailActivity.this).getFilePath(downloadReference));
+                        Uri uri = FileProvider.getUriForFile(DetailActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", file);
+                        getApplicationContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+                        if (currentAction == WALLPAPER) {
+                            setWallpaper(uri);
+                            if (wallpaperDialog != null) wallpaperDialog.setDownloadFinished(true);
+                        }
                     }
                     cursor.close();
                 }
@@ -184,8 +184,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                 if (mPhoto.color != null) colorIcon.setColorFilter(Color.parseColor(mPhoto.color), PorterDuff.Mode.SRC_IN);
                 tvColor.setText(mPhoto.color);
                 tvDownloads.setText(getString(R.string.downloads, NumberFormat.getInstance(Locale.CANADA).format(mPhoto.downloads)));
-                mCurrentUserCollections = mPhoto.current_user_collections;
-                mInCollection = mCurrentUserCollections.size() > 0;
+                mInCollection = mPhoto.current_user_collections.size() > 0;
                 updateCollectionButton(mInCollection);
                 mPhotoLike = mPhoto.liked_by_user;
                 updateHeartButton(mPhotoLike);
@@ -194,7 +193,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                 loadProgress.setVisibility(View.GONE);
             } else if (response.code() == 403) {
                 Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
-            } else {
+            } else if (mPhoto != null){
                 mService.requestPhotoDetails(mPhoto.id, this);
             }
         }
@@ -215,20 +214,15 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         }
 
         @Override
-        public void onSetLikeFailed(Call<LikePhotoResult> call, Throwable t) {
-        }
+        public void onSetLikeFailed(Call<LikePhotoResult> call, Throwable t) { }
     };
 
     PhotoService.OnReportDownloadListener mReportDownloadListener = new PhotoService.OnReportDownloadListener() {
         @Override
-        public void onReportDownloadSuccess(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-        }
+        public void onReportDownloadSuccess(Call<ResponseBody> call, Response<ResponseBody> response) { }
 
         @Override
-        public void onReportDownloadFailed(Call<ResponseBody> call, Throwable t) {
-
-        }
+        public void onReportDownloadFailed(Call<ResponseBody> call, Throwable t) { }
     };
 
     @Override
@@ -255,7 +249,11 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
 
         mPhoto = new Gson().fromJson(getIntent().getStringExtra("Photo"), Photo.class);
 
+        mComingFromCollectionId = getIntent().getIntExtra(CollectionDetailActivity.COLLECTION_DETAIL_ID_FLAG, 0);
+
         String photoId = getIntent().getStringExtra(DETAIL_ACTIVITY_PHOTO_ID_KEY);
+
+        mReturnIntent = new Intent();
 
         if (mPhoto != null) {
             loadInitialPhoto();
@@ -264,7 +262,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
             mLoadPhotoFromId = true;
             mService.requestPhotoDetails(photoId, mPhotoDetailsRequestListener);
         }
-
 
         floatingActionMenu.setClosedOnTouchOutside(true);
         createCustomAnimation();
@@ -275,6 +272,16 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         fabWallpaper.setOnClickListener(onClickListener);
 
         colorIcon = getResources().getDrawable(R.drawable.ic_fiber_manual_record_white_18dp, getTheme());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LoginActivity.LOGIN_ACTIVITY_RESULT_CODE) {
+            if (resultCode == RESULT_OK) {
+                mService.requestPhotoDetails(mPhoto.id, mPhotoDetailsRequestListener);
+            }
+        }
     }
 
     @Override
@@ -308,7 +315,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 getWindow().setExitTransition(null);
@@ -479,39 +485,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         }
     };
 
-    public void likeImage(View view){
-        if(AuthManager.getInstance().isAuthorized()) {
-            mPhotoLike = !mPhotoLike;
-            mService.setLikeForAPhoto(mPhoto.id, mPhotoLike, mSetLikeListener);
-            updateHeartButton(mPhotoLike);
-        }else{
-            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-    }
-
-    public void updateHeartButton(boolean like){
-        btnLike.setImageResource(like ? R.drawable.ic_heart_red_24dp : R.drawable.ic_heart_outline_grey_24dp);
-    }
-
-    public void addToCollection(View view){
-        if (AuthManager.getInstance().isAuthorized()) {
-            ManageCollectionsDialog manageCollectionsDialog = new ManageCollectionsDialog();
-            manageCollectionsDialog.setPhoto(mPhoto);
-            manageCollectionsDialog.setListener(this);
-            manageCollectionsDialog.show(getFragmentManager(), null);
-        } else {
-            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-    }
-
-    public void updateCollectionButton(boolean inCollection) {
-        btnAddToCollection.setImageResource(inCollection ?
-                ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionSavedIcon) :
-                R.drawable.ic_bookmark_outline_grey_24dp);
-    }
-
     private void shareTextUrl() {
         if (mPhoto != null) {
             Intent share = new Intent(Intent.ACTION_SEND);
@@ -619,11 +592,63 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         }
     }
 
+    public void likeImage(View view){
+        if (AuthManager.getInstance().isAuthorized()) {
+            mPhotoLike = !mPhotoLike;
+            mService.setLikeForAPhoto(mPhoto.id, mPhotoLike, mSetLikeListener);
+            updateHeartButton(mPhotoLike);
+            Intent returnIntent = new Intent();
+            if (!mPhotoLike) returnIntent.putExtra(UserLikesFragment.PHOTO_UNLIKE_FLAG, true);
+            setResult(RESULT_OK, returnIntent);
+        } else {
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    public void updateHeartButton(boolean like){
+        btnLike.setImageResource(like ? R.drawable.ic_heart_red_24dp : R.drawable.ic_heart_outline_grey_24dp);
+    }
+
+    public void addToCollection(View view){
+        if (AuthManager.getInstance().isAuthorized()) {
+            ManageCollectionsDialog manageCollectionsDialog = new ManageCollectionsDialog();
+            manageCollectionsDialog.setPhoto(mPhoto);
+            manageCollectionsDialog.setListener(this);
+            manageCollectionsDialog.show(getSupportFragmentManager(), null);
+        } else {
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.need_to_log_in), Toast.LENGTH_LONG).show();
+            startActivityForResult(new Intent(this, LoginActivity.class), LoginActivity.LOGIN_ACTIVITY_RESULT_CODE);
+        }
+    }
+
+    public void updateCollectionButton(boolean inCollection) {
+        btnAddToCollection.setImageResource(inCollection ?
+                ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionSavedIcon) :
+                R.drawable.ic_bookmark_outline_grey_24dp);
+    }
+
     @Override
-    public void onCollectionUpdated(Photo photo) {
-        mPhoto = photo;
-        mCurrentUserCollections = mPhoto.current_user_collections;
-        mInCollection = mCurrentUserCollections.size() > 0;
+    public void onCollectionUpdated(@ManageCollectionsDialog.CollectionUpdateType int updateType, Collection collection, @NonNull List<Collection> currentUserCollections) {
+        mPhoto.current_user_collections = currentUserCollections;
+        mInCollection = currentUserCollections.size() > 0;
         updateCollectionButton(mInCollection);
+
+        if (collection.id == mComingFromCollectionId) {
+            if (updateType == ManageCollectionsDialog.CollectionUpdateType.DELETE) {
+                mReturnIntent.putExtra(CollectionDetailActivity.PHOTO_REMOVED_FLAG, true);
+                mReturnIntent.putExtra("photo_id", mPhoto.id);
+            } else {
+                mReturnIntent.removeExtra(CollectionDetailActivity.PHOTO_REMOVED_FLAG);
+                mReturnIntent.removeExtra("photo_id");
+            }
+        }
+
+        setResult(RESULT_OK, mReturnIntent);
+    }
+
+    @Override
+    public void onCollectionCreated() {
+        setResult(RESULT_OK, mReturnIntent);
     }
 }

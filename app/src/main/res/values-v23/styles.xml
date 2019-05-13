@@ -42,6 +42,7 @@
         <item name="sortIcon">@drawable/ic_sort_black_24dp</item>
         <item name="shareIcon">@drawable/ic_share_black_24dp</item>
         <item name="browserIcon">@drawable/ic_earth_black_24dp</item>
+        <item name="browserSmallIcon">@drawable/baseline_public_black_18</item>
         <item name="newIcon">@drawable/ic_trending_up_black_24dp</item>
         <item name="hotIcon">@drawable/ic_whatshot_black_24dp</item>
         <item name="collectionsIcon">@drawable/ic_collections_black_24dp</item>
@@ -57,6 +58,7 @@
         <item name="mountainIcon">@drawable/ic_filter_hdr_black_24dp</item>
         <item name="starCircleIcon">@drawable/ic_stars_black_24dp</item>
         <item name="locationIcon">@drawable/ic_location_on_black_24dp</item>
+        <item name="locationSmallIcon">@drawable/baseline_location_on_black_18</item>
         <item name="calendarIcon">@drawable/ic_date_range_black_24dp</item>
         <item name="downloadIcon">@drawable/ic_file_download_black_24dp</item>
         <item name="paletteIcon">@drawable/ic_color_lens_black_24dp</item>
@@ -81,6 +83,7 @@
         <item name="quoteIcon">@drawable/ic_format_quote_black_24dp</item>
         <item name="collectionSavedIcon">@drawable/ic_bookmark_black_24dp</item>
         <item name="editIcon">@drawable/ic_mode_edit_black_24dp</item>
+        <item name="lockIcon">@drawable/baseline_lock_black_18</item>
     </style>
 
     <!-- Dark base activity theme -->
@@ -126,6 +129,7 @@
         <item name="sortIcon">@drawable/ic_sort_white_24dp</item>
         <item name="shareIcon">@drawable/ic_share_white_24dp</item>
         <item name="browserIcon">@drawable/ic_earth_white_24dp</item>
+        <item name="browserSmallIcon">@drawable/baseline_public_white_18</item>
         <item name="newIcon">@drawable/ic_trending_up_white_24dp</item>
         <item name="hotIcon">@drawable/ic_whatshot_white_24dp</item>
         <item name="collectionsIcon">@drawable/ic_collections_white_24dp</item>
@@ -141,6 +145,7 @@
         <item name="mountainIcon">@drawable/ic_filter_hdr_white_24dp</item>
         <item name="starCircleIcon">@drawable/ic_stars_white_24dp</item>
         <item name="locationIcon">@drawable/ic_location_on_white_24dp</item>
+        <item name="locationSmallIcon">@drawable/baseline_location_on_white_18</item>
         <item name="calendarIcon">@drawable/ic_date_range_white_24dp</item>
         <item name="downloadIcon">@drawable/ic_file_download_white_24dp</item>
         <item name="paletteIcon">@drawable/ic_color_lens_white_24dp</item>
@@ -165,6 +170,7 @@
         <item name="quoteIcon">@drawable/ic_format_quote_white_24dp</item>
         <item name="collectionSavedIcon">@drawable/ic_bookmark_white_24dp</item>
         <item name="editIcon">@drawable/ic_mode_edit_white_24dp</item>
+        <item name="lockIcon">@drawable/ic_lock_white_18dp</item>
     </style>
 
     <!-- Black base activity theme -->

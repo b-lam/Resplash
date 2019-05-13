@@ -9,13 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
+import androidx.browser.customtabs.CustomTabsIntent;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.model.AccessToken;
 import com.b_lam.resplash.data.service.AuthorizeService;
 import com.b_lam.resplash.data.tools.AuthManager;
+import com.b_lam.resplash.helpers.customtabs.CustomTabsHelper;
+import com.b_lam.resplash.util.ThemeUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -30,6 +33,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @BindView(R.id.join_btn) Button btnJoin;
     @BindView(R.id.login_close) ImageButton btnClose;
     @BindView(R.id.activity_login) RelativeLayout relativeLayout;
+
+    public static final int LOGIN_ACTIVITY_RESULT_CODE = 892;
 
     private String TAG = "LoginActivity";
     private AuthorizeService mService;
@@ -78,21 +83,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             case R.id.login_btn: {
                 Uri uri = Uri.parse(Resplash.getLoginUrl(this));
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                if (intent.resolveActivity(getPackageManager()) != null)
-                    startActivity(intent);
-                else
-                    Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                        .setToolbarColor(ThemeUtils.getThemeAttrColor(this, R.attr.colorPrimary))
+                        .setShowTitle(true)
+                        .build();
+                CustomTabsHelper.Companion.openCustomTab(this, customTabsIntent, uri);
                 break;
             }
 
             case R.id.join_btn: {
                 Uri uri = Uri.parse(Resplash.UNSPLASH_JOIN_URL);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                if (intent.resolveActivity(getPackageManager()) != null)
-                    startActivity(intent);
-                else
-                    Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                        .setToolbarColor(ThemeUtils.getThemeAttrColor(this, R.attr.colorPrimary))
+                        .setShowTitle(true)
+                        .build();
+                CustomTabsHelper.Companion.openCustomTab(this, customTabsIntent, uri);
                 break;
             }
         }
@@ -101,13 +106,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onRequestAccessTokenSuccess(Call<AccessToken> call, Response<AccessToken> response) {
         if (response.isSuccessful()) {
-            Log.d(TAG, response.body().toString());
             AuthManager.getInstance().writeAccessToken(response.body());
             AuthManager.getInstance().requestPersonalProfile();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mFirebaseAnalytics.logEvent(Resplash.FIREBASE_EVENT_LOGIN, null);
-            startActivity(intent);
+            setResult(RESULT_OK);
+            finish();
         } else {
             Snackbar.make(relativeLayout, getString(R.string.request_token_failed), Snackbar.LENGTH_SHORT).show();
         }

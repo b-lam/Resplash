@@ -9,15 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.activities.CollectionDetailActivity;
+import com.b_lam.resplash.activities.UserActivity;
+import com.b_lam.resplash.data.item.CollectionItem;
 import com.b_lam.resplash.data.model.Collection;
 import com.b_lam.resplash.data.model.User;
-import com.b_lam.resplash.data.item.CollectionItem;
 import com.b_lam.resplash.data.service.CollectionService;
+import com.b_lam.resplash.data.tools.AuthManager;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
@@ -26,18 +34,20 @@ import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListene
 
 import java.util.List;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Response;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class UserCollectionFragment extends Fragment {
 
-    private String TAG = "CollectionFragment";
+    public static final int USER_COLLECTION_UPDATE_CODE = 8134;
+    public final static String COLLECTION_UPDATED_FLAG = "COLLECTION_UPDATED_FLAG";
+    public final static String COLLECTION_DELETED_FLAG = "COLLECTION_DELETED_FLAG";
+
+    private final String TAG = "CollectionFragment";
+
     private CollectionService mService;
     private FastItemAdapter<CollectionItem> mCollectionAdapter;
     private List<Collection> mCollections;
@@ -49,13 +59,12 @@ public class UserCollectionFragment extends Fragment {
     private ItemAdapter mFooterAdapter;
     private int mPage;
     private User mUser;
+    private int mClickedCollectionPosition;
 
-    public UserCollectionFragment() {
-    }
+    public UserCollectionFragment() { }
 
     public static UserCollectionFragment newInstance() {
-        UserCollectionFragment collectionFragment = new UserCollectionFragment();
-        return collectionFragment;
+        return new UserCollectionFragment();
     }
 
     @Override
@@ -67,7 +76,7 @@ public class UserCollectionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         setRetainInstance(true);
 
@@ -97,9 +106,11 @@ public class UserCollectionFragment extends Fragment {
         mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
             @Override
             public void onLoadMore(int currentPage) {
-                mFooterAdapter.clear();
-                mFooterAdapter.add(new ProgressItem().withEnabled(false));
-                loadMore();
+                mImageRecycler.post(() -> {
+                    mFooterAdapter.clear();
+                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                    loadMore();
+                });
             }
         });
 
@@ -117,25 +128,25 @@ public class UserCollectionFragment extends Fragment {
         }
     }
 
-    private OnClickListener<CollectionItem> onClickListener = new OnClickListener<CollectionItem>(){
-        @Override
-        public boolean onClick(View v, IAdapter<CollectionItem> adapter, CollectionItem item, int position) {
-            Intent i = new Intent(getContext(), CollectionDetailActivity.class);
-            i.putExtra("Collection", new Gson().toJson(item.getModel()));
+    private OnClickListener<CollectionItem> onClickListener = (v, adapter, item, position) -> {
+        mClickedCollectionPosition = position;
+        Intent i = new Intent(getContext(), CollectionDetailActivity.class);
+        i.putExtra("Collection", new Gson().toJson(item.getModel()));
+        if (mUser.id.equals(AuthManager.getInstance().getID())) {
             i.putExtra(CollectionDetailActivity.USER_COLLECTION_FLAG, true);
-            startActivity(i);
-            return false;
         }
+        startActivityForResult(i, USER_COLLECTION_UPDATE_CODE);
+        return false;
     };
 
     public void updateAdapter(List<Collection> collections) {
-        for (Collection collection: collections) {
+        for (Collection collection : collections) {
             mCollectionAdapter.add(new CollectionItem(collection));
         }
     }
 
     public void loadMore(){
-        if(mCollections == null){
+        if (mCollections == null) {
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
             mHttpErrorView.setVisibility(View.GONE);
@@ -150,7 +161,7 @@ public class UserCollectionFragment extends Fragment {
                     if (response.code() == 200) {
                         mCollections = response.body();
                         mFooterAdapter.clear();
-                        UserCollectionFragment.this.updateAdapter(mCollections);
+                        updateAdapter(mCollections);
                         mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.VISIBLE);
@@ -189,8 +200,8 @@ public class UserCollectionFragment extends Fragment {
         }
     }
 
-    public void fetchNew(){
-        if(mCollections == null){
+    private void fetchNew(){
+        if (mCollections == null) {
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
             mHttpErrorView.setVisibility(View.GONE);
@@ -207,7 +218,7 @@ public class UserCollectionFragment extends Fragment {
                     if (response.code() == 200) {
                         mCollections = response.body();
                         mCollectionAdapter.clear();
-                        UserCollectionFragment.this.updateAdapter(mCollections);
+                        updateAdapter(mCollections);
                         mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mImageRecycler.setVisibility(View.VISIBLE);
@@ -252,6 +263,25 @@ public class UserCollectionFragment extends Fragment {
 
     public void setUser(User user){
         this.mUser = user;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == USER_COLLECTION_UPDATE_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra(COLLECTION_DELETED_FLAG, false)) {
+                    mCollectionAdapter.remove(mClickedCollectionPosition);
+                    if (getActivity() instanceof UserActivity) {
+                        ((UserActivity) getActivity()).getUser().total_collections--;
+                        ((UserActivity) getActivity()).setTabTitle(2, ((UserActivity) getActivity()).getUser().total_collections + " " + getString(R.string.main_collections));
+                    }
+                }
+                if (data.getBooleanExtra(COLLECTION_UPDATED_FLAG, false)) {
+                    fetchNew();
+                }
+            }
+        }
     }
 
 }

@@ -2,14 +2,18 @@ package com.b_lam.resplash.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.data.model.Collection;
@@ -18,7 +22,6 @@ import com.b_lam.resplash.data.service.CollectionService;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,9 +30,9 @@ import retrofit2.Response;
 
 public class EditCollectionDialog extends DialogFragment {
 
-    private static final String TAG = "EditCollectionDialog";
-
+    private Collection mCollection;
     private CollectionService mService;
+    private EditCollectionDialogListener mEditCollectionDialogListener;
 
     @BindView(R.id.edit_collection_name_input_layout) TextInputLayout mNameTextInputLayout;
     @BindView(R.id.edit_collection_name) TextInputEditText mNameEditText;
@@ -37,13 +40,25 @@ public class EditCollectionDialog extends DialogFragment {
     @BindView(R.id.edit_collection_make_private_checkbox) CheckBox mMakePrivateCheckBox;
     @BindView(R.id.edit_collection_confirm_delete_layout) ConstraintLayout mConfirmDeleteLayout;
     @BindView(R.id.edit_collection_action_button_layout) ConstraintLayout mActionButtonLayout;
+    @BindView(R.id.edit_collection_delete_button) Button mDeleteButton;
+    @BindView(R.id.edit_collection_cancel_button) Button mCancelButton;
+    @BindView(R.id.edit_collection_save_button) Button mSaveButton;
+    @BindView(R.id.edit_collection_yes_button) Button mYesButton;
+    @BindView(R.id.edit_collection_no_button) Button mNoButton;
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        setRetainInstance(true);
+
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_edit_collection, null, false);
         ButterKnife.bind(this, view);
 
         mService = CollectionService.getService();
+
+        mNameEditText.setText(mCollection.title);
+        mDescriptionEditText.setText(mCollection.description);
+        mMakePrivateCheckBox.setChecked(mCollection.privateX);
 
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
@@ -57,14 +72,19 @@ public class EditCollectionDialog extends DialogFragment {
 
     @OnClick(R.id.edit_collection_save_button)
     public void saveCollection() {
-        if (!mNameEditText.getText().toString().isEmpty()) {
+        if (mNameEditText.getText() != null && !mNameEditText.getText().toString().isEmpty()) {
             mNameTextInputLayout.setError(null);
-            mService.updateCollection(0, mNameEditText.getText().toString(),
-                    mDescriptionEditText.getText().toString(),
+            disableButtons();
+            mService.updateCollection(mCollection.id, mNameEditText.getText().toString(),
+                    (mDescriptionEditText.getText() == null) ? "" : mDescriptionEditText.getText().toString(),
                     mMakePrivateCheckBox.isChecked(),
                     new CollectionService.OnRequestACollectionListener() {
                         @Override
                         public void onRequestACollectionSuccess(Call<Collection> call, Response<Collection> response) {
+                            if (response.isSuccessful()) {
+                                mEditCollectionDialogListener.onCollectionUpdated(response.body());
+                            }
+                            enableButtons();
                             hideKeyboard();
                             dismiss();
                         }
@@ -72,6 +92,7 @@ public class EditCollectionDialog extends DialogFragment {
                         @Override
                         public void onRequestACollectionFailed(Call<Collection> call, Throwable t) {
                             Toast.makeText(getActivity(), R.string.failed_to_save_collection, Toast.LENGTH_SHORT).show();
+                            enableButtons();
                         }
                     });
         } else {
@@ -98,25 +119,61 @@ public class EditCollectionDialog extends DialogFragment {
 
     @OnClick(R.id.edit_collection_yes_button)
     public void deleteCollectionYes() {
-        mService.deleteCollection(0,
+        disableButtons();
+        mService.deleteCollection(mCollection.id,
                 new CollectionService.OnDeleteCollectionListener() {
                     @Override
                     public void onDeleteCollectionSuccess(Call<DeleteCollectionResult> call, Response<DeleteCollectionResult> response) {
+                        mEditCollectionDialogListener.onCollectionDeleted();
+                        enableButtons();
                         hideKeyboard();
+                        dismiss();
                     }
 
                     @Override
                     public void onDeleteCollectionFailed(Call<DeleteCollectionResult> call, Throwable t) {
                         Toast.makeText(getActivity(), R.string.failed_to_delete_collection, Toast.LENGTH_SHORT).show();
+                        enableButtons();
                     }
                 });
     }
 
+    public void setCollection(Collection collection) {
+        mCollection = collection;
+    }
+
+    public void setListener(EditCollectionDialogListener editCollectionDialogListener) {
+        mEditCollectionDialogListener = editCollectionDialogListener;
+    }
+
     private void hideKeyboard() {
-        View view = getDialog().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) getDialog().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        if (getDialog() != null) {
+            View view = getDialog().getCurrentFocus();
+            if (view != null) {
+                InputMethodManager inputManager = (InputMethodManager) getDialog().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         }
+    }
+
+    private void enableButtons() {
+        mDeleteButton.setEnabled(true);
+        mCancelButton.setEnabled(true);
+        mSaveButton.setEnabled(true);
+        mYesButton.setEnabled(true);
+        mNoButton.setEnabled(true);
+    }
+
+    private void disableButtons() {
+        mDeleteButton.setEnabled(false);
+        mCancelButton.setEnabled(false);
+        mSaveButton.setEnabled(false);
+        mYesButton.setEnabled(false);
+        mNoButton.setEnabled(false);
+    }
+
+    public interface EditCollectionDialogListener {
+        void onCollectionUpdated(Collection collection);
+        void onCollectionDeleted();
     }
 }

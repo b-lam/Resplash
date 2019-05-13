@@ -15,6 +15,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.tools.AuthManager;
@@ -45,12 +53,6 @@ import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -59,15 +61,20 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.viewpager) ViewPager mViewPager;
     @BindView(R.id.tabs) TabLayout mTabLayout;
-    @BindView(R.id.fab_upload) FloatingActionButton fabUpload;
+    @BindView(R.id.fab_upload) FloatingActionButton mFabUpload;
 
-    private String TAG = "MainActivity";
+    private final String TAG = "MainActivity";
+
+    private PagerAdapter mPagerAdapter;
     public Drawer drawer = null;
     private AccountHeader drawerHeader = null;
     private ProfileSettingDrawerItem drawerItemAddAccount, drawerItemViewProfile, drawerItemManageAccount, drawerItemLogout;
     private IProfile profile;
     private IProfile profileDefault;
     private MenuItem mItemFeaturedLatest, mItemFeaturedOldest, mItemFeaturedPopular, mItemNewLatest, mItemNewOldest, mItemNewPopular, mItemAll, mItemCurated, mItemFeatured;
+    private boolean mNewFragmentRecreated = false;
+    private boolean mFeaturedFragmentRecreated = false;
+    private boolean mCollectionFragmentRecreated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +104,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         }).start();
 
         Utils.isStoragePermissionGranted(this);
+        Utils.createNotificationChannel(this);
 
         profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail(getString(R.string.main_unsplash_description)).withIcon(R.drawable.intro_icon_image);
 
@@ -170,7 +178,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
 
         drawer.getRecyclerView().setVerticalScrollBarEnabled(false);
 
-        PagerAdapter mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mPagerAdapter.addFragment(NewFragment.newInstance("latest"), getString(R.string.main_new));
         mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), getString(R.string.main_featured));
         mPagerAdapter.addFragment(CollectionFragment.newInstance("Featured"), getString(R.string.main_collections));
@@ -183,11 +191,11 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition() == 0){
+                if (tab.getPosition() == 0) {
                     drawer.setSelection(1);
-                }else if(tab.getPosition() == 1){
+                } else if(tab.getPosition() == 1) {
                     drawer.setSelection(2);
-                }else{
+                } else {
                     drawer.setSelection(3);
                 }
             }
@@ -203,7 +211,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             }
         });
 
-        fabUpload.setOnClickListener(view -> {
+        mFabUpload.setOnClickListener(view -> {
             try {
                 Uri uri = Uri.parse(Resplash.UNSPLASH_UPLOAD_URL);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -213,6 +221,31 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                     Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        });
+
+        //TODO: Figure out a less stupid way to do this once I can figure out how to initiate the fragments with the correct id
+        mToolbar.setOnClickListener(v -> {
+            Fragment fragment;
+            switch (mViewPager.getCurrentItem()) {
+                case 0:
+                    fragment = mNewFragmentRecreated ? getSupportFragmentManager().findFragmentById(R.id.new_container) : mPagerAdapter.getItem(0);
+                    if (fragment instanceof NewFragment) {
+                        ((NewFragment) fragment).scrollToTop();
+                    }
+                    break;
+                case 1:
+                    fragment = mFeaturedFragmentRecreated ? getSupportFragmentManager().findFragmentById(R.id.featured_container) : mPagerAdapter.getItem(1);
+                    if (fragment instanceof FeaturedFragment) {
+                        ((FeaturedFragment) fragment).scrollToTop();
+                    }
+                    break;
+                case 2:
+                    fragment = mCollectionFragmentRecreated ? getSupportFragmentManager().findFragmentById(R.id.collection_container) : mPagerAdapter.getItem(2);
+                    if (fragment instanceof CollectionFragment) {
+                        ((CollectionFragment) fragment).scrollToTop();
+                    }
+                    break;
             }
         });
     }
@@ -337,31 +370,40 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             case R.id.sort_by:
                 return true;
             case R.id.menu_item_featured_latest:
-                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("latest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("latest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mFeaturedFragmentRecreated = true;
                 return true;
             case R.id.menu_item_featured_oldest:
-                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("oldest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("oldest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mFeaturedFragmentRecreated = true;
                 return true;
             case R.id.menu_item_featured_popular:
-                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("popular")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("popular")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mFeaturedFragmentRecreated = true;
                 return true;
             case R.id.menu_item_new_latest:
-                transaction.replace(R.id.new_container, NewFragment.newInstance("latest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.new_container, NewFragment.newInstance("latest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mNewFragmentRecreated = true;
                 return true;
             case R.id.menu_item_new_oldest:
-                transaction.replace(R.id.new_container, NewFragment.newInstance("oldest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.new_container, NewFragment.newInstance("oldest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mNewFragmentRecreated = true;
                 return true;
             case R.id.menu_item_new_popular:
-                transaction.replace(R.id.new_container, NewFragment.newInstance("popular")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.new_container, NewFragment.newInstance("popular")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mNewFragmentRecreated = true;
                 return true;
             case R.id.menu_item_all:
-                transaction.replace(R.id.collection_container, CollectionFragment.newInstance("All")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.collection_container, CollectionFragment.newInstance("All")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mCollectionFragmentRecreated = true;
                 return true;
             case R.id.menu_item_curated:
-                transaction.replace(R.id.collection_container, CollectionFragment.newInstance("Curated")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.collection_container, CollectionFragment.newInstance("Curated")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mCollectionFragmentRecreated = true;
                 return true;
             case R.id.menu_item_featured:
-                transaction.replace(R.id.collection_container, CollectionFragment.newInstance("Featured")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                transaction.replace(R.id.collection_container, CollectionFragment.newInstance("Featured")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                mCollectionFragmentRecreated = true;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -400,12 +442,8 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         }
     }
 
-    private void loadPreferences(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    }
-
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("position", mTabLayout.getSelectedTabPosition());
     }
@@ -421,8 +459,8 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentTitleList = new ArrayList<>();
 
-        public PagerAdapter(FragmentManager fm) {
-            super(fm);
+        PagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -430,11 +468,12 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             return fragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        private void addFragment(Fragment fragment, String title) {
             fragmentList.add(fragment);
             fragmentTitleList.add(title);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return fragmentList.get(position);
@@ -462,14 +501,10 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     }
 
     @Override
-    public void onWriteAccessToken() {
-
-    }
+    public void onWriteAccessToken() { }
 
     @Override
-    public void onWriteUserInfo() {
-
-    }
+    public void onWriteUserInfo() { }
 
     @Override
     public void onWriteAvatarPath() {
@@ -477,7 +512,5 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     }
 
     @Override
-    public void onLogout() {
-
-    }
+    public void onLogout() { }
 }

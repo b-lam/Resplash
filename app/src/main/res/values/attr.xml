@@ -34,6 +34,7 @@
         <attr name="sortIcon" format="reference"/>
         <attr name="shareIcon" format="reference"/>
         <attr name="browserIcon" format="reference"/>
+        <attr name="browserSmallIcon" format="reference"/>
         <attr name="newIcon" format="reference"/>
         <attr name="hotIcon" format="reference"/>
         <attr name="collectionsIcon" format="reference"/>
@@ -48,6 +49,7 @@
         <attr name="mountainIcon" format="reference"/>
         <attr name="starCircleIcon" format="reference"/>
         <attr name="locationIcon" format="reference"/>
+        <attr name="locationSmallIcon" format="reference"/>
         <attr name="calendarIcon" format="reference"/>
         <attr name="downloadIcon" format="reference"/>
         <attr name="paletteIcon" format="reference"/>
@@ -73,5 +75,6 @@
         <attr name="collectionSavedIcon" format="reference"/>
         <attr name="editIcon" format="reference"/>
         <attr name="autoWallpaperIcon" format="reference"/>
+        <attr name="lockIcon" format="reference"/>
     </declare-styleable>
 </resources>

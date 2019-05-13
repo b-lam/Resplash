@@ -52,6 +52,8 @@ public class Resplash extends Application{
 
     public static final String RESPLASH_USER_GROUP = "resplash_user_group";
 
+    public static final String NOTIFICATION_CHANNEL_ID = "resplash_notification_channel_id";
+
     // permission code.
     public static final int WRITE_EXTERNAL_STORAGE = 1;
 
@@ -68,6 +70,7 @@ public class Resplash extends Application{
     public static final String FIREBASE_EVENT_VIEW_PHOTO_INFO = "view_photo_info";
     public static final String FIREBASE_EVENT_ADD_TO_COLLECTION = "add_to_collection";
     public static final String FIREBASE_EVENT_CLEAR_CACHE = "clear_cache";
+    public static final String FIREBASE_EVENT_ENABLE_AUTO_WALLPAPER = "enable_auto_wallpaper";
 
     /** <br> life cycle. */
 
