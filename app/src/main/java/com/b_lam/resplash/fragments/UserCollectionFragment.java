@@ -132,7 +132,7 @@ public class UserCollectionFragment extends Fragment {
         mClickedCollectionPosition = position;
         Intent i = new Intent(getContext(), CollectionDetailActivity.class);
         i.putExtra("Collection", new Gson().toJson(item.getModel()));
-        if (mUser.id.equals(AuthManager.getInstance().getID())) {
+        if (mUser != null && mUser.id.equals(AuthManager.getInstance().getID())) {
             i.putExtra(CollectionDetailActivity.USER_COLLECTION_FLAG, true);
         }
         startActivityForResult(i, USER_COLLECTION_UPDATE_CODE);
