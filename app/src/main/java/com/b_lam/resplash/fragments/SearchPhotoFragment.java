@@ -171,7 +171,7 @@ public class SearchPhotoFragment extends Fragment {
                         mSearchPhotosResult = response.body();
                         mPhotos = mSearchPhotosResult.results;
                         mFooterAdapter.clear();
-                        SearchPhotoFragment.this.updateAdapter(mPhotos);
+                        updateAdapter(mPhotos);
                         mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mRecyclerView.setVisibility(View.VISIBLE);

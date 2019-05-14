@@ -14,10 +14,13 @@ import com.b_lam.resplash.data.model.Photo
 import com.b_lam.resplash.data.repository.WallpaperRepository
 import com.b_lam.resplash.data.service.PhotoService
 import com.google.common.util.concurrent.ListenableFuture
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Response
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 @SuppressLint("RestrictedApi")
@@ -80,25 +83,29 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
                     .url(getUrlFromQuality(photo, inputData.getString(AUTO_WALLPAPER_QUALITY_KEY)))
                     .build()
 
-            OkHttpClient().newCall(request).execute().use { response ->
-                val inputStream = response.body()?.byteStream()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    val screenSelect = inputData.getInt(AUTO_WALLPAPER_SELECT_SCREEN_KEY,
-                            WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK)
-                    WallpaperManager.getInstance(applicationContext).setStream(inputStream, null,
-                            true, screenSelect)
-                } else {
-                    WallpaperManager.getInstance(applicationContext).setStream(inputStream)
-                }
+            OkHttpClient.Builder()
+                    .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
+                    .protocols(Collections.singletonList(Protocol.HTTP_1_1))
+                    .build()
+                    .newCall(request).execute().use { response ->
+                        val inputStream = response.body()?.byteStream()
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            val screenSelect = inputData.getInt(AUTO_WALLPAPER_SELECT_SCREEN_KEY,
+                                    WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK)
+                            WallpaperManager.getInstance(applicationContext).setStream(inputStream, null,
+                                    true, screenSelect)
+                        } else {
+                            WallpaperManager.getInstance(applicationContext).setStream(inputStream)
+                        }
 
-                photoService?.reportDownload(photo.id, null)
+                        photoService?.reportDownload(photo.id, null)
 
-                addWallpaperToHistory(photo)
+                        addWallpaperToHistory(photo)
 
-                future.set(Result.success())
+                        future.set(Result.success())
 
-                response.close()
-            }
+                        response.close()
+                    }
         }.start()
     }
 
