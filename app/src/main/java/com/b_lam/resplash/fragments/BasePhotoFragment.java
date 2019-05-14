@@ -51,7 +51,6 @@ public abstract class BasePhotoFragment extends Fragment {
     private ItemAdapter mFooterAdapter;
     private List<Photo> mPhotos;
     private int mColumns;
-    private int mContainerId;
 
     private OnClickListener<Photo> mOnClickListener = (v, adapter, item, position) -> {
         onPhotoClick(item, position);
@@ -120,7 +119,6 @@ public abstract class BasePhotoFragment extends Fragment {
 
         View rootView = getView(inflater, container, savedInstanceState);
 
-        mContainerId = container.getId();
         mRecyclerView = rootView.findViewById(R.id.fragment_recycler_view);
         mImagesProgress = rootView.findViewById(R.id.fragment_progress);
         mHttpErrorView = rootView.findViewById(R.id.http_error_view);
@@ -181,7 +179,7 @@ public abstract class BasePhotoFragment extends Fragment {
     }
 
     public void scrollToTop() {
-        if (mGridLayoutManager.findFirstVisibleItemPosition() > 5) {
+        if (mGridLayoutManager != null && mGridLayoutManager.findFirstVisibleItemPosition() > 5) {
             mRecyclerView.scrollToPosition(5);
         }
         mRecyclerView.smoothScrollToPosition(0);

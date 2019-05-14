@@ -42,7 +42,7 @@ public class UserLikesFragment extends BasePhotoFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (mUser.id.equals(AuthManager.getInstance().getID()) && resultCode == RESULT_OK) {
+        if (mUser != null && mUser.id.equals(AuthManager.getInstance().getID()) && resultCode == RESULT_OK) {
             if (requestCode == USER_LIKES_UPDATE_CODE) {
                 if (data.getBooleanExtra(PHOTO_UNLIKE_FLAG, false)) {
                     mItemAdapter.remove(mClickedPhotoPosition);
