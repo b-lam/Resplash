@@ -79,33 +79,40 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
 
     private fun downloadAndSetWallpaper(photo: Photo, photoService: PhotoService?, future: SettableFuture<Result>) {
         Thread {
-            val request = Request.Builder()
-                    .url(getUrlFromQuality(photo, inputData.getString(AUTO_WALLPAPER_QUALITY_KEY)))
-                    .build()
+            try {
+                val request = Request.Builder()
+                        .url(getUrlFromQuality(photo, inputData.getString(AUTO_WALLPAPER_QUALITY_KEY)))
+                        .build()
 
-            OkHttpClient.Builder()
-                    .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
-                    .protocols(Collections.singletonList(Protocol.HTTP_1_1))
-                    .build()
-                    .newCall(request).execute().use { response ->
-                        val inputStream = response.body()?.byteStream()
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            val screenSelect = inputData.getInt(AUTO_WALLPAPER_SELECT_SCREEN_KEY,
-                                    WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK)
-                            WallpaperManager.getInstance(applicationContext).setStream(inputStream, null,
-                                    true, screenSelect)
-                        } else {
-                            WallpaperManager.getInstance(applicationContext).setStream(inputStream)
+                OkHttpClient.Builder()
+                        .retryOnConnectionFailure(true)
+                        .pingInterval(1, TimeUnit.SECONDS)
+                        .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
+                        .protocols(Collections.singletonList(Protocol.HTTP_1_1))
+                        .build()
+                        .newCall(request).execute().use { response ->
+                            val inputStream = response.body()?.byteStream()
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                val screenSelect = inputData.getInt(AUTO_WALLPAPER_SELECT_SCREEN_KEY,
+                                        WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK)
+                                WallpaperManager.getInstance(applicationContext).setStream(inputStream, null,
+                                        true, screenSelect)
+                            } else {
+                                WallpaperManager.getInstance(applicationContext).setStream(inputStream)
+                            }
+
+                            photoService?.reportDownload(photo.id, null)
+
+                            addWallpaperToHistory(photo)
+
+                            future.set(Result.success())
+
+                            response.close()
                         }
-
-                        photoService?.reportDownload(photo.id, null)
-
-                        addWallpaperToHistory(photo)
-
-                        future.set(Result.success())
-
-                        response.close()
-                    }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                future.set(Result.retry())
+            }
         }.start()
     }
 
@@ -182,8 +189,8 @@ class AutoWallpaperWorker(context: Context, workerParams: WorkerParameters) : Li
                 val changeWallpaperIntervalMinutes = changeWallpaperInterval!!.toLong()
 
                 val constraints = Constraints.Builder()
-                            .setRequiredNetworkType( if (deviceOnWifiCondition) NetworkType.UNMETERED else NetworkType.NOT_REQUIRED )
-                            .setRequiresCharging(deviceChargingCondition)
+                        .setRequiredNetworkType( if (deviceOnWifiCondition) NetworkType.UNMETERED else NetworkType.NOT_REQUIRED )
+                        .setRequiresCharging(deviceChargingCondition)
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     constraints.setRequiresDeviceIdle(deviceIdleCondition)
