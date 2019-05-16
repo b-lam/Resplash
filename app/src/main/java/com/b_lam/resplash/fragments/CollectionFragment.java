@@ -249,9 +249,11 @@ public class CollectionFragment extends Fragment {
     }
 
     public void scrollToTop() {
-        if (mGridLayoutManager.findFirstVisibleItemPosition() > 5) {
-            mRecyclerView.scrollToPosition(5);
+        if (mRecyclerView != null) {
+            if (mGridLayoutManager != null && mGridLayoutManager.findFirstVisibleItemPosition() > 5) {
+                mRecyclerView.scrollToPosition(5);
+            }
+            mRecyclerView.smoothScrollToPosition(0);
         }
-        mRecyclerView.smoothScrollToPosition(0);
     }
 }
