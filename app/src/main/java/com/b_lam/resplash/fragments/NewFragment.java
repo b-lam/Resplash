@@ -37,7 +37,7 @@ public class NewFragment extends BasePhotoFragment {
     @Override
     public void loadMore() {
         super.loadMore();
-        mService.requestPhotos(mPage, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
+        mService.requestPhotos(mPage++, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
     }
 
     @Override
