@@ -60,6 +60,7 @@
     <string-array name="language">
         <item>English</item>
         <item>Spanish</item>
+        <item>Italian</item>
         <item>Czech</item>
         <item>Russian</item>
         <item>Serbian</item>
@@ -69,6 +70,7 @@
     <string-array name="language_values">
         <item>en</item>
         <item>es</item>
+        <item>it</item>
         <item>cs</item>
         <item>ru</item>
         <item>sr</item>
