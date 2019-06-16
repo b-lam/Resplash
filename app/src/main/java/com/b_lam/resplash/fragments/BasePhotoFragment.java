@@ -78,7 +78,6 @@ public abstract class BasePhotoFragment extends Fragment {
                         mPhotos = response.body();
                         mFooterAdapter.clear();
                         updateAdapter(mPhotos);
-                        mPage++;
                         mImagesProgress.setVisibility(View.GONE);
                         mRecyclerView.setVisibility(View.VISIBLE);
                         mHttpErrorView.setVisibility(View.GONE);

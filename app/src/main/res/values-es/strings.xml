@@ -1,0 +1,278 @@
+<resources>
+    <string name="app_name">Resplash</string>
+
+    <string name="navigation_drawer_open">Abrir menú de navegación</string>
+    <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+
+    <string name="action_share">Compartir</string>
+    <string name="action_view_on_unsplash">Abrir en navegador web</string>
+
+    <!-- ErrorView -->
+    <string name="error_http">Oops.</string>
+    <string name="error_http_subtitle">Parece que nos hemos quedado sin solicitudes de acceso a Unsplash. \n\nPor favor, vuelve a intentarlo dentro de un rato.</string>
+    <string name="error_network">Oops.</string>
+    <string name="error_network_subtitle">Parece que hay un problema con tu conexión a internet.</string>
+
+    <!-- Settings -->
+    <string name="title_quality_section">Calidad</string>
+    <string name="title_load_quality_preference">Calidad de carga</string>
+    <string name="summary_load_quality_preference">Elige en qué calidad quieres que la app cargue las imágenes</string>
+    <string name="title_download_quality_preference">Calidad de descarga</string>
+    <string name="summary_download_quality_preference">Elige en qué calidad se descargarán las imágenes a tu dispositivo</string>
+    <string name="title_wallpaper_quality_preference">Calidad del fonodo de pantalla</string>
+    <string name="summary_wallpaper_quality_preference">Elige en qué calidad quieres que se descarguen tus fondos de pantalla</string>
+    <string-array name="quality_options">
+        <item>Raw</item>
+        <item>Alta</item>
+        <item>Media</item>
+        <item>Baja</item>
+        <item>Miniatura</item>
+    </string-array>
+    <string name="default_load_quality">Media</string>
+    <string name="default_download_quality">Alta</string>
+    <string name="title_layout_section">Diseño</string>
+    <string name="title_layout_preference">Elige un diseño</string>
+    <string name="summary_layout_preference">¿Cómo mostramos las imágenes?</string>
+    <string-array name="layout_options">
+        <item>Lista</item>
+        <item>Tarjetas</item>
+        <item>Cuadrícula</item>
+    </string-array>
+    <string name="default_layout">Lista</string>
+    <string name="title_general_section">General</string>
+    <string name="title_custom_api">Clave API personalizada</string>
+    <string name="title_clear_cache">Vaciar caché</string>
+    <string name="cache_size">Tamaño de caché</string>
+    <string name="message_cache_cleared">Caché vaciada!</string>
+    <string name="title_language">Idioma</string>
+    <string name="title_theme">Tema</string>
+    <string-array name="theme">
+        <item>Claro</item>
+        <item>Oscuro</item>
+        <item>Negro (AMOLED)</item>
+    </string-array>
+    <string name="default_theme">Claro</string>
+    <string name="restart">Reiniciar</string>
+    <string name="restart_to_apply">Reinicia para aplicar cambios</string>
+    <string name="title_other_section">Otros</string>
+    <string name="title_unsplash_intent_preference">Abre Unsplash.com</string>
+
+    <!-- Menu -->
+    <string name="menu_search">Buscar</string>
+    <string name="menu_sort">Ordenar por</string>
+    <string name="menu_item_latest">Últimas</string>
+    <string name="menu_item_oldest">Antiguas</string>
+    <string name="menu_item_popular">Populares</string>
+    <string name="menu_item_random">Aleatorio</string>
+    <string name="menu_item_all">Todas</string>
+    <string name="menu_item_curated">Curadas</string>
+    <string name="menu_item_featured">Destacadas</string>
+
+    <!-- Main -->
+    <string name="main_unsplash_description">Fotografías gratuitas y en alta resolución</string>
+    <string name="main_add_account">Añade una cuenta</string>
+    <string name="main_add_new_account">Añade tu cuenta de Unsplash</string>
+    <string name="main_view_profile">Ver perfil</string>
+    <string name="main_manage_account">Gestionar cuentas</string>
+    <string name="main_logout">Salir</string>
+    <string name="main_featured">Destacado</string>
+    <string name="main_new">Nuevo</string>
+    <string name="main_collections">Colecciones</string>
+    <string name="main_support_development">Ayuda al desarrollo</string>
+    <string name="main_settings">Configuración</string>
+    <string name="main_about">Info</string>
+    <string name="main_logout_success">Has cerrado sesión</string>
+
+    <!-- Intro -->
+    <string name="intro_welcome_title">Resplash</string>
+    <string name="intro_welcome_description">Powered by Unsplash</string>
+    <string name="intro_download_title">Hi-Res Photos</string>
+    <string name="intro_download_description">Free (do whatever you want) high-resolution photos</string>
+    <string name="intro_done">Ir</string>
+    <string name="intro_next">Siguiente</string>
+
+    <!-- Custom API -->
+    <string name="custom_api_key_description">Puedes crear tu cuenta en Unspash y usar tu propia clave API \n\n(Déjalo en blanco para usar la API por defecto)</string>
+    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
+    <string name="api_key_empty_message">Error: El campo no puede estar vacío</string>
+    <string name="redirect_uri_hint">Redirect URI</string>
+    <string name="secret_hint">Secret</string>
+    <string name="api_key_hint">API Key</string>
+
+    <!-- Search -->
+    <string name="search_photos">Fotos</string>
+    <string name="search_collections">Colecciones</string>
+    <string name="search_users">Usuarios</string>
+    <string name="search_hint">Buscar</string>
+    <string name="search_title">Buscar</string>
+    <string name="action_clear_text">Limpiar</string>
+    <string-array name="search_photos_orientations">
+        <item>Todas</item>
+        <item>Horizontal</item>
+        <item>Vertical</item>
+        <item>Cuadrada</item>
+    </string-array>
+
+    <!-- InfoDialog -->
+    <string name="photo_dimensions">Dimensiones</string>
+    <string name="camera_make">Cámara</string>
+    <string name="camera_model">Modelo</string>
+    <string name="exposure_time">Exposición</string>
+    <string name="aperture">Apertura</string>
+    <string name="iso">ISO</string>
+    <string name="focal_length">Distancia focal</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">Añadir a colección</string>
+    <string name="create_new_collection">Crear nueva colección</string>
+    <string name="create_a_new_collection">Crea una nueva colección</string>
+    <string name="create">Creada</string>
+    <string name="delete">Borrar</string>
+    <string name="collection_name_hint">Nombre</string>
+    <string name="collection_description_hint">Descripción (opcional)</string>
+    <string name="make_collection_private">Marcar como privada</string>
+    <string name="collection_name_is_required">El nombre es obligatorio</string>
+    <string name="failed_to_create_collection">Error al crear la colección</string>
+    <string name="failed_to_save_collection">Error al guardar la colección</string>
+    <string name="failed_to_delete_collection">Error al borrar la colección</string>
+    <string name="edit_collection">Editar la colección</string>
+    <string name="are_you_sure">¿Estas seguro?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+
+    <!-- About -->
+    <string name="about_title">Info</string>
+    <string name="about_unsplash_title">Unsplash.com</string>
+    <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
+    <string name="about_version_title">Versión</string>
+    <string name="about_introduction_title">Introducción</string>
+    <string name="about_github_title">GitHub</string>
+    <string name="about_privacy_policy_title">Política de privacidad</string>
+    <string name="about_support_development_card_title">Desarrollo</string>
+    <string name="about_rate_title">Valorar</string>
+    <string name="about_rate_subtitle">Si disfrutas con Resplash, ponle buena nota en Play Store</string>
+    <string name="about_donate_title">Donar</string>
+    <string name="about_donate_subtitle">Si disfrutas MUCHO con Resplash, considera invitarme a un café</string>
+    <string name="about_bug_title">Reportar errores</string>
+    <string name="about_bug_subtitle">En GitHub</string>
+    <string name="about_author_title">Brandon Lam</string>
+    <string name="about_author_card_title">Autor</string>
+    <string name="about_author_subtitle">Toronto, Ontario, Canada</string>
+    <string name="about_website_title">Visita mi web</string>
+    <string name="about_instagram_title">Sígueme en Instagram</string>
+    <string name="about_libraries_card_title">Librerías</string>
+
+    <!-- Donate -->
+    <string name="donate_card_title">Ayuda al desarrollo</string>
+    <string name="donate_item1_title">Café</string>
+    <string name="donate_item1_subtitle">Para mantenerme despierto en las largas noches de código</string>
+    <string name="donate_item2_title">Smoothie</string>
+    <string name="donate_item2_subtitle">Algo saludable, para variar</string>
+    <string name="donate_item3_title">Pizza</string>
+    <string name="donate_item3_subtitle">A todo el mundo le gusta la pizza</string>
+    <string name="donate_item4_title">Un almuerzo chulo</string>
+    <string name="donate_item4_subtitle">Una vez en la vida</string>
+    <string name="donate_thanks">¡Gracias!</string>
+    <string name="donate_loading">Cargando productos &#8230;</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Auto Wallpaper</string>
+    <string name="auto_wallpaper_conditions">Condiciones</string>
+    <string name="auto_wallpaper_on_wifi">Sólo con Wi-Fi</string>
+    <string name="auto_wallpaper_on_wifi_summary">El dispositivo debe estar conectado a una red Wi-Fi</string>
+    <string name="auto_wallpaper_charging">Cargando</string>
+    <string name="auto_wallpaper_charging_summary">El dispositivo debe estar conectado a la corriente</string>
+    <string name="auto_wallpaper_idle">Ausente</string>
+    <string name="auto_wallpaper_idle_summary">El dispositivo debe estar inactivo</string>
+    <string name="auto_wallpaper_interval">Intervalo</string>
+    <string name="auto_wallpaper_interval_summary">¿Cada cuanto tiempo cambiamos tu wallpaper?</string>
+    <string-array name="auto_wallpaper_interval_options">
+        <item>15 minutoss</item>
+        <item>30 minutos</item>
+        <item>1 hora</item>
+        <item>3 horas</item>
+        <item>6 horas</item>
+        <item>12 horas</item>
+        <item>24 horas</item>
+        <item>48 horas</item>
+    </string-array>
+    <string name="auto_wallpaper_source">Fuente</string>
+    <string name="auto_wallpaper_category">Categoría</string>
+    <string name="auto_wallpaper_category_summary">Elige una categoría</string>
+    <string-array name="auto_wallpaper_category_options">
+        <item>Todas</item>
+        <item>Destacados</item>
+        <item>Personalizar</item>
+    </string-array>
+    <string name="auto_wallpaper_custom_category">Categoría personalizada</string>
+    <string name="auto_wallpaper_custom_category_summary">Elige wallpapers que coincidan con un término de búsqueda</string>
+    <string name="auto_wallpaper_options">Opciones</string>
+    <string name="auto_wallpaper_select_screen">¿Dónde?</string>
+    <string name="auto_wallpaper_select_screen_summary">Elige en qué pantalla(s) aplicar el wallpaper</string>
+    <string-array name="auto_wallpaper_select_screen_options">
+        <item>Pantalla de inicio</item>
+        <item>Pantalla de bloqueo</item>
+        <item>Las dos</item>
+    </string-array>
+    <string name="auto_wallpaper_history">Historial de wallpapers</string>
+    <string name="auto_wallpaper_history_summary">Ver fondos de escritorio anteriores</string>
+    <string name="auto_wallpaper_info">Auto Wallpaper actualizará tu fondo de escritorio con una imagen de acuerdo con estas condiciones.</string>
+
+    <!-- Detail -->
+    <string name="stats">Datos</string>
+    <string name="photo_info">Info</string>
+    <string name="set_as_wallpaper">Usar como wallpaper</string>
+    <string name="download">Descargar</string>
+    <string name="setting_wallpaper">Config wallpaper&#8230;</string>
+    <string name="cancel">Cancelar</string>
+    <string name="file_exists">Ya has descargado esta imagen</string>
+
+    <!-- Error -->
+    <string name="no_results">No hay nada aquí&#8230;</string>
+    <string name="log_in">Iniciar sesión</string>
+    <string name="join">Crear cuenta</string>
+    <string name="edit_title">Editar perfil</string>
+    <string name="request_token_failed">El token de acceso ha fallado</string>
+    <string name="error">Error</string>
+
+    <string name="by_author">Por %1$s</string>
+    <string name="no_more_photos">No hay más fotos</string>
+    <string name="updated_photos">Fotos actualizadas</string>
+    <string name="updated_collections">Colecciones actualizadas</string>
+    <string name="updated_users">Usuarios actualiados</string>
+    <string name="share_via">Compartir en</string>
+    <string name="unsplash_image">Imagen de Unsplash</string>
+    <string name="unsplash_collection">Colección de Unspash</string>
+    <string name="save">Guardar</string>
+    <string name="saved">Guardados</string>
+    <string name="likes">%1$s Likes</string>
+    <string name="photos">%1$s Fotos</string>
+    <string name="views">%1$s Vistos</string>
+    <string name="downloads">%1$s Descargados</string>
+    <string name="cannot_make_anymore_requests">No podemos hacer eso en este momento</string>
+    <string name="download_started">Download started</string>
+    <string name="image_saved">Imagen guardada</string>
+    <string name="download_wallpaper">Descarga Wallpaper</string>
+    <string name="download_complete">Descarga completa</string>
+    <string name="unknown">Desconocido</string>
+    <string name="cannot_update_profile">No podemos actualizar tu perfil</string>
+    <string name="updated_profile">Perfil actualizado</string>
+    <string name="username_cannot_be_blank">Necesitamos saber como llamarte</string>
+    <string name="failed_to_load_profile">No se puede cargar el perfil</string>
+    <string name="next">Siguiente</string>
+    <string name="username_hint">Usuario</string>
+    <string name="first_name_hint">Nombre</string>
+    <string name="last_name_hint">Apellido</string>
+    <string name="email_address_hint">Email</string>
+    <string name="personal_site_hint">Web</string>
+    <string name="instagram_username_hint">Instagram</string>
+    <string name="location_hint">Ubicación</string>
+    <string name="bio_hint">Bio</string>
+    <string name="error_loading_photo">No podemos cargar esta foto</string>
+    <string name="need_to_log_in">Debes iniciar sesión para hacer eso</string>
+    <string name="on">Encendido</string>
+    <string name="off">Apagado</string>
+    <string name="next_wallpaper">Siguiente wallpaper</string>
+    <string name="remove_all">Borrar todos</string>
+    <string name="activate">Activar</string>
+</resources>
