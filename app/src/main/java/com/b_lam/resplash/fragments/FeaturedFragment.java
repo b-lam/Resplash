@@ -37,7 +37,7 @@ public class FeaturedFragment extends BasePhotoFragment {
     @Override
     public void loadMore(){
         super.loadMore();
-        mService.requestCuratedPhotos(mPage, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
+        mService.requestCuratedPhotos(mPage++, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
     }
 
     @Override

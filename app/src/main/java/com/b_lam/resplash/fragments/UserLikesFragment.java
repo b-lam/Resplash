@@ -60,7 +60,7 @@ public class UserLikesFragment extends BasePhotoFragment {
         super.loadMore();
 
         if (mUser != null) {
-            mService.requestUserLikes(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
+            mService.requestUserLikes(mUser, mPage++, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
         } else {
             mImagesProgress.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.GONE);

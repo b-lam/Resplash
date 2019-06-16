@@ -38,7 +38,7 @@ public class UserPhotoFragment extends BasePhotoFragment {
         super.loadMore();
 
         if (mUser != null) {
-            mService.requestUserPhotos(mUser, mPage, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
+            mService.requestUserPhotos(mUser, mPage++, Resplash.DEFAULT_PER_PAGE, mSort, mRequestPhotoListener);
         } else {
             mImagesProgress.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.GONE);
