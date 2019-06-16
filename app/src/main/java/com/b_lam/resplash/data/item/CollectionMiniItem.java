@@ -23,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CollectionMiniItem extends ModelAbstractItem<Collection, CollectionMiniItem, CollectionMiniItem.ViewHolder> {
+public class CollectionMiniItem extends ModelAbstractItem<Collection, CollectionMiniItem.ViewHolder> {
 
     public CollectionMiniItem (Collection collection) {
         super(collection);

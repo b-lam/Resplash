@@ -21,11 +21,10 @@ import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.model.Photo;
 import com.b_lam.resplash.data.service.PhotoService;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter_extensions.items.ProgressItem;
-import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.ui.items.ProgressItem;
 
 import java.util.List;
 
@@ -51,11 +50,6 @@ public abstract class BasePhotoFragment extends Fragment {
     private ItemAdapter mFooterAdapter;
     private List<Photo> mPhotos;
     private int mColumns;
-
-    private OnClickListener<Photo> mOnClickListener = (v, adapter, item, position) -> {
-        onPhotoClick(item, position);
-        return false;
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -130,7 +124,10 @@ public abstract class BasePhotoFragment extends Fragment {
         mRecyclerView.setItemViewCacheSize(5);
         mItemAdapter = new FastItemAdapter<>();
 
-        mItemAdapter.withOnClickListener(mOnClickListener);
+        mItemAdapter.setOnClickListener((v, adapter, item, position) -> {
+            onPhotoClick(item, position);
+            return false;
+        });
 
         mFooterAdapter = new ItemAdapter<>();
 
@@ -143,7 +140,9 @@ public abstract class BasePhotoFragment extends Fragment {
             public void onLoadMore(int currentPage) {
                 mRecyclerView.post(() -> {
                     mFooterAdapter.clear();
-                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                    ProgressItem progressItem = new ProgressItem();
+                    progressItem.setEnabled(false);
+                    mFooterAdapter.add(progressItem);
                     loadMore();
                 });
             }
@@ -155,7 +154,9 @@ public abstract class BasePhotoFragment extends Fragment {
             mRecyclerView.post(() -> {
                 mItemAdapter.clear();
                 mFooterAdapter.clear();
-                mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                ProgressItem progressItem = new ProgressItem();
+                progressItem.setEnabled(false);
+                mFooterAdapter.add(progressItem);
                 loadMore();
             });
         });

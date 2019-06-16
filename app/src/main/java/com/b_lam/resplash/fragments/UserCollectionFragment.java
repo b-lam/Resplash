@@ -26,11 +26,10 @@ import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.service.CollectionService;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.google.gson.Gson;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter_extensions.items.ProgressItem;
-import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.ui.items.ProgressItem;
 
 import java.util.List;
 
@@ -95,7 +94,16 @@ public class UserCollectionFragment extends Fragment {
         mImageRecycler.setItemViewCacheSize(5);
         mCollectionAdapter = new FastItemAdapter<>();
 
-        mCollectionAdapter.withOnClickListener(onClickListener);
+        mCollectionAdapter.setOnClickListener((v, adapter, item, position) -> {
+            mClickedCollectionPosition = position;
+            Intent i = new Intent(getContext(), CollectionDetailActivity.class);
+            i.putExtra("Collection", new Gson().toJson(item.getModel()));
+            if (mUser != null && mUser.id.equals(AuthManager.getInstance().getID())) {
+                i.putExtra(CollectionDetailActivity.USER_COLLECTION_FLAG, true);
+            }
+            startActivityForResult(i, USER_COLLECTION_UPDATE_CODE);
+            return false;
+        });
 
         mFooterAdapter = new ItemAdapter();
 
@@ -108,7 +116,9 @@ public class UserCollectionFragment extends Fragment {
             public void onLoadMore(int currentPage) {
                 mImageRecycler.post(() -> {
                     mFooterAdapter.clear();
-                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                    ProgressItem progressItem = new ProgressItem();
+                    progressItem.setEnabled(false);
+                    mFooterAdapter.add(progressItem);
                     loadMore();
                 });
             }
@@ -128,18 +138,7 @@ public class UserCollectionFragment extends Fragment {
         }
     }
 
-    private OnClickListener<CollectionItem> onClickListener = (v, adapter, item, position) -> {
-        mClickedCollectionPosition = position;
-        Intent i = new Intent(getContext(), CollectionDetailActivity.class);
-        i.putExtra("Collection", new Gson().toJson(item.getModel()));
-        if (mUser != null && mUser.id.equals(AuthManager.getInstance().getID())) {
-            i.putExtra(CollectionDetailActivity.USER_COLLECTION_FLAG, true);
-        }
-        startActivityForResult(i, USER_COLLECTION_UPDATE_CODE);
-        return false;
-    };
-
-    public void updateAdapter(List<Collection> collections) {
+    private void updateAdapter(List<Collection> collections) {
         for (Collection collection : collections) {
             mCollectionAdapter.add(new CollectionItem(collection));
         }

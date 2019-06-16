@@ -34,12 +34,10 @@ import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.views.CircleImageView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter_extensions.items.ProgressItem;
-import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.ui.items.ProgressItem;
 
 import java.util.List;
 
@@ -120,42 +118,7 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
 
         mPhotoAdapter = new FastItemAdapter<>();
 
-        mPhotoAdapter.withOnClickListener(onClickListener);
-
-        mFooterAdapter = new ItemAdapter<>();
-
-        mPhotoAdapter.addAdapter(1, mFooterAdapter);
-
-        mImageRecycler.setAdapter(mPhotoAdapter);
-
-        mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                if (mPhotoAdapter.getItemCount() >= mCollection.total_photos && mPage > 2) {
-                    Toast.makeText(getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG).show();
-                } else {
-                    mImageRecycler.post(() -> {
-                        mFooterAdapter.clear();
-                        mFooterAdapter.add(new ProgressItem().withEnabled(false));
-                        loadMore();
-                    });
-                }
-            }
-        });
-
-        mSwipeContainer.setOnRefreshListener(() -> {
-            mPage = 1;
-            mPhotoAdapter.clear();
-            loadMore();
-        });
-
-        mPage = 1;
-        loadMore();
-    }
-
-    private OnClickListener<Photo> onClickListener = new OnClickListener<Photo>(){
-        @Override
-        public boolean onClick(View v, IAdapter<Photo> adapter, Photo item, int position) {
+        mPhotoAdapter.setOnClickListener((v, adapter, item, position) -> {
             mClickedPhotoPosition = position;
             Intent i = new Intent(getApplicationContext(), DetailActivity.class);
             i.putExtra("Photo", new Gson().toJson(item));
@@ -177,8 +140,40 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
             }
 
             return false;
-        }
-    };
+        });
+
+        mFooterAdapter = new ItemAdapter<>();
+
+        mPhotoAdapter.addAdapter(1, mFooterAdapter);
+
+        mImageRecycler.setAdapter(mPhotoAdapter);
+
+        mImageRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener(mFooterAdapter) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                if (mPhotoAdapter.getItemCount() >= mCollection.total_photos && mPage > 2) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.no_more_photos), Toast.LENGTH_LONG).show();
+                } else {
+                    mImageRecycler.post(() -> {
+                        mFooterAdapter.clear();
+                        ProgressItem progressItem = new ProgressItem();
+                        progressItem.setEnabled(false);
+                        mFooterAdapter.add(progressItem);
+                        loadMore();
+                    });
+                }
+            }
+        });
+
+        mSwipeContainer.setOnRefreshListener(() -> {
+            mPage = 1;
+            mPhotoAdapter.clear();
+            loadMore();
+        });
+
+        mPage = 1;
+        loadMore();
+    }
 
     private void setCollection(Collection collection) {
         setTitle(collection.title);

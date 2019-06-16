@@ -2,24 +2,24 @@ package com.b_lam.resplash.data.model;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.bumptech.glide.Glide;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-import com.b_lam.resplash.R;
-
 /**
  * User
  **/
 
-public class User extends AbstractItem<User, User.ViewHolder> {
+public class User extends AbstractItem<User.ViewHolder> {
 
     /**
      "id": "pXhwzz1JtQU",

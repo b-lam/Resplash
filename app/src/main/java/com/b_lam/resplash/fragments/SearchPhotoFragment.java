@@ -27,11 +27,10 @@ import com.b_lam.resplash.data.model.Photo;
 import com.b_lam.resplash.data.model.SearchPhotosResult;
 import com.b_lam.resplash.data.service.SearchService;
 import com.google.gson.Gson;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter_extensions.items.ProgressItem;
-import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.ui.items.ProgressItem;
 
 import java.util.List;
 
@@ -101,7 +100,12 @@ public class SearchPhotoFragment extends Fragment {
         mRecyclerView.setItemViewCacheSize(5);
         mItemAdapter = new FastItemAdapter<>();
 
-        mItemAdapter.withOnClickListener(onClickListener);
+        mItemAdapter.setOnClickListener((v, adapter, item, position) -> {
+            Intent i = new Intent(getContext(), DetailActivity.class);
+            i.putExtra("Photo", new Gson().toJson(item));
+            startActivity(i);
+            return false;
+        });
 
         mFooterAdapter = new ItemAdapter();
 
@@ -114,7 +118,9 @@ public class SearchPhotoFragment extends Fragment {
             public void onLoadMore(int currentPage) {
                 mRecyclerView.post(() -> {
                     mFooterAdapter.clear();
-                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                    ProgressItem progressItem = new ProgressItem();
+                    progressItem.setEnabled(false);
+                    mFooterAdapter.add(progressItem);
                     loadMore();
                 });
             }
@@ -126,7 +132,9 @@ public class SearchPhotoFragment extends Fragment {
             mRecyclerView.post(() -> {
                 mItemAdapter.clear();
                 mFooterAdapter.clear();
-                mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                ProgressItem progressItem = new ProgressItem();
+                progressItem.setEnabled(false);
+                mFooterAdapter.add(progressItem);
                 loadMore();
             });
         });
@@ -143,13 +151,6 @@ public class SearchPhotoFragment extends Fragment {
             mService.cancel();
         }
     }
-
-    private OnClickListener<Photo> onClickListener = (v, adapter, item, position) -> {
-        Intent i = new Intent(getContext(), DetailActivity.class);
-        i.putExtra("Photo", new Gson().toJson(item));
-        startActivity(i);
-        return false;
-    };
 
     private void updateAdapter(List<Photo> photos) {
         mItemAdapter.add(photos);

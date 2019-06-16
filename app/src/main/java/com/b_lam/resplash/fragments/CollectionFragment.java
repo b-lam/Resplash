@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,12 +23,10 @@ import com.b_lam.resplash.data.item.CollectionItem;
 import com.b_lam.resplash.data.model.Collection;
 import com.b_lam.resplash.data.service.CollectionService;
 import com.google.gson.Gson;
-import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter_extensions.items.ProgressItem;
-import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.ui.items.ProgressItem;
 
 import java.util.List;
 
@@ -76,7 +75,7 @@ public class CollectionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         setRetainInstance(true);
 
@@ -95,7 +94,12 @@ public class CollectionFragment extends Fragment {
         mRecyclerView.setItemViewCacheSize(5);
         mCollectionAdapter = new FastItemAdapter<>();
 
-        mCollectionAdapter.withOnClickListener(onClickListener);
+        mCollectionAdapter.setOnClickListener((v, adapter, item, position) -> {
+            Intent i = new Intent(getContext(), CollectionDetailActivity.class);
+            i.putExtra("Collection", new Gson().toJson(item.getModel()));
+            startActivity(i);
+            return false;
+        });
 
         mFooterAdapter = new ItemAdapter();
 
@@ -108,7 +112,9 @@ public class CollectionFragment extends Fragment {
             public void onLoadMore(int currentPage) {
                 mRecyclerView.post(() -> {
                     mFooterAdapter.clear();
-                    mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                    ProgressItem progressItem = new ProgressItem();
+                    progressItem.setEnabled(false);
+                    mFooterAdapter.add(progressItem);
                     loadMore();
                 });
             }
@@ -128,17 +134,7 @@ public class CollectionFragment extends Fragment {
         }
     }
 
-    private OnClickListener<CollectionItem> onClickListener = new OnClickListener<CollectionItem>(){
-        @Override
-        public boolean onClick(View v, IAdapter<CollectionItem> adapter, CollectionItem item, int position) {
-            Intent i = new Intent(getContext(), CollectionDetailActivity.class);
-            i.putExtra("Collection", new Gson().toJson(item.getModel()));
-            startActivity(i);
-            return true;
-        }
-    };
-
-    public void updateAdapter(List<Collection> collections) {
+    private void updateAdapter(List<Collection> collections) {
         for (Collection collection: collections) {
             mCollectionAdapter.add(new CollectionItem(collection));
         }
@@ -184,16 +180,20 @@ public class CollectionFragment extends Fragment {
             }
         };
 
-        if(mType.equals("All")){
-            mService.requestAllCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
-        }else if(mType.equals("Curated")){
-            mService.requestCuratedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
-        }else if(mType.equals("Featured")){
-            mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        switch (mType) {
+            case "All":
+                mService.requestAllCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+                break;
+            case "Curated":
+                mService.requestCuratedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+                break;
+            case "Featured":
+                mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+                break;
         }
     }
 
-    public void fetchNew(){
+    private void fetchNew(){
         if(mCollections == null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
@@ -239,12 +239,16 @@ public class CollectionFragment extends Fragment {
             }
         };
 
-        if(mType.equals("All")){
-            mService.requestAllCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
-        }else if(mType.equals("Curated")){
-            mService.requestCuratedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
-        }else if(mType.equals("Featured")){
-            mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+        switch (mType) {
+            case "All":
+                mService.requestAllCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+                break;
+            case "Curated":
+                mService.requestCuratedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+                break;
+            case "Featured":
+                mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
+                break;
         }
     }
 

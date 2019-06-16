@@ -21,7 +21,7 @@ import com.mikepenz.fastadapter.items.ModelAbstractItem;
 
 import java.util.List;
 
-public class CollectionItem extends ModelAbstractItem<Collection, CollectionItem, CollectionItem.ViewHolder> {
+public class CollectionItem extends ModelAbstractItem<Collection, CollectionItem.ViewHolder> {
 
     public CollectionItem (Collection collection) {
         super(collection);
@@ -61,7 +61,7 @@ public class CollectionItem extends ModelAbstractItem<Collection, CollectionItem
     }
 
     @Override
-    public void bindView(ViewHolder holder, List<Object> payloads) {
+    public void bindView(@NonNull ViewHolder holder, @NonNull List<Object> payloads) {
         super.bindView(holder, payloads);
 
         String url;
@@ -136,14 +136,14 @@ public class CollectionItem extends ModelAbstractItem<Collection, CollectionItem
     }
 
     // Manually create the ViewHolder class
-    protected static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView coverPhoto, coverPhotoCard;
         TextView collectionName, collectionNameCard;
         TextView collectionSize, collectionSizeCard;
         ImageView collectionPrivate;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
             if (sharedPreferences.getString("item_layout", "List").equals("Cards")) {
