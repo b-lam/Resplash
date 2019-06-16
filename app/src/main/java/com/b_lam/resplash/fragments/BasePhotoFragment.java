@@ -68,6 +68,11 @@ public abstract class BasePhotoFragment extends Fragment {
             public void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response) {
                 Log.d(TAG, String.valueOf(response.code()));
                 if (isAdded()) {
+                    if (mSwipeContainer.isRefreshing()) {
+                        mItemAdapter.clear();
+                        mSwipeContainer.setRefreshing(false);
+                        Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
+                    }
                     if (response.isSuccessful()) {
                         mPhotos = response.body();
                         mFooterAdapter.clear();
@@ -82,10 +87,6 @@ public abstract class BasePhotoFragment extends Fragment {
                         mRecyclerView.setVisibility(View.GONE);
                         mHttpErrorView.setVisibility(View.VISIBLE);
                         mNetworkErrorView.setVisibility(View.GONE);
-                    }
-                    if (mSwipeContainer.isRefreshing()) {
-                        Toast.makeText(getContext(), getString(R.string.updated_photos), Toast.LENGTH_SHORT).show();
-                        mSwipeContainer.setRefreshing(false);
                     }
                 }
             }
@@ -151,14 +152,7 @@ public abstract class BasePhotoFragment extends Fragment {
         mSwipeContainer.setOnRefreshListener(() -> {
             mPage = 1;
             mPhotos = null;
-            mRecyclerView.post(() -> {
-                mItemAdapter.clear();
-                mFooterAdapter.clear();
-                ProgressItem progressItem = new ProgressItem();
-                progressItem.setEnabled(false);
-                mFooterAdapter.add(progressItem);
-                loadMore();
-            });
+            mRecyclerView.post(this::loadMore);
         });
 
         mPage = 1;
