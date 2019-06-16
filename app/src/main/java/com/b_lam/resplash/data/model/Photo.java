@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.ThemeUtils;
@@ -22,13 +25,11 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * Photo
  **/
 
-public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
+public class Photo extends AbstractItem<Photo.ViewHolder>  {
 
     /**
      "id": "Dwu85P9SOIk",
@@ -264,7 +265,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
     }
 
     @Override
-    public void bindView(final Photo.ViewHolder holder, List payloads) {
+    public void bindView(@NonNull final Photo.ViewHolder holder, @NonNull List payloads) {
         super.bindView(holder, payloads);
 
         String url = "";
@@ -295,13 +296,10 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
         DisplayMetrics displaymetrics = Resplash.getInstance().getResources().getDisplayMetrics();
         float finalHeight = displaymetrics.widthPixels / ((float)width/(float)height);
 
-        ViewPropertyTransition.Animator fadeAnimation = new ViewPropertyTransition.Animator() {
-            @Override
-            public void animate(View view) {
-                ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-                fadeAnim.setDuration(500);
-                fadeAnim.start();
-            }
+        ViewPropertyTransition.Animator fadeAnimation = view -> {
+            ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+            fadeAnim.setDuration(500);
+            fadeAnim.start();
         };
 
         switch (sharedPreferences.getString("item_layout", "List")){
@@ -321,13 +319,7 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
                 }
                 ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
                 colorAnimation.setDuration(1000);
-                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animator) {
-                        holder.imageList.setBackgroundColor((int) animator.getAnimatedValue());
-                    }
-
-                });
+                colorAnimation.addUpdateListener(animator -> holder.imageList.setBackgroundColor((int) animator.getAnimatedValue()));
                 colorAnimation.start();
                 break;
             case "Cards":
@@ -349,32 +341,33 @@ public class Photo extends AbstractItem<Photo, Photo.ViewHolder>  {
         }
     }
 
+    @NonNull
     @Override
-    public ViewHolder getViewHolder(View v) {
+    public ViewHolder getViewHolder(@NonNull View v) {
         return new ViewHolder(v);
     }
 
     // Manually create the ViewHolder class
-    protected static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageList;
         ImageView imageCard;
         TextView authorCard;
         ImageView imageGrid;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
             switch (sharedPreferences.getString("item_layout", "List")){
                 case "List":
-                    imageList = (ImageView) itemView.findViewById(R.id.item_image_img);
+                    imageList = itemView.findViewById(R.id.item_image_img);
                     break;
                 case "Cards":
-                    imageCard = (ImageView) itemView.findViewById(R.id.item_image_card_img);
-                    authorCard = (TextView) itemView.findViewById(R.id.item_image_card_author);
+                    imageCard = itemView.findViewById(R.id.item_image_card_img);
+                    authorCard = itemView.findViewById(R.id.item_image_card_author);
                     break;
                 case "Grid":
-                    imageGrid = (ImageView) itemView.findViewById(R.id.item_image_grid_img);
+                    imageGrid = itemView.findViewById(R.id.item_image_grid_img);
                     break;
             }
         }

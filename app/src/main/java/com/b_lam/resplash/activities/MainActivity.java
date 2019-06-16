@@ -35,7 +35,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.mikepenz.iconics.IconicsColor;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.iconics.IconicsSize;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -108,7 +110,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
 
         profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail(getString(R.string.main_unsplash_description)).withIcon(R.drawable.intro_icon_image);
 
-        DrawerImageLoader.init(new AbstractDrawerImageLoader() {
+        DrawerImageLoader.Companion.init(new AbstractDrawerImageLoader() {
             @Override
             public void set(ImageView imageView, Uri uri, Drawable placeholder, String tag) {
                 Glide.with(getApplicationContext())
@@ -119,7 +121,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             }
 
             @Override
-            public void cancel(ImageView imageView) {
+            public void cancel(@NonNull ImageView imageView) {
                 if (!isFinishing()) {
                     Glide.with(getApplicationContext()).clear(imageView);
                 }
@@ -128,11 +130,11 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
             @Override
             public Drawable placeholder(Context ctx, String tag) {
                 if (DrawerImageLoader.Tags.PROFILE.name().equals(tag)) {
-                    return DrawerUIUtils.getPlaceHolder(ctx);
+                    return DrawerUIUtils.INSTANCE.getPlaceHolder(ctx);
                 } else if (DrawerImageLoader.Tags.ACCOUNT_HEADER.name().equals(tag)) {
-                    return new IconicsDrawable(ctx).iconText(" ").backgroundColorRes(R.color.primary_light).sizeDp(56);
+                    return new IconicsDrawable(ctx).iconText(" ").backgroundColor(IconicsColor.colorRes(R.color.primary_light)).size(IconicsSize.dp(56));
                 } else if ("customUrlItem".equals(tag)) {
-                    return new IconicsDrawable(ctx).iconText(" ").backgroundColorRes(R.color.md_red_500).sizeDp(56);
+                    return new IconicsDrawable(ctx).iconText(" ").backgroundColor(IconicsColor.colorRes(R.color.md_red_500)).size(IconicsSize.dp(56));
                 }
                 return super.placeholder(ctx, tag);
             }
@@ -488,12 +490,12 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     private void updateDrawerItems(){
         drawerHeader.clear();
 
-        if(!AuthManager.getInstance().isAuthorized()){
+        if (!AuthManager.getInstance().isAuthorized()) {
             drawerHeader.addProfiles(drawerItemAddAccount, profileDefault);
-        }else{
-            if(AuthManager.getInstance().getAvatarPath() != null){
+        } else {
+            if (AuthManager.getInstance().getAvatarPath() != null) {
                 profile = new ProfileDrawerItem().withName(AuthManager.getInstance().getUsername()).withEmail(AuthManager.getInstance().getEmail()).withIcon(AuthManager.getInstance().getAvatarPath());
-            }else{
+            } else {
                 profile = profileDefault;
             }
             drawerHeader.addProfiles(drawerItemViewProfile, drawerItemManageAccount, drawerItemLogout, profile);

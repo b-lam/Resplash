@@ -11,8 +11,8 @@ android {
         applicationId "com.b_lam.resplash"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 27
-        versionName "2.0.3"
+        versionCode 28
+        versionName "2.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "RELEASE_APP_ID", project.RELEASE_APP_ID)
         buildConfigField("String", "RELEASE_SECRET", project.RELEASE_SECRET)
@@ -44,6 +44,9 @@ android {
     lintOptions {
         disable 'MissingTranslation'
     }
+    packagingOptions {
+        exclude 'META-INF/library-core_release.kotlin_module'
+    }
 }
 
 repositories {
@@ -74,16 +77,18 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.github.chrisbanes:PhotoView:2.2.0'
-    implementation 'com.mikepenz:materialdrawer:6.1.2'
-    implementation 'com.mikepenz:fastadapter:3.3.1'
-    implementation 'com.mikepenz:fastadapter-commons:3.3.1'
-    implementation 'com.mikepenz:fastadapter-extensions-expandable:3.3.1'
-    implementation 'com.mikepenz:fastadapter-extensions:3.3.1'
+    implementation 'com.mikepenz:materialdrawer:7.0.0-rc01'
+    implementation 'com.mikepenz:fastadapter:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-scroll:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-ui:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-drag:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-expandable:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-utils:4.0.0'
     implementation 'com.mikepenz:materialize:1.2.1'
     implementation 'com.jakewharton:butterknife:10.1.0'
     implementation 'com.github.clans:fab:1.6.4'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
-    implementation 'com.airbnb.android:lottie:3.0.0-beta2'
+    implementation 'com.airbnb.android:lottie:3.0.1'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'

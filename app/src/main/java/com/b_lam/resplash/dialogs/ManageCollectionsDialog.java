@@ -36,12 +36,10 @@ import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.views.NoSwipeViewPager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter_extensions.items.ProgressItem;
-import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.ui.items.ProgressItem;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -120,7 +118,10 @@ public class ManageCollectionsDialog extends DialogFragment implements
 
         mCollectionAdapter.addAdapter(1, mFooterAdapter);
 
-        mCollectionAdapter.withOnClickListener(mOnCollectionClickListener);
+        mCollectionAdapter.setOnClickListener((v, itemAdapter, item, position) -> {
+            onItemClick(v, item, position);
+            return false;
+        });
 
         mRecyclerView.setAdapter(mCollectionAdapter);
 
@@ -128,7 +129,9 @@ public class ManageCollectionsDialog extends DialogFragment implements
             @Override
             public void onLoadMore(int currentPage) {
                 mFooterAdapter.clear();
-                mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                ProgressItem progressItem = new ProgressItem();
+                progressItem.setEnabled(false);
+                mFooterAdapter.add(progressItem);
                 requestCollections();
             }
         });
@@ -209,62 +212,57 @@ public class ManageCollectionsDialog extends DialogFragment implements
         }
     }
 
-    private OnClickListener<CollectionMiniItem> mOnCollectionClickListener = new OnClickListener<CollectionMiniItem>(){
-        @Override
-        public boolean onClick(View v, @NonNull IAdapter<CollectionMiniItem> adapter, @NonNull CollectionMiniItem collection, int position) {
-            if (mPhoto != null) {
-                final ProgressBar addProgress = v.findViewById(R.id.item_collection_mini_progress);
-                final CollectionService.OnChangeCollectionPhotoListener onDeleteCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
-                    @Override
-                    public void onChangePhotoSuccess(Call<ChangeCollectionPhotoResult> call, Response<ChangeCollectionPhotoResult> response) {
-                        addProgress.setVisibility(View.INVISIBLE);
-                        if (response.isSuccessful() && response.body() != null) {
-                            ListIterator<Collection> iterator = mCurrentUserCollections.listIterator();
-                            while (iterator.hasNext()) {
-                                if (iterator.next().id == response.body().collection.id) {
-                                    iterator.remove();
-                                }
+    private void onItemClick(View v, @NonNull CollectionMiniItem collection, int position) {
+        if (mPhoto != null) {
+            final ProgressBar addProgress = v.findViewById(R.id.item_collection_mini_progress);
+            final CollectionService.OnChangeCollectionPhotoListener onDeleteCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
+                @Override
+                public void onChangePhotoSuccess(Call<ChangeCollectionPhotoResult> call, Response<ChangeCollectionPhotoResult> response) {
+                    addProgress.setVisibility(View.INVISIBLE);
+                    if (response.isSuccessful() && response.body() != null) {
+                        ListIterator<Collection> iterator = mCurrentUserCollections.listIterator();
+                        while (iterator.hasNext()) {
+                            if (iterator.next().id == response.body().collection.id) {
+                                iterator.remove();
                             }
-                            updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
-                            mManageCollectionsDialogListener.onCollectionUpdated(CollectionUpdateType.DELETE, response.body().collection, mCurrentUserCollections);
                         }
+                        updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
+                        mManageCollectionsDialogListener.onCollectionUpdated(CollectionUpdateType.DELETE, response.body().collection, mCurrentUserCollections);
                     }
-
-                    @Override
-                    public void onChangePhotoFailed(Call<ChangeCollectionPhotoResult> call, Throwable t) {
-                        addProgress.setVisibility(View.INVISIBLE);
-                    }
-                };
-
-                final CollectionService.OnChangeCollectionPhotoListener onAddCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
-                    @Override
-                    public void onChangePhotoSuccess(Call<ChangeCollectionPhotoResult> call, Response<ChangeCollectionPhotoResult> response) {
-                        addProgress.setVisibility(View.INVISIBLE);
-                        if (response.isSuccessful() && response.body() != null) {
-                            mCurrentUserCollections.add(response.body().collection);
-                            updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
-                            mManageCollectionsDialogListener.onCollectionUpdated(CollectionUpdateType.ADD, response.body().collection, mCurrentUserCollections);
-                        }
-                    }
-
-                    @Override
-                    public void onChangePhotoFailed(Call<ChangeCollectionPhotoResult> call, Throwable t) {
-                        addProgress.setVisibility(View.INVISIBLE);
-                    }
-                };
-
-                addProgress.setVisibility(View.VISIBLE);
-
-                if (isPhotoInCollection(mPhoto, collection.getModel())) {
-                    mService.deletePhotoFromCollection(collection.getModel().id, mPhoto.id, onDeleteCollectionPhotoListener);
-                } else {
-                    mService.addPhotoToCollection(collection.getModel().id, mPhoto.id, onAddCollectionPhotoListener);
                 }
-            }
 
-            return true;
+                @Override
+                public void onChangePhotoFailed(Call<ChangeCollectionPhotoResult> call, Throwable t) {
+                    addProgress.setVisibility(View.INVISIBLE);
+                }
+            };
+
+            final CollectionService.OnChangeCollectionPhotoListener onAddCollectionPhotoListener = new CollectionService.OnChangeCollectionPhotoListener() {
+                @Override
+                public void onChangePhotoSuccess(Call<ChangeCollectionPhotoResult> call, Response<ChangeCollectionPhotoResult> response) {
+                    addProgress.setVisibility(View.INVISIBLE);
+                    if (response.isSuccessful() && response.body() != null) {
+                        mCurrentUserCollections.add(response.body().collection);
+                        updateCollectionAtPosition(position, response.body().collection, mCurrentUserCollections);
+                        mManageCollectionsDialogListener.onCollectionUpdated(CollectionUpdateType.ADD, response.body().collection, mCurrentUserCollections);
+                    }
+                }
+
+                @Override
+                public void onChangePhotoFailed(Call<ChangeCollectionPhotoResult> call, Throwable t) {
+                    addProgress.setVisibility(View.INVISIBLE);
+                }
+            };
+
+            addProgress.setVisibility(View.VISIBLE);
+
+            if (isPhotoInCollection(mPhoto, collection.getModel())) {
+                mService.deletePhotoFromCollection(collection.getModel().id, mPhoto.id, onDeleteCollectionPhotoListener);
+            } else {
+                mService.addPhotoToCollection(collection.getModel().id, mPhoto.id, onAddCollectionPhotoListener);
+            }
         }
-    };
+    }
 
     public void setPhoto(Photo photo) {
         mPhoto = photo;

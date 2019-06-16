@@ -4,11 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
@@ -16,20 +21,13 @@ import com.b_lam.resplash.activities.UserActivity;
 import com.b_lam.resplash.data.model.SearchUsersResult;
 import com.b_lam.resplash.data.model.User;
 import com.b_lam.resplash.data.service.SearchService;
-import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter_extensions.items.ProgressItem;
-import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener;
+import com.mikepenz.fastadapter.ui.items.ProgressItem;
 
 import java.util.List;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -94,16 +92,17 @@ public class SearchUserFragment extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         mImageRecycler.setLayoutManager(gridLayoutManager);
-        mImageRecycler.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
+        mImageRecycler.setOnTouchListener((v, event) -> false);
         mImageRecycler.setItemViewCacheSize(5);
         mUserAdapter = new FastItemAdapter<>();
 
-        mUserAdapter.withOnClickListener(onClickListener);
+        mUserAdapter.setOnClickListener((v, adapter, item, position) -> {
+            Intent intent = new Intent(getContext(), UserActivity.class);
+            intent.putExtra("username", item.username);
+            intent.putExtra("name", item.name);
+            startActivity(intent);
+            return false;
+        });
 
         mFooterAdapter = new ItemAdapter();
 
@@ -115,17 +114,14 @@ public class SearchUserFragment extends Fragment {
             @Override
             public void onLoadMore(int currentPage) {
                 mFooterAdapter.clear();
-                mFooterAdapter.add(new ProgressItem().withEnabled(false));
+                ProgressItem progressItem = new ProgressItem();
+                progressItem.setEnabled(false);
+                mFooterAdapter.add(progressItem);
                 loadMore();
             }
         });
 
-        mSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchNew();
-            }
-        });
+        mSwipeContainer.setOnRefreshListener(this::fetchNew);
 
         fetchNew();
         return rootView;
@@ -139,18 +135,7 @@ public class SearchUserFragment extends Fragment {
         }
     }
 
-    private OnClickListener<User> onClickListener = new OnClickListener<User>(){
-        @Override
-        public boolean onClick(View v, IAdapter<User> adapter, User item, int position) {
-            Intent intent = new Intent(getContext(), UserActivity.class);
-            intent.putExtra("username", item.username);
-            intent.putExtra("name", item.name);
-            startActivity(intent);
-            return false;
-        }
-    };
-
-    public void updateAdapter(List<User> users) {
+    private void updateAdapter(List<User> users) {
         mUserAdapter.add(users);
     }
 
@@ -205,7 +190,7 @@ public class SearchUserFragment extends Fragment {
         }
     }
 
-    public void fetchNew(){
+    private void fetchNew(){
         if(mUsers == null && mQuery != null){
             mImagesProgress.setVisibility(View.VISIBLE);
             mImageRecycler.setVisibility(View.GONE);
