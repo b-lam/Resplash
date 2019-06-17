@@ -66,6 +66,7 @@
         <item>Serbian</item>
         <item>Chinese</item>
         <item>Portuguese (Brazilian)</item>
+        <item>German</item>
     </string-array>
     <string-array name="language_values">
         <item>en</item>
@@ -76,6 +77,7 @@
         <item>sr</item>
         <item>zh</item>
         <item>pt</item>
+        <item>de</item>
     </string-array>
     <string name="default_language" translatable="false">en</string>
     <string name="title_theme">Theme</string>
