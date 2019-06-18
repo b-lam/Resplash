@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Resplash</string>
-
     <string name="navigation_drawer_open">Otevřít navigační menu</string>
     <string name="navigation_drawer_close">Zavřít navigační menu</string>
 
@@ -29,8 +27,6 @@
         <item>Malá</item>
         <item>Miniatura</item>
     </array>
-    <string name="default_load_quality">Normální</string>
-    <string name="default_download_quality">Plná</string>
     <string name="title_layout_section">Uspořádání</string>
     <string name="title_layout_preference">Zvolte Uspořádání</string>
     <string name="summary_layout_preference">Zvolte zbůsob zobrazování obrázků</string>
@@ -39,7 +35,6 @@
         <item>Karty</item>
         <item>Mřížka</item>
     </array>
-    <string name="default_layout">Seznam</string>
     <string name="title_general_section">Obecná</string>
     <string name="title_custom_api">Vlastní API Klíč</string>
     <string name="title_clear_cache">Vymazat Mezipaměť</string>
@@ -52,7 +47,6 @@
         <item>Temný</item>
         <item>Černá</item>
     </array>
-    <string name="default_theme">Světlý</string>
     <string name="restart">Restartujte</string>
     <string name="restart_to_apply">Restartujte a použijte změny</string>
     <string name="title_other_section">Ostatní</string>
@@ -94,7 +88,6 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">Můžete si vytvořit svůj vlastní účet vývojáře na Unsplash a použít vlastní API klíč\n\n(Ponechte pole prázdné pro použití výchozího API klíče)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">Chyba: Toto pole musíte vyplnit</string>
     <string name="redirect_uri_hint">Přesměrovací URI</string>
     <string name="secret_hint">Tajné</string>
@@ -148,7 +141,7 @@
     <string name="donate_item4_title">Skvělé Jídlo</string>
     <string name="donate_item4_subtitle">Jednou za čas si ho můžete dopřát</string>
     <string name="donate_thanks">Díky za podporu!</string>
-    <string name="donate_loading">Načítání nabídek...</string>
+    <string name="donate_loading">Načítání nabídek&#8230;</string>
 
     <!-- Detail -->
     <string name="stats">Statistiky</string>
@@ -229,5 +222,19 @@
     <string name="auto_wallpaper_options">Možnosti</string>
     <string name="auto_wallpaper_select_screen">Vyberte obrazovku</string>
     <string name="auto_wallpaper_select_screen_summary">Vyberte, které obrazovky chcete tapetu použít</string>
+    <string name="activate">Aktivovat</string>
+    <string name="add_to_collection">Přidat do kolekce</string>
+    <string name="are_you_sure">Jsi si jistá?</string>
+    <string name="collection_description_hint">Popis (volitelný)</string>
+    <string name="collection_name_hint">Název</string>
+    <string name="collection_name_is_required">Jméno je povinné</string>
+    <string name="create">Vytvořit</string>
+    <string name="create_new_collection">Vytvořit novou kolekci</string>
+    <string name="delete">Vymazat</string>
+    <string name="edit_collection">Upravit kolekci</string>
+    <string name="failed_to_create_collection">Vytvoření kolekce se nezdařilo</string>
+    <string name="failed_to_delete_collection">Odstranění kolekce se nezdařilo</string>
+    <string name="failed_to_save_collection">Nepodařilo se uložit kolekci</string>
+    <string name="make_collection_private">Vytvořit soukromou sbírku</string>
 
 </resources>

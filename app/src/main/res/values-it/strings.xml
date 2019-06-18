@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Resplash</string>
-
     <string name="navigation_drawer_open">Apri drawer di navigazione</string>
     <string name="navigation_drawer_close">Chiudi drawer di navigazione</string>
 
@@ -29,8 +27,6 @@
         <item>Bassa</item>
         <item>Anteprima</item>
     </string-array>
-    <string name="default_load_quality">Normale</string>
-    <string name="default_download_quality">Alta</string>
     <string name="title_layout_section">Layout</string>
     <string name="title_layout_preference">Scegli Layout</string>
     <string name="summary_layout_preference">Scegli la disposizione delle immagini</string>
@@ -39,7 +35,6 @@
         <item>Carte</item>
         <item>Griglia</item>
     </string-array>
-    <string name="default_layout">Lista</string>
     <string name="title_general_section">Generali</string>
     <string name="title_custom_api">Chiave API personalizzata</string>
     <string name="title_clear_cache">Pulisci Cache</string>
@@ -52,7 +47,6 @@
         <item>Scuro</item>
         <item>Nero (AMOLED)</item>
     </string-array>
-    <string name="default_theme">Chiaro</string>
     <string name="restart">Riavvia</string>
     <string name="restart_to_apply">Riavvia per applicare le modifiche</string>
     <string name="title_other_section">Altro</string>
@@ -94,7 +88,6 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">Puoi creare il tuo account sviluppatore su Unsplash e usare la tua chiave API\n\n(Lascia vuoto per usare la chiave API stock)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">Errore: Il campo non può essere vuoto</string>
     <string name="redirect_uri_hint">Redirect URI</string>
     <string name="secret_hint">Chiave segreta</string>
@@ -126,7 +119,6 @@
     <!-- Collections -->
     <string name="add_to_collection">Aggiungi alla collezione</string>
     <string name="create_new_collection">Crea nuova collezione</string>
-    <string name="create_a_new_collection">Crea una nuova collezione</string>
     <string name="create">Crea</string>
     <string name="delete">Elimina</string>
     <string name="collection_name_hint">Nome</string>

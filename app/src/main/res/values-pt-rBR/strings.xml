@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Resplash</string>
-
     <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
     <string name="navigation_drawer_close">Fechar a gaveta de navegação</string>
 
@@ -29,8 +27,6 @@
         <item>Pequena</item>
         <item>Thumb</item>
     </array>
-    <string name="default_load_quality">Normal</string>
-    <string name="default_download_quality">Original</string>
     <string name="title_layout_section">Layout</string>
     <string name="title_layout_preference">Escolha o Layout</string>
     <string name="summary_layout_preference">Escolha como as imagens serão exibidas</string>
@@ -39,7 +35,6 @@
         <item>Cartões</item>
         <item>Grade</item>
     </array>
-    <string name="default_layout">Lista</string>
     <string name="title_general_section">Geral</string>
     <string name="title_custom_api">Chave API Customizada</string>
     <string name="title_clear_cache">Limpar Cache</string>
@@ -52,7 +47,6 @@
         <item>Escuro</item>
         <item>Preto</item>
     </array>
-    <string name="default_theme">Claro</string>
     <string name="restart">Reiniciar</string>
     <string name="restart_to_apply">Reiniciar para aplicar alterações</string>
     <string name="title_other_section">Outro</string>
@@ -94,7 +88,6 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">Você pode criar sua própria conta de desenvolvedor no Unsplash e usar a chave API\n\n(Deixe em branco para usar a chave API padrão)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">Erro: Campos não podem ficar vazios</string>
     <string name="redirect_uri_hint">URI de Redirecionamento</string>
     <string name="secret_hint">Secreto</string>
@@ -229,5 +222,19 @@
     <string name="auto_wallpaper_options">Opções</string>
     <string name="auto_wallpaper_select_screen">Tela de seleção</string>
     <string name="auto_wallpaper_select_screen_summary">Escolha em quais telas aplicar papel de parede</string>
+    <string name="activate">Ativar</string>
+    <string name="add_to_collection">Adicionar a coleção</string>
+    <string name="are_you_sure">Você tem certeza?</string>
+    <string name="collection_description_hint">Descrição (opcional)</string>
+    <string name="collection_name_is_required">Nome é obrigatório</string>
+    <string name="collection_name_hint">Nome</string>
+    <string name="create">Crio</string>
+    <string name="create_new_collection">Criar nova coleção</string>
+    <string name="delete">Excluir</string>
+    <string name="edit_collection">Editar coleção</string>
+    <string name="failed_to_create_collection">Falha ao criar coleção</string>
+    <string name="failed_to_delete_collection">Falha ao excluir a coleção</string>
+    <string name="failed_to_save_collection">Falha ao salvar a coleta</string>
+    <string name="make_collection_private">Tornar a coleção particular</string>
 
 </resources>
