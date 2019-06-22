@@ -204,7 +204,7 @@ public class ManageCollectionsDialog extends DialogFragment implements
                         public void onRequestACollectionFailed(Call<Collection> call, Throwable t) {
                             mCreateCollectionButton.setEnabled(true);
                             mCancelCollectionButton.setEnabled(true);
-                            Toast.makeText(getActivity(), R.string.failed_to_create_collection, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.failed_to_create_collection, Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
