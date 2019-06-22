@@ -11,8 +11,8 @@ android {
         applicationId "com.b_lam.resplash"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 29
-        versionName "2.0.5"
+        versionCode 30
+        versionName "2.0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "RELEASE_APP_ID", project.RELEASE_APP_ID)
         buildConfigField("String", "RELEASE_SECRET", project.RELEASE_SECRET)
@@ -78,12 +78,12 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.github.chrisbanes:PhotoView:2.2.0'
     implementation 'com.mikepenz:materialdrawer:7.0.0-rc01'
-    implementation 'com.mikepenz:fastadapter:4.0.1'
-    implementation 'com.mikepenz:fastadapter-extensions-scroll:4.0.1'
-    implementation 'com.mikepenz:fastadapter-extensions-ui:4.0.1'
-    implementation 'com.mikepenz:fastadapter-extensions-drag:4.0.1'
-    implementation 'com.mikepenz:fastadapter-extensions-expandable:4.0.1'
-    implementation 'com.mikepenz:fastadapter-extensions-utils:4.0.1'
+    implementation 'com.mikepenz:fastadapter:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-scroll:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-ui:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-drag:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-expandable:4.0.0'
+    implementation 'com.mikepenz:fastadapter-extensions-utils:4.0.0'
     implementation 'com.mikepenz:materialize:1.2.1'
     implementation 'com.jakewharton:butterknife:10.1.0'
     implementation 'com.github.clans:fab:1.6.4'
