@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Resplash</string>
-
     <string name="navigation_drawer_open">打开导航抽屉</string>
     <string name="navigation_drawer_close">关闭导航抽屉</string>
 
@@ -29,8 +27,6 @@
         <item>小图</item>
         <item>缩略图</item>
     </array>
-    <string name="default_load_quality">常规</string>
-    <string name="default_download_quality">整图</string>
     <string name="title_layout_section">布局</string>
     <string name="title_layout_preference">选择布局</string>
     <string name="summary_layout_preference">选择显示图片数量</string>
@@ -39,7 +35,6 @@
         <item>卡片</item>
         <item>网格</item>
     </array>
-    <string name="default_layout">列表</string>
     <string name="title_general_section">常规</string>
     <string name="title_custom_api">自定义 API Key</string>
     <string name="title_clear_cache">清空缓存</string>
@@ -52,7 +47,6 @@
         <item>深沉</item>
         <item>黑色</item>
     </array>
-    <string name="default_theme">明亮</string>
     <string name="restart">重启</string>
     <string name="restart_to_apply">重启以便更换主题</string>
     <string name="title_other_section">另外</string>
@@ -94,7 +88,6 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">你可以创建个人 Unsplash 开发者账户，以便运用你自己的 API key\n\n(如果使用 stock API key 此处留着空白)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">出错：不能留空</string>
     <string name="redirect_uri_hint">重定向 URI</string>
     <string name="secret_hint">Secret</string>
@@ -229,5 +222,19 @@
     <string name="auto_wallpaper_options">选项</string>
     <string name="auto_wallpaper_select_screen">选择屏幕</string>
     <string name="auto_wallpaper_select_screen_summary">选择要应用壁纸的屏幕</string>
+    <string name="activate">启用</string>
+    <string name="add_to_collection">添加到收藏</string>
+    <string name="are_you_sure">你确定吗？</string>
+    <string name="collection_description_hint">描述 (可选的)</string>
+    <string name="collection_name_hint">名称</string>
+    <string name="collection_name_is_required">名称是必需的</string>
+    <string name="create">创建</string>
+    <string name="create_new_collection">创建一个新的集合</string>
+    <string name="delete">删除</string>
+    <string name="failed_to_create_collection">无法创建集合</string>
+    <string name="failed_to_delete_collection">无法删除集合</string>
+    <string name="failed_to_save_collection">无法保存集合</string>
+    <string name="edit_collection">编辑集合</string>
+    <string name="make_collection_private">使收藏私密</string>
 
 </resources>

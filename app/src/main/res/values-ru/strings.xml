@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Resplash</string>
-
     <string name="navigation_drawer_open">Открыть навигационную панель</string>
     <string name="navigation_drawer_close">Закрыть навигационную панель</string>
 
@@ -29,8 +27,6 @@
         <item>Низкое</item>
         <item>Очень низкое</item>
     </array>
-    <string name="default_load_quality">Среднее</string>
-    <string name="default_download_quality">Высокое</string>
     <string name="title_layout_section">Расположение</string>
     <string name="title_layout_preference">Выберите расположение</string>
     <string name="summary_layout_preference">Выберите, как будут отображаться фотографии</string>
@@ -39,7 +35,6 @@
         <item>Карточками</item>
         <item>Сеткой</item>
     </array>
-    <string name="default_layout">Списоком</string>
     <string name="title_general_section">Общие</string>
     <string name="title_custom_api">Пользовательский ключ API</string>
     <string name="title_clear_cache">Очистить кэш</string>
@@ -52,7 +47,6 @@
         <item>Тёмная</item>
         <item>Черный</item>
     </array>
-    <string name="default_theme">Светлая</string>
     <string name="restart">Перезапуск</string>
     <string name="restart_to_apply">Перезапустите, чтобы применить изменения</string>
     <string name="title_other_section">Другие</string>
@@ -94,7 +88,6 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">Вы можете создать свой собственный аккаунт разработчика Unsplash и использовать свой собственный ключ API\n\n(Оставьте пустым, чтобы использовать стандартный ключ API)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">Ошибка: вы не может оставить поле пустым</string>
     <string name="redirect_uri_hint">Перенаправление URI</string>
     <string name="secret_hint">Секрет</string>
@@ -229,5 +222,19 @@
     <string name="auto_wallpaper_options">Опции</string>
     <string name="auto_wallpaper_select_screen">Выберите экран</string>
     <string name="auto_wallpaper_select_screen_summary">Выберите, к каким экранам применять обои</string>
+    <string name="activate">Aктивировать</string>
+    <string name="add_to_collection">Добавить в коллекцию</string>
+    <string name="are_you_sure">Уверены ли вы?</string>
+    <string name="collection_description_hint">Описание (необязательный)</string>
+    <string name="collection_name_is_required">Имя обязательно</string>
+    <string name="collection_name_hint">Hазвание</string>
+    <string name="create">Создайте</string>
+    <string name="create_new_collection">Создать новую коллекцию</string>
+    <string name="delete">Удалять</string>
+    <string name="edit_collection">Редактировать коллекцию</string>
+    <string name="failed_to_create_collection">Не удалось создать коллекцию</string>
+    <string name="failed_to_delete_collection">Не удалось удалить коллекцию</string>
+    <string name="failed_to_save_collection">Не удалось сохранить коллекцию</string>
+    <string name="make_collection_private">Сделайте коллекцию частной</string>
 
 </resources>

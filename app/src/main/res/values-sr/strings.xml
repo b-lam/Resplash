@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Resplash</string>
-
     <string name="navigation_drawer_open">Отвори навигациону фиоку</string>
     <string name="navigation_drawer_close">Затвори навигациону фиоку</string>
 
@@ -29,8 +27,6 @@
         <item>Small</item>
         <item>Thumb</item>
     </array>
-    <string name="default_load_quality">Regular</string>
-    <string name="default_download_quality">Full</string>
     <string name="title_layout_section">Распоред</string>
     <string name="title_layout_preference">Одаберите распоред</string>
     <string name="summary_layout_preference">Одаберите како желите да слике буду приказане</string>
@@ -39,7 +35,6 @@
         <item>Картице</item>
         <item>Мрежа</item>
     </array>
-    <string name="default_layout">Листа</string>
     <string name="title_general_section">Општи</string>
     <string name="title_custom_api">АПИ Кључ</string>
     <string name="title_clear_cache">Очисти кеш меморију</string>
@@ -52,7 +47,6 @@
         <item>Тамна</item>
         <item>Црн</item>
     </array>
-    <string name="default_theme">Светла</string>
     <string name="restart">Поново покрени</string>
     <string name="restart_to_apply">Поново покрени апликацију да би применио измене</string>
     <string name="title_other_section">Остало</string>
@@ -94,7 +88,6 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">Можете отворити ваш лични Unsplash девелопер налог и употребити ваш АПИ кључ\n\n(оставите празно за подразумевани АПИ кључ)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">Грешка: морате унети ово поље</string>
     <string name="redirect_uri_hint">Преусмерен URI</string>
     <string name="secret_hint">Тајна</string>
@@ -230,5 +223,19 @@
     <string name="auto_wallpaper_options">Опције</string>
     <string name="auto_wallpaper_select_screen">Изаберите Екран</string>
     <string name="auto_wallpaper_select_screen_summary">Изаберите које екране желите да примените на позадину</string>
+    <string name="activate">Активирати</string>
+    <string name="add_to_collection">Додај у збирку</string>
+    <string name="are_you_sure">Да ли сте сигурни?</string>
+    <string name="collection_description_hint">Опис (опционо)</string>
+    <string name="collection_name_hint">Име</string>
+    <string name="collection_name_is_required">Име је обавезно</string>
+    <string name="create">Цреате</string>
+    <string name="create_new_collection">Направите нову колекцију</string>
+    <string name="delete">Обриши</string>
+    <string name="edit_collection">Измени колекцију</string>
+    <string name="failed_to_create_collection">Креирање збирке није успело</string>
+    <string name="failed_to_delete_collection">Брисање колекције није успело</string>
+    <string name="failed_to_save_collection">Сачување збирке није успело</string>
+    <string name="make_collection_private">Нека колекција буде приватна</string>
 </resources>
 

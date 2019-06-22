@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Resplash</string>
-
     <string name="navigation_drawer_open">Abrir menú de navegación</string>
     <string name="navigation_drawer_close">Cerrar menú de navegación</string>
 
@@ -28,8 +26,6 @@
         <item>Baja</item>
         <item>Miniatura</item>
     </string-array>
-    <string name="default_load_quality">Media</string>
-    <string name="default_download_quality">Alta</string>
     <string name="title_layout_section">Diseño</string>
     <string name="title_layout_preference">Elige un diseño</string>
     <string name="summary_layout_preference">¿Cómo mostramos las imágenes?</string>
@@ -38,7 +34,6 @@
         <item>Tarjetas</item>
         <item>Cuadrícula</item>
     </string-array>
-    <string name="default_layout">Lista</string>
     <string name="title_general_section">General</string>
     <string name="title_custom_api">Clave API personalizada</string>
     <string name="title_clear_cache">Vaciar caché</string>
@@ -51,7 +46,6 @@
         <item>Oscuro</item>
         <item>Negro (AMOLED)</item>
     </string-array>
-    <string name="default_theme">Claro</string>
     <string name="restart">Reiniciar</string>
     <string name="restart_to_apply">Reinicia para aplicar cambios</string>
     <string name="title_other_section">Otros</string>
@@ -93,7 +87,6 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">Puedes crear tu cuenta en Unspash y usar tu propia clave API \n\n(Déjalo en blanco para usar la API por defecto)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">Error: El campo no puede estar vacío</string>
     <string name="redirect_uri_hint">Redirect URI</string>
     <string name="secret_hint">Secret</string>
@@ -125,7 +118,6 @@
     <!-- Collections -->
     <string name="add_to_collection">Añadir a colección</string>
     <string name="create_new_collection">Crear nueva colección</string>
-    <string name="create_a_new_collection">Crea una nueva colección</string>
     <string name="create">Creada</string>
     <string name="delete">Borrar</string>
     <string name="collection_name_hint">Nombre</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Resplash</string>
+    <string name="app_name" translatable="false">Resplash</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -35,8 +35,8 @@
         <item>Small</item>
         <item>Thumb</item>
     </string-array>
-    <string name="default_load_quality">Regular</string>
-    <string name="default_download_quality">Full</string>
+    <string name="default_load_quality" translatable="false">Regular</string>
+    <string name="default_download_quality" translatable="false">Full</string>
     <string name="title_layout_section">Layout</string>
     <string name="title_layout_preference">Choose Layout</string>
     <string name="summary_layout_preference">Choose how images are displayed</string>
@@ -50,7 +50,7 @@
         <item>Cards</item>
         <item>Grid</item>
     </string-array>
-    <string name="default_layout">List</string>
+    <string name="default_layout" translatable="false">List</string>
     <string name="title_general_section">General</string>
     <string name="title_custom_api">Custom API Key</string>
     <string name="title_clear_cache">Clear Cache</string>
@@ -59,23 +59,25 @@
     <string name="title_language">Language</string>
     <string-array name="language">
         <item>English</item>
-        <item>Spanish</item>
-        <item>Italian</item>
+        <item>Chinese</item>
         <item>Czech</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Portuguese</item>
         <item>Russian</item>
         <item>Serbian</item>
-        <item>Chinese</item>
-        <item>Portuguese (Brazilian)</item>
+        <item>Spanish</item>
     </string-array>
     <string-array name="language_values">
         <item>en</item>
-        <item>es</item>
-        <item>it</item>
+        <item>zh</item>
         <item>cs</item>
+        <item>de</item>
+        <item>it</item>
+        <item>pt</item>
         <item>ru</item>
         <item>sr</item>
-        <item>zh</item>
-        <item>pt</item>
+        <item>es</item>
     </string-array>
     <string name="default_language" translatable="false">en</string>
     <string name="title_theme">Theme</string>
@@ -89,7 +91,7 @@
         <item>Dark</item>
         <item>Black</item>
     </string-array>
-    <string name="default_theme">Light</string>
+    <string name="default_theme" translatable="false">Light</string>
     <string name="restart">Restart</string>
     <string name="restart_to_apply">Restart to apply changes</string>
     <string name="title_other_section">Other</string>
@@ -131,7 +133,7 @@
 
     <!-- Custom API -->
     <string name="custom_api_key_description">You can create your own Unsplash developer account and use your own API key\n\n(Leave blank to use the stock API key)</string>
-    <string name="redirect_uri">resplash://unsplash-auth-callback</string>
+    <string name="redirect_uri" translatable="false">resplash://unsplash-auth-callback</string>
     <string name="api_key_empty_message">Error: Cannot leave field empty</string>
     <string name="redirect_uri_hint">Redirect URI</string>
     <string name="secret_hint">Secret</string>
@@ -163,7 +165,6 @@
     <!-- Collections -->
     <string name="add_to_collection">Add to collection</string>
     <string name="create_new_collection">Create new collection</string>
-    <string name="create_a_new_collection">Create a new collection</string>
     <string name="create">Create</string>
     <string name="delete">Delete</string>
     <string name="collection_name_hint">Name</string>

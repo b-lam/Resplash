@@ -11,8 +11,8 @@ android {
         applicationId "com.b_lam.resplash"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 28
-        versionName "2.0.4"
+        versionCode 29
+        versionName "2.0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "RELEASE_APP_ID", project.RELEASE_APP_ID)
         buildConfigField("String", "RELEASE_SECRET", project.RELEASE_SECRET)
@@ -64,9 +64,9 @@ dependencies {
     implementation 'android.arch.work:work-runtime-ktx:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
     implementation 'androidx.fragment:fragment:1.1.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'androidx.preference:preference:1.1.0-beta01'
-    implementation 'androidx.room:room-runtime:2.1.0-rc01'
+    implementation 'androidx.room:room-runtime:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.browser:browser:1.0.0'
@@ -78,25 +78,25 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.github.chrisbanes:PhotoView:2.2.0'
     implementation 'com.mikepenz:materialdrawer:7.0.0-rc01'
-    implementation 'com.mikepenz:fastadapter:4.0.0'
-    implementation 'com.mikepenz:fastadapter-extensions-scroll:4.0.0'
-    implementation 'com.mikepenz:fastadapter-extensions-ui:4.0.0'
-    implementation 'com.mikepenz:fastadapter-extensions-drag:4.0.0'
-    implementation 'com.mikepenz:fastadapter-extensions-expandable:4.0.0'
-    implementation 'com.mikepenz:fastadapter-extensions-utils:4.0.0'
+    implementation 'com.mikepenz:fastadapter:4.0.1'
+    implementation 'com.mikepenz:fastadapter-extensions-scroll:4.0.1'
+    implementation 'com.mikepenz:fastadapter-extensions-ui:4.0.1'
+    implementation 'com.mikepenz:fastadapter-extensions-drag:4.0.1'
+    implementation 'com.mikepenz:fastadapter-extensions-expandable:4.0.1'
+    implementation 'com.mikepenz:fastadapter-extensions-utils:4.0.1'
     implementation 'com.mikepenz:materialize:1.2.1'
     implementation 'com.jakewharton:butterknife:10.1.0'
     implementation 'com.github.clans:fab:1.6.4'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     implementation 'com.airbnb.android:lottie:3.0.1'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
-    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     kapt 'com.jakewharton:butterknife-compiler:10.1.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
-    kapt 'androidx.room:room-compiler:2.1.0-rc01'
+    kapt 'androidx.room:room-compiler:2.1.0'
 
     testImplementation 'junit:junit:4.12'
 }

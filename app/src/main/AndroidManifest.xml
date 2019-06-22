@@ -15,18 +15,25 @@
 
     <application
         android:name=".Resplash"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="false"
         android:theme="@style/ResplashTheme.Primary.Base.Light"
-        tools:replace="android:supportsRtl">
+        tools:replace="android:supportsRtl"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules">
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/ResplashTheme.Primary.Base.Light">
+            android:theme="@style/SplashActivityTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
             <intent-filter>
                 <data
                     android:host="unsplash.com"
@@ -38,6 +45,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".activities.SettingsActivity"
@@ -48,19 +59,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SettingsActivity" />
-        </activity>
-        <activity
-            android:name=".activities.SplashActivity"
-            android:theme="@style/SplashActivityTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".activities.DetailActivity"
