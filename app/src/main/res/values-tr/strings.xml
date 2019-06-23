@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_drawer_open">Navigasyon Çekmecesini Aç</string>
+    <string name="navigation_drawer_close">Navigasyon Çekmecesini Kapat</string>
+
+    <string name="action_share">Paylaş</string>
+    <string name="action_view_on_unsplash">Tarayıcıda Aç</string>
+
+    <!-- ErrorView -->
+    <string name="error_http">Oops</string>
+    <string name="error_http_subtitle">Şu an yardımcı olamıyoruz.\n\nLütfen daha sonra tekrar deneyin.</string>
+    <string name="error_network">Oops</string>
+    <string name="error_network_subtitle">Görünüşe göre internetinizde bir sorun var.</string>
+
+    <!-- Settings -->
+    <string name="title_quality_section">Kalite</string>
+    <string name="title_load_quality_preference">Yükleme Kalitesi</string>
+    <string name="summary_load_quality_preference">Yüklenecek görüntülerin kalitesini seçin.</string>
+    <string name="title_download_quality_preference">İndirme Kalitesi</string>
+    <string name="summary_download_quality_preference">İndirilecek görüntülerin kalitesini seçin.</string>
+    <string name="title_wallpaper_quality_preference">Duvar Kağıdı Kalitesi</string>
+    <string name="summary_wallpaper_quality_preference">Ayarlanacak duvar kağıtlarının kalitesini seçin.</string>
+    <string-array name="quality_options">
+        <item>Orijinal</item>
+        <item>Kaliteli</item>
+        <item>Normal</item>
+        <item>Az Kaliteli</item>
+        <item>Kalitesiz</item>
+    </string-array>
+    <string name="title_layout_section">Düzen</string>
+    <string name="title_layout_preference">Düzen Seçin</string>
+    <string name="summary_layout_preference">Görüntülerin nasıl görüntüleneceğini seçin.</string>
+    <string-array name="layout_options">
+        <item>Liste</item>
+        <item>Kart</item>
+        <item>Izgara</item>
+    </string-array>
+    <string name="title_general_section">Genel</string>
+    <string name="title_custom_api">Özel API Anahtarı</string>
+    <string name="title_clear_cache">Önbelleği Temizle</string>
+    <string name="cache_size">Önbellek Boyutu</string>
+    <string name="message_cache_cleared">Önbellek temizlendi!</string>
+    <string name="title_language">Dil</string>
+    <string name="title_theme">Tema</string>
+    <string-array name="theme">
+        <item>Beyaz</item>
+        <item>Karanlık</item>
+        <item>Siyah (AMOLED)</item>
+    </string-array>
+    <string name="restart">Yeniden Başlat</string>
+    <string name="restart_to_apply">Değişiklikleri uygulamak için yeniden başlat.</string>
+    <string name="title_other_section">Diğer</string>
+    <string name="title_unsplash_intent_preference">Unsplash.com\'a Git</string>
+
+    <!-- Menu -->
+    <string name="menu_search">Ara</string>
+    <string name="menu_sort">-e Göre Sırala</string>
+    <string name="menu_item_latest">En Yeni</string>
+    <string name="menu_item_oldest">En Eski</string>
+    <string name="menu_item_popular">Popüler</string>
+    <string name="menu_item_random">Rastgele</string>
+    <string name="menu_item_all">Hepsi</string>
+    <string name="menu_item_curated">Curated</string>
+    <string name="menu_item_featured">Öne Çıkan</string>
+
+    <!-- Main -->
+    <string name="main_unsplash_description">Ücretsiz Yüksek Çözünürlüklü Fotoğraflar</string>
+    <string name="main_add_account">Yeni Hesap Ekle</string>
+    <string name="main_add_new_account">Yeni Unsplash Hesabı Ekle</string>
+    <string name="main_view_profile">Profili Görüntüle</string>
+    <string name="main_manage_account">Hesabı Yönet</string>
+    <string name="main_logout">Çıkış Yap</string>
+    <string name="main_featured">Öne Çıkan</string>
+    <string name="main_new">Yeni</string>
+    <string name="main_collections">Koleksiyonlar</string>
+    <string name="main_support_development">Geliştiriciyi Destekle</string>
+    <string name="main_settings">Ayarlar</string>
+    <string name="main_about">Hakkında</string>
+    <string name="main_logout_success">Başarıyla çıkış yapıldı.</string>
+
+    <!-- Intro -->
+    <string name="intro_welcome_title">Resplash</string>
+    <string name="intro_welcome_description">Unsplash\'ten yararlanmaktadır.</string>
+    <string name="intro_download_title">Yüksek Çözünürlüklü Fotoğraflar</string>
+    <string name="intro_download_description">Ücretsiz yüksek çözünürlüklü fotoğraflar.</string>
+    <string name="intro_done">Bitti</string>
+    <string name="intro_next">İlerle</string>
+
+    <!-- Custom API -->
+    <string name="custom_api_key_description">Kendi Unsplash geliştirici hesabınızı oluşturup kendi API anahtarınızı kullanabilirsiniz.\n\n(Mevcut API anahtarını kullanmak için boş bırakınız.)</string>
+    <string name="api_key_empty_message">Hata: Alanı boş bırakamazsınız.</string>
+    <string name="redirect_uri_hint">Yönlendirme Adresi</string>
+    <string name="secret_hint">Parola</string>
+    <string name="api_key_hint">API Anahtarı</string>
+
+    <!-- Search -->
+    <string name="search_photos">Fotoğraflar</string>
+    <string name="search_collections">Koleksiyonlar</string>
+    <string name="search_users">Kullanıcılar</string>
+    <string name="search_hint">Ara</string>
+    <string name="search_title">Ara</string>
+    <string name="action_clear_text">Yazıyı sil.</string>
+    <string-array name="search_photos_orientations">
+        <item>Hepsi</item>
+        <item>Yatay</item>
+        <item>Dikey</item>
+        <item>Karesel</item>
+    </string-array>
+
+    <!-- InfoDialog -->
+    <string name="photo_dimensions">Boyutlar</string>
+    <string name="camera_make">Üretici</string>
+    <string name="camera_model">Model</string>
+    <string name="exposure_time">Pozlama Süresi</string>
+    <string name="aperture">Açıklık</string>
+    <string name="iso">ISO</string>
+    <string name="focal_length">Odak Uzaklığı</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">Koleksiyona Ekle</string>
+    <string name="create_new_collection">Yeni Koleksiyon Oluştur</string>
+    <string name="create">Oluştur</string>
+    <string name="delete">Sil</string>
+    <string name="collection_name_hint">Ad</string>
+    <string name="collection_description_hint">Açıklama(isteğe bağlı)</string>
+    <string name="make_collection_private">Koleksiyonu Özel Yap</string>
+    <string name="collection_name_is_required">Ad gerekli.</string>
+    <string name="failed_to_create_collection">Koleksiyon oluşturma başarısız oldu.</string>
+    <string name="failed_to_save_collection">Koleksiyon kaydetme başarısız oldu.</string>
+    <string name="failed_to_delete_collection">Koleksiyon silme başarısız oldu.</string>
+    <string name="edit_collection">Koleksiyonu Düzenle</string>
+    <string name="are_you_sure">Emin misin?</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+
+    <!-- About -->
+    <string name="about_title">Hakkında</string>
+    <string name="about_unsplash_title">Unsplash.com</string>
+    <string name="about_unsplash_subtitle">Ücretsiz Yüksek Çözünürlüklü Fotoğraflar</string>
+    <string name="about_version_title">Versiyon</string>
+    <string name="about_introduction_title">Tanıtım</string>
+    <string name="about_github_title">GitHub</string>
+    <string name="about_privacy_policy_title">Gizlilik Politikası</string>
+    <string name="about_support_development_card_title">Geliştiriciyi Destekle</string>
+    <string name="about_rate_title">Değerlendir</string>
+    <string name="about_rate_subtitle">Eğer Resplash\'ı beğendiysen Play Store\'da değerlendir.</string>
+    <string name="about_donate_title">Bağış Yap</string>
+    <string name="about_donate_subtitle">Eğer Resplash\'ı gerçekten beğendiysen geliştirmeyi desteklemek için bana birkaç dolar göndermeyi düşün.</string>
+    <string name="about_bug_title">Hataları Rapor Et</string>
+    <string name="about_bug_subtitle">Hataları rapor et ya da yeni özellikler talep et.</string>
+    <string name="about_author_title">Brandon Lam</string>
+    <string name="about_author_card_title">Yazar</string>
+    <string name="about_author_subtitle">Toronto, Ontario, Canada</string>
+    <string name="about_website_title">Web Sitesini Ziyaret Et</string>
+    <string name="about_instagram_title">Instagram\'da Takip Et</string>
+    <string name="about_libraries_card_title">Kütüphaneler</string>
+
+    <!-- Donate -->
+    <string name="donate_card_title">Geliştiriciyi Destekle</string>
+    <string name="donate_item1_title">Kahve</string>
+    <string name="donate_item1_subtitle">Sabaha kadar süren kodlama seanslarında uyanık olmak gerek.</string>
+    <string name="donate_item2_title">Smoothie</string>
+    <string name="donate_item2_subtitle">Hep abur cubur nereye kadar?</string>
+    <string name="donate_item3_title">Pizza</string>
+    <string name="donate_item3_subtitle">Biri pizza mı dedi?</string>
+    <string name="donate_item4_title">Boğazda Yemek</string>
+    <string name="donate_item4_subtitle">Boğazda yemek yemek de bir başka.</string>
+    <string name="donate_thanks">Bağışınız için teşekkürler efendim.</string>
+    <string name="donate_loading">Ürünler yükleniyor.&#8230;</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Otomatik Duvar Kağıdı</string>
+    <string name="auto_wallpaper_conditions">Koşullar</string>
+    <string name="auto_wallpaper_on_wifi">Wi-Fi Üzerinde</string>
+    <string name="auto_wallpaper_on_wifi_summary">Cihaz Wİ-Fİ ağına bağlı olmalıdır.</string>
+    <string name="auto_wallpaper_charging">Şarjda</string>
+    <string name="auto_wallpaper_charging_summary">Cihaz bir güç kaynağına bağlı olmalıdır.</string>
+    <string name="auto_wallpaper_idle">Boşta</string>
+    <string name="auto_wallpaper_idle_summary">Cihaz kullanılmıyor olmalıdır.</string>
+    <string name="auto_wallpaper_interval">Süre</string>
+    <string name="auto_wallpaper_interval_summary">Otomatik duvar kağıdı değiştirme zaman aralığını seçin.</string>
+    <string-array name="auto_wallpaper_interval_options">
+        <item>15 Dakika</item>
+        <item>30 Dakika</item>
+        <item>1 Saat</item>
+        <item>3 Saat</item>
+        <item>6 Saat</item>
+        <item>12 Saat</item>
+        <item>24 Saat</item>
+        <item>48 Saat</item>
+    </string-array>
+    <string name="auto_wallpaper_source">Kaynak</string>
+    <string name="auto_wallpaper_category">Kategori</string>
+    <string name="auto_wallpaper_category_summary">Duvar kağıdı kategorisi seçin.</string>
+    <string-array name="auto_wallpaper_category_options">
+        <item>Hepsi</item>
+        <item>Öne Çıkan</item>
+        <item>Özel</item>
+    </string-array>
+    <string name="auto_wallpaper_custom_category">Özel Kategori</string>
+    <string name="auto_wallpaper_custom_category_summary">Bir arama terimi ile eşleşen duvar kağıtlarını alın.</string>
+    <string name="auto_wallpaper_options">Seçenekler</string>
+    <string name="auto_wallpaper_select_screen">Ekran Seçin</string>
+    <string name="auto_wallpaper_select_screen_summary">Duvar kağıdının uygulanacağı ekranı sein.</string>
+    <string-array name="auto_wallpaper_select_screen_options">
+        <item>Ana Ekran</item>
+        <item>Kilit Ekranı</item>
+        <item>Her İkisi</item>
+    </string-array>
+    <string name="auto_wallpaper_history">Otomatik Duvar Kağıdı Geçmişi</string>
+    <string name="auto_wallpaper_history_summary">Önceden ayarlanmış duvar kağıtlarını görün.</string>
+    <string name="auto_wallpaper_info">Otomatik Duvar Kağıdı, ana ekranınıza belirlenmiş koşullara göre rastgele duvar kağıtları ile yeni bir soluk getirecektir.</string>
+
+    <!-- Detail -->
+    <string name="stats">İstatistikler</string>
+    <string name="photo_info">Bilgi</string>
+    <string name="set_as_wallpaper">Duvar Kağıdı Olarak Ayarla</string>
+    <string name="download">İndir</string>
+    <string name="setting_wallpaper">Duvar kağıdı ayarlanıyor.&#8230;</string>
+    <string name="cancel">İptal Et</string>
+    <string name="file_exists">Bu zaten indirilmiş.</string>
+
+    <!-- Error -->
+    <string name="no_results">Burada hiçbir şey yok.&#8230;</string>
+    <string name="log_in">Giriş Yap</string>
+    <string name="join">Katıl</string>
+    <string name="edit_title">Profili Düzenle</string>
+    <string name="request_token_failed">Erişim belirteci isteği başarısız oldu.</string>
+    <string name="error">Hata</string>
+
+    <string name="by_author">Tarafından %1$s</string>
+    <string name="no_more_photos">Başka fotoğraf yok.</string>
+    <string name="updated_photos">Fotoğraflar güncellendi!</string>
+    <string name="updated_collections">Koleksiyonlar güncellendi!</string>
+    <string name="updated_users">Kullanıcılar güncellendi!</string>
+    <string name="share_via">Bunu kullanarak paylaş</string>
+    <string name="unsplash_image">Unsplash Görüntüsü</string>
+    <string name="unsplash_collection">Unsplash Koleksiyonu</string>
+    <string name="save">Kaydet</string>
+    <string name="saved">Kaydedildi.</string>
+    <string name="likes">%1$s Beğenme</string>
+    <string name="photos">%1$s Fotoğraf</string>
+    <string name="views">%1$s Görüntülenme</string>
+    <string name="downloads">%1$s İndirilme</string>
+    <string name="cannot_make_anymore_requests">Daha fazla istek yapamazsın.</string>
+    <string name="download_started">İndirme başladı.</string>
+    <string name="image_saved">Görüntü kaydedildi.</string>
+    <string name="download_wallpaper">Duvar Kağıdını İndir</string>
+    <string name="download_complete">İndirme tamamlandı.</string>
+    <string name="unknown">Bilinmeyen</string>
+    <string name="cannot_update_profile">Profil güncelleştirilemiyor.</string>
+    <string name="updated_profile">Profil güncelleştirildi.</string>
+    <string name="username_cannot_be_blank">Kullanıcı adı boş bırakılamaz.</string>
+    <string name="failed_to_load_profile">Profili yükleme başarısız oldu.</string>
+    <string name="next">Sonraki</string>
+    <string name="username_hint">Kullanıcı Adı</string>
+    <string name="first_name_hint">Ad</string>
+    <string name="last_name_hint">Soyad</string>
+    <string name="email_address_hint">E-mail Adresi</string>
+    <string name="personal_site_hint">Kişisel Site/Portfolyo</string>
+    <string name="instagram_username_hint">Instagram Kullanıcı Adı</string>
+    <string name="location_hint">Konum</string>
+    <string name="bio_hint">Biyografi</string>
+    <string name="error_loading_photo">Görünüşe göre bu fotoğrafı yüklemede bir sorun oluştu.</string>
+    <string name="need_to_log_in">Bunu yapmak için giriş yapmış olmanız lazım.</string>
+    <string name="on">Açık</string>
+    <string name="off">Kapalı</string>
+    <string name="next_wallpaper">Bir Sonraki Duvar Kağıdı</string>
+    <string name="remove_all">Hepsini Sil</string>
+    <string name="activate">Aktive Et</string>
+</resources>
