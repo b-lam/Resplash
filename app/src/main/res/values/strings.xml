@@ -67,6 +67,7 @@
         <item>Russian</item>
         <item>Serbian</item>
         <item>Spanish</item>
+        <item>Thai</item>
         <item>Turkish</item>
     </string-array>
     <string-array name="language_values">
@@ -79,6 +80,7 @@
         <item>ru</item>
         <item>sr</item>
         <item>es</item>
+        <item>th</item>
         <item>tr</item>
     </string-array>
     <string name="default_language" translatable="false">en</string>
