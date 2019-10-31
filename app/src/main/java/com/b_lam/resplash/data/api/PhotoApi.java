@@ -26,7 +26,7 @@ public interface PhotoApi {
                                 @Query("per_page") Integer per_page,
                                 @Query("order_by") String order_by);
 
-    @GET("photos/curated")
+    @GET("photos/")
     Call<List<Photo>> getCuratedPhotos(@Query("page") Integer page,
                                        @Query("per_page") Integer per_page,
                                        @Query("order_by") String order_by);
@@ -67,7 +67,7 @@ public interface PhotoApi {
                                           @Query("page") Integer page,
                                           @Query("per_page") Integer per_page);
 
-    @GET("collections/curated/{id}/photos")
+    @GET("collections/{id}/photos")
     Call<List<Photo>> getCuratedCollectionPhotos(@Path("id") Integer id,
                                                  @Query("page") Integer page,
                                                  @Query("per_page") Integer per_page);
