@@ -239,8 +239,6 @@ public class CollectionDetailActivity extends BaseActivity implements EditCollec
         if (mCollection.total_photos == 0) {
             mNoResultsView.setVisibility(View.VISIBLE);
             mSwipeContainer.setEnabled(false);
-        } else if (mCollection.curated) {
-            photoService.requestCuratedCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, photosRequestListener);
         } else {
             photoService.requestCollectionPhotos(mCollection, mPage, Resplash.DEFAULT_PER_PAGE, photosRequestListener);
         }

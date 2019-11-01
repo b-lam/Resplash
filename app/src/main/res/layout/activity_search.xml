@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="?attr/colorPrimary"
         android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.Toolbar
@@ -37,8 +38,9 @@
             android:id="@+id/search_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:layoutDirection="ltr"
             android:elevation="4dp"
+            app:tabBackground="?attr/colorPrimary"
             app:tabIndicatorColor="?attr/primaryTextColor"
             app:tabSelectedTextColor="?attr/primaryTextColor"
             app:tabTextColor="?attr/secondaryTextColor"

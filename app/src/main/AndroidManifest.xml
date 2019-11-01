@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.b_lam.resplash">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,35 +14,33 @@
 
     <application
         android:name=".Resplash"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:supportsRtl="false"
-        android:theme="@style/ResplashTheme.Primary.Base.Light"
-        tools:replace="android:supportsRtl"
-        android:allowBackup="true"
-        android:fullBackupContent="@xml/backup_rules">
+        android:supportsRtl="true"
+        android:theme="@style/ResplashTheme.Primary.Base.Light">
         <activity
             android:name=".activities.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/SplashActivityTheme">
+            android:theme="@style/SplashActivityTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:host="unsplash.com"
                     android:path="/"
                     android:scheme="https" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
 
             <meta-data
@@ -66,18 +63,18 @@
             android:theme="@style/ResplashTheme.Primary.Base.Light" />
         <activity
             android:name=".activities.SearchActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/ResplashTheme.Primary.Base.Light">
+            android:theme="@style/ResplashTheme.Primary.Base.Light"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SearchActivity" />
         </activity>
         <activity
             android:name=".activities.CollectionDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/ResplashTheme.Primary.Base.Light" />
+            android:theme="@style/ResplashTheme.Primary.Base.Light"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.PreviewActivity"
             android:theme="@style/ResplashTheme.Primary.Base.Light" />
@@ -86,20 +83,22 @@
             android:theme="@style/ResplashTheme.Primary.Base.Light" />
         <activity
             android:name=".activities.UserActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/ResplashTheme.Primary.Base.Light" />
+            android:theme="@style/ResplashTheme.Primary.Base.Light"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.LoginActivity"
             android:launchMode="singleTask"
             android:theme="@style/ResplashTheme.Primary.Base.Light">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:host="unsplash-auth-callback"
                     android:scheme="resplash" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
         <activity
@@ -128,6 +127,11 @@
             android:name=".activities.WallpaperHistoryActivity"
             android:label="@string/auto_wallpaper_history"
             android:theme="@style/ResplashTheme.Primary.Base.Light" />
+        <activity android:name=".activities.CustomCategoryActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIDEYkpmJmsiQ-I__T0lFHPG64bCYUXblnA0iBRQ" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -138,12 +142,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider" />
         </provider>
-
         <service
             android:name=".data.service.AutoWallpaperService"
             android:exported="true"
             android:label="@string/auto_wallpaper_title"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <service
             android:name=".data.service.WallpaperQuickTileService"
             android:icon="@drawable/baseline_compare_black_24"
@@ -153,10 +157,5 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
-        <meta-data
-            android:name="com.google.android.backup.api_key"
-            android:value="AEdPqrEAAAAIDEYkpmJmsiQ-I__T0lFHPG64bCYUXblnA0iBRQ" />
     </application>
-
 </manifest>

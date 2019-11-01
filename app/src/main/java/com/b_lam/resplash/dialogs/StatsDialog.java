@@ -76,7 +76,8 @@ public class StatsDialog extends DialogFragment implements PhotoService.OnReques
                 dismiss();
                 Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
             } else {
-                service.requestStats(photo.id, Resplash.DEFAULT_STATISTICS_RESOLUTION, Resplash.DEFAULT_STATISTICS_QUANTITY, this);
+                dismiss();
+                Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.error_http), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -84,7 +85,7 @@ public class StatsDialog extends DialogFragment implements PhotoService.OnReques
     @Override
     public void onRequestStatsFailed(Call<PhotoStats> call, Throwable t) {
         if (isAdded()) {
-            service.requestStats(photo.id, Resplash.DEFAULT_STATISTICS_RESOLUTION, Resplash.DEFAULT_STATISTICS_QUANTITY,this);
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.cannot_make_anymore_requests), Toast.LENGTH_LONG).show();
         }
     }
 }

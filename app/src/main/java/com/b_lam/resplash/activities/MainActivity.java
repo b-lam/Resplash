@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -27,7 +28,6 @@ import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.data.tools.AuthManager;
 import com.b_lam.resplash.fragments.CollectionFragment;
-import com.b_lam.resplash.fragments.FeaturedFragment;
 import com.b_lam.resplash.fragments.NewFragment;
 import com.b_lam.resplash.util.ThemeUtils;
 import com.b_lam.resplash.util.Utils;
@@ -73,9 +73,8 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     private ProfileSettingDrawerItem drawerItemAddAccount, drawerItemViewProfile, drawerItemManageAccount, drawerItemLogout;
     private IProfile profile;
     private IProfile profileDefault;
-    private MenuItem mItemFeaturedLatest, mItemFeaturedOldest, mItemFeaturedPopular, mItemNewLatest, mItemNewOldest, mItemNewPopular, mItemAll, mItemCurated, mItemFeatured;
+    private MenuItem mItemNewLatest, mItemNewOldest, mItemNewPopular, mItemAll, mItemFeatured;
     private boolean mNewFragmentRecreated = false;
-    private boolean mFeaturedFragmentRecreated = false;
     private boolean mCollectionFragmentRecreated = false;
 
     @Override
@@ -108,7 +107,10 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         Utils.isStoragePermissionGranted(this);
         Utils.createNotificationChannel(this);
 
-        profileDefault = new ProfileDrawerItem().withName("Resplash").withEmail(getString(R.string.main_unsplash_description)).withIcon(R.drawable.intro_icon_image);
+        profileDefault = new ProfileDrawerItem()
+                .withName("Resplash")
+                .withEmail(getString(R.string.main_unsplash_description))
+                .withIcon(R.drawable.intro_icon_image);
 
         DrawerImageLoader.Companion.init(new AbstractDrawerImageLoader() {
             @Override
@@ -117,6 +119,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                         .load(uri)
                         .apply(new RequestOptions()
                                 .placeholder(placeholder))
+                        .circleCrop()
                         .into(imageView);
             }
 
@@ -162,18 +165,18 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                 .withTranslucentStatusBar(false)
                 .withActionBarDrawerToggle(true)
                 .withToolbar(mToolbar)
+                .withDrawerGravity(GravityCompat.START)
                 .withDelayDrawerClickEvent(200)
                 .withAccountHeader(drawerHeader)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(1).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.newIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_featured)).withIdentifier(2).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.hotIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(3).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionsIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_new)).withIdentifier(1).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.homeIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_collections)).withIdentifier(2).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.collectionsIcon)).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)).withSelectedTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.auto_wallpaper_title)).withIdentifier(4).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.autoWallpaperIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.auto_wallpaper_title)).withIdentifier(3).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.autoWallpaperIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(5).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.heartIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(6).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.settingsIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
-                        new PrimaryDrawerItem().withName(getString(R.string.main_about)).withIdentifier(7).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.infoIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor))
+                        new PrimaryDrawerItem().withName(getString(R.string.main_support_development)).withIdentifier(4).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.heartIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_settings)).withIdentifier(5).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.settingsIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor)),
+                        new PrimaryDrawerItem().withName(getString(R.string.main_about)).withIdentifier(6).withIcon(ThemeUtils.getThemeAttrDrawable(this, R.attr.infoIcon)).withSelectable(false).withTextColor(ThemeUtils.getThemeAttrColor(this, R.attr.primaryTextColor))
                 )
                 .withOnDrawerItemClickListener(drawerItemClickListener)
                 .build();
@@ -182,10 +185,21 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
 
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mPagerAdapter.addFragment(NewFragment.newInstance("latest"), getString(R.string.main_new));
-        mPagerAdapter.addFragment(FeaturedFragment.newInstance("latest"), getString(R.string.main_featured));
         mPagerAdapter.addFragment(CollectionFragment.newInstance("Featured"), getString(R.string.main_collections));
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+
+            @Override
+            public void onPageSelected(int position) {
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) { }
+        });
 
         mTabLayout.setupWithViewPager(mViewPager);
 
@@ -195,10 +209,8 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                 mViewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
                     drawer.setSelection(1);
-                } else if(tab.getPosition() == 1) {
-                    drawer.setSelection(2);
                 } else {
-                    drawer.setSelection(3);
+                    drawer.setSelection(2);
                 }
             }
 
@@ -237,12 +249,6 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                     }
                     break;
                 case 1:
-                    fragment = mFeaturedFragmentRecreated ? getSupportFragmentManager().findFragmentById(R.id.featured_container) : mPagerAdapter.getItem(1);
-                    if (fragment instanceof FeaturedFragment) {
-                        ((FeaturedFragment) fragment).scrollToTop();
-                    }
-                    break;
-                case 2:
                     fragment = mCollectionFragmentRecreated ? getSupportFragmentManager().findFragmentById(R.id.collection_container) : mPagerAdapter.getItem(2);
                     if (fragment instanceof CollectionFragment) {
                         ((CollectionFragment) fragment).scrollToTop();
@@ -259,31 +265,29 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
 
                 Intent intent = null;
 
-                if(drawerItem.getIdentifier() == 1){
+                if (drawerItem.getIdentifier() == 1) {
                     mViewPager.setCurrentItem(0);
-                }else if(drawerItem.getIdentifier() == 2){
+                } else if (drawerItem.getIdentifier() == 2) {
                     mViewPager.setCurrentItem(1);
-                }else if(drawerItem.getIdentifier() == 3){
-                    mViewPager.setCurrentItem(2);
-                }else if(drawerItem.getIdentifier() == 4){
+                } else if (drawerItem.getIdentifier() == 3) {
                     intent = new Intent(MainActivity.this, AutoWallpaperActivity.class);
-                }else if(drawerItem.getIdentifier() == 5){
+                } else if (drawerItem.getIdentifier() == 4) {
                     intent = new Intent(MainActivity.this, DonateActivity.class);
-                }else if(drawerItem.getIdentifier() == 6){
+                } else if (drawerItem.getIdentifier() == 5) {
                     intent = new Intent(MainActivity.this, SettingsActivity.class);
-                }else if(drawerItem.getIdentifier() == 7){
+                } else if (drawerItem.getIdentifier() == 6) {
                     intent = new Intent(MainActivity.this, AboutActivity.class);
-                }else if(drawerItem.getIdentifier() == 100000){
+                } else if (drawerItem.getIdentifier() == 100000) {
                     intent = new Intent(MainActivity.this, LoginActivity.class);
-                }else if(drawerItem.getIdentifier() == 100001){
-                    if(AuthManager.getInstance().isAuthorized()){
+                } else if (drawerItem.getIdentifier() == 100001) {
+                    if (AuthManager.getInstance().isAuthorized()) {
                         intent = new Intent(MainActivity.this, UserActivity.class);
                         intent.putExtra("username", AuthManager.getInstance().getUsername());
                         intent.putExtra("name", AuthManager.getInstance().getFirstName() + " " + AuthManager.getInstance().getLastName());
                     }
-                }else if(drawerItem.getIdentifier() == 100002){
+                } else if (drawerItem.getIdentifier() == 100002) {
                     intent = new Intent(MainActivity.this, EditProfileActivity.class);
-                }else if(drawerItem.getIdentifier() == 100003){
+                } else if (drawerItem.getIdentifier() == 100003) {
                     AuthManager.getInstance().logout();
                     updateDrawerItems();
                     Toast.makeText(getApplicationContext(), getString(R.string.main_logout_success), Toast.LENGTH_SHORT).show();
@@ -302,14 +306,10 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
 
-        mItemFeaturedLatest = menu.findItem(R.id.menu_item_featured_latest);
-        mItemFeaturedOldest = menu.findItem(R.id.menu_item_featured_oldest);
-        mItemFeaturedPopular = menu.findItem(R.id.menu_item_featured_popular);
         mItemNewLatest = menu.findItem(R.id.menu_item_new_latest);
         mItemNewOldest = menu.findItem(R.id.menu_item_new_oldest);
         mItemNewPopular = menu.findItem(R.id.menu_item_new_popular);
         mItemAll = menu.findItem(R.id.menu_item_all);
-        mItemCurated = menu.findItem(R.id.menu_item_curated);
         mItemFeatured = menu.findItem(R.id.menu_item_featured);
 
         return true;
@@ -319,41 +319,11 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        switch (mViewPager.getCurrentItem()){
-            case 0:
-                mItemFeaturedLatest.setVisible(false);
-                mItemFeaturedOldest.setVisible(false);
-                mItemFeaturedPopular.setVisible(false);
-                mItemNewLatest.setVisible(true);
-                mItemNewOldest.setVisible(true);
-                mItemNewPopular.setVisible(true);
-                mItemAll.setVisible(false);
-                mItemCurated.setVisible(false);
-                mItemFeatured.setVisible(false);
-                break;
-            case 1:
-                mItemFeaturedLatest.setVisible(true);
-                mItemFeaturedOldest.setVisible(true);
-                mItemFeaturedPopular.setVisible(true);
-                mItemNewLatest.setVisible(false);
-                mItemNewOldest.setVisible(false);
-                mItemNewPopular.setVisible(false);
-                mItemAll.setVisible(false);
-                mItemCurated.setVisible(false);
-                mItemFeatured.setVisible(false);
-                break;
-            case 2:
-                mItemFeaturedLatest.setVisible(false);
-                mItemFeaturedOldest.setVisible(false);
-                mItemFeaturedPopular.setVisible(false);
-                mItemNewLatest.setVisible(false);
-                mItemNewOldest.setVisible(false);
-                mItemNewPopular.setVisible(false);
-                mItemAll.setVisible(true);
-                mItemCurated.setVisible(true);
-                mItemFeatured.setVisible(true);
-                break;
-        }
+        mItemNewLatest.setVisible(mViewPager.getCurrentItem() == 0);
+        mItemNewOldest.setVisible(mViewPager.getCurrentItem() == 0);
+        mItemNewPopular.setVisible(mViewPager.getCurrentItem() == 0);
+        mItemAll.setVisible(mViewPager.getCurrentItem() == 1);
+        mItemFeatured.setVisible(mViewPager.getCurrentItem() == 1);
 
         return true;
     }
@@ -371,18 +341,6 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                 return true;
             case R.id.sort_by:
                 return true;
-            case R.id.menu_item_featured_latest:
-                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("latest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                mFeaturedFragmentRecreated = true;
-                return true;
-            case R.id.menu_item_featured_oldest:
-                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("oldest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                mFeaturedFragmentRecreated = true;
-                return true;
-            case R.id.menu_item_featured_popular:
-                transaction.replace(R.id.featured_container, FeaturedFragment.newInstance("popular")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                mFeaturedFragmentRecreated = true;
-                return true;
             case R.id.menu_item_new_latest:
                 transaction.replace(R.id.new_container, NewFragment.newInstance("latest")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                 mNewFragmentRecreated = true;
@@ -397,10 +355,6 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                 return true;
             case R.id.menu_item_all:
                 transaction.replace(R.id.collection_container, CollectionFragment.newInstance("All")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                mCollectionFragmentRecreated = true;
-                return true;
-            case R.id.menu_item_curated:
-                transaction.replace(R.id.collection_container, CollectionFragment.newInstance("Curated")).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                 mCollectionFragmentRecreated = true;
                 return true;
             case R.id.menu_item_featured:

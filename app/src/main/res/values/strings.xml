@@ -21,35 +21,11 @@
     <string name="summary_download_quality_preference">Choose the quality of the images that are downloaded</string>
     <string name="title_wallpaper_quality_preference">Wallpaper Quality</string>
     <string name="summary_wallpaper_quality_preference">Choose the quality of the wallpapers set</string>
-    <string-array name="quality_options">
-        <item>Raw</item>
-        <item>Full</item>
-        <item>Regular</item>
-        <item>Small</item>
-        <item>Thumb</item>
-    </string-array>
-    <string-array name="quality_options_values">
-        <item>Raw</item>
-        <item>Full</item>
-        <item>Regular</item>
-        <item>Small</item>
-        <item>Thumb</item>
-    </string-array>
     <string name="default_load_quality" translatable="false">Regular</string>
     <string name="default_download_quality" translatable="false">Full</string>
     <string name="title_layout_section">Layout</string>
     <string name="title_layout_preference">Choose Layout</string>
     <string name="summary_layout_preference">Choose how images are displayed</string>
-    <string-array name="layout_options">
-        <item>List</item>
-        <item>Cards</item>
-        <item>Grid</item>
-    </string-array>
-    <string-array name="layout_options_values">
-        <item>List</item>
-        <item>Cards</item>
-        <item>Grid</item>
-    </string-array>
     <string name="default_layout" translatable="false">List</string>
     <string name="title_general_section">General</string>
     <string name="title_custom_api">Custom API Key</string>
@@ -57,51 +33,13 @@
     <string name="cache_size">Cache size</string>
     <string name="message_cache_cleared">Cache cleared!</string>
     <string name="title_language">Language</string>
-    <string-array name="language">
-        <item>English</item>
-        <item>Chinese</item>
-        <item>Czech</item>
-        <item>German</item>
-        <item>Italian</item>
-        <item>Portuguese</item>
-        <item>Russian</item>
-        <item>Serbian</item>
-        <item>Spanish</item>
-        <item>Thai</item>
-        <item>Turkish</item>
-    </string-array>
-    <string-array name="language_values">
-        <item>en</item>
-        <item>zh</item>
-        <item>cs</item>
-        <item>de</item>
-        <item>it</item>
-        <item>pt</item>
-        <item>ru</item>
-        <item>sr</item>
-        <item>es</item>
-        <item>th</item>
-        <item>tr</item>
-    </string-array>
     <string name="default_language" translatable="false">en</string>
     <string name="title_theme">Theme</string>
-    <string-array name="theme">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>Black (AMOLED)</item>
-    </string-array>
-    <string-array name="theme_values">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>Black</item>
-    </string-array>
     <string name="default_theme" translatable="false">Light</string>
     <string name="restart">Restart</string>
     <string name="restart_to_apply">Restart to apply changes</string>
     <string name="title_other_section">Other</string>
     <string name="title_unsplash_intent_preference">Go to Unsplash.com</string>
-
-    <!-- Menu -->
     <string name="menu_search">Search</string>
     <string name="menu_sort">Sort by</string>
     <string name="menu_item_latest">Latest</string>
@@ -110,9 +48,9 @@
     <string name="menu_item_random">Random</string>
     <string name="menu_item_all">All</string>
     <string name="menu_item_curated">Curated</string>
-    <string name="menu_item_featured">Featured</string>
 
-    <!-- Main -->
+    <!-- Menu -->
+    <string name="menu_item_featured">Featured</string>
     <string name="main_unsplash_description">Free high-resolution photos</string>
     <string name="main_add_account">Add Account</string>
     <string name="main_add_new_account">Add new Unsplash account</string>
@@ -120,55 +58,49 @@
     <string name="main_manage_account">Manage Account</string>
     <string name="main_logout">Log out</string>
     <string name="main_featured">Featured</string>
-    <string name="main_new">New</string>
+    <string name="main_new">Home</string>
+
+    <!-- Main -->
     <string name="main_collections">Collections</string>
     <string name="main_support_development">Support development</string>
     <string name="main_settings">Settings</string>
     <string name="main_about">About</string>
     <string name="main_logout_success">Log out - Success</string>
-
-    <!-- Intro -->
     <string name="intro_welcome_title">Resplash</string>
     <string name="intro_welcome_description">Powered by Unsplash</string>
     <string name="intro_download_title">Hi-Res Photos</string>
     <string name="intro_download_description">Free (do whatever you want) high-resolution photos</string>
     <string name="intro_done">Go</string>
     <string name="intro_next">Next</string>
-
-    <!-- Custom API -->
     <string name="custom_api_key_description">You can create your own Unsplash developer account and use your own API key\n\n(Leave blank to use the stock API key)</string>
     <string name="redirect_uri" translatable="false">resplash://unsplash-auth-callback</string>
+
+    <!-- Intro -->
     <string name="api_key_empty_message">Error: Cannot leave field empty</string>
     <string name="redirect_uri_hint">Redirect URI</string>
     <string name="secret_hint">Secret</string>
     <string name="api_key_hint">API Key</string>
-
-    <!-- Search -->
     <string name="search_photos">Photos</string>
     <string name="search_collections">Collections</string>
+
+    <!-- Custom API -->
     <string name="search_users">Users</string>
     <string name="search_hint">Search</string>
     <string name="search_title">Search</string>
     <string name="action_clear_text">Clear text</string>
-    <string-array name="search_photos_orientations">
-        <item>All</item>
-        <item>Landscape</item>
-        <item>Portrait</item>
-        <item>Squarish</item>
-    </string-array>
-
-    <!-- InfoDialog -->
     <string name="photo_dimensions">Dimensions</string>
     <string name="camera_make">Make</string>
+
+    <!-- Search -->
     <string name="camera_model">Model</string>
     <string name="exposure_time">Exposure time</string>
     <string name="aperture">Aperture</string>
     <string name="iso">ISO</string>
     <string name="focal_length">Focal length</string>
-
-    <!-- Collections -->
     <string name="add_to_collection">Add to collection</string>
     <string name="create_new_collection">Create new collection</string>
+
+    <!-- InfoDialog -->
     <string name="create">Create</string>
     <string name="delete">Delete</string>
     <string name="collection_name_hint">Name</string>
@@ -176,14 +108,14 @@
     <string name="make_collection_private">Make collection private</string>
     <string name="collection_name_is_required">Name is required</string>
     <string name="failed_to_create_collection">Failed to create collection</string>
+
+    <!-- Collections -->
     <string name="failed_to_save_collection">Failed to save collection</string>
     <string name="failed_to_delete_collection">Failed to delete collection</string>
     <string name="edit_collection">Edit collection</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
-    <!-- About -->
     <string name="about_title">About</string>
     <string name="about_unsplash_title">Unsplash.com</string>
     <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
@@ -193,6 +125,8 @@
     <string name="about_github_title">GitHub</string>
     <string name="about_privacy_policy_title">Privacy Policy</string>
     <string name="about_support_development_card_title">Support development</string>
+
+    <!-- About -->
     <string name="about_rate_title">Rate</string>
     <string name="about_rate_subtitle">If you like Resplash, rate it on the Play Store</string>
     <string name="about_donate_title">Donate</string>
@@ -225,8 +159,6 @@
     <string name="about_library10_subtitle" translatable="false">Android Floating Action Button based on Material Design specification</string>
     <string name="about_library11_title" translatable="false">PrettyTime</string>
     <string name="about_library11_subtitle" translatable="false">Social Style Date and Time Formatting for Java</string>
-
-    <!-- Donate -->
     <string name="donate_card_title">Support development</string>
     <string name="donate_item1_title">Coffee</string>
     <string name="donate_item1_subtitle">Keeps me awake through the late night coding sessions</string>
@@ -236,10 +168,10 @@
     <string name="donate_item3_subtitle">Everyone likes pizza</string>
     <string name="donate_item4_title">Fancy Meal</string>
     <string name="donate_item4_subtitle">Gotta treat yourself once in a while</string>
+
+    <!-- Donate -->
     <string name="donate_thanks">Thanks for donating!</string>
     <string name="donate_loading">Loading products&#8230;</string>
-
-    <!-- Auto Wallpaper -->
     <string name="auto_wallpaper_title">Auto Wallpaper</string>
     <string name="auto_wallpaper_conditions">Conditions</string>
     <string name="auto_wallpaper_on_wifi">On Wi-Fi</string>
@@ -249,41 +181,13 @@
     <string name="auto_wallpaper_idle">Idle</string>
     <string name="auto_wallpaper_idle_summary">Device must be inactive</string>
     <string name="auto_wallpaper_interval">Interval</string>
+
+    <!-- Auto Wallpaper -->
     <string name="auto_wallpaper_interval_summary">Select the auto wallpaper change interval</string>
-    <string-array name="auto_wallpaper_interval_options">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>12 hours</item>
-        <item>24 hours</item>
-        <item>48 hours</item>
-    </string-array>
-    <string-array name="auto_wallpaper_interval_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>720</item>
-        <item>1440</item>
-        <item>2880</item>
-    </string-array>
     <string name="auto_wallpaper_interval_default" translatable="false">1440</string>
     <string name="auto_wallpaper_source">Source</string>
     <string name="auto_wallpaper_category">Category</string>
     <string name="auto_wallpaper_category_summary">Select the wallpaper category</string>
-    <string-array name="auto_wallpaper_category_options">
-        <item>All</item>
-        <item>Featured</item>
-        <item>Custom</item>
-    </string-array>
-    <string-array name="auto_wallpaper_category_values">
-        <item>All</item>
-        <item>Featured</item>
-        <item>Custom</item>
-    </string-array>
     <string name="auto_wallpaper_category_default" translatable="false">All</string>
     <string name="auto_wallpaper_custom_category">Custom Category</string>
     <string name="auto_wallpaper_custom_category_summary">Get wallpapers matching a search term</string>
@@ -291,22 +195,10 @@
     <string name="auto_wallpaper_options">Options</string>
     <string name="auto_wallpaper_select_screen">Select Screen</string>
     <string name="auto_wallpaper_select_screen_summary">Choose which screens to apply wallpaper to</string>
-    <string-array name="auto_wallpaper_select_screen_options">
-        <item>Home screen</item>
-        <item>Lock screen</item>
-        <item>Both</item>
-    </string-array>
-    <string-array name="auto_wallpaper_select_screen_values">
-        <item>Home screen</item>
-        <item>Lock screen</item>
-        <item>Both</item>
-    </string-array>
     <string name="auto_wallpaper_select_screen_default" translatable="false">Both</string>
     <string name="auto_wallpaper_history">Auto Wallpaper History</string>
     <string name="auto_wallpaper_history_summary">View previously set wallpapers</string>
     <string name="auto_wallpaper_info">Auto Wallpaper will refresh your home screen with a new random wallpaper based on the set conditions.</string>
-
-    <!-- Detail -->
     <string name="stats">Stats</string>
     <string name="photo_info">Info</string>
     <string name="set_as_wallpaper">Set as wallpaper</string>
@@ -314,17 +206,16 @@
     <string name="setting_wallpaper">Setting wallpaper&#8230;</string>
     <string name="cancel">Cancel</string>
     <string name="file_exists">This has already been downloaded</string>
-
-    <!-- Error -->
     <string name="no_results">There\'s nothing here&#8230;</string>
     <string name="log_in">Log in</string>
     <string name="join">Join</string>
     <string name="edit_title">Edit Profile</string>
     <string name="request_token_failed">Access token request failed</string>
     <string name="error">Error</string>
-
     <string name="by_author">By %1$s</string>
     <string name="no_more_photos">No more photos</string>
+
+    <!-- Detail -->
     <string name="updated_photos">Updated photos!</string>
     <string name="updated_collections">Updated collections!</string>
     <string name="updated_users">Updated users!</string>
@@ -332,12 +223,15 @@
     <string name="unsplash_image">Unsplash Image</string>
     <string name="unsplash_collection">Unsplash Collection</string>
     <string name="save">Save</string>
+
+    <!-- Error -->
     <string name="saved">Saved</string>
     <string name="likes">%1$s Likes</string>
     <string name="photos">%1$s Photos</string>
     <string name="views">%1$s Views</string>
     <string name="downloads">%1$s Downloads</string>
     <string name="cannot_make_anymore_requests">Can\'t make anymore requests</string>
+
     <string name="download_started">Download started</string>
     <string name="image_saved">Image saved</string>
     <string name="download_wallpaper">Download Wallpaper</string>
@@ -363,4 +257,115 @@
     <string name="next_wallpaper">Next Wallpaper</string>
     <string name="remove_all">Remove all</string>
     <string name="activate">Activate</string>
+    <string name="help">Help</string>
+    <string-array name="quality_options">
+        <item>Raw</item>
+        <item>Full</item>
+        <item>Regular</item>
+        <item>Small</item>
+        <item>Thumb</item>
+    </string-array>
+    <string-array name="quality_options_values">
+        <item>Raw</item>
+        <item>Full</item>
+        <item>Regular</item>
+        <item>Small</item>
+        <item>Thumb</item>
+    </string-array>
+    <string-array name="layout_options">
+        <item>List</item>
+        <item>Cards</item>
+        <item>Grid</item>
+    </string-array>
+    <string-array name="layout_options_values">
+        <item>List</item>
+        <item>Cards</item>
+        <item>Grid</item>
+    </string-array>
+    <string-array name="language">
+        <item>English</item>
+        <item>Arabic</item>
+        <item>Chinese</item>
+        <item>Czech</item>
+        <item>German</item>
+        <item>Indonesian</item>
+        <item>Italian</item>
+        <item>Portuguese</item>
+        <item>Russian</item>
+        <item>Serbian</item>
+        <item>Spanish</item>
+        <item>Thai</item>
+        <item>Turkish</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>en</item>
+        <item>ar</item>
+        <item>zh</item>
+        <item>cs</item>
+        <item>de</item>
+        <item>in</item>
+        <item>it</item>
+        <item>pt</item>
+        <item>ru</item>
+        <item>sr</item>
+        <item>es</item>
+        <item>th</item>
+        <item>tr</item>
+    </string-array>
+    <string-array name="theme">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Black (AMOLED)</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Black</item>
+    </string-array>
+    <string-array name="search_photos_orientations">
+        <item>All</item>
+        <item>Landscape</item>
+        <item>Portrait</item>
+        <item>Squarish</item>
+    </string-array>
+    <string-array name="auto_wallpaper_interval_options">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
+        <item>48 hours</item>
+    </string-array>
+    <string-array name="auto_wallpaper_interval_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>720</item>
+        <item>1440</item>
+        <item>2880</item>
+    </string-array>
+    <string-array name="auto_wallpaper_category_options">
+        <item>All</item>
+        <item>Featured</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="auto_wallpaper_category_values">
+        <item>All</item>
+        <item>Featured</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="auto_wallpaper_select_screen_options">
+        <item>Home screen</item>
+        <item>Lock screen</item>
+        <item>Both</item>
+    </string-array>
+    <string-array name="auto_wallpaper_select_screen_values">
+        <item>Home screen</item>
+        <item>Lock screen</item>
+        <item>Both</item>
+    </string-array>
 </resources>

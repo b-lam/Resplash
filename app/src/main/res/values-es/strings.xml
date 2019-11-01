@@ -17,7 +17,7 @@
     <string name="summary_load_quality_preference">Elige en qué calidad quieres que la app cargue las imágenes</string>
     <string name="title_download_quality_preference">Calidad de descarga</string>
     <string name="summary_download_quality_preference">Elige en qué calidad se descargarán las imágenes a tu dispositivo</string>
-    <string name="title_wallpaper_quality_preference">Calidad del fonodo de pantalla</string>
+    <string name="title_wallpaper_quality_preference">Calidad del fondo de pantalla</string>
     <string name="summary_wallpaper_quality_preference">Elige en qué calidad quieres que se descarguen tus fondos de pantalla</string>
     <string-array name="quality_options">
         <item>Raw</item>
@@ -168,7 +168,7 @@
     <string name="donate_loading">Cargando productos &#8230;</string>
 
     <!-- Auto Wallpaper -->
-    <string name="auto_wallpaper_title">Auto Wallpaper</string>
+    <string name="auto_wallpaper_title">Fondos Automáticos</string>
     <string name="auto_wallpaper_conditions">Condiciones</string>
     <string name="auto_wallpaper_on_wifi">Sólo con Wi-Fi</string>
     <string name="auto_wallpaper_on_wifi_summary">El dispositivo debe estar conectado a una red Wi-Fi</string>
@@ -208,7 +208,7 @@
     </string-array>
     <string name="auto_wallpaper_history">Historial de wallpapers</string>
     <string name="auto_wallpaper_history_summary">Ver fondos de escritorio anteriores</string>
-    <string name="auto_wallpaper_info">Auto Wallpaper actualizará tu fondo de escritorio con una imagen de acuerdo con estas condiciones.</string>
+    <string name="auto_wallpaper_info">Fondos Automáticos actualizará tu fondo de escritorio con una imagen de acuerdo con estas condiciones.</string>
 
     <!-- Detail -->
     <string name="stats">Datos</string>

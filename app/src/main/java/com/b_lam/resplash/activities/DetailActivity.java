@@ -167,14 +167,16 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                     tvDescription.setVisibility(View.GONE);
                 }
                 if (mPhoto.location != null) {
-                    if (mPhoto.location.title != null) {
+                    if (!Utils.isEmpty(mPhoto.location.title)) {
                         tvLocation.setText(mPhoto.location.title);
                     } else if (mPhoto.location.city != null && mPhoto.location.country != null) {
-                        tvLocation.setText(mPhoto.location.city + ", " + mPhoto.location.country);
-                    }else if(mPhoto.location.city != null){
+                        tvLocation.setText(String.format("%s, %s", mPhoto.location.city, mPhoto.location.country));
+                    }else if (mPhoto.location.city != null){
                         tvLocation.setText(mPhoto.location.city);
-                    }else if(mPhoto.location.country != null){
+                    } else if (mPhoto.location.country != null){
                         tvLocation.setText(mPhoto.location.country);
+                    } else {
+                        tvLocation.setVisibility(View.GONE);
                     }
                 } else {
                     tvLocation.setVisibility(View.GONE);
@@ -201,9 +203,8 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
         @Override
         public void onRequestPhotoDetailsFailed(Call<Photo> call, Throwable t) {
             Log.d(TAG, t.toString());
-            if (mPhoto != null) {
-                mService.requestPhotoDetails(mPhoto.id, this);
-            }
+            Toast.makeText(Resplash.getInstance().getApplicationContext(), getString(R.string.error_loading_photo), Toast.LENGTH_LONG).show();
+            finish();
         }
     };
 
@@ -357,9 +358,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                             case "Raw":
                                 downloadImage(mPhoto.urls.raw, DOWNLOAD);
                                 break;
-                            case "Full":
-                                downloadImage(mPhoto.urls.full, DOWNLOAD);
-                                break;
                             case "Regular":
                                 downloadImage(mPhoto.urls.regular, DOWNLOAD);
                                 break;
@@ -369,6 +367,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                             case "Thumb":
                                 downloadImage(mPhoto.urls.thumb, DOWNLOAD);
                                 break;
+                            case "Full":
                             default:
                                 downloadImage(mPhoto.urls.full, DOWNLOAD);
                         }
@@ -383,9 +382,6 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                             case "Raw":
                                 downloadImage(mPhoto.urls.raw, WALLPAPER);
                                 break;
-                            case "Full":
-                                downloadImage(mPhoto.urls.full, WALLPAPER);
-                                break;
                             case "Regular":
                                 downloadImage(mPhoto.urls.regular, WALLPAPER);
                                 break;
@@ -395,6 +391,7 @@ public class DetailActivity extends BaseActivity implements ManageCollectionsDia
                             case "Thumb":
                                 downloadImage(mPhoto.urls.thumb, WALLPAPER);
                                 break;
+                            case "Full":
                             default:
                                 downloadImage(mPhoto.urls.full, WALLPAPER);
                         }

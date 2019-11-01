@@ -184,9 +184,6 @@ public class CollectionFragment extends Fragment {
             case "All":
                 mService.requestAllCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
                 break;
-            case "Curated":
-                mService.requestCuratedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
-                break;
             case "Featured":
                 mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
                 break;
@@ -242,9 +239,6 @@ public class CollectionFragment extends Fragment {
         switch (mType) {
             case "All":
                 mService.requestAllCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
-                break;
-            case "Curated":
-                mService.requestCuratedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);
                 break;
             case "Featured":
                 mService.requestFeaturedCollections(mPage, Resplash.DEFAULT_PER_PAGE, mCollectionRequestListener);

@@ -76,5 +76,6 @@
         <attr name="editIcon" format="reference"/>
         <attr name="autoWallpaperIcon" format="reference"/>
         <attr name="lockIcon" format="reference"/>
+        <attr name="homeIcon" format="reference"/>
     </declare-styleable>
 </resources>
