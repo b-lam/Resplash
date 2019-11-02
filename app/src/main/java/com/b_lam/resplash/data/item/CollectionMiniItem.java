@@ -51,6 +51,8 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
     public void bindView(ViewHolder holder, List<Object> payloads) {
         super.bindView(holder, payloads);
 
+        if (getModel() == null) return;
+
         String url;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Resplash.getInstance());
 
@@ -62,15 +64,13 @@ public class CollectionMiniItem extends ModelAbstractItem<Collection, Collection
                 case "Full":
                     url = getModel().cover_photo.urls.full;
                     break;
-                case "Regular":
-                    url = getModel().cover_photo.urls.regular;
-                    break;
                 case "Small":
                     url = getModel().cover_photo.urls.small;
                     break;
                 case "Thumb":
                     url = getModel().cover_photo.urls.thumb;
                     break;
+                case "Regular":
                 default:
                     url = getModel().cover_photo.urls.regular;
             }

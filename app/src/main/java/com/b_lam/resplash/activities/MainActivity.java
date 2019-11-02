@@ -249,7 +249,7 @@ public class MainActivity extends BaseActivity implements AuthManager.OnAuthData
                     }
                     break;
                 case 1:
-                    fragment = mCollectionFragmentRecreated ? getSupportFragmentManager().findFragmentById(R.id.collection_container) : mPagerAdapter.getItem(2);
+                    fragment = mCollectionFragmentRecreated ? getSupportFragmentManager().findFragmentById(R.id.collection_container) : mPagerAdapter.getItem(1);
                     if (fragment instanceof CollectionFragment) {
                         ((CollectionFragment) fragment).scrollToTop();
                     }
