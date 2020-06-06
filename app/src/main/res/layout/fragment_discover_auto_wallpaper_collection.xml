@@ -1,0 +1,52 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.b_lam.resplash.ui.autowallpaper.collections.DiscoverAutoWallpaperCollectionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:descendantFocusability="blocksDescendants">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/featured_collection_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/layout_animation_scale_in"
+            tools:listitem="@layout/item_auto_wallpaper_featured_collection"
+            tools:orientation="horizontal"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <cz.intik.overflowindicator.OverflowPagerIndicator
+            android:id="@+id/page_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/keyline_5"
+            android:layout_gravity="center_horizontal"
+            app:dotFillColor="@color/color_on_surface_secondary"
+            app:dotStrokeColor="@color/color_on_surface_secondary" />
+
+        <TextView
+            android:id="@+id/popular_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_7"
+            android:layout_marginTop="@dimen/keyline_3"
+            android:text="@string/auto_wallpaper_popular"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popular_collections_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/layout_animation_scale_in"
+            android:overScrollMode="never"
+            tools:listitem="@layout/item_auto_wallpaper_popular_collection" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

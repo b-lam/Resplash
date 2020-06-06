@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_one"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/action_auto_wallpaper"
+            android:icon="@drawable/ic_compare_24dp"
+            android:title="@string/auto_wallpaper_title" />
+    </group>
+    <group
+        android:id="@+id/group_two"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/action_upgrade"
+            android:icon="@drawable/ic_resplash_24dp"
+            android:title="@string/upgrade_to_resplash_pro" />
+        <item
+            android:id="@+id/action_donate"
+            android:icon="@drawable/ic_favorite_filled_24dp"
+            android:title="@string/support_development" />
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@drawable/ic_settings_24dp"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/action_about"
+            android:icon="@drawable/ic_info_24dp"
+            android:title="@string/about" />
+    </group>
+</menu>

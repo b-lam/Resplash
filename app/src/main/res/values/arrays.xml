@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Language-->
+    <string-array name="language_options">
+        <item>@string/language_english</item>
+        <item>@string/language_arabic</item>
+        <item>@string/language_chinese</item>
+        <item>@string/language_czech</item>
+        <item>@string/language_german</item>
+        <item>@string/language_indonesian</item>
+        <item>@string/language_italian</item>
+        <item>@string/language_portuguese</item>
+        <item>@string/language_russian</item>
+        <item>@string/language_serbian</item>
+        <item>@string/language_spanish</item>
+        <item>@string/language_thai</item>
+        <item>@string/language_turkish</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>en</item>
+        <item>ar</item>
+        <item>zh</item>
+        <item>cs</item>
+        <item>de</item>
+        <item>in</item>
+        <item>it</item>
+        <item>pt</item>
+        <item>ru</item>
+        <item>sr</item>
+        <item>es</item>
+        <item>th</item>
+        <item>tr</item>
+    </string-array>
+    <string name="default_language_value" translatable="false">en</string>
+
+    <!--Theme-->
+    <string-array name="theme_options">
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+        <item>@string/theme_battery</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>battery</item>
+    </string-array>
+    <string name="default_theme_value" translatable="false">light</string>
+
+    <!--Layout-->
+    <string-array name="layout_options">
+        <item>@string/layout_default</item>
+        <item>@string/layout_minimal</item>
+        <item>@string/layout_grid</item>
+    </string-array>
+    <string-array name="layout_values">
+        <item>default</item>
+        <item>minimal</item>
+        <item>grid</item>
+    </string-array>
+    <string name="default_layout_value" translatable="false">default</string>
+
+    <!--Quality-->
+    <string-array name="quality_options">
+        <item>@string/quality_raw</item>
+        <item>@string/quality_full</item>
+        <item>@string/quality_regular</item>
+        <item>@string/quality_small</item>
+        <item>@string/quality_thumb</item>
+    </string-array>
+    <string-array name="quality_values">
+        <item>raw</item>
+        <item>full</item>
+        <item>regular</item>
+        <item>small</item>
+        <item>thumb</item>
+    </string-array>
+    <string name="default_load_quality_value" translatable="false">regular</string>
+    <string name="default_download_quality_value" translatable="false">full</string>
+    <string name="default_wallpaper_quality_value" translatable="false">full</string>
+
+    <!--Auto Wallpaper Interval-->
+    <string-array name="auto_wallpaper_interval_options">
+        <item>@string/auto_wallpaper_interval_fifteen_minutes</item>
+        <item>@string/auto_wallpaper_interval_thirty_minutes</item>
+        <item>@string/auto_wallpaper_interval_one_hour</item>
+        <item>@string/auto_wallpaper_interval_three_hours</item>
+        <item>@string/auto_wallpaper_interval_six_hours</item>
+        <item>@string/auto_wallpaper_interval_twelve_hours</item>
+        <item>@string/auto_wallpaper_interval_twenty_four_hours</item>
+        <item>@string/auto_wallpaper_interval_forty_eight_hours</item>
+    </string-array>
+    <string-array name="auto_wallpaper_interval_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>720</item>
+        <item>1440</item>
+        <item>2880</item>
+    </string-array>
+    <string name="auto_wallpaper_interval_default" translatable="false">1440</string>
+
+    <!--Auto Wallpaper Category-->
+    <string-array name="auto_wallpaper_source_options">
+        <item>@string/auto_wallpaper_source_all</item>
+        <item>@string/auto_wallpaper_source_featured</item>
+        <item>@string/auto_wallpaper_source_collections</item>
+        <item>@string/auto_wallpaper_source_user</item>
+        <item>@string/auto_wallpaper_source_search</item>
+    </string-array>
+    <string-array name="auto_wallpaper_source_values">
+        <item>all</item>
+        <item>featured</item>
+        <item>collections</item>
+        <item>user</item>
+        <item>search</item>
+    </string-array>
+    <string name="auto_wallpaper_source_default" translatable="false">featured</string>
+
+    <!--Auto Wallpaper Select Screen-->
+    <string-array name="auto_wallpaper_select_screen_options">
+        <item>@string/auto_wallpaper_select_screen_home_screen</item>
+        <item>@string/auto_wallpaper_select_screen_lock_screen</item>
+        <item>@string/auto_wallpaper_select_screen_both</item>
+    </string-array>
+    <string-array name="auto_wallpaper_select_screen_values">
+        <item>home_screen</item>
+        <item>lock_screen</item>
+        <item>both</item>
+    </string-array>
+    <string name="auto_wallpaper_select_screen_default" translatable="false">both</string>
+
+    <!--Auto Wallpaper Orientation-->
+    <string-array name="auto_wallpaper_orientation_options">
+        <item>@string/filter_any</item>
+        <item>@string/filter_portrait</item>
+        <item>@string/filter_landscape</item>
+        <item>@string/filter_square</item>
+    </string-array>
+    <string-array name="auto_wallpaper_orientation_values">
+        <item>any</item>
+        <item>portrait</item>
+        <item>landscape</item>
+        <item>squarish</item>
+    </string-array>
+    <string name="auto_wallpaper_orientation_default" translatable="false">any</string>
+
+    <!--Auto Wallpaper Content Filter-->
+    <string-array name="auto_wallpaper_content_filter_options">
+        <item>@string/filter_low</item>
+        <item>@string/filter_high</item>
+    </string-array>
+    <string-array name="auto_wallpaper_content_filter_values">
+        <item>low</item>
+        <item>high</item>
+    </string-array>
+    <string name="auto_wallpaper_content_filter_default" translatable="false">low</string>
+</resources>

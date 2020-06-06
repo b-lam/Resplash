@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="@dimen/bottom_sheet_handle_width"
+            android:layout_height="@dimen/bottom_sheet_handle_height"
+            android:layout_marginTop="@dimen/keyline_5"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bottom_sheet_handle" />
+
+        <com.b_lam.resplash.ui.widget.ExpandableCardView
+            android:id="@+id/expandable_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:header_view="@layout/main_bottom_navigation_drawer_profile_header"
+            app:content_view="@layout/main_bottom_navigation_drawer_profile_content"
+            tools:expanded="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/drawer_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_tinted_surface"
+            app:itemBackground="@color/color_tinted_surface"
+            app:elevation="0dp"
+            app:menu="@menu/menu_bottom_navigation_drawer" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

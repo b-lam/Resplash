@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_unauthorized"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/action_add_account"
+            android:icon="@drawable/ic_person_add_24dp"
+            android:title="@string/add_account" />
+    </group>
+    <group
+        android:id="@+id/group_authorized"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/action_view_profile"
+            android:icon="@drawable/ic_account_circle_24dp"
+            android:title="@string/view_profile" />
+        <item
+            android:id="@+id/action_edit_profile"
+            android:icon="@drawable/ic_edit_24dp"
+            android:title="@string/edit_profile" />
+        <item
+            android:id="@+id/action_log_out"
+            android:icon="@drawable/ic_cancel_24dp"
+            android:title="@string/log_out" />
+    </group>
+</menu>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.b_lam.resplash.ui.widget.NoSwipeWrapViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/add_to_collection_layout" />
+
+        <include layout="@layout/create_collection_layout" />
+    </com.b_lam.resplash.ui.widget.NoSwipeWrapViewPager>
+</androidx.core.widget.NestedScrollView>

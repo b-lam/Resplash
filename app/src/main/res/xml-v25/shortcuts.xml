@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:icon="@drawable/ic_search_shortcut_24dp"
+        android:shortcutId="search"
+        android:shortcutShortLabel="@string/search">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.b_lam.resplash.ui.main.MainActivity"
+            android:targetPackage="@string/package_name" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.b_lam.resplash.ui.search.SearchActivity"
+            android:targetPackage="@string/package_name" />
+    </shortcut>
+</shortcuts>

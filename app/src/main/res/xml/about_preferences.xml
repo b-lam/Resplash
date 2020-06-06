@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference app:title="@string/unsplash"
+        app:summary="@string/unsplash_summary"
+        app:iconSpaceReserved="false">
+
+        <intent android:action="android.intent.action.VIEW"
+            android:data="@string/unsplash_url" />
+    </Preference>
+
+    <PreferenceCategory app:title="@string/app_name"
+        app:iconSpaceReserved="false">
+
+        <Preference app:title="@string/support_development"
+            app:iconSpaceReserved="false"
+            app:summary="@string/donate_summary">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.b_lam.resplash.ui.donation.DonationActivity"
+                android:targetPackage="@string/package_name" />
+        </Preference>
+
+        <Preference app:title="@string/github_title"
+            app:iconSpaceReserved="false"
+            app:summary="@string/github_summary">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/github_url" />
+        </Preference>
+
+        <Preference app:title="@string/rate_app_title"
+            app:summary="@string/rate_app_summary"
+            app:iconSpaceReserved="false">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/play_store_url" />
+        </Preference>
+
+        <Preference app:title="@string/report_bug_title"
+            app:summary="@string/report_bug_summary"
+            app:iconSpaceReserved="false">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/github_issues_url" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/developer_title"
+        app:iconSpaceReserved="false">
+
+        <Preference app:title="@string/instagram"
+            app:summary="@string/developer_instagram_username"
+            app:icon="@drawable/ic_instagram_24dp">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/developer_instagram_url" />
+        </Preference>
+
+        <Preference app:title="@string/unsplash"
+            app:summary="@string/developer_unsplash_username"
+            app:icon="@drawable/ic_unsplash_24dp">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/developer_unsplash_url" />
+        </Preference>
+    </PreferenceCategory>
+
+    <Preference app:title="@string/privacy_policy"
+        app:allowDividerAbove="true"
+        app:iconSpaceReserved="false">
+
+        <intent android:action="android.intent.action.VIEW"
+            android:data="@string/privacy_policy_url" />
+    </Preference>
+
+    <Preference app:key="licenses"
+        app:title="@string/licenses"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <CheckBoxPreference
+        app:key="auto_wallpaper_enable"
+        app:summaryOff="@string/off"
+        app:summaryOn="@string/on"
+        app:layout="@layout/preference_master_switch"
+        app:defaultValue="false" />
+
+    <Preference
+        app:icon="@drawable/ic_info_24dp"
+        app:summary="@string/auto_wallpaper_info"
+        app:allowDividerAbove="true" />
+
+    <PreferenceCategory app:title="@string/auto_wallpaper_conditions_title"
+        app:dependency="auto_wallpaper_enable">
+
+        <CheckBoxPreference
+            app:key="auto_wallpaper_on_wifi"
+            app:title="@string/auto_wallpaper_on_wifi_title"
+            app:summary="@string/auto_wallpaper_on_wifi_summary"
+            app:defaultValue="true" />
+
+        <CheckBoxPreference
+            app:key="auto_wallpaper_charging"
+            app:title="@string/auto_wallpaper_charging_title"
+            app:summary="@string/auto_wallpaper_charging_summary"
+            app:defaultValue="false" />
+
+        <CheckBoxPreference
+            app:key="auto_wallpaper_idle"
+            app:title="@string/auto_wallpaper_idle_title"
+            app:summary="@string/auto_wallpaper_idle_summary"
+            app:defaultValue="false"
+            app:isPreferenceVisible="false" />
+
+        <ListPreference
+            app:key="auto_wallpaper_interval"
+            app:title="@string/auto_wallpaper_interval_title"
+            app:summary="@string/auto_wallpaper_interval_summary"
+            app:entries="@array/auto_wallpaper_interval_options"
+            app:entryValues="@array/auto_wallpaper_interval_values"
+            app:defaultValue="@string/auto_wallpaper_interval_default" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/auto_wallpaper_source"
+        app:dependency="auto_wallpaper_enable">
+
+        <ListPreference
+            app:key="auto_wallpaper_source"
+            app:title="@string/auto_wallpaper_source_title"
+            app:summary="@string/auto_wallpaper_source_summary"
+            app:icon="@drawable/ic_wallpaper_24dp"
+            app:entries="@array/auto_wallpaper_source_options"
+            app:entryValues="@array/auto_wallpaper_source_values"
+            app:defaultValue="@string/auto_wallpaper_source_default" />
+
+        <Preference
+            app:key="auto_wallpaper_collections"
+            app:title="@string/auto_wallpaper_collections_title"
+            app:summary="@string/auto_wallpaper_collections_summary"
+            app:isPreferenceVisible="false" />
+
+        <EditTextPreference
+            app:key="auto_wallpaper_username"
+            app:title="@string/auto_wallpaper_user_title"
+            app:summary="@string/auto_wallpaper_user_summary"
+            app:dialogTitle=""
+            app:dialogMessage="@string/auto_wallpaper_user_dialog_message"
+            app:dialogLayout="@layout/username_edit_text_preference_layout"
+            app:isPreferenceVisible="false" />
+
+        <EditTextPreference
+            app:key="auto_wallpaper_search_terms"
+            app:title="@string/auto_wallpaper_search_terms_title"
+            app:dialogTitle=""
+            app:dialogMessage="@string/auto_wallpaper_search_terms_dialog_message"
+            app:dialogLayout="@layout/search_terms_edit_text_preference_layout"
+            app:isPreferenceVisible="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/auto_wallpaper_options_title"
+        app:dependency="auto_wallpaper_enable">
+
+        <CheckBoxPreference
+            app:key="auto_wallpaper_center_crop"
+            app:title="@string/auto_wallpaper_center_crop_title"
+            app:summary="@string/auto_wallpaper_center_crop_summary"
+            app:defaultValue="true"
+            app:isPreferenceVisible="false" />
+
+        <ListPreference
+            app:key="auto_wallpaper_select_screen"
+            app:title="@string/auto_wallpaper_select_screen_title"
+            app:summary="@string/auto_wallpaper_select_screen_summary"
+            app:entries="@array/auto_wallpaper_select_screen_options"
+            app:entryValues="@array/auto_wallpaper_select_screen_values"
+            app:defaultValue="@string/auto_wallpaper_select_screen_default"
+            app:isPreferenceVisible="false" />
+
+        <ListPreference
+            app:key="auto_wallpaper_orientation"
+            app:title="@string/auto_wallpaper_orientation_title"
+            app:summary="@string/auto_wallpaper_orientation_summary"
+            app:entries="@array/auto_wallpaper_orientation_options"
+            app:entryValues="@array/auto_wallpaper_orientation_values"
+            app:defaultValue="@string/auto_wallpaper_orientation_default" />
+
+        <ListPreference
+            app:key="auto_wallpaper_content_filter"
+            app:title="@string/auto_wallpaper_content_filter_title"
+            app:entries="@array/auto_wallpaper_content_filter_options"
+            app:entryValues="@array/auto_wallpaper_content_filter_values"
+            app:defaultValue="@string/auto_wallpaper_content_filter_default" />
+
+        <Preference
+            app:summary="@string/auto_wallpaper_content_filter_note" />
+    </PreferenceCategory>
+
+    <Preference
+        app:key="auto_wallpaper_history"
+        app:title="@string/auto_wallpaper_history_title"
+        app:summary="@string/auto_wallpaper_history_summary"
+        app:allowDividerAbove="true" />
+</PreferenceScreen>

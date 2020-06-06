@@ -1,0 +1,156 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+// Load local properties with API keys
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
+    defaultConfig {
+        applicationId 'com.b_lam.resplash'
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 35
+        versionName '3.0.0'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        buildConfigField("String", "RELEASE_APP_ID", localProperties['releaseAppId'])
+        buildConfigField("String", "RELEASE_SECRET", localProperties['releaseSecret'])
+        buildConfigField("String", "DEV_APP_ID", localProperties['devAppId'])
+        buildConfigField("String", "DEV_SECRET", localProperties['devSecret'])
+        buildConfigField("String", "GOOGLE_PLAY_LICENSE_KEY", localProperties['googlePlayLicenseKey'])
+        renderscriptTargetApi 29 as int
+        renderscriptSupportModeEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            applicationIdSuffix '.debug'
+        }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Support libraries
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.browser:browser:1.2.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta6'
+    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.fragment:fragment:1.2.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.work:work-runtime-ktx:2.3.4'
+
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+
+    // Room
+    implementation 'androidx.room:room-runtime:2.2.5'
+    implementation 'androidx.room:room-ktx:2.2.5'
+    kapt 'androidx.room:room-compiler:2.2.5'
+
+    // Material components
+    implementation 'com.google.android.material:material:1.3.0-alpha01'
+
+    // Billing
+    implementation 'com.android.billingclient:billing:2.2.1'
+    implementation 'com.android.billingclient:billing-ktx:2.2.1'
+
+    // Kotlin coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6'
+
+    // OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:4.7.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.7.0'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.8.1'
+
+    // Moshi
+    implementation 'com.squareup.moshi:moshi:1.9.2'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.2'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation('com.github.bumptech.glide:recyclerview-integration:4.11.0') {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // Koin
+    implementation 'org.koin:koin-android:2.1.5'
+    implementation 'org.koin:koin-androidx-viewmodel:2.1.5'
+
+    // Rx
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.3'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.4.2'
+    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:19.0.7'
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+
+    // Crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie:3.4.0'
+
+    // PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    // Pager Indicator
+    implementation 'com.github.intik:overflow-pager-indicator:3.0.1'
+
+    // PrettyTime
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+
+    // Open Source Notices
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
+
+    // LeakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+
+    // Unit tests
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

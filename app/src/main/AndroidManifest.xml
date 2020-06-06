@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.b_lam.resplash">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:name=".ResplashApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Resplash.Theme.DayNight">
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Resplash.Theme.DayNight.ActionBar" />
+        <activity android:name=".ui.about.AboutActivity" />
+        <activity android:name=".ui.debug.DebugActivity" />
+        <activity android:name=".ui.donation.DonationActivity" />
+        <activity android:name=".ui.upgrade.UpgradeActivity" />
+        <activity android:name=".ui.autowallpaper.history.AutoWallpaperHistoryActivity" />
+        <activity android:name=".ui.autowallpaper.collections.AutoWallpaperCollectionActivity" />
+        <activity
+            android:name=".ui.autowallpaper.AutoWallpaperSettingsActivity">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.user.edit.EditProfileActivity" />
+        <activity
+            android:name=".ui.user.UserActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.collection.detail.CollectionDetailActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".ui.photo.zoom.PhotoZoomActivity" />
+        <activity android:name=".ui.photo.detail.PhotoDetailActivity" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:parentActivityName=".ui.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.b_lam.resplash.ui.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <data
+                    android:host="unsplash-auth-callback"
+                    android:scheme="resplash" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.routing.RoutingActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <data
+                    android:host="unsplash.com"
+                    android:path="/"
+                    android:scheme="https" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <data
+                    android:host="unsplash.com"
+                    android:pathPrefix="/photos/"
+                    android:scheme="https" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <data
+                    android:host="unsplash.com"
+                    android:pathPrefix="/collections/"
+                    android:scheme="https" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <data
+                    android:host="unsplash.com"
+                    android:pathPattern=".*/@.*"
+                    android:scheme="https" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Resplash.Theme.DayNight.Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <service
+            android:name=".service.AutoWallpaperTileService"
+            android:icon="@drawable/ic_resplash_24dp"
+            android:label="@string/auto_wallpaper_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
