@@ -4,9 +4,11 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import com.b_lam.resplash.di.appModules
 import com.b_lam.resplash.domain.SharedPreferencesRepository
+import com.b_lam.resplash.util.applyLanguage
 import com.b_lam.resplash.util.applyTheme
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -24,8 +26,14 @@ class ResplashApplication : Application() {
             androidContext(this@ResplashApplication)
             modules(appModules)
         }
+        applyLanguage(sharedPreferencesRepository.locale)
         applyTheme(sharedPreferencesRepository.theme)
         createNotificationChannel()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        applyLanguage(sharedPreferencesRepository.locale)
     }
 
     private fun createNotificationChannel() {

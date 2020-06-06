@@ -1,5 +1,6 @@
 package com.b_lam.resplash.ui.settings
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -65,8 +66,14 @@ class SettingsActivity : BaseActivity() {
         }
 
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-            if (key == "layout" || key == "load_quality") {
+            if (key == "language" || key == "layout" || key == "load_quality") {
                 sharedViewModel.shouldRestartMainActivity = true
+            }
+
+            if (key == "language") {
+                activity?.finish()
+                activity?.overridePendingTransition( 0, 0);
+                startActivity(activity?.intent?.apply { addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION) })
             }
         }
 

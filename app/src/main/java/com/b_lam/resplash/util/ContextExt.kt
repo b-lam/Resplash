@@ -3,11 +3,14 @@ package com.b_lam.resplash.util
 import android.app.Notification
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.res.Resources
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.app.NotificationCompat
+import androidx.core.os.ConfigurationCompat
 import com.b_lam.resplash.R
 import com.b_lam.resplash.ResplashApplication.Companion.CHANNEL_ID
+import java.util.*
 
 inline fun <reified T> Context.ofType(): T? {
     var currentContext: Context? = this
@@ -27,6 +30,21 @@ inline fun Context.createNotification(
     builder.priority = priority
     builder.body()
     return builder.build()
+}
+
+fun Context.applyLanguage(locale: Locale?): Context {
+    val configuration = resources.configuration
+    val currentLocale = ConfigurationCompat.getLocales(configuration)[0]
+    val newLocale = locale ?: ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
+
+    return if (newLocale == currentLocale) {
+        this
+    } else {
+        Locale.setDefault(newLocale)
+        configuration.setLocale(newLocale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+        createConfigurationContext(configuration)
+    }
 }
 
 fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) =

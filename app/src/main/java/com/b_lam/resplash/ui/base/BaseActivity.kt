@@ -12,10 +12,10 @@ import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.login.LoginActivity
 import com.b_lam.resplash.ui.main.MainActivity
+import com.b_lam.resplash.util.applyLanguage
 import com.b_lam.resplash.util.getThemeAttrColor
 import com.b_lam.resplash.util.livedata.observeEvent
 import org.koin.android.ext.android.inject
-import java.util.*
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -25,11 +25,17 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setRecentAppsHeaderColor()
+        applyLanguage(sharedPreferencesRepository.locale)
 
         viewModel?.authRequiredLiveData?.observeEvent(this) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase?.applyLanguage(sharedPreferencesRepository.locale))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -51,10 +57,6 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(newBase?.applyLanguage())
-    }
-
     private fun AppCompatActivity.setRecentAppsHeaderColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val taskDescription = TaskDescription(
@@ -73,13 +75,5 @@ abstract class BaseActivity : AppCompatActivity() {
             setTaskDescription(taskDescription)
             icon?.recycle()
         }
-    }
-
-    private fun Context.applyLanguage(): Context {
-        val locale = sharedPreferencesRepository.locale
-        val configuration = resources.configuration
-        Locale.setDefault(locale)
-        configuration.setLocale(locale)
-        return createConfigurationContext(configuration)
     }
 }

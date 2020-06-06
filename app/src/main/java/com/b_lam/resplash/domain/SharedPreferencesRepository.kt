@@ -163,13 +163,17 @@ class SharedPreferencesRepository(context: Context) {
             putLong(PREFERENCE_LAST_POPULAR_COLLECTIONS_FETCH_KEY, value)
         }
 
-    val locale: Locale
-        get() = Locale(
-            sharedPreferences.getString(
+    val locale: Locale?
+        get() {
+            val value = sharedPreferences.getString(
                 PREFERENCE_LANGUAGE_KEY,
                 PREFERENCE_LANGUAGE_DEFAULT_VALUE
             ) ?: PREFERENCE_LANGUAGE_DEFAULT_VALUE
-        )
+            return when (value) {
+                "default" -> null
+                else -> Locale(value)
+            }
+        }
 
     private val sharedPreferenceChangedListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
@@ -185,7 +189,7 @@ class SharedPreferencesRepository(context: Context) {
     companion object {
 
         private const val PREFERENCE_LANGUAGE_KEY = "language"
-        private const val PREFERENCE_LANGUAGE_DEFAULT_VALUE = "en"
+        private const val PREFERENCE_LANGUAGE_DEFAULT_VALUE = "default"
 
         private const val PREFERENCE_THEME_KEY = "theme"
         private const val PREFERENCE_THEME_DEFAULT_VALUE = "default"
