@@ -12,6 +12,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
+
 import com.b_lam.resplash.R;
 import com.b_lam.resplash.Resplash;
 import com.b_lam.resplash.util.LocaleUtils;
@@ -23,9 +27,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.File;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NavUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -168,6 +169,8 @@ public class SettingsActivity extends AppCompatActivity {
             Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), getString(R.string.restart_to_apply), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.restart), v -> restartActivity());
             snackbar.getView().setBackgroundColor(ThemeUtils.getThemeAttrColor(getActivity(), R.attr.colorPrimaryDark));
+            snackbar.setActionTextColor(ThemeUtils.getThemeAttrColor(getActivity(), R.attr.primaryTextColor));
+            snackbar.setTextColor(ThemeUtils.getThemeAttrColor(getActivity(), R.attr.primaryTextColor));
             snackbar.getView().setElevation(Utils.dpToPx(getActivity(), 6));
             snackbar.show();
         }

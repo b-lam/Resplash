@@ -47,26 +47,6 @@ public class CollectionService {
         call = getAllCollections;
     }
 
-    public void requestCuratedCollections(int page, int per_page, final OnRequestCollectionsListener l) {
-        Call<List<Collection>> getCuratedCollections = buildApi(buildClient()).getCuratedCollections(page, per_page);
-        getCuratedCollections.enqueue(new Callback<List<Collection>>() {
-            @Override
-            public void onResponse(Call<List<Collection>> call, Response<List<Collection>> response) {
-                if (l != null) {
-                    l.onRequestCollectionsSuccess(call, response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Collection>> call, Throwable t) {
-                if (l != null) {
-                    l.onRequestCollectionsFailed(call, t);
-                }
-            }
-        });
-        call = getCuratedCollections;
-    }
-
     public void requestFeaturedCollections(int page, int per_page, final OnRequestCollectionsListener l) {
         Call<List<Collection>> getFeaturedCollections = buildApi(buildClient()).getFeaturedCollections(page, per_page);
         getFeaturedCollections.enqueue(new Callback<List<Collection>>() {

@@ -14,20 +14,15 @@
         <menu>
             <group android:checkableBehavior="none">
                 <item android:id="@+id/menu_item_new_latest"
-                    android:title="@string/menu_item_latest"
-                    android:icon="?attr/newIcon"/>
+                    android:title="@string/menu_item_latest" />
                 <item android:id="@+id/menu_item_new_oldest"
-                    android:title="@string/menu_item_oldest"
-                    android:icon="?attr/oldIcon"/>
+                    android:title="@string/menu_item_oldest" />
                 <item android:id="@+id/menu_item_new_popular"
-                    android:title="@string/menu_item_popular"
-                    android:icon="?attr/hotIcon"/>
+                    android:title="@string/menu_item_popular" />
                 <item android:id="@+id/menu_item_all"
-                    android:title="@string/menu_item_all"
-                    android:icon="?attr/mountainIcon"/>
+                    android:title="@string/menu_item_all" />
                 <item android:id="@+id/menu_item_featured"
-                    android:title="@string/menu_item_featured"
-                    android:icon="?attr/starCircleIcon"/>
+                    android:title="@string/menu_item_featured" />
             </group>
         </menu>
     </item>

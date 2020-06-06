@@ -34,6 +34,7 @@
         android:visibility="invisible"
         android:src="@drawable/baseline_skip_next_white_24"
         android:tooltipText="@string/next_wallpaper"
+        app:tint="@null"
         app:backgroundTint="?attr/fabColor"
         app:layout_anchorGravity="bottom|end"
         app:fabSize="normal" />

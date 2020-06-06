@@ -7,8 +7,8 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.b_lam.resplash.activities.DetailActivity"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    tools:context="com.b_lam.resplash.activities.DetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -18,8 +18,8 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_detail"
-            style="@style/ResplashToolbarTheme"
-            app:layout_scrollFlags="scroll|snap" />
+            app:layout_scrollFlags="scroll|snap"
+            style="@style/ResplashToolbarTheme" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -66,8 +66,8 @@
                     android:layout_gravity="center_vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:background="?attr/dividerColor">
 
                     <com.b_lam.resplash.views.CircleImageView
@@ -86,6 +86,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_gravity="center_vertical"
+                        android:gravity="start"
+                        android:textAlignment="viewStart"
                         android:layout_weight="1"
                         android:onClick="goToUserProfile"
                         android:clickable="true"
@@ -122,37 +124,36 @@
 
                 <TextView
                     android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
+                    android:gravity="start|center_vertical"
+                    android:textAlignment="viewStart"
                     android:textColor="?attr/primaryTextColor"/>
 
                 <TextView
                     android:id="@+id/tvDescription"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
+                    android:gravity="start|center_vertical"
+                    android:textAlignment="viewStart"
                     android:textColor="?attr/primaryTextColor"/>
 
                 <TextView
                     android:id="@+id/tvLocation"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:drawableStart="?attr/locationIcon"
                     android:drawablePadding="20dp"
@@ -160,13 +161,12 @@
 
                 <TextView
                     android:id="@+id/tvDate"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:drawableStart="?attr/calendarIcon"
                     android:drawablePadding="20dp"
@@ -174,13 +174,12 @@
 
                 <TextView
                     android:id="@+id/tvLikes"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:drawableStart="?attr/heartIcon"
                     android:drawablePadding="20dp"
@@ -188,17 +187,17 @@
 
                 <TextView
                     android:id="@+id/tvDownloads"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:drawableStart="?attr/downloadIcon"
                     android:drawablePadding="20dp"
                     android:textColor="?attr/primaryTextColor"/>
+
                 <TextView
                     android:id="@+id/tvColor"
                     android:layout_width="wrap_content"
@@ -207,7 +206,6 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:drawableStart="?attr/paletteIcon"
                     android:drawableEnd="@drawable/ic_fiber_manual_record_white_18dp"
@@ -221,11 +219,12 @@
         android:id="@+id/fab_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="end|bottom"
-        android:paddingRight="10dp"
+        android:layout_gravity="bottom|end"
+        android:paddingEnd="10dp"
         android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         android:elevation="6dp"
+        app:menu_labels_position="@integer/fab_menu_position"
         fab:menu_icon="@drawable/ic_expand_less_white_24dp"
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true"

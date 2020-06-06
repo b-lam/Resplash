@@ -26,10 +26,6 @@ public interface CollectionApi {
     Call<List<Collection>> getAllCollections(@Query("page") Integer page,
                                              @Query("per_page") Integer per_page);
 
-    @GET("collections/curated")
-    Call<List<Collection>> getCuratedCollections(@Query("page") Integer page,
-                                                 @Query("per_page") Integer per_page);
-
     @GET("collections/featured")
     Call<List<Collection>> getFeaturedCollections(@Query("page") Integer page,
                                                   @Query("per_page") Integer per_page);

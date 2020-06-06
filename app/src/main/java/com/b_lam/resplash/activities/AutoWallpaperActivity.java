@@ -4,9 +4,11 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -93,10 +95,19 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.auto_wallpaper, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+            case R.id.auto_wallpaper_help:
+                showHelpDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -123,6 +134,15 @@ public class AutoWallpaperActivity extends AppCompatActivity implements AutoWall
         } else {
             floatingActionButton.hide();
         }
+    }
+
+    private void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Not Working?")
+                .setMessage("Try disabling the Idle condition and battery optimizations for Resplash in your phone settings")
+                .setPositiveButton("Okay", null)
+                .create()
+                .show();
     }
 
     private void showSnackbar() {

@@ -21,15 +21,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Photo service.
- * */
-
 public class PhotoService {
-    // widget
-    private Call call;
 
-    /** <br> data. */
+    private Call call;
 
     public void requestPhotos(int page, int per_page, String order_by, final OnRequestPhotosListener l) {
         Call<List<Photo>> getPhotos = buildApi(buildClient()).getPhotos(page, per_page, order_by);
@@ -51,26 +45,6 @@ public class PhotoService {
         call = getPhotos;
     }
 
-    public void requestCuratedPhotos(int page, int per_page, String order_by, final OnRequestPhotosListener l) {
-        Call<List<Photo>> getCuratedPhotos = buildApi(buildClient()).getCuratedPhotos(page, per_page, order_by);
-        getCuratedPhotos.enqueue(new Callback<List<Photo>>() {
-            @Override
-            public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {
-                if (l != null) {
-                    l.onRequestPhotosSuccess(call, response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Photo>> call, Throwable t) {
-                if (l != null) {
-                    l.onRequestPhotosFailed(call, t);
-                }
-            }
-        });
-        call = getCuratedPhotos;
-    }
-
     public void requestStats(String id, String resolution, int quantity, final OnRequestStatsListener l) {
         Call<PhotoStats> getStats = buildApi(buildClient()).getPhotoStats(id, resolution, quantity);
         getStats.enqueue(new Callback<PhotoStats>() {
@@ -89,26 +63,6 @@ public class PhotoService {
             }
         });
         call = getStats;
-    }
-
-    public void requestPhotosInAGivenCategory(int id, int page, int per_page, final OnRequestPhotosListener l) {
-        Call<List<Photo>> getPhotosInAGivenCategory = buildApi(buildClient()).getPhotosInAGivenCategory(id, page, per_page);
-        getPhotosInAGivenCategory.enqueue(new Callback<List<Photo>>() {
-            @Override
-            public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {
-                if (l != null) {
-                    l.onRequestPhotosSuccess(call, response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Photo>> call, Throwable t) {
-                if (l != null) {
-                    l.onRequestPhotosFailed(call, t);
-                }
-            }
-        });
-        call = getPhotosInAGivenCategory;
     }
 
     public void setLikeForAPhoto(String id, boolean like, final OnSetLikeListener l) {
@@ -245,25 +199,6 @@ public class PhotoService {
         });
     }
 
-    public void requestCuratedCollectionPhotos(Collection c, int page, int per_page, final OnRequestPhotosListener l) {
-        Call<List<Photo>> getCuratedCollectionPhotos = buildApi(buildClient()).getCuratedCollectionPhotos(c.id, page, per_page);
-        getCuratedCollectionPhotos.enqueue(new Callback<List<Photo>>() {
-            @Override
-            public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {
-                if (l != null) {
-                    l.onRequestPhotosSuccess(call, response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Photo>> call, Throwable t) {
-                if (l != null) {
-                    l.onRequestPhotosFailed(call, t);
-                }
-            }
-        });
-    }
-
     public void requestRandomPhotos(Integer categoryId, Boolean featured,
                                      String username, String query,
                                      String orientation, int count, final OnRequestPhotosListener l) {
@@ -313,8 +248,6 @@ public class PhotoService {
         }
     }
 
-    /** <br> build. */
-
     public static PhotoService getService() {
         return new PhotoService();
     }
@@ -337,8 +270,6 @@ public class PhotoService {
                 .build()
                 .create((PhotoApi.class));
     }
-
-    /** <br> interface. */
 
     public interface OnRequestPhotosListener {
         void onRequestPhotosSuccess(Call<List<Photo>> call, Response<List<Photo>> response);

@@ -5,10 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.ArrayMap;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.ArrayMap;
 
 import com.b_lam.resplash.Resplash;
 

@@ -56,8 +56,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
                             android:paddingTop="10dp"
                             android:paddingBottom="5dp"
                             android:src="@mipmap/ic_launcher"/>
@@ -65,7 +65,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
                             android:text="@string/app_name"
                             android:textSize="22sp" />
 

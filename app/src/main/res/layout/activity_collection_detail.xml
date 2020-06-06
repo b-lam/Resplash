@@ -16,6 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|snap">
 
             <androidx.appcompat.widget.Toolbar
@@ -41,7 +42,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:padding="13dp">
+            android:padding="13dp"
+            android:background="?attr/colorPrimary">
+
             <com.b_lam.resplash.views.CircleImageView
                 android:layout_height="30dp"
                 android:layout_width="30dp"
@@ -50,6 +53,7 @@
                 android:focusable="true"
                 android:clickable="true">
             </com.b_lam.resplash.views.CircleImageView>
+
             <TextView
                 android:id="@+id/tvUserCollection"
                 android:layout_width="wrap_content"
