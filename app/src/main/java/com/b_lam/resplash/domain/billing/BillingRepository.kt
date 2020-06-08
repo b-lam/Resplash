@@ -36,8 +36,8 @@ class BillingRepository(
         localCacheBillingClient.skuDetailsDao().getSkuDetailsLiveDataById(Sku.RESPLASH_PRO)
     }
 
-    private val purchaseCompleteMutableLiveData = MutableLiveData<Event<Purchase>>()
-    val purchaseCompleteLiveData: LiveData<Event<Purchase>> = purchaseCompleteMutableLiveData
+    private val _purchaseCompleteLiveData = MutableLiveData<Event<Purchase>>()
+    val purchaseCompleteLiveData: LiveData<Event<Purchase>> = _purchaseCompleteLiveData
 
     val donationLiveData: LiveData<Donation?> by lazy {
         if (!::localCacheBillingClient.isInitialized) {
@@ -236,7 +236,7 @@ class BillingRepository(
                         )
                     )
                 }
-                purchaseCompleteMutableLiveData.postValue(Event(purchase))
+                _purchaseCompleteLiveData.postValue(Event(purchase))
             }
             localCacheBillingClient.purchaseDao().delete(purchase)
         }

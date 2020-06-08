@@ -28,44 +28,37 @@ class MainViewModel(
         billingRepository.startDataSourceConnections()
     }
 
-    private val navigationItemSelectedMutableLiveData = MutableLiveData<Event<Int>>()
-    val navigationItemSelectedLiveData: LiveData<Event<Int>>
-        get() = navigationItemSelectedMutableLiveData
+    private val _navigationItemSelectedLiveData = MutableLiveData<Event<Int>>()
+    val navigationItemSelectedLiveData: LiveData<Event<Int>> = _navigationItemSelectedLiveData
 
-    private val authorizedMutableLiveData = MutableLiveData(loginRepository.isAuthorized())
-    val authorizedLiveData: LiveData<Boolean>
-        get() = authorizedMutableLiveData
+    private val _authorizedLiveData = MutableLiveData(loginRepository.isAuthorized())
+    val authorizedLiveData: LiveData<Boolean> = _authorizedLiveData
 
     val resplashProLiveData = billingRepository.resplashProLiveData
 
-    private val usernameMutableLiveData = MutableLiveData<String?>()
-    val usernameLiveData: LiveData<String?>
-        get() = usernameMutableLiveData
+    private val _usernameLiveData = MutableLiveData<String?>()
+    val usernameLiveData: LiveData<String?> = _usernameLiveData
 
-    private val emailMutableLiveData = MutableLiveData<String?>()
-    val emailLiveData: LiveData<String?>
-        get() = emailMutableLiveData
+    private val _emailLiveData = MutableLiveData<String?>()
+    val emailLiveData: LiveData<String?> = _emailLiveData
 
-    private val profilePictureMutableLiveData = MutableLiveData<String?>()
-    val profilePictureLiveData: LiveData<String?>
-        get() = profilePictureMutableLiveData
+    private val _profilePictureLiveData = MutableLiveData<String?>()
+    val profilePictureLiveData: LiveData<String?> = _profilePictureLiveData
 
-    private val photoOrderMutableLiveData = MutableLiveData(PhotoDataSourceFactory.Companion.Order.LATEST)
-    val photoOrderLiveData: LiveData<PhotoDataSourceFactory.Companion.Order>
-        get() = photoOrderMutableLiveData
+    private val _photoOrderLiveData = MutableLiveData(PhotoDataSourceFactory.Companion.Order.LATEST)
+    val photoOrderLiveData: LiveData<PhotoDataSourceFactory.Companion.Order> = _photoOrderLiveData
 
-    private val collectionOrderMutableLiveData = MutableLiveData(CollectionDataSourceFactory.Companion.Order.ALL)
-    val collectionOrderLiveData: LiveData<CollectionDataSourceFactory.Companion.Order>
-        get() = collectionOrderMutableLiveData
+    private val _collectionOrderLiveData = MutableLiveData(CollectionDataSourceFactory.Companion.Order.ALL)
+    val collectionOrderLiveData: LiveData<CollectionDataSourceFactory.Companion.Order> = _collectionOrderLiveData
 
-    private val photoListing: LiveData<Listing<Photo>> = Transformations.map(photoOrderMutableLiveData) {
+    private val photoListing: LiveData<Listing<Photo>> = Transformations.map(_photoOrderLiveData) {
         photoRepository.getPhotos(it, viewModelScope)
     }
     val photosLiveData = Transformations.switchMap(photoListing) { it.pagedList }
     val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
     val photosRefreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
 
-    private val collectionListing = Transformations.map(collectionOrderMutableLiveData) {
+    private val collectionListing = Transformations.map(_collectionOrderLiveData) {
         collectionRepository.getCollections(it, viewModelScope)
     }
     val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagedList }
@@ -77,7 +70,7 @@ class MainViewModel(
     fun refreshCollections() = collectionListing.value?.refresh?.invoke()
 
     fun onNavigationItemSelected(optionId: Int) {
-        navigationItemSelectedMutableLiveData.postValue(Event(optionId))
+        _navigationItemSelectedLiveData.postValue(Event(optionId))
     }
 
     fun orderPhotosBy(selection: Int) {
@@ -86,7 +79,7 @@ class MainViewModel(
             1 -> PhotoDataSourceFactory.Companion.Order.OLDEST
             else -> PhotoDataSourceFactory.Companion.Order.POPULAR
         }
-        photoOrderMutableLiveData.postValue(order)
+        _photoOrderLiveData.postValue(order)
     }
 
     fun orderCollectionsBy(selection: Int) {
@@ -94,12 +87,12 @@ class MainViewModel(
             0 -> CollectionDataSourceFactory.Companion.Order.ALL
             else -> CollectionDataSourceFactory.Companion.Order.FEATURED
         }
-        collectionOrderMutableLiveData.postValue(order)
+        _collectionOrderLiveData.postValue(order)
     }
 
     fun refreshUserProfile() {
         if (loginRepository.isAuthorized()) {
-            authorizedMutableLiveData.postValue(true)
+            _authorizedLiveData.postValue(true)
             updateUser(loginRepository.getUsername(), loginRepository.getEmail(), loginRepository.getProfilePicture())
             if (loginRepository.getUsername().isNullOrBlank()) {
                 viewModelScope.launch {
@@ -115,14 +108,14 @@ class MainViewModel(
 
     fun logout() {
         loginRepository.logout()
-        authorizedMutableLiveData.postValue(false)
+        _authorizedLiveData.postValue(false)
         updateUser(null, null, null)
     }
 
     private fun updateUser(username: String?, email: String?, profilePicture: String?) {
-        usernameMutableLiveData.postValue(username)
-        emailMutableLiveData.postValue(email)
-        profilePictureMutableLiveData.postValue(profilePicture)
+        _usernameLiveData.postValue(username)
+        _emailLiveData.postValue(email)
+        _profilePictureLiveData.postValue(profilePicture)
     }
 
     override fun onCleared() {

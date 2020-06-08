@@ -7,6 +7,6 @@ import com.b_lam.resplash.util.livedata.Event
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val authRequiredMutableLiveData = MutableLiveData<Event<Int>>()
-    val authRequiredLiveData: LiveData<Event<Int>> = authRequiredMutableLiveData
+    private val _authRequiredLiveData = MutableLiveData<Event<Int>>()
+    val authRequiredLiveData: LiveData<Event<Int>> = _authRequiredLiveData
 }

@@ -30,10 +30,10 @@ class AutoWallpaperCollectionViewModel(
 
     val numCollectionsLiveData = autoWallpaperRepository.getNumberOfAutoWallpaperCollectionsLiveData()
 
-    private val addCollectionResultMutableLiveData = MutableLiveData<Event<Result<Collection>>>()
-    val addCollectionResultLiveData: LiveData<Event<Result<Collection>>> = addCollectionResultMutableLiveData
+    private val _addCollectionResultLiveData = MutableLiveData<Event<Result<Collection>>>()
+    val addCollectionResultLiveData: LiveData<Event<Result<Collection>>> = _addCollectionResultLiveData
 
-    private val featuredCollectionMutableLiveData by lazy {
+    private val _featuredCollectionLiveData by lazy {
         val liveData = MutableLiveData<List<AutoWallpaperCollection>>()
         val source = if (areSuggestedCollectionsStale(sharedPreferencesRepository.lastFeaturedCollectionsFetch)) {
             Source.DEFAULT
@@ -55,9 +55,9 @@ class AutoWallpaperCollectionViewModel(
             }
         return@lazy liveData
     }
-    val featuredCollectionLiveData: LiveData<List<AutoWallpaperCollection>> = featuredCollectionMutableLiveData
+    val featuredCollectionLiveData: LiveData<List<AutoWallpaperCollection>> = _featuredCollectionLiveData
 
-    private val popularCollectionMutableLiveData by lazy {
+    private val _popularCollectionLiveData by lazy {
         val liveData = MutableLiveData<List<AutoWallpaperCollection>>()
         val source = if (areSuggestedCollectionsStale(sharedPreferencesRepository.lastPopularCollectionsFetch)) {
             Source.DEFAULT
@@ -79,7 +79,7 @@ class AutoWallpaperCollectionViewModel(
             }
         return@lazy liveData
     }
-    val popularCollectionLiveData: LiveData<List<AutoWallpaperCollection>> = popularCollectionMutableLiveData
+    val popularCollectionLiveData: LiveData<List<AutoWallpaperCollection>> = _popularCollectionLiveData
 
     fun addAutoWallpaperCollection(collection: AutoWallpaperCollection) {
         viewModelScope.launch {
@@ -99,7 +99,7 @@ class AutoWallpaperCollectionViewModel(
             if (result is Result.Success) {
                 autoWallpaperRepository.addCollectionToAutoWallpaper(result.value)
             }
-            addCollectionResultMutableLiveData.postValue(Event(result))
+            _addCollectionResultLiveData.postValue(Event(result))
         }
     }
 

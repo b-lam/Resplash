@@ -24,7 +24,7 @@ class UpgradeViewModel(
 
     val resplashProLiveData = billingRepository.resplashProLiveData
 
-    private val bannerPhotoMutableLiveData by lazy {
+    private val _bannerPhotoLiveData by lazy {
         val liveData = MutableLiveData<Photo>()
         viewModelScope.launch {
             val result = photoRepository.getRandomPhoto(collectionId = RESPLASH_COLLECTION_ID)
@@ -32,7 +32,7 @@ class UpgradeViewModel(
         }
         return@lazy liveData
     }
-    val bannerPhotoLiveData: LiveData<Photo> = bannerPhotoMutableLiveData
+    val bannerPhotoLiveData: LiveData<Photo> = _bannerPhotoLiveData
 
     fun makePurchase(activity: Activity) {
         skuDetailsLiveData.value?.let {

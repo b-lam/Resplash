@@ -20,8 +20,8 @@ class CollectionDetailViewModel(
     private val autoWallpaperRepository: AutoWallpaperRepository
 ) : BaseViewModel() {
 
-    private val collectionMutableLiveData = MutableLiveData<Collection>()
-    val collectionLiveData: LiveData<Collection> = collectionMutableLiveData
+    private val _collectionLiveData = MutableLiveData<Collection>()
+    val collectionLiveData: LiveData<Collection> = _collectionLiveData
 
     private val photoListing = MutableLiveData<Listing<Photo>>()
 
@@ -44,7 +44,7 @@ class CollectionDetailViewModel(
         }
     }
 
-    fun setCollection(collection: Collection) = collectionMutableLiveData.postValue(collection)
+    fun setCollection(collection: Collection) = _collectionLiveData.postValue(collection)
 
     fun isCollectionUsedForAutoWallpaper(id: Int) =
         autoWallpaperRepository.isCollectionUsedForAutoWallpaper(id)

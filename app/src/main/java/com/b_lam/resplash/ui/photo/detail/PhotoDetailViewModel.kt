@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class PhotoDetailViewModel(private val photoRepository: PhotoRepository) : BaseViewModel() {
 
-    private val photoDetailsMutableLiveData: Map<String, LiveData<Photo>> = lazyMap {
+    private val _photoDetailsLiveData: Map<String, LiveData<Photo>> = lazyMap {
         val liveData = MutableLiveData<Photo>()
         viewModelScope.launch {
             val result = photoRepository.getPhotoDetails(it)
@@ -23,5 +23,5 @@ class PhotoDetailViewModel(private val photoRepository: PhotoRepository) : BaseV
         return@lazyMap liveData
     }
 
-    fun photoDetailsLiveData(id: String): LiveData<Photo> = photoDetailsMutableLiveData.getValue(id)
+    fun photoDetailsLiveData(id: String): LiveData<Photo> = _photoDetailsLiveData.getValue(id)
 }

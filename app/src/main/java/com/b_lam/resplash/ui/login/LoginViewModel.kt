@@ -16,10 +16,10 @@ class LoginViewModel(
     private val photoRepository: PhotoRepository
 ) : BaseViewModel() {
 
-    private val loginStateMutableLiveData = MutableLiveData<Result<AccessToken>>()
-    val loginStateLiveData: LiveData<Result<AccessToken>> = loginStateMutableLiveData
+    private val _loginStateLiveData = MutableLiveData<Result<AccessToken>>()
+    val loginStateLiveData: LiveData<Result<AccessToken>> = _loginStateLiveData
 
-    private val bannerPhotoMutableLiveData by lazy {
+    private val _bannerPhotoLiveData by lazy {
         val liveData = MutableLiveData<Photo>()
         viewModelScope.launch {
             val result = photoRepository.getRandomPhoto(featured = true)
@@ -27,14 +27,14 @@ class LoginViewModel(
         }
         return@lazy liveData
     }
-    val bannerPhotoLiveData: LiveData<Photo> = bannerPhotoMutableLiveData
+    val bannerPhotoLiveData: LiveData<Photo> = _bannerPhotoLiveData
 
     val loginUrl = loginRepository.loginUrl
 
     fun getAccessToken(code: String) {
         viewModelScope.launch {
             val accessToken = loginRepository.getAccessToken(code)
-            loginStateMutableLiveData.postValue(accessToken)
+            _loginStateLiveData.postValue(accessToken)
         }
     }
 }

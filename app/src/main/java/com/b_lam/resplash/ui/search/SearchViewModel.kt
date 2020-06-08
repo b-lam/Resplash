@@ -21,29 +21,23 @@ class SearchViewModel(
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
-    private val queryMutableLiveData = MutableLiveData("")
-    val queryLiveData: LiveData<String>
-        get() = queryMutableLiveData
+    private val _queryLiveData = MutableLiveData("")
+    val queryLiveData: LiveData<String> = _queryLiveData
 
-    private val queryPhotoMutableLiveData = MutableLiveData("")
-    private val queryPhotoLiveData: LiveData<String>
-        get() = queryPhotoMutableLiveData
+    private val _queryPhotoLiveData = MutableLiveData("")
+    private val queryPhotoLiveData: LiveData<String> = _queryPhotoLiveData
 
-    private val orderMutableLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.Order.RELEVANT)
-    val orderLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.Order>
-        get() = orderMutableLiveData
+    private val _orderLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.Order.RELEVANT)
+    val orderLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.Order> = _orderLiveData
 
-    private val contentFilterMutableLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.ContentFilter.LOW)
-    val contentFilterLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.ContentFilter>
-        get() = contentFilterMutableLiveData
+    private val _contentFilterLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.ContentFilter.LOW)
+    val contentFilterLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.ContentFilter> = _contentFilterLiveData
 
-    private val colorMutableLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.Color.ANY)
-    val colorLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.Color>
-        get() = colorMutableLiveData
+    private val _colorLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.Color.ANY)
+    val colorLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.Color> = _colorLiveData
 
-    private val orientationMutableLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.Orientation.ANY)
-    val orientationLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.Orientation>
-        get() = orientationMutableLiveData
+    private val _orientationLiveData = MutableLiveData(SearchPhotoDataSourceFactory.Companion.Orientation.ANY)
+    val orientationLiveData: LiveData<SearchPhotoDataSourceFactory.Companion.Orientation> = _orientationLiveData
 
     private val photoListing: LiveData<Listing<Photo>?> = Transformations.map(queryPhotoLiveData) {
         if (it.isNotBlank()) {
@@ -93,27 +87,27 @@ class SearchViewModel(
     }
 
     fun updateQuery(newQuery: String) {
-        queryMutableLiveData.postValue(newQuery)
-        queryPhotoMutableLiveData.postValue(newQuery)
+        _queryLiveData.postValue(newQuery)
+        _queryPhotoLiveData.postValue(newQuery)
     }
 
     fun updateOrder(order: SearchPhotoDataSourceFactory.Companion.Order) {
-        orderMutableLiveData.postValue(order)
+        _orderLiveData.postValue(order)
     }
 
     fun updateContentFilter(contentFilter: SearchPhotoDataSourceFactory.Companion.ContentFilter) {
-        contentFilterMutableLiveData.postValue(contentFilter)
+        _contentFilterLiveData.postValue(contentFilter)
     }
 
     fun updateColor(color: SearchPhotoDataSourceFactory.Companion.Color) {
-        colorMutableLiveData.postValue(color)
+        _colorLiveData.postValue(color)
     }
 
     fun updateOrientation(orientation: SearchPhotoDataSourceFactory.Companion.Orientation) {
-        orientationMutableLiveData.postValue(orientation)
+        _orientationLiveData.postValue(orientation)
     }
 
     fun updatePhotoSearch() {
-        queryPhotoMutableLiveData.postValue(queryPhotoLiveData.value)
+        _queryPhotoLiveData.postValue(queryPhotoLiveData.value)
     }
 }

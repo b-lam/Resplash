@@ -13,7 +13,7 @@ class EditProfileViewModel(
     private val loginRepository: LoginRepository
 ) : BaseViewModel() {
 
-    private val initialUserMutableLiveData by lazy {
+    private val _initialUserLiveData by lazy {
         val liveData = MutableLiveData<Result<Me>>()
         viewModelScope.launch {
             val result = loginRepository.getMe()
@@ -21,10 +21,10 @@ class EditProfileViewModel(
         }
         return@lazy liveData
     }
-    val userLiveData: LiveData<Result<Me>> = initialUserMutableLiveData
+    val userLiveData: LiveData<Result<Me>> = _initialUserLiveData
 
-    private val updatedUserMutableLiveData = MutableLiveData<Result<Me>>()
-    val updatedUserLiveData: LiveData<Result<Me>> = updatedUserMutableLiveData
+    private val _updatedUserLiveData = MutableLiveData<Result<Me>>()
+    val updatedUserLiveData: LiveData<Result<Me>> = _updatedUserLiveData
 
     fun updateUserProfile(
         username: String?,
@@ -40,7 +40,7 @@ class EditProfileViewModel(
             val result = loginRepository.updateMe(
                 username, firstName, lastName, email, url, instagramUsername, location, bio
             )
-            updatedUserMutableLiveData.postValue(result)
+            _updatedUserLiveData.postValue(result)
         }
     }
 }

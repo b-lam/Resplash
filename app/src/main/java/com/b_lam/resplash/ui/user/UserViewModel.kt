@@ -23,8 +23,8 @@ class UserViewModel(
     private val collectionRepository: CollectionRepository
 ) : BaseViewModel() {
 
-    private val userMutableLiveData = MutableLiveData<User>()
-    val userLiveData: LiveData<User> = userMutableLiveData
+    private val _userLiveData = MutableLiveData<User>()
+    val userLiveData: LiveData<User> = _userLiveData
 
     private val photoListing = MutableLiveData<Listing<Photo>>()
 
@@ -53,7 +53,7 @@ class UserViewModel(
         }
     }
 
-    fun setUser(user: User) = userMutableLiveData.postValue(user)
+    fun setUser(user: User) = _userLiveData.postValue(user)
 
     fun getUserListings(username: String) {
         photoListing.postValue(
