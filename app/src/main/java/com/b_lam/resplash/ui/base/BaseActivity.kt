@@ -3,6 +3,7 @@ package com.b_lam.resplash.ui.base
 import android.app.ActivityManager.TaskDescription
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
@@ -32,6 +33,11 @@ abstract class BaseActivity : AppCompatActivity() {
         viewModel?.authRequiredLiveData?.observeEvent(this) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        applyLanguage(sharedPreferencesRepository.locale)
     }
 
     override fun attachBaseContext(newBase: Context?) {
