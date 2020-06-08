@@ -34,11 +34,17 @@ class SettingsActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (viewModel.shouldRestartMainActivity) {
+        if (viewModel.shouldRestartMainActivity ||
+            intent.getBooleanExtra(EXTRA_SHOULD_RESTART, false)) {
             NavUtils.navigateUpFromSameTask(this)
         } else {
             super.onBackPressed()
         }
+    }
+
+    companion object {
+
+        const val EXTRA_SHOULD_RESTART = "extra_should_restart"
     }
 
     class SettingsFragment :
@@ -73,7 +79,10 @@ class SettingsActivity : BaseActivity() {
             if (key == "language") {
                 activity?.finish()
                 activity?.overridePendingTransition( 0, 0);
-                startActivity(activity?.intent?.apply { addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION) })
+                startActivity(activity?.intent?.apply {
+                    putExtra(EXTRA_SHOULD_RESTART, true)
+                    addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                })
             }
         }
 
