@@ -5,7 +5,6 @@ import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
-import com.b_lam.resplash.ui.collection.CollectionManagementBottomSheet
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.util.downloadmanager.RxDownloadManager
@@ -16,8 +15,6 @@ import org.koin.android.ext.android.inject
 abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
 
     abstract override val preloadPagedListAdapter: PhotoAdapter
-
-    abstract fun onLikeClick(photo: Photo)
 
     private val downloadManager: RxDownloadManager by inject()
 
@@ -37,21 +34,11 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
             }
         }
 
-        override fun onDownloadClick(photo: Photo) {
+        override fun onLongClick(photo: Photo) {
             downloadManager.downloadPhoto(
                 getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality),
                 photo.fileName
             )
-        }
-
-        override fun onLikeClick(photo: Photo, position: Int) {
-
-        }
-
-        override fun onCollectClick(photo: Photo) {
-            CollectionManagementBottomSheet
-                .newInstance(photo)
-                .show(parentFragmentManager, CollectionManagementBottomSheet.TAG)
         }
     }
 

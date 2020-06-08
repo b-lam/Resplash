@@ -16,106 +16,85 @@ class SharedPreferencesRepository(context: Context) {
     val theme: String?
         get() = sharedPreferences.getString(
             PREFERENCE_THEME_KEY,
-            PREFERENCE_THEME_DEFAULT_VALUE
-        )
+            PREFERENCE_THEME_DEFAULT_VALUE)
 
     val layout: String?
         get() = sharedPreferences.getString(
             PREFERENCE_LAYOUT_KEY,
-            PREFERENCE_LAYOUT_DEFAULT_VALUE
-        )
+            PREFERENCE_LAYOUT_DEFAULT_VALUE)
 
     val loadQuality: String?
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_LOAD_QUALITY_KEY,
-                PREFERENCE_LOAD_QUALITY_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getString(
+            PREFERENCE_LOAD_QUALITY_KEY,
+            PREFERENCE_LOAD_QUALITY_DEFAULT_VALUE)
 
     val downloadQuality: String?
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_DOWNLOAD_QUALITY_KEY,
-                PREFERENCE_DOWNLOAD_QUALITY_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getString(
+            PREFERENCE_DOWNLOAD_QUALITY_KEY,
+            PREFERENCE_DOWNLOAD_QUALITY_DEFAULT_VALUE)
 
     val wallpaperQuality: String?
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_WALLPAPER_QUALITY_KEY,
-                PREFERENCE_WALLPAPER_QUALITY_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getString(
+            PREFERENCE_WALLPAPER_QUALITY_KEY,
+            PREFERENCE_WALLPAPER_QUALITY_DEFAULT_VALUE)
+
+    val longPressDownload: Boolean
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_LONG_PRESS_DOWNLOAD_KEY,
+            PREFERENCE_LONG_PRESS_DOWNLOAD_DEFAULT_VALUE)
 
     val autoWallpaperEnabled: Boolean
-        get() = sharedPreferences
-            .getBoolean(
-                PREFERENCE_AUTO_WALLPAPER_ENABLE_KEY,
-                PREFERENCE_AUTO_WALLPAPER_ENABLE_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_AUTO_WALLPAPER_ENABLE_KEY,
+            PREFERENCE_AUTO_WALLPAPER_ENABLE_DEFAULT_VALUE)
 
     val autoWallpaperOnWifi: Boolean
-        get() = sharedPreferences
-            .getBoolean(
-                PREFERENCE_AUTO_WALLPAPER_ON_WIFI_KEY,
-                PREFERENCE_AUTO_WALLPAPER_ON_WIFI_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_AUTO_WALLPAPER_ON_WIFI_KEY,
+            PREFERENCE_AUTO_WALLPAPER_ON_WIFI_DEFAULT_VALUE)
 
     val autoWallpaperCharging: Boolean
-        get() = sharedPreferences
-            .getBoolean(
-                PREFERENCE_AUTO_WALLPAPER_CHARGING_KEY,
-                PREFERENCE_AUTO_WALLPAPER_CHARGING_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_AUTO_WALLPAPER_CHARGING_KEY,
+            PREFERENCE_AUTO_WALLPAPER_CHARGING_DEFAULT_VALUE)
 
     val autoWallpaperIdle: Boolean
-        get() = sharedPreferences
-            .getBoolean(
-                PREFERENCE_AUTO_WALLPAPER_IDLE_KEY,
-                PREFERENCE_AUTO_WALLPAPER_IDLE_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_AUTO_WALLPAPER_IDLE_KEY,
+            PREFERENCE_AUTO_WALLPAPER_IDLE_DEFAULT_VALUE)
 
     val autoWallpaperInterval: Long
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_AUTO_WALLPAPER_INTERVAL_KEY,
-                PREFERENCE_AUTO_WALLPAPER_INTERVAL_DEFAULT_VALUE
-            )?.toLong()
+        get() = sharedPreferences.getString(
+            PREFERENCE_AUTO_WALLPAPER_INTERVAL_KEY,
+            PREFERENCE_AUTO_WALLPAPER_INTERVAL_DEFAULT_VALUE)?.toLong()
             ?: PREFERENCE_AUTO_WALLPAPER_INTERVAL_DEFAULT_VALUE.toLong()
 
     val autoWallpaperSource: String?
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_AUTO_WALLPAPER_SOURCE_KEY,
-                PREFERENCE_AUTO_WALLPAPER_SOURCE_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getString(
+            PREFERENCE_AUTO_WALLPAPER_SOURCE_KEY,
+            PREFERENCE_AUTO_WALLPAPER_SOURCE_DEFAULT_VALUE)
 
     val autoWallpaperUsername: String?
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_AUTO_WALLPAPER_USERNAME_KEY,
-                PREFERENCE_AUTO_WALLPAPER_USERNAME_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getString(
+            PREFERENCE_AUTO_WALLPAPER_USERNAME_KEY,
+            PREFERENCE_AUTO_WALLPAPER_USERNAME_DEFAULT_VALUE)
 
     val autoWallpaperSearchTerms: String?
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_KEY,
-                PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getString(
+            PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_KEY,
+            PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_DEFAULT_VALUE)
 
     val autoWallpaperCenterCrop: Boolean
-        get() = sharedPreferences
-            .getBoolean(
-                PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_KEY,
-                PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_KEY,
+            PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_DEFAULT_VALUE)
 
     val autoWallpaperSelectScreen: Int
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             when (sharedPreferences.getString(
                 PREFERENCE_AUTO_WALLPAPER_SELECT_SCREEN_KEY,
-                PREFERENCE_AUTO_WALLPAPER_SELECT_SCREEN_DEFAULT_VALUE
-            )) {
+                PREFERENCE_AUTO_WALLPAPER_SELECT_SCREEN_DEFAULT_VALUE))
+            {
                 "home_screen" -> WallpaperManager.FLAG_SYSTEM
                 "lock_screen" -> WallpaperManager.FLAG_LOCK
                 else -> WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK
@@ -128,8 +107,7 @@ class SharedPreferencesRepository(context: Context) {
         get() {
             val value = sharedPreferences.getString(
                 PREFERENCE_AUTO_WALLPAPER_ORIENTATION_KEY,
-                PREFERENCE_AUTO_WALLPAPER_ORIENTATION_DEFAULT_VALUE
-            )
+                PREFERENCE_AUTO_WALLPAPER_ORIENTATION_DEFAULT_VALUE)
             return when (value) {
                 "any" -> null
                 else -> value
@@ -137,28 +115,22 @@ class SharedPreferencesRepository(context: Context) {
         }
 
     val autoWallpaperContentFilter: String?
-        get() = sharedPreferences
-            .getString(
-                PREFERENCE_AUTO_WALLPAPER_CONTENT_FILTER_KEY,
-                PREFERENCE_AUTO_WALLPAPER_CONTENT_FILTER_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getString(
+            PREFERENCE_AUTO_WALLPAPER_CONTENT_FILTER_KEY,
+            PREFERENCE_AUTO_WALLPAPER_CONTENT_FILTER_DEFAULT_VALUE)
 
     var lastFeaturedCollectionsFetch: Long
-        get() = sharedPreferences
-            .getLong(
-                PREFERENCE_LAST_FEATURED_COLLECTIONS_FETCH_KEY,
-                PREFERENCE_LAST_FEATURED_COLLECTIONS_FETCH_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getLong(
+            PREFERENCE_LAST_FEATURED_COLLECTIONS_FETCH_KEY,
+            PREFERENCE_LAST_FEATURED_COLLECTIONS_FETCH_DEFAULT_VALUE)
         set(value) = sharedPreferences.edit {
             putLong(PREFERENCE_LAST_FEATURED_COLLECTIONS_FETCH_KEY, value)
         }
 
     var lastPopularCollectionsFetch: Long
-        get() = sharedPreferences
-            .getLong(
-                PREFERENCE_LAST_POPULAR_COLLECTIONS_FETCH_KEY,
-                PREFERENCE_LAST_POPULAR_COLLECTIONS_FETCH_DEFAULT_VALUE
-            )
+        get() = sharedPreferences.getLong(
+            PREFERENCE_LAST_POPULAR_COLLECTIONS_FETCH_KEY,
+            PREFERENCE_LAST_POPULAR_COLLECTIONS_FETCH_DEFAULT_VALUE)
         set(value) = sharedPreferences.edit {
             putLong(PREFERENCE_LAST_POPULAR_COLLECTIONS_FETCH_KEY, value)
         }
@@ -167,8 +139,8 @@ class SharedPreferencesRepository(context: Context) {
         get() {
             val value = sharedPreferences.getString(
                 PREFERENCE_LANGUAGE_KEY,
-                PREFERENCE_LANGUAGE_DEFAULT_VALUE
-            ) ?: PREFERENCE_LANGUAGE_DEFAULT_VALUE
+                PREFERENCE_LANGUAGE_DEFAULT_VALUE)
+                ?: PREFERENCE_LANGUAGE_DEFAULT_VALUE
             return when (value) {
                 "default" -> null
                 else -> Locale(value)
@@ -205,6 +177,9 @@ class SharedPreferencesRepository(context: Context) {
 
         private const val PREFERENCE_WALLPAPER_QUALITY_KEY = "wallpaper_quality"
         private const val PREFERENCE_WALLPAPER_QUALITY_DEFAULT_VALUE = "full"
+
+        private const val PREFERENCE_LONG_PRESS_DOWNLOAD_KEY = "long_press_download"
+        private const val PREFERENCE_LONG_PRESS_DOWNLOAD_DEFAULT_VALUE = true
 
         const val PREFERENCE_AUTO_WALLPAPER_ENABLE_KEY = "auto_wallpaper_enable"
         const val PREFERENCE_AUTO_WALLPAPER_ENABLE_DEFAULT_VALUE = false

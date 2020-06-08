@@ -16,4 +16,13 @@
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         tools:src="@color/white" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/check_animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:lottie_fileName="check.json"
+        app:lottie_speed="1.25" />
 </com.google.android.material.card.MaterialCardView>

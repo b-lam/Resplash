@@ -23,10 +23,6 @@ class UserPhotoFragment : PhotoFragment() {
         }
     }
 
-    override fun onLikeClick(photo: Photo) {
-        TODO("not implemented")
-    }
-
     companion object {
 
         fun newInstance() = UserPhotoFragment()

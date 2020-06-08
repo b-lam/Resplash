@@ -58,7 +58,7 @@
 
         <Preference
             app:key="auto_wallpaper_collections"
-            app:title="@string/auto_wallpaper_collections_title"
+            app:title="@string/collections"
             app:summary="@string/auto_wallpaper_collections_summary"
             app:isPreferenceVisible="false" />
 

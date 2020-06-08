@@ -28,6 +28,13 @@
             app:title="@string/clear_cache" />
     </PreferenceCategory>
 
+    <SwitchPreference
+        app:key="long_press_download"
+        app:title="@string/long_press_to_download"
+        app:summary="@string/long_press_to_download_summary"
+        app:defaultValue="true"
+        app:allowDividerAbove="true" />
+
     <PreferenceCategory app:title="@string/quality">
 
         <ListPreference app:key="load_quality"

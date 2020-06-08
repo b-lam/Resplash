@@ -40,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/keyline_6"
+        android:foreground="?attr/selectableItemBackground"
         app:cardElevation="0dp"
         app:layout_goneMarginTop="@dimen/keyline_0"
         app:layout_constraintTop_toBottomOf="@id/user_container">
@@ -48,49 +49,17 @@
             android:id="@+id/photo_image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foreground="@drawable/photo_gradient_overlay"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             tools:src="@color/white" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/check_animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:lottie_fileName="check.json"
+            app:lottie_speed="1.25" />
     </com.google.android.material.card.MaterialCardView>
-
-    <ImageView
-        android:id="@+id/download_button"
-        style="@style/MaterialImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/keyline_6"
-        android:padding="@dimen/keyline_5"
-        android:src="@drawable/ic_download_border_18dp"
-        android:translationZ="1dp"
-        android:contentDescription="@string/download"
-        app:layout_constraintEnd_toStartOf="@id/like_button"
-        app:layout_constraintTop_toTopOf="@id/collect_button" />
-
-    <ImageView
-        android:id="@+id/like_button"
-        style="@style/MaterialImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/keyline_6"
-        android:padding="@dimen/keyline_5"
-        android:src="@drawable/ic_favorite_border_18dp"
-        android:translationZ="1dp"
-        android:contentDescription="@string/like"
-        app:layout_constraintEnd_toStartOf="@id/collect_button"
-        app:layout_constraintTop_toTopOf="@id/collect_button" />
-
-    <ImageView
-        android:id="@+id/collect_button"
-        style="@style/MaterialImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/keyline_6"
-        android:layout_marginBottom="@dimen/keyline_6"
-        android:padding="@dimen/keyline_5"
-        android:src="@drawable/ic_bookmark_border_18dp"
-        android:translationZ="1dp"
-        android:contentDescription="@string/add_to_collection"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

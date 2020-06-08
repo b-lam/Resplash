@@ -1,5 +1,6 @@
 package com.b_lam.resplash.ui.photo
 
+import android.animation.Animator
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ class DefaultPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
         photo: Photo?,
         loadQuality: String?,
         showUser: Boolean,
+        longPressDownload: Boolean,
         callback: PhotoAdapter.ItemEventCallback
     ) {
         photo?.let {
@@ -31,26 +33,25 @@ class DefaultPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
                 photo_image_view.setAspectRatio(photo.width, photo.height)
                 photo_image_view.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color)
                 photo_image_view.setOnClickListener { callback.onPhotoClick(photo) }
-                setPhotoLikedByUser(photo.liked_by_user)
-                if (photo.current_user_collections?.size ?: 0 > 0) {
-                    collect_button.setImageResource(R.drawable.ic_bookmark_filled_18dp)
+                if (longPressDownload) {
+                    photo_image_view.setOnLongClickListener {
+                        callback.onLongClick(photo)
+                        check_animation_view.isVisible = true
+                        check_animation_view.playAnimation()
+                        check_animation_view.addAnimatorListener(object :
+                            Animator.AnimatorListener {
+                            override fun onAnimationRepeat(animation: Animator?) {}
+                            override fun onAnimationCancel(animation: Animator?) {}
+                            override fun onAnimationStart(animation: Animator?) {}
+                            override fun onAnimationEnd(animation: Animator?) {
+                                check_animation_view.removeAnimatorListener(this)
+                                check_animation_view.isVisible = false
+                            }
+                        })
+                        true
+                    }
                 }
-                download_button.setOnClickListener { callback.onDownloadClick(photo) }
-                like_button.setOnClickListener {
-                    photo.liked_by_user = photo.liked_by_user?.not()
-                    setPhotoLikedByUser(!(photo.liked_by_user ?: false))
-                    callback.onLikeClick(photo, adapterPosition)
-                }
-                collect_button.setOnClickListener { callback.onCollectClick(photo) }
             }
-        }
-    }
-
-    private fun setPhotoLikedByUser(liked: Boolean?) {
-        if (liked == true) {
-            itemView.like_button.setImageResource(R.drawable.ic_favorite_filled_18dp)
-        } else {
-            itemView.like_button.setImageResource(R.drawable.ic_favorite_border_18dp)
         }
     }
 }

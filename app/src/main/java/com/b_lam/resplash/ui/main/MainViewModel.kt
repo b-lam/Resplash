@@ -97,14 +97,6 @@ class MainViewModel(
         collectionOrderMutableLiveData.postValue(order)
     }
 
-    fun onLikeClick(photo: Photo) {
-        if (photo.liked_by_user == true) {
-            viewModelScope.launch { photoRepository.unlikePhoto(photo.id) }
-        } else {
-            viewModelScope.launch { photoRepository.likePhoto(photo.id) }
-        }
-    }
-
     fun refreshUserProfile() {
         if (loginRepository.isAuthorized()) {
             authorizedMutableLiveData.postValue(true)

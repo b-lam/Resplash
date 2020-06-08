@@ -1,6 +1,7 @@
 package com.b_lam.resplash.ui.settings
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.b_lam.resplash.GlideApp
@@ -14,12 +15,13 @@ class SettingsViewModel(private val context: Context) : BaseViewModel() {
 
     var shouldRestartMainActivity = false
 
-    val glideCacheSize = MutableLiveData(getGlideCacheSize())
+    private val _glideCacheSize = MutableLiveData(getGlideCacheSize())
+    val glideCacheSize: LiveData<Long?> = _glideCacheSize
 
     fun launchClearCache() {
         viewModelScope.launch {
             clearCache()
-            glideCacheSize.postValue(getGlideCacheSize())
+            _glideCacheSize.postValue(getGlideCacheSize())
         }
     }
 

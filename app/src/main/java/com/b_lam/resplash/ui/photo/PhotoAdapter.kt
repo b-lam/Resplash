@@ -25,6 +25,7 @@ class PhotoAdapter(
 
     private val layout = sharedPreferencesRepository.layout
     private val loadQuality = sharedPreferencesRepository.loadQuality
+    private val longPressDownload = sharedPreferencesRepository.longPressDownload
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
@@ -40,11 +41,11 @@ class PhotoAdapter(
         with(getItem(position)) {
             when (getItemViewType(position)) {
                 R.layout.item_photo_default ->
-                    (holder as DefaultPhotoViewHolder).bind(this, loadQuality, showUser, callback)
+                    (holder as DefaultPhotoViewHolder).bind(this, loadQuality, showUser, longPressDownload, callback)
                 R.layout.item_photo_minimal ->
-                    (holder as MinimalPhotoViewHolder).bind(this, loadQuality, callback)
+                    (holder as MinimalPhotoViewHolder).bind(this, loadQuality, longPressDownload, callback)
                 R.layout.item_photo_grid ->
-                    (holder as GridPhotoViewHolder).bind(this, loadQuality, callback)
+                    (holder as GridPhotoViewHolder).bind(this, loadQuality, longPressDownload, callback)
             }
         }
     }
@@ -77,9 +78,7 @@ class PhotoAdapter(
 
         fun onPhotoClick(photo: Photo)
         fun onUserClick(user: User)
-        fun onDownloadClick(photo: Photo)
-        fun onLikeClick(photo: Photo, position: Int)
-        fun onCollectClick(photo: Photo)
+        fun onLongClick(photo: Photo)
     }
 
     companion object {

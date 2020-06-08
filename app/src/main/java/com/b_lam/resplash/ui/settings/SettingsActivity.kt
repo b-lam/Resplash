@@ -62,7 +62,7 @@ class SettingsActivity : BaseActivity() {
             val clearCachePreference = findPreference<Preference>("clear_cache")
             with(sharedViewModel) {
                 glideCacheSize.observe(viewLifecycleOwner) { cacheSize ->
-                    clearCachePreference?.summary = "Cache size: $cacheSize MB"
+                    clearCachePreference?.summary = getString(R.string.cache_size, cacheSize)
                 }
                 clearCachePreference?.setOnPreferenceClickListener {
                     launchClearCache()
@@ -72,7 +72,8 @@ class SettingsActivity : BaseActivity() {
         }
 
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-            if (key == "language" || key == "layout" || key == "load_quality") {
+            if (key == "language" || key == "layout" ||
+                key == "load_quality" || key == "long_press_download") {
                 sharedViewModel.shouldRestartMainActivity = true
             }
 

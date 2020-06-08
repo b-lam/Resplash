@@ -23,10 +23,6 @@ class MainPhotoFragment : PhotoFragment() {
         }
     }
 
-    override fun onLikeClick(photo: Photo) {
-        sharedViewModel.onLikeClick(photo)
-    }
-
     companion object {
 
         fun newInstance() = MainPhotoFragment()
