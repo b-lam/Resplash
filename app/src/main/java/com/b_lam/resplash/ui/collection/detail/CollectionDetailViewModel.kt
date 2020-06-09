@@ -22,6 +22,9 @@ class CollectionDetailViewModel(
     private val autoWallpaperRepository: AutoWallpaperRepository
 ) : BaseViewModel() {
 
+    private val _getCollectionResultLiveData = MutableLiveData<Event<Result<Collection>>>()
+    val getCollectionResultLiveData: LiveData<Event<Result<Collection>>> = _getCollectionResultLiveData
+
     private val _updateCollectionResultLiveData = MutableLiveData<Event<Result<Collection>>>()
     val updateCollectionResultLiveData: LiveData<Event<Result<Collection>>> = _updateCollectionResultLiveData
 
@@ -46,9 +49,10 @@ class CollectionDetailViewModel(
     fun getCollection(collectionId: Int) {
         viewModelScope.launch {
             val result = collectionRepository.getCollection(collectionId)
-            when (result) {
-                is Result.Success -> setCollection(result.value)
+            if (result is Result.Success) {
+                setCollection(result.value)
             }
+            _getCollectionResultLiveData.postValue(Event(result))
         }
     }
 
