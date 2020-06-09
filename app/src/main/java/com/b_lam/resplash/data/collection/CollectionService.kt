@@ -2,6 +2,7 @@ package com.b_lam.resplash.data.collection
 
 import com.b_lam.resplash.data.collection.model.Collection
 import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface CollectionService {
@@ -46,7 +47,7 @@ interface CollectionService {
     @DELETE("collections/{id}")
     suspend fun deleteCollection(
         @Path("id") id: Int
-    ): ResponseBody
+    ): Response<Unit>
 
     @POST("collections/{collection_id}/add")
     suspend fun addPhotoToCollection(

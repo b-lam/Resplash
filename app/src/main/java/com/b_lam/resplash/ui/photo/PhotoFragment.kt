@@ -1,5 +1,6 @@
 package com.b_lam.resplash.ui.photo
 
+import android.Manifest
 import android.content.Intent
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
@@ -10,6 +11,8 @@ import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.util.downloadmanager.RxDownloadManager
 import com.b_lam.resplash.util.fileName
 import com.b_lam.resplash.util.getPhotoUrl
+import com.b_lam.resplash.util.hasPermission
+import com.b_lam.resplash.util.requestPermission
 import org.koin.android.ext.android.inject
 
 abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
@@ -35,10 +38,13 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
         }
 
         override fun onLongClick(photo: Photo) {
-            downloadManager.downloadPhoto(
-                getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality),
-                photo.fileName
-            )
+            if (requireContext().hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                downloadManager.downloadPhoto(
+                    getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality),
+                    photo.fileName)
+            } else {
+                requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
+            }
         }
     }
 

@@ -5,16 +5,16 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
-class ScrollAwareFABBehavior(
+class ScrollAwareExtendedFabBehavior(
     context: Context,
     attrs: AttributeSet
-) : FloatingActionButton.Behavior(context, attrs) {
+) : CoordinatorLayout.Behavior<ExtendedFloatingActionButton>(context, attrs) {
 
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
-        child: FloatingActionButton,
+        child: ExtendedFloatingActionButton,
         directTargetChild: View,
         target: View,
         axes: Int,
@@ -27,7 +27,7 @@ class ScrollAwareFABBehavior(
 
     override fun onNestedScroll(
         coordinatorLayout: CoordinatorLayout,
-        child: FloatingActionButton,
+        child: ExtendedFloatingActionButton,
         target: View,
         dxConsumed: Int,
         dyConsumed: Int,
@@ -36,18 +36,14 @@ class ScrollAwareFABBehavior(
         type: Int,
         consumed: IntArray
     ) {
-        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed,
-            dxUnconsumed, dyUnconsumed, type, consumed)
+        super.onNestedScroll(coordinatorLayout, child, target,
+            dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed,
+            type, consumed)
 
-        if (dyConsumed > 0 && child.visibility == View.VISIBLE) {
-            child.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
-                override fun onHidden(fab: FloatingActionButton) {
-                    super.onHidden(fab)
-                    fab.visibility = View.INVISIBLE
-                }
-            })
-        } else if ((dyConsumed < 0 || dyUnconsumed < 0) && child.visibility != View.VISIBLE) {
-            child.show()
+        if (dyConsumed > 5 && child.isExtended) {
+            child.shrink()
+        } else if (dyConsumed < -5 && !child.isExtended) {
+            child.extend()
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.b_lam.resplash.ui.collection
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
@@ -28,6 +29,7 @@ class MinimalCollectionViewHolder(parent: View) : RecyclerView.ViewHolder(parent
                     collection.total_photos,
                     collection.total_photos
                 )
+                collection_private_icon.isVisible = collection.private ?: false
                 setOnClickListener { callback.onCollectionClick(collection) }
             }
         }

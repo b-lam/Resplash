@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/create_collection_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/keyline_5"
@@ -10,14 +9,14 @@
     android:clipToPadding="false">
 
     <TextView
-        android:id="@+id/create_collection_title"
+        android:id="@+id/edit_collection_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/keyline_7"
         android:paddingBottom="@dimen/keyline_7"
         android:paddingStart="@dimen/keyline_8"
         android:paddingEnd="@dimen/keyline_8"
-        android:text="@string/create_new_collection"
+        android:text="@string/edit_collection"
         android:textSize="20sp"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +31,7 @@
         app:counterEnabled="true"
         app:counterMaxLength="60"
         app:errorEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/create_collection_title"
+        app:layout_constraintTop_toBottomOf="@id/edit_collection_title"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -75,16 +74,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/collection_description_text_input_layout" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_5"
+        android:indeterminate="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/make_collection_private_checkbox"
+        android:visibility="gone" />
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/create_collection_button"
+        android:id="@+id/delete_collection_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_3"
+        android:layout_marginBottom="@dimen/keyline_3"
+        android:layout_marginStart="@dimen/keyline_6"
+        android:text="@string/delete"
+        android:textColor="@color/red_400"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cancel_collection_button"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar"
+        style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_collection_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/keyline_3"
         android:layout_marginBottom="@dimen/keyline_3"
         android:layout_marginEnd="@dimen/keyline_6"
-        android:text="@string/create"
+        android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/make_collection_private_checkbox"
+        app:layout_constraintTop_toTopOf="@id/delete_collection_button"
         style="@style/Widget.MaterialComponents.Button.TextButton" />
 
     <com.google.android.material.button.MaterialButton
@@ -92,7 +117,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
-        app:layout_constraintEnd_toStartOf="@id/create_collection_button"
-        app:layout_constraintTop_toTopOf="@id/create_collection_button"
+        app:layout_constraintEnd_toStartOf="@id/save_collection_button"
+        app:layout_constraintTop_toTopOf="@id/save_collection_button"
+        style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+    <TextView
+        android:id="@+id/are_you_sure_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_3"
+        android:layout_marginBottom="@dimen/keyline_3"
+        android:layout_marginStart="@dimen/keyline_6"
+        android:text="@string/are_you_sure"
+        android:visibility="gone"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/delete_no_collection_button"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar"
+        style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_yes_collection_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_3"
+        android:layout_marginBottom="@dimen/keyline_3"
+        android:layout_marginEnd="@dimen/keyline_6"
+        android:text="@string/yes"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/are_you_sure_text_view"
+        style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_no_collection_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/delete_yes_collection_button"
+        app:layout_constraintTop_toTopOf="@id/delete_yes_collection_button"
         style="@style/Widget.MaterialComponents.Button.TextButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

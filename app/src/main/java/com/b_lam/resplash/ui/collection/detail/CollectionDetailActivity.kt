@@ -1,5 +1,6 @@
 package com.b_lam.resplash.ui.collection.detail
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,11 +13,10 @@ import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.ui.user.UserActivity
+import com.b_lam.resplash.ui.user.UserCollectionFragment
+import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
-import com.b_lam.resplash.util.replaceFragmentInActivity
-import com.b_lam.resplash.util.setTextOrHide
-import com.b_lam.resplash.util.setupActionBar
-import com.b_lam.resplash.util.showSnackBar
+import com.b_lam.resplash.util.livedata.observeOnce
 import com.b_lam.resplash.worker.AutoWallpaperWorker
 import kotlinx.android.synthetic.main.activity_collection_detail.*
 import kotlinx.android.synthetic.main.activity_user.user_name_text_view
@@ -39,7 +39,27 @@ class CollectionDetailActivity : BaseActivity() {
             else -> finish()
         }
 
-        viewModel.collectionLiveData.observe(this) { setup(it) }
+        viewModel.collectionLiveData.observeOnce(this) { initialSetup(it) }
+        viewModel.updateCollectionResultLiveData.observe(this) {
+            val result = it.peekContent()
+            if (result is Result.Success) {
+                setupToolbar(result.value)
+                intent.apply {
+                    putExtra(UserCollectionFragment.EXTRA_USER_COLLECTION_MODIFY_FLAG, true)
+                    setResult(Activity.RESULT_OK, this)
+                }
+            }
+        }
+        viewModel.deleteCollectionResultLiveData.observe(this) {
+            val result = it.peekContent()
+            if (result is Result.Success) {
+                intent.apply {
+                    putExtra(UserCollectionFragment.EXTRA_USER_COLLECTION_DELETE_FLAG, true)
+                    setResult(Activity.RESULT_OK, this)
+                    finish()
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -83,11 +103,8 @@ class CollectionDetailActivity : BaseActivity() {
         }
     }
 
-    private fun setup(collection: Collection) {
-        setupActionBar(R.id.toolbar) {
-            title = collection.title
-            setDisplayHomeAsUpEnabled(true)
-        }
+    private fun initialSetup(collection: Collection) {
+        setupToolbar(collection)
         replaceFragmentInActivity(
             R.id.root_container,
             CollectionDetailFragment.newInstance(),
@@ -102,7 +119,6 @@ class CollectionDetailActivity : BaseActivity() {
         content_loading_layout.hide()
         collection_content_layout.isVisible = true
 
-        description_text_view.setTextOrHide(collection.description?.trim())
         collection.user?.let { user ->
             val count = resources.getQuantityString(
                 R.plurals.photos, collection.total_photos, collection.total_photos)
@@ -125,7 +141,25 @@ class CollectionDetailActivity : BaseActivity() {
             }
         }
 
+        if (intent.getBooleanExtra(EXTRA_IS_USER_COLLECTION, false)) {
+            edit_button.isVisible = true
+            edit_button.setOnClickListener {
+                EditCollectionBottomSheet
+                    .newInstance()
+                    .show(supportFragmentManager, EditCollectionBottomSheet.TAG)
+            }
+        }
+
         viewModel.getPhotoListing(collection.id)
+    }
+
+    private fun setupToolbar(collection: Collection) {
+        setupActionBar(R.id.toolbar) {
+            title = collection.title
+            setDisplayHomeAsUpEnabled(true)
+        }
+
+        description_text_view.setTextOrHide(collection.description?.trim())
     }
 
     private fun openCollectionInBrowser() {
@@ -147,5 +181,7 @@ class CollectionDetailActivity : BaseActivity() {
 
         const val EXTRA_COLLECTION = "extra_collection"
         const val EXTRA_COLLECTION_ID = "extra_collection_id"
+
+        const val EXTRA_IS_USER_COLLECTION = "extra_is_user_collection"
     }
 }

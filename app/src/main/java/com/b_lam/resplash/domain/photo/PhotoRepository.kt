@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.ResponseBody
+import retrofit2.Response
 
 class PhotoRepository(
     private val photoService: PhotoService,
@@ -96,7 +97,7 @@ class PhotoRepository(
         return safeApiCall(dispatcher) { photoService.likeAPhoto(id) }
     }
 
-    suspend fun unlikePhoto(id: String): Result<ResponseBody> {
+    suspend fun unlikePhoto(id: String): Result<Response<Unit>> {
         return safeApiCall(dispatcher) { photoService.unlikeAPhoto(id) }
     }
 }

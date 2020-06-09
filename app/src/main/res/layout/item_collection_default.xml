@@ -57,18 +57,38 @@
 
     <TextView
         android:id="@+id/collection_name_text_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/keyline_7"
-        android:layout_marginEnd="@dimen/keyline_7"
         android:layout_marginBottom="@dimen/keyline_5"
+        app:layout_goneMarginEnd="@dimen/keyline_7"
         android:textColor="@color/white"
         android:maxLines="1"
         android:ellipsize="end"
+        android:singleLine="true"
         android:translationZ="1dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collection_private_icon"
         app:layout_constraintBottom_toTopOf="@id/collection_count_text_view"
         style="@style/TextAppearance.Resplash.Headline6"
-        tools:text="Landscapes" />
+        tools:text="Landscapesfwefwefwefwefwefwefwefwfwefwefwef" />
+
+    <ImageView
+        android:id="@+id/collection_private_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_5"
+        android:layout_marginEnd="@dimen/keyline_7"
+        android:src="@drawable/ic_lock_18dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/collection_name_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/collection_name_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/collection_name_text_view"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/collection_count_text_view"

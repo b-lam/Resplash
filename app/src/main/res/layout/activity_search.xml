@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:background="@null"
-                    android:hint="@string/search_hint"
+                    android:hint="@string/search"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"
@@ -55,10 +55,12 @@
         android:id="@+id/filter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/keyline_9"
-        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginEnd="@dimen/keyline_8"
+        android:layout_marginBottom="@dimen/keyline_7"
+        android:layout_gravity="bottom|end"
         android:text="@string/filter"
         android:visibility="invisible"
+        app:layout_behavior="com.b_lam.resplash.ui.widget.ScrollAwareExtendedFabBehavior"
         app:elevation="@dimen/keyline_7"
         app:icon="@drawable/ic_filter_list_24dp" />
 

@@ -79,6 +79,19 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/keyline_8"
+        android:layout_marginBottom="@dimen/keyline_7"
+        android:layout_gravity="bottom|end"
+        android:text="@string/edit"
+        android:visibility="gone"
+        app:layout_behavior="com.b_lam.resplash.ui.widget.ScrollAwareExtendedFabBehavior"
+        app:elevation="@dimen/keyline_7"
+        app:icon="@drawable/ic_edit_24dp" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/root_container"
         android:layout_width="match_parent"

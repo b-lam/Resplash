@@ -9,6 +9,7 @@ import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.domain.collection.CollectionRepository
+import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.domain.photo.UserLikesDataSourceFactory
 import com.b_lam.resplash.domain.photo.UserPhotoDataSourceFactory
@@ -20,7 +21,8 @@ import kotlinx.coroutines.launch
 class UserViewModel(
     private val userRepository: UserRepository,
     private val photoRepository: PhotoRepository,
-    private val collectionRepository: CollectionRepository
+    private val collectionRepository: CollectionRepository,
+    private val loginRepository: LoginRepository
 ) : BaseViewModel() {
 
     private val _userLiveData = MutableLiveData<User>()
@@ -88,4 +90,5 @@ class UserViewModel(
 
     fun refreshCollections() = collectionListing.value?.refresh?.invoke()
 
+    fun isPersonalProfile() = userLiveData.value?.username == loginRepository.getUsername()
 }

@@ -3,7 +3,7 @@ package com.b_lam.resplash.di
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsViewModel
 import com.b_lam.resplash.ui.autowallpaper.collections.AutoWallpaperCollectionViewModel
 import com.b_lam.resplash.ui.autowallpaper.history.AutoWallpaperHistoryViewModel
-import com.b_lam.resplash.ui.collection.CollectionManagementViewModel
+import com.b_lam.resplash.ui.collection.add.AddCollectionViewModel
 import com.b_lam.resplash.ui.collection.detail.CollectionDetailViewModel
 import com.b_lam.resplash.ui.donation.DonationViewModel
 import com.b_lam.resplash.ui.login.LoginViewModel
@@ -22,15 +22,15 @@ val viewModelModule = module {
 
     viewModel { MainViewModel(get(), get(), get(), get()) }
 
-    viewModel { PhotoDetailViewModel(get()) }
+    viewModel { PhotoDetailViewModel(get(), get()) }
 
     viewModel { CollectionDetailViewModel(get(), get(), get()) }
 
-    viewModel { CollectionManagementViewModel(get(), get()) }
+    viewModel { AddCollectionViewModel(get(), get()) }
 
     viewModel { SearchViewModel(get(), get(), get()) }
 
-    viewModel { UserViewModel(get(), get(), get()) }
+    viewModel { UserViewModel(get(), get(), get(), get()) }
 
     viewModel { EditProfileViewModel(get()) }
 

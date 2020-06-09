@@ -12,13 +12,21 @@ import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
+import com.b_lam.resplash.util.livedata.Event
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class CollectionDetailViewModel(
     private val photoRepository: PhotoRepository,
     private val collectionRepository: CollectionRepository,
     private val autoWallpaperRepository: AutoWallpaperRepository
 ) : BaseViewModel() {
+
+    private val _updateCollectionResultLiveData = MutableLiveData<Event<Result<Collection>>>()
+    val updateCollectionResultLiveData: LiveData<Event<Result<Collection>>> = _updateCollectionResultLiveData
+
+    private val _deleteCollectionResultLiveData = MutableLiveData<Event<Result<Response<Unit>>>>()
+    val deleteCollectionResultLiveData: LiveData<Event<Result<Response<Unit>>>> = _deleteCollectionResultLiveData
 
     private val _collectionLiveData = MutableLiveData<Collection>()
     val collectionLiveData: LiveData<Collection> = _collectionLiveData
@@ -58,6 +66,31 @@ class CollectionDetailViewModel(
     fun removeCollectionFromAutoWallpaper() {
         viewModelScope.launch {
             collectionLiveData.value?.let { autoWallpaperRepository.removeCollectionFromAutoWallpaper(it) }
+        }
+    }
+
+    fun updateCollection(
+        title: String,
+        description: String?,
+        private: Boolean?
+    ) {
+        collectionLiveData.value?.id?.let {
+            viewModelScope.launch {
+                val result = collectionRepository.updateCollection(it, title, description, private)
+                if (result is Result.Success) {
+                    _collectionLiveData.postValue(result.value)
+                }
+                _updateCollectionResultLiveData.postValue(Event(result))
+            }
+        }
+    }
+
+    fun deleteCollection() {
+        collectionLiveData.value?.id?.let {
+            viewModelScope.launch {
+                val result = collectionRepository.deleteCollection(it)
+                _deleteCollectionResultLiveData.postValue(Event(result))
+            }
         }
     }
 }

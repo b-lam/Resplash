@@ -41,6 +41,7 @@ class DefaultCollectionViewHolder(parent: View) : RecyclerView.ViewHolder(parent
                     collection.total_photos,
                     collection.total_photos
                 )
+                collection_private_icon.isVisible = collection.private ?: false
                 setOnClickListener { callback.onCollectionClick(collection) }
             }
         }

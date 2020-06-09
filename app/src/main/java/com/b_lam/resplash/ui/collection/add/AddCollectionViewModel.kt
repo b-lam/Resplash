@@ -1,4 +1,4 @@
-package com.b_lam.resplash.ui.collection
+package com.b_lam.resplash.ui.collection.add
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -8,7 +8,7 @@ import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class CollectionManagementViewModel(
+class AddCollectionViewModel(
     private val collectionRepository: CollectionRepository,
     loginRepository: LoginRepository
 ) : BaseViewModel() {

@@ -4,6 +4,7 @@ import com.b_lam.resplash.data.common.model.PhotoStatistics
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.photo.model.Tag
 import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface PhotoService {
@@ -77,5 +78,5 @@ interface PhotoService {
     @DELETE("photos/{id}/like")
     suspend fun unlikeAPhoto(
         @Path("id") id: String
-    ): ResponseBody
+    ): Response<Unit>
 }

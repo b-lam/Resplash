@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.ResponseBody
+import retrofit2.Response
 
 class CollectionRepository(
     private val collectionService: CollectionService,
@@ -51,6 +52,25 @@ class CollectionRepository(
     ): Result<Collection> {
         return safeApiCall(dispatcher) {
             collectionService.createCollection(title, description, private)
+        }
+    }
+
+    suspend fun updateCollection(
+        id: Int,
+        title: String,
+        description: String?,
+        private: Boolean?
+    ): Result<Collection> {
+        return safeApiCall(dispatcher) {
+            collectionService.updateCollection(id, title, description, private)
+        }
+    }
+
+    suspend fun deleteCollection(
+        id: Int
+    ): Result<Response<Unit>> {
+        return safeApiCall(dispatcher) {
+            collectionService.deleteCollection(id)
         }
     }
 

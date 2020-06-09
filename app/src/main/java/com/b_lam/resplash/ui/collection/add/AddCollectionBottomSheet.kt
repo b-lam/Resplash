@@ -1,4 +1,4 @@
-package com.b_lam.resplash.ui.collection
+package com.b_lam.resplash.ui.collection.add
 
 import android.app.Dialog
 import android.os.Bundle
@@ -14,13 +14,13 @@ import com.b_lam.resplash.data.photo.model.Photo
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.add_to_collection_layout.*
-import kotlinx.android.synthetic.main.bottom_sheet_collection_management.*
+import kotlinx.android.synthetic.main.bottom_sheet_add_collection.*
 import kotlinx.android.synthetic.main.create_collection_layout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CollectionManagementBottomSheet : BottomSheetDialogFragment() {
+class AddCollectionBottomSheet : BottomSheetDialogFragment() {
 
-    private val viewModel: CollectionManagementViewModel by viewModel()
+    private val viewModel: AddCollectionViewModel by viewModel()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val bottomSheetDialog = super.onCreateDialog(savedInstanceState)
@@ -42,7 +42,7 @@ class CollectionManagementBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.bottom_sheet_collection_management, container, false)
+        return inflater.inflate(R.layout.bottom_sheet_add_collection, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +53,8 @@ class CollectionManagementBottomSheet : BottomSheetDialogFragment() {
         }
 
         view_pager.apply {
-            adapter = CollectionManagementPagerAdapter()
+            adapter =
+                CollectionManagementPagerAdapter()
             offscreenPageLimit = 2
         }
 
@@ -125,11 +126,12 @@ class CollectionManagementBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
 
-        val TAG = CollectionManagementBottomSheet::class.java.simpleName
+        val TAG = AddCollectionBottomSheet::class.java.simpleName
 
         private const val ARGUMENT_PHOTO = "argument_photo"
 
-        fun newInstance(photo: Photo) = CollectionManagementBottomSheet().apply {
+        fun newInstance(photo: Photo) = AddCollectionBottomSheet()
+            .apply {
             arguments = Bundle().apply {
                 putParcelable(ARGUMENT_PHOTO, photo)
             }

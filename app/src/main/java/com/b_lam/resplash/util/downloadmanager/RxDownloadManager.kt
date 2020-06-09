@@ -111,8 +111,6 @@ class RxDownloadManager(private val context: Context) {
                 return
             }
 
-            val uriIndex = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
-            val downloadedFilePath = cursor.getString(uriIndex).removePrefix("file://")
             cursor.close()
 
             publishSubject.onNext(downloadManager.getUriForDownloadedFile(id))
