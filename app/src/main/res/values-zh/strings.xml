@@ -1,2 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- Common -->
+    <string name="ok">好</string>
+    <string name="cancel">取消</string>
+    <string name="search">搜索</string>
+    <string name="photos">照片</string>
+    <string name="collections">珍藏</string>
+    <string name="like">喜欢</string>
+    <string name="users">用户</string>
+    <string name="unknown">未知</string>
+    <string name="download">下载</string>
+    <string name="on">启用</string>
+    <string name="off">残</string>
+    <string name="share">分享</string>
+    <string name="open_in_browser">在浏览器中打开</string>
+    <string name="apply">应用</string>
+    <string name="create">创建</string>
+    <string name="save">保存</string>
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="are_you_sure">你确定吗？</string>
+    <string name="yes">是</string>
+    <string name="no">没有</string>
+    <string name="thanks">谢谢!</string>
+    <string name="download_started">下载开始</string>
+    <string name="download_complete">下载完毕</string>
+    <string name="setting_wallpaper">设置壁纸…</string>
+
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="other">%d Photos</item>
+    </plurals>
+
+    <!-- Main -->
+    <string name="home">最新</string>
+    <string name="header_subtitle">由世界各地的创作者提供支持</string>
+    <string name="add_account">新增帐户</string>
+    <string name="view_profile">查看个人资料</string>
+    <string name="edit_profile">管理账户</string>
+    <string name="log_out">登出</string>
+    <string name="sort_by">排序方式</string>
+    <string name="order_latest">最近</string>
+    <string name="order_oldest">最旧</string>
+    <string name="order_popular">最流行</string>
+    <string name="order_all">所有</string>
+    <string name="order_featured">精选</string>
+
+    <!-- Error/Empty -->
+    <string name="oops">哎呀! 出事了…</string>
+    <string name="empty_state_title">这没东西看…</string>
+    <string name="error_state_title">呃哦</string>
+    <string name="error_setting_wallpaper">设置墙纸时出了点问题…</string>
+
+    <!-- Settings -->
+    <string name="settings">设置</string>
+    <string name="general">常规</string>
+    <string name="clear_cache">清空缓存</string>
+    <string name="cache_size">缓存大小: %d MB</string>
+    <string name="language">语言</string>
+    <string name="theme">主题</string>
+    <string name="theme_light">明亮</string>
+    <string name="theme_dark">深沉</string>
+    <string name="theme_battery">由省电模式设定</string>
+    <string name="theme_default">系统默认</string>
+    <string name="layout">布局</string>
+    <string name="layout_default">默认</string>
+    <string name="layout_minimal">简单</string>
+    <string name="layout_grid">网格</string>
+    <string name="quality">图像质量</string>
+    <string name="quality_raw">原始</string>
+    <string name="quality_full">整图</string>
+    <string name="quality_regular">常规</string>
+    <string name="quality_small">小图</string>
+    <string name="quality_thumb">缩略图</string>
+    <string name="load_quality">载入时的图像质量</string>
+    <string name="download_quality">下载时的图像质量</string>
+    <string name="wallpaper_quality">壁纸图像质量</string>
+    <string name="long_press_to_download">长按下载</string>
+    <string name="long_press_to_download_summary">长按照片开始下载</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">自动壁纸</string>
+    <string name="auto_wallpaper_info">自动壁纸将根据设置条件使用新的随机壁纸刷新主屏幕</string>
+    <string name="auto_wallpaper_help_title">不行吗</string>
+    <string name="auto_wallpaper_help_message">尝试在手机设置中为Resplash禁用空闲状态和电池优化。\n\n有关制造商的特定说明: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">条件</string>
+    <string name="auto_wallpaper_on_wifi_title">在Wifi上</string>
+    <string name="auto_wallpaper_on_wifi_summary">设备必须连接到Wi-Fi网络</string>
+    <string name="auto_wallpaper_charging_title">充电</string>
+    <string name="auto_wallpaper_charging_summary">设备必须连接到电源</string>
+    <string name="auto_wallpaper_idle_title">闲</string>
+    <string name="auto_wallpaper_idle_summary">设备必须处于非活动状</string>
+    <string name="auto_wallpaper_interval_title">间隔</string>
+    <string name="auto_wallpaper_interval_summary">每隔换墙纸: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15分钟</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30分钟</string>
+    <string name="auto_wallpaper_interval_one_hour">1小时</string>
+    <string name="auto_wallpaper_interval_three_hours">3小时</string>
+    <string name="auto_wallpaper_interval_six_hours">6小时</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12小时</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24小时</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48小时</string>
+    <string name="auto_wallpaper_source">资源</string>
+    <string name="auto_wallpaper_source_title">Wallpaper Source</string>
+    <string name="auto_wallpaper_source_summary">Current source: %s</string>
+    <string name="auto_wallpaper_source_all">所有</string>
+    <string name="auto_wallpaper_source_featured">精选</string>
+    <string name="auto_wallpaper_source_collections">珍藏</string>
+    <string name="auto_wallpaper_source_user">User photos</string>
+    <string name="auto_wallpaper_source_search">Search terms</string>
+    <string name="auto_wallpaper_source_not_set">Not set</string>
+    <string name="auto_wallpaper_collections_summary">Select the collections to get photos from</string>
+    <string name="auto_wallpaper_user_title">User Photos</string>
+    <string name="auto_wallpaper_user_summary">Using photos from: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Enter the username of the user to get photos from:</string>
+    <string name="auto_wallpaper_search_terms_title">Search Terms</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_options_title">选项</string>
+    <string name="auto_wallpaper_center_crop_title">Coltura Centrale</string>
+    <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_select_screen_title">选择屏幕</string>
+    <string name="auto_wallpaper_select_screen_summary">Applica lo sfondo a: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">主屏幕</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">锁屏</string>
+    <string name="auto_wallpaper_select_screen_both">主屏幕和锁定屏幕</string>
+    <string name="auto_wallpaper_orientation_title">取向</string>
+    <string name="auto_wallpaper_orientation_summary">Limitare l\'orientamento dello sfondo a: %s</string>
+    <string name="auto_wallpaper_content_filter_title">内容过滤器</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Low: Guarantees that no content violating submission guidelines (like images containing nudity or violence) will be displayed</string>
+    <string name="auto_wallpaper_content_filter_high_summary">High: Filter content that may be unsuitable for younger audiences</string>
+    <string name="auto_wallpaper_content_filter_note">Note that we can’t guarantee that all potentially unsuitable content is removed</string>
+    <string name="auto_wallpaper_history_title">自动壁纸历史</string>
+    <string name="auto_wallpaper_history_summary">查看以前设置的壁纸</string>
+    <string name="auto_wallpaper_history_clear_history">清除历史记录</string>
+    <string name="auto_wallpaper_activate">启用</string>
+    <string name="auto_wallpaper_next_wallpaper">下一个壁纸</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Remove from Auto Wallpaper</string>
+    <string name="auto_wallpaper_collection_added">Collection added to Auto Wallpaper</string>
+    <string name="auto_wallpaper_collection_removed">Collection removed from Auto Wallpaper</string>
+    <string name="auto_wallpaper_selected_collections">Selected</string>
+    <string name="auto_wallpaper_no_selected_collections">Find some collections to add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_discover">发现</string>
+    <string name="auto_wallpaper_popular">最流行</string>
+    <string name="auto_wallpaper_add_collection_from_url">从URL添加收藏</string>
+    <string name="auto_wallpaper_could_not_add_collection">无法添加收藏</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">复制并粘贴收藏网址：</string>
+    <string name="auto_wallpaper_collection_url">集合网址</string>
+    <string name="auto_wallpaper_add_collection">添加收藏</string>
+    <string name="auto_wallpaper_invalid_url">无效的网址</string>
+
+    <!-- Photo Detail -->
+    <string name="views">访问</string>
+    <string name="downloads">下载</string>
+    <string name="likes">赞</string>
+    <string name="camera">相机</string>
+    <string name="aperture">光圈</string>
+    <string name="focal_length">焦距</string>
+    <string name="dimensions">尺寸</string>
+    <string name="shutter_speed">曝光时间</string>
+    <string name="iso">ISO</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">添加到收藏</string>
+    <string name="create_new_collection">创建一个新的集合</string>
+    <string name="make_collection_private">使收藏私密</string>
+    <string name="collection_name_hint">名称</string>
+    <string name="collection_description_hint">描述 (可选的)</string>
+    <string name="collection_name_required">名称是必需的</string>
+    <string name="edit_collection">编辑集合</string>
+    <string name="curated_by_template">By %s</string>
+
+    <!-- User -->
+    <string name="open_portfolio_link">打开投资组合链接</string>
+    <string name="blank_username_error">用户名不能空白</string>
+    <string name="invalid_username_error">Username must have at least one letter and contain only letters, digits, or underscores (no spaces)</string>
+    <string name="username_taken_error">Username already taken</string>
+    <string name="blank_first_name_error">First name can\'t be blank</string>
+    <string name="blank_email_error">Email can\'t be blank</string>
+    <string name="invalid_email_error">Email is not valid</string>
+    <string name="username_hint">用户名</string>
+    <string name="username_helper_text">（仅字母，数字和下划线）</string>
+    <string name="first_name_hint">名</string>
+    <string name="last_name_hint">姓</string>
+    <string name="email_hint">邮箱地址</string>
+    <string name="portfolio_hint">个人主页</string>
+    <string name="instagram_username_hint">Instagram 用户名</string>
+    <string name="location_hint">地址</string>
+    <string name="bio_hint">简介</string>
+    <string name="account_updated">帐户已更新！</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">尝试寻找东西</string>
+    <string name="filter">过滤</string>
+    <string name="filter_relevance">关联</string>
+    <string name="filter_latest">最近</string>
+    <string name="content_filter">内容过滤器</string>
+    <string name="filter_low">最低要求</string>
+    <string name="filter_high">最大</string>
+    <string name="orientation">取向</string>
+    <string name="filter_any">任何</string>
+    <string name="filter_portrait">垂直</string>
+    <string name="filter_landscape">卧式</string>
+    <string name="filter_square">广场</string>
+    <string name="filter_color">颜色</string>
+    <string name="filter_color_any">任何</string>
+    <string name="filter_color_black_white">黑和白</string>
+    <string name="filter_color_black">黑色</string>
+    <string name="filter_color_white">白色</string>
+    <string name="filter_color_yellow">黄色</string>
+    <string name="filter_color_orange">橙子</string>
+    <string name="filter_color_red">红色</string>
+    <string name="filter_color_purple">紫色</string>
+    <string name="filter_color_magenta">品红</string>
+    <string name="filter_color_green">绿色</string>
+    <string name="filter_color_teal">蓝绿色</string>
+    <string name="filter_color_blue">蓝色</string>
+
+    <!-- Login -->
+    <string name="login">登入</string>
+    <string name="create_an_account">创建一个帐户</string>
+    <string name="login_banner_title">Creation starts here</string>
+    <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
+    <string name="login_success">登陆成功</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">升级到Resplash Pro</string>
+    <string name="pro_feature_title">What\'s in it for you?</string>
+    <string name="pro_feature_one">Customize Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
+    <string name="pro_feature_two">Future exclusive features</string>
+    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
+    <string name="pro_feature_three">支持开发</string>
+    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_required">You need Resplash Pro to do that!</string>
+
+    <!-- Donation -->
+    <string name="support_development">支持开发</string>
+    <string name="donate_banner_text">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
+    <string name="you_are_welcome">别客气</string>
+
+    <!-- About -->
+    <string name="about">关于</string>
+    <string name="licenses">执照</string>
+    <string name="unsplash_summary">The internet’s source of freely-usable images</string>
+    <string name="donate_summary">喜欢 Resplash? 不妨考虑打个赏钱，支持一下开发工作吧。</string>
+    <string name="report_bug_title">出错报告</string>
+    <string name="report_bug_summary">出错报告或者提议新功能</string>
+    <string name="rate_app_title">评价</string>
+    <string name="rate_app_summary">喜欢 Resplash 就在 Play Store 给个好评吧！</string>
+    <string name="github_summary">Resplash is open-source, check it out on GitHub</string>
+    <string name="developer_title">作者</string>
+    <string name="privacy_policy">隐私政策</string>
+</resources>

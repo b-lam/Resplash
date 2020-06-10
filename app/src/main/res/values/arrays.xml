@@ -3,6 +3,7 @@
 
     <!--Language-->
     <string-array name="language_options">
+        <item>@string/language_default</item>
         <item>@string/language_english</item>
         <item>@string/language_arabic</item>
         <item>@string/language_chinese</item>
@@ -18,6 +19,7 @@
         <item>@string/language_turkish</item>
     </string-array>
     <string-array name="language_values">
+        <item>default</item>
         <item>en</item>
         <item>ar</item>
         <item>zh</item>
@@ -32,7 +34,7 @@
         <item>th</item>
         <item>tr</item>
     </string-array>
-    <string name="default_language_value" translatable="false">en</string>
+    <string name="default_language_value" translatable="false">default</string>
 
     <!--Theme-->
     <string-array name="theme_options">
