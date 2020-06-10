@@ -11,11 +11,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.ui.login.LoginActivity
 import com.b_lam.resplash.ui.main.MainActivity
 import com.b_lam.resplash.util.applyLanguage
 import com.b_lam.resplash.util.getThemeAttrColor
-import com.b_lam.resplash.util.livedata.observeEvent
 import org.koin.android.ext.android.inject
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -29,10 +27,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
         setRecentAppsHeaderColor()
         applyLanguage(sharedPreferencesRepository.locale)
-
-        viewModel?.authRequiredLiveData?.observeEvent(this) {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

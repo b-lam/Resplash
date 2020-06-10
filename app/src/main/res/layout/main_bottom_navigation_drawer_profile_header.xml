@@ -31,6 +31,7 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:text="@string/app_name"
+        android:textAlignment="viewStart"
         android:singleLine="true"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/header_image_view"
@@ -47,11 +48,12 @@
         android:text="@string/header_subtitle"
         android:singleLine="true"
         android:drawablePadding="@dimen/keyline_5"
+        app:layout_constrainedWidth="true"
         android:drawableEnd="@drawable/ic_expand_more_18dp"
         android:gravity="center_vertical"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/header_title"
-        app:layout_constraintEnd_toEndOf="@id/header_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_title"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

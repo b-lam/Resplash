@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toStartOf="@id/collection_private_icon"
         app:layout_constraintBottom_toTopOf="@id/collection_count_text_view"
         style="@style/TextAppearance.Resplash.Headline6"
-        tools:text="Landscapesfwefwefwefwefwefwefwefwfwefwefwef" />
+        tools:text="Landscapes" />
 
     <ImageView
         android:id="@+id/collection_private_icon"
@@ -96,6 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/keyline_7"
         android:textColor="@color/white"
+        android:textAlignment="viewStart"
         android:translationZ="1dp"
         app:layout_constraintBottom_toBottomOf="@id/collection_card_view"
         style="@style/TextAppearance.Resplash.Subtitle2"

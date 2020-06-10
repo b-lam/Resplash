@@ -1,13 +1,8 @@
 package com.b_lam.resplash.util
 
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.annotation.IdRes
-import androidx.annotation.IntRange
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -68,14 +63,3 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
         action()
     }
 }
-
-fun AppCompatActivity.hasPermission(vararg permissions: String): Boolean {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        permissions.all { singlePermission ->
-            ContextCompat.checkSelfPermission(this, singlePermission) == PackageManager.PERMISSION_GRANTED
-        }
-    else true
-}
-
-fun AppCompatActivity.requestPermission(vararg permissions: String, @IntRange(from = 0) requestCode: Int) =
-    ActivityCompat.requestPermissions(this, permissions, requestCode)

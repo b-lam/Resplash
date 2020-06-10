@@ -24,5 +24,5 @@
         android:layout_gravity="center"
         android:visibility="gone"
         app:lottie_fileName="check.json"
-        app:lottie_speed="1.25" />
+        app:lottie_speed="1.5" />
 </com.google.android.material.card.MaterialCardView>

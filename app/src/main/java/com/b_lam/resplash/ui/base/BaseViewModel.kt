@@ -1,12 +1,5 @@
 package com.b_lam.resplash.ui.base
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.b_lam.resplash.util.livedata.Event
 
-abstract class BaseViewModel : ViewModel() {
-
-    private val _authRequiredLiveData = MutableLiveData<Event<Int>>()
-    val authRequiredLiveData: LiveData<Event<Int>> = _authRequiredLiveData
-}
+abstract class BaseViewModel : ViewModel()

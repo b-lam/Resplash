@@ -123,7 +123,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics-ktx:17.4.2'
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.4.3'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:19.0.7'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
