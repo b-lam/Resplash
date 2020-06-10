@@ -236,7 +236,7 @@
     <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
     <string name="go_pro">Go Pro</string>
     <string name="restore_purchase">Restore Purchase</string>
-    <string name="upgrade_required">You need Resplash Pro to do that!</string>
+    <string name="upgrade_required">คุณต้องมี Resplash Pro เพื่อทำเช่นนั้น!</string>
 
     <!-- Donation -->
     <string name="support_development">สนับสนุนนักพัฒนา</string>
