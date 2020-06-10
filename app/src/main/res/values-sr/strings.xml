@@ -29,9 +29,9 @@
 
     <!-- Common Plurals -->
     <plurals name="photos">
-        <item quantity="one">%d Photo</item>
-        <item quantity="few">%d Photos</item>
-        <item quantity="other">%d Photos</item>
+        <item quantity="one">%d фотографија</item>
+        <item quantity="few">%d Фотографије</item>
+        <item quantity="other">%d Фотографије</item>
     </plurals>
 
     <!-- Main -->

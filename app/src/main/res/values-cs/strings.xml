@@ -29,9 +29,9 @@
 
     <!-- Common Plurals -->
     <plurals name="photos">
-        <item quantity="one">%d Photo</item>
-        <item quantity="few">%d Photos</item>
-        <item quantity="other">%d Photos</item>
+        <item quantity="one">%d Fotka</item>
+        <item quantity="few">%d Fotek</item>
+        <item quantity="other">%d Fotek</item>
     </plurals>
 
     <!-- Main -->

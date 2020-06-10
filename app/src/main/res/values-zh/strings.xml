@@ -29,7 +29,7 @@
 
     <!-- Common Plurals -->
     <plurals name="photos">
-        <item quantity="other">%d Photos</item>
+        <item quantity="other">%d 照片</item>
     </plurals>
 
     <!-- Main -->

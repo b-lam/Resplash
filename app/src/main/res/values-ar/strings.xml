@@ -29,11 +29,11 @@
 
     <!-- Common Plurals -->
     <plurals name="photos">
-        <item quantity="zero">%d Photo</item>
-        <item quantity="one">%d Photo</item>
-        <item quantity="two">%d Photo</item>
-        <item quantity="few">%d Photo</item>
-        <item quantity="many">%d Photos</item>
+        <item quantity="zero">%d صور</item>
+        <item quantity="one">%d صور</item>
+        <item quantity="two">%d صور</item>
+        <item quantity="few">%d صور</item>
+        <item quantity="many">%d صور</item>
     </plurals>
 
     <!-- Main -->
