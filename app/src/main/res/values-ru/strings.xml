@@ -105,46 +105,46 @@
     <string name="auto_wallpaper_interval_twenty_four_hours">24 часа</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 часов</string>
     <string name="auto_wallpaper_source">Источник</string>
-    <string name="auto_wallpaper_source_title">Wallpaper Source</string>
-    <string name="auto_wallpaper_source_summary">Current source: %s</string>
+    <string name="auto_wallpaper_source_title">Источник обоев</string>
+    <string name="auto_wallpaper_source_summary">Источник тока: %s</string>
     <string name="auto_wallpaper_source_all">Все</string>
     <string name="auto_wallpaper_source_featured">Рекомендуемые</string>
     <string name="auto_wallpaper_source_collections">Коллекции</string>
-    <string name="auto_wallpaper_source_user">User photos</string>
-    <string name="auto_wallpaper_source_search">Search terms</string>
-    <string name="auto_wallpaper_source_not_set">Not set</string>
-    <string name="auto_wallpaper_collections_summary">Select the collections to get photos from</string>
-    <string name="auto_wallpaper_user_title">User Photos</string>
-    <string name="auto_wallpaper_user_summary">Using photos from: \@%s</string>
-    <string name="auto_wallpaper_user_dialog_message">Enter the username of the user to get photos from:</string>
-    <string name="auto_wallpaper_search_terms_title">Search Terms</string>
-    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
-    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_source_user">Фотографии пользователя</string>
+    <string name="auto_wallpaper_source_search">Условия поиска</string>
+    <string name="auto_wallpaper_source_not_set">Не задано</string>
+    <string name="auto_wallpaper_collections_summary">Выберите коллекции, чтобы получить фотографии из</string>
+    <string name="auto_wallpaper_user_title">Фотографии пользователя</string>
+    <string name="auto_wallpaper_user_summary">Использование фотографий из: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Введите имя пользователя для получения фотографий:</string>
+    <string name="auto_wallpaper_search_terms_title">Условия поиска</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Получите фотографии, соответствующие следующим условиям поиска:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Разделите несколько терминов запятыми)</string>
     <string name="auto_wallpaper_options_title">Опции</string>
-    <string name="auto_wallpaper_center_crop_title">Coltura Centrale</string>
-    <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_center_crop_title">Центр урожая</string>
+    <string name="auto_wallpaper_center_crop_summary">Обрезать все обои по центру</string>
     <string name="auto_wallpaper_select_screen_title">Выберите экран</string>
-    <string name="auto_wallpaper_select_screen_summary">Applica lo sfondo a: %s</string>
+    <string name="auto_wallpaper_select_screen_summary">Применить обои к: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Домашний экран</string>
     <string name="auto_wallpaper_select_screen_lock_screen">Экран блокировки</string>
     <string name="auto_wallpaper_select_screen_both">Главный экран и экран блокировки</string>
     <string name="auto_wallpaper_orientation_title">Oриентация</string>
-    <string name="auto_wallpaper_orientation_summary">Limitare l\'orientamento dello sfondo a: %s</string>
+    <string name="auto_wallpaper_orientation_summary">Ограничьте ориентацию обоев: %s</string>
     <string name="auto_wallpaper_content_filter_title">Контентный фильтр</string>
-    <string name="auto_wallpaper_content_filter_low_summary">Low: Guarantees that no content violating submission guidelines (like images containing nudity or violence) will be displayed</string>
-    <string name="auto_wallpaper_content_filter_high_summary">High: Filter content that may be unsuitable for younger audiences</string>
-    <string name="auto_wallpaper_content_filter_note">Note that we can’t guarantee that all potentially unsuitable content is removed</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Минимум: гарантирует, что не будет отображаться никакой контент, нарушающий правила представления (например, изображения, содержащие обнаженное тело или насилие)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Максимум: отфильтруйте контент, который может быть неподходящим для младшей аудитории.</string>
+    <string name="auto_wallpaper_content_filter_note">Обратите внимание, что мы не можем гарантировать, что весь потенциально неподходящий контент будет удален</string>
     <string name="auto_wallpaper_history_title">Автоматическая история обоев</string>
     <string name="auto_wallpaper_history_summary">Посмотреть ранее установленные обои</string>
     <string name="auto_wallpaper_history_clear_history">Чистая история</string>
     <string name="auto_wallpaper_activate">Aктивировать</string>
     <string name="auto_wallpaper_next_wallpaper">Следующие обои</string>
-    <string name="auto_wallpaper_add_to_auto_wallpaper">Add to Auto Wallpaper</string>
-    <string name="auto_wallpaper_remove_from_auto_wallpaper">Remove from Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_added">Collection added to Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_removed">Collection removed from Auto Wallpaper</string>
-    <string name="auto_wallpaper_selected_collections">Selected</string>
-    <string name="auto_wallpaper_no_selected_collections">Find some collections to add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Добавить в Автоматические обои</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Удалить из Автоматические обои</string>
+    <string name="auto_wallpaper_collection_added">Коллекция добавлена в Автоматические обои</string>
+    <string name="auto_wallpaper_collection_removed">Коллекция удалена из Автоматические обои</string>
+    <string name="auto_wallpaper_selected_collections">Bыбранный</string>
+    <string name="auto_wallpaper_no_selected_collections">Найдите несколько коллекций для добавления</string>
     <string name="auto_wallpaper_discover">Обнаружить</string>
     <string name="auto_wallpaper_popular">Популярные</string>
     <string name="auto_wallpaper_add_collection_from_url">Добавить коллекцию из URL</string>
@@ -163,7 +163,6 @@
     <string name="focal_length">Фокусное расстояние</string>
     <string name="dimensions">Разрешение</string>
     <string name="shutter_speed">Экспозиция</string>
-    <string name="iso">ISO</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Добавить в коллекцию</string>
@@ -178,11 +177,11 @@
     <!-- User -->
     <string name="open_portfolio_link">Ссылка на открытый портфель</string>
     <string name="blank_username_error">Имя пользователя не может быть пустым</string>
-    <string name="invalid_username_error">Username must have at least one letter and contain only letters, digits, or underscores (no spaces)</string>
-    <string name="username_taken_error">Username already taken</string>
-    <string name="blank_first_name_error">First name can\'t be blank</string>
-    <string name="blank_email_error">Email can\'t be blank</string>
-    <string name="invalid_email_error">Email is not valid</string>
+    <string name="invalid_username_error">Имя пользователя должно содержать хотя бы одну букву и содержать только буквы, цифры или символы подчеркивания (без пробелов)</string>
+    <string name="username_taken_error">Логин уже занят</string>
+    <string name="blank_first_name_error">Имя не может быть пустым</string>
+    <string name="blank_email_error">Email не может быть пустым</string>
+    <string name="invalid_email_error">Email не является допустимым</string>
     <string name="username_hint">Имя пользователя</string>
     <string name="username_helper_text">(Только буквы, цифры и подчеркивания)</string>
     <string name="first_name_hint">Имя</string>
@@ -224,9 +223,10 @@
     <!-- Login -->
     <string name="login">Авторизоваться</string>
     <string name="create_an_account">Завести аккаунт</string>
-    <string name="login_banner_title">Creation starts here</string>
-    <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
+    <string name="login_banner_title">Создание начинается здесь</string>
+    <string name="login_banner_subtitle">Доступ к бесплатным фотографиям с высоким разрешением, которые вы не найдете больше нигде</string>
     <string name="login_success">Вход выполнен успешно</string>
+    <string name="need_to_log_in">Вы должны войти, чтобы сделать это</string>
 
     <!-- Upgrade -->
     <string name="upgrade_to_resplash_pro">Обновить до Resplash Pro</string>
@@ -235,7 +235,7 @@
     <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
     <string name="pro_feature_two">Future exclusive features</string>
     <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
-    <string name="pro_feature_three">Поддержать разработку</string>
+    <string name="pro_feature_three">Support development</string>
     <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
     <string name="go_pro">Go Pro</string>
     <string name="restore_purchase">Restore Purchase</string>
@@ -243,19 +243,18 @@
 
     <!-- Donation -->
     <string name="support_development">Поддержать разработку</string>
-    <string name="donate_banner_text">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
     <string name="you_are_welcome">Пожалуйста</string>
 
     <!-- About -->
     <string name="about">О приложении</string>
     <string name="licenses">Лицензии</string>
-    <string name="unsplash_summary">The internet’s source of freely-usable images</string>
+    <string name="unsplash_summary">Интернет-источник свободно используемых изображений</string>
     <string name="donate_summary">Если вам действительно нравится Resplash, подумайте о поддержке его развития, отправив мне несколько сотен рублей</string>
     <string name="report_bug_title">Сообщить об ошибках</string>
     <string name="report_bug_summary">Сообщить об ошибках или предложить новые функции</string>
     <string name="rate_app_title">Оценить</string>
     <string name="rate_app_summary">Если вам нравится Resplash, оцените его в Play Маркете</string>
-    <string name="github_summary">Resplash is open-source, check it out on GitHub</string>
+    <string name="github_summary">Resplash с открытым исходным кодом, проверьте это на GitHub</string>
     <string name="developer_title">Автор</string>
     <string name="privacy_policy">политика конфиденциальности</string>
 </resources>

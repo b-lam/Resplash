@@ -78,7 +78,7 @@
     <string name="download_quality">Download Qualität</string>
     <string name="wallpaper_quality">Wallpaper Qualität</string>
     <string name="long_press_to_download">Zum Drücken lange drücken</string>
-    <string name="long_press_to_download_summary">Drücken sie lange auf ein foto, um den download zu starten</string>
+    <string name="long_press_to_download_summary">Drücken Sie lange auf ein Foto, um den Download zu starten</string>
 
     <!-- Auto Wallpaper -->
     <string name="auto_wallpaper_title">Auto Wallpaper</string>
@@ -103,46 +103,46 @@
     <string name="auto_wallpaper_interval_twenty_four_hours">24 Stunden</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 Stunden</string>
     <string name="auto_wallpaper_source">Quelle</string>
-    <string name="auto_wallpaper_source_title">Wallpaper Source</string>
-    <string name="auto_wallpaper_source_summary">Current source: %s</string>
+    <string name="auto_wallpaper_source_title">Hintergrundbildquelle</string>
+    <string name="auto_wallpaper_source_summary">Aktuelle Quelle: %s</string>
     <string name="auto_wallpaper_source_all">Alle</string>
     <string name="auto_wallpaper_source_featured">Vorgestellt</string>
     <string name="auto_wallpaper_source_collections">Kollektionen</string>
-    <string name="auto_wallpaper_source_user">User photos</string>
-    <string name="auto_wallpaper_source_search">Search terms</string>
-    <string name="auto_wallpaper_source_not_set">Not set</string>
-    <string name="auto_wallpaper_collections_summary">Select the collections to get photos from</string>
-    <string name="auto_wallpaper_user_title">User Photos</string>
-    <string name="auto_wallpaper_user_summary">Using photos from: \@%s</string>
-    <string name="auto_wallpaper_user_dialog_message">Enter the username of the user to get photos from:</string>
-    <string name="auto_wallpaper_search_terms_title">Search Terms</string>
-    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
-    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_source_user">Benutzerfotos</string>
+    <string name="auto_wallpaper_source_search">Suchbegriffe</string>
+    <string name="auto_wallpaper_source_not_set">Nicht eingestellt</string>
+    <string name="auto_wallpaper_collections_summary">Wählen Sie die Sammlungen aus, aus denen Sie Fotos erhalten möchten</string>
+    <string name="auto_wallpaper_user_title">Benutzerfotos</string>
+    <string name="auto_wallpaper_user_summary">Verwenden von Fotos aus: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Geben Sie den Benutzernamen des Benutzers ein, um Fotos zu erhalten von:</string>
+    <string name="auto_wallpaper_search_terms_title">Suchbegriffe</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Erhalten Sie Fotos, die den folgenden Suchbegriffen entsprechen:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Mehrere Begriffe durch Kommas trennen)</string>
     <string name="auto_wallpaper_options_title">Optionen</string>
-    <string name="auto_wallpaper_center_crop_title">Coltura Centrale</string>
-    <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_center_crop_title">Mittelernte</string>
+    <string name="auto_wallpaper_center_crop_summary">Beschneiden Sie alle zu zentrierenden Hintergrundbilder</string>
     <string name="auto_wallpaper_select_screen_title">Bildschirm wählen</string>
-    <string name="auto_wallpaper_select_screen_summary">Applica lo sfondo a: %s</string>
+    <string name="auto_wallpaper_select_screen_summary">Tapete auftragen auf: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Hauptbildschirm</string>
     <string name="auto_wallpaper_select_screen_lock_screen">Sperrbildschirm</string>
     <string name="auto_wallpaper_select_screen_both">Beide</string>
     <string name="auto_wallpaper_orientation_title">Orientierung</string>
-    <string name="auto_wallpaper_orientation_summary">Limitare l\'orientamento dello sfondo a: %s</string>
+    <string name="auto_wallpaper_orientation_summary">Begrenzen Sie die Tapetenausrichtung auf: %s</string>
     <string name="auto_wallpaper_content_filter_title">Inhaltsfilter</string>
-    <string name="auto_wallpaper_content_filter_low_summary">Low: Guarantees that no content violating submission guidelines (like images containing nudity or violence) will be displayed</string>
-    <string name="auto_wallpaper_content_filter_high_summary">High: Filter content that may be unsuitable for younger audiences</string>
-    <string name="auto_wallpaper_content_filter_note">Note that we can’t guarantee that all potentially unsuitable content is removed</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Minimum: Garantiert, dass keine Inhalte angezeigt werden, die gegen die Richtlinien für die Einreichung verstoßen (z. B. Bilder, die Nacktheit oder Gewalt enthalten)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Maximum: Filtern Sie Inhalte, die für jüngere Zielgruppen möglicherweise nicht geeignet sind</string>
+    <string name="auto_wallpaper_content_filter_note">Beachten Sie, dass wir nicht garantieren können, dass alle möglicherweise ungeeigneten Inhalte entfernt werden</string>
     <string name="auto_wallpaper_history_title">Auto Wallpaper Verlauf</string>
     <string name="auto_wallpaper_history_summary">Zeige vorherig gesetzte Wallpaper</string>
     <string name="auto_wallpaper_history_clear_history">Klare Geschichte</string>
     <string name="auto_wallpaper_activate">Aktivieren</string>
     <string name="auto_wallpaper_next_wallpaper">Nächstes Wallpaper</string>
-    <string name="auto_wallpaper_add_to_auto_wallpaper">Add to Auto Wallpaper</string>
-    <string name="auto_wallpaper_remove_from_auto_wallpaper">Remove from Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_added">Collection added to Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_removed">Collection removed from Auto Wallpaper</string>
-    <string name="auto_wallpaper_selected_collections">Selected</string>
-    <string name="auto_wallpaper_no_selected_collections">Find some collections to add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Zu Auto Wallpaper hinzufügen</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Aus Auto Wallpaper entfernen</string>
+    <string name="auto_wallpaper_collection_added">Sammlung zu Auto Wallpaper hinzugefügt</string>
+    <string name="auto_wallpaper_collection_removed">Sammlung aus Auto Wallpaper entfernt</string>
+    <string name="auto_wallpaper_selected_collections">Ausgewählt</string>
+    <string name="auto_wallpaper_no_selected_collections">Hier finden Sie einige Sammlungen zum Hinzufügen</string>
     <string name="auto_wallpaper_discover">Entdecken</string>
     <string name="auto_wallpaper_popular">Populär</string>
     <string name="auto_wallpaper_add_collection_from_url">Sammlung von URL hinzufügen</string>
@@ -161,7 +161,6 @@
     <string name="focal_length">Brennweite</string>
     <string name="dimensions">Größe</string>
     <string name="shutter_speed">Belichtungszeit</string>
-    <string name="iso">ISO</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Zu Kollektion hinzufügen</string>
@@ -176,11 +175,11 @@
     <!-- User -->
     <string name="open_portfolio_link">Portfolio-Link öffnen</string>
     <string name="blank_username_error">Benutzername darf nicht leer sein</string>
-    <string name="invalid_username_error">Username must have at least one letter and contain only letters, digits, or underscores (no spaces)</string>
-    <string name="username_taken_error">Username already taken</string>
-    <string name="blank_first_name_error">First name can\'t be blank</string>
-    <string name="blank_email_error">Email can\'t be blank</string>
-    <string name="invalid_email_error">Email is not valid</string>
+    <string name="invalid_username_error">Der Benutzername muss mindestens einen Buchstaben enthalten und darf nur Buchstaben, Ziffern oder Unterstriche enthalten (keine Leerzeichen).</string>
+    <string name="username_taken_error">Benutzername bereits vergeben</string>
+    <string name="blank_first_name_error">Der Vorname darf nicht leer sein</string>
+    <string name="blank_email_error">Email darf nicht leer sein</string>
+    <string name="invalid_email_error">Email ist ungültig</string>
     <string name="username_hint">Benutzername</string>
     <string name="username_helper_text">(Nur Buchstaben, Zahlen und Unterstriche)</string>
     <string name="first_name_hint">Vorname</string>
@@ -222,9 +221,10 @@
     <!-- Login -->
     <string name="login">Einloggen</string>
     <string name="create_an_account">Ein Konto erstellen</string>
-    <string name="login_banner_title">Creation starts here</string>
-    <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
+    <string name="login_banner_title">Die Schöpfung beginnt hier</string>
+    <string name="login_banner_subtitle">Greifen Sie auf kostenlose hochauflösende Fotos zu, die Sie sonst nirgendwo finden</string>
     <string name="login_success">Anmeldung erfolgreich</string>
+    <string name="need_to_log_in">Du musst eingeloggt sein um das zu tun</string>
 
     <!-- Upgrade -->
     <string name="upgrade_to_resplash_pro">Upgrade auf Resplash Pro</string>
@@ -233,7 +233,7 @@
     <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
     <string name="pro_feature_two">Future exclusive features</string>
     <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
-    <string name="pro_feature_three">Entwicklung unterstützen</string>
+    <string name="pro_feature_three">Support development</string>
     <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
     <string name="go_pro">Go Pro</string>
     <string name="restore_purchase">Restore Purchase</string>
@@ -241,19 +241,18 @@
 
     <!-- Donation -->
     <string name="support_development">Entwicklung unterstützen</string>
-    <string name="donate_banner_text">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
     <string name="you_are_welcome">Bitte</string>
 
     <!-- About -->
     <string name="about">Über</string>
     <string name="licenses">Lizenzen</string>
-    <string name="unsplash_summary">The internet’s source of freely-usable images</string>
+    <string name="unsplash_summary">Die Quelle frei verwendbarer Bilder im Internet</string>
     <string name="donate_summary">Dir gefällt Resplash wirklich? Dann überlege ob du die Entwicklung mit ein paar Euro unterstützen möchtest</string>
     <string name="report_bug_title">Fehler melden</string>
     <string name="report_bug_summary">Fehler melden oder neue Features anfragen</string>
     <string name="rate_app_title">Bewerten</string>
     <string name="rate_app_summary">Dir gefällt Resplash? Dann bewerte die App im Play Store</string>
-    <string name="github_summary">Resplash is open-source, check it out on GitHub</string>
+    <string name="github_summary">Resplash ist Open Source, schau es dir auf GitHub an</string>
     <string name="developer_title">Entwickler</string>
     <string name="privacy_policy">Datenschutzerklärung</string>
 </resources>

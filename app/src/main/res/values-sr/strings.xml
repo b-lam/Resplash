@@ -104,46 +104,46 @@
     <string name="auto_wallpaper_interval_twenty_four_hours">24 сати</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 сати</string>
     <string name="auto_wallpaper_source">Извор</string>
-    <string name="auto_wallpaper_source_title">Wallpaper Source</string>
-    <string name="auto_wallpaper_source_summary">Current source: %s</string>
+    <string name="auto_wallpaper_source_title">Извор позадине</string>
+    <string name="auto_wallpaper_source_summary">Тренутни извор: %s</string>
     <string name="auto_wallpaper_source_all">Све</string>
     <string name="auto_wallpaper_source_featured">Одабране</string>
     <string name="auto_wallpaper_source_collections">Колекције</string>
-    <string name="auto_wallpaper_source_user">User photos</string>
-    <string name="auto_wallpaper_source_search">Search terms</string>
-    <string name="auto_wallpaper_source_not_set">Not set</string>
-    <string name="auto_wallpaper_collections_summary">Select the collections to get photos from</string>
-    <string name="auto_wallpaper_user_title">User Photos</string>
-    <string name="auto_wallpaper_user_summary">Using photos from: \@%s</string>
-    <string name="auto_wallpaper_user_dialog_message">Enter the username of the user to get photos from:</string>
-    <string name="auto_wallpaper_search_terms_title">Search Terms</string>
-    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
-    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_source_user">Фотографије корисника</string>
+    <string name="auto_wallpaper_source_search">Појмови за претрагу</string>
+    <string name="auto_wallpaper_source_not_set">Није подешено</string>
+    <string name="auto_wallpaper_collections_summary">Изаберите колекције за добијање фотографија</string>
+    <string name="auto_wallpaper_user_title">Фотографије корисника</string>
+    <string name="auto_wallpaper_user_summary">Коришћење фотографија из: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Унесите корисничко име корисника за добијање фотографија са:</string>
+    <string name="auto_wallpaper_search_terms_title">Појмови за претрагу</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Набавите фотографије које одговарају следећим условима за претрагу:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Одвојите више израза зарезима)</string>
     <string name="auto_wallpaper_options_title">Опције</string>
-    <string name="auto_wallpaper_center_crop_title">Coltura Centrale</string>
-    <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_center_crop_title">Средишњи усев</string>
+    <string name="auto_wallpaper_center_crop_summary">Обрежите све тапете да бисте их центрирали</string>
     <string name="auto_wallpaper_select_screen_title">Изаберите Екран</string>
-    <string name="auto_wallpaper_select_screen_summary">Applica lo sfondo a: %s</string>
+    <string name="auto_wallpaper_select_screen_summary">Примените позадину на: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Почетни екран</string>
     <string name="auto_wallpaper_select_screen_lock_screen">Закључавање екрана</string>
     <string name="auto_wallpaper_select_screen_both">Почетни екран и закључани екран</string>
     <string name="auto_wallpaper_orientation_title">Оријентација</string>
-    <string name="auto_wallpaper_orientation_summary">Limitare l\'orientamento dello sfondo a: %s</string>
+    <string name="auto_wallpaper_orientation_summary">Ограничите оријентацију позадине на: %s</string>
     <string name="auto_wallpaper_content_filter_title">Филтер за садржај</string>
-    <string name="auto_wallpaper_content_filter_low_summary">Low: Guarantees that no content violating submission guidelines (like images containing nudity or violence) will be displayed</string>
-    <string name="auto_wallpaper_content_filter_high_summary">High: Filter content that may be unsuitable for younger audiences</string>
-    <string name="auto_wallpaper_content_filter_note">Note that we can’t guarantee that all potentially unsuitable content is removed</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Минимум: Гарантује да неће бити приказан садржај који крши смернице за пријављивање (попут слика које садрже голотињу или насиље)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Максимално: Филтрирајте садржај који можда није погодан за млађу публику</string>
+    <string name="auto_wallpaper_content_filter_note">Имајте на уму да не можемо гарантовати уклањање свих потенцијално неприкладних садржаја</string>
     <string name="auto_wallpaper_history_title">Аутоматска историја позадина</string>
     <string name="auto_wallpaper_history_summary">Прикажи претходно постављене позадине</string>
     <string name="auto_wallpaper_history_clear_history">Очисти историју</string>
     <string name="auto_wallpaper_activate">Активирати</string>
     <string name="auto_wallpaper_next_wallpaper">Следећа позадина</string>
-    <string name="auto_wallpaper_add_to_auto_wallpaper">Add to Auto Wallpaper</string>
-    <string name="auto_wallpaper_remove_from_auto_wallpaper">Remove from Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_added">Collection added to Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_removed">Collection removed from Auto Wallpaper</string>
-    <string name="auto_wallpaper_selected_collections">Selected</string>
-    <string name="auto_wallpaper_no_selected_collections">Find some collections to add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Додај у Аутоматиц Валлпапер</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Уклони из Аутоматиц Валлпапер-а</string>
+    <string name="auto_wallpaper_collection_added">Колекција је додата у Аутоматиц Валлпапер</string>
+    <string name="auto_wallpaper_collection_removed">Колекција је уклоњена са Аутоматиц Валлпапер-а</string>
+    <string name="auto_wallpaper_selected_collections">Изабрано</string>
+    <string name="auto_wallpaper_no_selected_collections">Пронађите неке колекције за додавање</string>
     <string name="auto_wallpaper_discover">Откријте</string>
     <string name="auto_wallpaper_popular">Популарне</string>
     <string name="auto_wallpaper_add_collection_from_url">Додајте колекцију из URL-а</string>
@@ -162,7 +162,6 @@
     <string name="focal_length">Фокусна дужина</string>
     <string name="dimensions">Димензије</string>
     <string name="shutter_speed">Експозиција</string>
-    <string name="iso">ISO</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Додај у збирку</string>
@@ -177,11 +176,11 @@
     <!-- User -->
     <string name="open_portfolio_link">Отвори везу за портфељ</string>
     <string name="blank_username_error">Корисничко име не мже бити празно</string>
-    <string name="invalid_username_error">Username must have at least one letter and contain only letters, digits, or underscores (no spaces)</string>
-    <string name="username_taken_error">Username already taken</string>
-    <string name="blank_first_name_error">First name can\'t be blank</string>
-    <string name="blank_email_error">Email can\'t be blank</string>
-    <string name="invalid_email_error">Email is not valid</string>
+    <string name="invalid_username_error">Корисничко име мора имати најмање једно слово и садржи само слова, цифре или подвлаке (без размака)</string>
+    <string name="username_taken_error">Корисничко име је већ узето</string>
+    <string name="blank_first_name_error">Поље за име не може бити празно</string>
+    <string name="blank_email_error">Поља е-поште не може бити празна</string>
+    <string name="invalid_email_error">Е-пошта није важећа</string>
     <string name="username_hint">Корисничко име</string>
     <string name="username_helper_text">(Само слова, бројеви и подвлаке)</string>
     <string name="first_name_hint">Имеe</string>
@@ -223,9 +222,10 @@
     <!-- Login -->
     <string name="login">Улогуј се</string>
     <string name="create_an_account">Направи налог</string>
-    <string name="login_banner_title">Creation starts here</string>
-    <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
+    <string name="login_banner_title">Стварање почиње овде</string>
+    <string name="login_banner_subtitle">Приступите бесплатним фотографијама високе резолуције које не можете наћи нигде другде</string>
     <string name="login_success">Пријављивање успешно</string>
+    <string name="need_to_log_in">Морате се пријавити да бисте то урадили</string>
 
     <!-- Upgrade -->
     <string name="upgrade_to_resplash_pro">Надоградите на Resplash Pro</string>
@@ -234,7 +234,7 @@
     <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
     <string name="pro_feature_two">Future exclusive features</string>
     <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
-    <string name="pro_feature_three">Подржите програмера</string>
+    <string name="pro_feature_three">Support development</string>
     <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
     <string name="go_pro">Go Pro</string>
     <string name="restore_purchase">Restore Purchase</string>
@@ -242,19 +242,18 @@
 
     <!-- Donation -->
     <string name="support_development">Подржите програмера</string>
-    <string name="donate_banner_text">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
     <string name="you_are_welcome">Нема на чему</string>
 
     <!-- About -->
     <string name="about">О нама</string>
     <string name="licenses">Лиценце</string>
-    <string name="unsplash_summary">The internet’s source of freely-usable images</string>
+    <string name="unsplash_summary">Интернет је слика слободно употребљивих слика</string>
     <string name="donate_summary">Ако вам се заиста свиђа Resplash, подржите његов развој тако што ћете ми послати неколико долара</string>
     <string name="report_bug_title">Пријавите грешку</string>
     <string name="report_bug_summary">Пријавите грешку или затражите нове опције</string>
     <string name="rate_app_title">Оцените</string>
     <string name="rate_app_summary">Ако вам се допада Resplash, оцените га на Гугл Продавници</string>
-    <string name="github_summary">Resplash is open-source, check it out on GitHub</string>
+    <string name="github_summary">Resplash је опен-соурце, погледајте га на GitHub</string>
     <string name="developer_title">Аутор</string>
     <string name="privacy_policy">Правила о приватности</string>
 </resources>

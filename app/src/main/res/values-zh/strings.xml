@@ -56,7 +56,7 @@
     <string name="settings">设置</string>
     <string name="general">常规</string>
     <string name="clear_cache">清空缓存</string>
-    <string name="cache_size">缓存大小: %d MB</string>
+    <string name="cache_size">缓存大小： %d MB</string>
     <string name="language">语言</string>
     <string name="theme">主题</string>
     <string name="theme_light">明亮</string>
@@ -83,7 +83,7 @@
     <string name="auto_wallpaper_title">自动壁纸</string>
     <string name="auto_wallpaper_info">自动壁纸将根据设置条件使用新的随机壁纸刷新主屏幕</string>
     <string name="auto_wallpaper_help_title">不行吗</string>
-    <string name="auto_wallpaper_help_message">尝试在手机设置中为Resplash禁用空闲状态和电池优化。\n\n有关制造商的特定说明: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_help_message">尝试在手机设置中为Resplash禁用空闲状态和电池优化。\n\n有关制造商的特定说明： https://dontkillmyapp.com/</string>
     <string name="auto_wallpaper_conditions_title">条件</string>
     <string name="auto_wallpaper_on_wifi_title">在Wifi上</string>
     <string name="auto_wallpaper_on_wifi_summary">设备必须连接到Wi-Fi网络</string>
@@ -92,7 +92,7 @@
     <string name="auto_wallpaper_idle_title">闲</string>
     <string name="auto_wallpaper_idle_summary">设备必须处于非活动状</string>
     <string name="auto_wallpaper_interval_title">间隔</string>
-    <string name="auto_wallpaper_interval_summary">每隔换墙纸: %s</string>
+    <string name="auto_wallpaper_interval_summary">每隔换墙纸： %s</string>
     <string name="auto_wallpaper_interval_fifteen_minutes">15分钟</string>
     <string name="auto_wallpaper_interval_thirty_minutes">30分钟</string>
     <string name="auto_wallpaper_interval_one_hour">1小时</string>
@@ -102,46 +102,46 @@
     <string name="auto_wallpaper_interval_twenty_four_hours">24小时</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48小时</string>
     <string name="auto_wallpaper_source">资源</string>
-    <string name="auto_wallpaper_source_title">Wallpaper Source</string>
-    <string name="auto_wallpaper_source_summary">Current source: %s</string>
+    <string name="auto_wallpaper_source_title">墙纸来源</string>
+    <string name="auto_wallpaper_source_summary">当前来源： %s</string>
     <string name="auto_wallpaper_source_all">所有</string>
     <string name="auto_wallpaper_source_featured">精选</string>
     <string name="auto_wallpaper_source_collections">珍藏</string>
-    <string name="auto_wallpaper_source_user">User photos</string>
-    <string name="auto_wallpaper_source_search">Search terms</string>
-    <string name="auto_wallpaper_source_not_set">Not set</string>
-    <string name="auto_wallpaper_collections_summary">Select the collections to get photos from</string>
-    <string name="auto_wallpaper_user_title">User Photos</string>
-    <string name="auto_wallpaper_user_summary">Using photos from: \@%s</string>
-    <string name="auto_wallpaper_user_dialog_message">Enter the username of the user to get photos from:</string>
-    <string name="auto_wallpaper_search_terms_title">Search Terms</string>
-    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
-    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_source_user">用户照片</string>
+    <string name="auto_wallpaper_source_search">搜寻字词</string>
+    <string name="auto_wallpaper_source_not_set">没有设置</string>
+    <string name="auto_wallpaper_collections_summary">选择收藏以获取照片</string>
+    <string name="auto_wallpaper_user_title">用户照片</string>
+    <string name="auto_wallpaper_user_summary">使用来自以下位置的照片：\@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">输入用户名，以从以下位置获取照片：</string>
+    <string name="auto_wallpaper_search_terms_title">搜寻字词</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">获取与以下搜索词匹配的照片：</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">（用逗号分隔多个术语）</string>
     <string name="auto_wallpaper_options_title">选项</string>
-    <string name="auto_wallpaper_center_crop_title">Coltura Centrale</string>
-    <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_center_crop_title">中心作物</string>
+    <string name="auto_wallpaper_center_crop_summary">裁剪所有要居中的壁纸</string>
     <string name="auto_wallpaper_select_screen_title">选择屏幕</string>
-    <string name="auto_wallpaper_select_screen_summary">Applica lo sfondo a: %s</string>
+    <string name="auto_wallpaper_select_screen_summary">将墙纸应用于： %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">主屏幕</string>
     <string name="auto_wallpaper_select_screen_lock_screen">锁屏</string>
     <string name="auto_wallpaper_select_screen_both">主屏幕和锁定屏幕</string>
     <string name="auto_wallpaper_orientation_title">取向</string>
-    <string name="auto_wallpaper_orientation_summary">Limitare l\'orientamento dello sfondo a: %s</string>
+    <string name="auto_wallpaper_orientation_summary">将墙纸方向限制为： %s</string>
     <string name="auto_wallpaper_content_filter_title">内容过滤器</string>
-    <string name="auto_wallpaper_content_filter_low_summary">Low: Guarantees that no content violating submission guidelines (like images containing nudity or violence) will be displayed</string>
-    <string name="auto_wallpaper_content_filter_high_summary">High: Filter content that may be unsuitable for younger audiences</string>
-    <string name="auto_wallpaper_content_filter_note">Note that we can’t guarantee that all potentially unsuitable content is removed</string>
+    <string name="auto_wallpaper_content_filter_low_summary">最低要求：保证不会显示任何违反提交准则的内容（例如包含裸露或暴力行为的图像）</string>
+    <string name="auto_wallpaper_content_filter_high_summary">上限：过滤可能不适合年轻受众的内容</string>
+    <string name="auto_wallpaper_content_filter_note">请注意，我们不能保证删除所有可能不适当的内容</string>
     <string name="auto_wallpaper_history_title">自动壁纸历史</string>
     <string name="auto_wallpaper_history_summary">查看以前设置的壁纸</string>
     <string name="auto_wallpaper_history_clear_history">清除历史记录</string>
     <string name="auto_wallpaper_activate">启用</string>
     <string name="auto_wallpaper_next_wallpaper">下一个壁纸</string>
-    <string name="auto_wallpaper_add_to_auto_wallpaper">Add to Auto Wallpaper</string>
-    <string name="auto_wallpaper_remove_from_auto_wallpaper">Remove from Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_added">Collection added to Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_removed">Collection removed from Auto Wallpaper</string>
-    <string name="auto_wallpaper_selected_collections">Selected</string>
-    <string name="auto_wallpaper_no_selected_collections">Find some collections to add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">添加到自动壁纸</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">从自动壁纸移除</string>
+    <string name="auto_wallpaper_collection_added">收藏集已添加到自动壁纸</string>
+    <string name="auto_wallpaper_collection_removed">收藏集已从自动壁纸中删除</string>
+    <string name="auto_wallpaper_selected_collections">已选</string>
+    <string name="auto_wallpaper_no_selected_collections">找到一些收藏夹</string>
     <string name="auto_wallpaper_discover">发现</string>
     <string name="auto_wallpaper_popular">最流行</string>
     <string name="auto_wallpaper_add_collection_from_url">从URL添加收藏</string>
@@ -160,7 +160,6 @@
     <string name="focal_length">焦距</string>
     <string name="dimensions">尺寸</string>
     <string name="shutter_speed">曝光时间</string>
-    <string name="iso">ISO</string>
 
     <!-- Collections -->
     <string name="add_to_collection">添加到收藏</string>
@@ -175,11 +174,11 @@
     <!-- User -->
     <string name="open_portfolio_link">打开投资组合链接</string>
     <string name="blank_username_error">用户名不能空白</string>
-    <string name="invalid_username_error">Username must have at least one letter and contain only letters, digits, or underscores (no spaces)</string>
-    <string name="username_taken_error">Username already taken</string>
-    <string name="blank_first_name_error">First name can\'t be blank</string>
-    <string name="blank_email_error">Email can\'t be blank</string>
-    <string name="invalid_email_error">Email is not valid</string>
+    <string name="invalid_username_error">用户名必须至少包含一个字母，并且只能包含字母，数字或下划线（无空格）</string>
+    <string name="username_taken_error">用户名已存在</string>
+    <string name="blank_first_name_error">名不能为空</string>
+    <string name="blank_email_error">电子邮件不能为空</string>
+    <string name="invalid_email_error">电邮无效</string>
     <string name="username_hint">用户名</string>
     <string name="username_helper_text">（仅字母，数字和下划线）</string>
     <string name="first_name_hint">名</string>
@@ -221,9 +220,10 @@
     <!-- Login -->
     <string name="login">登入</string>
     <string name="create_an_account">创建一个帐户</string>
-    <string name="login_banner_title">Creation starts here</string>
-    <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
+    <string name="login_banner_title">创作从这里开始</string>
+    <string name="login_banner_subtitle">访问免费的高分辨率照片，这是其他地方找不到的</string>
     <string name="login_success">登陆成功</string>
+    <string name="need_to_log_in">您需要登录才能执行此操作</string>
 
     <!-- Upgrade -->
     <string name="upgrade_to_resplash_pro">升级到Resplash Pro</string>
@@ -232,7 +232,7 @@
     <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
     <string name="pro_feature_two">Future exclusive features</string>
     <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
-    <string name="pro_feature_three">支持开发</string>
+    <string name="pro_feature_three">Support development</string>
     <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
     <string name="go_pro">Go Pro</string>
     <string name="restore_purchase">Restore Purchase</string>
@@ -240,19 +240,18 @@
 
     <!-- Donation -->
     <string name="support_development">支持开发</string>
-    <string name="donate_banner_text">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
     <string name="you_are_welcome">别客气</string>
 
     <!-- About -->
     <string name="about">关于</string>
     <string name="licenses">执照</string>
-    <string name="unsplash_summary">The internet’s source of freely-usable images</string>
+    <string name="unsplash_summary">互联网上免费使用的图片的来源</string>
     <string name="donate_summary">喜欢 Resplash? 不妨考虑打个赏钱，支持一下开发工作吧。</string>
     <string name="report_bug_title">出错报告</string>
     <string name="report_bug_summary">出错报告或者提议新功能</string>
     <string name="rate_app_title">评价</string>
     <string name="rate_app_summary">喜欢 Resplash 就在 Play Store 给个好评吧！</string>
-    <string name="github_summary">Resplash is open-source, check it out on GitHub</string>
+    <string name="github_summary">Resplash是开源的，请在GitHub上查看</string>
     <string name="developer_title">作者</string>
     <string name="privacy_policy">隐私政策</string>
 </resources>

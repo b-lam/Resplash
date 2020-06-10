@@ -103,46 +103,46 @@
     <string name="auto_wallpaper_interval_twenty_four_hours">24 Saat</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 Saat</string>
     <string name="auto_wallpaper_source">Kaynak</string>
-    <string name="auto_wallpaper_source_title">Wallpaper Source</string>
-    <string name="auto_wallpaper_source_summary">Current source: %s</string>
+    <string name="auto_wallpaper_source_title">Duvar kağıdı kaynağı</string>
+    <string name="auto_wallpaper_source_summary">Akım kaynağı: %s</string>
     <string name="auto_wallpaper_source_all">Hepsi</string>
     <string name="auto_wallpaper_source_featured">Öne Çıkan</string>
     <string name="auto_wallpaper_source_collections">Koleksiyonlar</string>
-    <string name="auto_wallpaper_source_user">User photos</string>
-    <string name="auto_wallpaper_source_search">Search terms</string>
-    <string name="auto_wallpaper_source_not_set">Not set</string>
-    <string name="auto_wallpaper_collections_summary">Select the collections to get photos from</string>
-    <string name="auto_wallpaper_user_title">User Photos</string>
-    <string name="auto_wallpaper_user_summary">Using photos from: \@%s</string>
-    <string name="auto_wallpaper_user_dialog_message">Enter the username of the user to get photos from:</string>
-    <string name="auto_wallpaper_search_terms_title">Search Terms</string>
-    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
-    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_source_user">Kullanıcı fotoğrafları</string>
+    <string name="auto_wallpaper_source_search">Arama terimleri</string>
+    <string name="auto_wallpaper_source_not_set">Belirlenmedi</string>
+    <string name="auto_wallpaper_collections_summary">Fotoğrafları almak için koleksiyonları seçin</string>
+    <string name="auto_wallpaper_user_title">Kullanıcı fotoğrafları</string>
+    <string name="auto_wallpaper_user_summary">Şu kaynaktan fotoğraflar kullanılıyor: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Fotoğrafları almak için kullanıcının kullanıcı adını girin:</string>
+    <string name="auto_wallpaper_search_terms_title">Arama terimleri</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Aşağıdaki arama terimleriyle eşleşen fotoğraflar edinin:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Birden çok terimi virgülle ayırın)</string>
     <string name="auto_wallpaper_options_title">Seçenekler</string>
-    <string name="auto_wallpaper_center_crop_title">Coltura Centrale</string>
-    <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_center_crop_title">Ortadaki kırpma</string>
+    <string name="auto_wallpaper_center_crop_summary">Ortalanacak tüm duvar kağıtlarını kırp</string>
     <string name="auto_wallpaper_select_screen_title">Ekran Seçin</string>
-    <string name="auto_wallpaper_select_screen_summary">Applica lo sfondo a: %s</string>
+    <string name="auto_wallpaper_select_screen_summary">Duvar kağıdını şuraya uygula: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Ana Ekran</string>
     <string name="auto_wallpaper_select_screen_lock_screen">Kilit Ekranı</string>
     <string name="auto_wallpaper_select_screen_both">Her İkisi</string>
     <string name="auto_wallpaper_orientation_title">Oryantasyon</string>
-    <string name="auto_wallpaper_orientation_summary">Limitare l\'orientamento dello sfondo a: %s</string>
+    <string name="auto_wallpaper_orientation_summary">Duvar kağıdı yönünü aşağıdakilerle sınırlandırın: %s</string>
     <string name="auto_wallpaper_content_filter_title">İçerik filtresi</string>
-    <string name="auto_wallpaper_content_filter_low_summary">Low: Guarantees that no content violating submission guidelines (like images containing nudity or violence) will be displayed</string>
-    <string name="auto_wallpaper_content_filter_high_summary">High: Filter content that may be unsuitable for younger audiences</string>
-    <string name="auto_wallpaper_content_filter_note">Note that we can’t guarantee that all potentially unsuitable content is removed</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Minimum: Gönderme yönergelerini ihlal eden hiçbir içeriğin (çıplaklık veya şiddet içeren resimler gibi) gösterilmeyeceğini garanti eder</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Maksimum: Genç kitleler için uygun olmayabilecek içeriğe filtre uygulayın</string>
+    <string name="auto_wallpaper_content_filter_note">Potansiyel olarak uygun olmayan tüm içeriğin kaldırıldığını garanti edemeyeceğimizi unutmayın</string>
     <string name="auto_wallpaper_history_title">Otomatik Duvar Kağıdı Geçmişi</string>
     <string name="auto_wallpaper_history_summary">Önceden ayarlanmış duvar kağıtlarını görün.</string>
     <string name="auto_wallpaper_history_clear_history">Geçmişi temizle</string>
     <string name="auto_wallpaper_activate">Aktive Et</string>
     <string name="auto_wallpaper_next_wallpaper">Bir Sonraki Duvar Kağıdı</string>
-    <string name="auto_wallpaper_add_to_auto_wallpaper">Add to Auto Wallpaper</string>
-    <string name="auto_wallpaper_remove_from_auto_wallpaper">Remove from Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_added">Collection added to Auto Wallpaper</string>
-    <string name="auto_wallpaper_collection_removed">Collection removed from Auto Wallpaper</string>
-    <string name="auto_wallpaper_selected_collections">Selected</string>
-    <string name="auto_wallpaper_no_selected_collections">Find some collections to add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Otomatik Duvar Kağıdı\'e ekle</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Otomatik Duvar Kağıdı\'den kaldır</string>
+    <string name="auto_wallpaper_collection_added">Koleksiyon Otomatik Duvar Kağıdı\'a eklendi</string>
+    <string name="auto_wallpaper_collection_removed">Koleksiyon Otomatik Duvar Kağıdı\'dan kaldırıldı</string>
+    <string name="auto_wallpaper_selected_collections">Seçilmiş</string>
+    <string name="auto_wallpaper_no_selected_collections">Eklenecek bazı koleksiyonlar bulun</string>
     <string name="auto_wallpaper_discover">Keşfedin</string>
     <string name="auto_wallpaper_popular">Popüler</string>
     <string name="auto_wallpaper_add_collection_from_url">URL\'den koleksiyon ekle</string>
@@ -161,7 +161,6 @@
     <string name="focal_length">Odak Uzaklığı</string>
     <string name="dimensions">Boyutlar</string>
     <string name="shutter_speed">Pozlama Süresi</string>
-    <string name="iso">ISO</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Koleksiyona Ekle</string>
@@ -176,11 +175,11 @@
     <!-- User -->
     <string name="open_portfolio_link">Portföy bağlantısını aç</string>
     <string name="blank_username_error">Kullanıcı adı boş bırakılamaz.</string>
-    <string name="invalid_username_error">Username must have at least one letter and contain only letters, digits, or underscores (no spaces)</string>
-    <string name="username_taken_error">Username already taken</string>
-    <string name="blank_first_name_error">First name can\'t be blank</string>
-    <string name="blank_email_error">Email can\'t be blank</string>
-    <string name="invalid_email_error">Email is not valid</string>
+    <string name="invalid_username_error">Kullanıcı adı en az bir harf içermeli ve yalnızca harf, rakam veya alt çizgi içermelidir (boşluk içermemelidir)</string>
+    <string name="username_taken_error">Kullanıcı adı önceden alınmış</string>
+    <string name="blank_first_name_error">Ad boş bırakılamaz</string>
+    <string name="blank_email_error">E-mail boş bırakılamaz</string>
+    <string name="invalid_email_error">E-mail geçerli değil</string>
     <string name="username_hint">Kullanıcı Adı</string>
     <string name="username_helper_text">(Yalnızca harfler, sayılar ve alt çizgiler)</string>
     <string name="first_name_hint">Ad</string>
@@ -222,9 +221,10 @@
     <!-- Login -->
     <string name="login">Giriş Yap</string>
     <string name="create_an_account">Hesap oluştur</string>
-    <string name="login_banner_title">Creation starts here</string>
-    <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
+    <string name="login_banner_title">Yaratılış burada başlıyor</string>
+    <string name="login_banner_subtitle">Başka hiçbir yerde bulamayacağınız ücretsiz, yüksek çözünürlüklü fotoğraflara erişin</string>
     <string name="login_success">Giriş başarılı</string>
+    <string name="need_to_log_in">Bunu yapmak için giriş yapmış olmanız lazım</string>
 
     <!-- Upgrade -->
     <string name="upgrade_to_resplash_pro">Resplash Pro sürümüne geçin</string>
@@ -233,7 +233,7 @@
     <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
     <string name="pro_feature_two">Future exclusive features</string>
     <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
-    <string name="pro_feature_three">Geliştiriciyi Destekle</string>
+    <string name="pro_feature_three">Support development</string>
     <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
     <string name="go_pro">Go Pro</string>
     <string name="restore_purchase">Restore Purchase</string>
@@ -241,19 +241,18 @@
 
     <!-- Donation -->
     <string name="support_development">Geliştiriciyi Destekle</string>
-    <string name="donate_banner_text">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
     <string name="you_are_welcome">Rica ederim</string>
 
     <!-- About -->
     <string name="about">Hakkında</string>
     <string name="licenses">Lisanslar</string>
-    <string name="unsplash_summary">The internet’s source of freely-usable images</string>
+    <string name="unsplash_summary">İnternetin özgürce kullanılabilen görseller kaynağı</string>
     <string name="donate_summary">Eğer Resplash\'ı gerçekten beğendiysen geliştirmeyi desteklemek için bana birkaç dolar göndermeyi düşün.</string>
     <string name="report_bug_title">Hataları Rapor Et</string>
     <string name="report_bug_summary">Hataları rapor et ya da yeni özellikler talep et.</string>
     <string name="rate_app_title">Değerlendir</string>
     <string name="rate_app_summary">Eğer Resplash\'ı beğendiysen Play Store\'da değerlendir.</string>
-    <string name="github_summary">Resplash is open-source, check it out on GitHub</string>
+    <string name="github_summary">Resplash açık kaynaklıdır, GitHub\'a bakın</string>
     <string name="developer_title">Yazar</string>
     <string name="privacy_policy">Gizlilik Politikası</string>
 </resources>

@@ -183,7 +183,7 @@
     <string name="focal_length">Focal Length</string>
     <string name="dimensions">Dimensions</string>
     <string name="shutter_speed">Shutter Speed</string>
-    <string name="iso">ISO</string>
+    <string name="iso" translatable="false">ISO</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Add to collection</string>
@@ -249,6 +249,7 @@
     <string name="login_banner_title">Creation starts here</string>
     <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
     <string name="login_success">Login successful</string>
+    <string name="need_to_log_in">You need to log in to do this</string>
 
     <!-- Upgrade -->
     <string name="resplash_pro" translatable="false">Resplash Pro</string>
@@ -266,7 +267,7 @@
 
     <!-- Donation -->
     <string name="support_development">Support development</string>
-    <string name="donate_banner_text">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
+    <string name="donate_banner_text" translatable="false">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
     <string name="you_are_welcome">You\'re welcome</string>
 
     <!-- About -->
