@@ -148,8 +148,8 @@ class CollectionDetailActivity : BaseActivity() {
             }
         }
 
-        if (intent.getBooleanExtra(EXTRA_IS_USER_COLLECTION, false)) {
-            edit_button.isVisible = true
+        if (viewModel.isOwnCollection()) {
+            edit_button.show()
             edit_button.setOnClickListener {
                 EditCollectionBottomSheet
                     .newInstance()
@@ -188,7 +188,5 @@ class CollectionDetailActivity : BaseActivity() {
 
         const val EXTRA_COLLECTION = "extra_collection"
         const val EXTRA_COLLECTION_ID = "extra_collection_id"
-
-        const val EXTRA_IS_USER_COLLECTION = "extra_is_user_collection"
     }
 }

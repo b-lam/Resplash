@@ -16,6 +16,7 @@ import com.b_lam.resplash.domain.photo.UserPhotoDataSourceFactory
 import com.b_lam.resplash.domain.user.UserRepository
 import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
+import com.b_lam.resplash.util.livedata.Event
 import kotlinx.coroutines.launch
 
 class UserViewModel(
@@ -24,6 +25,9 @@ class UserViewModel(
     private val collectionRepository: CollectionRepository,
     private val loginRepository: LoginRepository
 ) : BaseViewModel() {
+
+    private val _getUserResultLiveData = MutableLiveData<Event<Result<User>>>()
+    val getUserResultLiveData: LiveData<Event<Result<User>>> = _getUserResultLiveData
 
     private val _userLiveData = MutableLiveData<User>()
     val userLiveData: LiveData<User> = _userLiveData
@@ -49,9 +53,10 @@ class UserViewModel(
     fun getUser(username: String) {
         viewModelScope.launch {
             val result = userRepository.getUserPublicProfile(username)
-            when (result) {
-                is Result.Success -> setUser(result.value)
+            if (result is Result.Success) {
+                setUser(result.value)
             }
+            _getUserResultLiveData.postValue(Event(result))
         }
     }
 
@@ -90,5 +95,5 @@ class UserViewModel(
 
     fun refreshCollections() = collectionListing.value?.refresh?.invoke()
 
-    fun isPersonalProfile() = userLiveData.value?.username == loginRepository.getUsername()
+    fun isOwnProfile() = userLiveData.value?.username == loginRepository.getUsername()
 }

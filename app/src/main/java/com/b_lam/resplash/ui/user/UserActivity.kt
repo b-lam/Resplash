@@ -15,11 +15,9 @@ import com.b_lam.resplash.R
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
+import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
-import com.b_lam.resplash.util.loadProfilePicture
-import com.b_lam.resplash.util.setTextOrHide
-import com.b_lam.resplash.util.setupActionBar
-import com.b_lam.resplash.util.toPrettyString
+import com.b_lam.resplash.util.livedata.observeEvent
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_search.tab_layout
 import kotlinx.android.synthetic.main.activity_search.view_pager
@@ -47,6 +45,12 @@ class UserActivity : BaseActivity() {
         }
 
         viewModel.userLiveData.observe(this) { setup(it) }
+        viewModel.getUserResultLiveData.observeEvent(this) {
+            if (it !is Result.Success) {
+                toast(R.string.oops)
+                finish()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

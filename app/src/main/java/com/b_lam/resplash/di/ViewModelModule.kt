@@ -24,7 +24,7 @@ val viewModelModule = module {
 
     viewModel { PhotoDetailViewModel(get(), get()) }
 
-    viewModel { CollectionDetailViewModel(get(), get(), get()) }
+    viewModel { CollectionDetailViewModel(get(), get(), get(), get()) }
 
     viewModel { AddCollectionViewModel(get(), get()) }
 
