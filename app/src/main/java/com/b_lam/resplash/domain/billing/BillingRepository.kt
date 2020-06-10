@@ -54,7 +54,7 @@ class BillingRepository(
     }
 
     fun launchBillingFlow(activity: Activity, augmentedSkuDetails: AugmentedSkuDetails) =
-        launchBillingFlow(activity, SkuDetails(augmentedSkuDetails.originalJson))
+        launchBillingFlow(activity, SkuDetails(augmentedSkuDetails.originalJson!!))
 
     private fun launchBillingFlow(activity: Activity, skuDetails: SkuDetails) {
         val purchaseParams = BillingFlowParams.newBuilder().setSkuDetails(skuDetails).build()
@@ -136,7 +136,7 @@ class BillingRepository(
             when (billingResult.responseCode) {
                 BillingClient.BillingResponseCode.OK -> {
                     if (skuDetailsList.orEmpty().isNotEmpty()) {
-                        skuDetailsList.forEach {
+                        skuDetailsList?.forEach {
                             CoroutineScope(Job() + Dispatchers.IO).launch {
                                 localCacheBillingClient.skuDetailsDao().insertOrUpdate(it)
                             }
