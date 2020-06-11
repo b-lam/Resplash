@@ -19,15 +19,6 @@ import com.b_lam.resplash.R
 import com.b_lam.resplash.ResplashApplication.Companion.CHANNEL_ID
 import java.util.*
 
-inline fun <reified T> Context.ofType(): T? {
-    var currentContext: Context? = this
-    do {
-        if (currentContext is T) return currentContext
-        currentContext = (currentContext as? ContextWrapper)?.baseContext
-    } while (currentContext != null)
-    return null
-}
-
 inline fun Context.createNotification(
     priority: Int = NotificationCompat.PRIORITY_DEFAULT,
     body: NotificationCompat.Builder.() -> Unit
