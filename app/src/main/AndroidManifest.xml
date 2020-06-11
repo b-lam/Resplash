@@ -132,6 +132,9 @@
                 android:resource="@xml/shortcuts" />
         </activity>
 
+        <service android:name=".service.DownloadJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <service
             android:name=".service.AutoWallpaperTileService"
             android:icon="@drawable/ic_resplash_24dp"
