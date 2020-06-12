@@ -1,4 +1,4 @@
-package com.b_lam.resplash.util.downloadmanager
+package com.b_lam.resplash.util
 
 import android.app.DownloadManager
 import android.content.BroadcastReceiver

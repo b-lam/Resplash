@@ -8,11 +8,9 @@ import com.b_lam.resplash.data.search.SearchService
 import com.b_lam.resplash.data.user.UserService
 import com.b_lam.resplash.domain.login.AccessTokenInterceptor
 import com.b_lam.resplash.domain.login.AccessTokenProvider
-import com.b_lam.resplash.util.downloadmanager.RxDownloadManager
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -35,9 +33,6 @@ val networkModule = module {
     factory { createService<SearchService>(get(), get()) }
     factory { createService<AuthorizationService>(get(), get(), UNSPLASH_BASE_URL) }
     factory { createService<DownloadService>(get(), get()) }
-
-    single(createdAtStart = true) { RxDownloadManager(androidContext()) }
-
 }
 
 private fun createOkHttpClient(accessTokenInterceptor: AccessTokenInterceptor): OkHttpClient {

@@ -89,10 +89,6 @@ class PhotoRepository(
         }
     }
 
-    suspend fun trackDownload(id: String) {
-        safeApiCall(dispatcher) { photoService.trackDownload(id) }
-    }
-
     suspend fun likePhoto(id: String): Result<ResponseBody> {
         return safeApiCall(dispatcher) { photoService.likeAPhoto(id) }
     }

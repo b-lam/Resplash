@@ -46,11 +46,6 @@ interface PhotoService {
         @Query("quantity") quantity: Int?
     ): PhotoStatistics
 
-    @GET("photos/{id}/download")
-    suspend fun trackDownload(
-        @Path("id") id: String
-    ): ResponseBody
-
     @PUT("photos/{id}")
     suspend fun updatePhoto(
         @Path("id") id: String,

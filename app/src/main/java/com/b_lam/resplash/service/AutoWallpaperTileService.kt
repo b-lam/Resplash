@@ -1,6 +1,5 @@
 package com.b_lam.resplash.service
 
-import android.app.Notification
 import android.content.Intent
 import android.graphics.drawable.Icon
 import android.os.Build
@@ -9,8 +8,6 @@ import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import androidx.annotation.CallSuper
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.lifecycle.observe
@@ -19,7 +16,7 @@ import androidx.work.WorkManager
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
-import com.b_lam.resplash.util.createNotification
+import com.b_lam.resplash.util.NotificationManager
 import com.b_lam.resplash.worker.AutoWallpaperWorker
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -29,6 +26,10 @@ import org.koin.core.inject
 class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
 
     private val dispatcher = ServiceLifecycleDispatcher(this)
+
+    private val sharedPreferencesRepository: SharedPreferencesRepository by inject()
+
+    private val notificationManager: NotificationManager by inject()
 
     override fun onClick() {
         qsTile?.let { tile ->
@@ -47,7 +48,6 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
     }
 
     override fun onStartListening() {
-        val sharedPreferencesRepository: SharedPreferencesRepository by inject()
         qsTile.apply {
             if (sharedPreferencesRepository.autoWallpaperEnabled) {
                 state = Tile.STATE_ACTIVE
@@ -65,22 +65,12 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
             .observe(this@AutoWallpaperTileService) {
                 if (it.isNotEmpty()) {
                     when (it?.first()?.state) {
-                        WorkInfo.State.BLOCKED, WorkInfo.State.ENQUEUED, WorkInfo.State.RUNNING -> {
-                            val notification = applicationContext.createNotification(NotificationCompat.PRIORITY_LOW) {
-                                setContentTitle(getString(R.string.setting_wallpaper))
-                                setProgress(0, 0, true)
-                                setTimeoutAfter(60000)
-                            }
-                            showNotification(notification)
-                        }
-                        WorkInfo.State.SUCCEEDED -> cancelNotification()
-                        WorkInfo.State.FAILED, WorkInfo.State.CANCELLED -> {
-                            cancelNotification()
-                            val notification = applicationContext.createNotification {
-                                setContentTitle(getString(R.string.error_setting_wallpaper))
-                            }
-                            showNotification(notification)
-                        }
+                        WorkInfo.State.BLOCKED, WorkInfo.State.ENQUEUED, WorkInfo.State.RUNNING ->
+                            notificationManager.showTileServiceDownloadingNotification()
+                        WorkInfo.State.SUCCEEDED ->
+                            notificationManager.hideTileServiceNotification()
+                        WorkInfo.State.FAILED, WorkInfo.State.CANCELLED ->
+                            notificationManager.showTileServiceErrorNotification()
                     }
                 }
             }
@@ -113,23 +103,9 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
     @CallSuper
     override fun onDestroy() {
         dispatcher.onServicePreSuperOnDestroy()
-        cancelNotification()
+        notificationManager.hideTileServiceNotification()
         super.onDestroy()
     }
 
     override fun getLifecycle() = dispatcher.lifecycle
-
-    private fun showNotification(notification: Notification) =
-        with(NotificationManagerCompat.from(applicationContext)) {
-            notify(AUTO_WALLPAPER_TILE_SERVICE_NOTIFICATION_ID, notification)
-        }
-
-    private fun cancelNotification() = with(NotificationManagerCompat.from(applicationContext)) {
-        cancel(AUTO_WALLPAPER_TILE_SERVICE_NOTIFICATION_ID)
-    }
-
-    companion object {
-
-        private const val AUTO_WALLPAPER_TILE_SERVICE_NOTIFICATION_ID = 444
-    }
 }

@@ -3,22 +3,20 @@ package com.b_lam.resplash.service
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.ArrayMap
 import androidx.core.app.JobIntentService
+import androidx.core.app.NotificationCompat
 import com.b_lam.resplash.data.download.DownloadService
-import com.b_lam.resplash.util.error
-import com.b_lam.resplash.util.info
-import com.b_lam.resplash.util.save
-import com.b_lam.resplash.util.writeToFile
+import com.b_lam.resplash.util.*
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
-import java.io.File
 
 class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope() {
 
-    private val jobMap = ArrayMap<String, Job>()
+    private val jobMap = mutableMapOf<String, Job>()
 
     private val downloadService: DownloadService by inject()
+
+    private val notificationManager: NotificationManager by inject()
 
     override fun onHandleWork(intent: Intent) {
 
@@ -28,10 +26,11 @@ class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope
             launch { cancelJob(fileName) }
         } else {
             val url = intent.getStringExtra(EXTRA_URL) ?: return
+            val photoId = intent.getStringExtra(EXTRA_PHOTO_ID)
             launch(CoroutineExceptionHandler { _, e ->
                 error("CoroutineExceptionHandler", e)
             }) {
-                download(fileName, url)
+                download(fileName, url, photoId)
             }.also {
                 jobMap[fileName] = it
             }
@@ -47,49 +46,54 @@ class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope
 
     private suspend fun download(
         fileName: String,
-        url: String
+        url: String,
+        photoId: String?
     ) = withContext(Dispatchers.IO) {
         try {
             val responseBody = withTimeout(DOWNLOAD_TIMEOUT_MS) {
                 downloadService.downloadFile(url)
             }
 
-            val tempFile = File.createTempFile(fileName, null, this@DownloadJobIntentService.cacheDir)
+            val builder = notificationManager.getProgressNotificationBuilder(fileName)
 
-            responseBody.writeToFile(tempFile, this) {
-                onProgress(fileName, it)
+            val uri = responseBody.saveImage(this@DownloadJobIntentService, fileName, this) {
+                onProgress(builder, fileName, it)
             }
 
-            val uri = tempFile.save(this@DownloadJobIntentService, fileName)
-
-            // TODO: Delete temp file
-
-            onSuccess(fileName, uri)
+            if (uri != null) {
+                photoId?.let { trackDownload(photoId) }
+                onSuccess(fileName, uri)
+            } else {
+                onError(fileName, Exception("Failed writing to file"), true)
+            }
         } catch (e: CancellationException) {
             onError(fileName, e, false)
         } catch (e: Exception) {
             onError(fileName, e, true)
         }
 
-        // TODO: Use Rx or LiveData to notify observers
-
-        // TODO: Remove job from map
+        jobMap.remove(fileName)
     }
 
-    private fun onProgress(fileName: String, progress: Int) {
+    private suspend fun trackDownload(id: String) = safeApiCall(Dispatchers.IO) {
+        downloadService.trackDownload(id)
+    }
+
+    private fun onProgress(builder: NotificationCompat.Builder, fileName: String, progress: Int) {
         info("onProgress: $fileName - $progress")
-        // TODO: Show progress notification
+        notificationManager.updateProgressNotification(builder, fileName, progress)
     }
 
-    private fun onSuccess(fileName: String, uri: Uri?) {
-        info("onSuccess: $fileName")
-        // TODO: Show complete notification
+    private fun onSuccess(fileName: String, uri: Uri) {
+        info("onSuccess: $fileName - $uri")
+        notificationManager.showDownloadCompleteNotification(fileName, uri)
     }
 
     private fun onError(fileName: String, exception: Exception, showNotification: Boolean) {
         error("onError: $fileName", exception)
+        notificationManager.cancelNotification(fileName)
         if (showNotification) {
-            // TODO: Show error notification
+            notificationManager.showDownloadErrorNotification(fileName)
         }
     }
 
@@ -99,14 +103,16 @@ class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope
 
         private const val EXTRA_FILE_NAME = "extra_file_name"
         private const val EXTRA_URL = "extra_url"
+        private const val EXTRA_PHOTO_ID = "extra_photo_id"
         private const val EXTRA_CANCEL_DOWNLOAD = "extra_cancel_download"
 
         private const val DOWNLOAD_TIMEOUT_MS = 120_000L
 
-        fun enqueueDownload(context: Context, fileName: String, url: String) {
+        fun enqueueDownload(context: Context, fileName: String, url: String, photoId: String?) {
             val intent = Intent(context, DownloadJobIntentService::class.java).apply {
                 putExtra(EXTRA_FILE_NAME, fileName)
                 putExtra(EXTRA_URL, url)
+                putExtra(EXTRA_PHOTO_ID, photoId)
             }
             enqueueWork(context, DownloadJobIntentService::class.java, DOWNLOAD_JOB_ID, intent)
         }

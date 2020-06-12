@@ -14,6 +14,7 @@ import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.util.Result.Error
 import com.b_lam.resplash.util.Result.Success
 import com.b_lam.resplash.util.getPhotoUrl
+import com.b_lam.resplash.util.safeApiCall
 import com.b_lam.resplash.util.screenHeight
 import com.b_lam.resplash.util.screenWidth
 import kotlinx.coroutines.Dispatchers
@@ -30,9 +31,11 @@ class AutoWallpaperWorker(
     params: WorkerParameters
 ) : CoroutineWorker(appContext, params), KoinComponent {
 
-    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
-        val photoRepository: PhotoRepository by inject()
+    private val photoRepository: PhotoRepository by inject()
+    private val autoWallpaperRepository: AutoWallpaperRepository by inject()
+    private val downloadService: DownloadService by inject()
 
+    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val orientation = inputData.getString(KEY_AUTO_WALLPAPER_ORIENTATION)
         val contentFilter = inputData.getString(KEY_AUTO_WALLPAPER_CONTENT_FILTER)
 
@@ -77,7 +80,7 @@ class AutoWallpaperWorker(
 
             if (result is Success) {
                 if (downloadAndSetWallpaper(result.value)) {
-                    photoRepository.trackDownload(result.value.id)
+                    trackDownload(result.value.id)
                     addWallpaperToHistory(result.value)
                     return@withContext Result.success()
                 } else {
@@ -94,12 +97,10 @@ class AutoWallpaperWorker(
     }
 
     private suspend fun getCollectionId(): Int? {
-        val autoWallpaperRepository: AutoWallpaperRepository by inject()
         return autoWallpaperRepository.getRandomAutoWallpaperCollectionId()
     }
 
-    private suspend fun downloadAndSetWallpaper(photo: Photo): Boolean = withContext(Dispatchers.IO) {
-        val downloadService: DownloadService by inject()
+    private suspend fun downloadAndSetWallpaper(photo: Photo): Boolean {
         val url = getPhotoUrl(photo, inputData.getString(KEY_AUTO_WALLPAPER_QUALITY))
 
         try {
@@ -127,10 +128,10 @@ class AutoWallpaperWorker(
                 } else {
                     WallpaperManager.getInstance(appContext).setStream(it)
                 }
-                return@withContext true
+                return true
             }
         } catch (e: Throwable) {
-            return@withContext false
+            return false
         }
     }
 
@@ -163,8 +164,11 @@ class AutoWallpaperWorker(
         return right >= 0 && left in 0..right && bottom >= 0 && top in 0..bottom
     }
 
-    private suspend fun addWallpaperToHistory(photo: Photo) = withContext(Dispatchers.IO) {
-        val autoWallpaperRepository: AutoWallpaperRepository by inject()
+    private suspend fun trackDownload(id: String) = safeApiCall(Dispatchers.IO) {
+        downloadService.trackDownload(id)
+    }
+
+    private suspend fun addWallpaperToHistory(photo: Photo) {
         val url = getPhotoUrl(photo, inputData.getString(KEY_AUTO_WALLPAPER_THUMBNAIL_QUALITY))
         autoWallpaperRepository.addToAutoWallpaperHistory(
             AutoWallpaperHistory(

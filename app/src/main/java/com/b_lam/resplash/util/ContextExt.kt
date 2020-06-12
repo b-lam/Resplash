@@ -1,9 +1,8 @@
 package com.b_lam.resplash.util
 
+import android.Manifest
 import android.app.Activity
-import android.app.Notification
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Build
@@ -11,24 +10,10 @@ import android.widget.Toast
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.fragment.app.Fragment
-import com.b_lam.resplash.R
-import com.b_lam.resplash.ResplashApplication.Companion.CHANNEL_ID
 import java.util.*
-
-inline fun Context.createNotification(
-    priority: Int = NotificationCompat.PRIORITY_DEFAULT,
-    body: NotificationCompat.Builder.() -> Unit
-): Notification {
-    val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-    builder.setSmallIcon(R.drawable.ic_resplash_24dp)
-    builder.priority = priority
-    builder.body()
-    return builder.build()
-}
 
 fun Context.applyLanguage(locale: Locale?): Context {
     val configuration = resources.configuration
@@ -50,6 +35,11 @@ fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) =
 
 fun Context?.toast(@StringRes textId: Int, duration: Int = Toast.LENGTH_LONG) =
     this?.let { Toast.makeText(it, textId, duration).show() }
+
+fun Context.hasWritePermission(): Boolean {
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ||
+            hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+}
 
 fun Context.hasPermission(vararg permissions: String): Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
