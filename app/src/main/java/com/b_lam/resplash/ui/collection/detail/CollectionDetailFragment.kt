@@ -3,7 +3,6 @@ package com.b_lam.resplash.ui.collection.detail
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.observe
-import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.ui.photo.PhotoAdapter
 import com.b_lam.resplash.ui.photo.PhotoFragment
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
@@ -28,6 +27,10 @@ class CollectionDetailFragment : PhotoFragment() {
             networkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
             photosLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
         }
+    }
+
+    override fun trackDownload(id: String) {
+        sharedViewModel.trackDownload(id)
     }
 
     companion object {

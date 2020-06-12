@@ -1,7 +1,6 @@
 package com.b_lam.resplash.ui.user
 
 import androidx.lifecycle.observe
-import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.ui.photo.PhotoAdapter
 import com.b_lam.resplash.ui.photo.PhotoFragment
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
@@ -21,6 +20,10 @@ class UserPhotoFragment : PhotoFragment() {
             photosNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
             photosLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
         }
+    }
+
+    override fun trackDownload(id: String) {
+        sharedViewModel.trackDownload(id)
     }
 
     companion object {

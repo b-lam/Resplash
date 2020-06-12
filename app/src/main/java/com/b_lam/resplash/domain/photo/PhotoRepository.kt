@@ -1,5 +1,6 @@
 package com.b_lam.resplash.domain.photo
 
+import com.b_lam.resplash.data.download.DownloadService
 import com.b_lam.resplash.data.photo.PhotoService
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.search.SearchService
@@ -17,6 +18,7 @@ class PhotoRepository(
     private val photoService: PhotoService,
     private val searchService: SearchService,
     private val userService: UserService,
+    private val downloadService: DownloadService,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
@@ -95,5 +97,9 @@ class PhotoRepository(
 
     suspend fun unlikePhoto(id: String): Result<Response<Unit>> {
         return safeApiCall(dispatcher) { photoService.unlikeAPhoto(id) }
+    }
+
+    suspend fun trackDownload(id: String): Result<ResponseBody> {
+        return safeApiCall(dispatcher) { downloadService.trackDownload(id) }
     }
 }

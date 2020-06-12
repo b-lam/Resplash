@@ -10,19 +10,10 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.b_lam.resplash.R
-import com.b_lam.resplash.service.DownloadServiceBroadcastReceiver
 
 class NotificationManager(private val context: Context) {
 
     private val notificationManager by lazy { NotificationManagerCompat.from(context) }
-
-    private val downloadSummaryNotification = NotificationCompat.Builder(context, CHANNEL_ID)
-        .setSmallIcon(android.R.drawable.stat_sys_download)
-        .setContentTitle(context.getString(R.string.app_name))
-        .setStyle(NotificationCompat.InboxStyle())
-        .setGroup(GROUP_KEY_DOWNLOADS)
-        .setGroupSummary(true)
-        .build()
 
     private val tileServiceNotificationBuilder =
         NotificationCompat.Builder(context, CHANNEL_ID).apply {
@@ -70,7 +61,6 @@ class NotificationManager(private val context: Context) {
             setTicker("")
             setContentTitle(fileName)
             setProgress(PROGRESS_MAX, 0, false)
-            addAction(0, context.getString(R.string.cancel), getCancelDownloadIntent(fileName))
         }
         notificationManager.notify(fileName.hashCode(), builder.build())
         return builder
@@ -88,7 +78,14 @@ class NotificationManager(private val context: Context) {
     }
 
     fun showDownloadErrorNotification(fileName: String) {
-
+        val builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
+            priority = NotificationCompat.PRIORITY_LOW
+            setSmallIcon(android.R.drawable.stat_sys_download_done)
+            setContentTitle(fileName)
+            setContentText(context.getString(R.string.oops))
+            setProgress(0, 0, false)
+        }
+        notificationManager.notify(fileName.hashCode(), builder.build())
     }
 
     private fun getViewPendingIntent(uri: Uri): PendingIntent {
@@ -98,14 +95,10 @@ class NotificationManager(private val context: Context) {
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
             setDataAndType(uri, "image/*")
         }
-        return PendingIntent.getActivity(context, 0, viewIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-    }
 
-    private fun getCancelDownloadIntent(fileName: String): PendingIntent {
-        val cancelIntent = Intent(context, DownloadServiceBroadcastReceiver::class.java).apply {
-            putExtra(DownloadServiceBroadcastReceiver.EXTRA_CANCEL_FILE_NAME, fileName)
-        }
-        return PendingIntent.getBroadcast(context, 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val chooser = Intent.createChooser(viewIntent, "Open with")
+
+        return PendingIntent.getActivity(context, 0, chooser, PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
     fun showTileServiceDownloadingNotification() {
@@ -128,9 +121,6 @@ class NotificationManager(private val context: Context) {
     companion object {
 
         private const val CHANNEL_ID = "resplash_channel_id"
-
-        private const val GROUP_KEY_DOWNLOADS = "group_key_downloads"
-        private const val GROUP_DOWNLOADS_SUMMARY_ID = 534
 
         private const val TILE_SERVICE_NOTIFICATION_ID = 981
 

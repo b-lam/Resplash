@@ -18,14 +18,9 @@ import io.reactivex.rxjava3.subjects.PublishSubject
  */
 class RxDownloadManager(private val context: Context) {
 
-    private var _downloadManager: DownloadManager? = null
-    private val downloadManager: DownloadManager
-        get() {
-            if (_downloadManager == null) {
-                _downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager?
-            }
-            return _downloadManager ?: throw RuntimeException("Can't get DownloadManager system service")
-        }
+    private val downloadManager by lazy {
+        context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+    }
 
     private val subjectMap = LongSparseArray<PublishSubject<Uri>>()
 
@@ -43,9 +38,7 @@ class RxDownloadManager(private val context: Context) {
         return download(createRequest(url, fileName, false))
     }
 
-    private fun download(
-        request: DownloadManager.Request
-    ): Pair<Long, Observable<Uri>> {
+    private fun download(request: DownloadManager.Request): Pair<Long, Observable<Uri>> {
         val downloadId = downloadManager.enqueue(request)
         val publishSubject = PublishSubject.create<Uri>()
         subjectMap.put(downloadId, publishSubject)
@@ -95,7 +88,7 @@ class RxDownloadManager(private val context: Context) {
 
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0L) ?: 0L
-            val publishSubject = subjectMap.get(id) ?: return
+            val publishSubject = subjectMap[id] ?: return
 
             val query = DownloadManager.Query().apply { setFilterById(id) }
             val cursor = downloadManager.query(query)

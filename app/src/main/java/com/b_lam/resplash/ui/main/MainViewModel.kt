@@ -106,6 +106,8 @@ class MainViewModel(
         }
     }
 
+    fun trackDownload(id: String) = viewModelScope.launch { photoRepository.trackDownload(id) }
+
     fun logout() {
         loginRepository.logout()
         _authorizedLiveData.postValue(false)

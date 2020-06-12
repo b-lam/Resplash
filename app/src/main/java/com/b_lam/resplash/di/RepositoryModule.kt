@@ -11,7 +11,7 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    single(createdAtStart = true) { PhotoRepository(get(), get(), get()) }
+    single(createdAtStart = true) { PhotoRepository(get(), get(), get(), get()) }
     single(createdAtStart = true) { CollectionRepository(get(), get(), get()) }
     single(createdAtStart = true) { UserRepository(get(), get()) }
     single(createdAtStart = true) { LoginRepository(get(), get(), get()) }

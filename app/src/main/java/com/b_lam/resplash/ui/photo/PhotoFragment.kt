@@ -8,11 +8,10 @@ import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
-import com.b_lam.resplash.util.downloadmanager.RxDownloadManager
-import com.b_lam.resplash.util.fileName
-import com.b_lam.resplash.util.getPhotoUrl
-import com.b_lam.resplash.util.hasPermission
-import com.b_lam.resplash.util.requestPermission
+import com.b_lam.resplash.util.*
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.plusAssign
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import org.koin.android.ext.android.inject
 
 abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
@@ -20,6 +19,8 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
     abstract override val preloadPagedListAdapter: PhotoAdapter
 
     private val downloadManager: RxDownloadManager by inject()
+
+    private val compositeDisposable = CompositeDisposable()
 
     val itemEventCallback = object : PhotoAdapter.ItemEventCallback {
 
@@ -38,15 +39,25 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
         }
 
         override fun onLongClick(photo: Photo) {
-            if (requireContext().hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                downloadManager.downloadPhoto(
+            if (requireContext().hasWritePermission()) {
+                compositeDisposable += downloadManager.downloadPhoto(
                     getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality),
-                    photo.fileName)
+                    photo.fileName
+                ).second.doOnSubscribe {
+                    context.toast(R.string.download_started)
+                }.doAfterTerminate {
+                    compositeDisposable.clear()
+                }.subscribeBy(
+                    onNext = { trackDownload(photo.id) },
+                    onError = {}
+                )
             } else {
                 requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
             }
         }
     }
+
+    abstract fun trackDownload(id: String)
 
     override val emptyStateTitle: String
         get() = getString(R.string.empty_state_title)

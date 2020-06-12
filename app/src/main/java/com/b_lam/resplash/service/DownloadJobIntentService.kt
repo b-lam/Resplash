@@ -12,8 +12,6 @@ import org.koin.android.ext.android.inject
 
 class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope() {
 
-    private val jobMap = mutableMapOf<String, Job>()
-
     private val downloadService: DownloadService by inject()
 
     private val notificationManager: NotificationManager by inject()
@@ -22,25 +20,12 @@ class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope
 
         val fileName = intent.getStringExtra(EXTRA_FILE_NAME) ?: return
 
-        if (intent.getBooleanExtra(EXTRA_CANCEL_DOWNLOAD, false)) {
-            launch { cancelJob(fileName) }
-        } else {
-            val url = intent.getStringExtra(EXTRA_URL) ?: return
-            val photoId = intent.getStringExtra(EXTRA_PHOTO_ID)
-            launch(CoroutineExceptionHandler { _, e ->
-                error("CoroutineExceptionHandler", e)
-            }) {
-                download(fileName, url, photoId)
-            }.also {
-                jobMap[fileName] = it
-            }
-        }
-    }
-
-    private suspend fun cancelJob(fileName: String) {
-        jobMap[fileName]?.let {
-            it.cancelAndJoin()
-            jobMap.remove(fileName)
+        val url = intent.getStringExtra(EXTRA_URL) ?: return
+        val photoId = intent.getStringExtra(EXTRA_PHOTO_ID)
+        launch(CoroutineExceptionHandler { _, e ->
+            error("CoroutineExceptionHandler", e)
+        }) {
+            download(fileName, url, photoId)
         }
     }
 
@@ -72,7 +57,6 @@ class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope
             onError(fileName, e, true)
         }
 
-        jobMap.remove(fileName)
     }
 
     private suspend fun trackDownload(id: String) = safeApiCall(Dispatchers.IO) {
@@ -104,7 +88,6 @@ class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope
         private const val EXTRA_FILE_NAME = "extra_file_name"
         private const val EXTRA_URL = "extra_url"
         private const val EXTRA_PHOTO_ID = "extra_photo_id"
-        private const val EXTRA_CANCEL_DOWNLOAD = "extra_cancel_download"
 
         private const val DOWNLOAD_TIMEOUT_MS = 120_000L
 
@@ -113,14 +96,6 @@ class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope
                 putExtra(EXTRA_FILE_NAME, fileName)
                 putExtra(EXTRA_URL, url)
                 putExtra(EXTRA_PHOTO_ID, photoId)
-            }
-            enqueueWork(context, DownloadJobIntentService::class.java, DOWNLOAD_JOB_ID, intent)
-        }
-
-        fun cancelDownload(context: Context, fileName: String) {
-            val intent = Intent(context, DownloadJobIntentService::class.java).apply {
-                putExtra(EXTRA_CANCEL_DOWNLOAD, true)
-                putExtra(EXTRA_FILE_NAME, fileName)
             }
             enqueueWork(context, DownloadJobIntentService::class.java, DOWNLOAD_JOB_ID, intent)
         }

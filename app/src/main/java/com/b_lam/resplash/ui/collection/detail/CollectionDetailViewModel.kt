@@ -101,4 +101,6 @@ class CollectionDetailViewModel(
             }
         }
     }
+
+    fun trackDownload(id: String) = viewModelScope.launch { photoRepository.trackDownload(id) }
 }

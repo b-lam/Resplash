@@ -9,5 +9,5 @@ val managerModule = module {
 
     single(createdAtStart = true) { NotificationManager(androidContext()) }
 
-    single { RxDownloadManager(androidContext()) }
+    single(createdAtStart = true) { RxDownloadManager(androidContext()) }
 }

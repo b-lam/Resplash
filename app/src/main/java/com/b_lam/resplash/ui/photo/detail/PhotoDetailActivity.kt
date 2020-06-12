@@ -15,21 +15,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.ui.base.BaseActivity
+import com.b_lam.resplash.ui.collection.add.AddCollectionBottomSheet
+import com.b_lam.resplash.ui.login.LoginActivity
+import com.b_lam.resplash.ui.photo.zoom.PhotoZoomActivity
 import com.b_lam.resplash.ui.search.SearchActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
-import com.b_lam.resplash.util.downloadmanager.RxDownloadManager
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.plusAssign
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_photo_detail.*
-import kotlinx.android.synthetic.main.bottom_sheet_photo_detail.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
@@ -87,7 +87,17 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun setup(photo: Photo) {
         val url = getPhotoUrl(photo, sharedPreferencesRepository.loadQuality)
-        zoom_image_view.loadPhotoUrl(url)
+        photo_image_view.setAspectRatio(photo.width, photo.height)
+        photo_image_view.loadPhotoUrl(url)
+        photo_image_view.setOnClickListener {
+            Intent(this, PhotoZoomActivity::class.java).apply {
+                putExtra(PhotoZoomActivity.EXTRA_PHOTO_URL, url)
+                startActivity(this)
+            }
+        }
+    }
+
+    private fun displayPhotoDetails(photo: Photo) {
         photo.user?.let { user ->
             user_text_view.text = user.name ?: getString(R.string.unknown)
             user_image_view.loadProfilePicture(user)
@@ -98,15 +108,9 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 }
             }
         }
-        download_button.setOnClickListener { downloadPhoto(photo) }
-        wallpaper_button.setOnClickListener { setWallpaper(photo) }
-    }
-
-    private fun displayPhotoDetails(photo: Photo) {
         views_count_text_view.text = (photo.views ?: 0).toPrettyString()
         downloads_count_text_view.text = (photo.downloads ?: 0).toPrettyString()
         likes_count_text_view.text = (photo.likes ?: 0).toPrettyString()
-
         exif_recycler_view.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = ExifAdapter(context).apply { setExif(photo) }
@@ -117,6 +121,27 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             }
             adapter = TagAdapter(this@PhotoDetailActivity).apply { submitList(photo.tags) }
         }
+
+        collect_button.setOnClickListener {
+            if (viewModel.isUserAuthorized()) {
+                AddCollectionBottomSheet
+                    .newInstance(photo)
+                    .show(supportFragmentManager, AddCollectionBottomSheet.TAG)
+            } else {
+                toast(R.string.need_to_log_in)
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+        }
+        like_button.setOnClickListener {
+            if (viewModel.isUserAuthorized()) {
+                viewModel.likePhoto(photo.id)
+            } else {
+                toast(R.string.need_to_log_in)
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+        }
+        download_button.setOnClickListener { downloadPhoto(photo) }
+        wallpaper_button.setOnClickListener { setWallpaper(photo) }
 //        description_text_view.setTextOrHide(photo.description)
 //        photo.location?.let { location ->
 //            if (location.city != null && location.country != null) {
@@ -133,7 +158,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     }
 
     private fun downloadPhoto(photo: Photo) {
-        if (hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (hasWritePermission()) {
             val downloadManager: RxDownloadManager by inject()
             compositeDisposable += downloadManager.downloadPhoto(
                 getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality),
@@ -143,7 +168,10 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             }.doAfterTerminate {
                 compositeDisposable.clear()
             }.subscribeBy(
-                onNext = { toast(R.string.download_complete) },
+                onNext = {
+                    viewModel.trackDownload(photo.id)
+                    toast(R.string.download_complete)
+                },
                 onError = { toast(R.string.oops) }
             )
         } else {
@@ -152,12 +180,11 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     }
 
     private fun setWallpaper(photo: Photo) {
-        if (hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (hasWritePermission()) {
             val downloadManager: RxDownloadManager by inject()
             val download = downloadManager.downloadWallpaper(
                 getPhotoUrl(photo, sharedPreferencesRepository.wallpaperQuality),
-                photo.fileName
-            )
+                photo.fileName)
 
             val snackbar = Snackbar
                 .make(coordinator_layout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
@@ -171,7 +198,10 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                     compositeDisposable.clear()
                 }
                 .subscribeBy(
-                    onNext = { startActivity(WallpaperManager.getInstance(this).getCropAndSetWallpaperIntent(it)) },
+                    onNext = {
+                        viewModel.trackDownload(photo.id)
+                        startActivity(WallpaperManager.getInstance(this).getCropAndSetWallpaperIntent(it))
+                    },
                     onError = {}
                 )
         } else {
