@@ -1,7 +1,6 @@
 package com.b_lam.resplash.ui.user
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -115,10 +114,10 @@ class UserActivity : BaseActivity() {
         likes_count_container.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.LIKES) }
         collections_count_container.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.COLLECTION) }
 
-        location_text_view.setTextOrHide(user.location)
+        location_text_view.setTextAndVisibility(user.location)
         location_text_view.setOnClickListener { openLocationInMaps(user.location) }
 
-        bio_text_view.setTextOrHide(user.bio)
+        bio_text_view.setTextAndVisibility(user.bio?.trimEnd())
 
         user.username?.let { username -> viewModel.getUserListings(username) }
     }
@@ -126,14 +125,6 @@ class UserActivity : BaseActivity() {
     private fun openUrlInBrowser(url: String?) {
         val uri = Uri.parse(url)
         CustomTabsHelper.openCustomTab(this, uri, sharedPreferencesRepository.theme)
-    }
-
-    private fun openLocationInMaps(location: String?) {
-        val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(location)}")
-        Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
-            setPackage("com.google.android.apps.maps")
-            startActivity(this)
-        }
     }
 
     private fun goToTab(type: UserFragmentPagerAdapter.UserFragment) {

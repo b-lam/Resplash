@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Alert Dialog -->
     <style name="ThemeOverlay.Theme.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
@@ -33,6 +33,18 @@
         <item name="backgroundTint">?attr/colorSurface</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.Theme.BottomAppBar</item>
     </style>
+
+    <!-- Toolbar -->
+    <style name="Widget.Theme.Toolbar.PhotoDetail" parent="">
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+        <item name="android:theme">@style/ThemeOverlay.Theme.Toolbar.PhotoDetail</item>
+    </style>
+    <style name="ThemeOverlay.Theme.Toolbar.PhotoDetail" parent="">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
 
     <!-- This requires that our VD assets be tinted with colorControlNormal -->
     <!-- See: https://issuetracker.google.com/issues/127454210 -->

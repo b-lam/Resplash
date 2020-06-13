@@ -19,7 +19,7 @@
     <color name="color_on_secondary">#000000</color>
     <color name="color_on_background">#ffffff</color>
     <color name="color_on_surface">#ffffff</color>
-    <color name="color_on_surface_secondary">#bdbdbd</color>
+    <color name="color_on_surface_secondary">#eeeeee</color>
     <color name="color_on_surface_disabled">#60ffffff</color>
     <color name="color_on_error">#000000</color>
 

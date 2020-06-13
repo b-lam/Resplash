@@ -26,6 +26,7 @@
     <string name="download_started">การดาวน์โหลดเริ่มขึ้นแล้ว</string>
     <string name="download_complete">ดาวน์โหลดเสร็จสิ้น</string>
     <string name="setting_wallpaper">กำลังตั้งวอลเปเปอร์…</string>
+    <string name="set_as_wallpaper">ตั้งเป็นวอลล์เปเปอร์</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

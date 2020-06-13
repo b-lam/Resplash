@@ -31,4 +31,6 @@
 
     <color name="color_divider">#1F000000</color>
     <color name="color_tinted_surface">#ffffff</color>
+
+    <color name="immersive_sys_ui">#33000000</color>
 </resources>

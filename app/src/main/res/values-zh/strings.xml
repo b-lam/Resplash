@@ -26,6 +26,7 @@
     <string name="download_started">下载开始</string>
     <string name="download_complete">下载完毕</string>
     <string name="setting_wallpaper">设置壁纸…</string>
+    <string name="set_as_wallpaper">设为壁纸</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

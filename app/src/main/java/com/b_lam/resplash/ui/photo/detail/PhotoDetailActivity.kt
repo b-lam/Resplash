@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,6 +49,10 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             setDisplayHomeAsUpEnabled(true)
         }
 
+        scroll_view.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
+        constraint_layout.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
+        photo_image_view.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
+
         val photo = intent.getParcelableExtra<Photo>(EXTRA_PHOTO)
         val photoId = intent.getStringExtra(EXTRA_PHOTO_ID)
 
@@ -87,8 +92,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun setup(photo: Photo) {
         val url = getPhotoUrl(photo, sharedPreferencesRepository.loadQuality)
-        photo_image_view.setAspectRatio(photo.width, photo.height)
-        photo_image_view.loadPhotoUrl(url)
+        photo_image_view.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color, centerCrop = true)
         photo_image_view.setOnClickListener {
             Intent(this, PhotoZoomActivity::class.java).apply {
                 putExtra(PhotoZoomActivity.EXTRA_PHOTO_URL, url)
@@ -98,6 +102,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     }
 
     private fun displayPhotoDetails(photo: Photo) {
+        content_loading_layout.hide()
         photo.user?.let { user ->
             user_text_view.text = user.name ?: getString(R.string.unknown)
             user_image_view.loadProfilePicture(user)
@@ -108,13 +113,24 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 }
             }
         }
-        views_count_text_view.text = (photo.views ?: 0).toPrettyString()
-        downloads_count_text_view.text = (photo.downloads ?: 0).toPrettyString()
-        likes_count_text_view.text = (photo.likes ?: 0).toPrettyString()
+        photo.location?.let { location ->
+            val locationString = when {
+                location.city != null && location.country != null ->
+                    getString(R.string.location_template, location.city, location.country)
+                location.city != null && location.country == null -> location.city
+                location.city == null && location.country != null -> location.country
+                else -> null
+            }
+            location_text_view.setTextAndVisibility(locationString)
+            location_text_view.setOnClickListener { locationString?.let { openLocationInMaps(it) } }
+        }
         exif_recycler_view.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = ExifAdapter(context).apply { setExif(photo) }
         }
+        views_count_text_view.text = (photo.views ?: 0).toPrettyString()
+        downloads_count_text_view.text = (photo.downloads ?: 0).toPrettyString()
+        likes_count_text_view.text = (photo.likes ?: 0).toPrettyString()
         tag_recycler_view.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
                 addItemDecoration(SpacingItemDecoration(context, R.dimen.keyline_6, RecyclerView.HORIZONTAL))
@@ -132,29 +148,25 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 startActivity(Intent(this, LoginActivity::class.java))
             }
         }
+
+        setLikeButtonState(photo.liked_by_user ?: false)
         like_button.setOnClickListener {
             if (viewModel.isUserAuthorized()) {
-                viewModel.likePhoto(photo.id)
+                if (photo.liked_by_user == true) {
+                    viewModel.unlikePhoto(photo.id)
+                } else {
+                    viewModel.likePhoto(photo.id)
+                }
+                photo.liked_by_user = photo.liked_by_user?.not()
+                setLikeButtonState(photo.liked_by_user ?: false)
             } else {
                 toast(R.string.need_to_log_in)
                 startActivity(Intent(this, LoginActivity::class.java))
             }
         }
         download_button.setOnClickListener { downloadPhoto(photo) }
-        wallpaper_button.setOnClickListener { setWallpaper(photo) }
-//        description_text_view.setTextOrHide(photo.description)
-//        photo.location?.let { location ->
-//            if (location.city != null && location.country != null) {
-//                location_text_view.text =
-//                    getString(R.string.location_template, location.city, location.country)
-//            } else if (location.city != null && location.country == null) {
-//                location_text_view.text = location.city
-//            } else if (location.city == null && location.country != null) {
-//                location_text_view.text = location.country
-//            } else {
-//                location_text_view.text = getString(R.string.unknown)
-//            }
-//        }
+        set_as_wallpaper_button.setOnClickListener { setWallpaper(photo) }
+        set_as_wallpaper_button.show()
     }
 
     private fun downloadPhoto(photo: Photo) {
@@ -188,6 +200,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
             val snackbar = Snackbar
                 .make(coordinator_layout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
+                .setAnchorView(R.id.set_as_wallpaper_button)
                 .setAction(R.string.cancel) { downloadManager.cancelDownload(download.first) }
                 .setActionTextColor(ContextCompat.getColor(this, R.color.red_400))
 
@@ -214,6 +227,13 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             putExtra(SearchActivity.EXTRA_SEARCH_QUERY, tag)
             startActivity(this)
         }
+    }
+
+    private fun setLikeButtonState(likedByUser: Boolean) {
+        like_button.setImageResource(
+            if (likedByUser) R.drawable.ic_favorite_filled_24dp
+            else R.drawable.ic_favorite_border_24dp
+        )
     }
 
     private fun openPhotoInBrowser() {

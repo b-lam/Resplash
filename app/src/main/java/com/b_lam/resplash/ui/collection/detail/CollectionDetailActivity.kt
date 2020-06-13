@@ -166,7 +166,7 @@ class CollectionDetailActivity : BaseActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        description_text_view.setTextOrHide(collection.description?.trim())
+        description_text_view.setTextAndVisibility(collection.description?.trim())
     }
 
     private fun openCollectionInBrowser() {

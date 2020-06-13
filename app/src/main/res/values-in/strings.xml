@@ -26,6 +26,7 @@
     <string name="download_started">Pengunduhan dimulai</string>
     <string name="download_complete">Unduhan Selesai</string>
     <string name="setting_wallpaper">Pengaturan wallpaper…</string>
+    <string name="set_as_wallpaper">Atur sebagai wallpaper</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

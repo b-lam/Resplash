@@ -13,6 +13,11 @@
         <item name="windowNoTitle">false</item>
     </style>
 
+    <style name="Resplash.Theme.DayNight.PhotoDetail">
+        <item name="android:statusBarColor">@color/immersive_sys_ui</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+
     <!-- Base custom theme which will be shared between both light and dark theme variants -->
     <style name="Base.Theme" parent="Base.MaterialThemeBuilder">
         <!-- Material color attributes -->

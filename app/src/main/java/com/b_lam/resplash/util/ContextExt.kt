@@ -3,8 +3,10 @@ package com.b_lam.resplash.util
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.IntRange
@@ -47,6 +49,14 @@ fun Context.hasPermission(vararg permissions: String): Boolean {
             ContextCompat.checkSelfPermission(this, singlePermission) == PackageManager.PERMISSION_GRANTED
         }
     else true
+}
+
+fun Context.openLocationInMaps(location: String?) {
+    val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(location)}")
+    Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
+        setPackage("com.google.android.apps.maps")
+        startActivity(this)
+    }
 }
 
 fun Activity.requestPermission(vararg permissions: String, @IntRange(from = 0) requestCode: Int) =

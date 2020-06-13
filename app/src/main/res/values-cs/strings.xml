@@ -26,6 +26,7 @@
     <string name="download_started">Stahování zahájeno</string>
     <string name="download_complete">Stahování Dokončeno</string>
     <string name="setting_wallpaper">Nastavení tapety…</string>
+    <string name="set_as_wallpaper">Nastavit jako tapetu</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

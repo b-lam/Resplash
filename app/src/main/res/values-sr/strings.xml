@@ -26,6 +26,7 @@
     <string name="download_started">Преузимање започето</string>
     <string name="download_complete">Преузимање завршено</string>
     <string name="setting_wallpaper">Постављам позадину…</string>
+    <string name="set_as_wallpaper">Постави као позадину</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

@@ -26,6 +26,7 @@
     <string name="download_started">Descarga iniciada</string>
     <string name="download_complete">Descarga completa</string>
     <string name="setting_wallpaper">Config wallpaper…</string>
+    <string name="set_as_wallpaper">Usar como wallpaper</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">
