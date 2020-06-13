@@ -13,8 +13,8 @@ class SearchPhotoFragment : PhotoFragment() {
     
     private val sharedViewModel: SearchViewModel by sharedViewModel()
 
-    override val preloadPagedListAdapter =
-        PhotoAdapter(context, itemEventCallback, true, sharedPreferencesRepository)
+    override val pagedListAdapter =
+        PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override val emptyStateSubtitle: String
         get() = getString(R.string.no_search_results_subtitle)

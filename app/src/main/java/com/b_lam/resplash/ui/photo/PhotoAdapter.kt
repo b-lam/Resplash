@@ -1,27 +1,24 @@
 package com.b_lam.resplash.ui.photo
 
-import android.content.Context
 import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.ui.widget.recyclerview.PreloadPagedListAdapter
-import com.b_lam.resplash.util.*
-import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
+import com.b_lam.resplash.util.LAYOUT_DEFAULT
+import com.b_lam.resplash.util.LAYOUT_GRID
+import com.b_lam.resplash.util.LAYOUT_MINIMAL
 
 class PhotoAdapter(
-    private val context: Context?,
     private val callback: ItemEventCallback,
     private val showUser: Boolean,
     sharedPreferencesRepository: SharedPreferencesRepository
-) : PreloadPagedListAdapter<Photo>(diffCallback) {
+) : BasePagedListAdapter<Photo>(diffCallback) {
 
     private val layout = sharedPreferencesRepository.layout
     private val loadQuality = sharedPreferencesRepository.loadQuality
@@ -61,17 +58,6 @@ class PhotoAdapter(
             else ->
                 R.layout.item_photo_default
         }
-    }
-
-    override fun getPreloadRequestBuilder(item: Photo): RequestBuilder<*>? {
-        context?.let {
-            val url = getPhotoUrl(item, loadQuality)
-            return GlideApp.with(it)
-                .load(url)
-                .thumbnail(GlideApp.with(it).load(item.urls.thumb))
-                .transition(DrawableTransitionOptions.withCrossFade(CROSS_FADE_DURATION))
-        }
-        return null
     }
 
     interface ItemEventCallback {

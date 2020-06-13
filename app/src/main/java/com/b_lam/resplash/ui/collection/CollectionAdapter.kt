@@ -1,27 +1,24 @@
 package com.b_lam.resplash.ui.collection
 
-import android.content.Context
 import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.ui.widget.recyclerview.PreloadPagedListAdapter
-import com.b_lam.resplash.util.*
-import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
+import com.b_lam.resplash.util.LAYOUT_DEFAULT
+import com.b_lam.resplash.util.LAYOUT_GRID
+import com.b_lam.resplash.util.LAYOUT_MINIMAL
 
 class CollectionAdapter(
-    private val context: Context?,
     private val callback: ItemEventCallback,
     private val showUser: Boolean,
     sharedPreferencesRepository: SharedPreferencesRepository
-) : PreloadPagedListAdapter<Collection>(diffCallback) {
+) : BasePagedListAdapter<Collection>(diffCallback) {
 
     private val layout = sharedPreferencesRepository.layout
     private val loadQuality = sharedPreferencesRepository.loadQuality
@@ -60,19 +57,6 @@ class CollectionAdapter(
             else ->
                 R.layout.item_collection_default
         }
-    }
-
-    override fun getPreloadRequestBuilder(item: Collection): RequestBuilder<*>? {
-        context?.let {
-            item.cover_photo?.let {
-                val url = getPhotoUrl(item.cover_photo, loadQuality)
-                return GlideApp.with(context)
-                    .load(url)
-                    .thumbnail(GlideApp.with(context).load(item.cover_photo.urls.thumb))
-                    .transition(DrawableTransitionOptions.withCrossFade(CROSS_FADE_DURATION))
-            }
-        }
-        return null
     }
 
     interface ItemEventCallback {

@@ -10,8 +10,8 @@ class MainPhotoFragment : PhotoFragment() {
 
     private val sharedViewModel: MainViewModel by sharedViewModel()
 
-    override val preloadPagedListAdapter =
-        PhotoAdapter(context, itemEventCallback, true, sharedPreferencesRepository)
+    override val pagedListAdapter =
+        PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override fun observeEvents() {
         with(sharedViewModel) {

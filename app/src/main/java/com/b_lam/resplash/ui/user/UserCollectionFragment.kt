@@ -12,8 +12,8 @@ class UserCollectionFragment : CollectionFragment() {
 
     private val sharedViewModel: UserViewModel by sharedViewModel()
 
-    override val preloadPagedListAdapter =
-        CollectionAdapter(context, itemEventCallback, false, sharedPreferencesRepository)
+    override val pagedListAdapter =
+        CollectionAdapter(itemEventCallback, false, sharedPreferencesRepository)
 
     override fun observeEvents() {
         with(sharedViewModel) {

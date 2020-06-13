@@ -7,12 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
-import com.b_lam.resplash.ui.widget.recyclerview.PreloadPagedListAdapter
-import com.bumptech.glide.RequestBuilder
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
 
 class UserAdapter(
     private val callback: ItemEventCallback
-) : PreloadPagedListAdapter<User>(diffCallback) {
+) : BasePagedListAdapter<User>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
@@ -31,14 +30,6 @@ class UserAdapter(
     }
 
     override fun getItemViewType(position: Int) = R.layout.item_user_default
-
-    override fun getPreloadItems(position: Int): MutableList<User> {
-        return mutableListOf()
-    }
-
-    override fun getPreloadRequestBuilder(item: User): RequestBuilder<*>? {
-        return null
-    }
 
     interface ItemEventCallback {
 

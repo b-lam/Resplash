@@ -12,8 +12,8 @@ class CollectionDetailFragment : PhotoFragment() {
 
     private val sharedViewModel: CollectionDetailViewModel by sharedViewModel()
 
-    override val preloadPagedListAdapter =
-        PhotoAdapter(context, itemEventCallback, true, sharedPreferencesRepository)
+    override val pagedListAdapter =
+        PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

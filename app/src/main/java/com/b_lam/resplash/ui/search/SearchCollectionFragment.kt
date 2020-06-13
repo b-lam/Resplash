@@ -13,8 +13,8 @@ class SearchCollectionFragment : CollectionFragment() {
 
     private val sharedViewModel: SearchViewModel by sharedViewModel()
 
-    override val preloadPagedListAdapter =
-        CollectionAdapter(context, itemEventCallback, true, sharedPreferencesRepository)
+    override val pagedListAdapter =
+        CollectionAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override val emptyStateSubtitle: String
         get() = getString(R.string.no_search_results_subtitle)

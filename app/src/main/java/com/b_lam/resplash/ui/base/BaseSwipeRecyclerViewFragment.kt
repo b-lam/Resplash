@@ -7,13 +7,10 @@ import androidx.core.view.isVisible
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.ui.widget.recyclerview.PreloadPagedListAdapter
-import com.b_lam.resplash.ui.widget.recyclerview.RecyclerViewPreloader
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
 import com.b_lam.resplash.util.*
-import com.bumptech.glide.util.ViewPreloadSizeProvider
 import kotlinx.android.synthetic.main.empty_error_state_layout.view.*
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
 import org.koin.android.ext.android.inject
@@ -24,7 +21,7 @@ abstract class BaseSwipeRecyclerViewFragment<T> : BaseFragment() {
 
     override val layoutId = R.layout.fragment_swipe_recycler_view
 
-    abstract val preloadPagedListAdapter: PreloadPagedListAdapter<T>
+    abstract val pagedListAdapter: BasePagedListAdapter<T>
 
     abstract val emptyStateTitle: String
 
@@ -38,7 +35,7 @@ abstract class BaseSwipeRecyclerViewFragment<T> : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recycler_view.apply {
-            adapter = preloadPagedListAdapter.apply {
+            adapter = pagedListAdapter.apply {
                 orientation = resources.configuration.orientation
             }
             layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
@@ -48,11 +45,6 @@ abstract class BaseSwipeRecyclerViewFragment<T> : BaseFragment() {
                 spacing = itemSpacing
             )
             setItemViewCacheSize(RECYCLER_VIEW_CACHE_SIZE)
-            val preloadSizeProvider = ViewPreloadSizeProvider<T>()
-            val preloader = RecyclerViewPreloader(
-                GlideApp.with(this), preloadPagedListAdapter, preloadSizeProvider, 10
-            )
-            addOnScrollListener(preloader)
         }
 
         setEmptyStateText(emptyStateTitle, emptyStateSubtitle)
@@ -67,8 +59,8 @@ abstract class BaseSwipeRecyclerViewFragment<T> : BaseFragment() {
             layout = sharedPreferencesRepository.layout,
             spacing = itemSpacing
         )
-        preloadPagedListAdapter.orientation = newConfig.orientation
-        preloadPagedListAdapter.notifyDataSetChanged()
+        pagedListAdapter.orientation = newConfig.orientation
+        pagedListAdapter.notifyDataSetChanged()
     }
 
     fun scrollToTop() = recycler_view.scrollToTop()
@@ -94,7 +86,7 @@ abstract class BaseSwipeRecyclerViewFragment<T> : BaseFragment() {
     }
 
     fun updatePagedList(pagedList: PagedList<T>) {
-        preloadPagedListAdapter.submitList(pagedList)
+        pagedListAdapter.submitList(pagedList)
     }
 
     private fun setEmptyStateText(title: String, subtitle: String) {

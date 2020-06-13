@@ -11,7 +11,7 @@ import com.b_lam.resplash.ui.user.UserCollectionFragment
 
 abstract class CollectionFragment : BaseSwipeRecyclerViewFragment<Collection>() {
 
-    abstract override val preloadPagedListAdapter: CollectionAdapter
+    abstract override val pagedListAdapter: CollectionAdapter
 
     val itemEventCallback = object : CollectionAdapter.ItemEventCallback {
 

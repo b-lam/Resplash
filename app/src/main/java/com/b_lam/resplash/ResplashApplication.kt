@@ -30,4 +30,14 @@ class ResplashApplication : Application() {
         super.onConfigurationChanged(newConfig)
         applyLanguage(sharedPreferencesRepository.locale)
     }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        GlideApp.get(this).clearMemory()
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        GlideApp.get(this).trimMemory(level)
+    }
 }

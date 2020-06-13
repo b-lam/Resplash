@@ -37,7 +37,7 @@ class SearchUserFragment : BaseSwipeRecyclerViewFragment<User>() {
         }
     }
 
-    override val preloadPagedListAdapter = UserAdapter(itemEventCallback)
+    override val pagedListAdapter = UserAdapter(itemEventCallback)
 
     override val emptyStateTitle: String
         get() = getString(R.string.empty_state_title)
