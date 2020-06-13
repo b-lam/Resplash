@@ -2,8 +2,10 @@ package com.b_lam.resplash.ui.user
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
@@ -26,6 +28,14 @@ class UserAdapter(
             when (getItemViewType(position)) {
                 R.layout.item_user_default -> (holder as UserViewHolder).bind(this, callback)
             }
+        }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        if (holder is UserViewHolder) {
+            val userImageView: ImageView? = holder.itemView.findViewById(R.id.user_image_view)
+            userImageView?.let { GlideApp.with(it.context).clear(it) }
         }
     }
 

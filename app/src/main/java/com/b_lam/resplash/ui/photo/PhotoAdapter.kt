@@ -3,8 +3,10 @@ package com.b_lam.resplash.ui.photo
 import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
@@ -57,6 +59,19 @@ class PhotoAdapter(
                 R.layout.item_photo_grid
             else ->
                 R.layout.item_photo_default
+        }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        if (holder is DefaultPhotoViewHolder ||
+            holder is MinimalPhotoViewHolder ||
+            holder is GridPhotoViewHolder
+        ) {
+            val photoImageView: ImageView? = holder.itemView.findViewById(R.id.photo_image_view)
+            val userImageView: ImageView? = holder.itemView.findViewById(R.id.user_image_view)
+            photoImageView?.let { GlideApp.with(it.context).clear(it) }
+            userImageView?.let { GlideApp.with(it.context).clear(it) }
         }
     }
 

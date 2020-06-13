@@ -3,8 +3,10 @@ package com.b_lam.resplash.ui.collection
 import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.user.model.User
@@ -56,6 +58,19 @@ class CollectionAdapter(
                 R.layout.item_collection_grid
             else ->
                 R.layout.item_collection_default
+        }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        if (holder is DefaultCollectionViewHolder ||
+            holder is MinimalCollectionViewHolder ||
+            holder is GridCollectionViewHolder
+        ) {
+            val collectionImageView: ImageView? = holder.itemView.findViewById(R.id.collection_image_view)
+            val userImageView: ImageView? = holder.itemView.findViewById(R.id.user_image_view)
+            collectionImageView?.let { GlideApp.with(it.context).clear(it) }
+            userImageView?.let { GlideApp.with(it.context).clear(it) }
         }
     }
 

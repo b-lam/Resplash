@@ -28,6 +28,7 @@ fun ImageView.loadPhotoUrl(
         .transition(DrawableTransitionOptions.withCrossFade(CROSS_FADE_DURATION))
         .addListener(requestListener)
         .into(this)
+        .clearOnDetach()
 }
 
 fun ImageView.loadPhotoUrlWithThumbnail(
@@ -50,6 +51,7 @@ fun ImageView.loadPhotoUrlWithThumbnail(
         .transition(DrawableTransitionOptions.withCrossFade(CROSS_FADE_DURATION))
         .addListener(requestListener)
         .into(this)
+        .clearOnDetach()
 }
 
 fun ImageView.loadBlurredImage(
@@ -64,6 +66,7 @@ fun ImageView.loadBlurredImage(
         .addListener(requestListener)
         .apply(RequestOptions.bitmapTransform(SupportRSBlurTransformation()))
         .into(this)
+        .clearOnDetach()
 }
 
 fun ImageView.loadProfilePicture(user: User) {
@@ -77,6 +80,7 @@ fun ImageView.loadProfilePicture(url: String?) {
         .circleCrop()
         .transition(DrawableTransitionOptions.withCrossFade(CROSS_FADE_DURATION))
         .into(this)
+        .clearOnDetach()
 }
 
 fun AspectRatioImageView.setAspectRatio(width: Int?, height: Int?) {
