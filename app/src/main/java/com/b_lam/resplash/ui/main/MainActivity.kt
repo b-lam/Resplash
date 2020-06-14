@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -26,8 +28,16 @@ import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.user.edit.EditProfileActivity
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
 import com.b_lam.resplash.util.livedata.observeEvent
+import com.b_lam.resplash.util.loadPhotoUrl
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplay
+import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplayCallbacks
+import com.google.firebase.inappmessaging.ktx.inAppMessaging
+import com.google.firebase.inappmessaging.model.CardMessage
+import com.google.firebase.inappmessaging.model.InAppMessage
+import com.google.firebase.inappmessaging.model.MessageType
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -62,6 +72,11 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         viewModel.refreshUserProfile()
+
+        val inAppMessagingDisplay = FirebaseInAppMessagingDisplay { inAppMessage, callbacks ->
+            showInAppMessagingDialog(inAppMessage, callbacks)
+        }
+        Firebase.inAppMessaging.setMessageDisplayComponent(inAppMessagingDisplay)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -132,9 +147,9 @@ class MainActivity : BaseActivity() {
         val currentSelection = viewModel.photoOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.sort_by)
-            .setSingleChoiceItems(orderOptions, currentSelection) { dialogInterface, which ->
+            .setSingleChoiceItems(orderOptions, currentSelection) { dialog, which ->
                 if (which != currentSelection) viewModel.orderPhotosBy(which)
-                dialogInterface.dismiss()
+                dialog.dismiss()
             }
             .create()
             .show()
@@ -146,12 +161,47 @@ class MainActivity : BaseActivity() {
         val currentSelection = viewModel.collectionOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.sort_by)
-            .setSingleChoiceItems(orderOptions, currentSelection) { dialogInterface, which ->
+            .setSingleChoiceItems(orderOptions, currentSelection) { dialog, which ->
                 if (which != currentSelection) viewModel.orderCollectionsBy(which)
-                dialogInterface.dismiss()
+                dialog.dismiss()
             }
             .create()
             .show()
+    }
+
+    private fun showInAppMessagingDialog(
+        inAppMessage: InAppMessage,
+        callbacks: FirebaseInAppMessagingDisplayCallbacks
+    ) {
+        if (inAppMessage.messageType == MessageType.CARD) {
+            val cardMessage = inAppMessage as? CardMessage
+            callbacks.impressionDetected()
+            val view = layoutInflater.inflate(R.layout.in_app_messaging_dialog_layout, null)
+            view.findViewById<TextView>(R.id.title_text_view)?.text = cardMessage?.title?.text
+            view.findViewById<TextView>(R.id.message_text_view)?.text = cardMessage?.body?.text
+            cardMessage?.portraitImageData?.imageUrl?.let {
+                view.findViewById<ImageView>(R.id.header_image_view)?.loadPhotoUrl(it)
+            }
+            MaterialAlertDialogBuilder(this)
+                .setView(view)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.cancel()
+                }
+                .setNeutralButton("Learn more") { dialog, _ ->
+                    cardMessage?.primaryAction?.let { callbacks.messageClicked(it) }
+                    startActivity(Intent(this, UpgradeActivity::class.java))
+                    dialog.dismiss()
+                }
+                .setOnCancelListener {
+                    callbacks.messageDismissed(
+                        FirebaseInAppMessagingDisplayCallbacks.InAppMessagingDismissType.CLICK)
+                }
+                .create()
+                .show()
+        } else {
+            callbacks.displayErrorEncountered(
+                FirebaseInAppMessagingDisplayCallbacks.InAppMessagingErrorReason.UNSPECIFIED_RENDER_ERROR)
+        }
     }
 
     private fun openUnsplashSubmitTab() {

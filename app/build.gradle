@@ -106,10 +106,6 @@ dependencies {
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation('com.github.bumptech.glide:recyclerview-integration:4.11.0') {
-        // Excludes the support library because it's already included by Glide.
-        transitive = false
-    }
     implementation 'jp.wasabeef:glide-transformations:4.1.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
@@ -125,7 +121,7 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:17.4.3'
     implementation 'com.google.firebase:firebase-crashlytics:17.0.1'
-    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:19.0.7'
+    implementation 'com.google.firebase:firebase-inappmessaging-ktx:19.0.7'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
