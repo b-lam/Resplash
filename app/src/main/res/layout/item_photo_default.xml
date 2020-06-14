@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:ignore="UnusedAttribute">
 
     <LinearLayout
         android:id="@+id/user_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/keyline_6"
         android:orientation="horizontal"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/user_image_view"
@@ -39,11 +41,8 @@
         android:id="@+id/photo_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/keyline_6"
         android:foreground="?attr/selectableItemBackground"
-        app:cardElevation="0dp"
-        app:layout_goneMarginTop="@dimen/keyline_0"
-        app:layout_constraintTop_toBottomOf="@id/user_container">
+        app:cardElevation="0dp">
 
         <com.b_lam.resplash.ui.widget.AspectRatioImageView
             android:id="@+id/photo_image_view"
@@ -62,4 +61,4 @@
             app:lottie_fileName="check.json"
             app:lottie_speed="1.5" />
     </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

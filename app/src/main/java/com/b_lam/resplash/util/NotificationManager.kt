@@ -12,15 +12,6 @@ class NotificationManager(private val context: Context) {
 
     private val notificationManager by lazy { NotificationManagerCompat.from(context) }
 
-    private val tileServiceNotificationBuilder =
-        NotificationCompat.Builder(context, CHANNEL_ID).apply {
-            priority = NotificationCompat.PRIORITY_DEFAULT
-            setSmallIcon(R.drawable.ic_resplash_24dp)
-            setContentTitle(context.getString(R.string.setting_wallpaper))
-            setProgress(0, 0, true)
-            setTimeoutAfter(60000)
-        }
-
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = context.getString(R.string.app_name)
@@ -35,7 +26,14 @@ class NotificationManager(private val context: Context) {
     }
 
     fun showTileServiceDownloadingNotification() {
-        notificationManager.notify(TILE_SERVICE_NOTIFICATION_ID, tileServiceNotificationBuilder.build())
+        val builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
+            priority = NotificationCompat.PRIORITY_DEFAULT
+            setSmallIcon(R.drawable.ic_resplash_24dp)
+            setContentTitle(context.getString(R.string.setting_wallpaper))
+            setProgress(0, 0, true)
+            setTimeoutAfter(60000)
+        }
+        notificationManager.notify(TILE_SERVICE_NOTIFICATION_ID, builder.build())
     }
 
     fun showTileServiceErrorNotification() {
