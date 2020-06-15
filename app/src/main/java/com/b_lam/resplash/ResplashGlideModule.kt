@@ -1,5 +1,6 @@
 package com.b_lam.resplash
 
+import android.app.ActivityManager
 import android.content.Context
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.annotation.GlideModule
@@ -14,6 +15,10 @@ class ResplashGlideModule : AppGlideModule() {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         val diskCacheSizeBytes: Long = 1024 * 1024 * 500 // 500 MB
         builder.setDiskCache(InternalCacheDiskCacheFactory(context, diskCacheSizeBytes))
-        builder.setDefaultRequestOptions(RequestOptions().format(DecodeFormat.PREFER_RGB_565))
+
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+        if (activityManager?.isLowRamDevice == true) {
+            builder.setDefaultRequestOptions(RequestOptions().format(DecodeFormat.PREFER_RGB_565))
+        }
     }
 }
