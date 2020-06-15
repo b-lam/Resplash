@@ -79,6 +79,11 @@ class MainActivity : BaseActivity() {
         Firebase.inAppMessaging.setMessageDisplayComponent(inAppMessagingDisplay)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Firebase.inAppMessaging.clearDisplayListener()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
