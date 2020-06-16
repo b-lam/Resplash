@@ -1,24 +1,32 @@
 package com.b_lam.resplash.ui.main
 
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.b_lam.resplash.ui.photo.PhotoAdapter
 import com.b_lam.resplash.ui.photo.PhotoFragment
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MainPhotoFragment : PhotoFragment() {
 
     private val sharedViewModel: MainViewModel by sharedViewModel()
 
-    override val pagedListAdapter =
+    private var job: Job? = null
+
+    override val pagingAdapter =
         PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override fun observeEvents() {
-        with(sharedViewModel) {
-            swipe_refresh_layout.setOnRefreshListener { refreshPhotos() }
-            photosRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
-            photosNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            photosLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+        swipe_refresh_layout.setOnRefreshListener { pagingAdapter.refresh() }
+        pagingAdapter.addLoadStateListener { updateLoadState(it) }
+        sharedViewModel.photoOrderLiveData.observe(viewLifecycleOwner) { order ->
+            job?.cancel()
+            job = lifecycleScope.launch {
+                sharedViewModel.getPhotos(order).collectLatest { pagingAdapter.submitData(it) }
+            }
         }
     }
 

@@ -2,18 +2,24 @@ package com.b_lam.resplash.ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.b_lam.resplash.R
 import com.b_lam.resplash.ui.photo.PhotoAdapter
 import com.b_lam.resplash.ui.photo.PhotoFragment
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SearchPhotoFragment : PhotoFragment() {
     
     private val sharedViewModel: SearchViewModel by sharedViewModel()
 
-    override val pagedListAdapter =
+    private var searchJob: Job? = null
+
+    override val pagingAdapter =
         PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override val emptyStateSubtitle: String
@@ -21,15 +27,17 @@ class SearchPhotoFragment : PhotoFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         swipe_refresh_layout.isEnabled = false
     }
 
     override fun observeEvents() {
-        with(sharedViewModel) {
-            photosRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
-            photosNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            photosLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+        swipe_refresh_layout.setOnRefreshListener { pagingAdapter.refresh() }
+        pagingAdapter.addLoadStateListener { updateLoadState(it) }
+        sharedViewModel.queryPhotoLiveData.observe(viewLifecycleOwner) { query ->
+            searchJob?.cancel()
+            searchJob = lifecycleScope.launch {
+                sharedViewModel.searchPhotos(query).collectLatest { pagingAdapter.submitData(it) }
+            }
         }
     }
 

@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.b_lam.resplash.R
-import com.b_lam.resplash.domain.collection.CollectionDataSourceFactory
-import com.b_lam.resplash.domain.photo.PhotoDataSourceFactory
+import com.b_lam.resplash.domain.collection.CollectionPagingSource
+import com.b_lam.resplash.domain.photo.PhotoPagingSource
 import com.b_lam.resplash.ui.about.AboutActivity
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
 import com.b_lam.resplash.ui.base.BaseActivity
@@ -147,7 +147,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showPhotoOrderDialog() {
-        val orderOptions = enumValues<PhotoDataSourceFactory.Companion.Order>()
+        val orderOptions = enumValues<PhotoPagingSource.Companion.Order>()
             .map { getString(it.titleRes) }.toTypedArray()
         val currentSelection = viewModel.photoOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)
@@ -161,7 +161,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showCollectionOrderDialog() {
-        val orderOptions = enumValues<CollectionDataSourceFactory.Companion.Order>()
+        val orderOptions = enumValues<CollectionPagingSource.Companion.Order>()
             .map { getString(it.titleRes) }.toTypedArray()
         val currentSelection = viewModel.collectionOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)
@@ -181,7 +181,7 @@ class MainActivity : BaseActivity() {
         if (inAppMessage.messageType == MessageType.CARD) {
             val cardMessage = inAppMessage as? CardMessage
             callbacks.impressionDetected()
-            val view = layoutInflater.inflate(R.layout.in_app_messaging_dialog_layout, null)
+            val view = layoutInflater.inflate(R.layout.dialog_in_app_messaging, null)
             view.findViewById<TextView>(R.id.title_text_view)?.text = cardMessage?.title?.text
             view.findViewById<TextView>(R.id.message_text_view)?.text = cardMessage?.body?.text
             cardMessage?.portraitImageData?.imageUrl?.let {

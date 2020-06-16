@@ -2,24 +2,24 @@ package com.b_lam.resplash.domain.photo
 
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.UserService
-import com.b_lam.resplash.domain.BaseDataSourceFactory
-import kotlinx.coroutines.CoroutineScope
+import com.b_lam.resplash.domain.BasePagingSource
 
-class UserLikesDataSourceFactory(
+class UserLikesPagingSource(
     private val userService: UserService,
     private val username: String,
     private val order: Order?,
-    private val orientation: Orientation?,
-    private val scope: CoroutineScope
-) : BaseDataSourceFactory<Photo>() {
+    private val orientation: Orientation?
+) : BasePagingSource<Photo>() {
 
-    override fun createDataSource() = UserLikesDataSource(
-        userService,
-        username,
-        order?.value,
-        orientation?.value,
-        scope
-    )
+    override suspend fun getPage(page: Int, perPage: Int): List<Photo> {
+        return userService.getUserLikes(
+            username = username,
+            page = page,
+            per_page = perPage,
+            order_by = order?.value,
+            orientation = orientation?.value
+        )
+    }
 
     companion object {
 

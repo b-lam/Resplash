@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.b_lam.resplash.ui.widget.recyclerview.StaggeredGridItemOffsetDecoration
 
-const val RECYCLER_VIEW_CACHE_SIZE = 3
+const val RECYCLER_VIEW_CACHE_SIZE = 4
 
 const val LAYOUT_DEFAULT = "default"
 const val LAYOUT_MINIMAL = "minimal"

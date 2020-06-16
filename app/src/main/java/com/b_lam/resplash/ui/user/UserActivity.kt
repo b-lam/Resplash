@@ -118,8 +118,6 @@ class UserActivity : BaseActivity() {
         location_text_view.setOnClickListener { openLocationInMaps(user.location) }
 
         bio_text_view.setTextAndVisibility(user.bio?.trimEnd())
-
-        user.username?.let { username -> viewModel.getUserListings(username) }
     }
 
     private fun openUrlInBrowser(url: String?) {

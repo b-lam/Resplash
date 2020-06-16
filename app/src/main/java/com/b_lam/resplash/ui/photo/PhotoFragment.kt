@@ -16,7 +16,7 @@ import org.koin.android.ext.android.inject
 
 abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
 
-    abstract override val pagedListAdapter: PhotoAdapter
+    abstract override val pagingAdapter: PhotoAdapter
 
     private val downloadManager: RxDownloadManager by inject()
 

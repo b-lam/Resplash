@@ -1,16 +1,17 @@
 package com.b_lam.resplash.domain.collection
 
+import androidx.paging.Pager
+import androidx.paging.PagingData
 import com.b_lam.resplash.data.collection.CollectionService
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.search.SearchService
 import com.b_lam.resplash.data.user.UserService
-import com.b_lam.resplash.domain.Listing
+import com.b_lam.resplash.domain.BasePagingSource
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import okhttp3.ResponseBody
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 class CollectionRepository(
@@ -20,71 +21,36 @@ class CollectionRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun getCollection(collectionId: Int): Result<Collection> {
-        return safeApiCall(dispatcher) { collectionService.getCollection(collectionId) }
-    }
+    fun getCollections(order: CollectionPagingSource.Companion.Order) = Pager(
+        config = BasePagingSource.config,
+        pagingSourceFactory = { CollectionPagingSource(collectionService, order) }
+    ).flow
 
-    fun getCollections(
-        order: CollectionDataSourceFactory.Companion.Order,
-        scope: CoroutineScope
-    ): Listing<Collection> {
-        return CollectionDataSourceFactory(collectionService, order, scope).createListing()
-    }
+    fun searchCollections(query: String): Flow<PagingData<Collection>> = Pager(
+        config = BasePagingSource.config,
+        pagingSourceFactory = { SearchCollectionPagingSource(searchService, query) }
+    ).flow
 
-    fun searchCollections(
-        query: String,
-        scope: CoroutineScope
-    ): Listing<Collection> {
-        return SearchCollectionDataSourceFactory(searchService, query, scope).createListing()
-    }
+    fun getUserCollections(username: String) = Pager(
+        config = BasePagingSource.config,
+        pagingSourceFactory = { UserCollectionPagingSource(userService, username) }
+    ).flow
 
-    fun getUserCollections(
-        username: String,
-        scope: CoroutineScope
-    ): Listing<Collection> {
-        return UserCollectionDataSourceFactory(userService, username, scope).createListing()
-    }
+    suspend fun getCollection(collectionId: Int) =
+        safeApiCall(dispatcher) { collectionService.getCollection(collectionId) }
 
-    suspend fun createCollection(
-        title: String,
-        description: String?,
-        private: Boolean?
-    ): Result<Collection> {
-        return safeApiCall(dispatcher) {
-            collectionService.createCollection(title, description, private)
-        }
-    }
+    suspend fun createCollection(title: String, description: String?, private: Boolean?) =
+        safeApiCall(dispatcher) { collectionService.createCollection(title, description, private) }
 
-    suspend fun updateCollection(
-        id: Int,
-        title: String,
-        description: String?,
-        private: Boolean?
-    ): Result<Collection> {
-        return safeApiCall(dispatcher) {
-            collectionService.updateCollection(id, title, description, private)
-        }
-    }
+    suspend fun updateCollection(id: Int, title: String, description: String?, private: Boolean?) =
+        safeApiCall(dispatcher) { collectionService.updateCollection(id, title, description, private) }
 
-    suspend fun deleteCollection(
-        id: Int
-    ): Result<Response<Unit>> {
-        return safeApiCall(dispatcher) {
-            collectionService.deleteCollection(id)
-        }
-    }
+    suspend fun deleteCollection(id: Int): Result<Response<Unit>> =
+        safeApiCall(dispatcher) { collectionService.deleteCollection(id) }
 
-    suspend fun addPhotoToCollection(
-        collectionId: Int,
-        photoId: String
-    ): Result<ResponseBody> {
-        return safeApiCall(dispatcher) { collectionService.addPhotoToCollection(collectionId, photoId) }
-    }
+    suspend fun addPhotoToCollection(collectionId: Int, photoId: String) =
+        safeApiCall(dispatcher) { collectionService.addPhotoToCollection(collectionId, photoId) }
 
-    suspend fun removePhotoFromCollection(
-        collectionId: Int,
-        photoId: String
-    ): Result<ResponseBody> {
-        return safeApiCall(dispatcher) { collectionService.removePhotoFromCollection(collectionId, photoId) }
-    }
+    suspend fun removePhotoFromCollection(collectionId: Int, photoId: String) =
+        safeApiCall(dispatcher) { collectionService.removePhotoFromCollection(collectionId, photoId) }
 }

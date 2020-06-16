@@ -45,7 +45,7 @@ class UpgradeActivity : BaseActivity() {
     }
 
     private fun showThanksDialog() {
-        val view = layoutInflater.inflate(R.layout.thanks_dialog_layout, null)
+        val view = layoutInflater.inflate(R.layout.dialog_thanks, null)
         val animationView = view.findViewById<LottieAnimationView>(R.id.trophy_animation_view)
         animationView.setOnClickListener { animationView.playAnimation() }
         MaterialAlertDialogBuilder(this)

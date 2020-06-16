@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import com.b_lam.resplash.R
-import com.b_lam.resplash.domain.photo.SearchPhotoDataSourceFactory
+import com.b_lam.resplash.domain.photo.SearchPhotoPagingSource
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_sheet_search_photo_filter.*
@@ -48,71 +48,69 @@ class SearchPhotoFilterBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(sharedViewModel) {
-            val orderButtonId = when (orderLiveData.value) {
-                SearchPhotoDataSourceFactory.Companion.Order.RELEVANT -> R.id.order_relevance_button
-                else -> R.id.order_latest_button
-            }
-            order_by_toggle_group.check(orderButtonId)
-            order_by_toggle_group.addOnButtonCheckedListener { _, checkedId, isChecked ->
-                if (isChecked) {
-                    val order = when (checkedId) {
-                        R.id.order_relevance_button -> SearchPhotoDataSourceFactory.Companion.Order.RELEVANT
-                        else -> SearchPhotoDataSourceFactory.Companion.Order.LATEST
-                    }
-                    updateOrder(order)
-                    searchParametersChanged = true
+        val orderButtonId = when (sharedViewModel.order) {
+            SearchPhotoPagingSource.Companion.Order.RELEVANT -> R.id.order_relevance_button
+            else -> R.id.order_latest_button
+        }
+        order_by_toggle_group.check(orderButtonId)
+        order_by_toggle_group.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val order = when (checkedId) {
+                    R.id.order_relevance_button -> SearchPhotoPagingSource.Companion.Order.RELEVANT
+                    else -> SearchPhotoPagingSource.Companion.Order.LATEST
                 }
+                sharedViewModel.order = order
+                searchParametersChanged = true
             }
+        }
 
-            val contentFilterButtonId = when (contentFilterLiveData.value) {
-                SearchPhotoDataSourceFactory.Companion.ContentFilter.LOW -> R.id.content_filter_low_button
-                else -> R.id.content_filter_high_button
-            }
-            content_filter_toggle_group.check(contentFilterButtonId)
-            content_filter_toggle_group.addOnButtonCheckedListener { _, checkedId, isChecked ->
-                if (isChecked) {
-                    val contentFilter = when (checkedId) {
-                        R.id.content_filter_low_button -> SearchPhotoDataSourceFactory.Companion.ContentFilter.LOW
-                        else -> SearchPhotoDataSourceFactory.Companion.ContentFilter.HIGH
-                    }
-                    updateContentFilter(contentFilter)
-                    searchParametersChanged = true
+        val contentFilterButtonId = when (sharedViewModel.contentFilter) {
+            SearchPhotoPagingSource.Companion.ContentFilter.LOW -> R.id.content_filter_low_button
+            else -> R.id.content_filter_high_button
+        }
+        content_filter_toggle_group.check(contentFilterButtonId)
+        content_filter_toggle_group.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val contentFilter = when (checkedId) {
+                    R.id.content_filter_low_button -> SearchPhotoPagingSource.Companion.ContentFilter.LOW
+                    else -> SearchPhotoPagingSource.Companion.ContentFilter.HIGH
                 }
+                sharedViewModel.contentFilter = contentFilter
+                searchParametersChanged = true
             }
+        }
 
-            val items = enumValues<SearchPhotoDataSourceFactory.Companion.Color>()
-            val titles = items.map { getString(it.titleRes) }
-            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown_list, titles)
-            val colorFilterDropdownMenu = (color_filter_dropdown_menu.editText as? AutoCompleteTextView)
-            colorFilterDropdownMenu?.setAdapter(adapter)
-            colorFilterDropdownMenu?.setText(titles[items.indexOf(colorLiveData.value)], false)
-            colorFilterDropdownMenu?.setOnItemClickListener { _, _, position, _ ->
-                val color = items[position]
-                if (color != colorLiveData.value) {
-                    searchParametersChanged = true
-                    updateColor(color)
-                }
+        val items = enumValues<SearchPhotoPagingSource.Companion.Color>()
+        val titles = items.map { getString(it.titleRes) }
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown_list, titles)
+        val colorFilterDropdownMenu = (color_filter_dropdown_menu.editText as? AutoCompleteTextView)
+        colorFilterDropdownMenu?.setAdapter(adapter)
+        colorFilterDropdownMenu?.setText(titles[items.indexOf(sharedViewModel.color)], false)
+        colorFilterDropdownMenu?.setOnItemClickListener { _, _, position, _ ->
+            val color = items[position]
+            if (color != sharedViewModel.color) {
+                searchParametersChanged = true
+                sharedViewModel.color = color
             }
+        }
 
-            val orientationButtonId = when (orientationLiveData.value) {
-                SearchPhotoDataSourceFactory.Companion.Orientation.ANY -> R.id.orientation_any_button
-                SearchPhotoDataSourceFactory.Companion.Orientation.PORTRAIT -> R.id.orientation_portrait_button
-                SearchPhotoDataSourceFactory.Companion.Orientation.LANDSCAPE -> R.id.orientation_landscape_button
-                else -> R.id.orientation_square_button
-            }
-            orientation_toggle_group.check(orientationButtonId)
-            orientation_toggle_group.addOnButtonCheckedListener { _, checkedId, isChecked ->
-                if (isChecked) {
-                    val orientation = when (checkedId) {
-                        R.id.orientation_any_button -> SearchPhotoDataSourceFactory.Companion.Orientation.ANY
-                        R.id.orientation_portrait_button -> SearchPhotoDataSourceFactory.Companion.Orientation.PORTRAIT
-                        R.id.orientation_landscape_button -> SearchPhotoDataSourceFactory.Companion.Orientation.LANDSCAPE
-                        else -> SearchPhotoDataSourceFactory.Companion.Orientation.SQUARISH
-                    }
-                    updateOrientation(orientation)
-                    searchParametersChanged = true
+        val orientationButtonId = when (sharedViewModel.orientation) {
+            SearchPhotoPagingSource.Companion.Orientation.ANY -> R.id.orientation_any_button
+            SearchPhotoPagingSource.Companion.Orientation.PORTRAIT -> R.id.orientation_portrait_button
+            SearchPhotoPagingSource.Companion.Orientation.LANDSCAPE -> R.id.orientation_landscape_button
+            else -> R.id.orientation_square_button
+        }
+        orientation_toggle_group.check(orientationButtonId)
+        orientation_toggle_group.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val orientation = when (checkedId) {
+                    R.id.orientation_any_button -> SearchPhotoPagingSource.Companion.Orientation.ANY
+                    R.id.orientation_portrait_button -> SearchPhotoPagingSource.Companion.Orientation.PORTRAIT
+                    R.id.orientation_landscape_button -> SearchPhotoPagingSource.Companion.Orientation.LANDSCAPE
+                    else -> SearchPhotoPagingSource.Companion.Orientation.SQUARISH
                 }
+                sharedViewModel.orientation = orientation
+                searchParametersChanged = true
             }
         }
 
@@ -123,7 +121,7 @@ class SearchPhotoFilterBottomSheet : BottomSheetDialogFragment() {
         super.onDismiss(dialog)
 
         if (searchParametersChanged) {
-            sharedViewModel.updatePhotoSearch()
+            sharedViewModel.filterPhotoSearch()
         }
     }
 

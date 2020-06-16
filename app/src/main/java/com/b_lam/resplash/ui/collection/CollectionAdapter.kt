@@ -11,7 +11,7 @@ import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagingDataAdapter
 import com.b_lam.resplash.util.LAYOUT_DEFAULT
 import com.b_lam.resplash.util.LAYOUT_GRID
 import com.b_lam.resplash.util.LAYOUT_MINIMAL
@@ -20,7 +20,7 @@ class CollectionAdapter(
     private val callback: ItemEventCallback,
     private val showUser: Boolean,
     sharedPreferencesRepository: SharedPreferencesRepository
-) : BasePagedListAdapter<Collection>(diffCallback) {
+) : BasePagingDataAdapter<Collection>(diffCallback) {
 
     private val layout = sharedPreferencesRepository.layout
     private val loadQuality = sharedPreferencesRepository.loadQuality
@@ -63,15 +63,10 @@ class CollectionAdapter(
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         super.onViewRecycled(holder)
-        if (holder is DefaultCollectionViewHolder ||
-            holder is MinimalCollectionViewHolder ||
-            holder is GridCollectionViewHolder
-        ) {
-            val collectionImageView: ImageView? = holder.itemView.findViewById(R.id.collection_image_view)
-            val userImageView: ImageView? = holder.itemView.findViewById(R.id.user_image_view)
-            collectionImageView?.let { GlideApp.with(it.context).clear(it) }
-            userImageView?.let { GlideApp.with(it.context).clear(it) }
-        }
+        val collectionImageView: ImageView? = holder.itemView.findViewById(R.id.collection_image_view)
+        val userImageView: ImageView? = holder.itemView.findViewById(R.id.user_image_view)
+        collectionImageView?.let { GlideApp.with(it.context).clear(it) }
+        userImageView?.let { GlideApp.with(it.context).clear(it) }
     }
 
     interface ItemEventCallback {

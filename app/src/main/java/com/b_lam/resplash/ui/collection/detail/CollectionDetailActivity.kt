@@ -156,8 +156,6 @@ class CollectionDetailActivity : BaseActivity() {
                     .show(supportFragmentManager, EditCollectionBottomSheet.TAG)
             }
         }
-
-        viewModel.getPhotoListing(collection.id)
     }
 
     private fun setupToolbar(collection: Collection) {

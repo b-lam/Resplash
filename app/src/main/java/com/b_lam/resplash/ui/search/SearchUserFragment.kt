@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
@@ -14,11 +15,16 @@ import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.user.UserAdapter
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SearchUserFragment : BaseSwipeRecyclerViewFragment<User>() {
 
     private val sharedViewModel: SearchViewModel by sharedViewModel()
+
+    private var searchJob: Job? = null
 
     private val itemEventCallback = object : UserAdapter.ItemEventCallback {
 
@@ -37,7 +43,7 @@ class SearchUserFragment : BaseSwipeRecyclerViewFragment<User>() {
         }
     }
 
-    override val pagedListAdapter = UserAdapter(itemEventCallback)
+    override val pagingAdapter = UserAdapter(itemEventCallback)
 
     override val emptyStateTitle: String
         get() = getString(R.string.empty_state_title)
@@ -50,15 +56,17 @@ class SearchUserFragment : BaseSwipeRecyclerViewFragment<User>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         swipe_refresh_layout.isEnabled = false
     }
 
     override fun observeEvents() {
-        with(sharedViewModel) {
-            usersRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
-            usersNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            usersLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+        swipe_refresh_layout.setOnRefreshListener { pagingAdapter.refresh() }
+        pagingAdapter.addLoadStateListener { updateLoadState(it) }
+        sharedViewModel.queryLiveData.observe(viewLifecycleOwner) { query ->
+            searchJob?.cancel()
+            searchJob = lifecycleScope.launch {
+                sharedViewModel.searchUsers(query).collectLatest { pagingAdapter.submitData(it) }
+            }
         }
     }
 

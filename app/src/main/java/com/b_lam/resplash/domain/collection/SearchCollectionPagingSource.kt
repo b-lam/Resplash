@@ -2,14 +2,12 @@ package com.b_lam.resplash.domain.collection
 
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.search.SearchService
-import com.b_lam.resplash.domain.BaseDataSource
-import kotlinx.coroutines.CoroutineScope
+import com.b_lam.resplash.domain.BasePagingSource
 
-class SearchCollectionDataSource(
+class SearchCollectionPagingSource(
     private val searchService: SearchService,
-    private val query: String,
-    scope: CoroutineScope
-) : BaseDataSource<Collection>(scope) {
+    private val query: String
+) : BasePagingSource<Collection>() {
 
     override suspend fun getPage(page: Int, perPage: Int): List<Collection> {
         return searchService.searchCollections(

@@ -2,19 +2,21 @@ package com.b_lam.resplash.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
-import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.domain.billing.BillingRepository
-import com.b_lam.resplash.domain.collection.CollectionDataSourceFactory
+import com.b_lam.resplash.domain.collection.CollectionPagingSource
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
-import com.b_lam.resplash.domain.photo.PhotoDataSourceFactory
+import com.b_lam.resplash.domain.photo.PhotoPagingSource
 import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -45,29 +47,23 @@ class MainViewModel(
     private val _profilePictureLiveData = MutableLiveData<String?>()
     val profilePictureLiveData: LiveData<String?> = _profilePictureLiveData
 
-    private val _photoOrderLiveData = MutableLiveData(PhotoDataSourceFactory.Companion.Order.LATEST)
-    val photoOrderLiveData: LiveData<PhotoDataSourceFactory.Companion.Order> = _photoOrderLiveData
+    private val _photoOrderLiveData = MutableLiveData(PhotoPagingSource.Companion.Order.LATEST)
+    val photoOrderLiveData: LiveData<PhotoPagingSource.Companion.Order> = _photoOrderLiveData
 
-    private val _collectionOrderLiveData = MutableLiveData(CollectionDataSourceFactory.Companion.Order.ALL)
-    val collectionOrderLiveData: LiveData<CollectionDataSourceFactory.Companion.Order> = _collectionOrderLiveData
+    private val _collectionOrderLiveData = MutableLiveData(CollectionPagingSource.Companion.Order.ALL)
+    val collectionOrderLiveData: LiveData<CollectionPagingSource.Companion.Order> = _collectionOrderLiveData
 
-    private val photoListing: LiveData<Listing<Photo>> = Transformations.map(_photoOrderLiveData) {
-        photoRepository.getPhotos(it, viewModelScope)
+    fun getPhotos(order: PhotoPagingSource.Companion.Order): Flow<PagingData<Photo>> {
+        return photoRepository
+            .getPhotos(order)
+            .cachedIn(viewModelScope)
     }
-    val photosLiveData = Transformations.switchMap(photoListing) { it.pagedList }
-    val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
-    val photosRefreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
 
-    private val collectionListing = Transformations.map(_collectionOrderLiveData) {
-        collectionRepository.getCollections(it, viewModelScope)
+    fun getCollections(order: CollectionPagingSource.Companion.Order): Flow<PagingData<Collection>> {
+        return collectionRepository
+            .getCollections(order)
+            .cachedIn(viewModelScope)
     }
-    val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagedList }
-    val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it.networkState }
-    val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) { it.refreshState }
-
-    fun refreshPhotos() = photoListing.value?.refresh?.invoke()
-
-    fun refreshCollections() = collectionListing.value?.refresh?.invoke()
 
     fun onNavigationItemSelected(optionId: Int) {
         _navigationItemSelectedLiveData.postValue(Event(optionId))
@@ -75,17 +71,17 @@ class MainViewModel(
 
     fun orderPhotosBy(selection: Int) {
         val order = when (selection) {
-            0 -> PhotoDataSourceFactory.Companion.Order.LATEST
-            1 -> PhotoDataSourceFactory.Companion.Order.OLDEST
-            else -> PhotoDataSourceFactory.Companion.Order.POPULAR
+            0 -> PhotoPagingSource.Companion.Order.LATEST
+            1 -> PhotoPagingSource.Companion.Order.OLDEST
+            else -> PhotoPagingSource.Companion.Order.POPULAR
         }
         _photoOrderLiveData.postValue(order)
     }
 
     fun orderCollectionsBy(selection: Int) {
         val order = when (selection) {
-            0 -> CollectionDataSourceFactory.Companion.Order.ALL
-            else -> CollectionDataSourceFactory.Companion.Order.FEATURED
+            0 -> CollectionPagingSource.Companion.Order.ALL
+            else -> CollectionPagingSource.Companion.Order.FEATURED
         }
         _collectionOrderLiveData.postValue(order)
     }
