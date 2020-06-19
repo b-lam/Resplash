@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.b_lam.resplash.ui.photo.PhotoAdapter
 import com.b_lam.resplash.ui.photo.PhotoFragment
+import com.b_lam.resplash.util.livedata.observeOnce
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -20,10 +21,14 @@ class CollectionDetailFragment : PhotoFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        swipe_refresh_layout.isEnabled = false
+
+        sharedViewModel.collectionLiveData.observeOnce(this) {
+            swipe_refresh_layout.isEnabled = sharedViewModel.isOwnCollection()
+        }
     }
 
     override fun observeEvents() {
+        swipe_refresh_layout.setOnRefreshListener { pagingAdapter.refresh() }
         pagingAdapter.addLoadStateListener { updateLoadState(it) }
         sharedViewModel.collectionLiveData.observe(viewLifecycleOwner) { collection ->
             lifecycleScope.launch {
