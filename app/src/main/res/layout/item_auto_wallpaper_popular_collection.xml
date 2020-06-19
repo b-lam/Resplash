@@ -27,7 +27,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_overlay_40"
+            android:background="@color/black_overlay"
             android:foreground="?android:attr/selectableItemBackground" />
 
         <TextView

@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="@id/banner_image_view"
         app:layout_constraintTop_toTopOf="@id/banner_image_view"
         app:layout_constraintBottom_toBottomOf="@id/banner_image_view"
-        android:background="@color/black_overlay_40" />
+        android:background="@color/black_overlay" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

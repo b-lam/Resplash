@@ -26,7 +26,8 @@
             <com.b_lam.resplash.ui.widget.ContentLoadingLayout
                 android:id="@+id/content_loading_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/color_surface" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/collection_content_layout"

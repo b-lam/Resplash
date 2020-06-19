@@ -40,8 +40,8 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any> : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recycler_view.apply {
+            layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
             adapter = pagingAdapter.apply {
-                layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
                 orientation = resources.configuration.orientation
                 withLoadStateFooter(PagingLoadStateAdapter { pagingAdapter.retry() })
             }

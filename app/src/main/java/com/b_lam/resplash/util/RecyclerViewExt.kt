@@ -1,6 +1,8 @@
 package com.b_lam.resplash.util
 
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.b_lam.resplash.ui.widget.recyclerview.StaggeredGridItemOffsetDecoration
@@ -36,12 +38,23 @@ fun RecyclerView.setupLayoutManager(
 }
 
 fun RecyclerView.scrollToTop() {
-    val layoutManager = layoutManager as? StaggeredGridLayoutManager
     layoutManager?.let {
-        val firstVisibleItemPosition = it.findFirstVisibleItemPositions(null).first()
-        if (firstVisibleItemPosition > 5) {
-            scrollToPosition(5)
+        val firstVisibleItemPosition = it.findFirstVisibleItemPosition()
+        if (firstVisibleItemPosition > 6) {
+            scrollToPosition(6)
         }
+        smoothScrollToPosition(0)
     }
-    smoothScrollToPosition(0)
+}
+
+private fun RecyclerView.LayoutManager?.findFirstVisibleItemPosition(): Int {
+    return if (this is LinearLayoutManager) {
+        findFirstVisibleItemPosition()
+    } else if (this is GridLayoutManager) {
+        findFirstVisibleItemPosition()
+    } else if (this is StaggeredGridLayoutManager) {
+        findFirstVisibleItemPositions(null).first()
+    } else {
+        -1
+    }
 }

@@ -19,7 +19,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/collection_card_view"
         android:layout_width="0dp"
-        android:layout_height="@dimen/mini_collection_height"
+        android:layout_height="@dimen/selected_collection_height"
         android:layout_weight="1"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_overlay_40"
+            android:background="@color/black_overlay"
             android:foreground="?android:attr/selectableItemBackground" />
 
         <TextView

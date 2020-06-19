@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="2dp"
-        android:background="@color/black_overlay_40"
+        android:background="@color/black_overlay"
         app:layout_constraintStart_toStartOf="@id/banner_image_view"
         app:layout_constraintEnd_toEndOf="@id/banner_image_view"
         app:layout_constraintTop_toTopOf="@id/banner_image_view"

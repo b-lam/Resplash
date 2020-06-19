@@ -296,6 +296,7 @@
                 android:id="@+id/content_loading_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:background="@color/color_surface"
                 app:layout_constraintTop_toBottomOf="@id/photo_image_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:visibility="gone" />
