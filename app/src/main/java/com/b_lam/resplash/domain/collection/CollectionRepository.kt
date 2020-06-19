@@ -6,6 +6,7 @@ import com.b_lam.resplash.data.collection.CollectionService
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.search.SearchService
 import com.b_lam.resplash.data.user.UserService
+import com.b_lam.resplash.di.Properties
 import com.b_lam.resplash.domain.BasePagingSource
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.safeApiCall
@@ -35,6 +36,11 @@ class CollectionRepository(
         config = BasePagingSource.config,
         pagingSourceFactory = { UserCollectionPagingSource(userService, username) }
     ).flow
+
+    suspend fun getUserCollections(username: String, page: Int) =
+        safeApiCall(dispatcher) {
+            userService.getUserCollections(username, page, Properties.DEFAULT_PAGE_SIZE)
+        }
 
     suspend fun getCollection(collectionId: Int) =
         safeApiCall(dispatcher) { collectionService.getCollection(collectionId) }

@@ -138,10 +138,13 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             adapter = TagAdapter(this@PhotoDetailActivity).apply { submitList(photo.tags) }
         }
 
+        viewModel.currentUserCollectionIds.observe(this) {
+            setCollectButtonState(it ?: emptyList())
+        }
         collect_button.setOnClickListener {
             if (viewModel.isUserAuthorized()) {
                 AddCollectionBottomSheet
-                    .newInstance(photo)
+                    .newInstance(photo.id)
                     .show(supportFragmentManager, AddCollectionBottomSheet.TAG)
             } else {
                 toast(R.string.need_to_log_in)
@@ -233,6 +236,13 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
         like_button.setImageResource(
             if (likedByUser) R.drawable.ic_favorite_filled_24dp
             else R.drawable.ic_favorite_border_24dp
+        )
+    }
+
+    private fun setCollectButtonState(currentUserCollectionIds: List<Int>) {
+        collect_button.setImageResource(
+            if (currentUserCollectionIds.isNotEmpty()) R.drawable.ic_bookmark_filled_24dp
+            else R.drawable.ic_bookmark_border_24dp
         )
     }
 

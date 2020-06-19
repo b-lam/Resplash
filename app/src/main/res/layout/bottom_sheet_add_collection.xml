@@ -1,16 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.b_lam.resplash.ui.widget.NoSwipeWrapViewPager
-        android:id="@+id/view_pager"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/add_to_collection_layout" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_to_collection_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/create_collection_layout">
 
-        <include layout="@layout/create_collection_layout" />
-    </com.b_lam.resplash.ui.widget.NoSwipeWrapViewPager>
+            <TextView
+                android:id="@+id/add_to_collection_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/keyline_7"
+                android:paddingBottom="@dimen/keyline_7"
+                android:paddingStart="@dimen/keyline_8"
+                android:paddingEnd="@dimen/keyline_8"
+                android:text="@string/add_to_collection"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/add_collection_button" />
+
+            <ImageView
+                android:id="@+id/add_collection_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_8"
+                android:src="@drawable/ic_add_24dp"
+                android:contentDescription="@string/create_new_collection"
+                app:layout_constraintTop_toTopOf="@id/add_to_collection_title"
+                app:layout_constraintBottom_toBottomOf="@id/add_to_collection_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/MaterialImageButton" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintTop_toBottomOf="@id/add_to_collection_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:orientation="horizontal"
+                tools:listitem="@layout/item_collection_mini" />
+
+            <include layout="@layout/empty_error_state_layout"
+                android:id="@+id/empty_state_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toTopOf="@id/recycler_view"
+                app:layout_constraintBottom_toBottomOf="@id/recycler_view" />
+
+            <com.b_lam.resplash.ui.widget.ContentLoadingLayout
+                android:id="@+id/content_loading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/color_tinted_surface"
+                app:layout_constraintTop_toTopOf="@id/recycler_view"
+                app:layout_constraintBottom_toBottomOf="@id/recycler_view"
+                tools:visibility="gone" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_collection_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/keyline_5"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/create_collection_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/keyline_7"
+                android:paddingBottom="@dimen/keyline_7"
+                android:paddingStart="@dimen/keyline_8"
+                android:paddingEnd="@dimen/keyline_8"
+                android:text="@string/create_new_collection"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/collection_name_text_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/keyline_8"
+                android:paddingEnd="@dimen/keyline_8"
+                android:hint="@string/collection_name_hint"
+                app:counterEnabled="true"
+                app:counterMaxLength="60"
+                app:errorEnabled="true"
+                app:layout_constraintTop_toBottomOf="@id/create_collection_title"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/collection_description_text_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keyline_5"
+                android:paddingStart="@dimen/keyline_8"
+                android:paddingEnd="@dimen/keyline_8"
+                android:hint="@string/collection_description_hint"
+                app:counterEnabled="true"
+                app:counterMaxLength="250"
+                app:layout_constraintTop_toBottomOf="@id/collection_name_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/make_collection_private_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keyline_5"
+                android:layout_marginBottom="@dimen/keyline_5"
+                android:layout_marginStart="@dimen/keyline_8"
+                android:layout_marginEnd="@dimen/keyline_8"
+                android:checked="false"
+                android:text="@string/make_collection_private"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collection_description_text_input_layout" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/create_collection_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keyline_3"
+                android:layout_marginBottom="@dimen/keyline_3"
+                android:layout_marginEnd="@dimen/keyline_6"
+                android:text="@string/create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/make_collection_private_checkbox"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_collection_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                app:layout_constraintEnd_toStartOf="@id/create_collection_button"
+                app:layout_constraintTop_toTopOf="@id/create_collection_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+            <com.b_lam.resplash.ui.widget.ContentLoadingLayout
+                android:id="@+id/create_loading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/color_tinted_surface"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/create_collection_title"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

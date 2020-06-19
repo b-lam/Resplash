@@ -38,7 +38,7 @@ fun ImageView.loadPhotoUrlWithThumbnail(
     centerCrop: Boolean = false,
     requestListener: RequestListener<Drawable>? = null
 ) {
-    background = ColorDrawable(Color.parseColor(color))
+    color?.let { background = ColorDrawable(Color.parseColor(it)) }
     GlideApp.with(context)
         .load(url)
         .thumbnail(

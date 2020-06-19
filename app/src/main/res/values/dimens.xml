@@ -39,8 +39,9 @@
     <dimen name="user_profile_photo_max_height">132dp</dimen>
 
     <dimen name="collection_max_height">250dp</dimen>
-    <dimen name="mini_collection_height">88dp</dimen>
-    <dimen name="mini_collection_progress_size">18dp</dimen>
+    <dimen name="mini_collection_width">200dp</dimen>
+    <dimen name="mini_collection_progress_size">32dp</dimen>
+    <dimen name="selected_collection_height">88dp</dimen>
     <dimen name="featured_collection_height">200dp</dimen>
     <dimen name="popular_collection_height">112dp</dimen>
 
