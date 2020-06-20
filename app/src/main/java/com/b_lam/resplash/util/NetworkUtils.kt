@@ -5,6 +5,13 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
+sealed class NetworkState {
+    object EMPTY : NetworkState()
+    object LOADING : NetworkState()
+    object SUCCESS : NetworkState()
+    data class ERROR(val message: String? = null) : NetworkState()
+}
+
 sealed class Result<out T> {
     data class Success<out T>(val value: T): Result<T>()
     data class Error(val code: Int? = null, val error: String? = null): Result<Nothing>()

@@ -2,19 +2,18 @@ package com.b_lam.resplash.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
+import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
-import com.b_lam.resplash.domain.photo.SearchPhotoPagingSource
+import com.b_lam.resplash.domain.photo.SearchPhotoDataSource
 import com.b_lam.resplash.domain.user.UserRepository
 import com.b_lam.resplash.ui.base.BaseViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.b_lam.resplash.util.NetworkState
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
@@ -27,37 +26,51 @@ class SearchViewModel(
     val queryLiveData: LiveData<String> = _queryLiveData
 
     private val _queryPhotoLiveData = MutableLiveData("")
-    val queryPhotoLiveData: LiveData<String> = _queryPhotoLiveData
+    private val queryPhotoLiveData: LiveData<String> = _queryPhotoLiveData
 
-    var order = SearchPhotoPagingSource.Companion.Order.RELEVANT
-    var contentFilter = SearchPhotoPagingSource.Companion.ContentFilter.LOW
-    var color = SearchPhotoPagingSource.Companion.Color.ANY
-    var orientation = SearchPhotoPagingSource.Companion.Orientation.ANY
+    var order = SearchPhotoDataSource.Companion.Order.RELEVANT
+    var contentFilter = SearchPhotoDataSource.Companion.ContentFilter.LOW
+    var color = SearchPhotoDataSource.Companion.Color.ANY
+    var orientation = SearchPhotoDataSource.Companion.Orientation.ANY
 
-    fun searchPhotos(query: String): Flow<PagingData<Photo>> {
-        return if (query.isBlank()) {
-            flowOf(PagingData.empty())
-        } else {
+    private val photoListing: LiveData<Listing<Photo>?> = Transformations.map(queryPhotoLiveData) {
+        if (it.isNotBlank()) {
             photoRepository.searchPhotos(
-                query, order, null, contentFilter, color, orientation
-            ).cachedIn(viewModelScope)
+                it, order, null, contentFilter, color, orientation, viewModelScope)
+        } else {
+            null
         }
     }
-
-    fun searchCollections(query: String): Flow<PagingData<Collection>> {
-        return if (query.isBlank()) {
-            flowOf(PagingData.empty())
-        } else {
-            collectionRepository.searchCollections(query).cachedIn(viewModelScope)
-        }
+    val photosLiveData = Transformations.switchMap(photoListing) { it?.pagedList }
+    val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it?.networkState }
+    val photosRefreshStateLiveData = Transformations.switchMap(photoListing) {
+        it?.refreshState ?: MutableLiveData<NetworkState>(NetworkState.EMPTY)
     }
 
-    fun searchUsers(query: String): Flow<PagingData<User>> {
-        return if (query.isBlank()) {
-            flowOf(PagingData.empty())
+    private val collectionListing: LiveData<Listing<Collection>?> = Transformations.map(queryLiveData) {
+        if (it.isNotBlank()) {
+            collectionRepository.searchCollections(it, viewModelScope)
         } else {
-            userRepository.searchUsers(query).cachedIn(viewModelScope)
+            null
         }
+    }
+    val collectionsLiveData = Transformations.switchMap(collectionListing) { it?.pagedList }
+    val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it?.networkState }
+    val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) {
+        it?.refreshState ?: MutableLiveData<NetworkState>(NetworkState.EMPTY)
+    }
+
+    private val userListing: LiveData<Listing<User>?> = Transformations.map(queryLiveData) {
+        if (it.isNotBlank()) {
+            userRepository.searchUsers(it, viewModelScope)
+        } else {
+            null
+        }
+    }
+    val usersLiveData = Transformations.switchMap(userListing) { it?.pagedList }
+    val usersNetworkStateLiveData = Transformations.switchMap(userListing) { it?.networkState }
+    val usersRefreshStateLiveData = Transformations.switchMap(userListing) {
+        it?.refreshState ?: MutableLiveData<NetworkState>(NetworkState.EMPTY)
     }
 
     fun updateQuery(query: String) {

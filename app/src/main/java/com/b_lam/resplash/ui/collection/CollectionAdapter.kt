@@ -11,7 +11,7 @@ import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.ui.widget.recyclerview.BasePagingDataAdapter
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
 import com.b_lam.resplash.util.LAYOUT_DEFAULT
 import com.b_lam.resplash.util.LAYOUT_GRID
 import com.b_lam.resplash.util.LAYOUT_MINIMAL
@@ -20,7 +20,7 @@ class CollectionAdapter(
     private val callback: ItemEventCallback,
     private val showUser: Boolean,
     sharedPreferencesRepository: SharedPreferencesRepository
-) : BasePagingDataAdapter<Collection>(diffCallback) {
+) : BasePagedListAdapter<Collection>(diffCallback) {
 
     private val layout = sharedPreferencesRepository.layout
     private val loadQuality = sharedPreferencesRepository.loadQuality

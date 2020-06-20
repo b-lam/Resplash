@@ -1,18 +1,16 @@
 package com.b_lam.resplash.domain.collection
 
-import androidx.paging.Pager
-import androidx.paging.PagingData
 import com.b_lam.resplash.data.collection.CollectionService
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.search.SearchService
 import com.b_lam.resplash.data.user.UserService
 import com.b_lam.resplash.di.Properties
-import com.b_lam.resplash.domain.BasePagingSource
+import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 class CollectionRepository(
@@ -22,20 +20,26 @@ class CollectionRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    fun getCollections(order: CollectionPagingSource.Companion.Order) = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { CollectionPagingSource(collectionService, order) }
-    ).flow
+    fun getCollections(
+        order: CollectionDataSource.Companion.Order,
+        scope: CoroutineScope
+    ): Listing<Collection> {
+        return CollectionDataSourceFactory(collectionService, order, scope).createListing()
+    }
 
-    fun searchCollections(query: String): Flow<PagingData<Collection>> = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { SearchCollectionPagingSource(searchService, query) }
-    ).flow
+    fun searchCollections(
+        query: String,
+        scope: CoroutineScope
+    ): Listing<Collection> {
+        return SearchCollectionDataSourceFactory(searchService, query, scope).createListing()
+    }
 
-    fun getUserCollections(username: String) = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { UserCollectionPagingSource(userService, username) }
-    ).flow
+    fun getUserCollections(
+        username: String,
+        scope: CoroutineScope
+    ): Listing<Collection> {
+        return UserCollectionDataSourceFactory(userService, username, scope).createListing()
+    }
 
     suspend fun getUserCollections(username: String, page: Int) =
         safeApiCall(dispatcher) {

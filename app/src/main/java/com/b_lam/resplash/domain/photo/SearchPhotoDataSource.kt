@@ -4,17 +4,19 @@ import androidx.annotation.StringRes
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.search.SearchService
-import com.b_lam.resplash.domain.BasePagingSource
+import com.b_lam.resplash.domain.BaseDataSource
+import kotlinx.coroutines.CoroutineScope
 
-class SearchPhotoPagingSource(
+class SearchPhotoDataSource(
     private val searchService: SearchService,
     private val query: String,
     private val order: Order?,
     private val collections: String?,
     private val contentFilter: ContentFilter?,
     private val color: Color?,
-    private val orientation: Orientation?
-) : BasePagingSource<Photo>() {
+    private val orientation: Orientation?,
+    scope: CoroutineScope
+) : BaseDataSource<Photo>(scope) {
 
     override suspend fun getPage(page: Int, perPage: Int): List<Photo> {
         return searchService.searchPhotos(

@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.b_lam.resplash.R
-import com.b_lam.resplash.domain.collection.CollectionPagingSource
-import com.b_lam.resplash.domain.photo.PhotoPagingSource
+import com.b_lam.resplash.domain.collection.CollectionDataSource
+import com.b_lam.resplash.domain.photo.PhotoDataSource
 import com.b_lam.resplash.ui.about.AboutActivity
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
 import com.b_lam.resplash.ui.base.BaseActivity
@@ -147,7 +147,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showPhotoOrderDialog() {
-        val orderOptions = enumValues<PhotoPagingSource.Companion.Order>()
+        val orderOptions = enumValues<PhotoDataSource.Companion.Order>()
             .map { getString(it.titleRes) }.toTypedArray()
         val currentSelection = viewModel.photoOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)
@@ -161,7 +161,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showCollectionOrderDialog() {
-        val orderOptions = enumValues<CollectionPagingSource.Companion.Order>()
+        val orderOptions = enumValues<CollectionDataSource.Companion.Order>()
             .map { getString(it.titleRes) }.toTypedArray()
         val currentSelection = viewModel.collectionOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)

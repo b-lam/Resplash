@@ -2,33 +2,25 @@ package com.b_lam.resplash.ui.user
 
 import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.b_lam.resplash.ui.collection.CollectionAdapter
 import com.b_lam.resplash.ui.collection.CollectionFragment
 import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class UserCollectionFragment : CollectionFragment() {
 
     private val sharedViewModel: UserViewModel by sharedViewModel()
 
-    override val pagingAdapter =
+    override val pagedListAdapter =
         CollectionAdapter(itemEventCallback, false, sharedPreferencesRepository)
 
     override fun observeEvents() {
-        swipe_refresh_layout.setOnRefreshListener { pagingAdapter.refresh() }
-        pagingAdapter.addLoadStateListener { updateLoadState(it) }
-        sharedViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-            user.username?.let { username ->
-                lifecycleScope.launch {
-                    sharedViewModel.getUserCollections(username).collectLatest {
-                        pagingAdapter.submitData(it)
-                    }
-                }
-            }
+        with(sharedViewModel) {
+            swipe_refresh_layout.setOnRefreshListener { refreshCollections() }
+            collectionsRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
+            collectionsNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
+            collectionsLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
         }
     }
 
@@ -37,7 +29,7 @@ class UserCollectionFragment : CollectionFragment() {
         if (requestCode == RESULT_CODE_USER_COLLECTION_UPDATE && resultCode == Activity.RESULT_OK) {
             if (data?.getBooleanExtra(EXTRA_USER_COLLECTION_DELETE_FLAG, false) == true ||
                 data?.getBooleanExtra(EXTRA_USER_COLLECTION_MODIFY_FLAG, false) == true) {
-                pagingAdapter.refresh()
+                sharedViewModel.refreshCollections()
             }
         }
     }

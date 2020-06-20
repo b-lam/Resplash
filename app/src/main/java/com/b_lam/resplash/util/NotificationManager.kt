@@ -31,7 +31,7 @@ class NotificationManager(private val context: Context) {
             setSmallIcon(R.drawable.ic_resplash_24dp)
             setContentTitle(context.getString(R.string.setting_wallpaper))
             setProgress(0, 0, true)
-            setTimeoutAfter(60000)
+            setTimeoutAfter(60_000)
         }
         notificationManager.notify(TILE_SERVICE_NOTIFICATION_ID, builder.build())
     }

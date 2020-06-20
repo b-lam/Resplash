@@ -2,12 +2,14 @@ package com.b_lam.resplash.domain.user
 
 import com.b_lam.resplash.data.search.SearchService
 import com.b_lam.resplash.data.user.model.User
-import com.b_lam.resplash.domain.BasePagingSource
+import com.b_lam.resplash.domain.BaseDataSource
+import kotlinx.coroutines.CoroutineScope
 
-class SearchUserPagingSource(
+class SearchUserDataSource(
     private val searchService: SearchService,
-    private val query: String
-) : BasePagingSource<User>() {
+    private val query: String,
+    scope: CoroutineScope
+) : BaseDataSource<User>(scope) {
 
     override suspend fun getPage(page: Int, perPage: Int): List<User> {
         return searchService.searchUsers(

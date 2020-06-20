@@ -39,7 +39,7 @@ class MiniCollectionViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
                 image_overlay.setBackgroundColor(ContextCompat.getColor(context,
                     if (photoInCollection) R.color.green_overlay else R.color.black_overlay))
                 setOnClickListener {
-                    callback.onCollectionClick(collection, this, absoluteAdapterPosition)
+                    callback.onCollectionClick(collection, this, adapterPosition)
                 }
             }
         }

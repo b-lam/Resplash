@@ -1,13 +1,13 @@
 package com.b_lam.resplash.ui.widget.recyclerview
 
 import android.content.res.Configuration
-import androidx.paging.PagingDataAdapter
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BasePagingDataAdapter<T : Any>(
+abstract class BasePagedListAdapter<T : Any>(
     diffCallback: DiffUtil.ItemCallback<T>
-) : PagingDataAdapter<T, RecyclerView.ViewHolder>(diffCallback) {
+) : PagedListAdapter<T, RecyclerView.ViewHolder>(diffCallback) {
 
     var orientation = Configuration.ORIENTATION_PORTRAIT
 }

@@ -18,7 +18,7 @@ class StaggeredGridItemOffsetDecoration(
     ) {
         val params = view.layoutParams as? StaggeredGridLayoutManager.LayoutParams
         val spanIndex = params?.spanIndex ?: 0
-        val position = params?.absoluteAdapterPosition ?: 0
+        val position = params?.viewAdapterPosition ?: 0
 
         outRect.left = if (spanIndex == 0) spacing else 0
         outRect.top = if (position < spanCount) spacing else 0

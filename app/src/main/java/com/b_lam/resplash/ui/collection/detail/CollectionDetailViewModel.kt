@@ -2,11 +2,11 @@ package com.b_lam.resplash.ui.collection.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
+import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.domain.autowallpaper.AutoWallpaperRepository
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
@@ -14,7 +14,6 @@ import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -39,9 +38,17 @@ class CollectionDetailViewModel(
 
     var isCollectionUsedForAutoWallpaper = false
 
-    fun getPhotosForCollection(collectionId: Int): Flow<PagingData<Photo>> {
-        return photoRepository.getCollectionPhotos(collectionId).cachedIn(viewModelScope)
+    private val photoListing = MutableLiveData<Listing<Photo>>()
+
+    val photosLiveData = Transformations.switchMap(photoListing) { it.pagedList }
+    val networkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
+    val refreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
+
+    fun getPhotoListing(collectionId: Int) {
+        photoListing.postValue(photoRepository.getCollectionPhotos(collectionId, viewModelScope))
     }
+
+    fun refreshPhotos() = photoListing.value?.refresh?.invoke()
 
     fun getCollection(collectionId: Int) {
         viewModelScope.launch {

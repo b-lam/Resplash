@@ -4,12 +4,14 @@ import androidx.annotation.StringRes
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.PhotoService
 import com.b_lam.resplash.data.photo.model.Photo
-import com.b_lam.resplash.domain.BasePagingSource
+import com.b_lam.resplash.domain.BaseDataSource
+import kotlinx.coroutines.CoroutineScope
 
-class PhotoPagingSource(
+class PhotoDataSource(
     private val photoService: PhotoService,
-    private val order: Order
-) : BasePagingSource<Photo>() {
+    private val order: Order,
+    scope: CoroutineScope
+) : BaseDataSource<Photo>(scope) {
 
     override suspend fun getPage(page: Int, perPage: Int): List<Photo> {
         return photoService.getPhotos(

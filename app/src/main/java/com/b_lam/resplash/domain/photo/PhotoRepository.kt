@@ -1,13 +1,14 @@
 package com.b_lam.resplash.domain.photo
 
-import androidx.paging.Pager
 import com.b_lam.resplash.data.download.DownloadService
 import com.b_lam.resplash.data.photo.PhotoService
+import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.search.SearchService
 import com.b_lam.resplash.data.user.UserService
-import com.b_lam.resplash.domain.BasePagingSource
+import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
 class PhotoRepository(
@@ -18,50 +19,55 @@ class PhotoRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    fun getPhotos(order: PhotoPagingSource.Companion.Order) = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { PhotoPagingSource(photoService, order) }
-    ).flow
+    fun getPhotos(
+        order: PhotoDataSource.Companion.Order,
+        scope: CoroutineScope
+    ): Listing<Photo> {
+        return PhotoDataSourceFactory(photoService, order, scope).createListing()
+    }
 
-    fun getCollectionPhotos(collectionId: Int) = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { CollectionPhotoPagingSource(photoService, collectionId) }
-    ).flow
+    fun getCollectionPhotos(
+        collectionId: Int,
+        scope: CoroutineScope
+    ): Listing<Photo> {
+        return CollectionPhotoDataSourceFactory(photoService, collectionId, scope).createListing()
+    }
 
     fun searchPhotos(
         query: String,
-        order: SearchPhotoPagingSource.Companion.Order?,
+        order: SearchPhotoDataSource.Companion.Order?,
         collections: String?,
-        contentFilter: SearchPhotoPagingSource.Companion.ContentFilter?,
-        color: SearchPhotoPagingSource.Companion.Color?,
-        orientation: SearchPhotoPagingSource.Companion.Orientation?
-    ) = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { SearchPhotoPagingSource(searchService, query, order, collections,
-            contentFilter, color, orientation) }
-    ).flow
+        contentFilter: SearchPhotoDataSource.Companion.ContentFilter?,
+        color: SearchPhotoDataSource.Companion.Color?,
+        orientation: SearchPhotoDataSource.Companion.Orientation?,
+        scope: CoroutineScope
+    ): Listing<Photo> {
+        return SearchPhotoDataSourceFactory(searchService, query, order, collections,
+            contentFilter, color, orientation, scope).createListing()
+    }
 
     fun getUserPhotos(
         username: String,
-        order: UserPhotoPagingSource.Companion.Order?,
+        order: UserPhotoDataSource.Companion.Order?,
         stats: Boolean,
-        resolution: UserPhotoPagingSource.Companion.Resolution?,
+        resolution: UserPhotoDataSource.Companion.Resolution?,
         quantity: Int?,
-        orientation: UserPhotoPagingSource.Companion.Orientation?
-    ) = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { UserPhotoPagingSource(userService, username, order, stats,
-            resolution, quantity, orientation) }
-    ).flow
+        orientation: UserPhotoDataSource.Companion.Orientation?,
+        scope: CoroutineScope
+    ): Listing<Photo> {
+        return UserPhotoDataSourceFactory(userService, username, order, stats, resolution,
+            quantity, orientation, scope).createListing()
+    }
 
     fun getUserLikes(
         username: String,
-        order: UserLikesPagingSource.Companion.Order?,
-        orientation: UserLikesPagingSource.Companion.Orientation?
-    ) = Pager(
-        config = BasePagingSource.config,
-        pagingSourceFactory = { UserLikesPagingSource(userService, username, order, orientation) }
-    ).flow
+        order: UserLikesDataSource.Companion.Order?,
+        orientation: UserLikesDataSource.Companion.Orientation?,
+        scope: CoroutineScope
+    ): Listing<Photo> {
+        return UserLikesDataSourceFactory(userService, username, order, orientation, scope)
+            .createListing()
+    }
 
     suspend fun getPhotoDetails(id: String) = safeApiCall(dispatcher) { photoService.getPhoto(id) }
 
