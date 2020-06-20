@@ -122,6 +122,8 @@
     <string name="auto_wallpaper_options_title">Seçenekler</string>
     <string name="auto_wallpaper_center_crop_title">Ortadaki kırpma</string>
     <string name="auto_wallpaper_center_crop_summary">Ortalanacak tüm duvar kağıtlarını kırp</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Cihaz Yönünü Düzeltme</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Cihaz yatay moddayken ayarlanırsa bazı cihazlar duvar kağıdını yanlış keser, bunun işaretlenmesi cihaz dikey modda oluncaya kadar görevi yeniden planlayacaktır.</string>
     <string name="auto_wallpaper_select_screen_title">Ekran Seçin</string>
     <string name="auto_wallpaper_select_screen_summary">Duvar kağıdını şuraya uygula: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Ana Ekran</string>

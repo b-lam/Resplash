@@ -123,6 +123,8 @@
     <string name="auto_wallpaper_options_title">Опције</string>
     <string name="auto_wallpaper_center_crop_title">Средишњи усев</string>
     <string name="auto_wallpaper_center_crop_summary">Обрежите све тапете да бисте их центрирали</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Поправка оријентације уређаја</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Неки уређаји ће погрешно обрезати позадину ако је постављена док је уређај у пејзажном режиму, провером да ли ће ово одложити задатак док уређај не буде у портретном режиму</string>
     <string name="auto_wallpaper_select_screen_title">Изаберите Екран</string>
     <string name="auto_wallpaper_select_screen_summary">Примените позадину на: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Почетни екран</string>

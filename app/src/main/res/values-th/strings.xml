@@ -121,6 +121,8 @@
     <string name="auto_wallpaper_options_title">ตัวเลือก</string>
     <string name="auto_wallpaper_center_crop_title">ศูนย์พืชผล</string>
     <string name="auto_wallpaper_center_crop_summary">ครอบตัดวอลล์เปเปอร์ทั้งหมดให้อยู่กึ่งกลาง</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">แก้ไขการวางแนวอุปกรณ์</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">อุปกรณ์บางอย่างจะครอบตัดวอลล์เปเปอร์ไม่ถูกต้องหากตั้งค่าไว้ในขณะที่อุปกรณ์อยู่ในโหมดแนวนอนการตรวจสอบนี้จะกำหนดเวลางานใหม่จนกว่าอุปกรณ์จะอยู่ในโหมดแนวตั้ง</string>
     <string name="auto_wallpaper_select_screen_title">เลือกหน้าจอ</string>
     <string name="auto_wallpaper_select_screen_summary">ใช้วอลล์เปเปอร์กับ: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">หน้าจอหลัก</string>

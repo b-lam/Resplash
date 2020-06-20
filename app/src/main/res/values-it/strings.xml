@@ -122,6 +122,8 @@
     <string name="auto_wallpaper_options_title">Opzioni</string>
     <string name="auto_wallpaper_center_crop_title">Ritaglia centrale</string>
     <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Correzione dell\'orientamento del dispositivo</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Alcuni dispositivi ritagliano lo sfondo in modo errato se è impostato mentre il dispositivo è in modalità orizzontale, controllando questo riprogrammerà l\'attività fino a quando il dispositivo è in modalità verticale</string>
     <string name="auto_wallpaper_select_screen_title">Seleziona schermo</string>
     <string name="auto_wallpaper_select_screen_summary">Applica lo sfondo a: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Schermata principale</string>

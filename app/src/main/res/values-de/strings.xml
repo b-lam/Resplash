@@ -122,6 +122,8 @@
     <string name="auto_wallpaper_options_title">Optionen</string>
     <string name="auto_wallpaper_center_crop_title">Mittelernte</string>
     <string name="auto_wallpaper_center_crop_summary">Beschneiden Sie alle zu zentrierenden Hintergrundbilder</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Geräteorientierung korrigieren</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Einige Geräte beschneiden das Hintergrundbild falsch, wenn es im Querformat eingestellt ist. Wenn Sie dies aktivieren, wird die Aufgabe neu geplant, bis sich das Gerät im Hochformat befindet</string>
     <string name="auto_wallpaper_select_screen_title">Bildschirm wählen</string>
     <string name="auto_wallpaper_select_screen_summary">Tapete auftragen auf: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Hauptbildschirm</string>

@@ -143,6 +143,8 @@
     <string name="auto_wallpaper_options_title">Options</string>
     <string name="auto_wallpaper_center_crop_title">Center Crop</string>
     <string name="auto_wallpaper_center_crop_summary">Crop all wallpapers to be centered</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Device Orientation Fix</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Some devices will crop the wallpaper incorrectly if it is set while the device is in landscape mode, checking this will reschedule the task until the device is in portrait mode</string>
     <string name="auto_wallpaper_select_screen_title">Select Screen</string>
     <string name="auto_wallpaper_select_screen_summary">Apply wallpaper to: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Home screen</string>

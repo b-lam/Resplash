@@ -89,6 +89,11 @@ class SharedPreferencesRepository(context: Context) {
             PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_KEY,
             PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_DEFAULT_VALUE)
 
+    val autoWallpaperPortraitModeOnly: Boolean
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_KEY,
+            PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_DEFAULT_VALUE)
+
     val autoWallpaperSelectScreen: Int
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             when (sharedPreferences.getString(
@@ -207,6 +212,9 @@ class SharedPreferencesRepository(context: Context) {
 
         private const val PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_KEY = "auto_wallpaper_center_crop"
         private const val PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_DEFAULT_VALUE = true
+
+        private const val PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_KEY = "auto_wallpaper_portrait_mode_only"
+        private const val PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_DEFAULT_VALUE = false
 
         private const val PREFERENCE_AUTO_WALLPAPER_SELECT_SCREEN_KEY = "auto_wallpaper_select_screen"
         private const val PREFERENCE_AUTO_WALLPAPER_SELECT_SCREEN_DEFAULT_VALUE = "both"

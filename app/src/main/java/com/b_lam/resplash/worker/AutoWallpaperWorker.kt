@@ -2,6 +2,7 @@ package com.b_lam.resplash.worker
 
 import android.app.WallpaperManager
 import android.content.Context
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.graphics.Rect
 import android.os.Build
 import androidx.work.*
@@ -36,6 +37,13 @@ class AutoWallpaperWorker(
     private val downloadService: DownloadService by inject()
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
+        if (inputData.getBoolean(KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY, false)) {
+            val screenOrientation = appContext.resources.configuration.orientation
+            if (screenOrientation == ORIENTATION_LANDSCAPE) {
+                return@withContext Result.retry()
+            }
+        }
+
         val orientation = inputData.getString(KEY_AUTO_WALLPAPER_ORIENTATION)
         val contentFilter = inputData.getString(KEY_AUTO_WALLPAPER_CONTENT_FILTER)
 
@@ -196,6 +204,7 @@ class AutoWallpaperWorker(
         const val KEY_AUTO_WALLPAPER_USERNAME = "key_auto_wallpaper_username"
         const val KEY_AUTO_WALLPAPER_SEARCH_TERMS = "key_auto_wallpaper_search_terms"
         const val KEY_AUTO_WALLPAPER_CENTER_CROP = "key_auto_wallpaper_center_crop"
+        const val KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY = "key_auto_wallpaper_portrait_mode_only"
         const val KEY_AUTO_WALLPAPER_SELECT_SCREEN = "key_auto_wallpaper_select_screen"
         const val KEY_AUTO_WALLPAPER_ORIENTATION = "key_auto_wallpaper_orientation"
         const val KEY_AUTO_WALLPAPER_CONTENT_FILTER = "key_auto_wallpaper_content_filter"
@@ -290,6 +299,7 @@ class AutoWallpaperWorker(
             KEY_AUTO_WALLPAPER_USERNAME to sharedPreferencesRepository.autoWallpaperUsername,
             KEY_AUTO_WALLPAPER_SEARCH_TERMS to sharedPreferencesRepository.autoWallpaperSearchTerms,
             KEY_AUTO_WALLPAPER_CENTER_CROP to sharedPreferencesRepository.autoWallpaperCenterCrop,
+            KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY to sharedPreferencesRepository.autoWallpaperPortraitModeOnly,
             KEY_AUTO_WALLPAPER_SELECT_SCREEN to sharedPreferencesRepository.autoWallpaperSelectScreen,
             KEY_AUTO_WALLPAPER_ORIENTATION to sharedPreferencesRepository.autoWallpaperOrientation,
             KEY_AUTO_WALLPAPER_CONTENT_FILTER to sharedPreferencesRepository.autoWallpaperContentFilter

@@ -121,6 +121,8 @@
     <string name="auto_wallpaper_options_title">Polihan</string>
     <string name="auto_wallpaper_center_crop_title">Pangkas tengah</string>
     <string name="auto_wallpaper_center_crop_summary">Pangkas semua wallpaper untuk dipusatkan</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Perbaikan Orientasi Perangkat</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Beberapa perangkat akan memotong wallpaper dengan salah jika diatur saat perangkat dalam mode lansekap, memeriksa ini akan menjadwal ulang tugas sampai perangkat dalam mode potret</string>
     <string name="auto_wallpaper_select_screen_title">Pilih layar</string>
     <string name="auto_wallpaper_select_screen_summary">Terapkan wallpaper ke: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Layar utama</string>

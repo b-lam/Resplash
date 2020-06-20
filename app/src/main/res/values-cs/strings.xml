@@ -123,6 +123,8 @@
     <string name="auto_wallpaper_options_title">Možnosti</string>
     <string name="auto_wallpaper_center_crop_title">Středová plodina</string>
     <string name="auto_wallpaper_center_crop_summary">Ořízněte všechny tapety, které chcete vycentrovat</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Oprava orientace zařízení</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Některá zařízení budou ořezat tapetu nesprávně, pokud je nastavena, když je zařízení v režimu na šířku, zaškrtnutím tohoto změníte úkol na novou pozici, dokud nebude zařízení v režimu na výšku</string>
     <string name="auto_wallpaper_select_screen_title">Vyberte obrazovku</string>
     <string name="auto_wallpaper_select_screen_summary">Použít tapetu na: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Domovská obrazovka</string>
