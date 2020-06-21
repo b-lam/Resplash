@@ -33,10 +33,6 @@ class CollectionDetailFragment : PhotoFragment() {
         }
     }
 
-    override fun trackDownload(id: String) {
-        sharedViewModel.trackDownload(id)
-    }
-
     companion object {
 
         fun newInstance() = CollectionDetailFragment()

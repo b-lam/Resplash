@@ -14,6 +14,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 private const val CONTENT_TYPE = "Content-Type"
 private const val APPLICATION_JSON = "application/json"
@@ -32,11 +33,19 @@ val networkModule = module {
     factory { createService<UserService>(get(), get()) }
     factory { createService<SearchService>(get(), get()) }
     factory { createService<AuthorizationService>(get(), get(), UNSPLASH_BASE_URL) }
-    factory { createService<DownloadService>(get(), get()) }
+    factory { createDownloadService(get(), get()) }
 }
 
 private fun createOkHttpClient(accessTokenInterceptor: AccessTokenInterceptor): OkHttpClient {
-    val headerInterceptor = Interceptor { chain ->
+    return OkHttpClient.Builder()
+        .addNetworkInterceptor(createHeaderInterceptor())
+        .addInterceptor(createHttpLoggingInterceptor())
+        .addInterceptor(accessTokenInterceptor)
+        .build()
+}
+
+private fun createHeaderInterceptor(): Interceptor {
+    return Interceptor { chain ->
         val newRequest = chain.request()
             .newBuilder()
             .addHeader(CONTENT_TYPE, APPLICATION_JSON)
@@ -44,15 +53,13 @@ private fun createOkHttpClient(accessTokenInterceptor: AccessTokenInterceptor): 
             .build()
         chain.proceed(newRequest)
     }
-    val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
+}
+
+private fun createHttpLoggingInterceptor(): Interceptor {
+    return HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BASIC
         redactHeader("Authorization")
     }
-    return OkHttpClient.Builder()
-        .addNetworkInterceptor(headerInterceptor)
-        .addInterceptor(httpLoggingInterceptor)
-        .addInterceptor(accessTokenInterceptor)
-        .build()
 }
 
 private fun createAccessTokenInterceptor(
@@ -78,6 +85,26 @@ private inline fun <reified T> createService(
         .addConverterFactory(converterFactory)
         .build()
         .create(T::class.java)
+}
+
+private fun createDownloadService(
+    accessTokenInterceptor: AccessTokenInterceptor,
+    converterFactory: MoshiConverterFactory
+): DownloadService {
+    val okHttpClient = OkHttpClient.Builder()
+        .addNetworkInterceptor(createHeaderInterceptor())
+        .addInterceptor(createHttpLoggingInterceptor())
+        .addInterceptor(accessTokenInterceptor)
+        .connectTimeout(20, TimeUnit.SECONDS)
+        .readTimeout(120, TimeUnit.SECONDS)
+        .writeTimeout(120, TimeUnit.SECONDS)
+        .build()
+    return Retrofit.Builder()
+        .baseUrl(UNSPLASH_API_BASE_URL)
+        .client(okHttpClient)
+        .addConverterFactory(converterFactory)
+        .build()
+        .create(DownloadService::class.java)
 }
 
 object Properties {

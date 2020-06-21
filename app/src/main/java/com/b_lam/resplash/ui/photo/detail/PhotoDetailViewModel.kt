@@ -49,8 +49,6 @@ class PhotoDetailViewModel(
 
     fun unlikePhoto(id: String) = viewModelScope.launch { photoRepository.unlikePhoto(id) }
 
-    fun trackDownload(id: String) = viewModelScope.launch { photoRepository.trackDownload(id) }
-
     fun isUserAuthorized() = loginRepository.isAuthorized()
 
     fun addPhotoToCollection(collectionId: Int, photoId: String, position: Int) = liveData {

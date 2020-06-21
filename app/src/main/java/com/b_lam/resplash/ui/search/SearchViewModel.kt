@@ -14,7 +14,6 @@ import com.b_lam.resplash.domain.photo.SearchPhotoDataSource
 import com.b_lam.resplash.domain.user.UserRepository
 import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.NetworkState
-import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val photoRepository: PhotoRepository,
@@ -79,6 +78,4 @@ class SearchViewModel(
     }
 
     fun filterPhotoSearch() = _queryPhotoLiveData.postValue(queryPhotoLiveData.value)
-
-    fun trackDownload(id: String) = viewModelScope.launch { photoRepository.trackDownload(id) }
 }

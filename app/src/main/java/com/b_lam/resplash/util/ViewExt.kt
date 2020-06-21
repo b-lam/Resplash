@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 
@@ -22,6 +23,16 @@ fun View.showSnackBar(
     @StringRes textId: Int,
     duration: Int = Snackbar.LENGTH_SHORT,
     anchor: View? = null
+) {
+    Snackbar.make(this, textId, duration)
+        .setAnchorView(anchor)
+        .show()
+}
+
+fun View.showSnackBar(
+    @StringRes textId: Int,
+    duration: Int = Snackbar.LENGTH_SHORT,
+    @IdRes anchor: Int
 ) {
     Snackbar.make(this, textId, duration)
         .setAnchorView(anchor)

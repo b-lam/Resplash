@@ -2,19 +2,25 @@ package com.b_lam.resplash.ui.photo.detail
 
 import android.Manifest
 import android.app.WallpaperManager
+import android.content.BroadcastReceiver
 import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.content.ContextCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.observe
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
+import com.b_lam.resplash.service.DownloadJobIntentService
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.collection.add.AddCollectionBottomSheet
 import com.b_lam.resplash.ui.login.LoginActivity
@@ -25,11 +31,8 @@ import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
 import com.google.android.material.snackbar.Snackbar
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.kotlin.plusAssign
-import io.reactivex.rxjava3.kotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_photo_detail.*
-import org.koin.android.ext.android.inject
+import okio.IOException
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
@@ -38,7 +41,9 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private lateinit var id: String
 
-    private val compositeDisposable = CompositeDisposable()
+    private var downloadReceiver: BroadcastReceiver? = null
+
+    private var snackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +73,24 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             }
         } ?: run {
             finish()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        downloadReceiver = registerReceiver(
+            IntentFilter(DownloadJobIntentService.ACTION_DOWNLOAD_COMPLETE)
+        ) {
+            it?.let { handleDownloadIntent(it) }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        downloadReceiver?.let {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
         }
     }
 
@@ -174,21 +197,10 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun downloadPhoto(photo: Photo) {
         if (hasWritePermission()) {
-            val downloadManager: RxDownloadManager by inject()
-            compositeDisposable += downloadManager.downloadPhoto(
-                getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality),
-                photo.fileName
-            ).second.doOnSubscribe {
-                toast(R.string.download_started)
-            }.doAfterTerminate {
-                compositeDisposable.clear()
-            }.subscribeBy(
-                onNext = {
-                    viewModel.trackDownload(photo.id)
-                    toast(R.string.download_complete)
-                },
-                onError = { toast(R.string.oops) }
-            )
+            toast(R.string.download_started)
+            DownloadJobIntentService.enqueueDownload(this,
+                DownloadJobIntentService.Companion.Action.DOWNLOAD, photo.fileName,
+                getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality), photo.id)
         } else {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
         }
@@ -196,30 +208,14 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun setWallpaper(photo: Photo) {
         if (hasWritePermission()) {
-            val downloadManager: RxDownloadManager by inject()
-            val download = downloadManager.downloadWallpaper(
-                getPhotoUrl(photo, sharedPreferencesRepository.wallpaperQuality),
-                photo.fileName)
+            DownloadJobIntentService.enqueueDownload(this,
+                DownloadJobIntentService.Companion.Action.WALLPAPER, photo.fileName,
+                getPhotoUrl(photo, sharedPreferencesRepository.wallpaperQuality), photo.id)
 
-            val snackbar = Snackbar
+            snackbar = Snackbar
                 .make(coordinator_layout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
                 .setAnchorView(R.id.set_as_wallpaper_button)
-                .setAction(R.string.cancel) { downloadManager.cancelDownload(download.first) }
-                .setActionTextColor(ContextCompat.getColor(this, R.color.red_400))
-
-            compositeDisposable += download.second
-                .doOnSubscribe { snackbar.show() }
-                .doAfterTerminate {
-                    snackbar.dismiss()
-                    compositeDisposable.clear()
-                }
-                .subscribeBy(
-                    onNext = {
-                        viewModel.trackDownload(photo.id)
-                        startActivity(WallpaperManager.getInstance(this).getCropAndSetWallpaperIntent(it))
-                    },
-                    onError = {}
-                )
+            snackbar?.show()
         } else {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
         }
@@ -246,6 +242,48 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
         )
     }
 
+    private fun handleDownloadIntent(intent: Intent) {
+        val action = intent.getSerializableExtra(DownloadJobIntentService.DATA_ACTION)
+                as? DownloadJobIntentService.Companion.Action
+        val success = intent.getBooleanExtra(
+            DownloadJobIntentService.STATUS_SUCCESS, false)
+
+        if (success && action == DownloadJobIntentService.Companion.Action.WALLPAPER) {
+            snackbar?.dismiss()
+            intent.getParcelableExtra<Uri>(DownloadJobIntentService.DATA_URI)?.let {
+                setWallpaper(it)
+            }
+        } else if (success && action == DownloadJobIntentService.Companion.Action.DOWNLOAD) {
+            toast(R.string.download_complete)
+        } else if (!success && action == DownloadJobIntentService.Companion.Action.WALLPAPER) {
+            snackbar?.dismiss()
+            coordinator_layout.showSnackBar(R.string.oops, anchor = R.id.set_as_wallpaper_button)
+        } else if (!success && action == DownloadJobIntentService.Companion.Action.DOWNLOAD) {
+            toast(R.string.oops)
+        }
+    }
+
+    private fun setWallpaper(uri: Uri) {
+        try {
+            startActivity(WallpaperManager.getInstance(this).getCropAndSetWallpaperIntent(uri))
+        } catch (e: IllegalArgumentException) {
+            val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+            } else {
+                MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            }
+            try {
+                WallpaperManager.getInstance(applicationContext).setBitmap(bitmap)
+                toast("Wallpaper set successfully")
+            } catch (e: IOException) {
+                error("Error setting wallpaper", e)
+                toast("Failed to set wallpaper")
+            } finally {
+                bitmap.recycle()
+            }
+        }
+    }
+
     private fun openPhotoInBrowser() {
         val uri = Uri.parse(viewModel.photoDetailsLiveData(id).value?.links?.html)
         CustomTabsHelper.openCustomTab(this, uri, sharedPreferencesRepository.theme)
@@ -263,10 +301,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     companion object {
 
-        // Used to pass entire photo object to display while getting details
         const val EXTRA_PHOTO = "extra_photo"
-
-        // Used to pass get photo details when coming from Auto Wallpaper History or externally
         const val EXTRA_PHOTO_ID = "extra_photo_id"
     }
 }

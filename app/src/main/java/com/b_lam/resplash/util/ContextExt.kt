@@ -2,8 +2,10 @@ package com.b_lam.resplash.util
 
 import android.Manifest
 import android.app.Activity
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.Uri
@@ -15,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import java.util.*
 
 fun Context.applyLanguage(locale: Locale?): Context {
@@ -35,7 +38,7 @@ fun Context.applyLanguage(locale: Locale?): Context {
 fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) =
     this?.let { Toast.makeText(it, text, duration).show() }
 
-fun Context?.toast(@StringRes textId: Int, duration: Int = Toast.LENGTH_LONG) =
+fun Context?.toast(@StringRes textId: Int, duration: Int = Toast.LENGTH_SHORT) =
     this?.let { Toast.makeText(it, textId, duration).show() }
 
 fun Context.hasWritePermission(): Boolean {
@@ -49,6 +52,19 @@ fun Context.hasPermission(vararg permissions: String): Boolean {
             ContextCompat.checkSelfPermission(this, singlePermission) == PackageManager.PERMISSION_GRANTED
         }
     else true
+}
+
+fun Context.registerReceiver(
+    intentFilter: IntentFilter,
+    onReceive: (intent: Intent?) -> Unit
+): BroadcastReceiver {
+    val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent?) {
+            onReceive(intent)
+        }
+    }
+    LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter)
+    return receiver
 }
 
 fun Context.openLocationInMaps(location: String?) {

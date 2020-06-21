@@ -95,7 +95,5 @@ class UserViewModel(
 
     fun refreshCollections() = collectionListing.value?.refresh?.invoke()
 
-    fun trackDownload(id: String) = viewModelScope.launch { photoRepository.trackDownload(id) }
-
     fun isOwnProfile() = userLiveData.value?.username == loginRepository.getUsername()
 }
