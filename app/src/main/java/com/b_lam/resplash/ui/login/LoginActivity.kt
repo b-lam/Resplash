@@ -3,6 +3,7 @@ package com.b_lam.resplash.ui.login
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.login.LoginRepository.Companion.unsplashAuthCallback
@@ -28,15 +29,6 @@ class LoginActivity : BaseActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        viewModel.loginStateLiveData.observe(this) { result ->
-            if (result is Result.Success) {
-                toast(R.string.login_success)
-            } else {
-                toast(R.string.oops)
-            }
-            finish()
-        }
-
         viewModel.bannerPhotoLiveData.observe(this) {
             banner_image_view.loadBlurredImage(it.urls.small, it.color)
         }
@@ -47,10 +39,24 @@ class LoginActivity : BaseActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        intent?.data?.let {
-            if (it.authority.equals(unsplashAuthCallback)) {
-                it.getQueryParameter("code")?.let { code ->
-                    viewModel.getAccessToken(code)
+        intent?.data?.let { uri ->
+            if (uri.authority.equals(unsplashAuthCallback)) {
+                uri.getQueryParameter("code")?.let { code ->
+                    viewModel.getAccessToken(code).observe(this) {
+                        when (it) {
+                            is Result.Loading -> {
+                                content_loading_layout.isVisible = true
+                            }
+                            is Result.Success -> {
+                                toast(R.string.login_success)
+                                finish()
+                            }
+                            is Result.Error, Result.NetworkError -> {
+                                toast(R.string.oops)
+                                finish()
+                            }
+                        }
+                    }
                 }
             }
         }

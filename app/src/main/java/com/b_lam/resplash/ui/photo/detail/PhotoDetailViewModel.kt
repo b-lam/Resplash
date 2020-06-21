@@ -51,39 +51,41 @@ class PhotoDetailViewModel(
 
     fun isUserAuthorized() = loginRepository.isAuthorized()
 
-    fun addPhotoToCollection(collectionId: Int, photoId: String, position: Int) = liveData {
-        emit(Result.Loading)
+    fun addPhotoToCollection(collectionId: Int, photoId: String, position: Int) =
+        liveData(viewModelScope.coroutineContext) {
+            emit(Result.Loading)
 
-        val result = collectionRepository.addPhotoToCollection(collectionId, photoId)
-        if (result is Result.Success) {
-            val newIdList = _currentUserCollectionIds.value ?: mutableListOf()
-            newIdList.add(collectionId)
-            _currentUserCollectionIds.postValue(newIdList)
+            val result = collectionRepository.addPhotoToCollection(collectionId, photoId)
+            if (result is Result.Success) {
+                val newIdList = _currentUserCollectionIds.value ?: mutableListOf()
+                newIdList.add(collectionId)
+                _currentUserCollectionIds.postValue(newIdList)
 
-            val newCollectionsList = _userCollections.value
-            result.value.collection?.let { newCollectionsList?.set(position, it) }
-            _userCollections.postValue(newCollectionsList)
+                val newCollectionsList = _userCollections.value
+                result.value.collection?.let { newCollectionsList?.set(position, it) }
+                _userCollections.postValue(newCollectionsList)
+            }
+
+            emit(result)
         }
 
-        emit(result)
-    }
+    fun removePhotoFromCollection(collectionId: Int, photoId: String, position: Int) =
+        liveData(viewModelScope.coroutineContext) {
+            emit(Result.Loading)
 
-    fun removePhotoFromCollection(collectionId: Int, photoId: String, position: Int) = liveData {
-        emit(Result.Loading)
+            val result = collectionRepository.removePhotoFromCollection(collectionId, photoId)
+            if (result is Result.Success) {
+                val newList = _currentUserCollectionIds.value ?: mutableListOf()
+                newList.remove(collectionId)
+                _currentUserCollectionIds.postValue(newList)
 
-        val result = collectionRepository.removePhotoFromCollection(collectionId, photoId)
-        if (result is Result.Success) {
-            val newList = _currentUserCollectionIds.value ?: mutableListOf()
-            newList.remove(collectionId)
-            _currentUserCollectionIds.postValue(newList)
+                val newCollectionsList = _userCollections.value
+                result.value.collection?.let { newCollectionsList?.set(position, it) }
+                _userCollections.postValue(newCollectionsList)
+            }
 
-            val newCollectionsList = _userCollections.value
-            result.value.collection?.let { newCollectionsList?.set(position, it) }
-            _userCollections.postValue(newCollectionsList)
+            emit(result)
         }
-
-        emit(result)
-    }
 
     private var page = 1
     var isLoading = false
