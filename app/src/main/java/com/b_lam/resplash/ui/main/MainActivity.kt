@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.b_lam.resplash.BuildConfig
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.collection.CollectionDataSource
 import com.b_lam.resplash.domain.photo.PhotoDataSource
@@ -87,6 +88,11 @@ class MainActivity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.action_debug)?.isVisible = BuildConfig.DEBUG
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
