@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.b_lam.resplash.ui.widget.recyclerview.StaggeredGridItemOffsetDecoration
 
-const val RECYCLER_VIEW_CACHE_SIZE = 4
+const val RECYCLER_VIEW_CACHE_SIZE = 3
 
 const val LAYOUT_DEFAULT = "default"
 const val LAYOUT_MINIMAL = "minimal"
@@ -48,13 +48,10 @@ fun RecyclerView.scrollToTop() {
 }
 
 private fun RecyclerView.LayoutManager?.findFirstVisibleItemPosition(): Int {
-    return if (this is LinearLayoutManager) {
-        findFirstVisibleItemPosition()
-    } else if (this is GridLayoutManager) {
-        findFirstVisibleItemPosition()
-    } else if (this is StaggeredGridLayoutManager) {
-        findFirstVisibleItemPositions(null).first()
-    } else {
-        -1
+    return when (this) {
+        is LinearLayoutManager -> findFirstVisibleItemPosition()
+        is GridLayoutManager -> findFirstVisibleItemPosition()
+        is StaggeredGridLayoutManager -> findFirstVisibleItemPositions(null).first()
+        else -> RecyclerView.NO_POSITION
     }
 }

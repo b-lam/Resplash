@@ -61,13 +61,13 @@ class CollectionAdapter(
         }
     }
 
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-        super.onViewRecycled(holder)
-        val collectionImageView: ImageView? = holder.itemView.findViewById(R.id.collection_image_view)
-        val userImageView: ImageView? = holder.itemView.findViewById(R.id.user_image_view)
-        collectionImageView?.let { GlideApp.with(it.context).clear(it) }
-        userImageView?.let { GlideApp.with(it.context).clear(it) }
-    }
+//    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+//        super.onViewRecycled(holder)
+//        val collectionImageView: ImageView? = holder.itemView.findViewById(R.id.collection_image_view)
+//        val userImageView: ImageView? = holder.itemView.findViewById(R.id.user_image_view)
+//        collectionImageView?.let { GlideApp.with(it.context).clear(it) }
+//        userImageView?.let { GlideApp.with(it.context).clear(it) }
+//    }
 
     interface ItemEventCallback {
 
