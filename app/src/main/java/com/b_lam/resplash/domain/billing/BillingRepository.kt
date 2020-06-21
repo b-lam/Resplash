@@ -95,14 +95,17 @@ class BillingRepository(
                 querySkuDetailsAsync(BillingClient.SkuType.INAPP, INAPP_SKUS)
                 queryPurchasesAsync()
             }
-            BillingClient.BillingResponseCode.BILLING_UNAVAILABLE -> Log.d(TAG, billingResult.debugMessage)
+            BillingClient.BillingResponseCode.BILLING_UNAVAILABLE -> {
+                Log.d(TAG, billingResult.debugMessage)
+            }
             else -> Log.d(TAG, billingResult.debugMessage)
         }
     }
 
     override fun onBillingServiceDisconnected() {
         Log.d(TAG, "onBillingServiceDisconnected")
-        connectToPlayBillingService()
+        // TODO: Try connecting again with exponential backoff.
+        // billingClient.startConnection(this)
     }
 
     override fun onPurchasesUpdated(
@@ -112,7 +115,6 @@ class BillingRepository(
         when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> purchases?.apply { processPurchases(this.toSet()) }
             BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> queryPurchasesAsync()
-            BillingClient.BillingResponseCode.SERVICE_DISCONNECTED -> connectToPlayBillingService()
             else -> Log.i(TAG, billingResult.debugMessage)
         }
     }
