@@ -1,9 +1,11 @@
 package com.b_lam.resplash.data.autowallpaper.model
 
+import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+@Keep
 @Entity(
     tableName = "auto_wallpaper_collections",
     indices = [Index(value = ["date_added"])]
