@@ -44,6 +44,10 @@ fun RecyclerView.scrollToTop() {
             scrollToPosition(6)
         }
         smoothScrollToPosition(0)
+
+        if (it is StaggeredGridLayoutManager) {
+            it.invalidateSpanAssignments()
+        }
     }
 }
 
