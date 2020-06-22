@@ -163,6 +163,7 @@
     <string name="focal_length">ระยะโฟกัส</string>
     <string name="dimensions">ความละเอียด</string>
     <string name="shutter_speed">ความเร็วชัตเตอร์</string>
+    <string name="description">ลักษณะ</string>
 
     <!-- Collections -->
     <string name="add_to_collection">เพิ่มลงคอลเลคชั่น</string>

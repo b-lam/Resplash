@@ -187,6 +187,7 @@
     <string name="dimensions">Dimensions</string>
     <string name="shutter_speed">Shutter Speed</string>
     <string name="iso" translatable="false">ISO</string>
+    <string name="description">Description</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Add to collection</string>

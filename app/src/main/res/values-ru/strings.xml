@@ -166,6 +166,7 @@
     <string name="focal_length">Фокусное расстояние</string>
     <string name="dimensions">Разрешение</string>
     <string name="shutter_speed">Экспозиция</string>
+    <string name="description">Описание</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Добавить в коллекцию</string>

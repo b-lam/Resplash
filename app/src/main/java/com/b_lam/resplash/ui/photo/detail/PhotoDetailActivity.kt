@@ -30,6 +30,7 @@ import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_photo_detail.*
 import okio.IOException
@@ -99,8 +100,18 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
         return true
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.action_show_description)?.isVisible =
+            !viewModel.photoDetailsLiveData(id).value?.description.isNullOrBlank()
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_show_description -> {
+                showDescriptionDialog()
+                true
+            }
             R.id.action_open_in_browser -> {
                 openPhotoInBrowser()
                 true
@@ -136,6 +147,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 }
             }
         }
+        invalidateOptionsMenu()
         photo.location?.let { location ->
             val locationString = when {
                 location.city != null && location.country != null ->
@@ -282,6 +294,11 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 bitmap.recycle()
             }
         }
+    }
+
+    private fun showDescriptionDialog() {
+        val description = viewModel.photoDetailsLiveData(id).value?.description
+        MaterialAlertDialogBuilder(this).setMessage(description).show()
     }
 
     private fun openPhotoInBrowser() {

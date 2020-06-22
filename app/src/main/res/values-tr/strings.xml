@@ -164,6 +164,7 @@
     <string name="focal_length">Odak Uzaklığı</string>
     <string name="dimensions">Boyutlar</string>
     <string name="shutter_speed">Pozlama Süresi</string>
+    <string name="description">Açıklama</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Koleksiyona Ekle</string>

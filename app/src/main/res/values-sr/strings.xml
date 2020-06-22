@@ -165,6 +165,7 @@
     <string name="focal_length">Фокусна дужина</string>
     <string name="dimensions">Димензије</string>
     <string name="shutter_speed">Експозиција</string>
+    <string name="description">Опис</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Додај у збирку</string>

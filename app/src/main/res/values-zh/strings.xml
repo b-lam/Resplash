@@ -163,6 +163,7 @@
     <string name="focal_length">焦距</string>
     <string name="dimensions">尺寸</string>
     <string name="shutter_speed">曝光时间</string>
+    <string name="description">描述</string>
 
     <!-- Collections -->
     <string name="add_to_collection">添加到收藏</string>

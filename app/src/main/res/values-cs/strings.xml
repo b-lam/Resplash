@@ -165,6 +165,7 @@
     <string name="focal_length">Ohnisková vzdálenost</string>
     <string name="dimensions">Rozlišení</string>
     <string name="shutter_speed">Doba expozice</string>
+    <string name="description">Popis</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Přidat do kolekce</string>

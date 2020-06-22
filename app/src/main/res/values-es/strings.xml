@@ -164,6 +164,7 @@
     <string name="focal_length">Distancia focal</string>
     <string name="dimensions">Dimensiones</string>
     <string name="shutter_speed">Exposición</string>
+    <string name="description">Descripción</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Añadir a colección</string>

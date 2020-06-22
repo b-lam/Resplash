@@ -164,6 +164,7 @@
     <string name="focal_length">Tamanho de Foco</string>
     <string name="dimensions">Dimensões</string>
     <string name="shutter_speed">Tempo de exposição</string>
+    <string name="description">Descrição</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Adicionar a coleção</string>

@@ -164,6 +164,7 @@
     <string name="focal_length">Brennweite</string>
     <string name="dimensions">Größe</string>
     <string name="shutter_speed">Belichtungszeit</string>
+    <string name="description">Beschreibung</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Zu Kollektion hinzufügen</string>
