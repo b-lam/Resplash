@@ -16,7 +16,7 @@ fun getPhotoUrl(photo: Photo, quality: String?): String {
         REGULAR -> photo.urls.regular
         SMALL -> photo.urls.small
         THUMB -> photo.urls.thumb
-        else -> photo.urls.full
+        else -> photo.urls.regular
     }
 }
 
