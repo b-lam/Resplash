@@ -35,6 +35,7 @@
         <item quantity="two">%d صور</item>
         <item quantity="few">%d صور</item>
         <item quantity="many">%d صور</item>
+        <item quantity="other">%d صور</item>
     </plurals>
 
     <!-- Main -->
