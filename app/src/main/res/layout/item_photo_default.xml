@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="UnusedAttribute">
+
+    <LinearLayout
+        android:id="@+id/user_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/keyline_6"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/user_image_view"
+            android:layout_width="@dimen/user_profile_picture_small_size"
+            android:layout_height="@dimen/user_profile_picture_small_size"
+            android:layout_marginStart="@dimen/keyline_5"
+            android:scaleType="centerCrop"
+            tools:src="@color/green_100"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/user_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_6"
+            android:singleLine="true"
+            android:layout_gravity="center_vertical"
+            style="@style/TextAppearance.Resplash.Subtitle2"
+            tools:text="Brandon Lam" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/photo_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardElevation="0dp">
+
+        <com.b_lam.resplash.ui.widget.AspectRatioImageView
+            android:id="@+id/photo_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            tools:src="@color/white" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/check_animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:lottie_fileName="check.json"
+            app:lottie_speed="1.5" />
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

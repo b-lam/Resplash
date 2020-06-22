@@ -1,271 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="navigation_drawer_open">Buka laci navigasi</string>
-    <string name="navigation_drawer_close">Tutup laci navigasi</string>
+    <!-- Common -->
+    <string name="ok">Baik</string>
+    <string name="cancel">Batal</string>
+    <string name="search">Cari</string>
+    <string name="photos">Foto</string>
+    <string name="collections">Koleksi</string>
+    <string name="like">Menyukai</string>
+    <string name="users">Pengguna</string>
+    <string name="unknown">Tidak diketahui</string>
+    <string name="download">Unduh</string>
+    <string name="on">Hidup</string>
+    <string name="off">Mati</string>
+    <string name="share">Bagikan</string>
+    <string name="open_in_browser">Buka di browser</string>
+    <string name="apply">Menerapkan</string>
+    <string name="create">Buat</string>
+    <string name="save">Simpan</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Hapus</string>
+    <string name="are_you_sure">Apakah Anda yakin?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="thanks">Terima kasih!</string>
+    <string name="download_started">Pengunduhan dimulai</string>
+    <string name="download_complete">Unduhan Selesai</string>
+    <string name="setting_wallpaper">Pengaturan wallpaper…</string>
+    <string name="set_as_wallpaper">Atur sebagai wallpaper</string>
 
-    <string name="action_share">Bagikan</string>
-    <string name="action_view_on_unsplash">Buka di browser</string>
-
-    <!-- ErrorView -->
-    <string name="error_http">Oops.</string>
-    <string name="error_http_subtitle">Kami sepertinya kehabisan permintaan untuk saat ini \n\nHarap coba lagi nanti</string>
-    <string name="error_network">Oops.</string>
-    <string name="error_network_subtitle">Tampaknya ada masalah dengan internet Anda</string>
-
-    <!-- Settings -->
-    <string name="title_quality_section">Kualitas</string>
-    <string name="title_load_quality_preference">Kualitas Muatan</string>
-    <string name="summary_load_quality_preference">Pilih kualitas gambar yang dimuat</string>
-    <string name="title_download_quality_preference">Kualitas Unduhan</string>
-    <string name="summary_download_quality_preference">Pilih kualitas gambar yang diunduh</string>
-    <string name="title_wallpaper_quality_preference">Kualitas Wallpaper</string>
-    <string name="summary_wallpaper_quality_preference">Pilih kualitas set wallpaper</string>
-    <string-array name="quality_options">
-        <item>Sangat Tinggi</item>
-        <item>Tinggi</item>
-        <item>Normal</item>
-        <item>Rendah</item>
-        <item>Sangat Rendah</item>
-    </string-array>
-    <string name="title_layout_section">Tampilan</string>
-    <string name="title_layout_preference">Pilih Tampilan</string>
-    <string name="summary_layout_preference">Pilih bagaimana gambar ditampilkan</string>
-    <string-array name="layout_options">
-        <item>Daftar</item>
-        <item>Kartu</item>
-        <item>Kisi</item>
-    </string-array>
-    <string name="title_general_section">Umum</string>
-    <string name="title_custom_api">Kunci API Kustom</string>
-    <string name="title_clear_cache">Hapus Cache</string>
-    <string name="cache_size">Ukuran cache</string>
-    <string name="message_cache_cleared">Cache dihapus!</string>
-    <string name="title_language">Bahasa</string>
-    <string name="title_theme">Tema</string>
-    <string-array name="theme">
-        <item>Terang</item>
-        <item>Gelap</item>
-        <item>Hitam (AMOLED)</item>
-    </string-array>
-    <string name="restart">Muat Ulang</string>
-    <string name="restart_to_apply">Muat ulang untuk menerapkan perubahan</string>
-    <string name="title_other_section">Lainnya</string>
-    <string name="title_unsplash_intent_preference">Pergi ke Unsplash.com</string>
-
-    <!-- Menu -->
-    <string name="menu_search">Cari</string>
-    <string name="menu_sort">Urutkan berdasarkan</string>
-    <string name="menu_item_latest">Terbaru</string>
-    <string name="menu_item_oldest">Terlama</string>
-    <string name="menu_item_popular">Populer</string>
-    <string name="menu_item_random">Acak</string>
-    <string name="menu_item_all">Semua</string>
-    <string name="menu_item_curated">Kurasi</string>
-    <string name="menu_item_featured">Unggulan</string>
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="other">%d Foto</item>
+    </plurals>
 
     <!-- Main -->
-    <string name="main_unsplash_description">Foto resolusi tinggi gratis</string>
-    <string name="main_add_account">Tambahkan akun</string>
-    <string name="main_add_new_account">Tambahkan akun Unsplash baru</string>
-    <string name="main_view_profile">Lihat Profil</string>
-    <string name="main_manage_account">Kelola Akun</string>
-    <string name="main_logout">Keluar</string>
-    <string name="main_featured">Unggulan</string>
-    <string name="main_new">Baru</string>
-    <string name="main_collections">Koleksi</string>
-    <string name="main_support_development">Dukung pengembang</string>
-    <string name="main_settings">Pengaturan</string>
-    <string name="main_about">Tentang</string>
-    <string name="main_logout_success">Keluar - Berhasil</string>
+    <string name="home">Baru</string>
+    <string name="header_subtitle">Didukung oleh pencipta di mana-mana</string>
+    <string name="add_account">Menambahkan akun</string>
+    <string name="view_profile">Lihat Profil</string>
+    <string name="edit_profile">Kelola Akun</string>
+    <string name="log_out">Keluar</string>
+    <string name="sort_by">Urutkan berdasarkan</string>
+    <string name="order_latest">Terbaru</string>
+    <string name="order_oldest">Terlama</string>
+    <string name="order_popular">Populer</string>
+    <string name="order_all">Semua</string>
+    <string name="order_featured">Unggulan</string>
 
-    <!-- Intro -->
-    <string name="intro_welcome_title">Resplash</string>
-    <string name="intro_welcome_description">Didukung oleh Unsplash</string>
-    <string name="intro_download_title">Foto Resolusi Tinggi</string>
-    <string name="intro_download_description">Foto resolusi tinggi gratis (lakukan apa pun yang Anda inginkan)</string>
-    <string name="intro_done">Mulai</string>
-    <string name="intro_next">Lanjut</string>
+    <!-- Error/Empty -->
+    <string name="oops">Ups! Ada yang tidak beres…</string>
+    <string name="empty_state_title">Tidak ada yang bisa dilihat di sini…</string>
+    <string name="error_state_title">Uh oh…</string>
+    <string name="error_setting_wallpaper">Ada yang salah saat mengatur wallpaper…</string>
 
-    <!-- Custom API -->
-    <string name="custom_api_key_description">Anda dapat membuat akun pengembang Unsplash Anda sendiri dan menggunakan kunci API Anda sendiri\n\n(Biarkan kosong untuk menggunakan kunci API bawaan)</string>
-    <string name="api_key_empty_message">Kesalahan: Tidak dapat mengosongkan bidang</string>
-    <string name="redirect_uri_hint">Redirect URI</string>
-    <string name="secret_hint">Secret</string>
-    <string name="api_key_hint">API Key</string>
+    <!-- Settings -->
+    <string name="settings">Pengaturan</string>
+    <string name="general">Umum</string>
+    <string name="clear_cache">Hapus Cache</string>
+    <string name="cache_size">Ukuran cache: %d MB</string>
+    <string name="language">Bahasa</string>
+    <string name="theme">Tema</string>
+    <string name="theme_light">Terang</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="theme_battery">Diatur oleh penghemat baterai</string>
+    <string name="theme_default">Sistem standar</string>
+    <string name="layout">Tampilan</string>
+    <string name="layout_default">Default</string>
+    <string name="layout_minimal">Sederhana</string>
+    <string name="layout_grid">Kisi</string>
+    <string name="quality">Kualitas</string>
+    <string name="quality_raw">Sangat Tinggi</string>
+    <string name="quality_full">Tinggi</string>
+    <string name="quality_regular">Normal</string>
+    <string name="quality_small">Rendah</string>
+    <string name="quality_thumb">Sangat Rendah</string>
+    <string name="load_quality">Kualitas Muatan</string>
+    <string name="download_quality">Kualitas Unduhan</string>
+    <string name="wallpaper_quality">Kualitas Wallpaper</string>
+    <string name="long_press_to_download">Tekan lama untuk mengunduh</string>
+    <string name="long_press_to_download_summary">Tekan lama pada foto untuk mulai mengunduh</string>
 
-    <!-- Search -->
-    <string name="search_photos">Foto</string>
-    <string name="search_collections">Koleksi</string>
-    <string name="search_users">Pengguna</string>
-    <string name="search_hint">Cari</string>
-    <string name="search_title">Cari</string>
-    <string name="action_clear_text">Hapus teks</string>
-    <string-array name="search_photos_orientations">
-        <item>Semua</item>
-        <item>Membentang</item>
-        <item>Potret</item>
-        <item>Persegi</item>
-    </string-array>
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Wallpaper Otomatis</string>
+    <string name="auto_wallpaper_info">Wallpaper Otomatis akan menyegarkan layar beranda Anda dengan wallpaper acak baru berdasarkan kondisi yang ditetapkan</string>
+    <string name="auto_wallpaper_help_title">Tidak bekerja</string>
+    <string name="auto_wallpaper_help_message">Coba nonaktifkan kondisi idle dan optimisasi baterai untuk Resplash di pengaturan ponsel anda.\n\nUntuk instruksi khusus pabrikan: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">Kondisi</string>
+    <string name="auto_wallpaper_on_wifi_title">Pada Wi-Fi</string>
+    <string name="auto_wallpaper_on_wifi_summary">Perangkat harus terhubung ke jaringan Wi-Fi</string>
+    <string name="auto_wallpaper_charging_title">Pengisian daya</string>
+    <string name="auto_wallpaper_charging_summary">Perangkat harus terhubung ke sumber daya</string>
+    <string name="auto_wallpaper_idle_title">Diam</string>
+    <string name="auto_wallpaper_idle_summary">Perangkat harus tidak aktif</string>
+    <string name="auto_wallpaper_interval_title">Jarak Waktu</string>
+    <string name="auto_wallpaper_interval_summary">Ubah wallpaper setiap: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 menit</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 menit</string>
+    <string name="auto_wallpaper_interval_one_hour">1 jam</string>
+    <string name="auto_wallpaper_interval_three_hours">3 jam</string>
+    <string name="auto_wallpaper_interval_six_hours">6 jam</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 jam</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 jam</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 jam</string>
+    <string name="auto_wallpaper_source">Sumber</string>
+    <string name="auto_wallpaper_source_title">Sumber wallpaper</string>
+    <string name="auto_wallpaper_source_summary">Sumber saat ini: %s</string>
+    <string name="auto_wallpaper_source_all">Semua</string>
+    <string name="auto_wallpaper_source_featured">Unggulan</string>
+    <string name="auto_wallpaper_source_collections">Koleksi</string>
+    <string name="auto_wallpaper_source_user">Foto pengguna</string>
+    <string name="auto_wallpaper_source_search">Istilah pencarian</string>
+    <string name="auto_wallpaper_source_not_set">Tidak diatur</string>
+    <string name="auto_wallpaper_collections_summary">Pilih koleksi untuk mendapatkan foto</string>
+    <string name="auto_wallpaper_user_title">Foto pengguna</string>
+    <string name="auto_wallpaper_user_summary">Menggunakan foto dari: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Masukkan nama pengguna pengguna untuk mendapatkan foto:</string>
+    <string name="auto_wallpaper_search_terms_title">Istilah pencarian</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Dapatkan foto yang cocok dengan istilah pencarian berikut:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Pisahkan beberapa istilah dengan koma)</string>
+    <string name="auto_wallpaper_options_title">Polihan</string>
+    <string name="auto_wallpaper_center_crop_title">Pangkas tengah</string>
+    <string name="auto_wallpaper_center_crop_summary">Pangkas semua wallpaper untuk dipusatkan</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Perbaikan Orientasi Perangkat</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Beberapa perangkat akan memotong wallpaper dengan salah jika diatur saat perangkat dalam mode lansekap, memeriksa ini akan menjadwal ulang tugas sampai perangkat dalam mode potret</string>
+    <string name="auto_wallpaper_select_screen_title">Pilih layar</string>
+    <string name="auto_wallpaper_select_screen_summary">Terapkan wallpaper ke: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Layar utama</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">Layar kunci</string>
+    <string name="auto_wallpaper_select_screen_both">Keduanya</string>
+    <string name="auto_wallpaper_orientation_title">Orientasi</string>
+    <string name="auto_wallpaper_orientation_summary">Batasi orientasi wallpaper untuk: %s</string>
+    <string name="auto_wallpaper_content_filter_title">Filter konten</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Minimum: Jaminan bahwa tidak ada konten yang melanggar pedoman pengiriman (seperti gambar yang mengandung ketelanjangan atau kekerasan) akan ditampilkan</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Maksimum: Saring konten yang mungkin tidak cocok untuk pemirsa yang lebih muda</string>
+    <string name="auto_wallpaper_content_filter_note">Perhatikan bahwa kami tidak dapat menjamin bahwa semua konten yang berpotensi tidak pantas dihapus</string>
+    <string name="auto_wallpaper_history_title">Riwayat Wallpaper Otomatis</string>
+    <string name="auto_wallpaper_history_summary">Lihat wallpaper yang ditetapkan sebelumnya</string>
+    <string name="auto_wallpaper_history_clear_history">Bersihkan riwayat</string>
+    <string name="auto_wallpaper_activate">Aktifkan</string>
+    <string name="auto_wallpaper_next_wallpaper">Wallpaper Selanjutnya</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Tambahkan ke Wallpaper Otomatis</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Hapus dari Wallpaper Otomatis</string>
+    <string name="auto_wallpaper_collection_added">Koleksi ditambahkan ke Wallpaper Otomatis</string>
+    <string name="auto_wallpaper_collection_removed">Koleksi dihapus dari Wallpaper Otomatis</string>
+    <string name="auto_wallpaper_selected_collections">Terpilih</string>
+    <string name="auto_wallpaper_no_selected_collections">Temukan beberapa koleksi untuk ditambahkan</string>
+    <string name="auto_wallpaper_discover">Menemukan</string>
+    <string name="auto_wallpaper_popular">Populer</string>
+    <string name="auto_wallpaper_add_collection_from_url">Tambahkan koleksi dari URL</string>
+    <string name="auto_wallpaper_could_not_add_collection">Tidak dapat menambahkan koleksi</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Salin dan tempel URL koleksi:</string>
+    <string name="auto_wallpaper_collection_url">URL koleksi</string>
+    <string name="auto_wallpaper_add_collection">Tambahkan koleksi</string>
+    <string name="auto_wallpaper_invalid_url">URL tidak valid</string>
 
-    <!-- InfoDialog -->
-    <string name="photo_dimensions">Dimensi</string>
-    <string name="camera_make">Buat</string>
-    <string name="camera_model">Model</string>
-    <string name="exposure_time"> Waktu exposure</string>
+    <!-- Photo Detail -->
+    <string name="views">Dilihat</string>
+    <string name="downloads">Diunduh</string>
+    <string name="likes">Suka</string>
+    <string name="camera">Kamera</string>
     <string name="aperture">Aperture</string>
-    <string name="iso">ISO</string>
     <string name="focal_length">Jarak fokus</string>
+    <string name="dimensions">Dimensi</string>
+    <string name="shutter_speed">" Waktu exposure"</string>
+    <string name="description">Deskripsi</string>
 
     <!-- Collections -->
     <string name="add_to_collection">Tambah ke koleksi</string>
     <string name="create_new_collection">Buat koleksi baru</string>
-    <string name="create">Buat</string>
-    <string name="delete">Hapus</string>
+    <string name="make_collection_private">Buat koleksi pribadi</string>
     <string name="collection_name_hint">Nama</string>
     <string name="collection_description_hint">Deskripsi (opsional)</string>
-    <string name="make_collection_private">Buat koleksi pribadi</string>
-    <string name="collection_name_is_required">Nama diperlukan</string>
-    <string name="failed_to_create_collection">Gagal membuat koleksi</string>
-    <string name="failed_to_save_collection">Gagal menyimpan koleksi</string>
-    <string name="failed_to_delete_collection">Gagal menghapus koleksi</string>
+    <string name="collection_name_required">Nama diperlukan</string>
     <string name="edit_collection">Edit koleksi</string>
-    <string name="are_you_sure">Apakah Anda yakin?</string>
-    <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
+    <string name="curated_by_template">Dikuratori oleh %s</string>
 
-    <!-- About -->
-    <string name="about_title">Tentang</string>
-    <string name="about_unsplash_title">Unsplash.com</string>
-    <string name="about_unsplash_subtitle">Foto resolusi tinggi gratis (lakukan apa pun yang Anda inginkan)</string>
-    <string name="about_version_title">Versi</string>
-    <string name="about_introduction_title">Perkenalan</string>
-    <string name="about_github_title">GitHub</string>
-    <string name="about_privacy_policy_title">Kebijakan Privasi</string>
-    <string name="about_support_development_card_title">Dukung pengembang</string>
-    <string name="about_rate_title">Beri peringkat</string>
-    <string name="about_rate_subtitle">Jika Anda suka Resplash, beri peringkat di Play Store</string>
-    <string name="about_donate_title">Donasi</string>
-    <string name="about_donate_subtitle">Jika Anda benar-benar menyukai Resplash, pertimbangkan untuk mendukung pengembangannya dengan mengirimkan saya beberapa dolar</string>
-    <string name="about_bug_title">Laporkan bug</string>
-    <string name="about_bug_subtitle">Laporkan bug atau meminta fitur baru</string>
-    <string name="about_author_title">Brandon Lam</string>
-    <string name="about_author_card_title">Pembuat</string>
-    <string name="about_author_subtitle">Toronto, Ontario, Canada</string>
-    <string name="about_website_title">Buka situs</string>
-    <string name="about_instagram_title">Ikuti di Instagram</string>
-    <string name="about_libraries_card_title">Dukungan</string>
-
-    <!-- Donate -->
-    <string name="donate_card_title">Dukung pengembang</string>
-    <string name="donate_item1_title">Kopi Panas</string>
-    <string name="donate_item1_subtitle">Membuat saya tetap terjaga melalui sesi pengkodean larut malam</string>
-    <string name="donate_item2_title">Smoothie</string>
-    <string name="donate_item2_subtitle">Terkadang saya perlu makan sesuatu yang sehat</string>
-    <string name="donate_item3_title">Pizza</string>
-    <string name="donate_item3_subtitle">Semua orang suka pizza</string>
-    <string name="donate_item4_title">Makanan Mewah</string>
-    <string name="donate_item4_subtitle">Harus memperlakukan diri sendiri sesekali</string>
-    <string name="donate_thanks">Terima kasih telah menyumbang!</string>
-    <string name="donate_loading">Memuat produk&#8230;</string>
-
-    <!-- Auto Wallpaper -->
-    <string name="auto_wallpaper_title">Wallpaper Otomatis</string>
-    <string name="auto_wallpaper_conditions">Kondisi</string>
-    <string name="auto_wallpaper_on_wifi">Pada Wi-Fi</string>
-    <string name="auto_wallpaper_on_wifi_summary">Perangkat harus terhubung ke jaringan Wi-Fi</string>
-    <string name="auto_wallpaper_charging">Pengisian daya</string>
-    <string name="auto_wallpaper_charging_summary">Perangkat harus terhubung ke sumber daya</string>
-    <string name="auto_wallpaper_idle">Diam</string>
-    <string name="auto_wallpaper_idle_summary">Perangkat harus tidak aktif</string>
-    <string name="auto_wallpaper_interval">Jarak Waktu</string>
-    <string name="auto_wallpaper_interval_summary">Pilih interval perubahan wallpaper otomatis </string>
-    <string-array name="auto_wallpaper_interval_options">
-        <item>15 menit</item>
-        <item>30 menit</item>
-        <item>1 jam</item>
-        <item>3 jam</item>
-        <item>6 jam</item>
-        <item>12 jam</item>
-        <item>24 jam</item>
-        <item>48 jam</item>
-    </string-array>
-    <string name="auto_wallpaper_source">Sumber</string>
-    <string name="auto_wallpaper_category">Kategori</string>
-    <string name="auto_wallpaper_category_summary">Pilih kategori wallpaper</string>
-    <string-array name="auto_wallpaper_category_options">
-        <item>Semua</item>
-        <item>Unggulan</item>
-        <item>Khusus</item>
-    </string-array>
-    <string name="auto_wallpaper_custom_category">Kategori Khusus</string>
-    <string name="auto_wallpaper_custom_category_summary">Dapatkan wallpaper yang cocok dengan istilah pencarian</string>
-    <string name="auto_wallpaper_custom_category_default" translatable="false">Wallpaper</string>
-    <string name="auto_wallpaper_options">Polihan</string>
-    <string name="auto_wallpaper_select_screen">Pilih layar</string>
-    <string name="auto_wallpaper_select_screen_summary">Pilih layar mana yang ingin diterapkan wallpaper</string>
-    <string-array name="auto_wallpaper_select_screen_options">
-        <item>Layar utama</item>
-        <item>Layar kunci</item>
-        <item>Keduanya</item>
-    </string-array>
-    <string name="auto_wallpaper_history">Riwayat Wallpaper Otomatis</string>
-    <string name="auto_wallpaper_history_summary">Lihat wallpaper yang ditetapkan sebelumnya</string>
-    <string name="auto_wallpaper_info">Wallpaper Otomatis akan menyegarkan layar beranda Anda dengan wallpaper acak baru berdasarkan kondisi yang ditetapkan.</string>
-
-    <!-- Detail -->
-    <string name="stats">Statistik</string>
-    <string name="photo_info">Info</string>
-    <string name="set_as_wallpaper">Atur sebagai wallpaper</string>
-    <string name="download">Unduh</string>
-    <string name="setting_wallpaper">Pengaturan wallpaper&#8230;</string>
-    <string name="cancel">Batal</string>
-    <string name="file_exists">Ini sudah diunduh</string>
-
-    <!-- Error -->
-    <string name="no_results">Tidak ada apa-apa di sini&#8230;</string>
-    <string name="log_in">Masuk</string>
-    <string name="join">Daftar</string>
-    <string name="edit_title">Edit Profil</string>
-    <string name="request_token_failed">Permintaan token gagal</string>
-    <string name="error">Error</string>
-
-    <string name="by_author">Oleh %1$s</string>
-    <string name="no_more_photos">Tidak ada lagi foto</string>
-    <string name="updated_photos">Foto diperbarui!</string>
-    <string name="updated_collections">Koleksi diperbarui!</string>
-    <string name="updated_users">Pengguna diperbarui!</string>
-    <string name="share_via">Bagikan melalui</string>
-    <string name="unsplash_image">Gambar Unsplash</string>
-    <string name="unsplash_collection">Koleksi Unsplash</string>
-    <string name="save">Simpan</string>
-    <string name="saved">Disimpan</string>
-    <string name="likes">%1$s suka</string>
-    <string name="photos">%1$s Gambar</string>
-    <string name="views">%1$s Dilihat</string>
-    <string name="downloads">%1$s Diunduh</string>
-    <string name="cannot_make_anymore_requests">Tidak dapat membuat permintaan lagi</string>
-    <string name="download_started">Pengunduhan dimulai</string>
-    <string name="image_saved">Gambar disimpan</string>
-    <string name="download_wallpaper">Unduh Wallpaper</string>
-    <string name="download_complete">Unduhan Selesai</string>
-    <string name="unknown">Tidak diketahui</string>
-    <string name="cannot_update_profile">Tidak dapat memperbarui profil</string>
-    <string name="updated_profile">Profil diperbarui</string>
-    <string name="username_cannot_be_blank">Nama Pengguna tidak boleh kosong</string>
-    <string name="failed_to_load_profile">Gagal memuat profil</string>
-    <string name="next">Selanjutnya</string>
+    <!-- User -->
+    <string name="open_portfolio_link">Buka tautan portofolio</string>
+    <string name="blank_username_error">Nama pengguna tidak boleh kosong</string>
+    <string name="invalid_username_error">Nama pengguna harus memiliki setidaknya satu huruf dan hanya berisi huruf, angka, atau garis bawah (tanpa spasi)</string>
+    <string name="username_taken_error">Nama pengguna sudah diambil</string>
+    <string name="blank_first_name_error">Nama depan tidak boleh kosong</string>
+    <string name="blank_email_error">Email tidak boleh kosong</string>
+    <string name="invalid_email_error">Email tidak valid</string>
     <string name="username_hint">Nama Pengguna</string>
+    <string name="username_helper_text">(Hanya huruf, angka, dan garis bawah)</string>
     <string name="first_name_hint">Nama depan</string>
     <string name="last_name_hint">Nama belakang</string>
-    <string name="email_address_hint">Alamat email</string>
-    <string name="personal_site_hint">Situs / portofolio pribadi</string>
+    <string name="email_hint">Alamat email</string>
+    <string name="portfolio_hint">Situs / portofolio pribadi</string>
     <string name="instagram_username_hint">Nama pengguna instagram</string>
     <string name="location_hint">Lokasi</string>
     <string name="bio_hint">Bio</string>
-    <string name="error_loading_photo">Tampaknya ada masalah memuat foto ini</string>
+    <string name="account_updated">Akun diperbarui!</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">Coba cari sesuatu</string>
+    <string name="filter">Saring</string>
+    <string name="filter_relevance">Relevansi</string>
+    <string name="filter_latest">Terbaru</string>
+    <string name="content_filter">Filter konten</string>
+    <string name="filter_low">Minimum</string>
+    <string name="filter_high">Maksimum</string>
+    <string name="orientation">Orientasi</string>
+    <string name="filter_any">Apa saja</string>
+    <string name="filter_portrait">Potret</string>
+    <string name="filter_landscape">Membentang</string>
+    <string name="filter_square">Persegi</string>
+    <string name="filter_color">Warna</string>
+    <string name="filter_color_any">Apa saja</string>
+    <string name="filter_color_black_white">Hitam dan putih</string>
+    <string name="filter_color_black">Hitam</string>
+    <string name="filter_color_white">Putih</string>
+    <string name="filter_color_yellow">Kuning</string>
+    <string name="filter_color_orange">Jeruk</string>
+    <string name="filter_color_red">Merah</string>
+    <string name="filter_color_purple">Ungu</string>
+    <string name="filter_color_magenta">Magenta</string>
+    <string name="filter_color_green">Hijau</string>
+    <string name="filter_color_teal">Teal</string>
+    <string name="filter_color_blue">Biru</string>
+
+    <!-- Login -->
+    <string name="login">Masuk</string>
+    <string name="create_an_account">Buat sebuah akun</string>
+    <string name="login_banner_title">Penciptaan dimulai di sini</string>
+    <string name="login_banner_subtitle">Akses foto gratis beresolusi tinggi yang tidak dapat Anda temukan di tempat lain</string>
+    <string name="login_success">Login berhasil</string>
     <string name="need_to_log_in">Anda harus masuk untuk melakukan ini</string>
-    <string name="on">Hidup</string>
-    <string name="off">Mati</string>
-    <string name="next_wallpaper">Wallpaper Selanjutnya</string>
-    <string name="remove_all">Hapus semua</string>
-    <string name="activate">Aktifkan</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">Tingkatkan ke Resplash Pro</string>
+    <string name="pro_feature_title">What\'s in it for you?</string>
+    <string name="pro_feature_one">Customize Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
+    <string name="pro_feature_two">Future exclusive features</string>
+    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
+    <string name="pro_feature_three">Support development</string>
+    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_required">Anda perlu Resplash Pro untuk melakukan itu!</string>
+
+    <!-- Donation -->
+    <string name="support_development">Dukung pengembang</string>
+    <string name="you_are_welcome">Sama-sama</string>
+
+    <!-- About -->
+    <string name="about">Tentang</string>
+    <string name="licenses">Lisensi</string>
+    <string name="unsplash_summary">Sumber gambar yang dapat digunakan secara bebas di internet</string>
+    <string name="donate_summary">Jika Anda benar-benar menyukai Resplash, pertimbangkan untuk mendukung pengembangannya dengan mengirimkan saya beberapa dolar</string>
+    <string name="report_bug_title">Laporkan bug</string>
+    <string name="report_bug_summary">Laporkan bug atau meminta fitur baru</string>
+    <string name="rate_app_title">Beri peringkat</string>
+    <string name="rate_app_summary">Jika Anda suka Resplash, beri peringkat di Play Store</string>
+    <string name="github_summary">Resplash adalah open-source, periksa di GitHub</string>
+    <string name="developer_title">Pembuat</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
 </resources>

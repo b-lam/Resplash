@@ -1,240 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="navigation_drawer_open">Otevřít navigační menu</string>
-    <string name="navigation_drawer_close">Zavřít navigační menu</string>
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Zrušení</string>
+    <string name="search">Vyhledat</string>
+    <string name="photos">Fotek</string>
+    <string name="collections">Sbírky</string>
+    <string name="like">Mít rád</string>
+    <string name="users">Uživatelé</string>
+    <string name="unknown">Neznámé</string>
+    <string name="download">Stáhnout</string>
+    <string name="on">Povoleno</string>
+    <string name="off">Zakázáno</string>
+    <string name="share">Sdílet</string>
+    <string name="open_in_browser">Otevřít v prohlížeči</string>
+    <string name="apply">Aplikovat</string>
+    <string name="create">Vytvořit</string>
+    <string name="save">Uložit</string>
+    <string name="edit">Upravit</string>
+    <string name="delete">Vymazat</string>
+    <string name="are_you_sure">Jsi si jistá?</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="thanks">Dík!</string>
+    <string name="download_started">Stahování zahájeno</string>
+    <string name="download_complete">Stahování Dokončeno</string>
+    <string name="setting_wallpaper">Nastavení tapety…</string>
+    <string name="set_as_wallpaper">Nastavit jako tapetu</string>
 
-    <string name="action_share">Sdílet</string>
-    <string name="action_view_on_unsplash">Otevřít v prohlížeči</string>
-
-    <!-- ErrorView -->
-    <string name="error_http">Chyba Serveru</string>
-    <string name="error_http_subtitle">Zdá se, že došlo k problému se serverem.</string>
-    <string name="error_network">Žádné připojení</string>
-    <string name="error_network_subtitle">Zdá se, že máte problém s internetem.</string>
-
-    <!-- Settings -->
-    <string name="title_quality_section">Kvalita</string>
-    <string name="title_load_quality_preference">Kvalita Načtení</string>
-    <string name="summary_load_quality_preference">Zvolte kvalitu načtených obrázků</string>
-    <string name="title_download_quality_preference">Kvalita Stažení</string>
-    <string name="summary_download_quality_preference">Zvolte kvalitu stažených obrázků</string>
-    <string name="title_wallpaper_quality_preference">Kvalita Tapety</string>
-    <string name="summary_wallpaper_quality_preference">Zvolte kvalitu nastavené tapety</string>
-    <array name="quality_options">
-        <item>Raw</item>
-        <item>Plná</item>
-        <item>Normální</item>
-        <item>Malá</item>
-        <item>Miniatura</item>
-    </array>
-    <string name="title_layout_section">Uspořádání</string>
-    <string name="title_layout_preference">Zvolte Uspořádání</string>
-    <string name="summary_layout_preference">Zvolte zbůsob zobrazování obrázků</string>
-    <array name="layout_options">
-        <item>Seznam</item>
-        <item>Karty</item>
-        <item>Mřížka</item>
-    </array>
-    <string name="title_general_section">Obecná</string>
-    <string name="title_custom_api">Vlastní API Klíč</string>
-    <string name="title_clear_cache">Vymazat Mezipaměť</string>
-    <string name="cache_size">Velikost mezipaměti</string>
-    <string name="message_cache_cleared">Mezipaměť vymazána!</string>
-    <string name="title_language">Jazyk</string>
-    <string name="title_theme">Téma</string>
-    <array name="theme">
-        <item>Světlý</item>
-        <item>Temný</item>
-        <item>Černá</item>
-    </array>
-    <string name="restart">Restartujte</string>
-    <string name="restart_to_apply">Restartujte a použijte změny</string>
-    <string name="title_other_section">Ostatní</string>
-    <string name="title_unsplash_intent_preference">Otevřít Unsplash.com</string>
-
-    <!-- Menu -->
-    <string name="menu_search">Hledat</string>
-    <string name="menu_sort">Řadit podle</string>
-    <string name="menu_item_latest">Nejnovější</string>
-    <string name="menu_item_oldest">Nejstarší</string>
-    <string name="menu_item_popular">Oblíbené</string>
-    <string name="menu_item_random">Náhodně</string>
-    <string name="menu_item_all">Vše</string>
-    <string name="menu_item_curated">Kolekce</string>
-    <string name="menu_item_featured">Vybrané</string>
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="one">%d Fotka</item>
+        <item quantity="few">%d Fotek</item>
+        <item quantity="other">%d Fotek</item>
+    </plurals>
 
     <!-- Main -->
-    <string name="main_unsplash_description">Fotografie Ve Vysokém Rozlišení</string>
-    <string name="main_add_account">Přidat Účet</string>
-    <string name="main_add_new_account">Přidat nový Unsplash účet</string>
-    <string name="main_view_profile">Zobrazit Profil</string>
-    <string name="main_manage_account">Spravovat Účet</string>
-    <string name="main_logout">Odhlásit se</string>
-    <string name="main_featured">Doporučené</string>
-    <string name="main_new">Nové</string>
-    <string name="main_collections">Sbírky</string>
-    <string name="main_support_development">Podpořit vývoj</string>
-    <string name="main_settings">Nastavení</string>
-    <string name="main_about">O nás</string>
-    <string name="main_logout_success">Odhlášení - úspěšné</string>
+    <string name="home">Nové</string>
+    <string name="header_subtitle">Pohání tvůrci všude</string>
+    <string name="add_account">Přidat účet</string>
+    <string name="view_profile">Zobrazit Profil</string>
+    <string name="edit_profile">Spravovat Účet</string>
+    <string name="log_out">Odhlásit se</string>
+    <string name="sort_by">Řadit podle</string>
+    <string name="order_latest">Nejnovější</string>
+    <string name="order_oldest">Nejstarší</string>
+    <string name="order_popular">Oblíbené</string>
+    <string name="order_all">Vše</string>
+    <string name="order_featured">Vybrané</string>
 
-    <!-- Intro -->
-    <string name="intro_welcome_title">Resplash</string>
-    <string name="intro_welcome_description">Poháněno díky Unsplash</string>
-    <string name="intro_download_title">Fotografie Ve Vysokém Rozlišení</string>
-    <string name="intro_download_description">Fotografie ve vysokém rozlišení se kterými si můžete dělat co chcete (a jsou zdarma)</string>
-    <string name="intro_done">Začít</string>
-    <string name="intro_next">Další</string>
+    <!-- Error/Empty -->
+    <string name="oops">Jejda! Něco se pokazilo…</string>
+    <string name="empty_state_title">Zde není nic k vidění…</string>
+    <string name="error_state_title">A jé…</string>
+    <string name="error_setting_wallpaper">Při nastavení tapety se něco pokazilo…</string>
 
-    <!-- Custom API -->
-    <string name="custom_api_key_description">Můžete si vytvořit svůj vlastní účet vývojáře na Unsplash a použít vlastní API klíč\n\n(Ponechte pole prázdné pro použití výchozího API klíče)</string>
-    <string name="api_key_empty_message">Chyba: Toto pole musíte vyplnit</string>
-    <string name="redirect_uri_hint">Přesměrovací URI</string>
-    <string name="secret_hint">Tajné</string>
-    <string name="api_key_hint">API Klíč</string>
+    <!-- Settings -->
+    <string name="settings">Nastavení</string>
+    <string name="general">Obecná</string>
+    <string name="clear_cache">Vymazat Mezipaměť</string>
+    <string name="cache_size">Velikost mezipaměti: %d MB</string>
+    <string name="language">Jazyk</string>
+    <string name="theme">Téma</string>
+    <string name="theme_light">Světlý</string>
+    <string name="theme_dark">Temný</string>
+    <string name="theme_battery">Nastaveno šetřičem baterie</string>
+    <string name="theme_default">Výchozí systém</string>
+    <string name="layout">Uspořádání</string>
+    <string name="layout_default">Výchozí</string>
+    <string name="layout_minimal">Jednoduchý</string>
+    <string name="layout_grid">Mřížka</string>
+    <string name="quality">Kvalita</string>
+    <string name="quality_raw">Raw</string>
+    <string name="quality_full">Plná</string>
+    <string name="quality_regular">Normální</string>
+    <string name="quality_small">Malá</string>
+    <string name="quality_thumb">Miniatura</string>
+    <string name="load_quality">Kvalita Načtení</string>
+    <string name="download_quality">Kvalita Stažení</string>
+    <string name="wallpaper_quality">Kvalita Tapety</string>
+    <string name="long_press_to_download">Dlouhé stisknutí stáhnete</string>
+    <string name="long_press_to_download_summary">Dlouhým stisknutím fotografie spustíte stahování</string>
 
-    <!-- Search -->
-    <string name="search_photos">Fotek</string>
-    <string name="search_collections">Sbírky</string>
-    <string name="search_users">Uživatelé</string>
-    <string name="search_hint">Hledat</string>
-    <string name="search_title">Vyhledat</string>
-    <string name="action_clear_text">Vymazat text</string>
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Automatické Tapety</string>
+    <string name="auto_wallpaper_info">Automatické tapety obnoví domovskou obrazovku novou náhodnou tapetou na základě nastavených podmínek</string>
+    <string name="auto_wallpaper_help_title">Nejde to?</string>
+    <string name="auto_wallpaper_help_message">Zkuste v nastavení telefonu deaktivovat pohotovostní režim a optimalizaci baterie pro Resplash.\n\nPokyny specifické pro výrobce: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">Podmínky</string>
+    <string name="auto_wallpaper_on_wifi_title">Na Wifi</string>
+    <string name="auto_wallpaper_on_wifi_summary">Zařízení musí být připojeno k síti Wifi</string>
+    <string name="auto_wallpaper_charging_title">Nabíjení</string>
+    <string name="auto_wallpaper_charging_summary">Zařízení musí být připojeno k napájecímu zdroji</string>
+    <string name="auto_wallpaper_idle_title">Líný</string>
+    <string name="auto_wallpaper_idle_summary">Zařízení musí být neaktivní</string>
+    <string name="auto_wallpaper_interval_title">Interval</string>
+    <string name="auto_wallpaper_interval_summary">Každou změnu tapety: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 minut</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 minut</string>
+    <string name="auto_wallpaper_interval_one_hour">1 hodina</string>
+    <string name="auto_wallpaper_interval_three_hours">3 hodiny</string>
+    <string name="auto_wallpaper_interval_six_hours">6 hodin</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 hodin</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 hodin</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 hodin</string>
+    <string name="auto_wallpaper_source">Zdroj</string>
+    <string name="auto_wallpaper_source_title">Zdroj tapety</string>
+    <string name="auto_wallpaper_source_summary">Aktuální zdroj: %s</string>
+    <string name="auto_wallpaper_source_all">Vše</string>
+    <string name="auto_wallpaper_source_featured">Vybrané</string>
+    <string name="auto_wallpaper_source_collections">Sbírky</string>
+    <string name="auto_wallpaper_source_user">Fotografie uživatelů</string>
+    <string name="auto_wallpaper_source_search">Hledané výrazy</string>
+    <string name="auto_wallpaper_source_not_set">Nenastaveno</string>
+    <string name="auto_wallpaper_collections_summary">Vyberte sbírky, ze kterých chcete získat fotografie</string>
+    <string name="auto_wallpaper_user_title">Fotografie uživatelů</string>
+    <string name="auto_wallpaper_user_summary">Používám fotografie od: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Zadejte uživatelské jméno uživatele, ze kterého chcete získat fotografie:</string>
+    <string name="auto_wallpaper_search_terms_title">Hledané výrazy</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Získejte fotografie odpovídající následujícím vyhledávacím dotazům:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Oddělte více termínů čárkami)</string>
+    <string name="auto_wallpaper_options_title">Možnosti</string>
+    <string name="auto_wallpaper_center_crop_title">Středová plodina</string>
+    <string name="auto_wallpaper_center_crop_summary">Ořízněte všechny tapety, které chcete vycentrovat</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Oprava orientace zařízení</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Některá zařízení budou ořezat tapetu nesprávně, pokud je nastavena, když je zařízení v režimu na šířku, zaškrtnutím tohoto změníte úkol na novou pozici, dokud nebude zařízení v režimu na výšku</string>
+    <string name="auto_wallpaper_select_screen_title">Vyberte obrazovku</string>
+    <string name="auto_wallpaper_select_screen_summary">Použít tapetu na: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Domovská obrazovka</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">Uzamknout obrazovku</string>
+    <string name="auto_wallpaper_select_screen_both">Oba</string>
+    <string name="auto_wallpaper_orientation_title">Orientace</string>
+    <string name="auto_wallpaper_orientation_summary">Omezte orientaci tapety na: %s</string>
+    <string name="auto_wallpaper_content_filter_title">Filtr obsahu</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Minimum: Zaručuje, že se nebudou zobrazovat žádné pokyny pro porušení obsahu (jako jsou obrázky obsahující nahotu nebo násilí)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Maximum: Filtrujte obsah, který může být nevhodný pro mladší publikum</string>
+    <string name="auto_wallpaper_content_filter_note">Nemůžeme zaručit, že bude odstraněn veškerý potenciálně nevhodný obsah</string>
+    <string name="auto_wallpaper_history_title">Automatická Historie Tapet</string>
+    <string name="auto_wallpaper_history_summary">Zobrazení dříve nastavených tapet</string>
+    <string name="auto_wallpaper_history_clear_history">Smazat historii</string>
+    <string name="auto_wallpaper_activate">Aktivovat</string>
+    <string name="auto_wallpaper_next_wallpaper">Další tapeta</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Přidat do Automatické tapety</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Odebrat z Automatické tapety</string>
+    <string name="auto_wallpaper_collection_added">Kolekce byla přidána do Automatické tapety</string>
+    <string name="auto_wallpaper_collection_removed">Kolekce byla odebrána z Automatické tapety</string>
+    <string name="auto_wallpaper_selected_collections">Vybraný</string>
+    <string name="auto_wallpaper_no_selected_collections">Najděte některé kolekce, které chcete přidat</string>
+    <string name="auto_wallpaper_discover">Objevit</string>
+    <string name="auto_wallpaper_popular">Oblíbené</string>
+    <string name="auto_wallpaper_add_collection_from_url">Přidat sbírku z adresy URL</string>
+    <string name="auto_wallpaper_could_not_add_collection">Sbírku nelze přidat</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Zkopírujte a vložte adresu URL kolekce:</string>
+    <string name="auto_wallpaper_collection_url">URL kolekce</string>
+    <string name="auto_wallpaper_add_collection">Přidat sbírku</string>
+    <string name="auto_wallpaper_invalid_url">Neplatná URL adresa</string>
 
-    <!-- InfoDialog -->
-    <string name="photo_dimensions">Rozlišení</string>
-    <string name="camera_make">Značka</string>
-    <string name="camera_model">Model</string>
-    <string name="exposure_time">Doba expozice</string>
+    <!-- Photo Detail -->
+    <string name="views">Zobrazení</string>
+    <string name="downloads">Stažení</string>
+    <string name="likes">Srdíček</string>
+    <string name="camera">Fotoaparát</string>
     <string name="aperture">Clona</string>
-    <string name="iso">ISO</string>
     <string name="focal_length">Ohnisková vzdálenost</string>
-    <!-- About -->
-    <string name="about_title">O nás</string>
-    <string name="about_unsplash_title">Unsplash.com</string>
-    <string name="about_unsplash_subtitle">Fotografie ve vysokém rozlišení se kterými si můžete dělat co chcete (a jsou zdarma)</string>
-    <string name="about_version_title">Verze</string>
-    <string name="about_introduction_title">Úvod</string>
-    <string name="about_github_title">GitHub</string>
-    <string name="about_support_development_card_title">Podpořte vývoj</string>
-    <string name="about_rate_title">Hodnotit</string>
-    <string name="about_rate_subtitle">Líbí se Vám Resplash? Ohodnoťte jej v Obchodě Google Play</string>
-    <string name="about_donate_title">Podpořit</string>
-    <string name="about_donate_subtitle">Pokud se Vám Resplash vážně líbí, můžete podpořit vývoj tím, že mi pošlete pár korun</string>
-    <string name="about_bug_title">Nahlásit chyby</string>
-    <string name="about_bug_subtitle">Nahlásit chyby nebo požádat o nové funkce</string>
-    <string name="about_author_title">Brandon Lam</string>
-    <string name="about_author_card_title">Vývojář</string>
-    <string name="about_author_subtitle">Toronto, Ontario, Kanada</string>
-    <string name="about_website_title">Navštívit webové stránky</string>
-    <string name="about_instagram_title">Sledovat na Instagramu</string>
-    <string name="about_libraries_card_title">Knihovny</string>
+    <string name="dimensions">Rozlišení</string>
+    <string name="shutter_speed">Doba expozice</string>
+    <string name="description">Popis</string>
 
-    <!-- Donate -->
-    <string name="donate_card_title">Podpořit vývoj</string>
-    <string name="donate_item1_title">Kafe</string>
-    <string name="donate_item1_subtitle">Udržuje mě vzhůru během nocí strávených programováním</string>
-    <string name="donate_item2_title">Ovocný koktejl</string>
-    <string name="donate_item2_subtitle">Občas musím jíst taky něco zdravého</string>
-    <string name="donate_item3_title">Pizza</string>
-    <string name="donate_item3_subtitle">Kdo by něměl rád pizzu?</string>
-    <string name="donate_item4_title">Skvělé Jídlo</string>
-    <string name="donate_item4_subtitle">Jednou za čas si ho můžete dopřát</string>
-    <string name="donate_thanks">Díky za podporu!</string>
-    <string name="donate_loading">Načítání nabídek&#8230;</string>
+    <!-- Collections -->
+    <string name="add_to_collection">Přidat do kolekce</string>
+    <string name="create_new_collection">Vytvořit novou kolekci</string>
+    <string name="make_collection_private">Vytvořit soukromou sbírku</string>
+    <string name="collection_name_hint">Název</string>
+    <string name="collection_description_hint">Popis (volitelný)</string>
+    <string name="collection_name_required">Jméno je povinné</string>
+    <string name="edit_collection">Upravit kolekci</string>
+    <string name="curated_by_template">Autor: %s</string>
 
-    <!-- Detail -->
-    <string name="stats">Statistiky</string>
-    <string name="photo_info">Podrobnosti</string>
-    <string name="set_as_wallpaper">Nastavit jako tapetu</string>
-    <string name="download">Stáhnout</string>
-
-    <string name="no_results">Žádné výsledky</string>
-    <string name="log_in">Přihlásit se</string>
-    <string name="join">Zaregistrovat se</string>
-    <string name="edit_title">Upravit profil</string>
-    <string name="request_token_failed">Požadavek na token k přístupu selhal</string>
-    <string name="error">Chyba</string>
-
-    <string name="by_author">Od %1$s</string>
-    <string name="no_more_photos">Žádné další fotky</string>
-    <string name="updated_photos">Aktualizované fotky!</string>
-    <string name="updated_collections">Aktualizované sbírky!</string>
-    <string name="updated_users">Aktualizovaní uživatelé!</string>
-    <string name="share_via">Sdílet přes</string>
-    <string name="unsplash_image">Obrázek Unsplash</string>
-    <string name="unsplash_collection">Sbírka Unsplash</string>
-    <string name="save">Uložit</string>
-    <string name="saved">Uloženo</string>
-    <string name="likes">%1$s Srdíček</string>
-    <string name="photos">%1$s Fotek</string>
-    <string name="views">%1$s Zobrazení</string>
-    <string name="downloads">%1$s Stažení</string>
-    <string name="cannot_make_anymore_requests">Nelze vytvořit více požadavků</string>
-    <string name="download_started">Stahování zahájeno</string>
-    <string name="image_saved">Obrázek uložen</string>
-    <string name="download_wallpaper">Stáhnout Tapetu</string>
-    <string name="download_complete">Stahování Dokončeno</string>
-    <string name="unknown">Neznámé</string>
-    <string name="cannot_update_profile">Nelze aktualizovat profil</string>
-    <string name="updated_profile">Profil aktualizován</string>
-    <string name="username_cannot_be_blank">Uživatelské jméno musí být vyplněno</string>
-    <string name="failed_to_load_profile">Nelze načíst profil</string>
-    <string name="next">Další</string>
+    <!-- User -->
+    <string name="open_portfolio_link">Otevřené portfolio odkaz</string>
+    <string name="blank_username_error">Uživatelské jméno musí být vyplněno</string>
+    <string name="invalid_username_error">Uživatelské jméno musí obsahovat alespoň jedno písmeno a musí obsahovat pouze písmena, číslice nebo podtržítka (bez mezer)</string>
+    <string name="username_taken_error">Uživatelské jméno je již používáno</string>
+    <string name="blank_first_name_error">Jméno nemůže být prázdné</string>
+    <string name="blank_email_error">Email nemůže být prázdný</string>
+    <string name="invalid_email_error">Email není platný</string>
     <string name="username_hint">Uživatelské jméno</string>
+    <string name="username_helper_text">(Pouze písmena, čísla a podtržítka)</string>
     <string name="first_name_hint">Jméno</string>
     <string name="last_name_hint">Přijímení</string>
-    <string name="email_address_hint">Emailová adresa</string>
-    <string name="personal_site_hint">Osobní informace/portfolio</string>
+    <string name="email_hint">Emailová adresa</string>
+    <string name="portfolio_hint">Osobní informace/portfolio</string>
     <string name="instagram_username_hint">Uživatelské jméno na Instagramu</string>
     <string name="location_hint">Země</string>
     <string name="bio_hint">Bio</string>
-    <string name="cancel">Zrušení</string>
-    <string name="setting_wallpaper">Nastavení tapety&#8230;</string>
-    <string name="error_loading_photo">Zdá se, že při načítání této fotografie došlo k problému</string>
-    <string name="need_to_log_in">Chcete-li to provést, musíte se přihlásit</string>
-    <string name="next_wallpaper">Další tapeta</string>
-    <string name="remove_all">Odebrat všechny</string>
-    <string name="auto_wallpaper_title">Automatické Tapety</string>
-    <string name="auto_wallpaper_conditions">Podmínky</string>
-    <string name="file_exists">Toto již bylo staženo</string>
-    <string name="auto_wallpaper_info">Automatické tapety obnoví domovskou obrazovku novou náhodnou tapetou na základě nastavených podmínek.</string>
-    <string name="auto_wallpaper_history_summary">Zobrazení dříve nastavených tapet</string>
-    <string name="auto_wallpaper_history">Automatická Historie Tapet</string>
-    <string name="auto_wallpaper_custom_category_summary">Získejte tapety odpovídající hledanému výrazu</string>
-    <string name="auto_wallpaper_custom_category">Vlastní kategorie</string>
-    <string name="auto_wallpaper_category">Kategorie</string>
-    <string name="auto_wallpaper_category_summary">Vyberte kategorii tapety</string>
-    <string name="about_privacy_policy_title">Zásady ochrany osobních údajů</string>
-    <string name="auto_wallpaper_charging_summary">Zařízení musí být připojeno k napájecímu zdroji</string>
-    <string name="auto_wallpaper_on_wifi_summary">Zařízení musí být připojeno k síti Wifi</string>
-    <string name="auto_wallpaper_idle_summary">Zařízení musí být neaktivní</string>
-    <string name="auto_wallpaper_interval_summary">Vyberte interval automatické změny tapety</string>
-    <string name="auto_wallpaper_source">Zdroj</string>
-    <string name="auto_wallpaper_interval">Interval</string>
-    <string name="auto_wallpaper_charging">Nabíjení</string>
-    <string name="auto_wallpaper_on_wifi">Na Wifi</string>
-    <string name="auto_wallpaper_idle">Líný</string>
-    <string name="yes">Ano</string>
-    <string name="no">Ne</string>
-    <string name="on">Povoleno</string>
-    <string name="off">Zakázáno</string>
-    <string name="auto_wallpaper_options">Možnosti</string>
-    <string name="auto_wallpaper_select_screen">Vyberte obrazovku</string>
-    <string name="auto_wallpaper_select_screen_summary">Vyberte, které obrazovky chcete tapetu použít</string>
-    <string name="activate">Aktivovat</string>
-    <string name="add_to_collection">Přidat do kolekce</string>
-    <string name="are_you_sure">Jsi si jistá?</string>
-    <string name="collection_description_hint">Popis (volitelný)</string>
-    <string name="collection_name_hint">Název</string>
-    <string name="collection_name_is_required">Jméno je povinné</string>
-    <string name="create">Vytvořit</string>
-    <string name="create_new_collection">Vytvořit novou kolekci</string>
-    <string name="delete">Vymazat</string>
-    <string name="edit_collection">Upravit kolekci</string>
-    <string name="failed_to_create_collection">Vytvoření kolekce se nezdařilo</string>
-    <string name="failed_to_delete_collection">Odstranění kolekce se nezdařilo</string>
-    <string name="failed_to_save_collection">Nepodařilo se uložit kolekci</string>
-    <string name="make_collection_private">Vytvořit soukromou sbírku</string>
+    <string name="account_updated">Účet byl aktualizován!</string>
 
+    <!-- Search -->
+    <string name="no_search_results_subtitle">Zkuste něco hledat</string>
+    <string name="filter">Filtr</string>
+    <string name="filter_relevance">Relevantnost</string>
+    <string name="filter_latest">Nejnovější</string>
+    <string name="content_filter">Filtr obsahu</string>
+    <string name="filter_low">Minimální</string>
+    <string name="filter_high">Maximum</string>
+    <string name="orientation">Orientace</string>
+    <string name="filter_any">Žádný</string>
+    <string name="filter_portrait">Vertikální</string>
+    <string name="filter_landscape">Horizontální</string>
+    <string name="filter_square">Náměstí</string>
+    <string name="filter_color">Barva</string>
+    <string name="filter_color_any">Žádný</string>
+    <string name="filter_color_black_white">Černý a bílý</string>
+    <string name="filter_color_black">Černá</string>
+    <string name="filter_color_white">Bílý</string>
+    <string name="filter_color_yellow">Žlutá</string>
+    <string name="filter_color_orange">Oranžový</string>
+    <string name="filter_color_red">Červené</string>
+    <string name="filter_color_purple">Nachový</string>
+    <string name="filter_color_magenta">Purpurová</string>
+    <string name="filter_color_green">Zelený</string>
+    <string name="filter_color_teal">Šedozelená</string>
+    <string name="filter_color_blue">Modrý</string>
+
+    <!-- Login -->
+    <string name="login">Přihlásit se</string>
+    <string name="create_an_account">Vytvořit účet</string>
+    <string name="login_banner_title">Tady začíná tvorba</string>
+    <string name="login_banner_subtitle">Získejte přístup k fotografiím s vysokým rozlišením, které jinde nenajdete</string>
+    <string name="login_success">Přihlášení úspěšné</string>
+    <string name="need_to_log_in">Chcete-li to provést, musíte se přihlásit</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">Upgradujte na Resplash Pro</string>
+    <string name="pro_feature_title">What\'s in it for you?</string>
+    <string name="pro_feature_one">Customize Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
+    <string name="pro_feature_two">Future exclusive features</string>
+    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
+    <string name="pro_feature_three">Support development</string>
+    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_required">K tomu potřebujete Resplash Pro!</string>
+
+    <!-- Donation -->
+    <string name="support_development">Podpořte vývoj</string>
+    <string name="you_are_welcome">Nemáš zač</string>
+
+    <!-- About -->
+    <string name="about">O nás</string>
+    <string name="licenses">Licence</string>
+    <string name="unsplash_summary">Zdroj volně použitelných obrázků na internetu</string>
+    <string name="donate_summary">Pokud se Vám Resplash vážně líbí, můžete podpořit vývoj tím, že mi pošlete pár korun</string>
+    <string name="report_bug_title">Nahlásit chyby</string>
+    <string name="report_bug_summary">Nahlásit chyby nebo požádat o nové funkce</string>
+    <string name="rate_app_title">Hodnotit</string>
+    <string name="rate_app_summary">Líbí se Vám Resplash? Ohodnoťte jej v Obchodě Google Play</string>
+    <string name="github_summary">Resplash je open-source, podívejte se na GitHub</string>
+    <string name="developer_title">Vývojář</string>
+    <string name="privacy_policy">Zásady ochrany osobních údajů</string>
 </resources>

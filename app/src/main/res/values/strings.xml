@@ -1,371 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Resplash</string>
+    <string name="package_name" translatable="false">com.b_lam.resplash</string>
+    <string name="unsplash" translatable="false">Unsplash</string>
+    <string name="unsplash_url" translatable="false">https://unsplash.com/?utm_source=resplash&amp;utm_medium=referral&amp;utm_campaign=api-credit</string>
+    <string name="unsplash_submit_url" translatable="false">https://unsplash.com/submit</string>
+    <string name="unsplash_join_url" translatable="false">https://unsplash.com/join</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_share">Share</string>
-    <string name="action_view_on_unsplash">Open in browser</string>
-
-    <!-- ErrorView -->
-    <string name="error_http">Oops.</string>
-    <string name="error_http_subtitle">We seem to be out of requests for this hour\n\nPlease try again later</string>
-    <string name="error_network">Oops.</string>
-    <string name="error_network_subtitle">There seems to be a problem with your internet</string>
-
-    <!-- Settings -->
-    <string name="title_quality_section">Quality</string>
-    <string name="title_load_quality_preference">Load Quality</string>
-    <string name="summary_load_quality_preference">Choose the quality of the images that are loaded</string>
-    <string name="title_download_quality_preference">Download Quality</string>
-    <string name="summary_download_quality_preference">Choose the quality of the images that are downloaded</string>
-    <string name="title_wallpaper_quality_preference">Wallpaper Quality</string>
-    <string name="summary_wallpaper_quality_preference">Choose the quality of the wallpapers set</string>
-    <string name="default_load_quality" translatable="false">Regular</string>
-    <string name="default_download_quality" translatable="false">Full</string>
-    <string name="title_layout_section">Layout</string>
-    <string name="title_layout_preference">Choose Layout</string>
-    <string name="summary_layout_preference">Choose how images are displayed</string>
-    <string name="default_layout" translatable="false">List</string>
-    <string name="title_general_section">General</string>
-    <string name="title_custom_api">Custom API Key</string>
-    <string name="title_clear_cache">Clear Cache</string>
-    <string name="cache_size">Cache size</string>
-    <string name="message_cache_cleared">Cache cleared!</string>
-    <string name="title_language">Language</string>
-    <string name="default_language" translatable="false">en</string>
-    <string name="title_theme">Theme</string>
-    <string name="default_theme" translatable="false">Light</string>
-    <string name="restart">Restart</string>
-    <string name="restart_to_apply">Restart to apply changes</string>
-    <string name="title_other_section">Other</string>
-    <string name="title_unsplash_intent_preference">Go to Unsplash.com</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_sort">Sort by</string>
-    <string name="menu_item_latest">Latest</string>
-    <string name="menu_item_oldest">Oldest</string>
-    <string name="menu_item_popular">Popular</string>
-    <string name="menu_item_random">Random</string>
-    <string name="menu_item_all">All</string>
-    <string name="menu_item_curated">Curated</string>
-
-    <!-- Menu -->
-    <string name="menu_item_featured">Featured</string>
-    <string name="main_unsplash_description">Free high-resolution photos</string>
-    <string name="main_add_account">Add Account</string>
-    <string name="main_add_new_account">Add new Unsplash account</string>
-    <string name="main_view_profile">View Profile</string>
-    <string name="main_manage_account">Manage Account</string>
-    <string name="main_logout">Log out</string>
-    <string name="main_featured">Featured</string>
-    <string name="main_new">Home</string>
-
-    <!-- Main -->
-    <string name="main_collections">Collections</string>
-    <string name="main_support_development">Support development</string>
-    <string name="main_settings">Settings</string>
-    <string name="main_about">About</string>
-    <string name="main_logout_success">Log out - Success</string>
-    <string name="intro_welcome_title">Resplash</string>
-    <string name="intro_welcome_description">Powered by Unsplash</string>
-    <string name="intro_download_title">Hi-Res Photos</string>
-    <string name="intro_download_description">Free (do whatever you want) high-resolution photos</string>
-    <string name="intro_done">Go</string>
-    <string name="intro_next">Next</string>
-    <string name="custom_api_key_description">You can create your own Unsplash developer account and use your own API key\n\n(Leave blank to use the stock API key)</string>
-    <string name="redirect_uri" translatable="false">resplash://unsplash-auth-callback</string>
-
-    <!-- Intro -->
-    <string name="api_key_empty_message">Error: Cannot leave field empty</string>
-    <string name="redirect_uri_hint">Redirect URI</string>
-    <string name="secret_hint">Secret</string>
-    <string name="api_key_hint">API Key</string>
-    <string name="search_photos">Photos</string>
-    <string name="search_collections">Collections</string>
-
-    <!-- Custom API -->
-    <string name="search_users">Users</string>
-    <string name="search_hint">Search</string>
-    <string name="search_title">Search</string>
-    <string name="action_clear_text">Clear text</string>
-    <string name="photo_dimensions">Dimensions</string>
-    <string name="camera_make">Make</string>
-
-    <!-- Search -->
-    <string name="camera_model">Model</string>
-    <string name="exposure_time">Exposure time</string>
-    <string name="aperture">Aperture</string>
-    <string name="iso">ISO</string>
-    <string name="focal_length">Focal length</string>
-    <string name="add_to_collection">Add to collection</string>
-    <string name="create_new_collection">Create new collection</string>
-
-    <!-- InfoDialog -->
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+    <string name="photos">Photos</string>
+    <string name="collections">Collections</string>
+    <string name="like">Like</string>
+    <string name="users">Users</string>
+    <string name="unknown">Unknown</string>
+    <string name="download">Download</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="share">Share</string>
+    <string name="open_in_browser">Open in browser</string>
+    <string name="apply">Apply</string>
     <string name="create">Create</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="collection_name_hint">Name</string>
-    <string name="collection_description_hint">Description (optional)</string>
-    <string name="make_collection_private">Make collection private</string>
-    <string name="collection_name_is_required">Name is required</string>
-    <string name="failed_to_create_collection">Failed to create collection</string>
-
-    <!-- Collections -->
-    <string name="failed_to_save_collection">Failed to save collection</string>
-    <string name="failed_to_delete_collection">Failed to delete collection</string>
-    <string name="edit_collection">Edit collection</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="about_title">About</string>
-    <string name="about_unsplash_title">Unsplash.com</string>
-    <string name="about_unsplash_subtitle">Free (do whatever you want) high-resolution photos</string>
-    <string name="about_version_title">Version</string>
-    <string name="about_version_subtitle" translatable="false">1.0.0</string>
-    <string name="about_introduction_title">Introduction</string>
-    <string name="about_github_title">GitHub</string>
-    <string name="about_privacy_policy_title">Privacy Policy</string>
-    <string name="about_support_development_card_title">Support development</string>
+    <string name="thanks">Thanks!</string>
+    <string name="download_started">Download started</string>
+    <string name="download_complete">Download complete</string>
+    <string name="set_as_wallpaper">Set as wallpaper</string>
+    <string name="setting_wallpaper">Setting wallpaper…</string>
 
-    <!-- About -->
-    <string name="about_rate_title">Rate</string>
-    <string name="about_rate_subtitle">If you like Resplash, rate it on the Play Store</string>
-    <string name="about_donate_title">Donate</string>
-    <string name="about_donate_subtitle">If you really like Resplash, consider supporting its development by sending me a couple of dollars</string>
-    <string name="about_bug_title">Report bugs</string>
-    <string name="about_bug_subtitle">Report bugs or request new features</string>
-    <string name="about_author_title">Brandon Lam</string>
-    <string name="about_author_card_title">Author</string>
-    <string name="about_author_subtitle">Toronto, Ontario, Canada</string>
-    <string name="about_website_title">Visit website</string>
-    <string name="about_instagram_title">Follow on Instagram</string>
-    <string name="about_libraries_card_title">Libraries</string>
-    <string name="about_library1_title" translatable="false">Retrofit</string>
-    <string name="about_library1_subtitle" translatable="false">Type-safe HTTP client for Android and Java by Square, Inc.</string>
-    <string name="about_library2_title" translatable="false">Glide</string>
-    <string name="about_library2_subtitle" translatable="false">An image loading and caching library for Android focused on smooth scrolling</string>
-    <string name="about_library3_title" translatable="false">FastAdapter</string>
-    <string name="about_library3_subtitle" translatable="false">The bullet proof, fast and easy to use adapter library, which minimizes developing time to a fraction</string>
-    <string name="about_library4_title" translatable="false">Lottie</string>
-    <string name="about_library4_subtitle" translatable="false">Render After Effects animations natively on Android</string>
-    <string name="about_library5_title" translatable="false">MaterialDrawer</string>
-    <string name="about_library5_subtitle" translatable="false">The flexible, easy to use, all in one drawer library for your Android project</string>
-    <string name="about_library6_title" translatable="false">InkPageIndicator</string>
-    <string name="about_library6_subtitle" translatable="false">InkPageIndicator created by @nickbutcher for Plaid and backported by me for API 14+</string>
-    <string name="about_library7_title" translatable="false">Butter Knife</string>
-    <string name="about_library7_subtitle" translatable="false">Bind Android views and callbacks to fields and methods</string>
-    <string name="about_library9_title" translatable="false">PhotoView</string>
-    <string name="about_library9_subtitle" translatable="false">Implementation of ImageView for Android that supports zooming, by various touch gestures</string>
-    <string name="about_library10_title" translatable="false">FloatingActionButton</string>
-    <string name="about_library10_subtitle" translatable="false">Android Floating Action Button based on Material Design specification</string>
-    <string name="about_library11_title" translatable="false">PrettyTime</string>
-    <string name="about_library11_subtitle" translatable="false">Social Style Date and Time Formatting for Java</string>
-    <string name="donate_card_title">Support development</string>
-    <string name="donate_item1_title">Coffee</string>
-    <string name="donate_item1_subtitle">Keeps me awake through the late night coding sessions</string>
-    <string name="donate_item2_title">Smoothie</string>
-    <string name="donate_item2_subtitle">Sometimes I need to eat something healthy</string>
-    <string name="donate_item3_title">Pizza</string>
-    <string name="donate_item3_subtitle">Everyone likes pizza</string>
-    <string name="donate_item4_title">Fancy Meal</string>
-    <string name="donate_item4_subtitle">Gotta treat yourself once in a while</string>
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="one">%d Photo</item>
+        <item quantity="other">%d Photos</item>
+    </plurals>
 
-    <!-- Donate -->
-    <string name="donate_thanks">Thanks for donating!</string>
-    <string name="donate_loading">Loading products&#8230;</string>
-    <string name="auto_wallpaper_title">Auto Wallpaper</string>
-    <string name="auto_wallpaper_conditions">Conditions</string>
-    <string name="auto_wallpaper_on_wifi">On Wi-Fi</string>
-    <string name="auto_wallpaper_on_wifi_summary">Device must be connected to a Wi-Fi network</string>
-    <string name="auto_wallpaper_charging">Charging</string>
-    <string name="auto_wallpaper_charging_summary">Device must be connected to a power source</string>
-    <string name="auto_wallpaper_idle">Idle</string>
-    <string name="auto_wallpaper_idle_summary">Device must be inactive</string>
-    <string name="auto_wallpaper_interval">Interval</string>
+    <!-- Main -->
+    <string name="home">Home</string>
+    <string name="header_subtitle">Powered by creators everywhere</string>
+    <string name="add_account">Add account</string>
+    <string name="view_profile">View profile</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="log_out">Log out</string>
+    <string name="sort_by">Sort By</string>
+    <string name="order_latest">Latest</string>
+    <string name="order_oldest">Oldest</string>
+    <string name="order_popular">Popular</string>
+    <string name="order_all">All</string>
+    <string name="order_featured">Featured</string>
+
+    <!-- Error/Empty -->
+    <string name="oops">Oops, something went wrong…</string>
+    <string name="empty_state_title">Nothing to see here…</string>
+    <string name="error_state_title">Uh oh…</string>
+    <string name="error_setting_wallpaper">Something went wrong while setting the wallpaper…</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="general">General</string>
+    <string name="clear_cache">Clear Cache</string>
+    <string name="cache_size">Cache size: %d MB</string>
+    <string name="language">Language</string>
+    <string name="language_default" translatable="false">Follow system</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_arabic" translatable="false">Arabic</string>
+    <string name="language_chinese" translatable="false">Chinese</string>
+    <string name="language_czech" translatable="false">Czech</string>
+    <string name="language_german" translatable="false">German</string>
+    <string name="language_indonesian" translatable="false">Indonesian</string>
+    <string name="language_italian" translatable="false">Italian</string>
+    <string name="language_portuguese" translatable="false">Portuguese</string>
+    <string name="language_russian" translatable="false">Russian</string>
+    <string name="language_serbian" translatable="false">Serbian</string>
+    <string name="language_spanish" translatable="false">Spanish</string>
+    <string name="language_thai" translatable="false">Thai</string>
+    <string name="language_turkish" translatable="false">Turkish</string>
+    <string name="theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_battery">Set by Battery Saver</string>
+    <string name="theme_default">System default</string>
+    <string name="layout">Layout</string>
+    <string name="layout_default">Default</string>
+    <string name="layout_minimal">Minimal</string>
+    <string name="layout_grid">Grid</string>
+    <string name="quality">Quality</string>
+    <string name="quality_raw">Raw</string>
+    <string name="quality_full">Full</string>
+    <string name="quality_regular">Regular</string>
+    <string name="quality_small">Small</string>
+    <string name="quality_thumb">Thumb</string>
+    <string name="load_quality">Load Quality</string>
+    <string name="download_quality">Download Quality</string>
+    <string name="wallpaper_quality">Wallpaper Quality</string>
+    <string name="long_press_to_download">Long press to download</string>
+    <string name="long_press_to_download_summary">Long press on a photo to start downloading</string>
 
     <!-- Auto Wallpaper -->
-    <string name="auto_wallpaper_interval_summary">Select the auto wallpaper change interval</string>
-    <string name="auto_wallpaper_interval_default" translatable="false">1440</string>
+    <string name="auto_wallpaper_title">Auto Wallpaper</string>
+    <string name="auto_wallpaper_info">Auto Wallpaper will refresh your device with a new random wallpaper based on the set conditions</string>
+    <string name="auto_wallpaper_help_title">Not Working?</string>
+    <string name="auto_wallpaper_help_message">Try disabling the Idle condition and battery optimizations for Resplash in your phone\'s settings.\n\nFor manufacturer specific instructions: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">Conditions</string>
+    <string name="auto_wallpaper_on_wifi_title">On Wi-Fi</string>
+    <string name="auto_wallpaper_on_wifi_summary">Device must be connected to a Wi-Fi network</string>
+    <string name="auto_wallpaper_charging_title">Charging</string>
+    <string name="auto_wallpaper_charging_summary">Device must be connected to a power source</string>
+    <string name="auto_wallpaper_idle_title">Idle</string>
+    <string name="auto_wallpaper_idle_summary">Device must be inactive</string>
+    <string name="auto_wallpaper_interval_title">Interval</string>
+    <string name="auto_wallpaper_interval_summary">Change wallpaper every: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 minutes</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 minutes</string>
+    <string name="auto_wallpaper_interval_one_hour">1 hour</string>
+    <string name="auto_wallpaper_interval_three_hours">3 hours</string>
+    <string name="auto_wallpaper_interval_six_hours">6 hours</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 hours</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 hours</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 hours</string>
     <string name="auto_wallpaper_source">Source</string>
-    <string name="auto_wallpaper_category">Category</string>
-    <string name="auto_wallpaper_category_summary">Select the wallpaper category</string>
-    <string name="auto_wallpaper_category_default" translatable="false">All</string>
-    <string name="auto_wallpaper_custom_category">Custom Category</string>
-    <string name="auto_wallpaper_custom_category_summary">Get wallpapers matching a search term</string>
-    <string name="auto_wallpaper_custom_category_default" translatable="false">Wallpaper</string>
-    <string name="auto_wallpaper_options">Options</string>
-    <string name="auto_wallpaper_select_screen">Select Screen</string>
-    <string name="auto_wallpaper_select_screen_summary">Choose which screens to apply wallpaper to</string>
-    <string name="auto_wallpaper_select_screen_default" translatable="false">Both</string>
-    <string name="auto_wallpaper_history">Auto Wallpaper History</string>
+    <string name="auto_wallpaper_source_title">Wallpaper Source</string>
+    <string name="auto_wallpaper_source_summary">Current source: %s</string>
+    <string name="auto_wallpaper_source_all">All</string>
+    <string name="auto_wallpaper_source_featured">Featured</string>
+    <string name="auto_wallpaper_source_collections">Collections</string>
+    <string name="auto_wallpaper_source_user">User photos</string>
+    <string name="auto_wallpaper_source_search">Search terms</string>
+    <string name="auto_wallpaper_source_not_set">Not set</string>
+    <string name="auto_wallpaper_collections_summary">Select the collections to get photos from</string>
+    <string name="auto_wallpaper_user_title">User Photos</string>
+    <string name="auto_wallpaper_user_summary">Using photos from: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Enter the username of the user to get photos from:</string>
+    <string name="auto_wallpaper_search_terms_title">Search Terms</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_options_title">Options</string>
+    <string name="auto_wallpaper_center_crop_title">Center Crop</string>
+    <string name="auto_wallpaper_center_crop_summary">Crop all wallpapers to be centered</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Device Orientation Fix</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Some devices will crop the wallpaper incorrectly if it is set while the device is in landscape mode, checking this will reschedule the task until the device is in portrait mode</string>
+    <string name="auto_wallpaper_select_screen_title">Select Screen</string>
+    <string name="auto_wallpaper_select_screen_summary">Apply wallpaper to: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Home screen</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">Lock screen</string>
+    <string name="auto_wallpaper_select_screen_both">Home screen &amp; lock screen</string>
+    <string name="auto_wallpaper_orientation_title">Orientation</string>
+    <string name="auto_wallpaper_orientation_summary">Limit the wallpaper orientation to: %s</string>
+    <string name="auto_wallpaper_content_filter_title">Content Filter</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Low: Guarantees that no content violating submission guidelines (like images containing nudity or violence) will be displayed</string>
+    <string name="auto_wallpaper_content_filter_high_summary">High: Filter content that may be unsuitable for younger audiences</string>
+    <string name="auto_wallpaper_content_filter_note">Note that we can’t guarantee that all potentially unsuitable content is removed</string>
+    <string name="auto_wallpaper_history_title">Auto Wallpaper History</string>
     <string name="auto_wallpaper_history_summary">View previously set wallpapers</string>
-    <string name="auto_wallpaper_info">Auto Wallpaper will refresh your home screen with a new random wallpaper based on the set conditions.</string>
-    <string name="stats">Stats</string>
-    <string name="photo_info">Info</string>
-    <string name="set_as_wallpaper">Set as wallpaper</string>
-    <string name="download">Download</string>
-    <string name="setting_wallpaper">Setting wallpaper&#8230;</string>
-    <string name="cancel">Cancel</string>
-    <string name="file_exists">This has already been downloaded</string>
-    <string name="no_results">There\'s nothing here&#8230;</string>
-    <string name="log_in">Log in</string>
-    <string name="join">Join</string>
-    <string name="edit_title">Edit Profile</string>
-    <string name="request_token_failed">Access token request failed</string>
-    <string name="error">Error</string>
-    <string name="by_author">By %1$s</string>
-    <string name="no_more_photos">No more photos</string>
+    <string name="auto_wallpaper_history_clear_history">Clear history</string>
+    <string name="auto_wallpaper_activate">Activate</string>
+    <string name="auto_wallpaper_next_wallpaper">Next Wallpaper</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Remove from Auto Wallpaper</string>
+    <string name="auto_wallpaper_collection_added">Collection added to Auto Wallpaper</string>
+    <string name="auto_wallpaper_collection_removed">Collection removed from Auto Wallpaper</string>
+    <string name="auto_wallpaper_selected_collections">Selected</string>
+    <string name="auto_wallpaper_no_selected_collections">Find some collections to add to Auto Wallpaper</string>
+    <string name="auto_wallpaper_discover">Discover</string>
+    <string name="auto_wallpaper_popular">Popular</string>
+    <string name="auto_wallpaper_add_collection_from_url">Add collection from URL</string>
+    <string name="auto_wallpaper_could_not_add_collection">Could not add collection</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Copy and paste a collection URL:</string>
+    <string name="auto_wallpaper_collection_url">Collection URL</string>
+    <string name="auto_wallpaper_add_collection">Add Collection</string>
+    <string name="auto_wallpaper_invalid_url">Invalid URL</string>
 
-    <!-- Detail -->
-    <string name="updated_photos">Updated photos!</string>
-    <string name="updated_collections">Updated collections!</string>
-    <string name="updated_users">Updated users!</string>
-    <string name="share_via">Share via</string>
-    <string name="unsplash_image">Unsplash Image</string>
-    <string name="unsplash_collection">Unsplash Collection</string>
-    <string name="save">Save</string>
+    <!-- Photo Detail -->
+    <string name="location_template" translatable="false">%s, %s</string>
+    <string name="views">Views</string>
+    <string name="downloads">Downloads</string>
+    <string name="likes">Likes</string>
+    <string name="camera">Camera</string>
+    <string name="aperture">Aperture</string>
+    <string name="focal_length">Focal Length</string>
+    <string name="dimensions">Dimensions</string>
+    <string name="shutter_speed">Shutter Speed</string>
+    <string name="iso" translatable="false">ISO</string>
+    <string name="description">Description</string>
 
-    <!-- Error -->
-    <string name="saved">Saved</string>
-    <string name="likes">%1$s Likes</string>
-    <string name="photos">%1$s Photos</string>
-    <string name="views">%1$s Views</string>
-    <string name="downloads">%1$s Downloads</string>
-    <string name="cannot_make_anymore_requests">Can\'t make anymore requests</string>
+    <!-- Collections -->
+    <string name="add_to_collection">Add to collection</string>
+    <string name="create_new_collection">Create new collection</string>
+    <string name="make_collection_private">Make collection private</string>
+    <string name="collection_name_hint">Name</string>
+    <string name="collection_description_hint">Description (optional)</string>
+    <string name="collection_name_required">Name is required</string>
+    <string name="edit_collection">Edit collection</string>
+    <string name="curated_by_template">Curated by %s</string>
+    <string name="bullet_template" translatable="false">%s \u2022 %s</string>
 
-    <string name="download_started">Download started</string>
-    <string name="image_saved">Image saved</string>
-    <string name="download_wallpaper">Download Wallpaper</string>
-    <string name="download_complete">Download Complete</string>
-    <string name="unknown">Unknown</string>
-    <string name="cannot_update_profile">Cannot update profile</string>
-    <string name="updated_profile">Updated profile</string>
-    <string name="username_cannot_be_blank">Username cannot be blank</string>
-    <string name="failed_to_load_profile">Failed to load profile</string>
-    <string name="next">Next</string>
+    <!-- User -->
+    <string name="username_template" translatable="false">\@%s</string>
+    <string name="open_portfolio_link">Open portfolio link</string>
+    <string name="blank_username_error">Username can\'t be blank</string>
+    <string name="invalid_username_error">Username must have at least one letter and contain only letters, digits, or underscores (no spaces)</string>
+    <string name="username_taken_error">Username already taken</string>
+    <string name="blank_first_name_error">First name can\'t be blank</string>
+    <string name="blank_email_error">Email can\'t be blank</string>
+    <string name="invalid_email_error">Email is not valid</string>
     <string name="username_hint">Username</string>
+    <string name="username_helper_text">(Only letters, numbers and underscores)</string>
     <string name="first_name_hint">First name</string>
     <string name="last_name_hint">Last name</string>
-    <string name="email_address_hint">Email address</string>
-    <string name="personal_site_hint">Personal site/portfolio</string>
+    <string name="email_hint">Email</string>
+    <string name="portfolio_hint">Personal site/portfolio</string>
     <string name="instagram_username_hint">Instagram username</string>
     <string name="location_hint">Location</string>
     <string name="bio_hint">Bio</string>
-    <string name="error_loading_photo">There seems to be a problem loading this photo</string>
+    <string name="account_updated">Account updated!</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">Try searching for something</string>
+    <string name="filter">Filter</string>
+    <string name="filter_relevance">Relevance</string>
+    <string name="filter_latest">Latest</string>
+    <string name="content_filter">Content Filter</string>
+    <string name="filter_low">Low</string>
+    <string name="filter_high">High</string>
+    <string name="orientation">Orientation</string>
+    <string name="filter_any">Any</string>
+    <string name="filter_portrait">Portrait</string>
+    <string name="filter_landscape">Landscape</string>
+    <string name="filter_square">Square</string>
+    <string name="filter_color">Color</string>
+    <string name="filter_color_any">Any</string>
+    <string name="filter_color_black_white">Black and white</string>
+    <string name="filter_color_black">Black</string>
+    <string name="filter_color_white">White</string>
+    <string name="filter_color_yellow">Yellow</string>
+    <string name="filter_color_orange">Orange</string>
+    <string name="filter_color_red">Red</string>
+    <string name="filter_color_purple">Purple</string>
+    <string name="filter_color_magenta">Magenta</string>
+    <string name="filter_color_green">Green</string>
+    <string name="filter_color_teal">Teal</string>
+    <string name="filter_color_blue">Blue</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="create_an_account">Create An Account</string>
+    <string name="login_banner_title">Creation starts here</string>
+    <string name="login_banner_subtitle">Access free, high-resolution photos you can’t find anywhere else</string>
+    <string name="login_success">Login successful</string>
     <string name="need_to_log_in">You need to log in to do this</string>
-    <string name="on">On</string>
-    <string name="off">Off</string>
-    <string name="next_wallpaper">Next Wallpaper</string>
-    <string name="remove_all">Remove all</string>
-    <string name="activate">Activate</string>
-    <string name="help">Help</string>
-    <string-array name="quality_options">
-        <item>Raw</item>
-        <item>Full</item>
-        <item>Regular</item>
-        <item>Small</item>
-        <item>Thumb</item>
-    </string-array>
-    <string-array name="quality_options_values">
-        <item>Raw</item>
-        <item>Full</item>
-        <item>Regular</item>
-        <item>Small</item>
-        <item>Thumb</item>
-    </string-array>
-    <string-array name="layout_options">
-        <item>List</item>
-        <item>Cards</item>
-        <item>Grid</item>
-    </string-array>
-    <string-array name="layout_options_values">
-        <item>List</item>
-        <item>Cards</item>
-        <item>Grid</item>
-    </string-array>
-    <string-array name="language">
-        <item>English</item>
-        <item>Arabic</item>
-        <item>Chinese</item>
-        <item>Czech</item>
-        <item>German</item>
-        <item>Indonesian</item>
-        <item>Italian</item>
-        <item>Portuguese</item>
-        <item>Russian</item>
-        <item>Serbian</item>
-        <item>Spanish</item>
-        <item>Thai</item>
-        <item>Turkish</item>
-    </string-array>
-    <string-array name="language_values">
-        <item>en</item>
-        <item>ar</item>
-        <item>zh</item>
-        <item>cs</item>
-        <item>de</item>
-        <item>in</item>
-        <item>it</item>
-        <item>pt</item>
-        <item>ru</item>
-        <item>sr</item>
-        <item>es</item>
-        <item>th</item>
-        <item>tr</item>
-    </string-array>
-    <string-array name="theme">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>Black (AMOLED)</item>
-    </string-array>
-    <string-array name="theme_values">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>Black</item>
-    </string-array>
-    <string-array name="search_photos_orientations">
-        <item>All</item>
-        <item>Landscape</item>
-        <item>Portrait</item>
-        <item>Squarish</item>
-    </string-array>
-    <string-array name="auto_wallpaper_interval_options">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>12 hours</item>
-        <item>24 hours</item>
-        <item>48 hours</item>
-    </string-array>
-    <string-array name="auto_wallpaper_interval_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>720</item>
-        <item>1440</item>
-        <item>2880</item>
-    </string-array>
-    <string-array name="auto_wallpaper_category_options">
-        <item>All</item>
-        <item>Featured</item>
-        <item>Custom</item>
-    </string-array>
-    <string-array name="auto_wallpaper_category_values">
-        <item>All</item>
-        <item>Featured</item>
-        <item>Custom</item>
-    </string-array>
-    <string-array name="auto_wallpaper_select_screen_options">
-        <item>Home screen</item>
-        <item>Lock screen</item>
-        <item>Both</item>
-    </string-array>
-    <string-array name="auto_wallpaper_select_screen_values">
-        <item>Home screen</item>
-        <item>Lock screen</item>
-        <item>Both</item>
-    </string-array>
+
+    <!-- Upgrade -->
+    <string name="resplash_pro" translatable="false">Resplash Pro</string>
+    <string name="upgrade_to_resplash_pro">Upgrade to Resplash Pro</string>
+    <string name="pro_feature_title">What\'s in it for you?</string>
+    <string name="pro_feature_one">Customize Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
+    <string name="pro_feature_two">Future exclusive features</string>
+    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
+    <string name="pro_feature_three">Support development</string>
+    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_required">You need Resplash Pro to do that!</string>
+
+    <!-- Donation -->
+    <string name="support_development">Support development</string>
+    <string name="donate_banner_text" translatable="false">Hello &#128075;,\n\nI\'m Brandon, the developer of Resplash. If you want to support further development of the app, you can choose to send a few dollars my way by selecting one of the options below.</string>
+    <string name="you_are_welcome">You\'re welcome</string>
+
+    <!-- About -->
+    <string name="about">About</string>
+    <string name="licenses">Licenses</string>
+    <string name="unsplash_summary">The internet’s source of freely-usable images</string>
+    <string name="donate_summary">If you really like Resplash, consider supporting its development by sending me a couple of dollars</string>
+    <string name="report_bug_title">Report Bug</string>
+    <string name="report_bug_summary">Report bugs or request new features</string>
+    <string name="rate_app_title">Rate App</string>
+    <string name="rate_app_summary">If you like Resplash, rate it on the Google Play Store</string>
+    <string name="github_title" translatable="false">GitHub</string>
+    <string name="github_summary">Resplash is open-source, check it out on GitHub</string>
+    <string name="github_url" translatable="false">https://github.com/b-lam/Resplash</string>
+    <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.b_lam.resplash</string>
+    <string name="github_issues_url" translatable="false">https://github.com/b-lam/Resplash/issues</string>
+    <string name="developer_title">Developer</string>
+    <string name="developer_unsplash_username" translatable="false">\@brandon_lam</string>
+    <string name="instagram" translatable="false">Instagram</string>
+    <string name="developer_instagram_username" translatable="false">\@brandon.c.lam</string>
+    <string name="developer_instagram_url" translatable="false">https://www.instagram.com/brandon.c.lam/</string>
+    <string name="developer_unsplash_url" translatable="false">https://unsplash.com/@brandon_lam</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy_url" translatable="false">https://b-lam.github.io/projects/resplash/privacy_policy</string>
 </resources>

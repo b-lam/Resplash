@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/keyline_8"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:clipChildren="false">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_5"
+            android:text="@string/sort_by"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/order_by_toggle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_7"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/order_relevance_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/filter_relevance"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/order_latest_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/filter_latest"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/content_filter_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_5"
+            android:text="@string/content_filter"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/content_filter_toggle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_7"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/content_filter_low_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/filter_low"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/content_filter_high_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/filter_high"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/color_filter_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_5"
+            android:text="@string/filter_color"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/color_filter_dropdown_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_7"
+            app:boxStrokeWidth="@dimen/keyline_1"
+            app:boxStrokeWidthFocused="@dimen/keyline_1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/orientation_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_5"
+            android:text="@string/orientation"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/orientation_toggle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_7"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/orientation_any_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/filter_any"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.IconOnly" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/orientation_portrait_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/ic_portrait_24dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.IconOnly" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/orientation_landscape_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/ic_landscape_24dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.IconOnly" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/orientation_square_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:icon="@drawable/ic_square_24dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.IconOnly" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/apply_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/apply"
+            style="@style/Widget.MaterialComponents.Button" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

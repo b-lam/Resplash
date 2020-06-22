@@ -1,539 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_about"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center_horizontal"
-    android:gravity="center_horizontal"
-    tools:context="com.b_lam.resplash.activities.AboutActivity"
-    tools:ignore="MissingPrefix">
+    tools:context="com.b_lam.resplash.ui.about.AboutActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_about"
-            style="@style/ResplashToolbarTheme"
-            app:layout_scrollFlags="scroll"/>
-
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:descendantFocusability="blocksDescendants">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="?attr/cardBackgroundColor"
-                android:paddingTop="20dp">
+                android:paddingTop="@dimen/keyline_8"
+                android:paddingBottom="@dimen/keyline_8"
+                android:orientation="vertical"
+                android:gravity="center">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="@dimen/app_icon_size"
+                    android:layout_height="@dimen/app_icon_size"
+                    android:src="@mipmap/ic_launcher_round"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/keyline_5"
+                    android:text="@string/app_name"
+                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-medium" />
 
-                    <LinearLayout
-                        android:id="@+id/container_about_app"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/app_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/keyline_5"
+                    tools:text="1.0.0 (50)"/>
+            </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="5dp"
-                            android:src="@mipmap/ic_launcher"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:text="@string/app_name"
-                            android:textSize="22sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_unsplash"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/cameraIcon"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="@string/about_unsplash_title"
-                                style="@style/about_title_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_intro"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/introIcon"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="@string/about_introduction_title"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_github"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/gitHubIcon"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="@string/about_github_title"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_privacy_policy"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/infoIcon"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="@string/about_privacy_policy_title"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
+            <FrameLayout
+                android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="?attr/cardBackgroundColor"
-                android:layout_marginTop="10dp"
-                android:paddingTop="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        android:text="@string/about_support_development_card_title" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_rate"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/starIcon"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="@string/about_rate_title"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="@string/about_rate_subtitle"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_donate"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/donateIcon"
-                            style="@style/material_icon" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="@string/about_donate_title"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="@string/about_donate_subtitle"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_bug"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/bugReportIcon"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="@string/about_bug_title"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="@string/about_bug_subtitle"
-                                style="@style/about_subtitle_text"
-                                android:paddingBottom="10dp"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="?attr/cardBackgroundColor"
-                android:layout_marginTop="10dp"
-                android:paddingTop="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        android:text="@string/about_author_card_title" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_author"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/profileIcon"
-                            style="@style/material_icon" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:text="@string/about_author_title"
-                                style="@style/about_title_text"/>
-
-                            <TextView
-                                android:text="@string/about_author_subtitle"
-                                style="@style/about_subtitle_text"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_website"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/browserIcon"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="@string/about_website_title"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/container_about_instagram"
-                        style="@style/about_entry">
-
-                        <ImageView
-                            android:src="?attr/instagramIcon"
-                            style="@style/material_icon" />
-
-                        <TextView
-                            android:text="@string/about_instagram_title"
-                            style="@style/about_title_text"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="?attr/cardBackgroundColor"
-                android:layout_marginTop="10dp"
-                android:paddingTop="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        android:text="@string/about_libraries_card_title" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library1"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library1_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library1_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library2"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library2_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library2_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library3"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library3_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library3_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library4"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library4_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library4_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library5"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library5_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library5_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library6"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library6_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library6_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library7"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library7_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library7_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library9"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library9_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library9_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library10"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library10_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library10_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/dividerColor" />
-
-                    <LinearLayout
-                        android:id="@+id/container_about_library11"
-                        style="@style/about_library">
-
-                        <TextView
-                            android:text="@string/about_library11_title"
-                            style="@style/about_title_text"/>
-
-                        <TextView
-                            android:text="@string/about_library11_subtitle"
-                            style="@style/about_subtitle_text"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>

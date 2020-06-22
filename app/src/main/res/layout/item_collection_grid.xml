@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="UnusedAttribute">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/collection_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/collection_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/collection_max_height"
+            android:foreground="@drawable/collection_gradient_overlay"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            tools:src="@color/red_200"
+            tools:ignore="ContentDescription" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/collection_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_7"
+        android:layout_marginBottom="@dimen/keyline_5"
+        app:layout_goneMarginEnd="@dimen/keyline_7"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:translationZ="1dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/collection_private_icon"
+        app:layout_constraintBottom_toTopOf="@id/collection_count_text_view"
+        style="@style/TextAppearance.Resplash.Headline6"
+        tools:text="Landscapes" />
+
+    <ImageView
+        android:id="@+id/collection_private_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_5"
+        android:layout_marginEnd="@dimen/keyline_7"
+        android:src="@drawable/ic_lock_18dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/collection_name_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/collection_name_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/collection_name_text_view"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/collection_count_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/keyline_7"
+        android:textColor="@color/white"
+        android:textAlignment="viewStart"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/collection_card_view"
+        style="@style/TextAppearance.Resplash.Subtitle2"
+        tools:text="1234 Photos" />
+</androidx.constraintlayout.widget.ConstraintLayout>

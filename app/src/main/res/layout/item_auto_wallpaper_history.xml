@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/keyline_6"
+    android:orientation="vertical"
+    tools:ignore="UnusedAttribute">
+
+    <LinearLayout
+        android:id="@+id/user_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginEnd="@dimen/keyline_5">
+
+        <ImageView
+            android:id="@+id/user_image_view"
+            android:layout_width="@dimen/user_profile_picture_small_size"
+            android:layout_height="@dimen/user_profile_picture_small_size"
+            android:layout_marginStart="@dimen/keyline_5"
+            android:scaleType="centerCrop"
+            tools:src="@color/green_100"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/user_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_6"
+            android:singleLine="true"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            style="@style/TextAppearance.Resplash.Subtitle2"
+            tools:text="Brandon Lam" />
+
+        <TextView
+            android:id="@+id/set_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_5"
+            android:layout_marginEnd="@dimen/keyline_5"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/color_on_surface_secondary"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-light"
+            tools:text="10 minutes ago" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/photo_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_6"
+        app:cardElevation="0dp">
+
+        <com.b_lam.resplash.ui.widget.AspectRatioImageView
+            android:id="@+id/photo_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            tools:src="@color/white" />
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_collection"
+        android:icon="@drawable/ic_add_circle_outline_24dp"
+        android:title="@string/auto_wallpaper_add_to_auto_wallpaper"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_remove_collection"
+        android:icon="@drawable/ic_remove_circle_outline_24dp"
+        android:title="@string/auto_wallpaper_remove_from_auto_wallpaper"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_open_in_browser"
+        android:icon="@drawable/ic_open_in_browser_24dp"
+        android:title="@string/open_in_browser"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_24dp"
+        android:title="@string/share"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/keyline_8"
+    android:paddingEnd="@dimen/keyline_8"
+    android:paddingTop="@dimen/keyline_5"
+    android:paddingBottom="@dimen/keyline_5">
+
+    <TextView
+        android:id="@+id/exif_title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_on_surface_secondary"
+        android:textSize="14sp"
+        android:textAlignment="viewStart"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:fontFamily="sans-serif-medium"
+        tools:text="Camera" />
+
+    <TextView
+        android:id="@+id/exif_value_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_2"
+        android:textSize="14sp"
+        android:textAlignment="viewStart"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:fontFamily="sans-serif-light"
+        tools:text="Canon 5D MkII" />
+</LinearLayout>

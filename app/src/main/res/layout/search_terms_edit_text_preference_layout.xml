@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/keyline_10"
+    android:layout_marginBottom="@dimen/keyline_10"
+    android:overScrollMode="ifContentScrolls">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@android:id/message"
+            style="?android:attr/textAppearanceSmall"
+            android:paddingStart="@dimen/keyline_8"
+            android:paddingEnd="@dimen/keyline_8"
+            android:paddingTop="@dimen/keyline_8"
+            android:paddingBottom="@dimen/keyline_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/instagram_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_8"
+            android:layout_marginEnd="@dimen/keyline_8"
+            android:layout_marginBottom="@dimen/keyline_3"
+            app:hintEnabled="false"
+            app:helperTextEnabled="true"
+            app:helperText="@string/auto_wallpaper_search_terms_dialog_helper_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@android:id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:maxLines="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</ScrollView>

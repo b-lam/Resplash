@@ -1,16 +1,16 @@
+
 # [Resplash]
 
 <img src="https://github.com/b-lam/Resplash/blob/master/design/Play_Store_Banner.jpg?raw=true" width="750">
 
 **[Resplash]** is powered by [Unsplash.com](https://unsplash.com/)
 
-Beautiful, free photos.
-Gifted by the world’s most generous community of photographers.
+The internet’s source of freely-usable images. Powered by creators everywhere.
 
-* Browse 800000+ high-res photos
+* Browse 1M+ high-res photos
 * New photos everyday
 * Material design
-* Dark and black (AMOLED) theme
+* Dark theme
 * Download raw photos
 * Set as wallpaper straight from the app
 * Automatically refresh your home screen with a new random wallpaper
@@ -27,17 +27,30 @@ Gifted by the world’s most generous community of photographers.
 
 <img src="https://b-lam.github.io/img/resplash/resplash-1.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-2.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-3.png" width="250">
 
-# Developed By
+# Build
 
-* Brandon Lam 
- * [b-lam.github.io](https://b-lam.github.io)
- * [instagram.com/brandon.c.lam](https://www.instagram.com/brandon.c.lam/)
+Note that in order to access the Unsplash API, you must at a minimum:
+
+- Create a developer account at: [https://unsplash.com/developers](https://unsplash.com/developers)
+- Copy your app access key and secret key
+
+Then add the following to your `local.properties`:
+
+```
+devAppId="<Access Key>"
+devSecret="<Secret Key>"
+```
+
+# Developer
+
+* [Brandon Lam](https://b-lam.github.io)
+* [Instagram: @brandon.c.lam](https://www.instagram.com/brandon.c.lam/)
 
 # License
 
 	MIT License
 
-	Copyright (c) 2017 Brandon Lam
+	Copyright (c) 2020 Brandon Lam
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -58,4 +71,3 @@ Gifted by the world’s most generous community of photographers.
 	SOFTWARE.
 
  [Resplash]:https://play.google.com/store/apps/details?id=com.b_lam.resplash
-

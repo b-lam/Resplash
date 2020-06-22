@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/general">
+
+        <ListPreference app:key="language"
+            app:title="@string/language"
+            app:entries="@array/language_options"
+            app:entryValues="@array/language_values"
+            app:defaultValue="@string/default_language_value"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference app:key="theme"
+            app:title="@string/theme"
+            app:entries="@array/theme_options"
+            app:entryValues="@array/theme_values"
+            app:defaultValue="@string/default_theme_value"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference app:key="layout"
+            app:title="@string/layout"
+            app:entries="@array/layout_options"
+            app:entryValues="@array/layout_values"
+            app:defaultValue="@string/default_layout_value"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference app:key="clear_cache"
+            app:title="@string/clear_cache" />
+    </PreferenceCategory>
+
+    <SwitchPreference
+        app:key="long_press_download"
+        app:title="@string/long_press_to_download"
+        app:summary="@string/long_press_to_download_summary"
+        app:defaultValue="true"
+        app:allowDividerAbove="true" />
+
+    <PreferenceCategory app:title="@string/quality">
+
+        <ListPreference app:key="load_quality"
+            app:title="@string/load_quality"
+            app:entries="@array/quality_options"
+            app:entryValues="@array/quality_values"
+            app:defaultValue="@string/default_load_quality_value"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference app:key="download_quality"
+            app:title="@string/download_quality"
+            app:entries="@array/quality_options"
+            app:entryValues="@array/quality_values"
+            app:defaultValue="@string/default_download_quality_value"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference app:key="wallpaper_quality"
+            app:title="@string/wallpaper_quality"
+            app:entries="@array/quality_options"
+            app:entryValues="@array/quality_values"
+            app:defaultValue="@string/default_wallpaper_quality_value"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

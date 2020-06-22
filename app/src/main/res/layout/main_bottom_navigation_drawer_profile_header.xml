@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/keyline_7"
+    android:paddingEnd="@dimen/keyline_7"
+    android:paddingTop="@dimen/keyline_5"
+    android:paddingBottom="@dimen/keyline_7"
+    android:background="?attr/selectableItemBackground"
+    android:tag="expand_or_collapse">
+
+    <ImageView
+        android:id="@+id/header_image_view"
+        android:layout_width="@dimen/user_profile_picture_medium_size"
+        android:layout_height="@dimen/user_profile_picture_medium_size"
+        android:src="@mipmap/ic_launcher_round"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_7"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="@string/app_name"
+        android:textAlignment="viewStart"
+        android:singleLine="true"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/header_image_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/header_subtitle" />
+
+    <TextView
+        android:id="@+id/header_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_2"
+        android:textSize="12sp"
+        android:text="@string/header_subtitle"
+        android:singleLine="true"
+        android:drawablePadding="@dimen/keyline_5"
+        app:layout_constrainedWidth="true"
+        android:drawableEnd="@drawable/ic_expand_more_18dp"
+        android:gravity="center_vertical"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/header_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_title"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

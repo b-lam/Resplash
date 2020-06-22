@@ -1,420 +1,74 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Light base activity theme -->
-    <style name="ResplashTheme.Primary.Base.Light" parent="MaterialDrawerTheme.Light">
-        <item name="colorPrimary">@color/colorPrimary_light</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_light</item>
-        <item name="colorAccent">@color/colorAccent_light</item>
-
-        <item name="primaryTextColor">@color/colorText_light</item>
-        <item name="secondaryTextColor">@color/colorTextSecondary_light</item>
-        <item name="dividerColor">@color/colorPrimaryDark_light</item>
-        <item name="menuIconColor">@android:color/black</item>
-        <item name="menuBackgroundColor">@color/menuBackground_light</item>
-        <item name="cardBackgroundColor">@color/cardBackgroundColor_light</item>
-        <item name="progressBarColor">@color/progressBarColor_light</item>
-        <item name="previewBackgroundColor">@color/previewBackgroundColor_light</item>
-        <item name="fabColor">@color/colorAccent_light</item>
-        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="actionBarTheme">@style/ActionBarTheme_light</item>
-        <item name="selectionControlsTheme">@style/selectionControlsTheme_light</item>
-
-        <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/primary_text_color_selector_light</item>
-        <item name="android:textColorPrimary">@color/primary_text_color_selector_light</item>
-        <item name="android:textColorSecondary">@color/secondary_text_color_selector_light</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/md_grey_500</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyleLight</item>
-        <item name="android:windowContentTransitions">true</item>
-
-        <item name="android:progressBarStyle">@style/ResplashProgressBarTheme_light</item>
-        <item name="android:windowBackground">@color/colorPrimary_light</item>
-        <item name="android:alertDialogTheme">@style/ResplashDialogTheme_light</item>
-
-        <item name="material_drawer_background">@color/colorPrimary_light</item>
-        <item name="material_drawer_selected">@color/colorPrimaryDark_light</item>
-
-        <item name="resplashLogo">@drawable/splash_black</item>
-        <item name="searchIcon">@drawable/ic_search_black_24dp</item>
-        <item name="sortIcon">@drawable/ic_sort_black_24dp</item>
-        <item name="shareIcon">@drawable/ic_share_black_24dp</item>
-        <item name="browserIcon">@drawable/ic_earth_black_24dp</item>
-        <item name="browserSmallIcon">@drawable/baseline_public_black_18</item>
-        <item name="newIcon">@drawable/ic_trending_up_black_24dp</item>
-        <item name="hotIcon">@drawable/ic_whatshot_black_24dp</item>
-        <item name="collectionsIcon">@drawable/ic_collections_black_24dp</item>
-        <item name="autoWallpaperIcon">@drawable/baseline_compare_black_24</item>
-        <item name="heartIcon">@drawable/ic_favorite_black_24dp</item>
-        <item name="settingsIcon">@drawable/ic_settings_black_24dp</item>
-        <item name="infoIcon">@drawable/ic_info_outline_black_24dp</item>
-        <item name="profileIcon">@drawable/ic_account_circle_black_24dp</item>
-        <item name="cancelIcon">@drawable/ic_cancel_black_24dp</item>
-        <item name="closeIcon">@drawable/ic_close_black_24dp</item>
-        <item name="addIcon">@drawable/ic_add_black_24dp</item>
-        <item name="oldIcon">@drawable/ic_restore_black_24dp</item>
-        <item name="mountainIcon">@drawable/ic_filter_hdr_black_24dp</item>
-        <item name="starCircleIcon">@drawable/ic_stars_black_24dp</item>
-        <item name="locationIcon">@drawable/ic_location_on_black_24dp</item>
-        <item name="locationSmallIcon">@drawable/baseline_location_on_black_18</item>
-        <item name="calendarIcon">@drawable/ic_date_range_black_24dp</item>
-        <item name="downloadIcon">@drawable/ic_file_download_black_24dp</item>
-        <item name="paletteIcon">@drawable/ic_color_lens_black_24dp</item>
-        <item name="viewsIcon">@drawable/ic_remove_red_eye_black_24dp</item>
-        <item name="dimensionsIcon">@drawable/ic_straighten_black_24dp</item>
-        <item name="imageIcon">@drawable/ic_image_black_24dp</item>
-        <item name="cameraIcon">@drawable/ic_camera_alt_black_24dp</item>
-        <item name="exposureIcon">@drawable/ic_timelapse_black_24dp</item>
-        <item name="apertureIcon">@drawable/ic_camera_black_24dp</item>
-        <item name="isoIcon">@drawable/ic_iso_black_24dp</item>
-        <item name="focalLengthIcon">@drawable/ic_all_out_black_24dp</item>
-        <item name="introIcon">@drawable/ic_chrome_reader_mode_black_24dp</item>
-        <item name="gitHubIcon">@drawable/ic_github_circle_black_24dp</item>
-        <item name="starIcon">@drawable/ic_star_black_24dp</item>
-        <item name="donateIcon">@drawable/ic_gift_black_24dp</item>
-        <item name="bugReportIcon">@drawable/ic_bug_report_black_24dp</item>
-        <item name="instagramIcon">@drawable/ic_instagram_black_24dp</item>
-        <item name="keyIcon">@drawable/ic_key_variant_black_24dp</item>
-        <item name="emailIcon">@drawable/ic_email_black_24dp</item>
-        <item name="exploreIcon">@drawable/ic_explore_black_24dp</item>
-        <item name="accountCardIcon">@drawable/ic_account_card_details_black_24dp</item>
-        <item name="quoteIcon">@drawable/ic_format_quote_black_24dp</item>
-        <item name="collectionSavedIcon">@drawable/ic_bookmark_black_24dp</item>
-        <item name="editIcon">@drawable/ic_mode_edit_black_24dp</item>
-        <item name="lockIcon">@drawable/baseline_lock_black_18</item>
-        <item name="homeIcon">@drawable/baseline_home_black_24</item>
+    <!-- Alert Dialog -->
+    <style name="ThemeOverlay.Theme.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/ResplashAlertDialogTitleTextStyle</item>
     </style>
 
-    <!-- Dark base activity theme -->
-    <style name="ResplashTheme.Primary.Base.Dark" parent="MaterialDrawerTheme">
-        <item name="colorPrimary">@color/colorPrimary_dark</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_dark</item>
-        <item name="colorAccent">@color/colorAccent_dark</item>
-
-        <item name="primaryTextColor">@color/colorText_dark</item>
-        <item name="secondaryTextColor">@color/colorTextSecondary_dark</item>
-        <item name="dividerColor">@color/colorPrimaryDark_dark</item>
-        <item name="menuIconColor">@android:color/white</item>
-        <item name="menuBackgroundColor">@color/menuBackground_dark</item>
-        <item name="cardBackgroundColor">@color/cardBackgroundColor_dark</item>
-        <item name="progressBarColor">@color/progressBarColor_dark</item>
-        <item name="previewBackgroundColor">@color/previewBackgroundColor_dark</item>
-        <item name="fabColor">@color/colorAccent_dark</item>
-        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
-        <item name="actionBarTheme">@style/ActionBarTheme_dark</item>
-        <item name="selectionControlsTheme">@style/selectionControlsTheme_dark</item>
-
-        <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/primary_text_color_selector_dark</item>
-        <item name="android:textColorPrimary">@color/primary_text_color_selector_dark</item>
-        <item name="android:textColorSecondary">@color/secondary_text_color_selector_dark</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark_dark</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyleDark</item>
-        <item name="android:windowContentTransitions">true</item>
-
-        <item name="android:progressBarStyle">@style/ResplashProgressBarTheme_dark</item>
-        <item name="android:windowBackground">@color/colorPrimary_dark</item>
-        <item name="android:alertDialogTheme">@style/ResplashDialogTheme_dark</item>
-
-        <item name="material_drawer_background">@color/colorPrimary_dark</item>
-        <item name="material_drawer_selected">@color/colorPrimaryDark_dark</item>
-
-        <item name="resplashLogo">@drawable/splash_white</item>
-        <item name="searchIcon">@drawable/ic_search_white_24dp</item>
-        <item name="sortIcon">@drawable/ic_sort_white_24dp</item>
-        <item name="shareIcon">@drawable/ic_share_white_24dp</item>
-        <item name="browserIcon">@drawable/ic_earth_white_24dp</item>
-        <item name="browserSmallIcon">@drawable/baseline_public_white_18</item>
-        <item name="newIcon">@drawable/ic_trending_up_white_24dp</item>
-        <item name="hotIcon">@drawable/ic_whatshot_white_24dp</item>
-        <item name="collectionsIcon">@drawable/ic_collections_white_24dp</item>
-        <item name="autoWallpaperIcon">@drawable/baseline_compare_white_24</item>
-        <item name="heartIcon">@drawable/ic_favorite_white_24dp</item>
-        <item name="settingsIcon">@drawable/ic_settings_white_24dp</item>
-        <item name="infoIcon">@drawable/ic_info_outline_white_24dp</item>
-        <item name="profileIcon">@drawable/ic_account_circle_white_24dp</item>
-        <item name="cancelIcon">@drawable/ic_cancel_white_24dp</item>
-        <item name="closeIcon">@drawable/ic_close_white_24dp</item>
-        <item name="addIcon">@drawable/ic_add_white_24dp</item>
-        <item name="oldIcon">@drawable/ic_restore_white_24dp</item>
-        <item name="mountainIcon">@drawable/ic_filter_hdr_white_24dp</item>
-        <item name="starCircleIcon">@drawable/ic_stars_white_24dp</item>
-        <item name="locationIcon">@drawable/ic_location_on_white_24dp</item>
-        <item name="locationSmallIcon">@drawable/baseline_location_on_white_18</item>
-        <item name="calendarIcon">@drawable/ic_date_range_white_24dp</item>
-        <item name="downloadIcon">@drawable/ic_file_download_white_24dp</item>
-        <item name="paletteIcon">@drawable/ic_color_lens_white_24dp</item>
-        <item name="viewsIcon">@drawable/ic_remove_red_eye_white_24dp</item>
-        <item name="dimensionsIcon">@drawable/ic_straighten_white_24dp</item>
-        <item name="imageIcon">@drawable/ic_image_white_24dp</item>
-        <item name="cameraIcon">@drawable/ic_camera_alt_white_24dp</item>
-        <item name="exposureIcon">@drawable/ic_timelapse_white_24dp</item>
-        <item name="apertureIcon">@drawable/ic_camera_white_24dp</item>
-        <item name="isoIcon">@drawable/ic_iso_white_24dp</item>
-        <item name="focalLengthIcon">@drawable/ic_all_out_white_24dp</item>
-        <item name="introIcon">@drawable/ic_chrome_reader_mode_white_24dp</item>
-        <item name="gitHubIcon">@drawable/ic_github_circle_white_24dp</item>
-        <item name="starIcon">@drawable/ic_star_white_24dp</item>
-        <item name="donateIcon">@drawable/ic_gift_white_24dp</item>
-        <item name="bugReportIcon">@drawable/ic_bug_report_white_24dp</item>
-        <item name="instagramIcon">@drawable/ic_instagram_white_24dp</item>
-        <item name="keyIcon">@drawable/ic_key_variant_white_24dp</item>
-        <item name="emailIcon">@drawable/ic_email_white_24dp</item>
-        <item name="exploreIcon">@drawable/ic_explore_white_24dp</item>
-        <item name="accountCardIcon">@drawable/ic_account_card_details_white_24dp</item>
-        <item name="quoteIcon">@drawable/ic_format_quote_white_24dp</item>
-        <item name="collectionSavedIcon">@drawable/ic_bookmark_white_24dp</item>
-        <item name="editIcon">@drawable/ic_mode_edit_white_24dp</item>
-        <item name="lockIcon">@drawable/ic_lock_white_18dp</item>
-        <item name="homeIcon">@drawable/baseline_home_white_24</item>
+    <style name="ThemeOverlay.Theme.AlertDialog" parent="ThemeOverlay.Theme.MaterialAlertDialog">
+        <item name="dialogCornerRadius">@dimen/medium_corner_radius</item>
     </style>
 
-    <!-- Black base activity theme -->
-    <style name="ResplashTheme.Primary.Base.Black" parent="ResplashTheme.Primary.Base.Dark">
-        <item name="colorPrimary">@color/colorPrimary_black</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_black</item>
-        <item name="colorAccent">@color/colorAccent_black</item>
-
-        <item name="primaryTextColor">@color/colorText_black</item>
-        <item name="secondaryTextColor">@color/colorTextSecondary_black</item>
-        <item name="dividerColor">@color/colorPrimary_black</item>
-        <item name="menuIconColor">@android:color/white</item>
-        <item name="menuBackgroundColor">@color/menuBackground_black</item>
-        <item name="cardBackgroundColor">@color/cardBackgroundColor_black</item>
-        <item name="progressBarColor">@color/progressBarColor_black</item>
-        <item name="previewBackgroundColor">@color/previewBackgroundColor_black</item>
-        <item name="fabColor">@color/colorAccent_black</item>
-        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
-
-        <item name="android:textCursorDrawable">@drawable/cursor</item>
-        <item name="android:textColor">@color/primary_text_color_selector_black</item>
-        <item name="android:textColorPrimary">@color/primary_text_color_selector_black</item>
-        <item name="android:textColorSecondary">@color/secondary_text_color_selector_black</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/colorPrimary_black</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyleDark</item>
-        <item name="android:windowContentTransitions">true</item>
-
-        <item name="android:progressBarStyle">@style/ResplashProgressBarTheme_dark</item>
-        <item name="android:windowBackground">@color/colorPrimary_black</item>
-        <item name="android:alertDialogTheme">@style/ResplashDialogTheme_dark</item>
-
-        <item name="material_drawer_background">@color/colorPrimary_black</item>
-        <item name="material_drawer_selected">@color/colorPrimaryDark_black</item>
+    <style name="ResplashAlertDialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="DrawerArrowStyleLight" parent="@style/Widget.AppCompat.DrawerArrowToggle">
-        <item name="spinBars">true</item>
-        <item name="color">@android:color/black</item>
+    <!-- Bottom Sheets -->
+    <style name="ThemeOverlay.Theme.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Theme.BottomSheet.Modal</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="bottomSheetStyle">@style/Widget.Theme.BottomSheet.Modal</item>
+        <item name="android:listDivider">@color/color_divider</item>
     </style>
 
-    <style name="DrawerArrowStyleDark" parent="@style/Widget.AppCompat.DrawerArrowToggle">
-        <item name="spinBars">true</item>
-        <item name="color">@android:color/white</item>
+    <style name="Widget.Theme.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">?shapeAppearanceLargeComponent</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="SplashActivityTheme" parent="ResplashTheme.Primary.Base.Light">
-        <item name="android:windowBackground">@drawable/background_splash</item>
+    <!-- Bottom App Bar -->
+    <style name="Widget.Theme.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Theme.BottomAppBar</item>
     </style>
 
-    <style name="PreferenceThemeLight" parent="ResplashTheme.Primary.Base.Light">
-        <item name="colorAccent">@color/colorText_light</item>
+    <!-- Toolbar -->
+    <style name="Widget.Theme.Toolbar.PhotoDetail" parent="">
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+        <item name="android:theme">@style/ThemeOverlay.Theme.Toolbar.PhotoDetail</item>
+    </style>
+    <style name="ThemeOverlay.Theme.Toolbar.PhotoDetail" parent="">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
     </style>
 
-    <style name="PreferenceThemeDark" parent="ResplashTheme.Primary.Base.Dark">
-        <item name="colorAccent">@color/colorText_dark</item>
+
+    <!-- This requires that our VD assets be tinted with colorControlNormal -->
+    <!-- See: https://issuetracker.google.com/issues/127454210 -->
+    <style name="ThemeOverlay.Theme.BottomAppBar" parent="ThemeOverlay.MaterialComponents.BottomAppBar.Surface">
+        <item name="colorControlNormal">?attr/colorOnSurface</item>
+        <item name="actionMenuTextColor">?attr/colorOnSurface</item>
     </style>
 
-    <style name="PreferenceThemeBlack" parent="ResplashTheme.Primary.Base.Black">
-        <item name="colorAccent">@color/colorText_black</item>
+    <style name="Widget.MaterialComponents.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
     </style>
 
-    <style name="material_image_button">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:layout_margin">8dp</item>
+    <style name="MaterialImageButton">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
-    </style>
-
-    <style name = "IntroTitleStyle" parent="@android:style/TextAppearance.Large">
-        <item name ="android:textAlignment">center</item>
-        <item name="android:textStyle">bold</item>
-        <item name ="android:textSize">28sp</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name ="android:layout_marginLeft">30dp</item>
-        <item name ="android:layout_marginRight">30dp</item>
-        <item name ="android:layout_marginTop">120dp</item>
-    </style>
-
-    <style name="IntroDescriptionStyle" parent="@android:style/TextAppearance.Small">
-        <item name ="android:textAlignment">center</item>
-        <item name ="android:textSize">17sp</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name ="android:layout_marginTop">50dp</item>
-        <item name ="android:layout_marginLeft">30dp</item>
-        <item name ="android:layout_marginRight">30dp</item>
-    </style>
-
-    <style name="material_icon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-    </style>
-
-    <style name="textInputLayoutHintStyle" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">?attr/primaryTextColor</item>
-    </style>
-
-    <style name="textErrorStyle" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/error_red</item>
-    </style>
-
-    <style name="selectionControlsTheme_light" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/colorText_light</item>
-        <item name="colorControlActivated">@color/colorText_light</item>
-    </style>
-
-    <style name="selectionControlsTheme_dark" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/colorText_dark</item>
-        <item name="colorControlActivated">@color/colorText_dark</item>
-    </style>
-
-    <style name="switchTheme">
-        <item name="colorControlActivated">@color/white</item>
-    </style>
-
-    <style name="ResplashDialogTheme_light" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/dialog_background_light</item>
-        <item name="android:textColorPrimary">@color/colorText_light</item>
-        <item name="android:textColorAlertDialogListItem">@color/colorText_light</item>
-        <item name="colorAccent">@color/colorText_light</item>
-        <item name="colorControlNormal">@color/colorTextSecondary_light</item>
-        <item name="colorControlActivated">@color/colorText_light</item>
-    </style>
-
-    <style name="ResplashDialogTheme_dark" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/dialog_background_dark</item>
-        <item name="android:textColorPrimary">@color/colorText_dark</item>
-        <item name="android:textColorAlertDialogListItem">@color/colorText_dark</item>
-        <item name="colorAccent">@color/colorText_dark</item>
-        <item name="colorControlNormal">@color/colorTextSecondary_dark</item>
-        <item name="colorControlActivated">@color/colorText_dark</item>
-    </style>
-
-    <style name="ResplashProgressBarTheme_light" parent="Widget.AppCompat.ProgressBar">
-        <item name="android:indeterminateTint">@color/progressBarColor_light</item>
-        <item name="android:indeterminateTintMode">multiply</item>
-    </style>
-
-    <style name="ResplashProgressBarTheme_dark" parent="Widget.AppCompat.ProgressBar">
-        <item name="android:indeterminateTint">@color/progressBarColor_dark</item>
-        <item name="android:indeterminateTintMode">multiply</item>
-    </style>
-
-    <style name="ResplashButtonTheme">
-        <item name="android:colorButtonNormal">@color/colorPrimaryDark_dark</item>
-        <item name="android:colorControlHighlight">@color/rippleColor_dark</item>
-        <item name="android:textColor">@color/colorText_dark</item>
-    </style>
-
-    <style name="ResplashButtonThemeInverse">
-        <item name="android:colorButtonNormal">@color/colorPrimaryDark_light</item>
-        <item name="android:colorControlHighlight">@color/rippleColor_light</item>
-        <item name="android:textColor">@color/colorText_light</item>
-    </style>
-
-    <style name="ResplashToolbarTheme">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:theme">?attr/actionBarTheme</item>
-        <item name="titleTextColor">?attr/primaryTextColor</item>
-        <item name="popupTheme">?attr/toolbarPopupTheme</item>
-    </style>
-
-    <style name="ActionBarTheme_light" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorSecondary">@color/colorText_light</item>
-    </style>
-
-    <style name="ActionBarTheme_dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorSecondary">@color/colorText_dark</item>
-    </style>
-
-    <style name="about_entry">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:paddingStart">4dp</item>
-        <item name="android:paddingEnd">4dp</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-
-    <style name="about_library">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingTop">15dp</item>
-        <item name="android:paddingBottom">15dp</item>
-        <item name="android:paddingStart">15dp</item>
-        <item name="android:paddingEnd">15dp</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-
-    <style name="donate_item_row">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
-        <item name="android:paddingStart">15dp</item>
-        <item name="android:paddingEnd">15dp</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-
-    <style name="donate_item_description">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:padding">4dp</item>
-    </style>
-
-    <style name="about_title_text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">3dp</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="about_subtitle_text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginEnd">15dp</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="edit_profile_edit_text">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:ems">10</item>
-        <item name="android:background">@color/transparent</item>
+        <item name="android:padding">@dimen/keyline_3</item>
     </style>
 
 </resources>

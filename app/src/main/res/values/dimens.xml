@@ -1,14 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="nav_header_vertical_spacing">16dp</dimen>
-    <dimen name="nav_header_height">160dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="tab_max_width">264dp</dimen>
-    <dimen name="tab_padding_bottom">16dp</dimen>
-    <dimen name="tab_label">14sp</dimen>
-    <dimen name="custom_tab_layout_height">72dp</dimen>
+    <dimen name="keyline_0">0dp</dimen>
+    <dimen name="keyline_1">1dp</dimen>
+    <dimen name="keyline_2">2dp</dimen>
+    <dimen name="keyline_3">4dp</dimen>
+    <dimen name="keyline_4">6dp</dimen>
+    <dimen name="keyline_5">8dp</dimen>
+    <dimen name="keyline_6">12dp</dimen>
+    <dimen name="keyline_7">16dp</dimen>
+    <dimen name="keyline_8">24dp</dimen>
+    <dimen name="keyline_9">32dp</dimen>
+    <dimen name="keyline_10">48dp</dimen>
+    <dimen name="keyline_11">64dp</dimen>
+
+    <!--Emphasis modifiers for "on" colors-->
+    <dimen name="alpha_emphasis_high">@dimen/material_emphasis_high_type</dimen>
+    <dimen name="alpha_emphasis_medium">@dimen/material_emphasis_medium</dimen>
+    <dimen name="alpha_emphasis_disabled">@dimen/material_emphasis_disabled</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="small_corner_radius">4dp</dimen>
+    <dimen name="medium_corner_radius">8dp</dimen>
+    <dimen name="large_corner_radius">0dp</dimen>
+
+    <!--Bottom Drawer-->
+    <dimen name="bottom_sheet_handle_width">28dp</dimen>
+    <dimen name="bottom_sheet_handle_height">4dp</dimen>
+    <dimen name="bottom_sheet_handle_radius">8dp</dimen>
+
+    <dimen name="card_elevation">8dp</dimen>
+
+    <dimen name="user_profile_picture_small_size">40dp</dimen>
+    <dimen name="user_profile_picture_medium_size">48dp</dimen>
+    <dimen name="user_profile_picture_large_size">88dp</dimen>
+
+    <dimen name="user_profile_photo_min_height">112dp</dimen>
+    <dimen name="user_profile_photo_max_height">132dp</dimen>
+
+    <dimen name="collection_max_height">250dp</dimen>
+    <dimen name="mini_collection_width">200dp</dimen>
+    <dimen name="mini_collection_progress_size">32dp</dimen>
+    <dimen name="selected_collection_height">88dp</dimen>
+    <dimen name="featured_collection_height">200dp</dimen>
+    <dimen name="popular_collection_height">112dp</dimen>
+
+    <dimen name="extended_fab_min_width">192dp</dimen>
+
+    <dimen name="app_icon_size">72dp</dimen>
 </resources>

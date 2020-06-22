@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/collection_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/featured_collection_height"
+    android:layout_margin="@dimen/keyline_7"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/collection_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:background="@color/amber_500"
+            tools:ignore="ContentDescription" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_overlay"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/featured_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_8"
+            android:layout_marginTop="@dimen/keyline_6"
+            android:text="@string/auto_wallpaper_source_featured"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/collection_name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/keyline_8"
+            android:layout_marginTop="@dimen/keyline_3"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:textAlignment="viewStart"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="@id/featured_chip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/featured_chip"
+            tools:text="Wallpapers" />
+
+        <TextView
+            android:id="@+id/user_name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/keyline_8"
+            android:layout_marginTop="@dimen/keyline_3"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textAlignment="viewStart"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="@id/featured_chip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/collection_name_text_view"
+            tools:text="Curated by Unsplash" />
+
+        <ImageView
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/keyline_8"
+            android:layout_marginBottom="@dimen/keyline_7"
+            android:src="@drawable/ic_add_circle_outline_24dp"
+            android:tint="@color/white"
+            android:contentDescription="@string/auto_wallpaper_add_to_auto_wallpaper"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/MaterialImageButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

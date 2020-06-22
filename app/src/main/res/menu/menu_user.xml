@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_open_portfolio_link"
+        android:icon="@drawable/ic_public_24dp"
+        android:title="@string/open_portfolio_link"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_open_in_browser"
+        android:icon="@drawable/ic_open_in_browser_24dp"
+        android:title="@string/open_in_browser"
+        app:showAsAction="ifRoom" />
+</menu>

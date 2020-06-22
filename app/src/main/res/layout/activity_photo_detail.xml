@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:ignore="UnusedAttribute"
+    tools:context="com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/keyline_11"
+            android:animateLayoutChanges="true"
+            android:fitsSystemWindows="false"
+            android:clipToPadding="false">
+
+            <ImageView
+                android:id="@+id/photo_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:foreground="?selectableItemBackground"
+                android:fitsSystemWindows="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintDimensionRatio="4:3"
+                tools:src="@color/deep_orange_500" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/toolbar_image_scrim"
+                app:layout_constraintTop_toTopOf="@id/photo_image_view"
+                app:layout_constraintBottom_toBottomOf="@id/photo_image_view"/>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:background="@color/transparent"
+                android:fitsSystemWindows="true"
+                app:menu="@menu/menu_photo_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Widget.Theme.Toolbar.PhotoDetail" />
+
+            <TextView
+                android:id="@+id/location_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/keyline_7"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:drawableStart="@drawable/ic_place_18dp"
+                android:drawablePadding="@dimen/keyline_4"
+                android:visibility="gone"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/photo_image_view"
+                tools:text="Toronto, Canada"
+                tools:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/user_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_7"
+                android:layout_marginTop="@dimen/keyline_7"
+                android:paddingStart="@dimen/keyline_0"
+                android:paddingEnd="@dimen/keyline_7"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/download_button"
+                app:layout_constraintTop_toBottomOf="@id/photo_image_view">
+
+                <ImageView
+                    android:id="@+id/user_image_view"
+                    android:layout_width="@dimen/user_profile_picture_small_size"
+                    android:layout_height="@dimen/user_profile_picture_small_size"
+                    android:scaleType="centerCrop"
+                    tools:src="@color/green_100"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/user_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/keyline_6"
+                    android:singleLine="true"
+                    android:layout_gravity="center_vertical"
+                    style="@style/TextAppearance.Resplash.Subtitle2"
+                    tools:text="Brandon Lam" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/collect_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_7"
+                android:src="@drawable/ic_bookmark_border_24dp"
+                android:contentDescription="@string/add_to_collection"
+                app:layout_constraintTop_toTopOf="@id/user_container"
+                app:layout_constraintBottom_toBottomOf="@id/user_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/MaterialImageButton" />
+
+            <ImageView
+                android:id="@+id/like_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_7"
+                android:contentDescription="@string/like"
+                android:src="@drawable/ic_favorite_border_24dp"
+                app:layout_constraintTop_toTopOf="@id/user_container"
+                app:layout_constraintBottom_toBottomOf="@id/user_container"
+                app:layout_constraintEnd_toStartOf="@id/collect_button"
+                style="@style/MaterialImageButton" />
+
+            <ImageView
+                android:id="@+id/download_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/keyline_7"
+                android:src="@drawable/ic_download_border_24dp"
+                android:contentDescription="@string/download"
+                app:layout_constraintTop_toTopOf="@id/user_container"
+                app:layout_constraintBottom_toBottomOf="@id/user_container"
+                app:layout_constraintEnd_toStartOf="@id/like_button"
+                style="@style/MaterialImageButton" />
+
+            <View
+                android:id="@+id/divider_1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/keyline_7"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_container" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exif_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keyline_7"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@id/divider_1"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:spanCount="2"
+                tools:listitem="@layout/item_photo_exif" />
+
+            <View
+                android:id="@+id/divider_2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/keyline_7"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exif_recycler_view" />
+
+            <LinearLayout
+                android:id="@+id/views_count_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_8"
+                android:layout_marginTop="@dimen/keyline_7"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/downloads_count_container"
+                app:layout_constraintTop_toBottomOf="@id/divider_2">
+
+                <TextView
+                    android:id="@+id/views_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/views"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_on_surface_secondary"
+                    android:fontFamily="sans-serif-medium"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/views_count_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-light"
+                    tools:text="123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/downloads_count_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_5"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toEndOf="@id/views_count_container"
+                app:layout_constraintEnd_toStartOf="@id/likes_count_container"
+                app:layout_constraintTop_toTopOf="@id/views_count_container"
+                app:layout_constraintBottom_toBottomOf="@id/views_count_container">
+
+                <TextView
+                    android:id="@+id/downloads_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/downloads"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_on_surface_secondary"
+                    android:fontFamily="sans-serif-medium"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/downloads_count_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-light"
+                    tools:text="323.4K" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/likes_count_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_5"
+                android:layout_marginEnd="@dimen/keyline_8"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toEndOf="@id/downloads_count_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/views_count_container"
+                app:layout_constraintBottom_toBottomOf="@id/views_count_container">
+
+                <TextView
+                    android:id="@+id/likes_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/likes"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_on_surface_secondary"
+                    android:fontFamily="sans-serif-medium"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/likes_count_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-light"
+                    tools:text="2" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider_3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/keyline_7"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/views_count_container" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tag_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/keyline_3"
+                app:layout_constraintTop_toBottomOf="@id/divider_3"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:orientation="horizontal"
+                tools:listitem="@layout/item_photo_tag" />
+
+            <com.b_lam.resplash.ui.widget.ContentLoadingLayout
+                android:id="@+id/content_loading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/color_surface"
+                app:layout_constraintTop_toBottomOf="@id/photo_image_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:visibility="gone" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/set_as_wallpaper_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/keyline_8"
+        android:layout_marginBottom="@dimen/keyline_7"
+        android:layout_gravity="bottom|end"
+        android:text="@string/set_as_wallpaper"
+        android:visibility="invisible"
+        app:layout_behavior="com.b_lam.resplash.ui.widget.ScrollAwareExtendedFabBehavior"
+        app:elevation="@dimen/keyline_7"
+        app:icon="@drawable/ic_wallpaper_24dp"
+        tools:visibility="visible" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

@@ -1,271 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="navigation_drawer_open">فتح قائمة التنقل</string>
-    <string name="navigation_drawer_close">إغلاق قائمة التنقل</string>
+    <!-- Common -->
+    <string name="ok">حسنا</string>
+    <string name="cancel">إلغاء</string>
+    <string name="search">بحث</string>
+    <string name="photos">صور</string>
+    <string name="collections">مجموعات</string>
+    <string name="like">لكى تحب</string>
+    <string name="users">مستخدمين</string>
+    <string name="unknown">غير معروف</string>
+    <string name="download">تحميل</string>
+    <string name="on">فتح</string>
+    <string name="off">إغلاق</string>
+    <string name="share">شارك</string>
+    <string name="open_in_browser">فتح في المتصفح</string>
+    <string name="apply">تطبيق</string>
+    <string name="create">إنشاء</string>
+    <string name="save">حفظ</string>
+    <string name="edit">تعديل</string>
+    <string name="delete">حذف</string>
+    <string name="are_you_sure">هل أنت متأكد؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="thanks">شكر!</string>
+    <string name="download_started">تم بدأ التحميل</string>
+    <string name="download_complete">تم التحميل بنجاح</string>
+    <string name="setting_wallpaper">…جاري تطبيق الخلفية</string>
+    <string name="set_as_wallpaper">تطبيق كـخلفية</string>
 
-    <string name="action_share">شارك</string>
-    <string name="action_view_on_unsplash">فتح في المتصفح</string>
-
-    <!-- ErrorView -->
-    <string name="error_http">!خطأ</string>
-    <string name="error_http_subtitle">لقد نفذت منا الطلبات في هذه الساعة، يرجي المحاولة لاحقاً</string>
-    <string name="error_network">!خطأ في الشبكة</string>
-    <string name="error_network_subtitle">يبدو أنه هناك مشكلة في الانترنت لديك</string>
-
-    <!-- Settings -->
-    <string name="title_quality_section">الجودة</string>
-    <string name="title_load_quality_preference">تحميل الجودة</string>
-    <string name="summary_load_quality_preference">أختر جودة الصور المحملة</string>
-    <string name="title_download_quality_preference">جودة التحميل</string>
-    <string name="summary_download_quality_preference">اختر جودة الصور المحملة</string>
-    <string name="title_wallpaper_quality_preference">جودة الخلفيات</string>
-    <string name="summary_wallpaper_quality_preference">أختر جودة الخلفيات الموضوعة</string>
-    <string-array name="quality_options">
-        <item>ضعيف</item>
-        <item>كامل</item>
-        <item>عادي</item>
-        <item>صغير</item>
-        <item>عالية</item>
-    </string-array>
-    <string name="title_layout_section">المظهر</string>
-    <string name="title_layout_preference">اختر المظهر</string>
-    <string name="summary_layout_preference">اختر كيف يتم عرض الصور</string>
-    <string-array name="layout_options">
-        <item>قائمة</item>
-        <item>بطاقات</item>
-        <item>شبكة</item>
-    </string-array>
-    <string name="title_general_section">عام</string>
-    <string name="title_custom_api">مخصص API مفتاح</string>
-    <string name="title_clear_cache">(Cache)حذف الملفات الغير مهمة</string>
-    <string name="cache_size">حجم الملفات الغير مهمة</string>
-    <string name="message_cache_cleared">!تم الحذف بنجاح</string>
-    <string name="title_language">اللغة</string>
-    <string name="title_theme">المظهر</string>
-    <string-array name="theme">
-        <item>مضيئ</item>
-        <item>مظلم</item>
-        <item>أسود</item>
-    </string-array>
-    <string name="restart">إعادة تشغيل</string>
-    <string name="restart_to_apply">قم بإعادة تشغيل التطبيق من أجل تطبيق التغييرات</string>
-    <string name="title_other_section">أخري</string>
-    <string name="title_unsplash_intent_preference">unsplash.com أذهب إلي</string>
-
-    <!-- Menu -->
-    <string name="menu_search">أبحث</string>
-    <string name="menu_sort">صنف حسب</string>
-    <string name="menu_item_latest">الأحدث</string>
-    <string name="menu_item_oldest">الأقدم</string>
-    <string name="menu_item_popular">الشائع</string>
-    <string name="menu_item_random">عشوائي</string>
-    <string name="menu_item_all">الجميع</string>
-    <string name="menu_item_curated">مختارة</string>
-    <string name="menu_item_featured">مميز</string>
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="zero">%d صور</item>
+        <item quantity="one">%d صور</item>
+        <item quantity="two">%d صور</item>
+        <item quantity="few">%d صور</item>
+        <item quantity="many">%d صور</item>
+        <item quantity="other">%d صور</item>
+    </plurals>
 
     <!-- Main -->
-    <string name="main_unsplash_description">صور عالية الجودة مجانية</string>
-    <string name="main_add_account">إضافة حساب</string>
-    <string name="main_add_new_account">جديد Unsplash إضافة حساب</string>
-    <string name="main_view_profile">عرض الملف الشخصي</string>
-    <string name="main_manage_account">إدارة الحساب</string>
-    <string name="main_logout">تسجيل الخروج</string>
-    <string name="main_featured">مميز</string>
-    <string name="main_new">جديد</string>
-    <string name="main_collections">مجموعات</string>
-    <string name="main_support_development">دعم تطوير التطبيق</string>
-    <string name="main_settings">الأعدادات</string>
-    <string name="main_about">عن</string>
-    <string name="main_logout_success">تم تسجيل الخروج</string>
+    <string name="home">جديد</string>
+    <string name="header_subtitle">مدعوم من منشئي المحتوى في كل مكان</string>
+    <string name="add_account">إضافة حساب</string>
+    <string name="view_profile">عرض الملف الشخصي</string>
+    <string name="edit_profile">إدارة الحساب</string>
+    <string name="log_out">تسجيل الخروج</string>
+    <string name="sort_by">صنف حسب</string>
+    <string name="order_latest">الأحدث</string>
+    <string name="order_oldest">الأقدم</string>
+    <string name="order_popular">الشائع</string>
+    <string name="order_all">الجميع</string>
+    <string name="order_featured">مميز</string>
 
-    <!-- Intro -->
-    <string name="intro_welcome_title">Resplash</string>
-    <string name="intro_welcome_description">Unsplash مشغل بواسطة</string>
-    <string name="intro_download_title">صور عالية الجودة</string>
-    <string name="intro_download_description">صور عالية الجودة</string>
-    <string name="intro_done">الذهاب</string>
-    <string name="intro_next">التالي</string>
+    <!-- Error/Empty -->
+    <string name="oops">تبا شيء ما حدث بشكل خاطئ…</string>
+    <string name="empty_state_title">ليس هناك ما تراه هنا…</string>
+    <string name="error_state_title">اه اه…</string>
+    <string name="error_setting_wallpaper">حدث خطأ أثناء تعيين الخلفية…</string>
 
-    <!-- Custom API -->
-    <string name="custom_api_key_description">الخاص بك APIواستخدام مفتاح الـ Unsplash يمكنك عمل حساب مطور لدي)</string>
-    <string name="api_key_empty_message">خطأ: لا يمكنك ترك الخانة فارغة</string>
-    <string name="redirect_uri_hint">عنوان مباشر</string>
-    <string name="secret_hint">سري</string>
-    <string name="api_key_hint">APIمفتاح الـ</string>
+    <!-- Settings -->
+    <string name="settings">الأعدادات</string>
+    <string name="general">عام</string>
+    <string name="clear_cache">(Cache)حذف الملفات الغير مهمة</string>
+    <string name="cache_size">حجم الملفات الغير مهمة: %d MB</string>
+    <string name="language">اللغة</string>
+    <string name="theme">المظهر</string>
+    <string name="theme_light">مضيئ</string>
+    <string name="theme_dark">مظلم</string>
+    <string name="theme_battery">ضبط بواسطة توفير البطارية</string>
+    <string name="theme_default">النظام الافتراضي</string>
+    <string name="layout">المظهر</string>
+    <string name="layout_default">إفتراضي</string>
+    <string name="layout_minimal">بسيط</string>
+    <string name="layout_grid">شبكة</string>
+    <string name="quality">الجودة</string>
+    <string name="quality_raw">ضعيف</string>
+    <string name="quality_full">كامل</string>
+    <string name="quality_regular">عادي</string>
+    <string name="quality_small">صغير</string>
+    <string name="quality_thumb">عالية</string>
+    <string name="load_quality">تحميل الجودة</string>
+    <string name="download_quality">جودة التحميل</string>
+    <string name="wallpaper_quality">جودة الخلفيات</string>
+    <string name="long_press_to_download">اضغط مع الاستمرار للتنزيل</string>
+    <string name="long_press_to_download_summary">اضغط مع الاستمرار على الصورة لبدء التنزيل</string>
 
-    <!-- Search -->
-    <string name="search_photos">صور</string>
-    <string name="search_collections">مجموعات</string>
-    <string name="search_users">مستخدمين</string>
-    <string name="search_hint">بحث</string>
-    <string name="search_title">بحث</string>
-    <string name="action_clear_text">حذف النص</string>
-    <string-array name="search_photos_orientations">
-        <item>الجميع</item>
-        <item>افقية</item>
-        <item>طولية</item>
-        <item>مربعة</item>
-    </string-array>
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">تغيير تلقائي للخلفيات</string>
+    <string name="auto_wallpaper_info">خاصية الخلفيات العشوائية تغير خلفية الشاشة الرئيسية بطريقة عشوائية مبنية علي الشروط المطبقة</string>
+    <string name="auto_wallpaper_help_title">لا يعمل؟</string>
+    <string name="auto_wallpaper_help_message">حاول تعطيل حالة الخمول وتحسينات البطارية في Resplash في إعدادات هاتفك.\n\nللحصول على تعليمات خاصة بالشركة المصنعة: https://dontkillmyapp.com</string>
+    <string name="auto_wallpaper_conditions_title">الشروط</string>
+    <string name="auto_wallpaper_on_wifi_title">شبكة واي-فاي</string>
+    <string name="auto_wallpaper_on_wifi_summary">أن يكون الجهاز متصل بالواي-فاي</string>
+    <string name="auto_wallpaper_charging_title">في حالة شحن</string>
+    <string name="auto_wallpaper_charging_summary">يجب ان يكون في مصدر شحن</string>
+    <string name="auto_wallpaper_idle_title">حالة خمول</string>
+    <string name="auto_wallpaper_idle_summary">يجب ان يكون غير نشط</string>
+    <string name="auto_wallpaper_interval_title">المدة</string>
+    <string name="auto_wallpaper_interval_summary">تغيير الخلفية كل: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 دقيقة</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 دقيقة</string>
+    <string name="auto_wallpaper_interval_one_hour">1 ساعة</string>
+    <string name="auto_wallpaper_interval_three_hours">3 ساعات</string>
+    <string name="auto_wallpaper_interval_six_hours">6 ساعات</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 ساعة</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 ساعة</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 ساعة</string>
+    <string name="auto_wallpaper_source">مصدر</string>
+    <string name="auto_wallpaper_source_title">مصدر خلفية</string>
+    <string name="auto_wallpaper_source_summary">المصدر الحالي: %s</string>
+    <string name="auto_wallpaper_source_all">الجميع</string>
+    <string name="auto_wallpaper_source_featured">مميز</string>
+    <string name="auto_wallpaper_source_collections">مجموعات</string>
+    <string name="auto_wallpaper_source_user">صور المستخدم</string>
+    <string name="auto_wallpaper_source_search">مصطلحات البحث</string>
+    <string name="auto_wallpaper_source_not_set">غير مضبوط</string>
+    <string name="auto_wallpaper_collections_summary">حدد المجموعات للحصول على صور منها</string>
+    <string name="auto_wallpaper_user_title">صور المستخدم</string>
+    <string name="auto_wallpaper_user_summary">استخدام الصور من: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">أدخل اسم المستخدم الخاص بالمستخدم للحصول على صور من:</string>
+    <string name="auto_wallpaper_search_terms_title">مصطلحات البحث</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">احصل على صور تطابق شروط البحث التالية:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(فصل مصطلحات متعددة بفواصل)</string>
+    <string name="auto_wallpaper_options_title">أعدادات</string>
+    <string name="auto_wallpaper_center_crop_title">محصول مركزي</string>
+    <string name="auto_wallpaper_center_crop_summary">اقتصاص جميع الخلفيات ليتم توسيطها</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">إصلاح توجيه الجهاز</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">ستقوم بعض الأجهزة بقص خلفية الشاشة بشكل غير صحيح إذا تم ضبطها عندما يكون الجهاز في الوضع الأفقي ، سيؤدي التحقق من ذلك إلى إعادة جدولة المهمة حتى يصبح الجهاز في الوضع الرأسي</string>
+    <string name="auto_wallpaper_select_screen_title">إختيار الشاشة</string>
+    <string name="auto_wallpaper_select_screen_summary">تطبيق الخلفية على: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">الشاشة الرئيسية</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">شاشة القفل</string>
+    <string name="auto_wallpaper_select_screen_both">كلاهم</string>
+    <string name="auto_wallpaper_orientation_title">اتجاه</string>
+    <string name="auto_wallpaper_orientation_summary">حدد اتجاه خلفية الشاشة إلى: %s</string>
+    <string name="auto_wallpaper_content_filter_title">تصفية المحتوى</string>
+    <string name="auto_wallpaper_content_filter_low_summary">الحد الأدنى: يضمن عدم عرض أي محتوى ينتهك إرشادات الإرسال (مثل الصور التي تحتوي على عُري أو عنف)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">الحد الأقصى: تصفية المحتوى الذي قد يكون غير مناسب للجمهور الأصغر سنًا</string>
+    <string name="auto_wallpaper_content_filter_note">لاحظ أنه لا يمكننا ضمان إزالة جميع المحتويات التي قد تكون غير مناسبة</string>
+    <string name="auto_wallpaper_history_title">سجل الخلفيات التلقائية</string>
+    <string name="auto_wallpaper_history_summary">عرض الخلفيات التي تم تطبيقها سابقاً</string>
+    <string name="auto_wallpaper_history_clear_history">تاريخ واضح</string>
+    <string name="auto_wallpaper_activate">تفعيل</string>
+    <string name="auto_wallpaper_next_wallpaper">الخلفية التالية</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">إضافة إلى تغيير تلقائي للخلفيات</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">إزالة من تغيير تلقائي للخلفيات</string>
+    <string name="auto_wallpaper_collection_added">تمت إضافة المجموعة إلى تغيير تلقائي للخلفيات</string>
+    <string name="auto_wallpaper_collection_removed">تمت إزالة المجموعة من تغيير تلقائي للخلفيات</string>
+    <string name="auto_wallpaper_selected_collections">المحدد</string>
+    <string name="auto_wallpaper_no_selected_collections">ابحث عن بعض المجموعات لإضافتها</string>
+    <string name="auto_wallpaper_discover">اكتشف</string>
+    <string name="auto_wallpaper_popular">الشائع</string>
+    <string name="auto_wallpaper_add_collection_from_url">أضف مجموعة من URL</string>
+    <string name="auto_wallpaper_could_not_add_collection">تعذرت إضافة المجموعة</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">انسخ والصق عنوان URL للمجموعة:</string>
+    <string name="auto_wallpaper_collection_url">عنوان URL الخاص بالمجموعة</string>
+    <string name="auto_wallpaper_add_collection">أضف مجموعة</string>
+    <string name="auto_wallpaper_invalid_url">URL غير صالح</string>
 
-    <!-- InfoDialog -->
-    <string name="photo_dimensions">ابعاد</string>
-    <string name="camera_make">عمل</string>
-    <string name="camera_model">الموديل</string>
-    <string name="exposure_time">وقت الكشف</string>
+    <!-- Photo Detail -->
+    <string name="views">مشاهدات</string>
+    <string name="downloads">تحميلات</string>
+    <string name="likes">اعجابات</string>
+    <string name="camera">الة تصوير</string>
     <string name="aperture">ثقب</string>
-    <string name="iso">ISO</string>
     <string name="focal_length">البعد البؤري</string>
+    <string name="dimensions">ابعاد</string>
+    <string name="shutter_speed">وقت الكشف</string>
+    <string name="description">وصف</string>
 
     <!-- Collections -->
     <string name="add_to_collection">إضافة الي مجموعة</string>
     <string name="create_new_collection">إنشاء مجموعة جديدة</string>
-    <string name="create">إنشاء</string>
-    <string name="delete">حذف</string>
+    <string name="make_collection_private">جعل المجموعة خاصة</string>
     <string name="collection_name_hint">أسم</string>
     <string name="collection_description_hint">الوصف (إختياري)</string>
-    <string name="make_collection_private">جعل المجموعة خاصة</string>
-    <string name="collection_name_is_required">الأسم مطلوب</string>
-    <string name="failed_to_create_collection">خطأ في إنشاء مجموعة جديدة</string>
-    <string name="failed_to_save_collection">خطأ في حفظ مجموعة</string>
-    <string name="failed_to_delete_collection">خطأ في حذف مجموعة</string>
+    <string name="collection_name_required">الأسم مطلوب</string>
     <string name="edit_collection">تعديل المجموعة</string>
-    <string name="are_you_sure">هل أنت متأكد؟</string>
-    <string name="yes">نعم</string>
-    <string name="no">لا</string>
+    <string name="curated_by_template">برعاية %s</string>
 
-    <!-- About -->
-    <string name="about_title">عن</string>
-    <string name="about_unsplash_title">Unsplash.com</string>
-    <string name="about_unsplash_subtitle">صور عالية الجودة مجانية</string>
-    <string name="about_version_title">الإصدار</string>
-    <string name="about_introduction_title">التعريف</string>
-    <string name="about_github_title">GitHub</string>
-    <string name="about_privacy_policy_title">سياسة الخصوية</string>
-    <string name="about_support_development_card_title">دعم تطوير التطبيق</string>
-    <string name="about_rate_title">تقييم</string>
-    <string name="about_rate_subtitle">أذا تحب التطبيق، قم بتقييمه في متجر بلاي</string>
-    <string name="about_donate_title">التبرع</string>
-    <string name="about_donate_subtitle">أذا تحب التطبيق كثيراً، رجاءً قم بالتبرع ببعض المال من أجل تطويره</string>
-    <string name="about_bug_title">الأبلاغ عن أعطال</string>
-    <string name="about_bug_subtitle">الأبلاغ عن أعطال او طلب ميزة جديدة</string>
-    <string name="about_author_title">Brandon Lam</string>
-    <string name="about_author_card_title">الناشر</string>
-    <string name="about_author_subtitle">تورنتو، اونتاريو، كندا</string>
-    <string name="about_website_title">زيارة الموقع</string>
-    <string name="about_instagram_title">متابعة علي الانستجرام</string>
-    <string name="about_libraries_card_title">المكتبة</string>
-
-    <!-- Donate -->
-    <string name="donate_card_title">دعم تطوير التطبيق</string>
-    <string name="donate_item1_title">قهوة</string>
-    <string name="donate_item1_subtitle">تجعلني مستيقظ طوال الليل</string>
-    <string name="donate_item2_title">عصير</string>
-    <string name="donate_item2_subtitle">أحياناً اريد تناول شئ صحي</string>
-    <string name="donate_item3_title">بيتزا</string>
-    <string name="donate_item3_subtitle">الجميع يحب البيتزا</string>
-    <string name="donate_item4_title">وجبة راقية</string>
-    <string name="donate_item4_subtitle">يجب أن استمتع بشئ راقي مرة كل فترة طويلة</string>
-    <string name="donate_thanks">!شكراً للتبرع</string>
-    <string name="donate_loading">L&#8230;جاري تحميل المنتجات</string>
-
-    <!-- Auto Wallpaper -->
-    <string name="auto_wallpaper_title">تغيير تلقائي للخلفيات</string>
-    <string name="auto_wallpaper_conditions">الشروط</string>
-    <string name="auto_wallpaper_on_wifi">شبكة واي-فاي</string>
-    <string name="auto_wallpaper_on_wifi_summary">أن يكون الجهاز متصل بالواي-فاي</string>
-    <string name="auto_wallpaper_charging">في حالة شحن</string>
-    <string name="auto_wallpaper_charging_summary">يجب ان يكون في مصدر شحن</string>
-    <string name="auto_wallpaper_idle">حالة خمول</string>
-    <string name="auto_wallpaper_idle_summary">يجب ان يكون غير نشط</string>
-    <string name="auto_wallpaper_interval">المدة</string>
-    <string name="auto_wallpaper_interval_summary">أختر مدة تغير الخلفيات </string>
-    <string-array name="auto_wallpaper_interval_options">
-        <item>15 دقيقة</item>
-        <item>30 دقيقة</item>
-        <item>1 ساعة</item>
-        <item>3 ساعات</item>
-        <item>6 ساعات</item>
-        <item>12 ساعة</item>
-        <item>24 ساعة</item>
-        <item>48 ساعة</item>
-    </string-array>
-    <string name="auto_wallpaper_source">مصدر</string>
-    <string name="auto_wallpaper_category">فئة</string>
-    <string name="auto_wallpaper_category_summary">اختر فئة الخلفية</string>
-    <string-array name="auto_wallpaper_category_options">
-        <item>الجميع</item>
-        <item>مميز</item>
-        <item>مخصص</item>
-    </string-array>
-    <string name="auto_wallpaper_custom_category">فئة مخصصة</string>
-    <string name="auto_wallpaper_custom_category_summary">الحصول علي الخليفات المتطابقة مع الشرط</string>
-    <string name="auto_wallpaper_custom_category_default" translatable="false">خلفية</string>
-    <string name="auto_wallpaper_options">أعدادات</string>
-    <string name="auto_wallpaper_select_screen">إختيار الشاشة</string>
-    <string name="auto_wallpaper_select_screen_summary">أختر الشاشة التي تتطبق عليها الخلفية</string>
-    <string-array name="auto_wallpaper_select_screen_options">
-        <item>الشاشة الرئيسية</item>
-        <item>شاشة القفل</item>
-        <item>كلاهم</item>
-    </string-array>
-    <string name="auto_wallpaper_history">سجل الخلفيات التلقائية</string>
-    <string name="auto_wallpaper_history_summary">عرض الخلفيات التي تم تطبيقها سابقاً</string>
-    <string name="auto_wallpaper_info">خاصية الخلفيات العشوائية تغير خلفية الشاشة الرئيسية بطريقة عشوائية مبنية علي الشروط المطبقة</string>
-
-    <!-- Detail -->
-    <string name="stats">إحصائيات</string>
-    <string name="photo_info">معلومات</string>
-    <string name="set_as_wallpaper">تطبيق كـخلفية</string>
-    <string name="download">تحميل</string>
-    <string name="setting_wallpaper">&#8230;جاري تطبيق الخلفية</string>
-    <string name="cancel">إلغاء</string>
-    <string name="file_exists">الملف تم تحميله سابقاً</string>
-
-    <!-- Error -->
-    <string name="no_results">&#8230;لا توجد نتائج</string>
-    <string name="log_in">تسجيل الدخول</string>
-    <string name="join">الانضمام</string>
-    <string name="edit_title">تعديل الملف الشخصي</string>
-    <string name="request_token_failed">Access token request failed</string>
-    <string name="error">خطأ</string>
-
-    <string name="by_author">%1$s بواسطة</string>
-    <string name="no_more_photos">ليس هناك صور اخري</string>
-    <string name="updated_photos">!تم تحديث الصور</string>
-    <string name="updated_collections">!تم تحديث المجموعات</string>
-    <string name="updated_users">!تم تحديث المستخدمين</string>
-    <string name="share_via">المشاركة عبر</string>
-    <string name="unsplash_image">Unsplash صورة</string>
-    <string name="unsplash_collection">Unsplash مجموعة</string>
-    <string name="save">حفظ</string>
-    <string name="saved">محفوظ</string>
-    <string name="likes">%1$s اعجابات</string>
-    <string name="photos">%1$s صور</string>
-    <string name="views">%1$s مشاهدات</string>
-    <string name="downloads">%1$s تحميلات</string>
-    <string name="cannot_make_anymore_requests">لا يمكن إجراء طلبات</string>
-    <string name="download_started">تم بدأ التحميل</string>
-    <string name="image_saved">تم حفظ الصورة</string>
-    <string name="download_wallpaper">حمل الخلفية</string>
-    <string name="download_complete">تم التحميل بنجاح</string>
-    <string name="unknown">غير معروف</string>
-    <string name="cannot_update_profile">لا يمكن تحديث الملف الشخصي</string>
-    <string name="updated_profile">تم تحديث الملف الشخصي</string>
-    <string name="username_cannot_be_blank">اسم المستخدم لا يمكن ان يكون فارغ</string>
-    <string name="failed_to_load_profile">خطأ في تحميل الملف الشخصي</string>
-    <string name="next">التالي</string>
+    <!-- User -->
+    <string name="open_portfolio_link">افتح رابط المحفظة</string>
+    <string name="blank_username_error">اسم المستخدم لا يمكن ان يكون فارغ</string>
+    <string name="invalid_username_error">يجب أن يحتوي اسم المستخدم على حرف واحد على الأقل وأن يحتوي فقط على أحرف أو أرقام أو شرطات سفلية (بدون مسافات)</string>
+    <string name="username_taken_error">الاسم مستخدم من قبل</string>
+    <string name="blank_first_name_error">لا يمكن أن يكون الاسم الأول فارغًا</string>
+    <string name="blank_email_error">لا يمكن أن يكون البريد الإلكتروني فارغًا</string>
+    <string name="invalid_email_error">البريد الإلكتروني غير صالح</string>
     <string name="username_hint">اسم المستخدم</string>
+    <string name="username_helper_text">(فقط الحروف والأرقام والشرطات السفلية)</string>
     <string name="first_name_hint">الاسم الاول</string>
     <string name="last_name_hint">أسم العائلة</string>
-    <string name="email_address_hint">عنوان البريد الإلكتروني</string>
-    <string name="personal_site_hint">الصفحة الشخصية</string>
+    <string name="email_hint">عنوان البريد الإلكتروني</string>
+    <string name="portfolio_hint">الصفحة الشخصية</string>
     <string name="instagram_username_hint">أسم مستخدم الانستاجرام</string>
     <string name="location_hint">موقع</string>
     <string name="bio_hint">الوصف</string>
-    <string name="error_loading_photo">هناك مشكلة في تحميل الصورة</string>
+    <string name="account_updated">تم تحديث الحساب!</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">حاول البحث عن شيء ما</string>
+    <string name="filter">منقي</string>
+    <string name="filter_relevance">ملاءمة</string>
+    <string name="filter_latest">الأحدث</string>
+    <string name="content_filter">تصفية المحتوى</string>
+    <string name="filter_low">الحد الأدنى</string>
+    <string name="filter_high">أقصى</string>
+    <string name="orientation">اتجاه</string>
+    <string name="filter_any">أي</string>
+    <string name="filter_portrait">طولية</string>
+    <string name="filter_landscape">افقية</string>
+    <string name="filter_square">مربعة</string>
+    <string name="filter_color">اللون</string>
+    <string name="filter_color_any">أي</string>
+    <string name="filter_color_black_white">اسود و ابيض</string>
+    <string name="filter_color_black">أسود</string>
+    <string name="filter_color_white">أبيض</string>
+    <string name="filter_color_yellow">الأصفر</string>
+    <string name="filter_color_orange">البرتقالي</string>
+    <string name="filter_color_red">أحمر</string>
+    <string name="filter_color_purple">أرجواني</string>
+    <string name="filter_color_magenta">أرجواني</string>
+    <string name="filter_color_green">أخضر</string>
+    <string name="filter_color_teal">بط نهري صغير</string>
+    <string name="filter_color_blue">أزرق</string>
+
+    <!-- Login -->
+    <string name="login">تسجيل الدخول</string>
+    <string name="create_an_account">انشئ حساب</string>
+    <string name="login_banner_title">يبدأ الخلق من هنا</string>
+    <string name="login_banner_subtitle">يمكنك الوصول إلى صور مجانية عالية الدقة لا يمكنك العثور عليها في أي مكان آخر</string>
+    <string name="login_success">نجح تسجيل الدخول</string>
     <string name="need_to_log_in">يجب عليك تسجيل الدخول من اجل اتمام الامر</string>
-    <string name="on">فتح</string>
-    <string name="off">إغلاق</string>
-    <string name="next_wallpaper">الخلفية التالية</string>
-    <string name="remove_all">حذف الكل</string>
-    <string name="activate">تفعيل</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">الترقية إلى Resplash Pro</string>
+    <string name="pro_feature_title">What\'s in it for you?</string>
+    <string name="pro_feature_one">Customize Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
+    <string name="pro_feature_two">Future exclusive features</string>
+    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
+    <string name="pro_feature_three">Support development</string>
+    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_required">تحتاج إلى Resplash Pro للقيام بذلك!</string>
+
+    <!-- Donation -->
+    <string name="support_development">دعم تطوير التطبيق</string>
+    <string name="you_are_welcome">على الرحب و السعة</string>
+
+    <!-- About -->
+    <string name="about">عن</string>
+    <string name="licenses">تراخيص مفتوحة المصدر</string>
+    <string name="unsplash_summary">مصدر الإنترنت للصور القابلة للاستخدام بحرية</string>
+    <string name="donate_summary">أذا تحب التطبيق كثيراً، رجاءً قم بالتبرع ببعض المال من أجل تطويره</string>
+    <string name="report_bug_title">الأبلاغ عن أعطال</string>
+    <string name="report_bug_summary">الأبلاغ عن أعطال او طلب ميزة جديدة</string>
+    <string name="rate_app_title">تقييم</string>
+    <string name="rate_app_summary">أذا تحب التطبيق، قم بتقييمه في متجر بلاي</string>
+    <string name="github_summary">Resplash مفتوح المصدر ، تحقق منه على GitHub</string>
+    <string name="developer_title">الناشر</string>
+    <string name="privacy_policy">سياسة الخصوية</string>
 </resources>

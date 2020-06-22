@@ -17,26 +17,25 @@
         android:paddingTop="16dp">
 
         <TextView
-            android:id="@android:id/title"
+            android:id="@android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="?attr/primaryTextColor" />
+            android:textColor="?colorOnBackground" />
 
-        <TextView
-            android:id="@android:id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@android:id/title"
-            android:layout_below="@android:id/title"
-            android:maxLines="2"
-            android:paddingTop="6dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?attr/secondaryTextColor"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@android:id/summary"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignStart="@android:id/title"-->
+<!--            android:layout_below="@android:id/title"-->
+<!--            android:maxLines="2"-->
+<!--            android:paddingTop="6dp"-->
+<!--            android:textAppearance="?android:attr/textAppearanceSmall"-->
+<!--            android:textSize="14sp" />-->
 
     </RelativeLayout>
 
@@ -48,5 +47,4 @@
         android:background="@null"
         android:clickable="false"
         android:focusable="false" />
-
 </LinearLayout>

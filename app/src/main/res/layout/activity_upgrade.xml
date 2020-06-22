@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.b_lam.resplash.ui.upgrade.UpgradeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/banner_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@color/blue_grey_500"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/app_bar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+        tools:ignore="ContentDescription" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/banner_image_view"
+        app:layout_constraintEnd_toEndOf="@id/banner_image_view"
+        app:layout_constraintTop_toTopOf="@id/banner_image_view"
+        app:layout_constraintBottom_toBottomOf="@id/banner_image_view"
+        android:background="@color/black_overlay" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/app_bar"
+        app:layout_constraintBottom_toTopOf="@id/bottom_sheet">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_10"
+                android:layout_marginEnd="@dimen/keyline_10"
+                android:layout_marginTop="@dimen/keyline_7"
+                android:text="@string/pro_feature_title"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textAlignment="center"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/pro_detail_1_text_view" />
+
+            <ImageView
+                android:id="@+id/check_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_10"
+                android:src="@drawable/ic_check_circle_18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toStartOf="@id/pro_detail_1_text_view"
+                app:layout_constraintTop_toTopOf="@id/pro_detail_1_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/pro_detail_1_text_view"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/pro_detail_1_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_6"
+                android:layout_marginEnd="@dimen/keyline_10"
+                android:layout_marginTop="@dimen/keyline_9"
+                android:text="@string/pro_feature_one"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintStart_toEndOf="@id/check_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_text_view"
+                app:layout_constraintBottom_toTopOf="@id/pro_detail_1_sub_text_view" />
+
+            <TextView
+                android:id="@+id/pro_detail_1_sub_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keyline_3"
+                android:text="@string/pro_feature_one_subtitle"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/pro_detail_1_text_view"
+                app:layout_constraintEnd_toEndOf="@id/pro_detail_1_text_view"
+                app:layout_constraintTop_toBottomOf="@id/pro_detail_1_text_view"
+                app:layout_constraintBottom_toTopOf="@id/pro_detail_2_text_view" />
+
+            <ImageView
+                android:id="@+id/check_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_10"
+                android:src="@drawable/ic_check_circle_18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toStartOf="@id/pro_detail_2_text_view"
+                app:layout_constraintTop_toTopOf="@id/pro_detail_2_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/pro_detail_2_text_view"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/pro_detail_2_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_6"
+                android:layout_marginEnd="@dimen/keyline_10"
+                android:layout_marginTop="@dimen/keyline_9"
+                android:text="@string/pro_feature_two"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintStart_toEndOf="@id/check_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pro_detail_1_sub_text_view"
+                app:layout_constraintBottom_toTopOf="@id/pro_detail_2_sub_text_view" />
+
+            <TextView
+                android:id="@+id/pro_detail_2_sub_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keyline_3"
+                android:text="@string/pro_feature_two_subtitle"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/pro_detail_2_text_view"
+                app:layout_constraintEnd_toEndOf="@id/pro_detail_2_text_view"
+                app:layout_constraintTop_toBottomOf="@id/pro_detail_2_text_view"
+                app:layout_constraintBottom_toTopOf="@id/pro_detail_3_text_view" />
+
+            <ImageView
+                android:id="@+id/check_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_10"
+                android:src="@drawable/ic_check_circle_18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toStartOf="@id/pro_detail_3_text_view"
+                app:layout_constraintTop_toTopOf="@id/pro_detail_3_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/pro_detail_3_text_view"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/pro_detail_3_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/keyline_6"
+                android:layout_marginEnd="@dimen/keyline_10"
+                android:layout_marginTop="@dimen/keyline_9"
+                android:text="@string/pro_feature_three"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintStart_toEndOf="@id/check_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pro_detail_2_sub_text_view"
+                app:layout_constraintBottom_toTopOf="@id/pro_detail_3_sub_text_view" />
+
+            <TextView
+                android:id="@+id/pro_detail_3_sub_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/keyline_3"
+                android:layout_marginBottom="@dimen/keyline_9"
+                android:text="@string/pro_feature_three_subtitle"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/pro_detail_3_text_view"
+                app:layout_constraintEnd_toEndOf="@id/pro_detail_3_text_view"
+                app:layout_constraintTop_toBottomOf="@id/pro_detail_3_text_view"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/go_pro_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/extended_fab_min_width"
+        android:layout_marginTop="@dimen/keyline_8"
+        android:text="@string/go_pro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottom_sheet"
+        app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton" />
+
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@color/color_surface"
+        android:orientation="vertical"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/restore_purchase_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/keyline_9"
+            android:layout_marginBottom="@dimen/keyline_6"
+            android:textSize="12sp"
+            android:text="@string/restore_purchase"
+            style="@style/Widget.MaterialComponents.Button.TextButton" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/remove_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/keyline_7"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_remove_circle_outline_24dp"
+        style="@style/MaterialImageButton"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/collection_card_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/selected_collection_height"
+        android:layout_weight="1"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/remove_button"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/collection_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            tools:ignore="ContentDescription" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_overlay"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/collection_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_8"
+            android:layout_marginEnd="@dimen/keyline_8"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="New Collection" />
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

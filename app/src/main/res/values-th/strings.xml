@@ -1,271 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="navigation_drawer_open">เปิดแถบเมนู</string>
-    <string name="navigation_drawer_close">ปิดแถบเมนู</string>
+    <!-- Common -->
+    <string name="ok">ตกลง</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="search">ค้นหา</string>
+    <string name="photos">ภาพถ่าย</string>
+    <string name="collections">คอลเลคชั่น</string>
+    <string name="like">ชอบ</string>
+    <string name="users">ผู้ใช้</string>
+    <string name="unknown">ไม่รู้จัก</string>
+    <string name="download">ดาวน์โหลด</string>
+    <string name="on">เปิด</string>
+    <string name="off">ปิด</string>
+    <string name="share">แชร์</string>
+    <string name="open_in_browser">เปิดในบราวเซอร์</string>
+    <string name="apply">ใช้</string>
+    <string name="create">สร้าง</string>
+    <string name="save">บันทึก</string>
+    <string name="edit">แก้ไข</string>
+    <string name="delete">ลบ</string>
+    <string name="are_you_sure">คุณแน่ใจไหม?</string>
+    <string name="yes">ใช่</string>
+    <string name="no">ไม่</string>
+    <string name="thanks">ขอบคุณ!</string>
+    <string name="download_started">การดาวน์โหลดเริ่มขึ้นแล้ว</string>
+    <string name="download_complete">ดาวน์โหลดเสร็จสิ้น</string>
+    <string name="setting_wallpaper">กำลังตั้งวอลเปเปอร์…</string>
+    <string name="set_as_wallpaper">ตั้งเป็นวอลล์เปเปอร์</string>
 
-    <string name="action_share">แชร์</string>
-    <string name="action_view_on_unsplash">เปิดในบราวเซอร์</string>
-
-    <!-- ErrorView -->
-    <string name="error_http">โอ๊ะ</string>
-    <string name="error_http_subtitle">ดูเหมือนว่าเราจะไม่สามารถทำคำขอของคุณได้ในขณะนี้/n/nกรุณาลองใหม่อีกครั้ง</string>
-    <string name="error_network">โอ๊ะ</string>
-    <string name="error_network_subtitle">ดูเหมือนว่าจะอินเทอร์เน็ตของคุณจะมีปัญหา</string>
-
-    <!-- Settings -->
-    <string name="title_quality_section">คุณภาพ</string>
-    <string name="title_load_quality_preference">คุณภาพของภาพตัวอย่าง</string>
-    <string name="summary_load_quality_preference">เลือกคุณภาพของภาพตัวอย่างที่แสดง</string>
-    <string name="title_download_quality_preference">คุณภาพของภาพดาวน์โหลด</string>
-    <string name="summary_download_quality_preference">เลือกคุณภาพของภาพที่ดาวน์โหลดลงเครื่อง</string>
-    <string name="title_wallpaper_quality_preference">คุณภาพวอลเปเปอร์</string>
-    <string name="summary_wallpaper_quality_preference">เลือกคุณภาพของภาพถ่ายที่ใช้ตั้งวอลเปเปอร์</string>
-    <string-array name="quality_options">
-        <item>ต้นฉบับ</item>
-        <item>ขนาดเต็ม</item>
-        <item>ขนาดทั่วไป</item>
-        <item>ขนาดเล็ก</item>
-        <item>ขนาดตัวอย่าง</item>
-    </string-array>
-    <string name="title_layout_section">รูปแบบการจัดวาง</string>
-    <string name="title_layout_preference">เลือกรูปแบบการจัดวาง</string>
-    <string name="summary_layout_preference">เลือกรูบแบบการจัดวางของตัวอย่างภาพถ่าย</string>
-    <string-array name="layout_options">
-        <item>รายการ</item>
-        <item>การ์ด</item>
-        <item>ตาราง</item>
-    </string-array>
-    <string name="title_general_section">ทั่วไป</string>
-    <string name="title_custom_api">API Key ของตัวเอง</string>
-    <string name="title_clear_cache">ทำความสะอาดแคช</string>
-    <string name="cache_size">ขนาดของแคช</string>
-    <string name="message_cache_cleared">ทำความสะอาดเรียบร้อย!</string>
-    <string name="title_language">ภาษา</string>
-    <string name="title_theme">ธีม</string>
-    <string-array name="theme">
-        <item>สว่าง</item>
-        <item>มืด</item>
-        <item>ดำ (AMOLED)</item>
-    </string-array>
-    <string name="restart">รีสตาร์ท</string>
-    <string name="restart_to_apply">รีสตาร์ทเพื่อใช้การตั้งค่าใหม่</string>
-    <string name="title_other_section">อื่นๆ</string>
-    <string name="title_unsplash_intent_preference">ไปที่ Unsplash.com</string>
-
-    <!-- Menu -->
-    <string name="menu_search">ค้นหา</string>
-    <string name="menu_sort">เรียงโดย</string>
-    <string name="menu_item_latest">ล่าสุด</string>
-    <string name="menu_item_oldest">เก่าสุด</string>
-    <string name="menu_item_popular">ยอดนิยม</string>
-    <string name="menu_item_random">สุ่ม</string>
-    <string name="menu_item_all">ทั้งหมด</string>
-    <string name="menu_item_curated">คอลเลคชั่น</string>
-    <string name="menu_item_featured">แนะนำ</string>
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="other">%d ภาพถ่าย</item>
+    </plurals>
 
     <!-- Main -->
-    <string name="main_unsplash_description">ภาพถ่ายคุณภาพสูงฟรี</string>
-    <string name="main_add_account">เพิ่มบัญชี</string>
-    <string name="main_add_new_account">เพิ่มบัญชีใหม่</string>
-    <string name="main_view_profile">ดูโปรไฟล์</string>
-    <string name="main_manage_account">จัดการบัญชี</string>
-    <string name="main_logout">ออกจากระบบ</string>
-    <string name="main_featured">แนะนำ</string>
-    <string name="main_new">ใหม่</string>
-    <string name="main_collections">คอลเลคชั่น</string>
-    <string name="main_support_development">สนับสนุนทีมพัฒนา</string>
-    <string name="main_settings">ตั้งค่า</string>
-    <string name="main_about">เกี่ยวกับ</string>
-    <string name="main_logout_success">ออกจากระบบ - สำเร็จ</string>
+    <string name="home">ใหม่</string>
+    <string name="header_subtitle">ขับเคลื่อนโดยผู้สร้างทุกที่</string>
+    <string name="add_account">เพิ่มบัญชี</string>
+    <string name="view_profile">ดูโปรไฟล์</string>
+    <string name="edit_profile">จัดการบัญชี</string>
+    <string name="log_out">ออกจากระบบ</string>
+    <string name="sort_by">เรียงโดย</string>
+    <string name="order_latest">ล่าสุด</string>
+    <string name="order_oldest">เก่าสุด</string>
+    <string name="order_popular">ยอดนิยม</string>
+    <string name="order_all">ทั้งหมด</string>
+    <string name="order_featured">แนะนำ</string>
 
-    <!-- Intro -->
-    <string name="intro_welcome_title">Resplash</string>
-    <string name="intro_welcome_description">สนับสนุนโดย Unsplash</string>
-    <string name="intro_download_title">ภาพถ่ายคุณภาพสูง</string>
-    <string name="intro_download_description">ฟรี (คุณสามารถเอาไปใช้ยังไงก็ได้) ภาพถ่ายคุณภาพสูง</string>
-    <string name="intro_done">ไป</string>
-    <string name="intro_next">ถัดไป</string>
+    <!-- Error/Empty -->
+    <string name="oops">อ๊ะเกิดข้อผิดพลาดบางอย่าง…</string>
+    <string name="empty_state_title">ไม่มีอะไรให้ดูที่นี่…</string>
+    <string name="error_state_title">เอ่อโอ้…</string>
+    <string name="error_setting_wallpaper">เกิดข้อผิดพลาดขณะตั้งค่าภาพพื้นหลัง…</string>
 
-    <!-- Custom API -->
-    <string name="custom_api_key_description">คุณสามารถสร้างบัญชีนักพัฒนา Unsplash ของคุณเองและใช้ API KEY ของคุณ\n\n(ปล่อยวางเพื่อใช้ API key เดิม)</string>
-    <string name="api_key_empty_message">ผิดพลาด: ช่องนี้ห้ามปล่อยให้ว่าง</string>
-    <string name="redirect_uri_hint">Redirect URI</string>
-    <string name="secret_hint">ความลับ</string>
-    <string name="api_key_hint">API Key</string>
+    <!-- Settings -->
+    <string name="settings">ตั้งค่า</string>
+    <string name="general">ทั่วไป</string>
+    <string name="clear_cache">ทำความสะอาดแคช</string>
+    <string name="cache_size">ขนาดของแคช: %d MB</string>
+    <string name="language">ภาษา</string>
+    <string name="theme">ธีม</string>
+    <string name="theme_light">สว่าง</string>
+    <string name="theme_dark">มืด</string>
+    <string name="theme_battery">กำหนดโดยประหยัดแบตเตอรี่</string>
+    <string name="theme_default">ระบบเริ่มต้น</string>
+    <string name="layout">รูปแบบการจัดวาง</string>
+    <string name="layout_default">ค่าเริ่มต้น</string>
+    <string name="layout_minimal">ง่าย</string>
+    <string name="layout_grid">ตาราง</string>
+    <string name="quality">คุณภาพ</string>
+    <string name="quality_raw">ต้นฉบับ</string>
+    <string name="quality_full">ขนาดเต็ม</string>
+    <string name="quality_regular">ขนาดทั่วไป</string>
+    <string name="quality_small">ขนาดเล็ก</string>
+    <string name="quality_thumb">ขนาดตัวอย่าง</string>
+    <string name="load_quality">คุณภาพของภาพตัวอย่าง</string>
+    <string name="download_quality">คุณภาพของภาพดาวน์โหลด</string>
+    <string name="wallpaper_quality">คุณภาพวอลเปเปอร์</string>
+    <string name="long_press_to_download">กดค้างเพื่อดาวน์โหลด</string>
+    <string name="long_press_to_download_summary">กดที่รูปถ่ายค้างไว้เพื่อเริ่มดาวน์โหลด</string>
 
-    <!-- Search -->
-    <string name="search_photos">ภาพถ่าย</string>
-    <string name="search_collections">คอลเลคชั่น</string>
-    <string name="search_users">ผู้ใช้</string>
-    <string name="search_hint">ค้นหา</string>
-    <string name="search_title">ค้นหา</string>
-    <string name="action_clear_text">ล้างข้อความ</string>
-    <string-array name="search_photos_orientations">
-        <item>ทั้งหมด</item>
-        <item>ภาพทิวทัศน์</item>
-        <item>ภาพบุคคล</item>
-        <item>Squarish</item>
-    </string-array>
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">เปลี่ยนวอลเปเปอร์อัตโนมัติ</string>
+    <string name="auto_wallpaper_info">การเปลี่ยนวอลเปเปอร์อัตโนมัติจะเปลี่ยนวอลเปเปอร์ของคุณแบบสุ่มโดยขึ้นอยู่กับเงื่อนไขของคุณ</string>
+    <string name="auto_wallpaper_help_title">ไม่ทำงาน?</string>
+    <string name="auto_wallpaper_help_message">ลองปิดการใช้งานสภาวะไม่ได้ใช้งานและการปรับแบตเตอรี่ให้เหมาะสมสำหรับ Resplash ในการตั้งค่าโทรศัพท์ของคุณ\n\nสำหรับคำแนะนำเฉพาะของผู้ผลิต: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">เงื่อนไข</string>
+    <string name="auto_wallpaper_on_wifi_title">เปิด Wifi</string>
+    <string name="auto_wallpaper_on_wifi_summary">เครื่องของคุณต้องต่อกับ Wifi ก่อน</string>
+    <string name="auto_wallpaper_charging_title">ชาร์จโทรศัพท์</string>
+    <string name="auto_wallpaper_charging_summary">เครื่องของคุณต้องอยู่ในสถานะชาร์จก่อน</string>
+    <string name="auto_wallpaper_idle_title">ว่าง</string>
+    <string name="auto_wallpaper_idle_summary">เครื่องของคุณไม่ได้ใช้งาน</string>
+    <string name="auto_wallpaper_interval_title">ระยะเวลา</string>
+    <string name="auto_wallpaper_interval_summary">เปลี่ยนรูปพื้นหลังทุก: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 นาที</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 นาที</string>
+    <string name="auto_wallpaper_interval_one_hour">1 ชั่วโมง</string>
+    <string name="auto_wallpaper_interval_three_hours">3 ชั่วโมง</string>
+    <string name="auto_wallpaper_interval_six_hours">6 ชั่วโมง</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 ชั่วโมง</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 ชั่วโมง</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 ชั่วโมง</string>
+    <string name="auto_wallpaper_source">แหล่งที่มา</string>
+    <string name="auto_wallpaper_source_title">แหล่งภาพพื้นหลัง</string>
+    <string name="auto_wallpaper_source_summary">แหล่งที่มาปัจจุบัน: %s</string>
+    <string name="auto_wallpaper_source_all">ทั้งหมด</string>
+    <string name="auto_wallpaper_source_featured">แนะนำ</string>
+    <string name="auto_wallpaper_source_collections">คอลเลคชั่น</string>
+    <string name="auto_wallpaper_source_user">รูปถ่ายของผู้ใช้</string>
+    <string name="auto_wallpaper_source_search">คำค้นหา</string>
+    <string name="auto_wallpaper_source_not_set">ไม่ได้ตั้งค่า</string>
+    <string name="auto_wallpaper_collections_summary">เลือกคอลเล็กชันเพื่อรับภาพถ่าย</string>
+    <string name="auto_wallpaper_user_title">รูปถ่ายของผู้ใช้</string>
+    <string name="auto_wallpaper_user_summary">ใช้รูปภาพจาก: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">ป้อนชื่อผู้ใช้ของผู้ใช้เพื่อรับรูปภาพจาก:</string>
+    <string name="auto_wallpaper_search_terms_title">คำค้นหา</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">รับรูปภาพที่ตรงกับคำค้นหาต่อไปนี้:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(คั่นหลายคำด้วยเครื่องหมายจุลภาค)</string>
+    <string name="auto_wallpaper_options_title">ตัวเลือก</string>
+    <string name="auto_wallpaper_center_crop_title">ศูนย์พืชผล</string>
+    <string name="auto_wallpaper_center_crop_summary">ครอบตัดวอลล์เปเปอร์ทั้งหมดให้อยู่กึ่งกลาง</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">แก้ไขการวางแนวอุปกรณ์</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">อุปกรณ์บางอย่างจะครอบตัดวอลล์เปเปอร์ไม่ถูกต้องหากตั้งค่าไว้ในขณะที่อุปกรณ์อยู่ในโหมดแนวนอนการตรวจสอบนี้จะกำหนดเวลางานใหม่จนกว่าอุปกรณ์จะอยู่ในโหมดแนวตั้ง</string>
+    <string name="auto_wallpaper_select_screen_title">เลือกหน้าจอ</string>
+    <string name="auto_wallpaper_select_screen_summary">ใช้วอลล์เปเปอร์กับ: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">หน้าจอหลัก</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">หน้าจอล็อค</string>
+    <string name="auto_wallpaper_select_screen_both">ทั้งสองหน้าจอ</string>
+    <string name="auto_wallpaper_orientation_title">ปฐมนิเทศ</string>
+    <string name="auto_wallpaper_orientation_summary">จำกัด การวางแนววอลเปเปอร์เป็น: %s</string>
+    <string name="auto_wallpaper_content_filter_title">ตัวกรองเนื้อหา</string>
+    <string name="auto_wallpaper_content_filter_low_summary">ขั้นต่ำ: รับประกันว่าจะไม่มีการแสดงเนื้อหาที่ละเมิดหลักเกณฑ์การส่ง (เช่นภาพที่มีภาพเปลือยหรือความรุนแรง)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">สูงสุด: กรองเนื้อหาที่อาจไม่เหมาะสมสำหรับผู้ชมอายุน้อยกว่า</string>
+    <string name="auto_wallpaper_content_filter_note">โปรดทราบว่าเราไม่สามารถรับประกันได้ว่าเนื้อหาที่อาจไม่เหมาะสมทั้งหมดจะถูกลบออก</string>
+    <string name="auto_wallpaper_history_title">ประวัติวอลเปเปอร์อัตโนมัติ</string>
+    <string name="auto_wallpaper_history_summary">ดูวอลเปเปอร์อันก่อนหน้า</string>
+    <string name="auto_wallpaper_history_clear_history">ล้างประวัติ</string>
+    <string name="auto_wallpaper_activate">เปิดการทำงาน</string>
+    <string name="auto_wallpaper_next_wallpaper">วอลเปเปอร์ถัดไป</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">เพิ่มไปที่เปลี่ยนวอลเปเปอร์อัตโนมัติ</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">ลบออกจากเปลี่ยนวอลเปเปอร์อัตโนมัติ</string>
+    <string name="auto_wallpaper_collection_added">เพิ่มคอลเล็กชันไปที่เปลี่ยนวอลเปเปอร์อัตโนมัติ</string>
+    <string name="auto_wallpaper_collection_removed">นำคอลเล็กชันออกจากเปลี่ยนวอลเปเปอร์อัตโนมัติ</string>
+    <string name="auto_wallpaper_selected_collections">เลือก</string>
+    <string name="auto_wallpaper_no_selected_collections">ค้นหาคอลเล็กชันที่จะเพิ่ม</string>
+    <string name="auto_wallpaper_discover">ค้นพบ</string>
+    <string name="auto_wallpaper_popular">ยอดนิยม</string>
+    <string name="auto_wallpaper_add_collection_from_url">เพิ่มคอลเล็กชันจาก URL</string>
+    <string name="auto_wallpaper_could_not_add_collection">ไม่สามารถเพิ่มคอลเล็กชัน</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">คัดลอกและวาง URL การรวบรวม:</string>
+    <string name="auto_wallpaper_collection_url">URL การรวบรวม</string>
+    <string name="auto_wallpaper_add_collection">เพิ่มคอลเล็กชัน</string>
+    <string name="auto_wallpaper_invalid_url">URL ไม่ถูกต้อง</string>
 
-    <!-- InfoDialog -->
-    <string name="photo_dimensions">ความละเอียด</string>
-    <string name="camera_make">ยี่ห้อของกล้อง</string>
-    <string name="camera_model">รุ่นของกล้อง</string>
-    <string name="exposure_time">ความเร็วชัตเตอร์</string>
+    <!-- Photo Detail -->
+    <string name="views">จำนวนเข้าชม</string>
+    <string name="downloads">ดาวน์โหลด</string>
+    <string name="likes">ถูกใจ</string>
+    <string name="camera">กล้อง</string>
     <string name="aperture">รูรับแสง</string>
-    <string name="iso">ISO</string>
     <string name="focal_length">ระยะโฟกัส</string>
+    <string name="dimensions">ความละเอียด</string>
+    <string name="shutter_speed">ความเร็วชัตเตอร์</string>
+    <string name="description">ลักษณะ</string>
 
     <!-- Collections -->
     <string name="add_to_collection">เพิ่มลงคอลเลคชั่น</string>
     <string name="create_new_collection">สร้างคอลเลคชั่นใหม่</string>
-    <string name="create">สร้าง</string>
-    <string name="delete">ลบ</string>
+    <string name="make_collection_private">ทำคอลเลคชั่นส่วนตัว</string>
     <string name="collection_name_hint">ชื่อ</string>
     <string name="collection_description_hint">รายละเอียด (ตัวเลือก)</string>
-    <string name="make_collection_private">ทำคอลเลคชั่นส่วนตัว</string>
-    <string name="collection_name_is_required">ต้องใส่ชื่อคอลเลคชั่น</string>
-    <string name="failed_to_create_collection">ไม่สามารถสร้างคอลเลคชั่นได้</string>
-    <string name="failed_to_save_collection">>ไม่สามารถบันทึกคอลเลคชั่นได้</string>
-    <string name="failed_to_delete_collection">>ไม่สามารถลบคอลเลคชั่นได้</string>
+    <string name="collection_name_required">ต้องใส่ชื่อคอลเลคชั่น</string>
     <string name="edit_collection">แก้ไขคอลเลคชั่น</string>
-    <string name="are_you_sure">คุณแน่ใจไหม?</string>
-    <string name="yes">ใช่</string>
-    <string name="no">ไม่</string>
+    <string name="curated_by_template">จัดทำโดย %s</string>
 
-    <!-- About -->
-    <string name="about_title">เกี่ยวกับ</string>
-    <string name="about_unsplash_title">Unsplash.com</string>
-    <string name="about_unsplash_subtitle">ฟรี (คุณสามารถเอาไปใช้ยังไงก็ได้) ภาพถ่ายคุณภาพสูง</string>
-    <string name="about_version_title">เวอร์ชั่น</string>
-    <string name="about_introduction_title">เกริ่นนำ</string>
-    <string name="about_github_title">GitHub</string>
-    <string name="about_privacy_policy_title">นโยบายความเป็นส่วนตัว</string>
-    <string name="about_support_development_card_title">สนับสนุนนักพัฒนา</string>
-    <string name="about_rate_title">ประเมิน</string>
-    <string name="about_rate_subtitle">ถ้าคุณชอบ Resplash, กรุณาประเมินคะแนนใน Play Store</string>
-    <string name="about_donate_title">บริจาค</string>
-    <string name="about_donate_subtitle">ถ้าคุณชอบ Resplash อย่างมาก, คุณสามารถสนับสนุนการพัฒนาโดยส่งเงินมาให้เรา</string>
-    <string name="about_bug_title">รายงานบัค</string>
-    <string name="about_bug_subtitle">รายงานบัคหรือแนะนำฟีเจอร์ใหม่ที่ต้องการ</string>
-    <string name="about_author_title">Brandon Lam</string>
-    <string name="about_author_card_title">ผู้จัดทำ</string>
-    <string name="about_author_subtitle">Toronto, Ontario, Canada</string>
-    <string name="about_website_title">เยี่ยมชมเว็บไซต์</string>
-    <string name="about_instagram_title">ติดตามใน Instagram</string>
-    <string name="about_libraries_card_title">ไลบรารี</string>
-
-    <!-- Donate -->
-    <string name="donate_card_title">สนับสนุนนักพัฒนา</string>
-    <string name="donate_item1_title">กาแฟ</string>
-    <string name="donate_item1_subtitle">ทำให้เรามีแรงในการเขียนโค้ดตอนดึก</string>
-    <string name="donate_item2_title">น้ำปั่น</string>
-    <string name="donate_item2_subtitle">บางครั้งเราก็ต้องกินของมีประโยชน์</string>
-    <string name="donate_item3_title">พิซซ่า</string>
-    <string name="donate_item3_subtitle">ใครๆก็ชอบพิซซ่า</string>
-    <string name="donate_item4_title">อาหารมื้อหรู</string>
-    <string name="donate_item4_subtitle">นานๆทีได้กินอาหารมื้อหรูบ้างสักครั้ง</string>
-    <string name="donate_thanks">ขอบคุณสำหรับเงินของคุณ!</string>
-    <string name="donate_loading">กำลังดาวน์โหลดผลิตภัณฑ์&#8230;</string>
-
-    <!-- Auto Wallpaper -->
-    <string name="auto_wallpaper_title">เปลี่ยนวอลเปเปอร์อัตโนมัติ</string>
-    <string name="auto_wallpaper_conditions">เงื่อนไข</string>
-    <string name="auto_wallpaper_on_wifi">เปิด Wifi</string>
-    <string name="auto_wallpaper_on_wifi_summary">เครื่องของคุณต้องต่อกับ Wifi ก่อน</string>
-    <string name="auto_wallpaper_charging">ชาร์จโทรศัพท์</string>
-    <string name="auto_wallpaper_charging_summary">เครื่องของคุณต้องอยู่ในสถานะชาร์จก่อน</string>
-    <string name="auto_wallpaper_idle">ว่าง</string>
-    <string name="auto_wallpaper_idle_summary">เครื่องของคุณไม่ได้ใช้งาน</string>
-    <string name="auto_wallpaper_interval">ระยะเวลา</string>
-    <string name="auto_wallpaper_interval_summary">เลือกว่าจะให้เปลี่ยนวอลเปเปอร์ในระยะเวลาเท่าไหร่</string>
-    <string-array name="auto_wallpaper_interval_options">
-        <item>15 นาที</item>
-        <item>30 นาที</item>
-        <item>1 ชั่วโมง</item>
-        <item>3 ชั่วโมง</item>
-        <item>6 ชั่วโมง</item>
-        <item>12 ชั่วโมง</item>
-        <item>24 ชั่วโมง</item>
-        <item>48 ชั่วโมง</item>
-    </string-array>
-    <string name="auto_wallpaper_source">แหล่งที่มา</string>
-    <string name="auto_wallpaper_category">ประเภท</string>
-    <string name="auto_wallpaper_category_summary">เลือกประเภทวอลเปเปอร์</string>
-    <string-array name="auto_wallpaper_category_options">
-        <item>ทั้งหมด</item>
-        <item>แนะนำ</item>
-        <item>ปรับแต่ง</item>
-    </string-array>
-    <string name="auto_wallpaper_custom_category">ปรับแต่งประเภท</string>
-    <string name="auto_wallpaper_custom_category_summary">หาวอลเปเปอร์ที่ต้องการด้วยคำค้นหา</string>
-    <string name="auto_wallpaper_options">ตัวเลือก</string>
-    <string name="auto_wallpaper_select_screen">เลือกหน้าจอ</string>
-    <string name="auto_wallpaper_select_screen_summary">เลือกหน้าจอที่จะเปลี่ยนวอลเปเปอร์อัตโนมัติ</string>
-    <string-array name="auto_wallpaper_select_screen_options">
-        <item>หน้าจอหลัก</item>
-        <item>หน้าจอล็อค</item>
-        <item>ทั้งสองหน้าจอ</item>
-    </string-array>
-    <string name="auto_wallpaper_history">ประวัติวอลเปเปอร์อัตโนมัติ</string>
-    <string name="auto_wallpaper_history_summary">ดูวอลเปเปอร์อันก่อนหน้า</string>
-    <string name="auto_wallpaper_info">การเปลี่ยนวอลเปเปอร์อัตโนมัติจะเปลี่ยนวอลเปเปอร์ของคุณแบบสุ่มโดยขึ้นอยู่กับเงื่อนไขของคุณ</string>
-
-    <!-- Detail -->
-    <string name="stats">สถิติ</string>
-    <string name="photo_info">เกี่ยวกับ</string>
-    <string name="set_as_wallpaper">ตั้งเป็นวอลล์เปเปอร์</string>
-    <string name="download">ดาวน์โหลด</string>
-    <string name="setting_wallpaper">กำลังตั้งวอลเปเปอร์&#8230;</string>
-    <string name="cancel">ยกเลิก</string>
-    <string name="file_exists">ดาวน์โหลดเสร็จเรียบร้อย</string>
-
-    <!-- Error -->
-    <string name="no_results">ไม่มีอะไรที่นี่#8230;</string>
-    <string name="log_in">เข้าสู่ระบบ</string>
-    <string name="join">เข้าร่วม</string>
-    <string name="edit_title">ตั้งค่าโปรไฟล์</string>
-    <string name="request_token_failed">การเข้าถึง Token ผิดพลาด</string>
-    <string name="error">ผิดพลาด</string>
-
-    <string name="by_author">โดย %1$s</string>
-    <string name="no_more_photos">ไม่มีภาพถ่ายอีกแล้ว</string>
-    <string name="updated_photos">ภาพถ่ายอัพเดตแล้ว!</string>
-    <string name="updated_collections">อัพเดตคอลเลคชั่นแล้ว!</string>
-    <string name="updated_users">อัพเดตผู้ใช้แล้ว!</string>
-    <string name="share_via">แบ่งปัน via</string>
-    <string name="unsplash_image">รูปภาพ Unsplash</string>
-    <string name="unsplash_collection">คอลเลคชั่น Unsplash</string>
-    <string name="save">บันทึก</string>
-    <string name="saved">บันทึกแล้ว</string>
-    <string name="likes">%1$s ถูกใจ</string>
-    <string name="photos">%1$s ภาพถ่าย</string>
-    <string name="views">%1$s จำนวนเข้าชม</string>
-    <string name="downloads">%1$s ดาวน์โหลด</string>
-    <string name="cannot_make_anymore_requests">ไม่สามารถทำตามคำร้องได้อีก</string>
-    <string name="download_started">การดาวน์โหลดเริ่มขึ้นแล้ว</string>
-    <string name="image_saved">รูปภาพถูกบันทึกแลเว</string>
-    <string name="download_wallpaper">ดาวน์โหลดวอลเปเปอร์</string>
-    <string name="download_complete">ดาวน์โหลดเสร็จสิ้น</string>
-    <string name="unknown">ไม่รู้จัก</string>
-    <string name="cannot_update_profile">ไม่สามารถอัพเดตโปรไฟล์</string>
-    <string name="updated_profile">อัพเดตโปรไฟล์แล้ว</string>
-    <string name="username_cannot_be_blank">ชื่อผู้ใช้ไม่สามารถปล่อยว่างได้</string>
-    <string name="failed_to_load_profile">ไม่สามารถดาวน์โหลดข้อมูลโปรไฟล์ได้</string>
-    <string name="next">ถัดไป</string>
+    <!-- User -->
+    <string name="open_portfolio_link">เปิดลิงค์ผลงาน</string>
+    <string name="blank_username_error">ชื่อผู้ใช้ไม่สามารถปล่อยว่างได้</string>
+    <string name="invalid_username_error">ชื่อผู้ใช้จะต้องมีตัวอักษรอย่างน้อยหนึ่งตัวและมีเฉพาะตัวอักษรตัวเลขหรือขีดล่าง (ไม่มีช่องว่าง)</string>
+    <string name="username_taken_error">ชื่อผู้ใช้ที่ได้รับแล้ว</string>
+    <string name="blank_first_name_error">ชื่อต้องไม่ว่างเปล่า</string>
+    <string name="blank_email_error">อีเมลต้องไม่ว่างเปล่า</string>
+    <string name="invalid_email_error">อีเมลไม่ถูกต้อง</string>
     <string name="username_hint">ผู้ใช้</string>
+    <string name="username_helper_text">(เฉพาะตัวอักษรตัวเลขและขีดล่าง)</string>
     <string name="first_name_hint">ชื่อ</string>
     <string name="last_name_hint">นามสกุล</string>
-    <string name="email_address_hint">ที่อยู่อีเมล์</string>
-    <string name="personal_site_hint">เว็บไซต์ส่วนตัว/พอร์ตโฟลิโอ</string>
+    <string name="email_hint">ที่อยู่อีเมล์</string>
+    <string name="portfolio_hint">เว็บไซต์ส่วนตัว/พอร์ตโฟลิโอ</string>
     <string name="instagram_username_hint">Instagram</string>
     <string name="location_hint">ที่อยูา</string>
     <string name="bio_hint">ชีวประวัติ</string>
-    <string name="error_loading_photo">ดูเหมือนว่าจะมีปัญหาในการดาวน์โหลดข้อมูลรูปภาพ</string>
+    <string name="account_updated">อัปเดตบัญชีแล้ว!</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">ลองค้นหาบางสิ่ง</string>
+    <string name="filter">กรอง</string>
+    <string name="filter_relevance">ความสัมพันธ์กัน</string>
+    <string name="filter_latest">ล่าสุด</string>
+    <string name="content_filter">ตัวกรองเนื้อหา</string>
+    <string name="filter_low">ขั้นต่ำ</string>
+    <string name="filter_high">ขีดสุด</string>
+    <string name="orientation">ปฐมนิเทศ</string>
+    <string name="filter_any">ใด</string>
+    <string name="filter_portrait">ภาพบุคคล</string>
+    <string name="filter_landscape">ภาพทิวทัศน์</string>
+    <string name="filter_square">สี่เหลี่ยม</string>
+    <string name="filter_color">สี</string>
+    <string name="filter_color_any">ใด</string>
+    <string name="filter_color_black_white">ดำและขาว</string>
+    <string name="filter_color_black">สีดำ</string>
+    <string name="filter_color_white">ขาว</string>
+    <string name="filter_color_yellow">สีเหลือง</string>
+    <string name="filter_color_orange">ส้ม</string>
+    <string name="filter_color_red">สีแดง</string>
+    <string name="filter_color_purple">สีม่วง</string>
+    <string name="filter_color_magenta">สีม่วงแดงเข้ม</string>
+    <string name="filter_color_green">สีเขียว</string>
+    <string name="filter_color_teal">นกเป็ดน้ำ</string>
+    <string name="filter_color_blue">สีน้ำเงิน</string>
+
+    <!-- Login -->
+    <string name="login">เข้าสู่ระบบ</string>
+    <string name="create_an_account">สร้างบัญชี</string>
+    <string name="login_banner_title">การสร้างเริ่มต้นที่นี่</string>
+    <string name="login_banner_subtitle">เข้าถึงรูปภาพความละเอียดสูงฟรีที่คุณไม่สามารถหาได้จากที่อื่น</string>
+    <string name="login_success">เข้าสู่ระบบสำเร็จ</string>
     <string name="need_to_log_in">คุณต้องเข้าสู่ระบบก่อน</string>
-    <string name="on">เปิด</string>
-    <string name="off">ปิด</string>
-    <string name="next_wallpaper">วอลเปเปอร์ถัดไป</string>
-    <string name="remove_all">ลบทั้งหมด</string>
-    <string name="activate">เปิดการทำงาน</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">อัปเกรดเป็น Resplash Pro</string>
+    <string name="pro_feature_title">What\'s in it for you?</string>
+    <string name="pro_feature_one">Customize Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
+    <string name="pro_feature_two">Future exclusive features</string>
+    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
+    <string name="pro_feature_three">Support development</string>
+    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_required">คุณต้องมี Resplash Pro เพื่อทำเช่นนั้น!</string>
+
+    <!-- Donation -->
+    <string name="support_development">สนับสนุนนักพัฒนา</string>
+    <string name="you_are_welcome">ไม่เป็นไร</string>
+
+    <!-- About -->
+    <string name="about">เกี่ยวกับ</string>
+    <string name="licenses">ใบอนุญาต</string>
+    <string name="unsplash_summary">แหล่งที่มาของรูปภาพที่ใช้งานได้อย่างอิสระ</string>
+    <string name="donate_summary">ถ้าคุณชอบ Resplash อย่างมาก, คุณสามารถสนับสนุนการพัฒนาโดยส่งเงินมาให้เรา</string>
+    <string name="report_bug_title">รายงานบัค</string>
+    <string name="report_bug_summary">รายงานบัคหรือแนะนำฟีเจอร์ใหม่ที่ต้องการ</string>
+    <string name="rate_app_title">ประเมิน</string>
+    <string name="rate_app_summary">ถ้าคุณชอบ Resplash, กรุณาประเมินคะแนนใน Play Store</string>
+    <string name="github_summary">Resplash เป็นโอเพ่นซอร์สตรวจสอบกับ GitHub</string>
+    <string name="developer_title">ผู้จัดทำ</string>
+    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
 </resources>

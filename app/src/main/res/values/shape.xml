@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Shape Appearance for small components like chips, buttons, text fields and FABs-->
+    <style name="ShapeAppearance.Resplash.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <!--Your custom shape here-->
+    </style>
+
+    <!--Shape Appearance for medium components like cards, alert dialogs-->
+    <style name="ShapeAppearance.Resplash.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">@dimen/medium_corner_radius</item>
+    </style>
+
+    <!--Shape Appearance for large components like side and bottom navigation drawers-->
+    <style name="ShapeAppearance.Resplash.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerSize">@dimen/large_corner_radius</item>
+    </style>
+
+</resources>

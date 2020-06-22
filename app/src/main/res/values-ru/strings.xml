@@ -1,240 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="navigation_drawer_open">Открыть навигационную панель</string>
-    <string name="navigation_drawer_close">Закрыть навигационную панель</string>
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Отмена</string>
+    <string name="search">Поиск</string>
+    <string name="photos">Фотографии</string>
+    <string name="collections">Коллекции</string>
+    <string name="like">Любить</string>
+    <string name="users">Пользователи</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="download">Скачать</string>
+    <string name="on">Включено</string>
+    <string name="off">Инвалид</string>
+    <string name="share">Поделиться</string>
+    <string name="open_in_browser">Открыть в браузере</string>
+    <string name="apply">Применять</string>
+    <string name="create">Создайте</string>
+    <string name="save">Сохранить</string>
+    <string name="edit">Pедактировать</string>
+    <string name="delete">Удалять</string>
+    <string name="are_you_sure">Уверены ли вы?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="thanks">Спасибо!</string>
+    <string name="download_started">Загрузка началась</string>
+    <string name="download_complete">Загрузка завершена</string>
+    <string name="setting_wallpaper">Настройка обоев…</string>
+    <string name="set_as_wallpaper">Установить в качестве обоев</string>
 
-    <string name="action_share">Поделиться</string>
-    <string name="action_view_on_unsplash">Открыть в браузере</string>
-
-    <!-- ErrorView -->
-    <string name="error_http">Ошибка сервера</string>
-    <string name="error_http_subtitle">Кажется, что проблема с сервером.</string>
-    <string name="error_network">Нет соединения</string>
-    <string name="error_network_subtitle">Кажется, что проблема с вашим интернетом.</string>
-
-    <!-- Settings -->
-    <string name="title_quality_section">Качество</string>
-    <string name="title_load_quality_preference">Качество загружаемых</string>
-    <string name="summary_load_quality_preference">Выберите качество загружаемых фотографий</string>
-    <string name="title_download_quality_preference">Качество скачиваемых</string>
-    <string name="summary_download_quality_preference">Выберите качество скачиваемых фотографий</string>
-    <string name="title_wallpaper_quality_preference">Качество обоев</string>
-    <string name="summary_wallpaper_quality_preference">Выерите качество устанавливаемых обоев</string>
-    <array name="quality_options">
-        <item>Оригинальное</item>
-        <item>Высокое</item>
-        <item>Среднее</item>
-        <item>Низкое</item>
-        <item>Очень низкое</item>
-    </array>
-    <string name="title_layout_section">Расположение</string>
-    <string name="title_layout_preference">Выберите расположение</string>
-    <string name="summary_layout_preference">Выберите, как будут отображаться фотографии</string>
-    <array name="layout_options">
-        <item>Списком</item>
-        <item>Карточками</item>
-        <item>Сеткой</item>
-    </array>
-    <string name="title_general_section">Общие</string>
-    <string name="title_custom_api">Пользовательский ключ API</string>
-    <string name="title_clear_cache">Очистить кэш</string>
-    <string name="cache_size">Размер кэша</string>
-    <string name="message_cache_cleared">Кэш очищен!</string>
-    <string name="title_language">Язык</string>
-    <string name="title_theme">Тема</string>
-    <array name="theme">
-        <item>Светлая</item>
-        <item>Тёмная</item>
-        <item>Черный</item>
-    </array>
-    <string name="restart">Перезапуск</string>
-    <string name="restart_to_apply">Перезапустите, чтобы применить изменения</string>
-    <string name="title_other_section">Другие</string>
-    <string name="title_unsplash_intent_preference">Перейти на Unsplash.com</string>
-
-    <!-- Menu -->
-    <string name="menu_search">Поиск</string>
-    <string name="menu_sort">Сортировать по</string>
-    <string name="menu_item_latest">Последние</string>
-    <string name="menu_item_oldest">Старейшие</string>
-    <string name="menu_item_popular">Популярные</string>
-    <string name="menu_item_random">Случайные</string>
-    <string name="menu_item_all">Все</string>
-    <string name="menu_item_curated">Кураторские</string>
-    <string name="menu_item_featured">Рекомендуемые</string>
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="one">%d Фотография</item>
+        <item quantity="few">%d Фотографии</item>
+        <item quantity="many">%d Фотографии</item>
+        <item quantity="other">%d Фотографии</item>
+    </plurals>
 
     <!-- Main -->
-    <string name="main_unsplash_description">Бесплатные фотографии высокого разрешения</string>
-    <string name="main_add_account">Добавить аккаунт</string>
-    <string name="main_add_new_account">Добавить новый аккаунт Unsplash</string>
-    <string name="main_view_profile">Просмотреть профиль</string>
-    <string name="main_manage_account">Управление аккаунтом</string>
-    <string name="main_logout">Выйти</string>
-    <string name="main_featured">Рекомендуемые</string>
-    <string name="main_new">Новые</string>
-    <string name="main_collections">Коллекции</string>
-    <string name="main_support_development">Поддержать разработку</string>
-    <string name="main_settings">Настройки</string>
-    <string name="main_about">О приложении</string>
-    <string name="main_logout_success">Выход - Успешно</string>
+    <string name="home">Новые</string>
+    <string name="header_subtitle">Создано создателями повсюду</string>
+    <string name="add_account">Добавить аккаунт</string>
+    <string name="view_profile">Просмотреть профиль</string>
+    <string name="edit_profile">Управление аккаунтом</string>
+    <string name="log_out">Выйти</string>
+    <string name="sort_by">Сортировать по</string>
+    <string name="order_latest">Последние</string>
+    <string name="order_oldest">Старейшие</string>
+    <string name="order_popular">Популярные</string>
+    <string name="order_all">Все</string>
+    <string name="order_featured">Рекомендуемые</string>
 
-    <!-- Intro -->
-    <string name="intro_welcome_title">Resplash</string>
-    <string name="intro_welcome_description">Работает на Unsplash</string>
-    <string name="intro_download_title">Фотографии высокого разрешения</string>
-    <string name="intro_download_description">Бесплатные (делайте что хотите) фотографии высокого разрешения</string>
-    <string name="intro_done">Начать</string>
-    <string name="intro_next">Далее</string>
+    <!-- Error/Empty -->
+    <string name="oops">Упс! Что-то пошло не так…</string>
+    <string name="empty_state_title">Здесь нечего смотреть…</string>
+    <string name="error_state_title">Э-э-э…</string>
+    <string name="error_setting_wallpaper">Что-то пошло не так при установке обоев…</string>
 
-    <!-- Custom API -->
-    <string name="custom_api_key_description">Вы можете создать свой собственный аккаунт разработчика Unsplash и использовать свой собственный ключ API\n\n(Оставьте пустым, чтобы использовать стандартный ключ API)</string>
-    <string name="api_key_empty_message">Ошибка: вы не может оставить поле пустым</string>
-    <string name="redirect_uri_hint">Перенаправление URI</string>
-    <string name="secret_hint">Секрет</string>
-    <string name="api_key_hint">Ключ API</string>
+    <!-- Settings -->
+    <string name="settings">Настройки</string>
+    <string name="general">Общие</string>
+    <string name="clear_cache">Очистить кэш</string>
+    <string name="cache_size">Размер кэша: %d MB</string>
+    <string name="language">Язык</string>
+    <string name="theme">Тема</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_battery">Устанавливается с помощью аккумулятора</string>
+    <string name="theme_default">Системные установки по умолчанию</string>
+    <string name="layout">Расположение</string>
+    <string name="layout_default">Нормальный</string>
+    <string name="layout_minimal">просто</string>
+    <string name="layout_grid">Сеткой</string>
+    <string name="quality">Качество</string>
+    <string name="quality_raw">Оригинальное</string>
+    <string name="quality_full">Высокое</string>
+    <string name="quality_regular">Среднее</string>
+    <string name="quality_small">Низкое</string>
+    <string name="quality_thumb">Очень низкое</string>
+    <string name="load_quality">Качество загружаемых</string>
+    <string name="download_quality">Качество скачиваемых</string>
+    <string name="wallpaper_quality">Качество обоев</string>
+    <string name="long_press_to_download">Длительное нажатие, чтобы загрузить</string>
+    <string name="long_press_to_download_summary">Длительное нажатие на фото, чтобы начать загрузку</string>
 
-    <!-- Search -->
-    <string name="search_photos">Фотографии</string>
-    <string name="search_collections">Коллекции</string>
-    <string name="search_users">Пользователи</string>
-    <string name="search_hint">Поиск</string>
-    <string name="search_title">Поиск</string>
-    <string name="action_clear_text">Удалить текст</string>
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Автоматические обои</string>
+    <string name="auto_wallpaper_info">Автоматические обои обновят ваш главный экран новыми случайными обоями в зависимости от заданных условий</string>
+    <string name="auto_wallpaper_help_title">Не работает?</string>
+    <string name="auto_wallpaper_help_message">Попробуйте отключить состояние ожидания и оптимизацию батареи для Resplash в настройках вашего телефона.\n\nДля конкретных инструкций производителя: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">Условия</string>
+    <string name="auto_wallpaper_on_wifi_title">На вайфай</string>
+    <string name="auto_wallpaper_on_wifi_summary">Устройство должно быть подключено к сети Wi-Fi</string>
+    <string name="auto_wallpaper_charging_title">Зарядный</string>
+    <string name="auto_wallpaper_charging_summary">Устройство должно быть подключено к источнику питания</string>
+    <string name="auto_wallpaper_idle_title">бездействующий</string>
+    <string name="auto_wallpaper_idle_summary">Устройство должно быть неактивно</string>
+    <string name="auto_wallpaper_interval_title">Интервал</string>
+    <string name="auto_wallpaper_interval_summary">Менять обои каждые: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 минут</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 минут</string>
+    <string name="auto_wallpaper_interval_one_hour">1 час</string>
+    <string name="auto_wallpaper_interval_three_hours">3 часа</string>
+    <string name="auto_wallpaper_interval_six_hours">6 часов</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 часов</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 часа</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 часов</string>
+    <string name="auto_wallpaper_source">Источник</string>
+    <string name="auto_wallpaper_source_title">Источник обоев</string>
+    <string name="auto_wallpaper_source_summary">Источник тока: %s</string>
+    <string name="auto_wallpaper_source_all">Все</string>
+    <string name="auto_wallpaper_source_featured">Рекомендуемые</string>
+    <string name="auto_wallpaper_source_collections">Коллекции</string>
+    <string name="auto_wallpaper_source_user">Фотографии пользователя</string>
+    <string name="auto_wallpaper_source_search">Условия поиска</string>
+    <string name="auto_wallpaper_source_not_set">Не задано</string>
+    <string name="auto_wallpaper_collections_summary">Выберите коллекции, чтобы получить фотографии из</string>
+    <string name="auto_wallpaper_user_title">Фотографии пользователя</string>
+    <string name="auto_wallpaper_user_summary">Использование фотографий из: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Введите имя пользователя для получения фотографий:</string>
+    <string name="auto_wallpaper_search_terms_title">Условия поиска</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Получите фотографии, соответствующие следующим условиям поиска:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Разделите несколько терминов запятыми)</string>
+    <string name="auto_wallpaper_options_title">Опции</string>
+    <string name="auto_wallpaper_center_crop_title">Центр урожая</string>
+    <string name="auto_wallpaper_center_crop_summary">Обрезать все обои по центру</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Исправление ориентации устройства</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Некоторые устройства будут обрезать обои неправильно, если они установлены, когда устройство находится в альбомном режиме, проверка этого перенесет задачу, пока устройство не будет в портретном режиме</string>
+    <string name="auto_wallpaper_select_screen_title">Выберите экран</string>
+    <string name="auto_wallpaper_select_screen_summary">Применить обои к: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Домашний экран</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">Экран блокировки</string>
+    <string name="auto_wallpaper_select_screen_both">Главный экран и экран блокировки</string>
+    <string name="auto_wallpaper_orientation_title">Oриентация</string>
+    <string name="auto_wallpaper_orientation_summary">Ограничьте ориентацию обоев: %s</string>
+    <string name="auto_wallpaper_content_filter_title">Контентный фильтр</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Минимум: гарантирует, что не будет отображаться никакой контент, нарушающий правила представления (например, изображения, содержащие обнаженное тело или насилие)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Максимум: отфильтруйте контент, который может быть неподходящим для младшей аудитории.</string>
+    <string name="auto_wallpaper_content_filter_note">Обратите внимание, что мы не можем гарантировать, что весь потенциально неподходящий контент будет удален</string>
+    <string name="auto_wallpaper_history_title">Автоматическая история обоев</string>
+    <string name="auto_wallpaper_history_summary">Посмотреть ранее установленные обои</string>
+    <string name="auto_wallpaper_history_clear_history">Чистая история</string>
+    <string name="auto_wallpaper_activate">Aктивировать</string>
+    <string name="auto_wallpaper_next_wallpaper">Следующие обои</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Добавить в Автоматические обои</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Удалить из Автоматические обои</string>
+    <string name="auto_wallpaper_collection_added">Коллекция добавлена в Автоматические обои</string>
+    <string name="auto_wallpaper_collection_removed">Коллекция удалена из Автоматические обои</string>
+    <string name="auto_wallpaper_selected_collections">Bыбранный</string>
+    <string name="auto_wallpaper_no_selected_collections">Найдите несколько коллекций для добавления</string>
+    <string name="auto_wallpaper_discover">Обнаружить</string>
+    <string name="auto_wallpaper_popular">Популярные</string>
+    <string name="auto_wallpaper_add_collection_from_url">Добавить коллекцию из URL</string>
+    <string name="auto_wallpaper_could_not_add_collection">Не удалось добавить коллекцию</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Скопируйте и вставьте URL коллекции:</string>
+    <string name="auto_wallpaper_collection_url">URL коллекции</string>
+    <string name="auto_wallpaper_add_collection">Добавить коллекцию</string>
+    <string name="auto_wallpaper_invalid_url">Неправильный адрес</string>
 
-    <!-- InfoDialog -->
-    <string name="photo_dimensions">Разрешение</string>
-    <string name="camera_make">Марка</string>
-    <string name="camera_model">Модель</string>
-    <string name="exposure_time">Экспозиция</string>
+    <!-- Photo Detail -->
+    <string name="views">Просмотров</string>
+    <string name="downloads">Cкачиваний</string>
+    <string name="likes">Лайков</string>
+    <string name="camera">Камера</string>
     <string name="aperture">Апертура</string>
-    <string name="iso">ISO</string>
     <string name="focal_length">Фокусное расстояние</string>
-    <!-- About -->
-    <string name="about_title">О приложении</string>
-    <string name="about_unsplash_title">Unsplash.com</string>
-    <string name="about_unsplash_subtitle">Бесплатные (делайте что хотите) фотографии высокого разрешения</string>
-    <string name="about_version_title">Версия</string>
-    <string name="about_introduction_title">Введение</string>
-    <string name="about_github_title">GitHub</string>
-    <string name="about_support_development_card_title">Поддержать разработку</string>
-    <string name="about_rate_title">Оценить</string>
-    <string name="about_rate_subtitle">Если вам нравится Resplash, оцените его в Play Маркете</string>
-    <string name="about_donate_title">Пожертвовать</string>
-    <string name="about_donate_subtitle">Если вам действительно нравится Resplash, подумайте о поддержке его развития, отправив мне несколько сотен рублей</string>
-    <string name="about_bug_title">Сообщить об ошибках</string>
-    <string name="about_bug_subtitle">Сообщить об ошибках или предложить новые функции</string>
-    <string name="about_author_title">Brandon Lam</string>
-    <string name="about_author_card_title">Автор</string>
-    <string name="about_author_subtitle">Торонто, Онтарио, Канада</string>
-    <string name="about_website_title">Посетить вебсайт</string>
-    <string name="about_instagram_title">Подписаться на Instagram</string>
-    <string name="about_libraries_card_title">Библиотеки</string>
+    <string name="dimensions">Разрешение</string>
+    <string name="shutter_speed">Экспозиция</string>
+    <string name="description">Описание</string>
 
-    <!-- Donate -->
-    <string name="donate_card_title">Поддержать разработку</string>
-    <string name="donate_item1_title">Кофе</string>
-    <string name="donate_item1_subtitle">Держит меня бодрым во время ночных сеансов написания кода</string>
-    <string name="donate_item2_title">Смузи</string>
-    <string name="donate_item2_subtitle">Иногда мне нужно есть что-то полезное</string>
-    <string name="donate_item3_title">Пицца</string>
-    <string name="donate_item3_subtitle">Все любят пиццу</string>
-    <string name="donate_item4_title">Причудливая еда</string>
-    <string name="donate_item4_subtitle">Могу побаловать себя время от времени</string>
-    <string name="donate_thanks">Спасибо, что пожертвовали!</string>
-    <string name="donate_loading">Загрузка продуктов...</string>
+    <!-- Collections -->
+    <string name="add_to_collection">Добавить в коллекцию</string>
+    <string name="create_new_collection">Создать новую коллекцию</string>
+    <string name="make_collection_private">Сделайте коллекцию частной</string>
+    <string name="collection_name_hint">Hазвание</string>
+    <string name="collection_description_hint">Описание (необязательный)</string>
+    <string name="collection_name_required">Имя обязательно</string>
+    <string name="edit_collection">Редактировать коллекцию</string>
+    <string name="curated_by_template">Куратор %s</string>
 
-    <!-- Detail -->
-    <string name="stats">Статистика</string>
-    <string name="photo_info">Информация</string>
-    <string name="set_as_wallpaper">Установить в качестве обоев</string>
-    <string name="download">Скачать</string>
-
-    <string name="no_results">Нет результатов</string>
-    <string name="log_in">Авторизоваться</string>
-    <string name="join">Присоединиться</string>
-    <string name="edit_title">Редактировать профиль</string>
-    <string name="request_token_failed">Ошибка доступа к токену</string>
-    <string name="error">Ошибка</string>
-
-    <string name="by_author">От %1$s</string>
-    <string name="no_more_photos">Больше нет фотографий</string>
-    <string name="updated_photos">Фотографии обновлены!</string>
-    <string name="updated_collections">Коллекции обновлены!</string>
-    <string name="updated_users">Пользователи обновлены!</string>
-    <string name="share_via">Поделиться с помощью</string>
-    <string name="unsplash_image">Фотографии Unsplash</string>
-    <string name="unsplash_collection">Коллекция Unsplash</string>
-    <string name="save">Сохранить</string>
-    <string name="saved">Сохранено</string>
-    <string name="likes">%1$s лайков</string>
-    <string name="photos">%1$s фотографий</string>
-    <string name="views">%1$s просмотров</string>
-    <string name="downloads">%1$s скачиваний</string>
-    <string name="cannot_make_anymore_requests">Больше не возможно сделать запросы.</string>
-    <string name="download_started">Загрузка началась</string>
-    <string name="image_saved">Фотография сохранена</string>
-    <string name="download_wallpaper">Скачать обои</string>
-    <string name="download_complete">Загрузка завершена</string>
-    <string name="unknown">Неизвестно</string>
-    <string name="cannot_update_profile">Не удается обновить профиль</string>
-    <string name="updated_profile">Профиль обновлён</string>
-    <string name="username_cannot_be_blank">Имя пользователя не может быть пустым</string>
-    <string name="failed_to_load_profile">Не удалось загрузить профиль</string>
-    <string name="next">Далее</string>
+    <!-- User -->
+    <string name="open_portfolio_link">Ссылка на открытый портфель</string>
+    <string name="blank_username_error">Имя пользователя не может быть пустым</string>
+    <string name="invalid_username_error">Имя пользователя должно содержать хотя бы одну букву и содержать только буквы, цифры или символы подчеркивания (без пробелов)</string>
+    <string name="username_taken_error">Логин уже занят</string>
+    <string name="blank_first_name_error">Имя не может быть пустым</string>
+    <string name="blank_email_error">Email не может быть пустым</string>
+    <string name="invalid_email_error">Email не является допустимым</string>
     <string name="username_hint">Имя пользователя</string>
+    <string name="username_helper_text">(Только буквы, цифры и подчеркивания)</string>
     <string name="first_name_hint">Имя</string>
     <string name="last_name_hint">Фамилия</string>
-    <string name="email_address_hint">Email адрес</string>
-    <string name="personal_site_hint">Личный сайт/портфолио</string>
+    <string name="email_hint">Email адрес</string>
+    <string name="portfolio_hint">Личный сайт/портфолио</string>
     <string name="instagram_username_hint">Имя пользователя Instagram</string>
     <string name="location_hint">Место нахождения</string>
     <string name="bio_hint">Биография</string>
-    <string name="cancel">Отмена</string>
-    <string name="setting_wallpaper">Настройка обоев&#8230;</string>
-    <string name="error_loading_photo">Кажется, проблема с загрузкой этой фотографии</string>
-    <string name="need_to_log_in">Вы должны войти, чтобы сделать это</string>
-    <string name="next_wallpaper">Следующие обои</string>
-    <string name="remove_all">Удалить все</string>
-    <string name="auto_wallpaper_title">Автоматические обои</string>
-    <string name="auto_wallpaper_conditions">условия</string>
-    <string name="file_exists">Это уже было загружено</string>
-    <string name="auto_wallpaper_info">Автоматические обои обновят ваш главный экран новыми случайными обоями в зависимости от заданных условий.</string>
-    <string name="auto_wallpaper_history_summary">Посмотреть ранее установленные обои</string>
-    <string name="auto_wallpaper_history">Автоматическая история обоев</string>
-    <string name="auto_wallpaper_custom_category_summary">Получить обои, соответствующие поисковому запросу</string>
-    <string name="auto_wallpaper_custom_category">Пользовательская категория</string>
-    <string name="auto_wallpaper_category">категория</string>
-    <string name="auto_wallpaper_category_summary">Выберите категорию обоев</string>
-    <string name="about_privacy_policy_title">политика конфиденциальности</string>
-    <string name="auto_wallpaper_charging_summary">Устройство должно быть подключено к источнику питания</string>
-    <string name="auto_wallpaper_on_wifi_summary">Устройство должно быть подключено к сети Wi-Fi</string>
-    <string name="auto_wallpaper_idle_summary">Устройство должно быть неактивно</string>
-    <string name="auto_wallpaper_interval_summary">Выберите интервал автоматической смены обоев</string>
-    <string name="auto_wallpaper_source">Источник</string>
-    <string name="auto_wallpaper_interval">Интервал</string>
-    <string name="auto_wallpaper_charging">Зарядный</string>
-    <string name="auto_wallpaper_on_wifi">На вайфай</string>
-    <string name="auto_wallpaper_idle">бездействующий</string>
-    <string name="yes">Да</string>
-    <string name="no">Нет</string>
-    <string name="on">Включено</string>
-    <string name="off">Инвалид</string>
-    <string name="auto_wallpaper_options">Опции</string>
-    <string name="auto_wallpaper_select_screen">Выберите экран</string>
-    <string name="auto_wallpaper_select_screen_summary">Выберите, к каким экранам применять обои</string>
-    <string name="activate">Aктивировать</string>
-    <string name="add_to_collection">Добавить в коллекцию</string>
-    <string name="are_you_sure">Уверены ли вы?</string>
-    <string name="collection_description_hint">Описание (необязательный)</string>
-    <string name="collection_name_is_required">Имя обязательно</string>
-    <string name="collection_name_hint">Hазвание</string>
-    <string name="create">Создайте</string>
-    <string name="create_new_collection">Создать новую коллекцию</string>
-    <string name="delete">Удалять</string>
-    <string name="edit_collection">Редактировать коллекцию</string>
-    <string name="failed_to_create_collection">Не удалось создать коллекцию</string>
-    <string name="failed_to_delete_collection">Не удалось удалить коллекцию</string>
-    <string name="failed_to_save_collection">Не удалось сохранить коллекцию</string>
-    <string name="make_collection_private">Сделайте коллекцию частной</string>
+    <string name="account_updated">Аккаунт обновлен!</string>
 
+    <!-- Search -->
+    <string name="no_search_results_subtitle">Попробуйте поискать что-нибудь</string>
+    <string name="filter">Фильтр</string>
+    <string name="filter_relevance">Актуальность</string>
+    <string name="filter_latest">Последние</string>
+    <string name="content_filter">Контентный фильтр</string>
+    <string name="filter_low">минимальный</string>
+    <string name="filter_high">максимальная</string>
+    <string name="orientation">Oриентация</string>
+    <string name="filter_any">Любые</string>
+    <string name="filter_portrait">вертикальный</string>
+    <string name="filter_landscape">горизонтальный</string>
+    <string name="filter_square">Квадрат</string>
+    <string name="filter_color">цвет</string>
+    <string name="filter_color_any">Любые</string>
+    <string name="filter_color_black_white">черное и белое</string>
+    <string name="filter_color_black">черный</string>
+    <string name="filter_color_white">белый</string>
+    <string name="filter_color_yellow">желтый</string>
+    <string name="filter_color_orange">оранжевый</string>
+    <string name="filter_color_red">красный</string>
+    <string name="filter_color_purple">пурпурный</string>
+    <string name="filter_color_magenta">фуксин</string>
+    <string name="filter_color_green">зеленый</string>
+    <string name="filter_color_teal">чирок</string>
+    <string name="filter_color_blue">синий</string>
+
+    <!-- Login -->
+    <string name="login">Авторизоваться</string>
+    <string name="create_an_account">Завести аккаунт</string>
+    <string name="login_banner_title">Создание начинается здесь</string>
+    <string name="login_banner_subtitle">Доступ к бесплатным фотографиям с высоким разрешением, которые вы не найдете больше нигде</string>
+    <string name="login_success">Вход выполнен успешно</string>
+    <string name="need_to_log_in">Вы должны войти, чтобы сделать это</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">Обновить до Resplash Pro</string>
+    <string name="pro_feature_title">What\'s in it for you?</string>
+    <string name="pro_feature_one">Customize Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
+    <string name="pro_feature_two">Future exclusive features</string>
+    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
+    <string name="pro_feature_three">Support development</string>
+    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
+    <string name="go_pro">Go Pro</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_required">Вам нужен Resplash Pro, чтобы сделать это!</string>
+
+    <!-- Donation -->
+    <string name="support_development">Поддержать разработку</string>
+    <string name="you_are_welcome">Пожалуйста</string>
+
+    <!-- About -->
+    <string name="about">О приложении</string>
+    <string name="licenses">Лицензии</string>
+    <string name="unsplash_summary">Интернет-источник свободно используемых изображений</string>
+    <string name="donate_summary">Если вам действительно нравится Resplash, подумайте о поддержке его развития, отправив мне несколько сотен рублей</string>
+    <string name="report_bug_title">Сообщить об ошибках</string>
+    <string name="report_bug_summary">Сообщить об ошибках или предложить новые функции</string>
+    <string name="rate_app_title">Оценить</string>
+    <string name="rate_app_summary">Если вам нравится Resplash, оцените его в Play Маркете</string>
+    <string name="github_summary">Resplash с открытым исходным кодом, проверьте это на GitHub</string>
+    <string name="developer_title">Автор</string>
+    <string name="privacy_policy">политика конфиденциальности</string>
 </resources>

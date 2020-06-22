@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/keyline_7"
+    android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/user_image_view"
+        android:layout_width="@dimen/user_profile_picture_medium_size"
+        android:layout_height="@dimen/user_profile_picture_medium_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@color/green_100"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/full_name_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_6"
+        android:singleLine="true"
+        android:textSize="16sp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/user_image_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/user_image_view"
+        app:layout_constraintBottom_toTopOf="@id/username_text_view"
+        style="@style/TextAppearance.Resplash.Subtitle2"
+        tools:text="Brandon Lam"/>
+
+    <TextView
+        android:id="@+id/username_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_on_surface_secondary"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/full_name_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/full_name_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/user_image_view"
+        tools:text="\@brandon_lam" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/photo_one_card_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_6"
+        app:layout_goneMarginTop="@dimen/keyline_0"
+        app:cardElevation="0dp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@id/full_name_text_view"
+        app:layout_constraintEnd_toStartOf="@id/photo_two_card_view"
+        app:layout_constraintTop_toBottomOf="@id/user_image_view">
+
+        <ImageView
+            android:id="@+id/photo_one_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="@dimen/user_profile_photo_min_height"
+            android:maxHeight="@dimen/user_profile_photo_max_height"
+            android:scaleType="centerCrop"
+            android:src="@color/grey_300"
+            android:clickable="true"
+            android:focusable="true"
+            tools:ignore="ContentDescription" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/photo_two_card_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/keyline_6"
+        app:layout_goneMarginTop="@dimen/keyline_0"
+        app:cardElevation="0dp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@id/photo_one_card_view"
+        app:layout_constraintEnd_toStartOf="@id/photo_three_card_view"
+        app:layout_constraintTop_toTopOf="@id/photo_one_card_view"
+        app:layout_constraintBottom_toBottomOf="@id/photo_one_card_view">
+
+    <ImageView
+        android:id="@+id/photo_two_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@color/grey_300"
+        android:clickable="true"
+        android:focusable="true"
+        tools:ignore="ContentDescription" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/photo_three_card_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/keyline_6"
+        app:layout_goneMarginTop="@dimen/keyline_0"
+        app:cardElevation="0dp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@id/photo_two_card_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/photo_one_card_view"
+        app:layout_constraintBottom_toBottomOf="@id/photo_one_card_view">
+
+    <ImageView
+        android:id="@+id/photo_three_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@color/grey_300"
+        android:clickable="true"
+        android:focusable="true"
+        tools:ignore="ContentDescription" />
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
