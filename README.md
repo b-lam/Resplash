@@ -1,7 +1,7 @@
 
 # [Resplash]
 
-<img src="https://github.com/b-lam/Resplash/blob/master/design/Play_Store_Banner.jpg?raw=true" width="750">
+<img src="https://raw.githubusercontent.com/b-lam/Resplash/master/design/Resplash_Play_Store_Banner.jpg" width="750">
 
 **[Resplash]** is powered by [Unsplash.com](https://unsplash.com/)
 
@@ -25,7 +25,7 @@ The internet’s source of freely-usable images. Powered by creators everywhere.
 
 # Screenshots
 
-<img src="https://b-lam.github.io/img/resplash/resplash-1.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-2.png" width="250"> <img src="https://b-lam.github.io/img/resplash/resplash-3.png" width="250">
+<img src="https://raw.githubusercontent.com/b-lam/Resplash/master/design/Play_Store_Screenshot_1.jpg" width="250"> <img src="https://raw.githubusercontent.com/b-lam/Resplash/master/design/Play_Store_Screenshot_3.jpg" width="250"> <img src="https://raw.githubusercontent.com/b-lam/Resplash/master/design/Play_Store_Screenshot_2.jpg" width="250">
 
 # Build
 
