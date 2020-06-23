@@ -27,7 +27,7 @@ class RoutingActivity : BaseActivity() {
 
     private fun routeIntent(intent: Intent?) {
         intent?.data?.let {
-            val firstPathSegment = it.pathSegments.first()
+            val firstPathSegment = it.pathSegments.firstOrNull()
             when {
                 firstPathSegment == "photos" && it.pathSegments.size > 1 -> {
                     Intent(this, PhotoDetailActivity::class.java).apply {
@@ -41,9 +41,9 @@ class RoutingActivity : BaseActivity() {
                         startActivity(this)
                     }
                 }
-                firstPathSegment.startsWith("@") -> {
+                firstPathSegment?.startsWith("@") ?: false -> {
                     Intent(this, UserActivity::class.java).apply {
-                        putExtra(UserActivity.EXTRA_USERNAME, firstPathSegment.removePrefix("@"))
+                        putExtra(UserActivity.EXTRA_USERNAME, firstPathSegment?.removePrefix("@"))
                         startActivity(this)
                     }
                 }
