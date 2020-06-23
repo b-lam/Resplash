@@ -302,8 +302,9 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     }
 
     private fun openPhotoInBrowser() {
-        val uri = Uri.parse(viewModel.photoDetailsLiveData(id).value?.links?.html)
-        CustomTabsHelper.openCustomTab(this, uri, sharedPreferencesRepository.theme)
+        viewModel.photoDetailsLiveData(id).value?.links?.html?.let {
+            CustomTabsHelper.openCustomTab(this, Uri.parse(it), sharedPreferencesRepository.theme)
+        }
     }
 
     private fun sharePhoto() {
