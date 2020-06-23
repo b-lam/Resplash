@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -82,7 +83,7 @@ class UserActivity : BaseActivity() {
             title = user.username
             setDisplayHomeAsUpEnabled(true)
         }
-        fragmentPagerAdapter = UserFragmentPagerAdapter(this, user, supportFragmentManager)
+        fragmentPagerAdapter = UserFragmentPagerAdapter(this, supportFragmentManager, user)
         view_pager.apply {
             adapter = fragmentPagerAdapter
             offscreenPageLimit = 2
@@ -93,7 +94,7 @@ class UserActivity : BaseActivity() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {}
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    fragmentPagerAdapter.getFragment(tab?.position ?: 0).scrollToTop()
+                    fragmentPagerAdapter.getFragment(tab?.position ?: 0)?.scrollToTop()
                 }
             })
         }
@@ -136,12 +137,12 @@ class UserActivity : BaseActivity() {
 
     private class UserFragmentPagerAdapter(
         private val context: Context,
-        user: User,
-        fm: FragmentManager
+        private val fm: FragmentManager,
+        user: User
     ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         private val fragmentTypes = mutableListOf<UserFragment>()
-        private val fragments = mutableListOf<BaseSwipeRecyclerViewFragment<*>>()
+        private val fragmentTags = mutableListOf<String>()
 
         init {
             if (user.total_photos != 0) fragmentTypes.add(UserFragment.PHOTO)
@@ -155,19 +156,24 @@ class UserActivity : BaseActivity() {
             COLLECTION(R.string.collections)
         }
 
-        fun getFragment(position: Int) = fragments[position]
+        fun getFragment(position: Int) =
+            fm.findFragmentByTag(fragmentTags[position]) as? BaseSwipeRecyclerViewFragment<*>
 
         fun getItemType(position: Int) = fragmentTypes[position]
 
         fun getFragmentIndexOfType(type: UserFragment) = fragmentTypes.indexOf(type)
 
         override fun getItem(position: Int): Fragment {
-            val fragment = when (getItemType(position)) {
+            return when (getItemType(position)) {
                 UserFragment.PHOTO -> UserPhotoFragment.newInstance()
                 UserFragment.LIKES -> UserLikesFragment.newInstance()
                 UserFragment.COLLECTION -> UserCollectionFragment.newInstance()
             }
-            fragments.add(position, fragment)
+        }
+
+        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+            val fragment = super.instantiateItem(container, position)
+            (fragment as? Fragment)?.tag?.let { fragmentTags.add(position, it) }
             return fragment
         }
 

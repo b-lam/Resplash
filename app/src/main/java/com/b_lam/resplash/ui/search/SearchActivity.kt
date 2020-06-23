@@ -2,6 +2,7 @@ package com.b_lam.resplash.ui.search
 
 import android.content.Context
 import android.os.Bundle
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -47,7 +48,7 @@ class SearchActivity : BaseActivity() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {}
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    fragmentPagerAdapter.getFragment(tab?.position ?: 0).scrollToTop()
+                    fragmentPagerAdapter.getFragment(tab?.position ?: 0)?.scrollToTop()
                 }
             })
         }
@@ -90,10 +91,10 @@ class SearchActivity : BaseActivity() {
 
     private class SearchFragmentPagerAdapter(
         private val context: Context,
-        fm: FragmentManager
+        private val fm: FragmentManager
     ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-        private val fragments = mutableListOf<BaseSwipeRecyclerViewFragment<*>>()
+        private val fragmentTags = mutableListOf<String>()
 
         enum class SearchFragment(val titleRes: Int) {
             PHOTO(R.string.photos),
@@ -101,17 +102,22 @@ class SearchActivity : BaseActivity() {
             USER(R.string.users)
         }
 
-        fun getFragment(position: Int) = fragments[position]
+        fun getFragment(position: Int) =
+            fm.findFragmentByTag(fragmentTags[position]) as? BaseSwipeRecyclerViewFragment<*>
 
         fun getItemType(position: Int) = SearchFragment.values()[position]
 
         override fun getItem(position: Int): Fragment {
-            val fragment = when (getItemType(position)) {
+            return when (getItemType(position)) {
                 SearchFragment.PHOTO -> SearchPhotoFragment.newInstance()
                 SearchFragment.COLLECTION -> SearchCollectionFragment.newInstance()
                 SearchFragment.USER -> SearchUserFragment.newInstance()
             }
-            fragments.add(position, fragment)
+        }
+
+        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+            val fragment = super.instantiateItem(container, position)
+            (fragment as? Fragment)?.tag?.let { fragmentTags.add(position, it) }
             return fragment
         }
 
