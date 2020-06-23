@@ -66,11 +66,11 @@ class UserActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_open_portfolio_link -> {
-                openUrlInBrowser(viewModel.userLiveData.value?.portfolio_url)
+                viewModel.userLiveData.value?.portfolio_url?.let { openUrlInBrowser(it) }
                 true
             }
             R.id.action_open_in_browser -> {
-                openUrlInBrowser(viewModel.userLiveData.value?.links?.html)
+                viewModel.userLiveData.value?.links?.html?.let { openUrlInBrowser(it) }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -122,9 +122,8 @@ class UserActivity : BaseActivity() {
         user.username?.let { username -> viewModel.getUserListings(username) }
     }
 
-    private fun openUrlInBrowser(url: String?) {
-        val uri = Uri.parse(url)
-        CustomTabsHelper.openCustomTab(this, uri, sharedPreferencesRepository.theme)
+    private fun openUrlInBrowser(url: String) {
+        CustomTabsHelper.openCustomTab(this, Uri.parse(url), sharedPreferencesRepository.theme)
     }
 
     private fun goToTab(type: UserFragmentPagerAdapter.UserFragment) {
