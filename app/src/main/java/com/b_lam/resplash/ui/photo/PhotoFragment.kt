@@ -34,7 +34,7 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
         override fun onLongClick(photo: Photo) {
             if (requireContext().hasWritePermission()) {
                 context.toast(R.string.download_started)
-                DownloadJobIntentService.enqueueDownload(requireContext(),
+                DownloadJobIntentService.enqueueDownload(requireActivity().applicationContext,
                     DownloadJobIntentService.Companion.Action.DOWNLOAD, photo.fileName,
                     getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality), photo.id)
             } else {

@@ -210,7 +210,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     private fun downloadPhoto(photo: Photo) {
         if (hasWritePermission()) {
             toast(R.string.download_started)
-            DownloadJobIntentService.enqueueDownload(this,
+            DownloadJobIntentService.enqueueDownload(applicationContext,
                 DownloadJobIntentService.Companion.Action.DOWNLOAD, photo.fileName,
                 getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality), photo.id)
         } else {
@@ -220,7 +220,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun setWallpaper(photo: Photo) {
         if (hasWritePermission()) {
-            DownloadJobIntentService.enqueueDownload(this,
+            DownloadJobIntentService.enqueueDownload(applicationContext,
                 DownloadJobIntentService.Companion.Action.WALLPAPER, photo.fileName,
                 getPhotoUrl(photo, sharedPreferencesRepository.wallpaperQuality), photo.id)
 
