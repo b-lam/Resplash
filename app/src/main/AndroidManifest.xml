@@ -123,6 +123,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
             android:theme="@style/Resplash.Theme.DayNight.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

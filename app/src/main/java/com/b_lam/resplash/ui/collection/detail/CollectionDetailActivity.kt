@@ -170,8 +170,9 @@ class CollectionDetailActivity : BaseActivity() {
     }
 
     private fun openCollectionInBrowser() {
-        val uri = Uri.parse(viewModel.collectionLiveData.value?.links?.html)
-        CustomTabsHelper.openCustomTab(this, uri, sharedPreferencesRepository.theme)
+        viewModel.collectionLiveData.value?.links?.html?.let {
+            CustomTabsHelper.openCustomTab(this, Uri.parse(it), sharedPreferencesRepository.theme)
+        }
     }
 
     private fun shareCollection() {
