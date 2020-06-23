@@ -69,9 +69,16 @@ fun Context.registerReceiver(
 
 fun Context.openLocationInMaps(location: String?) {
     val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(location)}")
-    Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
-        setPackage("com.google.android.apps.maps")
-        startActivity(this)
+    val intent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+    val mapsPackageName = "com.google.android.apps.maps"
+    val mapsIsInstalled = try {
+        packageManager.getApplicationInfo(mapsPackageName, 0).enabled
+    } catch (e: PackageManager.NameNotFoundException) {
+        false
+    }
+    if (mapsIsInstalled) intent.setPackage(mapsPackageName)
+    if (intent.resolveActivity(packageManager) != null) {
+        startActivity(intent)
     }
 }
 
