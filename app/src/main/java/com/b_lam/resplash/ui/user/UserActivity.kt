@@ -3,6 +3,7 @@ package com.b_lam.resplash.ui.user
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
@@ -142,7 +143,7 @@ class UserActivity : BaseActivity() {
     ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         private val fragmentTypes = mutableListOf<UserFragment>()
-        private val fragmentTags = mutableListOf<String>()
+        private val fragmentTags = SparseArray<String>()
 
         init {
             if (user.total_photos != 0) fragmentTypes.add(UserFragment.PHOTO)
@@ -157,7 +158,7 @@ class UserActivity : BaseActivity() {
         }
 
         fun getFragment(position: Int) =
-            fm.findFragmentByTag(fragmentTags[position]) as? BaseSwipeRecyclerViewFragment<*>
+            fm.findFragmentByTag(fragmentTags.get(position)) as? BaseSwipeRecyclerViewFragment<*>
 
         fun getItemType(position: Int) = fragmentTypes[position]
 
@@ -173,7 +174,7 @@ class UserActivity : BaseActivity() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val fragment = super.instantiateItem(container, position)
-            (fragment as? Fragment)?.tag?.let { fragmentTags.add(position, it) }
+            (fragment as? Fragment)?.tag?.let { fragmentTags.put(position, it) }
             return fragment
         }
 

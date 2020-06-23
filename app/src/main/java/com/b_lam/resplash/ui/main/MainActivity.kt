@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
@@ -226,7 +227,7 @@ class MainActivity : BaseActivity() {
         private val fm: FragmentManager
     ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-        private val fragmentTags = mutableListOf<String>()
+        private val fragmentTags = SparseArray<String>()
 
         enum class MainFragment(val titleRes: Int) {
             HOME(R.string.home),
@@ -234,7 +235,7 @@ class MainActivity : BaseActivity() {
         }
 
         fun getFragment(position: Int) =
-            fm.findFragmentByTag(fragmentTags[position]) as? BaseSwipeRecyclerViewFragment<*>
+            fm.findFragmentByTag(fragmentTags.get(position)) as? BaseSwipeRecyclerViewFragment<*>
 
         private fun getItemType(position: Int) = MainFragment.values()[position]
 
@@ -247,7 +248,7 @@ class MainActivity : BaseActivity() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val fragment = super.instantiateItem(container, position)
-            (fragment as? Fragment)?.tag?.let { fragmentTags.add(position, it) }
+            (fragment as? Fragment)?.tag?.let { fragmentTags.put(position, it) }
             return fragment
         }
 
