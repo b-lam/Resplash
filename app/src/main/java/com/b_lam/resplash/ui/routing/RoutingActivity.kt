@@ -48,7 +48,10 @@ class RoutingActivity : BaseActivity() {
                     }
                 }
                 else -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    Intent(this, MainActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(this)
+                    }
                 }
             }
         } ?: run {
