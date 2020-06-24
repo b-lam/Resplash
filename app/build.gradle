@@ -17,8 +17,8 @@ android {
         applicationId 'com.b_lam.resplash'
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 37
-        versionName '3.0.1'
+        versionCode 38
+        versionName '3.0.2'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField("String", "RELEASE_APP_ID", localProperties['releaseAppId'])
         buildConfigField("String", "RELEASE_SECRET", localProperties['releaseSecret'])
@@ -128,7 +128,7 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:17.4.3'
-    implementation 'com.google.firebase:firebase-crashlytics:17.0.1'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.0'
     implementation 'com.google.firebase:firebase-inappmessaging-ktx:19.0.7'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
