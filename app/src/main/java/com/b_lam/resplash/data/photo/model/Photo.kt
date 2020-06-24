@@ -25,6 +25,7 @@ data class Photo(
     val location: Location?,
     val tags: List<Tag>?,
     val current_user_collections: List<Collection>?,
+    val sponsorship: Sponsorship?,
     val urls: Urls,
     val links: Links?,
     val user: User?,
@@ -81,4 +82,10 @@ data class Links(
     val html: String,
     val download: String,
     val download_location: String
+) : Parcelable
+
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class Sponsorship(
+    val sponsor: User?
 ) : Parcelable

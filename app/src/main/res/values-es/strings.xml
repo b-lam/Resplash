@@ -27,6 +27,7 @@
     <string name="download_complete">Descarga completa</string>
     <string name="setting_wallpaper">Config wallpaper…</string>
     <string name="set_as_wallpaper">Usar como wallpaper</string>
+    <string name="sponsored">Patrocinado</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

@@ -27,6 +27,7 @@
     <string name="download_complete">下载完毕</string>
     <string name="setting_wallpaper">设置壁纸…</string>
     <string name="set_as_wallpaper">设为壁纸</string>
+    <string name="sponsored">赞助商</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

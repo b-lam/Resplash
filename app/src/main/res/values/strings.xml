@@ -34,6 +34,7 @@
     <string name="download_complete">Download complete</string>
     <string name="set_as_wallpaper">Set as wallpaper</string>
     <string name="setting_wallpaper">Setting wallpaper…</string>
+    <string name="sponsored">Sponsored</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

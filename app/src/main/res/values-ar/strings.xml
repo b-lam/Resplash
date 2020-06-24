@@ -27,6 +27,7 @@
     <string name="download_complete">تم التحميل بنجاح</string>
     <string name="setting_wallpaper">…جاري تطبيق الخلفية</string>
     <string name="set_as_wallpaper">تطبيق كـخلفية</string>
+    <string name="sponsored">برعاية</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

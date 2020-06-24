@@ -27,6 +27,7 @@
     <string name="download_complete">Download Completato</string>
     <string name="setting_wallpaper">Sto impostando lo sfondo…</string>
     <string name="set_as_wallpaper">Imposta come sfondo</string>
+    <string name="sponsored">Sponsorizzato</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

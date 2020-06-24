@@ -27,6 +27,7 @@
     <string name="download_complete">İndirme tamamlandı.</string>
     <string name="setting_wallpaper">Duvar kağıdı ayarlanıyor…</string>
     <string name="set_as_wallpaper">Duvar Kağıdı Olarak Ayarla</string>
+    <string name="sponsored">Sponsor</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">

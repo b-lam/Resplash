@@ -28,6 +28,7 @@ class DefaultPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
                         user_image_view.loadProfilePicture(user)
                         user_text_view.text = user.name ?: context.getString(R.string.unknown)
                     }
+                    sponsored_text_view.isVisible = photo.sponsorship != null
                 }
                 val url = getPhotoUrl(photo, loadQuality)
                 photo_image_view.setAspectRatio(photo.width, photo.height)

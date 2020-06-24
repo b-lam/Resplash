@@ -27,6 +27,7 @@
     <string name="download_complete">ดาวน์โหลดเสร็จสิ้น</string>
     <string name="setting_wallpaper">กำลังตั้งวอลเปเปอร์…</string>
     <string name="set_as_wallpaper">ตั้งเป็นวอลล์เปเปอร์</string>
+    <string name="sponsored">ผู้สนับสนุน</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">
