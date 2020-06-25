@@ -4,7 +4,7 @@
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
     <style name="Resplash.Theme.DayNight" parent="Base.Theme">
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
 
 </resources>
