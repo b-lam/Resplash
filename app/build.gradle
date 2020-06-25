@@ -148,6 +148,9 @@ dependencies {
     // Open Source Notices
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
+    // Muzei
+    implementation 'com.google.android.apps.muzei:muzei-api:3.4.0-alpha02'
+
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 

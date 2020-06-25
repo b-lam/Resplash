@@ -55,7 +55,7 @@ class AutoWallpaperWorker(
                     contentFilter = contentFilter
                 )
                 Source.COLLECTIONS -> {
-                    val collectionId = getCollectionId()
+                    val collectionId = autoWallpaperRepository.getRandomAutoWallpaperCollectionId()
                     photoRepository.getRandomPhoto(
                         collectionId = collectionId,
                         orientation = orientation,
@@ -102,10 +102,6 @@ class AutoWallpaperWorker(
         } catch (e: Throwable) {
             return@withContext Result.failure()
         }
-    }
-
-    private suspend fun getCollectionId(): Int? {
-        return autoWallpaperRepository.getRandomAutoWallpaperCollectionId()
     }
 
     private suspend fun downloadAndSetWallpaper(photo: Photo): Boolean {
