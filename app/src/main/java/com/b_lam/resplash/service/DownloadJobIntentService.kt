@@ -9,8 +9,8 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
-import androidx.core.app.JobIntentService
 import androidx.core.app.NotificationCompat
+import androidx.core.app.SafeJobIntentService
 import androidx.core.content.FileProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.b_lam.resplash.BuildConfig
@@ -26,7 +26,7 @@ import okio.sink
 import org.koin.android.ext.android.inject
 import java.io.File
 
-class DownloadJobIntentService : JobIntentService(), CoroutineScope by MainScope() {
+class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainScope() {
 
     private val downloadService: DownloadService by inject()
 
