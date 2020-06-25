@@ -41,12 +41,15 @@ class CustomTabsHelper {
             // If we cant find a package name, it means there's no browser that supports Chrome
             // Custom Tabs installed. So, we fallback to the web-view
             if (packageName == null) {
-                context.startActivity(Intent(Intent.ACTION_VIEW, uri))
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                if (context.packageManager.queryIntentActivities(intent, 0).isNotEmpty()) {
+                    context.startActivity(intent)
+                }
             } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
                     customTabsIntent.intent.putExtra(
                         Intent.EXTRA_REFERRER,
-                        Uri.parse(Intent.URI_ANDROID_APP_SCHEME.toString() + "//" + context.packageName)
+                        Uri.parse("${Intent.URI_ANDROID_APP_SCHEME}//${context.packageName}")
                     )
                 }
                 customTabsIntent.intent.setPackage(packageName)
