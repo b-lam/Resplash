@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/auto_wallpaper_source">
+
+        <ListPreference
+            app:key="auto_wallpaper_source"
+            app:title="@string/auto_wallpaper_source_title"
+            app:summary="@string/auto_wallpaper_source_summary"
+            app:icon="@drawable/ic_wallpaper_24dp"
+            app:entries="@array/auto_wallpaper_source_options"
+            app:entryValues="@array/auto_wallpaper_source_values"
+            app:defaultValue="@string/auto_wallpaper_source_default" />
+
+        <Preference
+            app:key="auto_wallpaper_collections"
+            app:title="@string/collections"
+            app:summary="@string/auto_wallpaper_collections_summary"
+            app:isPreferenceVisible="false" />
+
+        <EditTextPreference
+            app:key="auto_wallpaper_username"
+            app:title="@string/auto_wallpaper_user_title"
+            app:summary="@string/auto_wallpaper_user_summary"
+            app:dialogTitle=""
+            app:dialogMessage="@string/auto_wallpaper_user_dialog_message"
+            app:dialogLayout="@layout/username_edit_text_preference_layout"
+            app:isPreferenceVisible="false" />
+
+        <EditTextPreference
+            app:key="auto_wallpaper_search_terms"
+            app:title="@string/auto_wallpaper_search_terms_title"
+            app:dialogTitle=""
+            app:dialogMessage="@string/auto_wallpaper_search_terms_dialog_message"
+            app:dialogLayout="@layout/search_terms_edit_text_preference_layout"
+            app:isPreferenceVisible="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

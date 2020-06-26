@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
+import com.b_lam.resplash.BuildConfig
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.ui.base.BaseActivity
@@ -19,6 +20,9 @@ import com.b_lam.resplash.util.customtabs.CustomTabsHelper
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.livedata.observeOnce
 import com.b_lam.resplash.worker.AutoWallpaperWorker
+import com.google.android.apps.muzei.api.isSelected
+import com.google.android.apps.muzei.api.provider.ProviderClient
+import com.google.android.apps.muzei.api.provider.ProviderContract
 import kotlinx.android.synthetic.main.activity_collection_detail.*
 import kotlinx.android.synthetic.main.activity_user.user_name_text_view
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,6 +30,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CollectionDetailActivity : BaseActivity() {
 
     override val viewModel: CollectionDetailViewModel by viewModel()
+
+    private var providerClient: ProviderClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +73,9 @@ class CollectionDetailActivity : BaseActivity() {
                 }
             }
         }
+
+        providerClient = ProviderContract.getProviderClient(
+            applicationContext, "${BuildConfig.APPLICATION_ID}.muzeiartprovider")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,9 +84,7 @@ class CollectionDetailActivity : BaseActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if (sharedPreferencesRepository.autoWallpaperEnabled &&
-            sharedPreferencesRepository.autoWallpaperSource ==
-            AutoWallpaperWorker.Companion.Source.COLLECTIONS) {
+        if (isAutoWallpaperCollectionsEnabled()) {
             menu?.findItem(R.id.action_add_collection)?.isVisible =
                 !viewModel.isCollectionUsedForAutoWallpaper
             menu?.findItem(R.id.action_remove_collection)?.isVisible =
@@ -139,9 +146,7 @@ class CollectionDetailActivity : BaseActivity() {
             }
         }
 
-        if (sharedPreferencesRepository.autoWallpaperEnabled &&
-            sharedPreferencesRepository.autoWallpaperSource ==
-            AutoWallpaperWorker.Companion.Source.COLLECTIONS) {
+        if (isAutoWallpaperCollectionsEnabled()) {
             viewModel.isCollectionUsedForAutoWallpaper(collection.id).observe(this) {
                 viewModel.isCollectionUsedForAutoWallpaper = it
                 invalidateOptionsMenu()
@@ -184,6 +189,12 @@ class CollectionDetailActivity : BaseActivity() {
         }, null)
         startActivity(share)
     }
+
+    private fun isAutoWallpaperCollectionsEnabled() =
+        (sharedPreferencesRepository.autoWallpaperEnabled ||
+                providerClient?.isSelected(applicationContext) ?: false) &&
+                sharedPreferencesRepository.autoWallpaperSource ==
+                AutoWallpaperWorker.Companion.Source.COLLECTIONS
 
     companion object {
 

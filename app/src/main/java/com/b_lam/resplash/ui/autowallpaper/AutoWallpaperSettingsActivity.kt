@@ -279,7 +279,5 @@ class AutoWallpaperSettingsActivity :
                 sourcePreference?.callChangeListener(newValue)
             }
         }
-
-
     }
 }

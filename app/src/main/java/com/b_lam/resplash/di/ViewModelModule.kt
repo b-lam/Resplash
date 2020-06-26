@@ -7,6 +7,7 @@ import com.b_lam.resplash.ui.collection.detail.CollectionDetailViewModel
 import com.b_lam.resplash.ui.donation.DonationViewModel
 import com.b_lam.resplash.ui.login.LoginViewModel
 import com.b_lam.resplash.ui.main.MainViewModel
+import com.b_lam.resplash.ui.muzei.MuzeiSettingsViewModel
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailViewModel
 import com.b_lam.resplash.ui.search.SearchViewModel
 import com.b_lam.resplash.ui.settings.SettingsViewModel
@@ -44,4 +45,6 @@ val viewModelModule = module {
     viewModel { UpgradeViewModel(get(), get()) }
 
     viewModel { DonationViewModel(get(), get()) }
+
+    viewModel { MuzeiSettingsViewModel(get()) }
 }

@@ -78,8 +78,20 @@ class PhotoRepository(
         contentFilter: String? = null
     ) = safeApiCall(dispatcher) {
         photoService.getRandomPhotos(
-            collectionId, featured, username, query, orientation, contentFilter, 1
-        ).first()
+            collectionId, featured, username, query, orientation, contentFilter, 1).first()
+    }
+
+    suspend fun getRandomPhotos(
+        collectionId: Int? = null,
+        featured: Boolean? = false,
+        username: String? = null,
+        query: String? = null,
+        orientation: String? = null,
+        contentFilter: String? = null,
+        count: Int = 3
+    ) = safeApiCall(dispatcher) {
+        photoService.getRandomPhotos(
+            collectionId, featured, username, query, orientation, contentFilter, count)
     }
 
     suspend fun likePhoto(id: String) = safeApiCall(dispatcher) { photoService.likeAPhoto(id) }
