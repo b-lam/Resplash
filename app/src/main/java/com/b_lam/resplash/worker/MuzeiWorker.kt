@@ -52,7 +52,10 @@ class MuzeiWorker(
             if (result is Success && result.value.isNotEmpty()) {
                 val providerClient = ProviderContract.getProviderClient(
                     applicationContext, "${BuildConfig.APPLICATION_ID}.muzeiartprovider")
-                providerClient.setArtwork(result.value.map { it.toArtwork() })
+                val newArtworkList =
+                    providerClient.lastAddedArtwork?.let { mutableListOf(it) } ?: mutableListOf()
+                newArtworkList.addAll(result.value.map { it.toArtwork() })
+                providerClient.setArtwork(newArtworkList)
                 return@withContext Result.success()
             } else if ((result is Success && result.value.isEmpty()) ||
                 (result is Error && result.code == 404)) {

@@ -88,7 +88,7 @@ class PhotoRepository(
         query: String? = null,
         orientation: String? = null,
         contentFilter: String? = null,
-        count: Int = 6
+        count: Int = 5
     ) = safeApiCall(dispatcher) {
         photoService.getRandomPhotos(
             collectionId, featured, username, query, orientation, contentFilter, count)
