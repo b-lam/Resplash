@@ -18,7 +18,7 @@ class ResplashMuzeiArtProvider : MuzeiArtProvider() {
 
     override fun onLoadRequested(initial: Boolean) {
         val context = context ?: return
-        MuzeiWorker.scheduleJob(context, get())
+        MuzeiWorker.enqueueWork(context, get())
     }
 
     override fun openFile(artwork: Artwork): InputStream {

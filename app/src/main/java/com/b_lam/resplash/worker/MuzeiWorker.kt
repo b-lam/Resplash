@@ -49,12 +49,13 @@ class MuzeiWorker(
                 else -> photoRepository.getRandomPhotos()
             }
 
-            if (result is Success) {
+            if (result is Success && result.value.isNotEmpty()) {
                 val providerClient = ProviderContract.getProviderClient(
                     applicationContext, "${BuildConfig.APPLICATION_ID}.muzeiartprovider")
                 providerClient.setArtwork(result.value.map { it.toArtwork() })
                 return@withContext Result.success()
-            } else if (result is Error && result.code == 404) {
+            } else if ((result is Success && result.value.isEmpty()) ||
+                (result is Error && result.code == 404)) {
                 return@withContext Result.failure()
             } else {
                 return@withContext Result.retry()
@@ -71,7 +72,8 @@ class MuzeiWorker(
             title = description,
             byline = user?.name,
             persistentUri = url.toUri(),
-            webUri = links?.html?.toUri()
+            webUri = links?.html?.toUri(),
+            metadata = user?.links?.html
         )
     }
 
@@ -82,7 +84,7 @@ class MuzeiWorker(
         private const val KEY_MUZEI_USERNAME = "key_muzei_username"
         private const val KEY_MUZEI_SEARCH_TERMS = "key_muzei_search_terms"
 
-        fun scheduleJob(
+        fun enqueueWork(
             context: Context,
             sharedPreferencesRepository: SharedPreferencesRepository
         ) {
