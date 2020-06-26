@@ -26,6 +26,7 @@ import com.b_lam.resplash.ui.autowallpaper.collections.AutoWallpaperCollectionAc
 import com.b_lam.resplash.ui.autowallpaper.history.AutoWallpaperHistoryActivity
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.upgrade.UpgradeActivity
+import com.b_lam.resplash.util.isInstalledOnExternalStorage
 import com.b_lam.resplash.util.setupActionBar
 import com.b_lam.resplash.util.showSnackBar
 import com.b_lam.resplash.util.toast
@@ -78,6 +79,10 @@ class AutoWallpaperSettingsActivity :
 
         next_fab.setOnClickListener {
             AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this, sharedPreferencesRepository)
+        }
+
+        if (isInstalledOnExternalStorage()) {
+            showExternalStorageWarningDialog()
         }
     }
 
@@ -137,6 +142,17 @@ class AutoWallpaperSettingsActivity :
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.auto_wallpaper_help_title)
             .setView(textView)
+            .setPositiveButton(R.string.ok, null)
+            .create()
+            .show()
+    }
+
+    private fun showExternalStorageWarningDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Installed on SD card?")
+            .setMessage("Hey there! We've noticed you've decided to move this application to " +
+                    "the SD card. Unfortunately, due to a limitation in Android, this means that " +
+                    "the Auto Wallpaper feature might not work properly. You have been warned!")
             .setPositiveButton(R.string.ok, null)
             .create()
             .show()
