@@ -72,7 +72,7 @@ class MuzeiWorker(
         val url = getPhotoUrl(this, inputData.getString(KEY_MUZEI_QUALITY))
         return Artwork(
             token = id,
-            title = description,
+            title = description ?: "Untitled",
             byline = user?.name,
             persistentUri = url.toUri(),
             webUri = links?.html?.toUri(),
