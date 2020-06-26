@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.Uri
@@ -87,3 +88,10 @@ fun Activity.requestPermission(vararg permissions: String, @IntRange(from = 0) r
 
 fun Fragment.requestPermission(vararg permissions: String, @IntRange(from = 0) requestCode: Int) =
     requestPermissions(permissions, requestCode)
+
+fun Context.isInstalledOnExternalStorage() = try {
+    (applicationInfo.flags and ApplicationInfo.FLAG_EXTERNAL_STORAGE) ==
+            ApplicationInfo.FLAG_EXTERNAL_STORAGE
+} catch (e: PackageManager.NameNotFoundException) {
+    false
+}
