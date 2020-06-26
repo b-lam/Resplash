@@ -4,7 +4,7 @@
     <PreferenceCategory app:title="@string/auto_wallpaper_source">
 
         <ListPreference
-            app:key="muzei_source"
+            app:key="auto_wallpaper_source"
             app:title="@string/auto_wallpaper_source_title"
             app:summary="@string/auto_wallpaper_source_summary"
             app:icon="@drawable/ic_wallpaper_24dp"
@@ -13,13 +13,13 @@
             app:defaultValue="@string/auto_wallpaper_source_default" />
 
         <Preference
-            app:key="muzei_collections"
+            app:key="auto_wallpaper_collections"
             app:title="@string/collections"
             app:summary="@string/auto_wallpaper_collections_summary"
             app:isPreferenceVisible="false" />
 
         <EditTextPreference
-            app:key="muzei_username"
+            app:key="auto_wallpaper_username"
             app:title="@string/auto_wallpaper_user_title"
             app:summary="@string/auto_wallpaper_user_summary"
             app:dialogTitle=""
@@ -28,7 +28,7 @@
             app:isPreferenceVisible="false" />
 
         <EditTextPreference
-            app:key="muzei_search_terms"
+            app:key="auto_wallpaper_search_terms"
             app:title="@string/auto_wallpaper_search_terms_title"
             app:dialogTitle=""
             app:dialogMessage="@string/auto_wallpaper_search_terms_dialog_message"

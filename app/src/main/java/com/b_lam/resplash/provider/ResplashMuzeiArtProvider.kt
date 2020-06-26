@@ -1,6 +1,7 @@
 package com.b_lam.resplash.provider
 
 import com.b_lam.resplash.data.download.DownloadService
+import com.b_lam.resplash.util.safeApiCall
 import com.b_lam.resplash.util.warn
 import com.b_lam.resplash.worker.MuzeiWorker
 import com.google.android.apps.muzei.api.provider.Artwork
@@ -9,15 +10,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import java.io.IOException
 import java.io.InputStream
 
 class ResplashMuzeiArtProvider : MuzeiArtProvider() {
 
     override fun onLoadRequested(initial: Boolean) {
         val context = context ?: return
-        MuzeiWorker.scheduleJob(context)
+        MuzeiWorker.scheduleJob(context, get())
     }
 
     override fun openFile(artwork: Artwork): InputStream {
@@ -25,9 +26,10 @@ class ResplashMuzeiArtProvider : MuzeiArtProvider() {
             artwork.token?.run {
                 try {
                     val downloadService: DownloadService by inject()
-                    val scope = CoroutineScope(Job() + Dispatchers.IO)
-                    scope.launch { downloadService.trackDownload(this@run) }
-                } catch (e: IOException) {
+                    CoroutineScope(Job() + Dispatchers.IO).launch {
+                        safeApiCall(Dispatchers.IO) { downloadService.trackDownload(this@run) }
+                    }
+                } catch (e: Exception) {
                     warn("Error reporting download to Unsplash", e)
                 }
             }

@@ -194,16 +194,16 @@ class AutoWallpaperWorker(
         private const val AUTO_WALLPAPER_JOB_ID = "auto_wallpaper_job_id"
         const val AUTO_WALLPAPER_SINGLE_JOB_ID = "auto_wallpaper_single_job_id"
 
-        const val KEY_AUTO_WALLPAPER_QUALITY = "key_auto_wallpaper_quality"
-        const val KEY_AUTO_WALLPAPER_THUMBNAIL_QUALITY = "key_auto_wallpaper_thumbnail_quality"
-        const val KEY_AUTO_WALLPAPER_SOURCE = "key_auto_wallpaper_source"
-        const val KEY_AUTO_WALLPAPER_USERNAME = "key_auto_wallpaper_username"
-        const val KEY_AUTO_WALLPAPER_SEARCH_TERMS = "key_auto_wallpaper_search_terms"
-        const val KEY_AUTO_WALLPAPER_CENTER_CROP = "key_auto_wallpaper_center_crop"
-        const val KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY = "key_auto_wallpaper_portrait_mode_only"
-        const val KEY_AUTO_WALLPAPER_SELECT_SCREEN = "key_auto_wallpaper_select_screen"
-        const val KEY_AUTO_WALLPAPER_ORIENTATION = "key_auto_wallpaper_orientation"
-        const val KEY_AUTO_WALLPAPER_CONTENT_FILTER = "key_auto_wallpaper_content_filter"
+        private const val KEY_AUTO_WALLPAPER_QUALITY = "key_auto_wallpaper_quality"
+        private const val KEY_AUTO_WALLPAPER_THUMBNAIL_QUALITY = "key_auto_wallpaper_thumbnail_quality"
+        private const val KEY_AUTO_WALLPAPER_SOURCE = "key_auto_wallpaper_source"
+        private const val KEY_AUTO_WALLPAPER_USERNAME = "key_auto_wallpaper_username"
+        private const val KEY_AUTO_WALLPAPER_SEARCH_TERMS = "key_auto_wallpaper_search_terms"
+        private const val KEY_AUTO_WALLPAPER_CENTER_CROP = "key_auto_wallpaper_center_crop"
+        private const val KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY = "key_auto_wallpaper_portrait_mode_only"
+        private const val KEY_AUTO_WALLPAPER_SELECT_SCREEN = "key_auto_wallpaper_select_screen"
+        private const val KEY_AUTO_WALLPAPER_ORIENTATION = "key_auto_wallpaper_orientation"
+        private const val KEY_AUTO_WALLPAPER_CONTENT_FILTER = "key_auto_wallpaper_content_filter"
 
         object Source {
 

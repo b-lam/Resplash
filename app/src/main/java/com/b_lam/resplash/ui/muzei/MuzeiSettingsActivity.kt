@@ -48,7 +48,7 @@ class MuzeiSettingsActivity : BaseActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.muzei_preference, rootKey)
 
-            findPreference<EditTextPreference>("muzei_username")?.summaryProvider =
+            findPreference<EditTextPreference>("auto_wallpaper_username")?.summaryProvider =
                 Preference.SummaryProvider<EditTextPreference> {
                     if (it.text.isNullOrBlank()) {
                         getString(R.string.auto_wallpaper_source_not_set)
@@ -57,7 +57,7 @@ class MuzeiSettingsActivity : BaseActivity() {
                     }
                 }
 
-            findPreference<EditTextPreference>("muzei_search_terms")?.summaryProvider =
+            findPreference<EditTextPreference>("auto_wallpaper_search_terms")?.summaryProvider =
                 Preference.SummaryProvider<EditTextPreference> {
                     if (it.text.isNullOrBlank()) {
                         getString(R.string.auto_wallpaper_source_not_set)
@@ -66,12 +66,12 @@ class MuzeiSettingsActivity : BaseActivity() {
                     }
                 }
 
-            findPreference<ListPreference>("muzei_source")?.summaryProvider =
+            findPreference<ListPreference>("auto_wallpaper_source")?.summaryProvider =
                 Preference.SummaryProvider<ListPreference> {
                     getString(R.string.auto_wallpaper_source_summary, it.entry)
                 }
 
-            findPreference<ListPreference>("muzei_source")
+            findPreference<ListPreference>("auto_wallpaper_source")
                 ?.setOnPreferenceChangeListener { _, newValue ->
                     if (AutoWallpaperWorker.Companion.Source.SOURCE_UNENTITLED.contains(newValue) ||
                         sharedViewModel.resplashProLiveData.value?.entitled == true) {
@@ -90,7 +90,7 @@ class MuzeiSettingsActivity : BaseActivity() {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            findPreference<Preference>("muzei_collections")?.setOnPreferenceClickListener {
+            findPreference<Preference>("auto_wallpaper_collections")?.setOnPreferenceClickListener {
                 startActivity(Intent(context, AutoWallpaperCollectionActivity::class.java))
                 true
             }
@@ -103,11 +103,11 @@ class MuzeiSettingsActivity : BaseActivity() {
         }
 
         private fun setCustomSourceVisibility(value: String?) {
-            findPreference<Preference>("muzei_collections")?.isVisible =
+            findPreference<Preference>("auto_wallpaper_collections")?.isVisible =
                 value == AutoWallpaperWorker.Companion.Source.COLLECTIONS
-            findPreference<Preference>("muzei_username")?.isVisible =
+            findPreference<Preference>("auto_wallpaper_username")?.isVisible =
                 value == AutoWallpaperWorker.Companion.Source.USER
-            findPreference<Preference>("muzei_search_terms")?.isVisible =
+            findPreference<Preference>("auto_wallpaper_search_terms")?.isVisible =
                 value == AutoWallpaperWorker.Companion.Source.SEARCH
         }
 
