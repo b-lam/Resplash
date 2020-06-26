@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:layout_marginEnd="@dimen/keyline_5">
 
         <ImageView
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/keyline_6"
             android:singleLine="true"
-            android:layout_gravity="center_vertical"
+            android:textAlignment="viewStart"
             android:layout_weight="1"
             style="@style/TextAppearance.Resplash.Subtitle2"
             tools:text="Brandon Lam" />
