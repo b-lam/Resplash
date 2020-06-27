@@ -5,6 +5,7 @@ import android.app.WallpaperManager
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -33,7 +34,6 @@ import com.b_lam.resplash.util.customtabs.CustomTabsHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_photo_detail.*
-import okio.IOException
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
@@ -279,19 +279,20 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
         try {
             startActivity(WallpaperManager.getInstance(this).getCropAndSetWallpaperIntent(uri))
         } catch (e: IllegalArgumentException) {
-            val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
-            } else {
-                MediaStore.Images.Media.getBitmap(contentResolver, uri)
-            }
+            var bitmap: Bitmap? = null
             try {
+                bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+                } else {
+                    MediaStore.Images.Media.getBitmap(contentResolver, uri)
+                }
                 WallpaperManager.getInstance(applicationContext).setBitmap(bitmap)
                 toast("Wallpaper set successfully")
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 error("Error setting wallpaper", e)
                 toast("Failed to set wallpaper")
             } finally {
-                bitmap.recycle()
+                bitmap?.recycle()
             }
         }
     }
