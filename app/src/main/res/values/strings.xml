@@ -296,5 +296,5 @@
     <string name="developer_instagram_url" translatable="false">https://www.instagram.com/brandon.c.lam/</string>
     <string name="developer_unsplash_url" translatable="false">https://unsplash.com/@brandon_lam</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="privacy_policy_url" translatable="false">https://b-lam.github.io/projects/resplash/privacy_policy</string>
+    <string name="privacy_policy_url" translatable="false">https://b-lam.github.io/work/resplash/privacy_policy</string>
 </resources>
