@@ -25,7 +25,7 @@ The internet’s source of freely-usable images. Powered by creators everywhere.
 
 # Screenshots
 
-<img src="https://raw.githubusercontent.com/b-lam/Resplash/master/design/Play_Store_Screenshot_1.jpg" width="250"> <img src="https://raw.githubusercontent.com/b-lam/Resplash/master/design/Play_Store_Screenshot_3.jpg" width="250"> <img src="https://raw.githubusercontent.com/b-lam/Resplash/master/design/Play_Store_Screenshot_2.jpg" width="250">
+<img src="https://raw.githubusercontent.com/b-lam/b-lam.github.io/master/img/resplash/resplash_1.jpg" width="200"> <img src="https://raw.githubusercontent.com/b-lam/b-lam.github.io/master/img/resplash/resplash_3.jpg" width="200"> <img src="https://raw.githubusercontent.com/b-lam/b-lam.github.io/master/img/resplash/resplash_2.jpg" width="200">
 
 # Build
 
