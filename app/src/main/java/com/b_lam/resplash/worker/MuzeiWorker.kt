@@ -1,5 +1,6 @@
 package com.b_lam.resplash.worker
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.core.net.toUri
 import androidx.work.*
@@ -68,11 +69,12 @@ class MuzeiWorker(
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private fun Photo.toArtwork(): Artwork {
         val url = getPhotoUrl(this, inputData.getString(KEY_MUZEI_QUALITY))
         return Artwork(
             token = id,
-            title = description ?: "Untitled",
+            title = description ?: alt_description?.capitalize() ?: "Untitled",
             byline = user?.name,
             persistentUri = url.toUri(),
             webUri = links?.html?.toUri(),

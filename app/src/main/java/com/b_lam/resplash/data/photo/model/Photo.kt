@@ -21,6 +21,7 @@ data class Photo(
     val likes: Int?,
     var liked_by_user: Boolean?,
     val description: String?,
+    val alt_description: String?,
     val exif: Exif?,
     val location: Location?,
     val tags: List<Tag>?,
