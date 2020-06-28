@@ -9,10 +9,25 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.b_lam.resplash.ui.main.MainActivity"
-            android:targetPackage="@string/package_name" />
+            android:targetPackage="com.b_lam.resplash" />
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.b_lam.resplash.ui.search.SearchActivity"
-            android:targetPackage="@string/package_name" />
+            android:targetPackage="com.b_lam.resplash" />
+    </shortcut>
+
+    <shortcut
+        android:icon="@drawable/ic_auto_wallpaper_shortcut_24dp"
+        android:shortcutId="autowallpaper"
+        android:shortcutShortLabel="@string/auto_wallpaper_title">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.b_lam.resplash.ui.main.MainActivity"
+            android:targetPackage="com.b_lam.resplash" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity"
+            android:targetPackage="com.b_lam.resplash" />
     </shortcut>
 </shortcuts>
