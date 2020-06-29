@@ -76,6 +76,13 @@
             android:data="@string/privacy_policy_url" />
     </Preference>
 
+    <Preference app:title="@string/terms_and_conditions"
+        app:iconSpaceReserved="false">
+
+        <intent android:action="android.intent.action.VIEW"
+            android:data="@string/terms_and_conditions_url" />
+    </Preference>
+
     <Preference app:key="licenses"
         app:title="@string/licenses"
         app:iconSpaceReserved="false" />

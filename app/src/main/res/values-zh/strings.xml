@@ -261,4 +261,5 @@
     <string name="github_summary">Resplash是开源的，请在GitHub上查看</string>
     <string name="developer_title">作者</string>
     <string name="privacy_policy">隐私政策</string>
+    <string name="terms_and_conditions">条款和条件</string>
 </resources>

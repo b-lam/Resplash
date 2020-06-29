@@ -263,4 +263,5 @@
     <string name="github_summary">Resplash је опен-соурце, погледајте га на GitHub</string>
     <string name="developer_title">Аутор</string>
     <string name="privacy_policy">Правила о приватности</string>
+    <string name="terms_and_conditions">Услови</string>
 </resources>

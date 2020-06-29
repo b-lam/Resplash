@@ -264,4 +264,5 @@
     <string name="github_summary">Resplash с открытым исходным кодом, проверьте это на GitHub</string>
     <string name="developer_title">Автор</string>
     <string name="privacy_policy">политика конфиденциальности</string>
+    <string name="terms_and_conditions">Условия и положения</string>
 </resources>

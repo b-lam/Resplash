@@ -261,4 +261,5 @@
     <string name="github_summary">Resplash เป็นโอเพ่นซอร์สตรวจสอบกับ GitHub</string>
     <string name="developer_title">ผู้จัดทำ</string>
     <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="terms_and_conditions">ข้อกำหนดและเงื่อนไข</string>
 </resources>
