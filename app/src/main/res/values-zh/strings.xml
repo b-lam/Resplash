@@ -122,6 +122,8 @@
     <string name="auto_wallpaper_options_title">选项</string>
     <string name="auto_wallpaper_center_crop_title">中心作物</string>
     <string name="auto_wallpaper_center_crop_summary">裁剪所有要居中的壁纸</string>
+    <string name="auto_wallpaper_show_notification_title">显示通知</string>
+    <string name="auto_wallpaper_show_notification_summary">获取有关当前墙纸信息的通知</string>
     <string name="auto_wallpaper_portrait_mode_only_title">设备方向修复</string>
     <string name="auto_wallpaper_portrait_mode_only_summary">如果某些设备在横向模式下设置了墙纸，则会错误地裁切墙纸，选中此项将重新安排任务，直到该设备在纵向模式下</string>
     <string name="auto_wallpaper_select_screen_title">选择屏幕</string>

@@ -1,5 +1,6 @@
 package com.b_lam.resplash.worker
 
+import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
@@ -12,12 +13,9 @@ import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.domain.autowallpaper.AutoWallpaperRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
+import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.Result.Error
 import com.b_lam.resplash.util.Result.Success
-import com.b_lam.resplash.util.getPhotoUrl
-import com.b_lam.resplash.util.safeApiCall
-import com.b_lam.resplash.util.screenHeight
-import com.b_lam.resplash.util.screenWidth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.KoinComponent
@@ -35,6 +33,7 @@ class AutoWallpaperWorker(
     private val photoRepository: PhotoRepository by inject()
     private val autoWallpaperRepository: AutoWallpaperRepository by inject()
     private val downloadService: DownloadService by inject()
+    private val notificationManager: NotificationManager by inject()
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         if (inputData.getBoolean(KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY, false)) {
@@ -88,6 +87,11 @@ class AutoWallpaperWorker(
 
             if (result is Success) {
                 if (downloadAndSetWallpaper(result.value)) {
+                    if (notificationManager.isNewAutoWallpaperNotificationEnabled(
+                            inputData.getBoolean(KEY_AUTO_WALLPAPER_SHOW_NOTIFICATION, true))
+                    ) {
+                        showNotification(result.value)
+                    }
                     trackDownload(result.value.id)
                     addWallpaperToHistory(result.value)
                     return@withContext Result.success()
@@ -189,6 +193,14 @@ class AutoWallpaperWorker(
         )
     }
 
+    @SuppressLint("DefaultLocale")
+    private fun showNotification(photo: Photo) {
+        val title = photo.description ?: photo.alt_description?.capitalize() ?: "Untitled"
+        val subtitle = photo.user?.name
+        notificationManager.showNewAutoWallpaperNotification(
+            photo.id, title, subtitle, photo.urls.thumb)
+    }
+
     companion object {
 
         private const val AUTO_WALLPAPER_JOB_ID = "auto_wallpaper_job_id"
@@ -200,6 +212,7 @@ class AutoWallpaperWorker(
         private const val KEY_AUTO_WALLPAPER_USERNAME = "key_auto_wallpaper_username"
         private const val KEY_AUTO_WALLPAPER_SEARCH_TERMS = "key_auto_wallpaper_search_terms"
         private const val KEY_AUTO_WALLPAPER_CENTER_CROP = "key_auto_wallpaper_center_crop"
+        private const val KEY_AUTO_WALLPAPER_SHOW_NOTIFICATION = "key_auto_wallpaper_show_notification"
         private const val KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY = "key_auto_wallpaper_portrait_mode_only"
         private const val KEY_AUTO_WALLPAPER_SELECT_SCREEN = "key_auto_wallpaper_select_screen"
         private const val KEY_AUTO_WALLPAPER_ORIENTATION = "key_auto_wallpaper_orientation"
@@ -295,6 +308,7 @@ class AutoWallpaperWorker(
             KEY_AUTO_WALLPAPER_USERNAME to sharedPreferencesRepository.autoWallpaperUsername,
             KEY_AUTO_WALLPAPER_SEARCH_TERMS to sharedPreferencesRepository.autoWallpaperSearchTerms,
             KEY_AUTO_WALLPAPER_CENTER_CROP to sharedPreferencesRepository.autoWallpaperCenterCrop,
+            KEY_AUTO_WALLPAPER_SHOW_NOTIFICATION to sharedPreferencesRepository.autoWallpaperShowNotification,
             KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY to sharedPreferencesRepository.autoWallpaperPortraitModeOnly,
             KEY_AUTO_WALLPAPER_SELECT_SCREEN to sharedPreferencesRepository.autoWallpaperSelectScreen,
             KEY_AUTO_WALLPAPER_ORIENTATION to sharedPreferencesRepository.autoWallpaperOrientation,

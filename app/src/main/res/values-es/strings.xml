@@ -123,6 +123,8 @@
     <string name="auto_wallpaper_options_title">Opciones</string>
     <string name="auto_wallpaper_center_crop_title">Cultivo central</string>
     <string name="auto_wallpaper_center_crop_summary">Recorta todos los fondos de pantalla para centrarlos</string>
+    <string name="auto_wallpaper_show_notification_title">Muestra la notificación</string>
+    <string name="auto_wallpaper_show_notification_summary">Recibe una notificación con la información actual del fondo de pantalla</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Corrección de orientación del dispositivo</string>
     <string name="auto_wallpaper_portrait_mode_only_summary">Algunos dispositivos recortarán el fondo de pantalla incorrectamente si se configura mientras el dispositivo está en modo horizontal, al verificar esto se reprogramará la tarea hasta que el dispositivo esté en modo vertical</string>
     <string name="auto_wallpaper_select_screen_title">¿Dónde?</string>

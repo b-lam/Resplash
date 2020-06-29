@@ -177,6 +177,10 @@ class AutoWallpaperSettingsActivity :
                 findPreference<Preference>("auto_wallpaper_select_screen")?.isVisible = true
             }
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                findPreference<Preference>("auto_wallpaper_show_notification")?.isVisible = false
+            }
+
             findPreference<ListPreference>("auto_wallpaper_interval")?.summaryProvider =
                 Preference.SummaryProvider<ListPreference> {
                     getString(R.string.auto_wallpaper_interval_summary, it.entry)

@@ -127,6 +127,8 @@
     <string name="auto_wallpaper_options_title">أعدادات</string>
     <string name="auto_wallpaper_center_crop_title">محصول مركزي</string>
     <string name="auto_wallpaper_center_crop_summary">اقتصاص جميع الخلفيات ليتم توسيطها</string>
+    <string name="auto_wallpaper_show_notification_title">إظهار الإخطار</string>
+    <string name="auto_wallpaper_show_notification_summary">احصل على إشعار بمعلومات الخلفية الحالية</string>
     <string name="auto_wallpaper_portrait_mode_only_title">إصلاح توجيه الجهاز</string>
     <string name="auto_wallpaper_portrait_mode_only_summary">ستقوم بعض الأجهزة بقص خلفية الشاشة بشكل غير صحيح إذا تم ضبطها عندما يكون الجهاز في الوضع الأفقي ، سيؤدي التحقق من ذلك إلى إعادة جدولة المهمة حتى يصبح الجهاز في الوضع الرأسي</string>
     <string name="auto_wallpaper_select_screen_title">إختيار الشاشة</string>

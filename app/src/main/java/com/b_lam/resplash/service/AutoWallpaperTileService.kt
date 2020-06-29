@@ -35,6 +35,7 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
         qsTile?.let { tile ->
             when (tile.state) {
                 Tile.STATE_ACTIVE -> {
+                    notificationManager.showTileServiceDownloadingNotification()
                     AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this@AutoWallpaperTileService, get())
                 }
                 else -> unlockAndRun {

@@ -123,6 +123,8 @@
     <string name="auto_wallpaper_options_title">Opções</string>
     <string name="auto_wallpaper_center_crop_title">Cortar ao centro</string>
     <string name="auto_wallpaper_center_crop_summary">Cortar todos os papéis de parede para centralizar</string>
+    <string name="auto_wallpaper_show_notification_title">Mostrar notificação</string>
+    <string name="auto_wallpaper_show_notification_summary">Receba uma notificação com as informações atuais do papel de parede</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Correção de orientação do dispositivo</string>
     <string name="auto_wallpaper_portrait_mode_only_summary">Alguns dispositivos cortam o papel de parede incorretamente se ele estiver definido enquanto o dispositivo estiver no modo paisagem. A seleção disso reagendará a tarefa até que o dispositivo esteja no modo retrato</string>
     <string name="auto_wallpaper_select_screen_title">Tela de seleção</string>
