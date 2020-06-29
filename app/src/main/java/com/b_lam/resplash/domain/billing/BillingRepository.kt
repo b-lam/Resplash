@@ -206,7 +206,6 @@ class BillingRepository(
                 when (billingResult.responseCode) {
                     BillingClient.BillingResponseCode.OK -> disburseNonConsumableEntitlement(purchase)
                     BillingClient.BillingResponseCode.ITEM_NOT_OWNED -> removeNonConsumableEntitlement(purchase)
-                    BillingClient.BillingResponseCode.DEVELOPER_ERROR -> removeNonConsumableEntitlement(purchase)
                     else -> Log.d(TAG, "acknowledgeNonConsumablePurchasesAsync response is ${billingResult.debugMessage}")
                 }
             }
@@ -217,26 +216,10 @@ class BillingRepository(
         CoroutineScope(Job() + Dispatchers.IO).launch {
             if (Sku.CONSUMABLE_SKUS.contains(purchase.sku)) {
                 when (purchase.sku) {
-                    Sku.COFFEE -> updateDonations(purchase.sku,
-                        Donation(
-                            LEVEL_COFFEE
-                        )
-                    )
-                    Sku.SMOOTHIE -> updateDonations(purchase.sku,
-                        Donation(
-                            LEVEL_SMOOTHIE
-                        )
-                    )
-                    Sku.PIZZA -> updateDonations(purchase.sku,
-                        Donation(
-                            LEVEL_PIZZA
-                        )
-                    )
-                    Sku.FANCY_MEAL -> updateDonations(purchase.sku,
-                        Donation(
-                            LEVEL_FANCY_MEAL
-                        )
-                    )
+                    Sku.COFFEE -> updateDonations(purchase.sku, Donation(LEVEL_COFFEE))
+                    Sku.SMOOTHIE -> updateDonations(purchase.sku, Donation(LEVEL_SMOOTHIE))
+                    Sku.PIZZA -> updateDonations(purchase.sku, Donation(LEVEL_PIZZA))
+                    Sku.FANCY_MEAL -> updateDonations(purchase.sku, Donation(LEVEL_FANCY_MEAL))
                 }
                 _purchaseCompleteLiveData.postValue(Event(purchase))
             }
@@ -248,8 +231,7 @@ class BillingRepository(
         CoroutineScope(Job() + Dispatchers.IO).launch {
             when (purchase.sku) {
                 Sku.RESPLASH_PRO -> {
-                    val resplashPro =
-                        ResplashPro(true)
+                    val resplashPro = ResplashPro(true)
                     insert(resplashPro)
                     localCacheBillingClient.skuDetailsDao()
                         .insertOrUpdate(purchase.sku, resplashPro.mayPurchase())
@@ -263,8 +245,7 @@ class BillingRepository(
         CoroutineScope(Job() + Dispatchers.IO).launch {
             when (purchase.sku) {
                 Sku.RESPLASH_PRO -> {
-                    val resplashPro =
-                        ResplashPro(false)
+                    val resplashPro = ResplashPro(false)
                     delete(resplashPro)
                     localCacheBillingClient.skuDetailsDao()
                         .insertOrUpdate(purchase.sku, resplashPro.mayPurchase())
@@ -281,8 +262,7 @@ class BillingRepository(
         donationLiveData.value?.apply {
             synchronized(this) {
                 if (this != donation) { //new purchase
-                    update =
-                        Donation(level + donation.level)
+                    update = Donation(level + donation.level)
                 }
                 Log.d(
                     TAG,
