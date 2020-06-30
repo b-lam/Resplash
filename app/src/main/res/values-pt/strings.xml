@@ -27,6 +27,8 @@
     <string name="download_complete">Download Completo</string>
     <string name="setting_wallpaper">Definindo Papel de Parede…</string>
     <string name="set_as_wallpaper">Definir como Papel de Parede</string>
+    <string name="file_exists_title">Baixar novamente?</string>
+    <string name="file_exists_message">Esta foto já foi baixada. Deseja baixar esta foto novamente?</string>
     <string name="sponsored">Patrocinados</string>
 
     <!-- Common Plurals -->

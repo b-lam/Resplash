@@ -27,6 +27,8 @@
     <string name="download_complete">Преузимање завршено</string>
     <string name="setting_wallpaper">Постављам позадину…</string>
     <string name="set_as_wallpaper">Постави као позадину</string>
+    <string name="file_exists_title">Преузми поново?</string>
+    <string name="file_exists_message">Ова фотографија је већ преузета. Да ли желите поново да преузмете ову фотографију?</string>
     <string name="sponsored">Спонзорисани</string>
 
     <!-- Common Plurals -->

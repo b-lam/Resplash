@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
@@ -72,7 +73,7 @@ class PhotoAdapter(
 
         fun onPhotoClick(photo: Photo)
         fun onUserClick(user: User)
-        fun onLongClick(photo: Photo)
+        fun onLongClick(photo: Photo, animationView: LottieAnimationView)
     }
 
     companion object {

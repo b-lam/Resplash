@@ -27,6 +27,8 @@
     <string name="download_complete">Download Completato</string>
     <string name="setting_wallpaper">Sto impostando lo sfondo…</string>
     <string name="set_as_wallpaper">Imposta come sfondo</string>
+    <string name="file_exists_title">Scarica di nuovo?</string>
+    <string name="file_exists_message">Questa foto è già stata scaricata. Vuoi scaricare di nuovo questa foto?</string>
     <string name="sponsored">Sponsorizzato</string>
 
     <!-- Common Plurals -->

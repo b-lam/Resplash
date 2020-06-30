@@ -1,6 +1,5 @@
 package com.b_lam.resplash.ui.photo
 
-import android.animation.Animator
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -36,19 +35,7 @@ class DefaultPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
                 photo_image_view.setOnClickListener { callback.onPhotoClick(photo) }
                 if (longPressDownload) {
                     photo_image_view.setOnLongClickListener {
-                        callback.onLongClick(photo)
-                        check_animation_view.isVisible = true
-                        check_animation_view.playAnimation()
-                        check_animation_view.addAnimatorListener(object :
-                            Animator.AnimatorListener {
-                            override fun onAnimationRepeat(animation: Animator?) {}
-                            override fun onAnimationCancel(animation: Animator?) {}
-                            override fun onAnimationStart(animation: Animator?) {}
-                            override fun onAnimationEnd(animation: Animator?) {
-                                check_animation_view.removeAnimatorListener(this)
-                                check_animation_view.isVisible = false
-                            }
-                        })
+                        callback.onLongClick(photo, check_animation_view)
                         true
                     }
                 }

@@ -27,6 +27,8 @@
     <string name="download_complete">ดาวน์โหลดเสร็จสิ้น</string>
     <string name="setting_wallpaper">กำลังตั้งวอลเปเปอร์…</string>
     <string name="set_as_wallpaper">ตั้งเป็นวอลล์เปเปอร์</string>
+    <string name="file_exists_title">ดาวน์โหลดอีกครั้ง?</string>
+    <string name="file_exists_message">ดาวน์โหลดรูปภาพนี้แล้ว คุณต้องการดาวน์โหลดรูปภาพนี้อีกครั้งหรือไม่?</string>
     <string name="sponsored">ผู้สนับสนุน</string>
 
     <!-- Common Plurals -->

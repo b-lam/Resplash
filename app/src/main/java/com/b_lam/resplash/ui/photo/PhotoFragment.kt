@@ -1,7 +1,10 @@
 package com.b_lam.resplash.ui.photo
 
 import android.Manifest
+import android.animation.Animator
 import android.content.Intent
+import androidx.core.view.isVisible
+import com.airbnb.lottie.LottieAnimationView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
@@ -31,16 +34,39 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
             }
         }
 
-        override fun onLongClick(photo: Photo) {
-            if (requireContext().hasWritePermission()) {
-                context.toast(R.string.download_started)
-                DownloadJobIntentService.enqueueDownload(requireActivity().applicationContext,
-                    DownloadJobIntentService.Companion.Action.DOWNLOAD, photo.fileName,
-                    getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality), photo.id)
+        override fun onLongClick(photo: Photo, animationView: LottieAnimationView) {
+            if (requireContext().fileExists(photo.fileName)) {
+                showFileExistsDialog(requireContext()) { downloadPhoto(photo, animationView) }
             } else {
-                requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
+                downloadPhoto(photo, animationView)
             }
         }
+    }
+
+    private fun downloadPhoto(photo: Photo, animationView: LottieAnimationView) {
+        if (requireContext().hasWritePermission()) {
+            context.toast(R.string.download_started)
+            animateLongClickDownload(animationView)
+            DownloadJobIntentService.enqueueDownload(requireActivity().applicationContext,
+                DownloadJobIntentService.Companion.Action.DOWNLOAD, photo.fileName,
+                getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality), photo.id)
+        } else {
+            requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
+        }
+    }
+
+    private fun animateLongClickDownload(animationView: LottieAnimationView) {
+        animationView.isVisible = true
+        animationView.playAnimation()
+        animationView.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {}
+            override fun onAnimationCancel(animation: Animator?) {}
+            override fun onAnimationStart(animation: Animator?) {}
+            override fun onAnimationEnd(animation: Animator?) {
+                animationView.removeAnimatorListener(this)
+                animationView.isVisible = false
+            }
+        })
     }
 
     override val emptyStateTitle: String

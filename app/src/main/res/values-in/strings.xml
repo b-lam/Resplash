@@ -27,6 +27,8 @@
     <string name="download_complete">Unduhan Selesai</string>
     <string name="setting_wallpaper">Pengaturan wallpaper…</string>
     <string name="set_as_wallpaper">Atur sebagai wallpaper</string>
+    <string name="file_exists_title">Unduh lagi?</string>
+    <string name="file_exists_message">Foto ini sudah diunduh. Anda ingin mengunduh foto ini lagi?</string>
     <string name="sponsored">Disponsori</string>
 
     <!-- Common Plurals -->

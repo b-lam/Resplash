@@ -34,6 +34,8 @@
     <string name="download_complete">Download complete</string>
     <string name="set_as_wallpaper">Set as wallpaper</string>
     <string name="setting_wallpaper">Setting wallpaper…</string>
+    <string name="file_exists_title">Download again?</string>
+    <string name="file_exists_message">This photo has already been downloaded. Do you want to download this photo again?</string>
     <string name="sponsored">Sponsored</string>
 
     <!-- Common Plurals -->

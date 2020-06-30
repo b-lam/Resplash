@@ -27,6 +27,8 @@
     <string name="download_complete">Descarga completa</string>
     <string name="setting_wallpaper">Config wallpaper…</string>
     <string name="set_as_wallpaper">Usar como wallpaper</string>
+    <string name="file_exists_title">¿Descargar de nuevo?</string>
+    <string name="file_exists_message">Esta foto ya ha sido descargada. ¿Quieres descargar esta foto de nuevo?</string>
     <string name="sponsored">Patrocinado</string>
 
     <!-- Common Plurals -->

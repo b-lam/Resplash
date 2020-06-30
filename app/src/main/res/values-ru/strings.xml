@@ -27,6 +27,8 @@
     <string name="download_complete">Загрузка завершена</string>
     <string name="setting_wallpaper">Настройка обоев…</string>
     <string name="set_as_wallpaper">Установить в качестве обоев</string>
+    <string name="file_exists_title">Скачать снова?</string>
+    <string name="file_exists_message">Это фото уже загружено. Вы хотите загрузить это фото еще раз?</string>
     <string name="sponsored">Оплаченные</string>
 
     <!-- Common Plurals -->
