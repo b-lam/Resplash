@@ -41,6 +41,9 @@ private fun createOkHttpClient(accessTokenInterceptor: AccessTokenInterceptor): 
         .addNetworkInterceptor(createHeaderInterceptor())
         .addInterceptor(createHttpLoggingInterceptor())
         .addInterceptor(accessTokenInterceptor)
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
         .build()
 }
 
@@ -65,9 +68,7 @@ private fun createHttpLoggingInterceptor(): Interceptor {
 private fun createAccessTokenInterceptor(
     accessTokenProvider: AccessTokenProvider
 ): AccessTokenInterceptor {
-    return AccessTokenInterceptor(
-        accessTokenProvider
-    )
+    return AccessTokenInterceptor(accessTokenProvider)
 }
 
 private fun createConverterFactory(): MoshiConverterFactory {
