@@ -129,6 +129,7 @@
     <string name="auto_wallpaper_options_title">أعدادات</string>
     <string name="auto_wallpaper_center_crop_title">محصول مركزي</string>
     <string name="auto_wallpaper_center_crop_summary">اقتصاص جميع الخلفيات ليتم توسيطها</string>
+    <string name="auto_wallpaper_notification_settings_title">إعدادات الإشعار</string>
     <string name="auto_wallpaper_show_notification_title">إظهار الإخطار</string>
     <string name="auto_wallpaper_show_notification_summary">احصل على إشعار بمعلومات الخلفية الحالية</string>
     <string name="auto_wallpaper_portrait_mode_only_title">إصلاح توجيه الجهاز</string>

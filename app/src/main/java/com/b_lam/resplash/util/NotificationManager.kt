@@ -164,7 +164,7 @@ class NotificationManager(private val context: Context) {
     companion object {
 
         private const val DOWNLOADS_CHANNEL_ID = "downloads_channel_id"
-        private const val NEW_AUTO_WALLPAPER_CHANNEL_ID = "new_auto_wallpaper_channel_id"
+        const val NEW_AUTO_WALLPAPER_CHANNEL_ID = "new_auto_wallpaper_channel_id"
         private const val NEXT_AUTO_WALLPAPER_CHANNEL_ID = "next_auto_wallpaper_channel_id"
 
         private val OLD_CHANNEL_IDS = listOf("resplash_channel_id")

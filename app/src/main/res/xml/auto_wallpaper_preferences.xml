@@ -83,11 +83,9 @@
     <PreferenceCategory app:title="@string/auto_wallpaper_options_title"
         app:dependency="auto_wallpaper_enable">
 
-        <CheckBoxPreference
-            app:key="auto_wallpaper_center_crop"
-            app:title="@string/auto_wallpaper_center_crop_title"
-            app:summary="@string/auto_wallpaper_center_crop_summary"
-            app:defaultValue="true"
+        <Preference
+            app:key="auto_wallpaper_notification_settings"
+            app:title="@string/auto_wallpaper_notification_settings_title"
             app:isPreferenceVisible="false" />
 
         <CheckBoxPreference
@@ -95,6 +93,13 @@
             app:title="@string/auto_wallpaper_show_notification_title"
             app:summary="@string/auto_wallpaper_show_notification_summary"
             app:defaultValue="true" />
+
+        <CheckBoxPreference
+            app:key="auto_wallpaper_center_crop"
+            app:title="@string/auto_wallpaper_center_crop_title"
+            app:summary="@string/auto_wallpaper_center_crop_summary"
+            app:defaultValue="true"
+            app:isPreferenceVisible="false" />
 
         <CheckBoxPreference
             app:key="auto_wallpaper_portrait_mode_only"

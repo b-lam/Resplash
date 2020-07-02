@@ -126,6 +126,7 @@
     <string name="auto_wallpaper_options_title">Опције</string>
     <string name="auto_wallpaper_center_crop_title">Средишњи усев</string>
     <string name="auto_wallpaper_center_crop_summary">Обрежите све тапете да бисте их центрирали</string>
+    <string name="auto_wallpaper_notification_settings_title">Подешавања обавештења</string>
     <string name="auto_wallpaper_show_notification_title">Прикажи обавештење</string>
     <string name="auto_wallpaper_show_notification_summary">Получить уведомление с текущей информацией обоев</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Поправка оријентације уређаја</string>

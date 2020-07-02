@@ -127,6 +127,7 @@
     <string name="auto_wallpaper_options_title">Опции</string>
     <string name="auto_wallpaper_center_crop_title">Центр урожая</string>
     <string name="auto_wallpaper_center_crop_summary">Обрезать все обои по центру</string>
+    <string name="auto_wallpaper_notification_settings_title">Настройки уведомлений</string>
     <string name="auto_wallpaper_show_notification_title">Показать уведомление</string>
     <string name="auto_wallpaper_show_notification_summary">Получить уведомление с текущей информацией обоев</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Исправление ориентации устройства</string>

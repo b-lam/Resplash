@@ -125,6 +125,7 @@
     <string name="auto_wallpaper_options_title">Seçenekler</string>
     <string name="auto_wallpaper_center_crop_title">Ortadaki kırpma</string>
     <string name="auto_wallpaper_center_crop_summary">Ortalanacak tüm duvar kağıtlarını kırp</string>
+    <string name="auto_wallpaper_notification_settings_title">Bildirim ayarları</string>
     <string name="auto_wallpaper_show_notification_title">Bildirimleri göster</string>
     <string name="auto_wallpaper_show_notification_summary">Geçerli duvar kağıdı bilgileriyle bildirim alma</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Cihaz Yönünü Düzeltme</string>

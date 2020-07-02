@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
@@ -26,10 +27,7 @@ import com.b_lam.resplash.ui.autowallpaper.collections.AutoWallpaperCollectionAc
 import com.b_lam.resplash.ui.autowallpaper.history.AutoWallpaperHistoryActivity
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.upgrade.UpgradeActivity
-import com.b_lam.resplash.util.isInstalledOnExternalStorage
-import com.b_lam.resplash.util.setupActionBar
-import com.b_lam.resplash.util.showSnackBar
-import com.b_lam.resplash.util.toast
+import com.b_lam.resplash.util.*
 import com.b_lam.resplash.worker.AutoWallpaperWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -178,6 +176,7 @@ class AutoWallpaperSettingsActivity :
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                findPreference<Preference>("auto_wallpaper_notification_settings")?.isVisible = true
                 findPreference<Preference>("auto_wallpaper_show_notification")?.isVisible = false
             }
 
@@ -254,6 +253,22 @@ class AutoWallpaperSettingsActivity :
             findPreference<Preference>("auto_wallpaper_collections")?.setOnPreferenceClickListener {
                 startActivity(Intent(context, AutoWallpaperCollectionActivity::class.java))
                 true
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                findPreference<Preference>("auto_wallpaper_notification_settings")?.setOnPreferenceClickListener {
+                    val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        putExtra(Settings.EXTRA_APP_PACKAGE, context?.packageName)
+                        putExtra(Settings.EXTRA_CHANNEL_ID, NotificationManager.NEW_AUTO_WALLPAPER_CHANNEL_ID)
+                    }
+                    if (intent.resolveActivity(requireContext().packageManager) != null) {
+                        startActivity(intent)
+                    } else {
+                        context?.toast(R.string.oops)
+                    }
+                    true
+                }
             }
 
             sharedViewModel.resplashProLiveData.observe(viewLifecycleOwner) {

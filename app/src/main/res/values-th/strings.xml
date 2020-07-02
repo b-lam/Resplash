@@ -124,6 +124,7 @@
     <string name="auto_wallpaper_options_title">ตัวเลือก</string>
     <string name="auto_wallpaper_center_crop_title">ศูนย์พืชผล</string>
     <string name="auto_wallpaper_center_crop_summary">ครอบตัดวอลล์เปเปอร์ทั้งหมดให้อยู่กึ่งกลาง</string>
+    <string name="auto_wallpaper_notification_settings_title">การตั้งค่าการแจ้งเตือน</string>
     <string name="auto_wallpaper_show_notification_title">แสดงการแจ้งเตือน</string>
     <string name="auto_wallpaper_show_notification_summary">รับการแจ้งเตือนด้วยข้อมูลวอลเปเปอร์ปัจจุบัน</string>
     <string name="auto_wallpaper_portrait_mode_only_title">แก้ไขการวางแนวอุปกรณ์</string>

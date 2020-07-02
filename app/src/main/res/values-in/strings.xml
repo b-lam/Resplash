@@ -124,6 +124,7 @@
     <string name="auto_wallpaper_options_title">Polihan</string>
     <string name="auto_wallpaper_center_crop_title">Pangkas tengah</string>
     <string name="auto_wallpaper_center_crop_summary">Pangkas semua wallpaper untuk dipusatkan</string>
+    <string name="auto_wallpaper_notification_settings_title">Pengaturan pemberitahuan</string>
     <string name="auto_wallpaper_show_notification_title">Tunjukkan notifikasi</string>
     <string name="auto_wallpaper_show_notification_summary">Dapatkan pemberitahuan dengan info wallpaper terkini</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Perbaikan Orientasi Perangkat</string>
