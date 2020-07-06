@@ -3,6 +3,7 @@ package com.b_lam.resplash.util
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.WindowInsets
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
@@ -52,10 +53,29 @@ inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() ->
     if (layoutParams is T) block(layoutParams as T)
 }
 
-fun View.showKeyboard() {
-    if (requestFocus()) {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+fun View.focusAndShowKeyboard() {
+    fun View.showTheKeyboardNow() {
+        if (isFocused) {
+            post {
+                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+            }
+        }
+    }
+
+    requestFocus()
+    if (hasWindowFocus()) {
+        showTheKeyboardNow()
+    } else {
+        viewTreeObserver.addOnWindowFocusChangeListener(
+            object : ViewTreeObserver.OnWindowFocusChangeListener {
+                override fun onWindowFocusChanged(hasFocus: Boolean) {
+                    if (hasFocus) {
+                        this@focusAndShowKeyboard.showTheKeyboardNow()
+                        viewTreeObserver.removeOnWindowFocusChangeListener(this)
+                    }
+                }
+            })
     }
 }
 

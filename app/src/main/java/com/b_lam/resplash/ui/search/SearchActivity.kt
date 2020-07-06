@@ -13,9 +13,9 @@ import androidx.viewpager.widget.ViewPager
 import com.b_lam.resplash.R
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
+import com.b_lam.resplash.util.focusAndShowKeyboard
 import com.b_lam.resplash.util.hideKeyboard
 import com.b_lam.resplash.util.setupActionBar
-import com.b_lam.resplash.util.showKeyboard
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_search.*
@@ -35,7 +35,10 @@ class SearchActivity : BaseActivity() {
 
         intent.extras?.getString(EXTRA_SEARCH_QUERY)?.let {
             viewModel.updateQuery(it)
-            search_text_input_layout.editText?.setText(it)
+            search_text_input_layout.editText?.apply {
+                setText(it)
+                setSelection(text.length)
+            }
         }
 
         val fragmentPagerAdapter = SearchFragmentPagerAdapter(this, supportFragmentManager)
@@ -62,7 +65,7 @@ class SearchActivity : BaseActivity() {
             return@setOnEditorActionListener false
         }
         if (search_text_input_layout.editText?.text.isNullOrBlank()) {
-            search_text_input_layout.editText?.showKeyboard()
+            search_text_input_layout.editText?.focusAndShowKeyboard()
         }
         view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
