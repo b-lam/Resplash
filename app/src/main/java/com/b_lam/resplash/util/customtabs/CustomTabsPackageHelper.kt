@@ -36,7 +36,7 @@ internal object CustomTabsPackageHelper {
         // Get default VIEW intent handler.
         val activityIntent = Intent(Intent.ACTION_VIEW, uri)
         val defaultHandlerInfo = pm.resolveActivity(activityIntent, 0)
-        val defaultHandlerPackageName: String? = defaultHandlerInfo?.activityInfo?.packageName
+        val defaultHandlerPackageName = defaultHandlerInfo?.activityInfo?.packageName
 
         // Get all apps that can handle VIEW intents.
         val resolvedActivityList = pm.queryIntentActivities(activityIntent, 0)
