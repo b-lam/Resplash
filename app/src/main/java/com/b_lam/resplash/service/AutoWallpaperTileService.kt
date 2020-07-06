@@ -32,8 +32,8 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
     private val notificationManager: NotificationManager by inject()
 
     override fun onClick() {
-        qsTile?.let { tile ->
-            when (tile.state) {
+        qsTile?.let {
+            when (it.state) {
                 Tile.STATE_ACTIVE -> {
                     notificationManager.showTileServiceDownloadingNotification()
                     AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this@AutoWallpaperTileService, get())
@@ -49,7 +49,7 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
     }
 
     override fun onStartListening() {
-        qsTile.apply {
+        qsTile?.apply {
             if (sharedPreferencesRepository.autoWallpaperEnabled) {
                 state = Tile.STATE_ACTIVE
                 label = getString(R.string.auto_wallpaper_next_wallpaper)
@@ -60,7 +60,11 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
                 icon = Icon.createWithResource(this@AutoWallpaperTileService, R.drawable.ic_compare_24dp)
             }
             updateTile()
+            observeAutoWallpaperWorker()
         }
+    }
+
+    private fun observeAutoWallpaperWorker() {
         WorkManager.getInstance(this@AutoWallpaperTileService)
             .getWorkInfosForUniqueWorkLiveData(AutoWallpaperWorker.AUTO_WALLPAPER_SINGLE_JOB_ID)
             .observe(this@AutoWallpaperTileService) {
