@@ -1,4 +1,4 @@
-package com.b_lam.resplash.util
+package com.b_lam.resplash.util.download
 
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
@@ -10,19 +10,18 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import androidx.collection.LongSparseArray
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.subjects.PublishSubject
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.b_lam.resplash.util.RESPLASH_DIRECTORY
+import com.b_lam.resplash.util.error
+import java.io.File
 
-/**
- * Wrapper for DownloadManager using Rx
- */
-class RxDownloadManager(private val context: Context) {
+class DownloadManagerWrapper(private val context: Context) {
 
     private val downloadManager by lazy {
         context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     }
 
-    private val subjectMap = LongSparseArray<PublishSubject<Uri>>()
+    private val downloadActionMap = LongSparseArray<DownloadAction>()
 
     init {
         val downloadStatusReceiver = DownloadStatusReceiver()
@@ -30,19 +29,16 @@ class RxDownloadManager(private val context: Context) {
         context.registerReceiver(downloadStatusReceiver, intentFilter)
     }
 
-    fun downloadPhoto(url: String, fileName: String): Pair<Long, Observable<Uri>> {
-        return download(createRequest(url, fileName, true))
-    }
-
-    fun downloadWallpaper(url: String, fileName: String): Pair<Long, Observable<Uri>> {
-        return download(createRequest(url, fileName, false))
-    }
-
-    private fun download(request: DownloadManager.Request): Pair<Long, Observable<Uri>> {
+    fun downloadPhoto(url: String, fileName: String) {
+        val request = createRequest(url, fileName, true)
         val downloadId = downloadManager.enqueue(request)
-        val publishSubject = PublishSubject.create<Uri>()
-        subjectMap.put(downloadId, publishSubject)
-        return Pair(downloadId, publishSubject)
+        downloadActionMap.put(downloadId, DownloadAction.DOWNLOAD)
+    }
+
+    fun downloadWallpaper(url: String, fileName: String) {
+        val request = createRequest(url, fileName, false)
+        val downloadId = downloadManager.enqueue(request)
+        downloadActionMap.put(downloadId, DownloadAction.WALLPAPER)
     }
 
     private fun createRequest(
@@ -57,7 +53,7 @@ class RxDownloadManager(private val context: Context) {
         }
 
         val subPath = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            "$RESPLASH_DOWNLOAD_FOLDER_NAME/$fileName"
+            "$RESPLASH_DIRECTORY${File.separator}$fileName"
         } else {
             fileName
         }
@@ -88,44 +84,58 @@ class RxDownloadManager(private val context: Context) {
 
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0L) ?: 0L
-            val publishSubject = subjectMap[id] ?: return
+            val downloadAction = downloadActionMap.get(id) ?: return
 
             val query = DownloadManager.Query().apply { setFilterById(id) }
             val cursor = downloadManager.query(query)
 
             if (!cursor.moveToFirst()) {
-                removeDownloadWithError(cursor, id, publishSubject, "Cursor empty, this shouldn't happened")
+                onError(cursor, id, downloadAction, "Cursor empty, this shouldn't happened")
                 return
             }
 
             val statusIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
             if (cursor.getInt(statusIndex) != DownloadManager.STATUS_SUCCESSFUL) {
-                removeDownloadWithError(cursor, id, publishSubject, "Download Failed")
-                return
+                onError(cursor, id, downloadAction, "Download Failed")
+            } else {
+                onSuccess(cursor, id, downloadAction, downloadManager.getUriForDownloadedFile(id))
             }
-
-            cursor.close()
-
-            publishSubject.onNext(downloadManager.getUriForDownloadedFile(id))
-            publishSubject.onComplete()
-            subjectMap.remove(id)
         }
 
-        private fun removeDownloadWithError(
+        private fun onSuccess(
             cursor: Cursor,
             id: Long,
-            publishSubject: PublishSubject<Uri>,
-            errorMessage: String
+            downloadAction: DownloadAction,
+            uri: Uri
         ) {
             cursor.close()
-            downloadManager.remove(id)
-            publishSubject.onError(IllegalStateException(errorMessage))
-            subjectMap.remove(id)
+            downloadActionMap.remove(id)
+
+            val localIntent = Intent(ACTION_DOWNLOAD_COMPLETE).apply {
+                putExtra(STATUS_SUCCESS, true)
+                putExtra(DATA_ACTION, downloadAction)
+                putExtra(DATA_URI, uri)
+            }
+            LocalBroadcastManager.getInstance(context).sendBroadcast(localIntent)
         }
-    }
 
-    companion object {
+        private fun onError(
+            cursor: Cursor,
+            id: Long,
+            downloadAction: DownloadAction,
+            errorMessage: String
+        ) {
+            error("onError: $errorMessage")
 
-        const val RESPLASH_DOWNLOAD_FOLDER_NAME = "Resplash"
+            cursor.close()
+            downloadManager.remove(id)
+            downloadActionMap.remove(id)
+
+            val localIntent = Intent(ACTION_DOWNLOAD_COMPLETE).apply {
+                putExtra(STATUS_SUCCESS, false)
+                putExtra(DATA_ACTION, downloadAction)
+            }
+            LocalBroadcastManager.getInstance(context).sendBroadcast(localIntent)
+        }
     }
 }

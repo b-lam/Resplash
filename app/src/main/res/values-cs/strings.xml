@@ -73,6 +73,9 @@
     <string name="layout_default">Výchozí</string>
     <string name="layout_minimal">Jednoduchý</string>
     <string name="layout_grid">Mřížka</string>
+    <string name="downloader">Downloader</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">Kvalita</string>
     <string name="quality_raw">Raw</string>
     <string name="quality_full">Plná</string>

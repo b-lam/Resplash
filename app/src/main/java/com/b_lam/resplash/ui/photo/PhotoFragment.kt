@@ -13,6 +13,10 @@ import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.util.*
+import com.b_lam.resplash.util.download.DOWNLOADER_SYSTEM
+import com.b_lam.resplash.util.download.DownloadAction
+import com.b_lam.resplash.util.download.DownloadManagerWrapper
+import org.koin.android.ext.android.inject
 
 abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
 
@@ -35,7 +39,7 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
         }
 
         override fun onLongClick(photo: Photo, animationView: LottieAnimationView) {
-            if (requireContext().fileExists(photo.fileName)) {
+            if (requireContext().fileExists(photo.fileName, sharedPreferencesRepository.downloader)) {
                 showFileExistsDialog(requireContext()) { downloadPhoto(photo, animationView) }
             } else {
                 downloadPhoto(photo, animationView)
@@ -47,9 +51,14 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
         if (requireContext().hasWritePermission()) {
             context.toast(R.string.download_started)
             animateLongClickDownload(animationView)
-            DownloadJobIntentService.enqueueDownload(requireActivity().applicationContext,
-                DownloadJobIntentService.Companion.Action.DOWNLOAD, photo.fileName,
-                getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality), photo.id)
+            val url = getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality)
+            if (sharedPreferencesRepository.downloader == DOWNLOADER_SYSTEM) {
+                val downloadManagerWrapper: DownloadManagerWrapper by inject()
+                downloadManagerWrapper.downloadPhoto(url, photo.fileName)
+            } else {
+                DownloadJobIntentService.enqueueDownload(requireActivity().applicationContext,
+                    DownloadAction.DOWNLOAD, photo.fileName, url, photo.id)
+            }
         } else {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
         }

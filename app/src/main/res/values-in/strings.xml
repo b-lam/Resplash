@@ -71,6 +71,9 @@
     <string name="layout_default">Default</string>
     <string name="layout_minimal">Sederhana</string>
     <string name="layout_grid">Kisi</string>
+    <string name="downloader">Pengunduh</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">Kualitas</string>
     <string name="quality_raw">Sangat Tinggi</string>
     <string name="quality_full">Tinggi</string>

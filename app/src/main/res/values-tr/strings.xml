@@ -72,6 +72,9 @@
     <string name="layout_default">Varsayılan</string>
     <string name="layout_minimal">Basit</string>
     <string name="layout_grid">Izgara</string>
+    <string name="downloader">Downloader</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">Kalite</string>
     <string name="quality_raw">Orijinal</string>
     <string name="quality_full">Kaliteli</string>

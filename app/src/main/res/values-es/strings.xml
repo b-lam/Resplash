@@ -72,6 +72,9 @@
     <string name="layout_default">Estándar</string>
     <string name="layout_minimal">Sencillo</string>
     <string name="layout_grid">Cuadrícula</string>
+    <string name="downloader">Descargador</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">Calidad</string>
     <string name="quality_raw">Raw</string>
     <string name="quality_full">Alta</string>

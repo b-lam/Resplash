@@ -76,6 +76,9 @@
     <string name="layout_default">إفتراضي</string>
     <string name="layout_minimal">بسيط</string>
     <string name="layout_grid">شبكة</string>
+    <string name="downloader">تنزيل</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">الجودة</string>
     <string name="quality_raw">ضعيف</string>
     <string name="quality_full">كامل</string>

@@ -24,6 +24,13 @@
             app:defaultValue="@string/default_layout_value"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference app:key="downloader"
+            app:title="@string/downloader"
+            app:entries="@array/downloader_options"
+            app:entryValues="@array/downloader_values"
+            app:defaultValue="@string/default_downloader_value"
+            app:useSimpleSummaryProvider="true" />
+
         <Preference app:key="clear_cache"
             app:title="@string/clear_cache" />
     </PreferenceCategory>

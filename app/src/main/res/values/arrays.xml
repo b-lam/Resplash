@@ -62,6 +62,17 @@
     </string-array>
     <string name="default_layout_value" translatable="false">default</string>
 
+    <!--Downloader-->
+    <string-array name="downloader_options">
+        <item>@string/downloader_default</item>
+        <item>@string/downloader_system</item>
+    </string-array>
+    <string-array name="downloader_values">
+        <item>default</item>
+        <item>system</item>
+    </string-array>
+    <string name="default_downloader_value" translatable="false">default</string>
+
     <!--Quality-->
     <string-array name="quality_options">
         <item>@string/quality_raw</item>

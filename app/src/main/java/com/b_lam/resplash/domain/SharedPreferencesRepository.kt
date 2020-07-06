@@ -23,6 +23,11 @@ class SharedPreferencesRepository(context: Context) {
             PREFERENCE_LAYOUT_KEY,
             PREFERENCE_LAYOUT_DEFAULT_VALUE)
 
+    val downloader: String?
+        get() = sharedPreferences.getString(
+            PREFERENCE_DOWNLOADER_KEY,
+            PREFERENCE_DOWNLOADER_DEFAULT_VALUE)
+
     val loadQuality: String?
         get() = sharedPreferences.getString(
             PREFERENCE_LOAD_QUALITY_KEY,
@@ -178,6 +183,9 @@ class SharedPreferencesRepository(context: Context) {
 
         private const val PREFERENCE_LAYOUT_KEY = "layout"
         private const val PREFERENCE_LAYOUT_DEFAULT_VALUE = "default"
+
+        private const val PREFERENCE_DOWNLOADER_KEY = "downloader"
+        private const val PREFERENCE_DOWNLOADER_DEFAULT_VALUE = "default"
 
         private const val PREFERENCE_LOAD_QUALITY_KEY = "load_quality"
         private const val PREFERENCE_LOAD_QUALITY_DEFAULT_VALUE = "regular"

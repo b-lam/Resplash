@@ -73,6 +73,9 @@
     <string name="layout_default">Нормално</string>
     <string name="layout_minimal">Једноставно</string>
     <string name="layout_grid">Мрежа</string>
+    <string name="downloader">Довнлоадер</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">Квалитет</string>
     <string name="quality_raw">Raw</string>
     <string name="quality_full">Full</string>

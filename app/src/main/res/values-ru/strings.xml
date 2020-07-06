@@ -74,6 +74,9 @@
     <string name="layout_default">Нормальный</string>
     <string name="layout_minimal">просто</string>
     <string name="layout_grid">Сеткой</string>
+    <string name="downloader">Загрузчик</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">Качество</string>
     <string name="quality_raw">Оригинальное</string>
     <string name="quality_full">Высокое</string>

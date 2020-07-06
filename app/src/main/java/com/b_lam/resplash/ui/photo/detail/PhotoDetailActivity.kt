@@ -31,9 +31,11 @@ import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
+import com.b_lam.resplash.util.download.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_photo_detail.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
@@ -80,9 +82,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     override fun onStart() {
         super.onStart()
 
-        downloadReceiver = registerReceiver(
-            IntentFilter(DownloadJobIntentService.ACTION_DOWNLOAD_COMPLETE)
-        ) {
+        downloadReceiver = registerReceiver(IntentFilter(ACTION_DOWNLOAD_COMPLETE)) {
             it?.let { handleDownloadIntent(it) }
         }
     }
@@ -203,15 +203,15 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             }
         }
         download_button.setOnClickListener {
-            if (fileExists(photo.fileName)) {
+            if (fileExists(photo.fileName, sharedPreferencesRepository.downloader)) {
                 showFileExistsDialog(this) { downloadPhoto(photo) }
             } else {
                 downloadPhoto(photo)
             }
         }
         set_as_wallpaper_button.setOnClickListener {
-            if (fileExists(photo.fileName)) {
-                getUriForPhoto(photo.fileName)?.let { uri ->
+            if (fileExists(photo.fileName, sharedPreferencesRepository.downloader)) {
+                getUriForPhoto(photo.fileName, sharedPreferencesRepository.downloader)?.let { uri ->
                     applyWallpaper(uri)
                 } ?: run {
                     downloadWallpaper(photo)
@@ -247,9 +247,14 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     private fun downloadPhoto(photo: Photo) {
         if (hasWritePermission()) {
             toast(R.string.download_started)
-            DownloadJobIntentService.enqueueDownload(applicationContext,
-                DownloadJobIntentService.Companion.Action.DOWNLOAD, photo.fileName,
-                getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality), photo.id)
+            val url = getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality)
+            if (sharedPreferencesRepository.downloader == DOWNLOADER_SYSTEM) {
+                val downloadManagerWrapper: DownloadManagerWrapper by inject()
+                downloadManagerWrapper.downloadPhoto(url, photo.fileName)
+            } else {
+                DownloadJobIntentService.enqueueDownload(applicationContext,
+                    DownloadAction.DOWNLOAD, photo.fileName, url, photo.id)
+            }
         } else {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
         }
@@ -257,9 +262,14 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun downloadWallpaper(photo: Photo) {
         if (hasWritePermission()) {
-            DownloadJobIntentService.enqueueDownload(applicationContext,
-                DownloadJobIntentService.Companion.Action.WALLPAPER, photo.fileName,
-                getPhotoUrl(photo, sharedPreferencesRepository.wallpaperQuality), photo.id)
+            val url = getPhotoUrl(photo, sharedPreferencesRepository.wallpaperQuality)
+            if (sharedPreferencesRepository.downloader == DOWNLOADER_SYSTEM) {
+                val downloadManagerWrapper: DownloadManagerWrapper by inject()
+                downloadManagerWrapper.downloadWallpaper(url, photo.fileName)
+            } else {
+                DownloadJobIntentService.enqueueDownload(applicationContext,
+                    DownloadAction.WALLPAPER, photo.fileName, url, photo.id)
+            }
 
             snackbar = Snackbar
                 .make(coordinator_layout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
@@ -271,22 +281,20 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     }
 
     private fun handleDownloadIntent(intent: Intent) {
-        val action = intent.getSerializableExtra(DownloadJobIntentService.DATA_ACTION)
-                as? DownloadJobIntentService.Companion.Action
-        val success = intent.getBooleanExtra(
-            DownloadJobIntentService.STATUS_SUCCESS, false)
+        val action = intent.getSerializableExtra(DATA_ACTION) as? DownloadAction
+        val success = intent.getBooleanExtra(STATUS_SUCCESS, false)
 
-        if (success && action == DownloadJobIntentService.Companion.Action.WALLPAPER) {
+        if (success && action == DownloadAction.WALLPAPER) {
             snackbar?.dismiss()
-            intent.getParcelableExtra<Uri>(DownloadJobIntentService.DATA_URI)?.let {
+            intent.getParcelableExtra<Uri>(DATA_URI)?.let {
                 applyWallpaper(it)
             }
-        } else if (success && action == DownloadJobIntentService.Companion.Action.DOWNLOAD) {
+        } else if (success && action == DownloadAction.DOWNLOAD) {
             toast(R.string.download_complete)
-        } else if (!success && action == DownloadJobIntentService.Companion.Action.WALLPAPER) {
+        } else if (!success && action == DownloadAction.WALLPAPER) {
             snackbar?.dismiss()
             coordinator_layout.showSnackBar(R.string.oops, anchor = R.id.set_as_wallpaper_button)
-        } else if (!success && action == DownloadJobIntentService.Companion.Action.DOWNLOAD) {
+        } else if (!success && action == DownloadAction.DOWNLOAD) {
             toast(R.string.oops)
         }
     }

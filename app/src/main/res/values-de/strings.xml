@@ -72,6 +72,9 @@
     <string name="layout_default">Standard</string>
     <string name="layout_minimal">Einfach</string>
     <string name="layout_grid">Raster</string>
+    <string name="downloader">Downloader</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">Qualität</string>
     <string name="quality_raw">Raw</string>
     <string name="quality_full">Voll</string>

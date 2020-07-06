@@ -71,6 +71,9 @@
     <string name="layout_default">默认</string>
     <string name="layout_minimal">简单</string>
     <string name="layout_grid">网格</string>
+    <string name="downloader">下载器</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">图像质量</string>
     <string name="quality_raw">原始</string>
     <string name="quality_full">完整</string>

@@ -121,11 +121,6 @@ dependencies {
     implementation 'org.koin:koin-android:2.1.5'
     implementation 'org.koin:koin-androidx-viewmodel:2.1.5'
 
-    // Rx
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.3'
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
-
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:17.4.3'
     implementation 'com.google.firebase:firebase-crashlytics:17.1.0'

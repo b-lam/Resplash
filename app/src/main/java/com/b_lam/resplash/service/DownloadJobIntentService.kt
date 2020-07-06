@@ -14,6 +14,7 @@ import androidx.core.content.FileProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.b_lam.resplash.data.download.DownloadService
 import com.b_lam.resplash.util.*
+import com.b_lam.resplash.util.download.*
 import kotlinx.coroutines.*
 import okhttp3.ResponseBody
 import okio.buffer
@@ -29,7 +30,7 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
 
     override fun onHandleWork(intent: Intent) {
 
-        val action = intent.getSerializableExtra(EXTRA_ACTION) as? Action ?: return
+        val action = intent.getSerializableExtra(EXTRA_ACTION) as? DownloadAction ?: return
         val fileName = intent.getStringExtra(EXTRA_FILE_NAME) ?: return
         val url = intent.getStringExtra(EXTRA_URL) ?: return
         val photoId = intent.getStringExtra(EXTRA_PHOTO_ID)
@@ -42,7 +43,7 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
     }
 
     private suspend fun download(
-        action: Action,
+        downloadAction: DownloadAction,
         fileName: String,
         url: String,
         photoId: String?
@@ -64,14 +65,14 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
 
             if (uri != null) {
                 photoId?.let { trackDownload(photoId) }
-                onSuccess(action, fileName, uri)
+                onSuccess(downloadAction, fileName, uri)
             } else {
-                onError(action, fileName, Exception("Failed writing to file"), true)
+                onError(downloadAction, fileName, Exception("Failed writing to file"), true)
             }
         } catch (e: CancellationException) {
-            onError(action, fileName, e, false)
+            onError(downloadAction, fileName, e, false)
         } catch (e: Exception) {
-            onError(action, fileName, e, true)
+            onError(downloadAction, fileName, e, true)
         }
 
     }
@@ -85,7 +86,7 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
     }
 
     private fun onSuccess(
-        action: Action,
+        downloadAction: DownloadAction,
         fileName: String,
         uri: Uri
     ) {
@@ -93,19 +94,19 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
 
         val localIntent = Intent(ACTION_DOWNLOAD_COMPLETE).apply {
             putExtra(STATUS_SUCCESS, true)
-            putExtra(DATA_ACTION, action)
+            putExtra(DATA_ACTION, downloadAction)
             putExtra(DATA_URI, uri)
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent)
 
         notificationManager.cancelNotification(fileName)
-        if (action == Action.DOWNLOAD) {
+        if (downloadAction == DownloadAction.DOWNLOAD) {
             notificationManager.showDownloadCompleteNotification(fileName, uri)
         }
     }
 
     private fun onError(
-        action: Action,
+        downloadAction: DownloadAction,
         fileName: String,
         exception: Exception,
         showNotification: Boolean
@@ -114,7 +115,7 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
 
         val localIntent = Intent(ACTION_DOWNLOAD_COMPLETE).apply {
             putExtra(STATUS_SUCCESS, false)
-            putExtra(DATA_ACTION, action)
+            putExtra(DATA_ACTION, downloadAction)
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent)
 
@@ -136,7 +137,7 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
             put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
             put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
             put(MediaStore.Images.Media.SIZE, contentLength())
-            put(MediaStore.Images.Media.RELATIVE_PATH, RELATIVE_PATH)
+            put(MediaStore.Images.Media.RELATIVE_PATH, RESPLASH_RELATIVE_PATH)
             put(MediaStore.Images.Media.IS_PENDING, 1)
         }
 
@@ -181,7 +182,7 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
         fileName: String,
         onProgress: ((Int) -> Unit)?
     ): Uri? {
-        val path = File(LEGACY_PATH)
+        val path = File(RESPLASH_LEGACY_PATH)
 
         if (!path.exists()) {
             if (!path.mkdirs()) {
@@ -227,24 +228,15 @@ class DownloadJobIntentService : SafeJobIntentService(), CoroutineScope by MainS
         private const val EXTRA_URL = "extra_url"
         private const val EXTRA_PHOTO_ID = "extra_photo_id"
 
-        const val ACTION_DOWNLOAD_COMPLETE = "com.b_lam.resplash.ACTION_DOWNLOAD_COMPLETE"
-
-        const val DATA_ACTION = "com.b_lam.resplash.DATA_ACTION"
-        const val DATA_URI = "com.b_lam.resplash.DATA_URI"
-
-        const val STATUS_SUCCESS = "com.b_lam.resplash.STATUS_SUCCESS"
-
-        enum class Action { DOWNLOAD, WALLPAPER }
-
         fun enqueueDownload(
             context: Context,
-            action: Action,
+            downloadAction: DownloadAction,
             fileName: String,
             url: String,
             photoId: String?
         ) {
             val intent = Intent(context, DownloadJobIntentService::class.java).apply {
-                putExtra(EXTRA_ACTION, action)
+                putExtra(EXTRA_ACTION, downloadAction)
                 putExtra(EXTRA_FILE_NAME, fileName)
                 putExtra(EXTRA_URL, url)
                 putExtra(EXTRA_PHOTO_ID, photoId)

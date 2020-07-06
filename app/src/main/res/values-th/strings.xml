@@ -71,6 +71,9 @@
     <string name="layout_default">ค่าเริ่มต้น</string>
     <string name="layout_minimal">ง่าย</string>
     <string name="layout_grid">ตาราง</string>
+    <string name="downloader">ดาวน์โหลด</string>
+    <string name="downloader_default">Resplash downloader</string>
+    <string name="downloader_system">System downloader</string>
     <string name="quality">คุณภาพ</string>
     <string name="quality_raw">ต้นฉบับ</string>
     <string name="quality_full">ขนาดเต็ม</string>
