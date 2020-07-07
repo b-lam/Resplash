@@ -48,4 +48,6 @@
     <dimen name="extended_fab_min_width">192dp</dimen>
 
     <dimen name="app_icon_size">72dp</dimen>
+
+    <dimen name="app_widget_size">40dp</dimen>
 </resources>

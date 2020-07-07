@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/auto_wallpaper_next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/auto_wallpaper_app_widget_button"
+        android:contentDescription="@string/auto_wallpaper_next_wallpaper"
+        android:elevation="6dp" />
+</FrameLayout>

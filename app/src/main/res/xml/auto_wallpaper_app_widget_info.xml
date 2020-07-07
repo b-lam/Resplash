@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialKeyguardLayout="@layout/auto_wallpaper_app_widget"
+    android:initialLayout="@layout/auto_wallpaper_app_widget"
+    android:minWidth="@dimen/app_widget_size"
+    android:minHeight="@dimen/app_widget_size"
+    android:previewImage="@drawable/auto_wallpaper_app_widget_button"
+    android:resizeMode="none"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen|keyguard" />
