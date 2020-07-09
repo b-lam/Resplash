@@ -9,11 +9,11 @@ The internet’s source of freely-usable images. Powered by creators everywhere.
 
 * Browse 1M+ high-res photos
 * New photos everyday
-* Material design
+* Automatic wallpaper changer: Automatically refresh your home screen with a new random wallpaper
+* Muzei 3.0 Live Wallpaper source (Muzei app needs to be installed: http://get.muzei.co)
 * Dark theme
 * Download raw photos
 * Set as wallpaper straight from the app
-* Automatically refresh your home screen with a new random wallpaper
 * View user profiles, curated collections, photo stats and EXIF data
 * Log in to like photos and update your profile
 * Various layout options
