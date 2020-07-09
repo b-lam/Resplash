@@ -15,6 +15,7 @@ import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.lazyMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class PhotoDetailViewModel(
     private val photoRepository: PhotoRepository,
@@ -42,6 +43,9 @@ class PhotoDetailViewModel(
 
     private val _userCollections = MutableLiveData<MutableList<Collection>?>()
     val userCollections: LiveData<MutableList<Collection>?> = _userCollections
+
+    var downloadId: Long? = null
+    var downloadUUID: UUID? = null
 
     fun photoDetailsLiveData(id: String): LiveData<Photo> = _photoDetailsLiveData.getValue(id)
 

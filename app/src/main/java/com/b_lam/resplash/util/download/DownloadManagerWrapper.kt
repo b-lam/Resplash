@@ -29,16 +29,18 @@ class DownloadManagerWrapper(private val context: Context) {
         context.registerReceiver(downloadStatusReceiver, intentFilter)
     }
 
-    fun downloadPhoto(url: String, fileName: String) {
+    fun downloadPhoto(url: String, fileName: String): Long {
         val request = createRequest(url, fileName, true)
         val downloadId = downloadManager.enqueue(request)
         downloadActionMap.put(downloadId, DownloadAction.DOWNLOAD)
+        return downloadId
     }
 
-    fun downloadWallpaper(url: String, fileName: String) {
+    fun downloadWallpaper(url: String, fileName: String): Long {
         val request = createRequest(url, fileName, false)
         val downloadId = downloadManager.enqueue(request)
         downloadActionMap.put(downloadId, DownloadAction.WALLPAPER)
+        return downloadId
     }
 
     private fun createRequest(
@@ -112,7 +114,7 @@ class DownloadManagerWrapper(private val context: Context) {
             downloadActionMap.remove(id)
 
             val localIntent = Intent(ACTION_DOWNLOAD_COMPLETE).apply {
-                putExtra(STATUS_SUCCESS, true)
+                putExtra(DOWNLOAD_STATUS, STATUS_SUCCESSFUL)
                 putExtra(DATA_ACTION, downloadAction)
                 putExtra(DATA_URI, uri)
             }
@@ -132,7 +134,7 @@ class DownloadManagerWrapper(private val context: Context) {
             downloadActionMap.remove(id)
 
             val localIntent = Intent(ACTION_DOWNLOAD_COMPLETE).apply {
-                putExtra(STATUS_SUCCESS, false)
+                putExtra(DOWNLOAD_STATUS, STATUS_CANCELLED)
                 putExtra(DATA_ACTION, downloadAction)
             }
             LocalBroadcastManager.getInstance(context).sendBroadcast(localIntent)

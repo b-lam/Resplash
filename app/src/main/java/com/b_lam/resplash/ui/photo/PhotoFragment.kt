@@ -8,7 +8,6 @@ import com.airbnb.lottie.LottieAnimationView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
-import com.b_lam.resplash.service.DownloadJobIntentService
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
@@ -16,6 +15,7 @@ import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.download.DOWNLOADER_SYSTEM
 import com.b_lam.resplash.util.download.DownloadAction
 import com.b_lam.resplash.util.download.DownloadManagerWrapper
+import com.b_lam.resplash.worker.DownloadWorker
 import org.koin.android.ext.android.inject
 
 abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
@@ -56,8 +56,8 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
                 val downloadManagerWrapper: DownloadManagerWrapper by inject()
                 downloadManagerWrapper.downloadPhoto(url, photo.fileName)
             } else {
-                DownloadJobIntentService.enqueueDownload(requireActivity().applicationContext,
-                    DownloadAction.DOWNLOAD, photo.fileName, url, photo.id)
+                DownloadWorker.enqueueDownload(requireActivity().applicationContext,
+                    DownloadAction.DOWNLOAD, url, photo.fileName, photo.id)
             }
         } else {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)

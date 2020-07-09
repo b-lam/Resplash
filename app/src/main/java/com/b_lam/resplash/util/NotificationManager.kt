@@ -32,11 +32,7 @@ class NotificationManager(private val context: Context) {
         }
     }
 
-    fun cancelNotification(fileName: String) {
-        cancelNotification(fileName.hashCode())
-    }
-
-    private fun cancelNotification(id: Int) {
+    fun cancelNotification(id: Int) {
         notificationManager.cancel(id)
     }
 
@@ -64,6 +60,25 @@ class NotificationManager(private val context: Context) {
         notificationManager.cancel(AUTO_WALLPAPER_TILE_NOTIFICATION_ID)
     }
 
+    fun getProgressNotificationBuilder(fileName: String, cancelIntent: PendingIntent) =
+        NotificationCompat.Builder(context, DOWNLOADS_CHANNEL_ID).apply {
+            priority = NotificationCompat.PRIORITY_LOW
+            setSmallIcon(android.R.drawable.stat_sys_download)
+            setTicker("")
+            setOngoing(true)
+            setContentTitle(fileName)
+            setProgress(0, 0, true)
+            addAction(0, context.getString(R.string.cancel), cancelIntent)
+        }
+
+    fun updateProgressNotification(
+        builder: NotificationCompat.Builder,
+        progress: Int
+    ) = builder.apply {
+        setProgress(100, progress, false)
+        if (progress == 100) setSmallIcon(android.R.drawable.stat_sys_download_done)
+    }
+
     fun showDownloadCompleteNotification(fileName: String, uri: Uri) {
         val builder = NotificationCompat.Builder(context, DOWNLOADS_CHANNEL_ID).apply {
             priority = NotificationCompat.PRIORITY_LOW
@@ -74,27 +89,6 @@ class NotificationManager(private val context: Context) {
             setProgress(0, 0, false)
             setAutoCancel(true)
         }
-        notificationManager.notify(fileName.hashCode(), builder.build())
-    }
-
-    fun getProgressNotificationBuilder(fileName: String): NotificationCompat.Builder {
-        val builder = NotificationCompat.Builder(context, DOWNLOADS_CHANNEL_ID).apply {
-            priority = NotificationCompat.PRIORITY_LOW
-            setSmallIcon(android.R.drawable.stat_sys_download)
-            setTicker("")
-            setContentTitle(fileName)
-            setProgress(0, 0, true)
-        }
-        notificationManager.notify(fileName.hashCode(), builder.build())
-        return builder
-    }
-
-    fun updateProgressNotification(
-        builder: NotificationCompat.Builder,
-        fileName: String,
-        progress: Int
-    ) {
-        builder.apply { setProgress(100, progress, false) }
         notificationManager.notify(fileName.hashCode(), builder.build())
     }
 

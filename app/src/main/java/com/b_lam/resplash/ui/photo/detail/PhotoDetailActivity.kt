@@ -13,15 +13,16 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.observe
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
-import com.b_lam.resplash.service.DownloadJobIntentService
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.collection.add.AddCollectionBottomSheet
 import com.b_lam.resplash.ui.login.LoginActivity
@@ -32,6 +33,7 @@ import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
 import com.b_lam.resplash.util.download.*
+import com.b_lam.resplash.worker.DownloadWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_photo_detail.*
@@ -250,10 +252,10 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             val url = getPhotoUrl(photo, sharedPreferencesRepository.downloadQuality)
             if (sharedPreferencesRepository.downloader == DOWNLOADER_SYSTEM) {
                 val downloadManagerWrapper: DownloadManagerWrapper by inject()
-                downloadManagerWrapper.downloadPhoto(url, photo.fileName)
+                viewModel.downloadId = downloadManagerWrapper.downloadPhoto(url, photo.fileName)
             } else {
-                DownloadJobIntentService.enqueueDownload(applicationContext,
-                    DownloadAction.DOWNLOAD, photo.fileName, url, photo.id)
+                viewModel.downloadUUID = DownloadWorker.enqueueDownload(applicationContext,
+                    DownloadAction.DOWNLOAD, url, photo.fileName, photo.id)
             }
         } else {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
@@ -265,14 +267,16 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             val url = getPhotoUrl(photo, sharedPreferencesRepository.wallpaperQuality)
             if (sharedPreferencesRepository.downloader == DOWNLOADER_SYSTEM) {
                 val downloadManagerWrapper: DownloadManagerWrapper by inject()
-                downloadManagerWrapper.downloadWallpaper(url, photo.fileName)
+                viewModel.downloadId = downloadManagerWrapper.downloadWallpaper(url, photo.fileName)
             } else {
-                DownloadJobIntentService.enqueueDownload(applicationContext,
-                    DownloadAction.WALLPAPER, photo.fileName, url, photo.id)
+                viewModel.downloadUUID = DownloadWorker.enqueueDownload(applicationContext,
+                    DownloadAction.WALLPAPER, url, photo.fileName, photo.id)
             }
 
             snackbar = Snackbar
                 .make(coordinator_layout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.cancel) { cancelDownload() }
+                .setActionTextColor(ContextCompat.getColor(this, R.color.red_400))
                 .setAnchorView(R.id.set_as_wallpaper_button)
             snackbar?.show()
         } else {
@@ -282,20 +286,22 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun handleDownloadIntent(intent: Intent) {
         val action = intent.getSerializableExtra(DATA_ACTION) as? DownloadAction
-        val success = intent.getBooleanExtra(STATUS_SUCCESS, false)
+        val status = intent.getIntExtra(DOWNLOAD_STATUS, -1)
 
-        if (success && action == DownloadAction.WALLPAPER) {
+        if (action == DownloadAction.WALLPAPER) {
             snackbar?.dismiss()
-            intent.getParcelableExtra<Uri>(DATA_URI)?.let {
-                applyWallpaper(it)
+            when (status) {
+                STATUS_SUCCESSFUL -> intent.getParcelableExtra<Uri>(DATA_URI)?.let {
+                    applyWallpaper(it)
+                }
+                STATUS_FAILED ->
+                    coordinator_layout.showSnackBar(R.string.oops, anchor = R.id.set_as_wallpaper_button)
             }
-        } else if (success && action == DownloadAction.DOWNLOAD) {
-            toast(R.string.download_complete)
-        } else if (!success && action == DownloadAction.WALLPAPER) {
-            snackbar?.dismiss()
-            coordinator_layout.showSnackBar(R.string.oops, anchor = R.id.set_as_wallpaper_button)
-        } else if (!success && action == DownloadAction.DOWNLOAD) {
-            toast(R.string.oops)
+        } else if (action == DownloadAction.DOWNLOAD) {
+            when (status) {
+                STATUS_SUCCESSFUL -> toast(R.string.download_complete)
+                STATUS_FAILED -> toast(R.string.oops)
+            }
         }
     }
 
@@ -317,6 +323,17 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 toast("Failed to set wallpaper")
             } finally {
                 bitmap?.recycle()
+            }
+        }
+    }
+
+    private fun cancelDownload() {
+        if (sharedPreferencesRepository.downloader == DOWNLOADER_SYSTEM) {
+            val downloadManagerWrapper: DownloadManagerWrapper by inject()
+            viewModel.downloadId?.let { downloadManagerWrapper.cancelDownload(it) }
+        } else {
+            viewModel.downloadUUID?.let {
+                WorkManager.getInstance(applicationContext).cancelWorkById(it)
             }
         }
     }

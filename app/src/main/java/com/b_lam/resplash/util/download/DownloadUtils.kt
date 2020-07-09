@@ -8,6 +8,10 @@ const val ACTION_DOWNLOAD_COMPLETE = "com.b_lam.resplash.ACTION_DOWNLOAD_COMPLET
 const val DATA_ACTION = "com.b_lam.resplash.DATA_ACTION"
 const val DATA_URI = "com.b_lam.resplash.DATA_URI"
 
-const val STATUS_SUCCESS = "com.b_lam.resplash.STATUS_SUCCESS"
+const val DOWNLOAD_STATUS = "com.b_lam.resplash.DOWNLOAD_STATUS"
+
+const val STATUS_SUCCESSFUL = 1
+const val STATUS_FAILED = 2
+const val STATUS_CANCELLED = 3
 
 enum class DownloadAction { DOWNLOAD, WALLPAPER }
