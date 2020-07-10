@@ -205,7 +205,6 @@ class BillingRepository(
             playStoreBillingClient.acknowledgePurchase(params) { billingResult ->
                 when (billingResult.responseCode) {
                     BillingClient.BillingResponseCode.OK -> disburseNonConsumableEntitlement(purchase)
-                    BillingClient.BillingResponseCode.ITEM_NOT_OWNED -> removeNonConsumableEntitlement(purchase)
                     else -> Log.d(TAG, "acknowledgeNonConsumablePurchasesAsync response is ${billingResult.debugMessage}")
                 }
             }
