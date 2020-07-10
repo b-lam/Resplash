@@ -40,7 +40,7 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
                 }
                 else -> unlockAndRun {
                     Intent(this@AutoWallpaperTileService, AutoWallpaperSettingsActivity::class.java).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivityAndCollapse(this)
                     }
                 }

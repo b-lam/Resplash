@@ -125,8 +125,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">获取与以下关键词匹配的照片：</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">（用逗号分隔多个关键词）</string>
     <string name="auto_wallpaper_options_title">选项</string>
-    <string name="auto_wallpaper_center_crop_title">中心裁剪</string>
-    <string name="auto_wallpaper_center_crop_summary">裁剪壁纸以使其居中</string>
+    <string name="auto_wallpaper_crop_title">作物壁纸</string>
+    <string name="auto_wallpaper_crop_none">没有</string>
+    <string name="auto_wallpaper_crop_center">中央</string>
+    <string name="auto_wallpaper_crop_center_crop">中心裁剪</string>
     <string name="auto_wallpaper_notification_settings_title">通知设置</string>
     <string name="auto_wallpaper_show_notification_title">显示通知</string>
     <string name="auto_wallpaper_show_notification_summary">获取有关当前壁纸信息的通知</string>

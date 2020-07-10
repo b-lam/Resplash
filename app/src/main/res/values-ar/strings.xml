@@ -130,8 +130,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">احصل على صور تطابق شروط البحث التالية:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(فصل مصطلحات متعددة بفواصل)</string>
     <string name="auto_wallpaper_options_title">أعدادات</string>
-    <string name="auto_wallpaper_center_crop_title">محصول مركزي</string>
-    <string name="auto_wallpaper_center_crop_summary">اقتصاص جميع الخلفيات ليتم توسيطها</string>
+    <string name="auto_wallpaper_crop_title">خلفية المحاصيل</string>
+    <string name="auto_wallpaper_crop_none">لا يوجد</string>
+    <string name="auto_wallpaper_crop_center">مركز</string>
+    <string name="auto_wallpaper_crop_center_crop">محصول مركزي</string>
     <string name="auto_wallpaper_notification_settings_title">إعدادات الإشعار</string>
     <string name="auto_wallpaper_show_notification_title">إظهار الإخطار</string>
     <string name="auto_wallpaper_show_notification_summary">احصل على إشعار بمعلومات الخلفية الحالية</string>

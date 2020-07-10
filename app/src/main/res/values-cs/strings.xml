@@ -127,8 +127,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">Získejte fotografie odpovídající následujícím vyhledávacím dotazům:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(Oddělte více termínů čárkami)</string>
     <string name="auto_wallpaper_options_title">Možnosti</string>
-    <string name="auto_wallpaper_center_crop_title">Středová plodina</string>
-    <string name="auto_wallpaper_center_crop_summary">Ořízněte všechny tapety, které chcete vycentrovat</string>
+    <string name="auto_wallpaper_crop_title">Oříznutí tapety</string>
+    <string name="auto_wallpaper_crop_none">Žádný</string>
+    <string name="auto_wallpaper_crop_center">Centrum</string>
+    <string name="auto_wallpaper_crop_center_crop">Středová plodina</string>
     <string name="auto_wallpaper_notification_settings_title">Nastavení upozornění</string>
     <string name="auto_wallpaper_show_notification_title">Zobrazit upozornění</string>
     <string name="auto_wallpaper_show_notification_summary">Získejte upozornění s aktuálními informacemi o tapetách</string>

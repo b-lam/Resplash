@@ -126,8 +126,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">Obtenha fotos correspondentes aos seguintes termos de pesquisa:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separe vários termos com vírgulas)</string>
     <string name="auto_wallpaper_options_title">Opções</string>
-    <string name="auto_wallpaper_center_crop_title">Cortar ao centro</string>
-    <string name="auto_wallpaper_center_crop_summary">Cortar todos os papéis de parede para centralizar</string>
+    <string name="auto_wallpaper_crop_title">Crop wallpaper</string>
+    <string name="auto_wallpaper_crop_none">Nenhum</string>
+    <string name="auto_wallpaper_crop_center">Centro</string>
+    <string name="auto_wallpaper_crop_center_crop">Corte central</string>
     <string name="auto_wallpaper_notification_settings_title">Configurações de notificação</string>
     <string name="auto_wallpaper_show_notification_title">Mostrar notificação</string>
     <string name="auto_wallpaper_show_notification_summary">Receba uma notificação com as informações atuais do papel de parede</string>

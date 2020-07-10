@@ -126,8 +126,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">Ottieni foto corrispondenti ai seguenti termini di ricerca:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separare più termini con virgole)</string>
     <string name="auto_wallpaper_options_title">Opzioni</string>
-    <string name="auto_wallpaper_center_crop_title">Ritaglia centrale</string>
-    <string name="auto_wallpaper_center_crop_summary">Ritaglia tutti gli sfondi da centrare</string>
+    <string name="auto_wallpaper_crop_title">Ritaglia carta da parati</string>
+    <string name="auto_wallpaper_crop_none">Nessuna</string>
+    <string name="auto_wallpaper_crop_center">Centro</string>
+    <string name="auto_wallpaper_crop_center_crop">Taglio centrale</string>
     <string name="auto_wallpaper_notification_settings_title">Impostazioni di notifica</string>
     <string name="auto_wallpaper_show_notification_title">Mostra notifica</string>
     <string name="auto_wallpaper_show_notification_summary">Ricevi una notifica con le informazioni sullo sfondo corrente</string>

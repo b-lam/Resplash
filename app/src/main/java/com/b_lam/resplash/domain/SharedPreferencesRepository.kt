@@ -89,10 +89,10 @@ class SharedPreferencesRepository(context: Context) {
             PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_KEY,
             PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_DEFAULT_VALUE)
 
-    val autoWallpaperCenterCrop: Boolean
-        get() = sharedPreferences.getBoolean(
-            PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_KEY,
-            PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_DEFAULT_VALUE)
+    val autoWallpaperCrop: String?
+        get() = sharedPreferences.getString(
+            PREFERENCE_AUTO_WALLPAPER_CROP_KEY,
+            PREFERENCE_AUTO_WALLPAPER_CROP_DEFAULT_VALUE)
 
     val autoWallpaperShowNotification: Boolean
         get() = sharedPreferences.getBoolean(
@@ -223,8 +223,8 @@ class SharedPreferencesRepository(context: Context) {
         private const val PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_KEY = "auto_wallpaper_search_terms"
         private const val PREFERENCE_AUTO_WALLPAPER_SEARCH_TERMS_DEFAULT_VALUE = ""
 
-        private const val PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_KEY = "auto_wallpaper_center_crop"
-        private const val PREFERENCE_AUTO_WALLPAPER_CENTER_CROP_DEFAULT_VALUE = true
+        private const val PREFERENCE_AUTO_WALLPAPER_CROP_KEY = "auto_wallpaper_crop"
+        private const val PREFERENCE_AUTO_WALLPAPER_CROP_DEFAULT_VALUE = "center_crop"
 
         private const val PREFERENCE_AUTO_WALLPAPER_SHOW_NOTIFICATION_KEY = "auto_wallpaper_show_notification"
         private const val PREFERENCE_AUTO_WALLPAPER_SHOW_NOTIFICATION_DEFAULT_VALUE = true

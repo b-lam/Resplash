@@ -20,9 +20,9 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class MuzeiWorker(
-    appContext: Context,
+    context: Context,
     params: WorkerParameters
-) : CoroutineWorker(appContext, params), KoinComponent {
+) : CoroutineWorker(context, params), KoinComponent {
 
     private val photoRepository: PhotoRepository by inject()
     private val autoWallpaperRepository: AutoWallpaperRepository by inject()

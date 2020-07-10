@@ -26,9 +26,9 @@ import kotlin.math.max
 import kotlin.math.min
 
 class AutoWallpaperWorker(
-    private val appContext: Context,
+    private val context: Context,
     params: WorkerParameters
-) : CoroutineWorker(appContext, params), KoinComponent {
+) : CoroutineWorker(context, params), KoinComponent {
 
     private val photoRepository: PhotoRepository by inject()
     private val autoWallpaperRepository: AutoWallpaperRepository by inject()
@@ -37,7 +37,7 @@ class AutoWallpaperWorker(
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         if (inputData.getBoolean(KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY, false)) {
-            val screenOrientation = appContext.resources.configuration.orientation
+            val screenOrientation = context.resources.configuration.orientation
             if (screenOrientation == ORIENTATION_LANDSCAPE) {
                 return@withContext Result.retry()
             }
@@ -110,31 +110,26 @@ class AutoWallpaperWorker(
 
     private suspend fun downloadAndSetWallpaper(photo: Photo): Boolean {
         val url = getPhotoUrl(photo, inputData.getString(KEY_AUTO_WALLPAPER_QUALITY))
-
         try {
             downloadService.downloadFile(url).byteStream().use {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     val centerCropRect =
-                        if (inputData.getBoolean(KEY_AUTO_WALLPAPER_CENTER_CROP, true)) {
-                            if (photo.width != null && photo.height != null) {
-                                getCenterCropRect(
-                                    min(screenWidth, screenHeight).toDouble(),
-                                    max(screenWidth, screenHeight).toDouble(),
-                                    photo.width.toDouble(),
-                                    photo.height.toDouble()
-                                )
-                            } else {
-                                null
-                            }
+                        if (inputData.getString(KEY_AUTO_WALLPAPER_CROP) != "none" &&
+                            (photo.width != null && photo.height != null)) {
+                            getCropHintRect(
+                                min(screenWidth, screenHeight).toDouble(),
+                                max(screenWidth, screenHeight).toDouble(),
+                                photo.width.toDouble(),
+                                photo.height.toDouble())
                         } else {
                             null
                         }
                     val screenSelect = inputData.getInt(KEY_AUTO_WALLPAPER_SELECT_SCREEN,
                         WallpaperManager.FLAG_SYSTEM or WallpaperManager.FLAG_LOCK)
-                    WallpaperManager.getInstance(appContext).setStream(it, centerCropRect,
+                    WallpaperManager.getInstance(context).setStream(it, centerCropRect,
                         true, screenSelect)
                 } else {
-                    WallpaperManager.getInstance(appContext).setStream(it)
+                    WallpaperManager.getInstance(context).setStream(it)
                 }
                 return true
             }
@@ -143,7 +138,7 @@ class AutoWallpaperWorker(
         }
     }
 
-    private fun getCenterCropRect(
+    private fun getCropHintRect(
         screenWidth: Double,
         screenHeight: Double,
         photoWidth: Double,
@@ -161,8 +156,12 @@ class AutoWallpaperWorker(
             val newHeight = screenHeight * resizeFactor
             val newLeft = (photoWidth - newWidth) / 2
             val newTop = (photoHeight - newHeight) / 2
-            val rect = Rect(newLeft.toInt(), newTop.toInt(),
-                (newWidth + newLeft).toInt(), (newHeight + newTop).toInt())
+            val newRight = if (inputData.getString(KEY_AUTO_WALLPAPER_CROP) == "center_crop") {
+                newWidth + newLeft
+            } else {
+                photoWidth
+            }
+            val rect = Rect(newLeft.toInt(), newTop.toInt(), newRight.toInt(), (newHeight + newTop).toInt())
             return if (rect.isValid()) rect else null
         }
         return null
@@ -205,13 +204,14 @@ class AutoWallpaperWorker(
 
         private const val AUTO_WALLPAPER_JOB_ID = "auto_wallpaper_job_id"
         const val AUTO_WALLPAPER_SINGLE_JOB_ID = "auto_wallpaper_single_job_id"
+        private const val AUTO_WALLPAPER_FUTURE_JOB_ID = "auto_wallpaper_future_job_id"
 
         private const val KEY_AUTO_WALLPAPER_QUALITY = "key_auto_wallpaper_quality"
         private const val KEY_AUTO_WALLPAPER_THUMBNAIL_QUALITY = "key_auto_wallpaper_thumbnail_quality"
         private const val KEY_AUTO_WALLPAPER_SOURCE = "key_auto_wallpaper_source"
         private const val KEY_AUTO_WALLPAPER_USERNAME = "key_auto_wallpaper_username"
         private const val KEY_AUTO_WALLPAPER_SEARCH_TERMS = "key_auto_wallpaper_search_terms"
-        private const val KEY_AUTO_WALLPAPER_CENTER_CROP = "key_auto_wallpaper_center_crop"
+        private const val KEY_AUTO_WALLPAPER_CROP = "key_auto_wallpaper_crop"
         private const val KEY_AUTO_WALLPAPER_SHOW_NOTIFICATION = "key_auto_wallpaper_show_notification"
         private const val KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY = "key_auto_wallpaper_portrait_mode_only"
         private const val KEY_AUTO_WALLPAPER_SELECT_SCREEN = "key_auto_wallpaper_select_screen"
@@ -250,19 +250,19 @@ class AutoWallpaperWorker(
                         .setInitialDelay(autoWallpaperInterval, TimeUnit.MINUTES)
                         .build()
 
+                    WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_JOB_ID)
                     WorkManager.getInstance(context).enqueueUniqueWork(
                         AUTO_WALLPAPER_SINGLE_JOB_ID,
                         ExistingWorkPolicy.REPLACE,
                         request
                     )
                     WorkManager.getInstance(context).enqueueUniqueWork(
-                        AUTO_WALLPAPER_JOB_ID,
+                        AUTO_WALLPAPER_FUTURE_JOB_ID,
                         ExistingWorkPolicy.REPLACE,
                         requestFuture
                     )
                 } else {
-                    WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_SINGLE_JOB_ID)
-                    WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_JOB_ID)
+                    cancelAllWork(context)
                 }
             }
         }
@@ -288,13 +288,15 @@ class AutoWallpaperWorker(
                         .setConstraints(constraints.build())
                         .build()
 
+                    WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_SINGLE_JOB_ID)
+                    WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_FUTURE_JOB_ID)
                     WorkManager.getInstance(context).enqueueUniquePeriodicWork(
                         AUTO_WALLPAPER_JOB_ID,
                         ExistingPeriodicWorkPolicy.REPLACE,
                         request
                     )
                 } else {
-                    WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_JOB_ID)
+                    cancelAllWork(context)
                 }
             }
         }
@@ -307,7 +309,7 @@ class AutoWallpaperWorker(
             KEY_AUTO_WALLPAPER_SOURCE to sharedPreferencesRepository.autoWallpaperSource,
             KEY_AUTO_WALLPAPER_USERNAME to sharedPreferencesRepository.autoWallpaperUsername,
             KEY_AUTO_WALLPAPER_SEARCH_TERMS to sharedPreferencesRepository.autoWallpaperSearchTerms,
-            KEY_AUTO_WALLPAPER_CENTER_CROP to sharedPreferencesRepository.autoWallpaperCenterCrop,
+            KEY_AUTO_WALLPAPER_CROP to sharedPreferencesRepository.autoWallpaperCrop,
             KEY_AUTO_WALLPAPER_SHOW_NOTIFICATION to sharedPreferencesRepository.autoWallpaperShowNotification,
             KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY to sharedPreferencesRepository.autoWallpaperPortraitModeOnly,
             KEY_AUTO_WALLPAPER_SELECT_SCREEN to sharedPreferencesRepository.autoWallpaperSelectScreen,
@@ -315,13 +317,19 @@ class AutoWallpaperWorker(
             KEY_AUTO_WALLPAPER_CONTENT_FILTER to sharedPreferencesRepository.autoWallpaperContentFilter
         )
 
+        private fun cancelAllWork(context: Context) {
+            WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_SINGLE_JOB_ID)
+            WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_FUTURE_JOB_ID)
+            WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_JOB_ID)
+        }
+
         class FutureAutoWallpaperWorker(
-            private val appContext: Context,
+            private val context: Context,
             params: WorkerParameters
-        ) : Worker(appContext, params), KoinComponent {
+        ) : Worker(context, params), KoinComponent {
 
             override fun doWork(): Result {
-                scheduleAutoWallpaperJob(appContext, get())
+                scheduleAutoWallpaperJob(context, get())
                 return Result.success()
             }
         }

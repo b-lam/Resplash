@@ -94,11 +94,13 @@
             app:summary="@string/auto_wallpaper_show_notification_summary"
             app:defaultValue="true" />
 
-        <CheckBoxPreference
-            app:key="auto_wallpaper_center_crop"
-            app:title="@string/auto_wallpaper_center_crop_title"
-            app:summary="@string/auto_wallpaper_center_crop_summary"
-            app:defaultValue="true"
+        <ListPreference
+            app:key="auto_wallpaper_crop"
+            app:title="@string/auto_wallpaper_crop_title"
+            app:useSimpleSummaryProvider="true"
+            app:entries="@array/auto_wallpaper_crop_options"
+            app:entryValues="@array/auto_wallpaper_crop_values"
+            app:defaultValue="@string/auto_wallpaper_crop_default"
             app:isPreferenceVisible="false" />
 
         <CheckBoxPreference

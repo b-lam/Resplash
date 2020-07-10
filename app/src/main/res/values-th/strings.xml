@@ -125,8 +125,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">รับรูปภาพที่ตรงกับคำค้นหาต่อไปนี้:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(คั่นหลายคำด้วยเครื่องหมายจุลภาค)</string>
     <string name="auto_wallpaper_options_title">ตัวเลือก</string>
-    <string name="auto_wallpaper_center_crop_title">ศูนย์พืชผล</string>
-    <string name="auto_wallpaper_center_crop_summary">ครอบตัดวอลล์เปเปอร์ทั้งหมดให้อยู่กึ่งกลาง</string>
+    <string name="auto_wallpaper_crop_title">ครอบตัดวอลล์เปเปอร์</string>
+    <string name="auto_wallpaper_crop_none">ไม่มี</string>
+    <string name="auto_wallpaper_crop_center">ศูนย์</string>
+    <string name="auto_wallpaper_crop_center_crop">ตัดตรงกลาง</string>
     <string name="auto_wallpaper_notification_settings_title">การตั้งค่าการแจ้งเตือน</string>
     <string name="auto_wallpaper_show_notification_title">แสดงการแจ้งเตือน</string>
     <string name="auto_wallpaper_show_notification_summary">รับการแจ้งเตือนด้วยข้อมูลวอลเปเปอร์ปัจจุบัน</string>

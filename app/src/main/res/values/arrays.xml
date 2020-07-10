@@ -132,6 +132,19 @@
     </string-array>
     <string name="auto_wallpaper_source_default" translatable="false">featured</string>
 
+    <!--Auto Wallpaper Crop-->
+    <string-array name="auto_wallpaper_crop_options">
+        <item>@string/auto_wallpaper_crop_none</item>
+        <item>@string/auto_wallpaper_crop_center</item>
+        <item>@string/auto_wallpaper_crop_center_crop</item>
+    </string-array>
+    <string-array name="auto_wallpaper_crop_values">
+        <item>none</item>
+        <item>center</item>
+        <item>center_crop</item>
+    </string-array>
+    <string name="auto_wallpaper_crop_default" translatable="false">center_crop</string>
+
     <!--Auto Wallpaper Select Screen-->
     <string-array name="auto_wallpaper_select_screen_options">
         <item>@string/auto_wallpaper_select_screen_home_screen</item>

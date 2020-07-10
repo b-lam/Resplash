@@ -126,8 +126,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">Obtenga fotos que coincidan con los siguientes términos de búsqueda:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separe varios términos con comas)</string>
     <string name="auto_wallpaper_options_title">Opciones</string>
-    <string name="auto_wallpaper_center_crop_title">Cultivo central</string>
-    <string name="auto_wallpaper_center_crop_summary">Recorta todos los fondos de pantalla para centrarlos</string>
+    <string name="auto_wallpaper_crop_title">Recortar fondo de pantalla</string>
+    <string name="auto_wallpaper_crop_none">Ninguno</string>
+    <string name="auto_wallpaper_crop_center">Centrar</string>
+    <string name="auto_wallpaper_crop_center_crop">Corte central</string>
     <string name="auto_wallpaper_notification_settings_title">Configuración de las notificaciones</string>
     <string name="auto_wallpaper_show_notification_title">Muestra la notificación</string>
     <string name="auto_wallpaper_show_notification_summary">Recibe una notificación con la información actual del fondo de pantalla</string>

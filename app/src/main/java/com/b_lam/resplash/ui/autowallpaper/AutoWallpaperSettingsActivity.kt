@@ -171,7 +171,7 @@ class AutoWallpaperSettingsActivity :
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                findPreference<Preference>("auto_wallpaper_center_crop")?.isVisible = true
+                findPreference<Preference>("auto_wallpaper_crop")?.isVisible = true
                 findPreference<Preference>("auto_wallpaper_select_screen")?.isVisible = true
             }
 

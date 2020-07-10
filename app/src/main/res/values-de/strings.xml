@@ -126,8 +126,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">Erhalten Sie Fotos, die den folgenden Suchbegriffen entsprechen:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(Mehrere Begriffe durch Kommas trennen)</string>
     <string name="auto_wallpaper_options_title">Optionen</string>
-    <string name="auto_wallpaper_center_crop_title">Mittelernte</string>
-    <string name="auto_wallpaper_center_crop_summary">Beschneiden Sie alle zu zentrierenden Hintergrundbilder</string>
+    <string name="auto_wallpaper_crop_title">Crop Wallpaper</string>
+    <string name="auto_wallpaper_crop_none">Keiner</string>
+    <string name="auto_wallpaper_crop_center">Center</string>
+    <string name="auto_wallpaper_crop_center_crop">Mittelschnitt</string>
     <string name="auto_wallpaper_notification_settings_title">Benachrichtigungseinstellungen</string>
     <string name="auto_wallpaper_show_notification_title">Benachrichtigung anzeigen</string>
     <string name="auto_wallpaper_show_notification_summary">Erhalten Sie eine Benachrichtigung mit den aktuellen Hintergrundinformationen</string>
