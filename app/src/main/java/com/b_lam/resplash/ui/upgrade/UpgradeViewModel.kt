@@ -24,6 +24,10 @@ class UpgradeViewModel(
 
     val resplashProLiveData = billingRepository.resplashProLiveData
 
+    val billingMessageLiveData = billingRepository.billingMessageLiveData
+
+    val billingErrorLiveData = billingRepository.billingErrorLiveData
+
     private val _bannerPhotoLiveData by lazy {
         val liveData = MutableLiveData<Photo>()
         viewModelScope.launch {

@@ -12,7 +12,7 @@ class DonationViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
         callback: DonationAdapter.ItemEventCallback
     ) {
         with(itemView) {
-            sku_title_text_view.text = skuDetails.title?.dropLastWhile { it != ' ' }?.trimEnd()
+            sku_title_text_view.text = skuDetails.title?.dropLastWhile { it != '(' }?.dropLast(1)
             sku_description_text_view.text = skuDetails.description
             sku_price_text_view.text = skuDetails.price
             setOnClickListener { callback.onSkuDetailsClick(skuDetails) }
