@@ -177,6 +177,7 @@ class BillingRepository(
                     }
                 } else if (purchase.purchaseState == Purchase.PurchaseState.PENDING) {
                     debug("Received a pending purchase of SKU: ${purchase.sku}")
+                    _billingMessageLiveData.postValue(Event("Purchase is pending"))
                 } else {
                     debug("Received an UNSPECIFIED_STATE purchase: $purchase")
                 }
