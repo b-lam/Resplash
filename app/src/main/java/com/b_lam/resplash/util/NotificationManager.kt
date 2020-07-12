@@ -21,8 +21,12 @@ class NotificationManager(private val context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannels = listOf(
                 NotificationChannel(DOWNLOADS_CHANNEL_ID, "Downloads", NotificationManager.IMPORTANCE_LOW),
-                NotificationChannel(NEXT_AUTO_WALLPAPER_CHANNEL_ID, "Next Auto Wallpaper", NotificationManager.IMPORTANCE_DEFAULT),
-                NotificationChannel(NEW_AUTO_WALLPAPER_CHANNEL_ID, "New Auto Wallpaper Info", NotificationManager.IMPORTANCE_MIN)
+                NotificationChannel(NEXT_AUTO_WALLPAPER_CHANNEL_ID, "Next Auto Wallpaper", NotificationManager.IMPORTANCE_DEFAULT).apply {
+                    setShowBadge(false)
+                },
+                NotificationChannel(NEW_AUTO_WALLPAPER_CHANNEL_ID, "New Auto Wallpaper Info", NotificationManager.IMPORTANCE_MIN).apply {
+                    setShowBadge(false)
+                }
             )
             notificationManager.createNotificationChannels(notificationChannels)
 

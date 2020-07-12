@@ -149,8 +149,8 @@
     <string name="auto_wallpaper_options_title">Options</string>
     <string name="auto_wallpaper_crop_title">Wallpaper Crop</string>
     <string name="auto_wallpaper_crop_none">None</string>
-    <string name="auto_wallpaper_crop_center">Center</string>
-    <string name="auto_wallpaper_crop_center_crop">Center crop</string>
+    <string name="auto_wallpaper_crop_center">Center (Scroll)</string>
+    <string name="auto_wallpaper_crop_center_crop">Center (Crop)</string>
     <string name="auto_wallpaper_notification_settings_title">Notification Settings</string>
     <string name="auto_wallpaper_show_notification_title">Show Notification</string>
     <string name="auto_wallpaper_show_notification_summary">Get a notification with the current wallpaper info</string>
