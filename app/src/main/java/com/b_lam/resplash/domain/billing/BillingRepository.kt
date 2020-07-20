@@ -125,13 +125,13 @@ class BillingRepository(
         }
     }
 
-    fun queryPurchasesAsync() {
+    fun queryPurchasesAsync(restore: Boolean = false) {
         debug("queryPurchasesAsync called")
         val purchasesResult = HashSet<Purchase>()
         val result = playStoreBillingClient.queryPurchases(BillingClient.SkuType.INAPP)
         debug("queryPurchasesAsync INAPP results: ${result.purchasesList?.size}")
         result.purchasesList?.apply { purchasesResult.addAll(this) }
-        if (result.purchasesList.isNullOrEmpty()) {
+        if (restore && result.purchasesList.isNullOrEmpty()) {
             _billingMessageLiveData.postValue(Event("No purchases found"))
         }
         processPurchases(purchasesResult)

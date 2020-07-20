@@ -44,7 +44,7 @@ class UpgradeViewModel(
         }
     }
 
-    fun restorePurchase() = billingRepository.queryPurchasesAsync()
+    fun restorePurchase() = billingRepository.queryPurchasesAsync(restore = true)
 
     override fun onCleared() {
         super.onCleared()
