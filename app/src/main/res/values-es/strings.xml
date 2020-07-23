@@ -15,7 +15,7 @@
     <string name="share">Compartir</string>
     <string name="open_in_browser">Abrir en navegador web</string>
     <string name="apply">Aplicar</string>
-    <string name="create">Creada</string>
+    <string name="create">Crear</string>
     <string name="save">Guardar</string>
     <string name="edit">Editar</string>
     <string name="delete">Borrar</string>
@@ -52,9 +52,9 @@
     <string name="order_featured">Destacadas</string>
 
     <!-- Error/Empty -->
-    <string name="oops">Huy! Algo salió mal…</string>
+    <string name="oops">¡Huy! Algo salió mal…</string>
     <string name="empty_state_title">Nada que ver aquí…</string>
-    <string name="error_state_title">Uh oh…</string>
+    <string name="error_state_title">Uh vaya…</string>
     <string name="error_setting_wallpaper">Algo salió mal al configurar el fondo de pantalla…</string>
 
     <!-- Settings -->
@@ -67,7 +67,7 @@
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Oscuro</string>
     <string name="theme_battery">Establecido por el ahorro de batería</string>
-    <string name="theme_default">Sistema por defecto</string>
+    <string name="theme_default">Predeterminado por el sistema</string>
     <string name="layout">Diseño</string>
     <string name="layout_default">Estándar</string>
     <string name="layout_minimal">Sencillo</string>
@@ -235,23 +235,23 @@
 
     <!-- Login -->
     <string name="login">Iniciar sesión</string>
-    <string name="create_an_account">Crea una cuenta</string>
+    <string name="create_an_account">Crear cuenta</string>
     <string name="login_banner_title">La creación comienza aquí</string>
     <string name="login_banner_subtitle">Acceda a fotos gratuitas de alta resolución que no puede encontrar en ningún otro lugar</string>
-    <string name="login_success">Inicio de sesión exitoso</string>
+    <string name="login_success">Sesión iniciada</string>
     <string name="need_to_log_in">Debes iniciar sesión para hacer eso</string>
 
     <!-- Upgrade -->
     <string name="upgrade_to_resplash_pro">Actualiza a Resplash Pro</string>
-    <string name="pro_feature_title">What\'s in it for you?</string>
-    <string name="pro_feature_one">Customize Auto Wallpaper</string>
-    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
-    <string name="pro_feature_two">Future exclusive features</string>
-    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
-    <string name="pro_feature_three">Support development</string>
-    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
-    <string name="go_pro">Go Pro</string>
-    <string name="restore_purchase">Restore Purchase</string>
+    <string name="pro_feature_title">¿Qué hay para ti?</string>
+    <string name="pro_feature_one">Personaliza tu Fondo Automático</string>
+    <string name="pro_feature_one_subtitle">Algunos prefieren fotos en blanco y negro, otros prefieren ver imágenes de la naturaleza en lugar de las urbanas. Personaliza exactamente los tipos de fondos de pantalla que ves en Fondos Automáticos.</string>
+    <string name="pro_feature_two">Actualizaciones futuras exclusivas</string>
+    <string name="pro_feature_two_subtitle">Acceda a las futuras características exclusivas de los profesionales</string>
+    <string name="pro_feature_three">Apoyo al desarrollo</string>
+    <string name="pro_feature_three_subtitle">Obtener pro ayuda al desarrollo de Resplash</string>
+    <string name="go_pro">Obtener Pro</string>
+    <string name="restore_purchase">Restaurar pago</string>
     <string name="upgrade_required">¡Necesitas Resplash Pro para hacer eso!</string>
 
     <!-- Donation -->
@@ -270,5 +270,5 @@
     <string name="github_summary">Resplash es de código abierto, échale un vistazo en GitHub</string>
     <string name="developer_title">Autor</string>
     <string name="privacy_policy">Política de privacidad</string>
-    <string name="terms_and_conditions">Términos y Condiciones</string>
+    <string name="terms_and_conditions">Términos y condiciones</string>
 </resources>
