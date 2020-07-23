@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common -->
-    <string name="ok">OK</string>
+    <string name="ok">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="search">Buscar</string>
     <string name="photos">Fotos</string>
@@ -19,22 +19,22 @@
     <string name="save">Guardar</string>
     <string name="edit">Editar</string>
     <string name="delete">Borrar</string>
-    <string name="are_you_sure">¿Estas seguro?</string>
+    <string name="are_you_sure">¿Estás seguro?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
-    <string name="thanks">Gracias!</string>
+    <string name="thanks">¡Gracias!</string>
     <string name="download_started">Descarga iniciada</string>
     <string name="download_complete">Descarga completa</string>
-    <string name="setting_wallpaper">Config wallpaper…</string>
-    <string name="set_as_wallpaper">Usar como wallpaper</string>
+    <string name="setting_wallpaper">Configurar fondo…</string>
+    <string name="set_as_wallpaper">Establecer fondo de pantalla</string>
     <string name="file_exists_title">¿Descargar de nuevo?</string>
     <string name="file_exists_message">Esta foto ya ha sido descargada. ¿Quieres descargar esta foto de nuevo?</string>
     <string name="sponsored">Patrocinado</string>
 
     <!-- Common Plurals -->
     <plurals name="photos">
-        <item quantity="one">%d Foto</item>
-        <item quantity="other">%d Fotos</item>
+        <item quantity="one">%d foto</item>
+        <item quantity="other">%d fotos</item>
     </plurals>
 
     <!-- Main -->
@@ -72,11 +72,11 @@
     <string name="layout_default">Estándar</string>
     <string name="layout_minimal">Sencillo</string>
     <string name="layout_grid">Cuadrícula</string>
-    <string name="downloader">Descargador</string>
-    <string name="downloader_default">Resplash downloader</string>
-    <string name="downloader_system">System downloader</string>
+    <string name="downloader">Gestor de descargas</string>
+    <string name="downloader_default">Descargas de Resplash</string>
+    <string name="downloader_system">Descargas del sistema</string>
     <string name="quality">Calidad</string>
-    <string name="quality_raw">Raw</string>
+    <string name="quality_raw">Original</string>
     <string name="quality_full">Alta</string>
     <string name="quality_regular">Media</string>
     <string name="quality_small">Baja</string>
@@ -89,16 +89,16 @@
 
     <!-- Auto Wallpaper -->
     <string name="auto_wallpaper_title">Fondos Automáticos</string>
-    <string name="auto_wallpaper_info">Fondos Automáticos actualizará tu fondo de escritorio con una imagen de acuerdo con estas condiciones</string>
+    <string name="auto_wallpaper_info">Fondos Automáticos actualizará tu fondo de escritorio con una imagen bajo ciertas condiciones</string>
     <string name="auto_wallpaper_help_title">¿No funciona?</string>
-    <string name="auto_wallpaper_help_message">Intente deshabilitar la condición de inactividad y las optimizaciones de batería para Resplash en la configuración de su teléfono.\n\nPara instrucciones específicas del fabricante: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_help_message">Intenta desactivar el modo de suspensión y las optimizaciones de batería para Resplash en la configuración de su teléfono.\n\nPara instrucciones específicas del fabricante: https://dontkillmyapp.com/</string>
     <string name="auto_wallpaper_conditions_title">Condiciones</string>
     <string name="auto_wallpaper_on_wifi_title">Sólo con Wi-Fi</string>
     <string name="auto_wallpaper_on_wifi_summary">El dispositivo debe estar conectado a una red Wi-Fi</string>
-    <string name="auto_wallpaper_charging_title">Cargando</string>
+    <string name="auto_wallpaper_charging_title">En carga</string>
     <string name="auto_wallpaper_charging_summary">El dispositivo debe estar conectado a la corriente</string>
-    <string name="auto_wallpaper_idle_title">Ausente</string>
-    <string name="auto_wallpaper_idle_summary">El dispositivo debe estar inactivo</string>
+    <string name="auto_wallpaper_idle_title">En suspensión</string>
+    <string name="auto_wallpaper_idle_summary">El dispositivo debe estar en pausa</string>
     <string name="auto_wallpaper_interval_title">Intervalo</string>
     <string name="auto_wallpaper_interval_summary">Cambiar fondo de pantalla cada: %s</string>
     <string name="auto_wallpaper_interval_fifteen_minutes">15 minutos</string>
@@ -110,7 +110,7 @@
     <string name="auto_wallpaper_interval_twenty_four_hours">24 horas</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 horas</string>
     <string name="auto_wallpaper_source">Fuente</string>
-    <string name="auto_wallpaper_source_title">Fuente de papel tapiz</string>
+    <string name="auto_wallpaper_source_title">Fuente de fondo de pantalla</string>
     <string name="auto_wallpaper_source_summary">Fuente actual: %s</string>
     <string name="auto_wallpaper_source_all">Todas</string>
     <string name="auto_wallpaper_source_featured">Destacadas</string>
@@ -129,7 +129,7 @@
     <string name="auto_wallpaper_crop_title">Recortar fondo de pantalla</string>
     <string name="auto_wallpaper_crop_none">Ninguno</string>
     <string name="auto_wallpaper_crop_center">Centrar</string>
-    <string name="auto_wallpaper_crop_center_crop">Corte central</string>
+    <string name="auto_wallpaper_crop_center_crop">Recorte central</string>
     <string name="auto_wallpaper_notification_settings_title">Configuración de las notificaciones</string>
     <string name="auto_wallpaper_show_notification_title">Muestra la notificación</string>
     <string name="auto_wallpaper_show_notification_summary">Recibe una notificación con la información actual del fondo de pantalla</string>
@@ -139,18 +139,18 @@
     <string name="auto_wallpaper_select_screen_summary">Aplicar fondo de pantalla a: %s</string>
     <string name="auto_wallpaper_select_screen_home_screen">Pantalla de inicio</string>
     <string name="auto_wallpaper_select_screen_lock_screen">Pantalla de bloqueo</string>
-    <string name="auto_wallpaper_select_screen_both">Las dos</string>
+    <string name="auto_wallpaper_select_screen_both">Ambas</string>
     <string name="auto_wallpaper_orientation_title">Orientación</string>
     <string name="auto_wallpaper_orientation_summary">Limite la orientación del fondo de pantalla a: %s</string>
     <string name="auto_wallpaper_content_filter_title">Filtro de contenido</string>
-    <string name="auto_wallpaper_content_filter_low_summary">Mínimo: garantiza que no se mostrará ningún contenido que viole las pautas de envío (como imágenes que contienen desnudos o violencia)</string>
-    <string name="auto_wallpaper_content_filter_high_summary">Máximo: filtrar contenido que puede no ser adecuado para audiencias más jóvenes</string>
-    <string name="auto_wallpaper_content_filter_note">Tenga en cuenta que no podemos garantizar que se elimine todo el contenido potencialmente inadecuado</string>
-    <string name="auto_wallpaper_history_title">Historial de wallpapers</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Mínimo: garantiza que no mostrará ningún contenido sensible (como imágenes que contienen desnudos o violencia)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Máximo: filtra contenido que sería inapropiado para público joven</string>
+    <string name="auto_wallpaper_content_filter_note">Tenga en cuenta que no garantizamos la remoción de todo contenido potencialmente inadecuado</string>
+    <string name="auto_wallpaper_history_title">Historial de fondos</string>
     <string name="auto_wallpaper_history_summary">Ver fondos de escritorio anteriores</string>
-    <string name="auto_wallpaper_history_clear_history">Claro historial</string>
+    <string name="auto_wallpaper_history_clear_history">Limpiar historial</string>
     <string name="auto_wallpaper_activate">Activar</string>
-    <string name="auto_wallpaper_next_wallpaper">Siguiente wallpaper</string>
+    <string name="auto_wallpaper_next_wallpaper">Siguiente fondo</string>
     <string name="auto_wallpaper_add_to_auto_wallpaper">Añadir a Fondos Automáticos</string>
     <string name="auto_wallpaper_remove_from_auto_wallpaper">Eliminar de Fondos Automáticos</string>
     <string name="auto_wallpaper_collection_added">Colección agregada a Fondos Automáticos</string>
@@ -167,9 +167,9 @@
     <string name="auto_wallpaper_invalid_url">URL invalida</string>
 
     <!-- Photo Detail -->
-    <string name="views">Vistos</string>
-    <string name="downloads">Descargados</string>
-    <string name="likes">Likes</string>
+    <string name="views">Vistas</string>
+    <string name="downloads">Descargadas</string>
+    <string name="likes">Gustas</string>
     <string name="camera">Cámara</string>
     <string name="aperture">Apertura</string>
     <string name="focal_length">Distancia focal</string>
@@ -185,12 +185,12 @@
     <string name="collection_description_hint">Descripción (opcional)</string>
     <string name="collection_name_required">El nombre es obligatorio</string>
     <string name="edit_collection">Editar la colección</string>
-    <string name="curated_by_template">Comisariada por %s</string>
+    <string name="curated_by_template">Curada por %s</string>
 
     <!-- User -->
-    <string name="open_portfolio_link">Abrir enlace de cartera</string>
+    <string name="open_portfolio_link">Abrir enlace de portafolio</string>
     <string name="blank_username_error">Necesitamos saber como llamarte</string>
-    <string name="invalid_username_error">El nombre de usuario debe tener al menos una letra y contener solo letras, dígitos o guiones bajos (sin espacios)</string>
+    <string name="invalid_username_error">El nombre de usuario debe tener al menos un caracter y contener solo letras, dígitos o guiones bajos (sin espacios)</string>
     <string name="username_taken_error">Nombre de usuario ya tomado</string>
     <string name="blank_first_name_error">El nombre no puede estar en blanco</string>
     <string name="blank_email_error">Email no puede estar en blanco</string>
@@ -204,7 +204,7 @@
     <string name="instagram_username_hint">Instagram</string>
     <string name="location_hint">Ubicación</string>
     <string name="bio_hint">Bio</string>
-    <string name="account_updated">Cuenta actualizada!</string>
+    <string name="account_updated">¡Cuenta actualizada!</string>
 
     <!-- Search -->
     <string name="no_search_results_subtitle">Intenta buscar algo</string>
