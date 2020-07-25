@@ -218,7 +218,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun openUnsplashSubmitTab() {
-        val uri = Uri.parse(getString(R.string.unsplash_submit_url))
+        val uri = if (viewModel.isUserLoggedIn()) {
+            Uri.parse(getString(R.string.unsplash_authed_submit_url))
+        } else {
+            Uri.parse(getString(R.string.unsplash_unauthed_submit_url))
+        }
         CustomTabsHelper.openCustomTab(this, uri, sharedPreferencesRepository.theme)
     }
 

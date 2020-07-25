@@ -4,7 +4,8 @@
     <string name="package_name" translatable="false">com.b_lam.resplash</string>
     <string name="unsplash" translatable="false">Unsplash</string>
     <string name="unsplash_url" translatable="false">https://unsplash.com/?utm_source=resplash&amp;utm_medium=referral&amp;utm_campaign=api-credit</string>
-    <string name="unsplash_submit_url" translatable="false">https://unsplash.com/submit</string>
+    <string name="unsplash_authed_submit_url" translatable="false">https://unsplash.com/submit</string>
+    <string name="unsplash_unauthed_submit_url" translatable="false">https://unsplash.com/?modal=%7B%22tag%22%3A%22Login%22%2C%22value%22%3A%7B%22tag%22%3A%22SubmitAPhoto%22%2C%22value%22%3A%7B%7D%7D%7D</string>
     <string name="unsplash_join_url" translatable="false">https://unsplash.com/join</string>
 
     <!-- Common -->

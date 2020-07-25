@@ -90,6 +90,8 @@ class MainViewModel(
         _collectionOrderLiveData.postValue(order)
     }
 
+    fun isUserLoggedIn() = loginRepository.isAuthorized()
+
     fun refreshUserProfile() {
         if (loginRepository.isAuthorized()) {
             _authorizedLiveData.postValue(true)
