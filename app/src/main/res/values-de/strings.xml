@@ -5,8 +5,8 @@
     <string name="cancel">Abbrechen</string>
     <string name="search">Suche</string>
     <string name="photos">Fotos</string>
-    <string name="collections">Kollektionen</string>
-    <string name="like">Mögen</string>
+    <string name="collections">Sammlungen</string>
+    <string name="like">Liken</string>
     <string name="users">Nutzer</string>
     <string name="unknown">Unbekannt</string>
     <string name="download">Download</string>
@@ -19,16 +19,16 @@
     <string name="save">Speichern</string>
     <string name="edit">Bearbeiten</string>
     <string name="delete">Löschen</string>
-    <string name="are_you_sure">Bist du sicher?</string>
+    <string name="are_you_sure">Bist du dir sicher?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="thanks">Vielen Dank!</string>
     <string name="download_started">Download gestartet</string>
-    <string name="download_complete">Download komplett</string>
-    <string name="setting_wallpaper">Setze Wallpaper…</string>
-    <string name="set_as_wallpaper">Als Wallpaper verwenden</string>
-    <string name="file_exists_title">Lade es erneut runter?</string>
-    <string name="file_exists_message">Dieses Foto wurde bereits heruntergeladen. Möchten Sie dieses Foto erneut herunterladen?</string>
+    <string name="download_complete">Download beendet</string>
+    <string name="setting_wallpaper">Setze Hintergrundbild…</string>
+    <string name="set_as_wallpaper">Als Hintergrundbild verwenden</string>
+    <string name="file_exists_title">Erneut herunterladen?</string>
+    <string name="file_exists_message">Dieses Foto wurde bereits heruntergeladen. Möchtest du dieses Foto erneut herunterladen?</string>
     <string name="sponsored">Gesponsert</string>
 
     <!-- Common Plurals -->
@@ -39,7 +39,7 @@
 
     <!-- Main -->
     <string name="home">Neu</string>
-    <string name="header_subtitle">Überall von Schöpfern angetrieben</string>
+    <string name="header_subtitle">Unterstützt von Creatorn aus aller Welt</string>
     <string name="add_account">Konto hinzufügen</string>
     <string name="view_profile">Account anzeigen</string>
     <string name="edit_profile">Account bearbeiten</string>
@@ -47,60 +47,60 @@
     <string name="sort_by">Sortieren nach</string>
     <string name="order_latest">Neueste</string>
     <string name="order_oldest">Älteste</string>
-    <string name="order_popular">Populär</string>
+    <string name="order_popular">Beliebt</string>
     <string name="order_all">Alle</string>
     <string name="order_featured">Vorgestellt</string>
 
     <!-- Error/Empty -->
     <string name="oops">Ups! Irgendwas lief schief…</string>
     <string name="empty_state_title">Es gibt hier nichts zu sehen…</string>
-    <string name="error_state_title">Uh oh…</string>
+    <string name="error_state_title">Oh oh…</string>
     <string name="error_setting_wallpaper">Beim Einstellen des Hintergrundbilds ist ein Fehler aufgetreten…</string>
 
     <!-- Settings -->
     <string name="settings">Einstellungen</string>
     <string name="general">Allgemein</string>
     <string name="clear_cache">Cache leeren</string>
-    <string name="cache_size">Cache größe: %d MB</string>
+    <string name="cache_size">Cache-Größe: %d MB</string>
     <string name="language">Sprache</string>
-    <string name="theme">Theme</string>
+    <string name="theme">Darstellung</string>
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>
     <string name="theme_battery">Vom Batteriesparmodus eingestellt</string>
-    <string name="theme_default">Systemfehler</string>
+    <string name="theme_default">Systemeinstellung</string>
     <string name="layout">Layout</string>
     <string name="layout_default">Standard</string>
     <string name="layout_minimal">Einfach</string>
     <string name="layout_grid">Raster</string>
     <string name="downloader">Downloader</string>
-    <string name="downloader_default">Resplash downloader</string>
-    <string name="downloader_system">System downloader</string>
+    <string name="downloader_default">Resplash-Downloader</string>
+    <string name="downloader_system">System-Downloader</string>
     <string name="quality">Qualität</string>
-    <string name="quality_raw">Raw</string>
+    <string name="quality_raw">Rohdatei</string>
     <string name="quality_full">Voll</string>
     <string name="quality_regular">Medium</string>
     <string name="quality_small">Gering</string>
     <string name="quality_thumb">Vorschau</string>
-    <string name="load_quality">Lade Qualität</string>
-    <string name="download_quality">Download Qualität</string>
-    <string name="wallpaper_quality">Wallpaper Qualität</string>
-    <string name="long_press_to_download">Zum Drücken lange drücken</string>
-    <string name="long_press_to_download_summary">Drücken Sie lange auf ein Foto, um den Download zu starten</string>
+    <string name="load_quality">Lade-Qualität</string>
+    <string name="download_quality">Download-Qualität</string>
+    <string name="wallpaper_quality">Wallpaper-Qualität</string>
+    <string name="long_press_to_download">Zum Herunterladen lange drücken</string>
+    <string name="long_press_to_download_summary">Drücken lange auf ein Foto, um den Download zu starten</string>
 
     <!-- Auto Wallpaper -->
-    <string name="auto_wallpaper_title">Auto Wallpaper</string>
-    <string name="auto_wallpaper_info">Auto Wallpaper verschönert deinen Haupt-/Sperrbildschirm mit zufällig gewählten Hintergründen, basierend auf deinen Voreinstellungen</string>
+    <string name="auto_wallpaper_title">Auto-Wallpaper</string>
+    <string name="auto_wallpaper_info">Auto-Wallpaper verschönert deinen Start-/Sperrbildschirm mit zufällig gewählten Hintergrundbildern basierend auf deinen Voreinstellungen</string>
     <string name="auto_wallpaper_help_title">Funktioniert nicht?</string>
-    <string name="auto_wallpaper_help_message">Versuchen Sie, den Ruhezustand und die Batterie-optimierungen für Resplash in den Einstellungen Ihres Telefons zu deaktivieren.\n\nFür herstellerspezifische anweisungen: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_help_message">Versuche, den Ruhezustand und die Batterieoptimierungen für Resplash in den Einstellungen deines Telefons zu deaktivieren. Für herstellerspezifische Anweisungen siehe hier: https://dontkillmyapp.com/</string>
     <string name="auto_wallpaper_conditions_title">Bedingungen</string>
-    <string name="auto_wallpaper_on_wifi_title">Wi-Fi</string>
+    <string name="auto_wallpaper_on_wifi_title">WLAN</string>
     <string name="auto_wallpaper_on_wifi_summary">Gerät muss mit einem WLAN-Netzwerk verbunden sein</string>
     <string name="auto_wallpaper_charging_title">Aufladen</string>
     <string name="auto_wallpaper_charging_summary">Gerät muss mit einem Ladegerät verbunden sein</string>
     <string name="auto_wallpaper_idle_title">Inaktiv</string>
     <string name="auto_wallpaper_idle_summary">Gerät muss inaktiv sein</string>
     <string name="auto_wallpaper_interval_title">Intervall</string>
-    <string name="auto_wallpaper_interval_summary">Ändern Sie das Hintergrundbild alle: %s</string>
+    <string name="auto_wallpaper_interval_summary">Ändere das Hintergrundbild alle: %s</string>
     <string name="auto_wallpaper_interval_fifteen_minutes">15 Minuten</string>
     <string name="auto_wallpaper_interval_thirty_minutes">30 Minuten</string>
     <string name="auto_wallpaper_interval_one_hour">1 Stunde</string>
@@ -114,60 +114,60 @@
     <string name="auto_wallpaper_source_summary">Aktuelle Quelle: %s</string>
     <string name="auto_wallpaper_source_all">Alle</string>
     <string name="auto_wallpaper_source_featured">Vorgestellt</string>
-    <string name="auto_wallpaper_source_collections">Kollektionen</string>
+    <string name="auto_wallpaper_source_collections">Sammlungen</string>
     <string name="auto_wallpaper_source_user">Benutzerfotos</string>
     <string name="auto_wallpaper_source_search">Suchbegriffe</string>
     <string name="auto_wallpaper_source_not_set">Nicht eingestellt</string>
-    <string name="auto_wallpaper_collections_summary">Wählen Sie die Sammlungen aus, aus denen Sie Fotos erhalten möchten</string>
+    <string name="auto_wallpaper_collections_summary">Wählen die Sammlungen aus, aus denen du Fotos erhalten möchten</string>
     <string name="auto_wallpaper_user_title">Benutzerfotos</string>
-    <string name="auto_wallpaper_user_summary">Verwenden von Fotos aus: \@%s</string>
-    <string name="auto_wallpaper_user_dialog_message">Geben Sie den Benutzernamen des Benutzers ein, um Fotos zu erhalten von:</string>
+    <string name="auto_wallpaper_user_summary">Verwende Fotos aus: \\@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Gebe den Benutzernamen des Benutzers ein, von dem du Fotos erhalten möchtest:</string>
     <string name="auto_wallpaper_search_terms_title">Suchbegriffe</string>
-    <string name="auto_wallpaper_search_terms_dialog_message">Erhalten Sie Fotos, die den folgenden Suchbegriffen entsprechen:</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Erhalte Fotos, die den folgenden Suchbegriffen entsprechen:</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">(Mehrere Begriffe durch Kommas trennen)</string>
     <string name="auto_wallpaper_options_title">Optionen</string>
-    <string name="auto_wallpaper_crop_title">Crop Wallpaper</string>
-    <string name="auto_wallpaper_crop_none">Keiner</string>
-    <string name="auto_wallpaper_crop_center">Center</string>
-    <string name="auto_wallpaper_crop_center_crop">Mittelschnitt</string>
+    <string name="auto_wallpaper_crop_title">Hintergrundbild zuschneiden</string>
+    <string name="auto_wallpaper_crop_none">Nicht zuschneiden</string>
+    <string name="auto_wallpaper_crop_center">Mittig (scrollen)</string>
+    <string name="auto_wallpaper_crop_center_crop">Mittig (zuschneiden)</string>
     <string name="auto_wallpaper_notification_settings_title">Benachrichtigungseinstellungen</string>
     <string name="auto_wallpaper_show_notification_title">Benachrichtigung anzeigen</string>
-    <string name="auto_wallpaper_show_notification_summary">Erhalten Sie eine Benachrichtigung mit den aktuellen Hintergrundinformationen</string>
+    <string name="auto_wallpaper_show_notification_summary">Erhalte eine Benachrichtigung mit Informationen zum aktuellen Hintergrundbild</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Geräteorientierung korrigieren</string>
-    <string name="auto_wallpaper_portrait_mode_only_summary">Einige Geräte beschneiden das Hintergrundbild falsch, wenn es im Querformat eingestellt ist. Wenn Sie dies aktivieren, wird die Aufgabe neu geplant, bis sich das Gerät im Hochformat befindet</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Einige Geräte beschneiden das Hintergrundbild falsch, wenn es im Querformat eingestellt ist. Wenn du das aktivierst, wird die Aktualisierung solange deaktiviert, bis sich das Gerät im Hochformat befindet</string>
     <string name="auto_wallpaper_select_screen_title">Bildschirm wählen</string>
-    <string name="auto_wallpaper_select_screen_summary">Tapete auftragen auf: %s</string>
-    <string name="auto_wallpaper_select_screen_home_screen">Hauptbildschirm</string>
+    <string name="auto_wallpaper_select_screen_summary">Hintergrundbild zuweisen: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Startbildschirm</string>
     <string name="auto_wallpaper_select_screen_lock_screen">Sperrbildschirm</string>
     <string name="auto_wallpaper_select_screen_both">Beide</string>
     <string name="auto_wallpaper_orientation_title">Orientierung</string>
-    <string name="auto_wallpaper_orientation_summary">Begrenzen Sie die Tapetenausrichtung auf: %s</string>
+    <string name="auto_wallpaper_orientation_summary">Orientierung des Hintergrundbilds einschränken auf: %s</string>
     <string name="auto_wallpaper_content_filter_title">Inhaltsfilter</string>
-    <string name="auto_wallpaper_content_filter_low_summary">Minimum: Garantiert, dass keine Inhalte angezeigt werden, die gegen die Richtlinien für die Einreichung verstoßen (z. B. Bilder, die Nacktheit oder Gewalt enthalten)</string>
-    <string name="auto_wallpaper_content_filter_high_summary">Maximum: Filtern Sie Inhalte, die für jüngere Zielgruppen möglicherweise nicht geeignet sind</string>
-    <string name="auto_wallpaper_content_filter_note">Beachten Sie, dass wir nicht garantieren können, dass alle möglicherweise ungeeigneten Inhalte entfernt werden</string>
-    <string name="auto_wallpaper_history_title">Auto Wallpaper Verlauf</string>
-    <string name="auto_wallpaper_history_summary">Zeige vorherig gesetzte Wallpaper</string>
-    <string name="auto_wallpaper_history_clear_history">Klare Geschichte</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Minimum: Garantiert, dass keine Inhalte angezeigt werden, die gegen die Richtlinien für die Einreichung verstoßen (z.B. Bilder, die Nacktheit oder Gewalt enthalten)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Maximum: Inhalte filtern, die für jüngere Zielgruppen möglicherweise nicht geeignet sind</string>
+    <string name="auto_wallpaper_content_filter_note">Beachte bitte, dass wir nicht garantieren können, dass alle möglicherweise ungeeigneten Inhalte entfernt werden</string>
+    <string name="auto_wallpaper_history_title">Auto-Wallpaper-Verlauf</string>
+    <string name="auto_wallpaper_history_summary">Zeige zuletzt gesetztes Hintergrundbild</string>
+    <string name="auto_wallpaper_history_clear_history">Verlauf löschen</string>
     <string name="auto_wallpaper_activate">Aktivieren</string>
-    <string name="auto_wallpaper_next_wallpaper">Nächstes Wallpaper</string>
-    <string name="auto_wallpaper_add_to_auto_wallpaper">Zu Auto Wallpaper hinzufügen</string>
-    <string name="auto_wallpaper_remove_from_auto_wallpaper">Aus Auto Wallpaper entfernen</string>
-    <string name="auto_wallpaper_collection_added">Sammlung zu Auto Wallpaper hinzugefügt</string>
-    <string name="auto_wallpaper_collection_removed">Sammlung aus Auto Wallpaper entfernt</string>
+    <string name="auto_wallpaper_next_wallpaper">Nächstes Hintergrundbild</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Zu Auto-Wallpaper hinzufügen</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Aus Auto-Wallpaper entfernen</string>
+    <string name="auto_wallpaper_collection_added">Sammlung zu Auto-Wallpaper hinzugefügt</string>
+    <string name="auto_wallpaper_collection_removed">Sammlung aus Auto-Wallpaper entfernt</string>
     <string name="auto_wallpaper_selected_collections">Ausgewählt</string>
-    <string name="auto_wallpaper_no_selected_collections">Hier finden Sie einige Sammlungen zum Hinzufügen</string>
+    <string name="auto_wallpaper_no_selected_collections">Finde einige Sammlungen zum Hinzufügen</string>
     <string name="auto_wallpaper_discover">Entdecken</string>
-    <string name="auto_wallpaper_popular">Populär</string>
+    <string name="auto_wallpaper_popular">Beliebt</string>
     <string name="auto_wallpaper_add_collection_from_url">Sammlung von URL hinzufügen</string>
     <string name="auto_wallpaper_could_not_add_collection">Sammlung konnte nicht hinzugefügt werden</string>
-    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Kopieren Sie eine Sammlungs-URL und fügen Sie sie ein:</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Kopiere eine Sammlungs-URL und füge sie ein:</string>
     <string name="auto_wallpaper_collection_url">Sammlungs-URL</string>
     <string name="auto_wallpaper_add_collection">Sammlung hinzufügen</string>
     <string name="auto_wallpaper_invalid_url">Ungültige URL</string>
 
     <!-- Photo Detail -->
-    <string name="views">Views</string>
+    <string name="views">Aufrufe</string>
     <string name="downloads">Downloads</string>
     <string name="likes">Likes</string>
     <string name="camera">Kamera</string>
@@ -178,14 +178,14 @@
     <string name="description">Beschreibung</string>
 
     <!-- Collections -->
-    <string name="add_to_collection">Zu Kollektion hinzufügen</string>
-    <string name="create_new_collection">Neue Kollektion erstellen</string>
-    <string name="make_collection_private">Mache Kollektion privat</string>
+    <string name="add_to_collection">Zu Sammlung hinzufügen</string>
+    <string name="create_new_collection">Neue Sammlung erstellen</string>
+    <string name="make_collection_private">Sammlung auf \"Privat\" einstellen</string>
     <string name="collection_name_hint">Name</string>
     <string name="collection_description_hint">Beschreibung (optional)</string>
     <string name="collection_name_required">Name erforderlich</string>
-    <string name="edit_collection">Kollektion bearbeiten</string>
-    <string name="curated_by_template">Kuratiert von %s</string>
+    <string name="edit_collection">Sammlung bearbeiten</string>
+    <string name="curated_by_template">Gesammelt von %s</string>
 
     <!-- User -->
     <string name="open_portfolio_link">Portfolio-Link öffnen</string>
@@ -193,34 +193,33 @@
     <string name="invalid_username_error">Der Benutzername muss mindestens einen Buchstaben enthalten und darf nur Buchstaben, Ziffern oder Unterstriche enthalten (keine Leerzeichen).</string>
     <string name="username_taken_error">Benutzername bereits vergeben</string>
     <string name="blank_first_name_error">Der Vorname darf nicht leer sein</string>
-    <string name="blank_email_error">Email darf nicht leer sein</string>
-    <string name="invalid_email_error">Email ist ungültig</string>
+    <string name="blank_email_error">E-Mail-Adresse darf nicht leer sein</string>
+    <string name="invalid_email_error">E-Mail-Adresse ist ungültig</string>
     <string name="username_hint">Benutzername</string>
     <string name="username_helper_text">(Nur Buchstaben, Zahlen und Unterstriche)</string>
     <string name="first_name_hint">Vorname</string>
     <string name="last_name_hint">Nachname</string>
-    <string name="email_hint">Email Adresse</string>
-    <string name="portfolio_hint">Persönlcihe Webseite/Portfolio</string>
-    <string name="instagram_username_hint">Instagram Benutzername</string>
+    <string name="email_hint">E-Mail-Adresse</string>
+    <string name="portfolio_hint">Persönliche Webseite/Portfolio</string>
     <string name="location_hint">Standort</string>
     <string name="bio_hint">Bio</string>
     <string name="account_updated">Konto aktualisiert!</string>
 
     <!-- Search -->
-    <string name="no_search_results_subtitle">Versuchen Sie, nach etwas zu suchen</string>
+    <string name="no_search_results_subtitle">Versuche, nach etwas zu suchen</string>
     <string name="filter">Filter</string>
     <string name="filter_relevance">Relevanz</string>
-    <string name="filter_latest">Neueste</string>
+    <string name="filter_latest">Neuste</string>
     <string name="content_filter">Inhaltsfilter</string>
     <string name="filter_low">Minimum</string>
     <string name="filter_high">Maximal</string>
     <string name="orientation">Orientierung</string>
-    <string name="filter_any">Irgendein</string>
+    <string name="filter_any">Alle</string>
     <string name="filter_portrait">Hochformat</string>
     <string name="filter_landscape">Querformat</string>
     <string name="filter_square">Quadratisch</string>
     <string name="filter_color">Farbe</string>
-    <string name="filter_color_any">Irgendein</string>
+    <string name="filter_color_any">Alle</string>
     <string name="filter_color_black_white">Schwarz und weiß</string>
     <string name="filter_color_black">Schwarz</string>
     <string name="filter_color_white">Weiß</string>
@@ -235,24 +234,24 @@
 
     <!-- Login -->
     <string name="login">Einloggen</string>
-    <string name="create_an_account">Ein Konto erstellen</string>
-    <string name="login_banner_title">Die Schöpfung beginnt hier</string>
-    <string name="login_banner_subtitle">Greifen Sie auf kostenlose hochauflösende Fotos zu, die Sie sonst nirgendwo finden</string>
+    <string name="create_an_account">Konto erstellen</string>
+    <string name="login_banner_title">Creation starts here</string>
+    <string name="login_banner_subtitle">Greife auf kostenlose hochauflösende Fotos zu, die du sonst nirgendwo findest</string>
     <string name="login_success">Anmeldung erfolgreich</string>
-    <string name="need_to_log_in">Du musst eingeloggt sein um das zu tun</string>
+    <string name="need_to_log_in">Du musst eingeloggt sein, um das zu tun</string>
 
     <!-- Upgrade -->
-    <string name="upgrade_to_resplash_pro">Upgrade auf Resplash Pro</string>
-    <string name="pro_feature_title">What\'s in it for you?</string>
-    <string name="pro_feature_one">Customize Auto Wallpaper</string>
-    <string name="pro_feature_one_subtitle">Some people prefer black &amp; white photos, some would rather see nature images instead of urban ones. Customize exactly what types of wallpapers you see from Auto Wallpaper</string>
-    <string name="pro_feature_two">Future exclusive features</string>
-    <string name="pro_feature_two_subtitle">Get access to future pro exclusive features</string>
-    <string name="pro_feature_three">Support development</string>
-    <string name="pro_feature_three_subtitle">Going pro helps support the development of Resplash</string>
-    <string name="go_pro">Go Pro</string>
-    <string name="restore_purchase">Restore Purchase</string>
-    <string name="upgrade_required">Dazu benötigen Sie Resplash Pro!</string>
+    <string name="upgrade_to_resplash_pro">Auf Resplash Pro upgraden</string>
+    <string name="pro_feature_title">Was ist denn da drin?</string>
+    <string name="pro_feature_one">Auto-Wallpaper anpassen</string>
+    <string name="pro_feature_one_subtitle">Manche mögen Schwarz-Weiß-Bilder, andere sehen sich lieber Landschaftsbilder statt Stadtfotos an. Passe genau an, welche Arten von Hintergrundbildern du in Auto-Wallpaper sehen möchtest.</string>
+    <string name="pro_feature_two">Exklusive Funktionen in der Zukunft</string>
+    <string name="pro_feature_two_subtitle">Erhalte Zugang zu zukünftigen exklusiven Funktionen für Pro-Nutzer</string>
+    <string name="pro_feature_three">Entwicklung unterstützen</string>
+    <string name="pro_feature_three_subtitle">Mit dem Upgrade zu Pro unterstützt du die Entwicklung von Resplash</string>
+    <string name="go_pro">Zu Pro wechseln</string>
+    <string name="restore_purchase">Einkauf wiederherstellen</string>
+    <string name="upgrade_required">Dazu benötigst du Resplash Pro!</string>
 
     <!-- Donation -->
     <string name="support_development">Entwicklung unterstützen</string>
@@ -262,13 +261,14 @@
     <string name="about">Über</string>
     <string name="licenses">Lizenzen</string>
     <string name="unsplash_summary">Die Quelle frei verwendbarer Bilder im Internet</string>
-    <string name="donate_summary">Dir gefällt Resplash wirklich? Dann überlege ob du die Entwicklung mit ein paar Euro unterstützen möchtest</string>
+    <string name="donate_summary">Dir gefällt Resplash? Unterstütze die Entwicklung mit ein paar Euro!</string>
     <string name="report_bug_title">Fehler melden</string>
     <string name="report_bug_summary">Fehler melden oder neue Features anfragen</string>
     <string name="rate_app_title">Bewerten</string>
     <string name="rate_app_summary">Dir gefällt Resplash? Dann bewerte die App im Play Store</string>
-    <string name="github_summary">Resplash ist Open Source, schau es dir auf GitHub an</string>
+    <string name="github_summary">Resplash ist ein Open-Source-Projekt, schaue es dir auf GitHub an</string>
     <string name="developer_title">Entwickler</string>
     <string name="privacy_policy">Datenschutzerklärung</string>
-    <string name="terms_and_conditions">Geschäftsbedingungen</string>
+    <string name="terms_and_conditions">Allgemeine Geschäftsbedingungen</string>
+    <string name="instagram_username_hint">Instagram-Benuzername</string>
 </resources>
