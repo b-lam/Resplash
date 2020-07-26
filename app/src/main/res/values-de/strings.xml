@@ -120,7 +120,7 @@
     <string name="auto_wallpaper_source_not_set">Nicht eingestellt</string>
     <string name="auto_wallpaper_collections_summary">Wählen die Sammlungen aus, aus denen du Fotos erhalten möchten</string>
     <string name="auto_wallpaper_user_title">Benutzerfotos</string>
-    <string name="auto_wallpaper_user_summary">Verwende Fotos aus: \\@%s</string>
+    <string name="auto_wallpaper_user_summary">Verwende Fotos aus: \@%s</string>
     <string name="auto_wallpaper_user_dialog_message">Gebe den Benutzernamen des Benutzers ein, von dem du Fotos erhalten möchtest:</string>
     <string name="auto_wallpaper_search_terms_title">Suchbegriffe</string>
     <string name="auto_wallpaper_search_terms_dialog_message">Erhalte Fotos, die den folgenden Suchbegriffen entsprechen:</string>
@@ -201,6 +201,7 @@
     <string name="last_name_hint">Nachname</string>
     <string name="email_hint">E-Mail-Adresse</string>
     <string name="portfolio_hint">Persönliche Webseite/Portfolio</string>
+    <string name="instagram_username_hint">Instagram-Benuzername</string>
     <string name="location_hint">Standort</string>
     <string name="bio_hint">Bio</string>
     <string name="account_updated">Konto aktualisiert!</string>
@@ -270,5 +271,4 @@
     <string name="developer_title">Entwickler</string>
     <string name="privacy_policy">Datenschutzerklärung</string>
     <string name="terms_and_conditions">Allgemeine Geschäftsbedingungen</string>
-    <string name="instagram_username_hint">Instagram-Benuzername</string>
 </resources>
