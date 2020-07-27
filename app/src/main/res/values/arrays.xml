@@ -11,6 +11,7 @@
         <item>@string/language_german</item>
         <item>@string/language_indonesian</item>
         <item>@string/language_italian</item>
+        <item>@string/language_japanese</item>
         <item>@string/language_portuguese</item>
         <item>@string/language_russian</item>
         <item>@string/language_serbian</item>
@@ -27,6 +28,7 @@
         <item>de</item>
         <item>in</item>
         <item>it</item>
+        <item>ja</item>
         <item>pt</item>
         <item>ru</item>
         <item>sr</item>
