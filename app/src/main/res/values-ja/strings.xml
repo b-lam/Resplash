@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="search">検索</string>
+    <string name="photos">写真</string>
+    <string name="collections">コレクション</string>
+    <string name="like">いいね</string>
+    <string name="users">ユーザー</string>
+    <string name="unknown">不明</string>
+    <string name="download">ダウンロード</string>
+    <string name="on">オン</string>
+    <string name="off">オフ</string>
+    <string name="share">共有</string>
+    <string name="open_in_browser">ブラウザーで開く</string>
+    <string name="apply">適用</string>
+    <string name="create">作成</string>
+    <string name="save">保存</string>
+    <string name="edit">編集</string>
+    <string name="delete">削除</string>
+    <string name="are_you_sure">本当によろしいですか？</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="thanks">ありがとう！</string>
+    <string name="download_started">ダウンロード開始</string>
+    <string name="download_complete">ダウンロード終了</string>
+    <string name="set_as_wallpaper">壁紙にする</string>
+    <string name="setting_wallpaper">壁紙を設定中…</string>
+    <string name="file_exists_title">もう一度ダウンロードしますか？</string>
+    <string name="file_exists_message">この写真はすでにダウンロードされています。もう一度ダウンロードしますか？</string>
+    <string name="sponsored">スポンサー</string>
+
+    <!-- Common plurals -->
+    <plurals name="photos">
+        <item quantity="other">%d枚</item>
+    </plurals>
+
+    <!-- Main -->
+    <string name="home">ホーム</string>
+    <string name="header_subtitle">世界中のクリエイターから</string>
+    <string name="add_account">アカウントを追加</string>
+    <string name="view_profile">アカウントを見る</string>
+    <string name="edit_profile">アカウントを編集</string>
+    <string name="log_out">ログアウト</string>
+    <string name="sort_by">並び替え</string>
+    <string name="order_latest">新しい順</string>
+    <string name="order_oldest">古い順</string>
+    <string name="order_popular">人気</string>
+    <string name="order_all">すべて</string>
+    <string name="order_featured">注目</string>
+
+    <!-- Error/Empty -->
+    <string name="oops">エラーが発生しました</string>
+    <string name="empty_state_title">表示するものがありません</string>
+    <string name="error_state_title">あらら…</string>
+    <string name="error_setting_wallpaper">壁紙の設定中にエラーが発生しました</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="general">一般</string>
+    <string name="clear_cache">キャッシュを削除</string>
+    <string name="cache_size">キャッシュのサイズ: %d MB</string>
+    <string name="language">言語</string>
+    <string name="theme">テーマ</string>
+    <string name="theme_light">ライトモード</string>
+    <string name="theme_dark">ダークモード</string>
+    <string name="theme_battery">省エネモードの設定</string>
+    <string name="theme_default">端末設定</string>
+    <string name="layout">レイアウト</string>
+    <string name="layout_default">デフォルト</string>
+    <string name="layout_minimal">最低限</string>
+    <string name="layout_grid">グリッド</string>
+    <string name="downloader">ダウンローダー</string>
+    <string name="downloader_default">Resplashダウンローダー</string>
+    <string name="downloader_system">システムダウンローダー</string>
+    <string name="quality">画質</string>
+    <string name="quality_raw">オリジナル</string>
+    <string name="quality_full">フルサイズ</string>
+    <string name="quality_regular">普通</string>
+    <string name="quality_small">小さい</string>
+    <string name="quality_thumb">サムネイル</string>
+    <string name="load_quality">表示画質</string>
+    <string name="download_quality">ダウンロード画質</string>
+    <string name="wallpaper_quality">壁紙の画質</string>
+    <string name="long_press_to_download">長押しでダウンロード</string>
+    <string name="long_press_to_download_summary">ダウンロードを開始するには写真を長押ししてください</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">オート壁紙</string>
+    <string name="auto_wallpaper_info">オート壁紙は設定された範囲の中から自動的にランダムに選択された写真を壁紙を設定します。</string>
+    <string name="auto_wallpaper_help_title">不具合がありますか?</string>
+    <string name="auto_wallpaper_help_message">Resplashの省エネモードまたはバックグラウンド処理に関する設定を変更してみてください。メーカーごとの詳しい説明はこちらをご覧ください: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">条件</string>
+    <string name="auto_wallpaper_on_wifi_title">Wi-Fi接続中</string>
+    <string name="auto_wallpaper_on_wifi_summary">端末がWi-Fiに接続されている場合</string>
+    <string name="auto_wallpaper_charging_title">充電中</string>
+    <string name="auto_wallpaper_charging_summary">端末が充電されている場合</string>
+    <string name="auto_wallpaper_idle_title">スリープ状態</string>
+    <string name="auto_wallpaper_idle_summary">端末が使用されていない場合</string>
+    <string name="auto_wallpaper_interval_title">頻度</string>
+    <string name="auto_wallpaper_interval_summary">更新頻度: 毎%s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15分</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30分</string>
+    <string name="auto_wallpaper_interval_one_hour">1時間</string>
+    <string name="auto_wallpaper_interval_three_hours">3時間</string>
+    <string name="auto_wallpaper_interval_six_hours">6時間</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12時間</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24時間</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48時間</string>
+    <string name="auto_wallpaper_source">作者</string>
+    <string name="auto_wallpaper_source_title">壁紙の作者</string>
+    <string name="auto_wallpaper_source_summary">現在の壁紙の作者:</string>
+    <string name="auto_wallpaper_source_all">すべて</string>
+    <string name="auto_wallpaper_source_featured">注目の写真</string>
+    <string name="auto_wallpaper_source_collections">コレクション</string>
+    <string name="auto_wallpaper_source_user">ユーザー</string>
+    <string name="auto_wallpaper_source_search">検索キーワード</string>
+    <string name="auto_wallpaper_source_not_set">未設定</string>
+    <string name="auto_wallpaper_collections_summary">使用するコレクションを選択してください</string>
+    <string name="auto_wallpaper_user_title">ユーザーの写真</string>
+    <string name="auto_wallpaper_user_summary">\\@%sの写真を使用する</string>
+    <string name="auto_wallpaper_user_dialog_message">写真を使用したい作者のユーザー名を入力してください:</string>
+    <string name="auto_wallpaper_search_terms_title">検索キーワード</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">以下のキーワードに関連する写真を検索</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(複数のキーワードはカンマで区切ってください)</string>
+    <string name="auto_wallpaper_options_title">その他</string>
+    <string name="auto_wallpaper_crop_title">壁紙のトリミング</string>
+    <string name="auto_wallpaper_crop_none">しない</string>
+    <string name="auto_wallpaper_crop_center">中央 (スクロール)</string>
+    <string name="auto_wallpaper_crop_center_crop">中央 (トリミング)</string>
+    <string name="auto_wallpaper_notification_settings_title">通知設定</string>
+    <string name="auto_wallpaper_show_notification_title">通知を受信する</string>
+    <string name="auto_wallpaper_show_notification_summary">表示されている壁紙の詳細を受信する</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">端末の向きに関する不具合</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">端末が横画面の場合壁紙が正しくトリミングされない場合があります。これを選択すると端末が縦画面になるまで壁紙の更新が一時的に停止されます。</string>
+    <string name="auto_wallpaper_select_screen_title">画面を選択</string>
+    <string name="auto_wallpaper_select_screen_summary">壁紙に設定</string>
+    <string name="auto_wallpaper_select_screen_home_screen">ホーム画面</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">ロック画面</string>
+    <string name="auto_wallpaper_select_screen_both">両方</string>
+    <string name="auto_wallpaper_orientation_title">壁紙の向き</string>
+    <string name="auto_wallpaper_orientation_summary">%s向きの壁紙のみ使用する</string>
+    <string name="auto_wallpaper_content_filter_title">コンテンツフィルター</string>
+    <string name="auto_wallpaper_content_filter_low_summary">低: 投稿ガイドラインに違反する内容(性的描写、暴力など)を取り除きます</string>
+    <string name="auto_wallpaper_content_filter_high_summary">高: 子供向けではないコンテンツを取り除きます</string>
+    <string name="auto_wallpaper_content_filter_note">不適切な内容が必ず表示されないことは保証できないことをご了承ください。</string>
+    <string name="auto_wallpaper_history_title">オート壁紙の履歴</string>
+    <string name="auto_wallpaper_history_summary">最近使用した壁紙を表示</string>
+    <string name="auto_wallpaper_history_clear_history">履歴を削除</string>
+    <string name="auto_wallpaper_activate">開始</string>
+    <string name="auto_wallpaper_next_wallpaper">次の壁紙</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">オート壁紙に追加</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">オート壁紙から削除</string>
+    <string name="auto_wallpaper_collection_added">コレクションがオート壁紙に追加されました</string>
+    <string name="auto_wallpaper_collection_removed">コレクションがオート壁紙から削除されました</string>
+    <string name="auto_wallpaper_selected_collections">選択中</string>
+    <string name="auto_wallpaper_no_selected_collections">オート壁紙に追加するコレクションを探してみましょう</string>
+    <string name="auto_wallpaper_discover">見つける</string>
+    <string name="auto_wallpaper_popular">人気</string>
+    <string name="auto_wallpaper_add_collection_from_url">リンクでコレクションを追加する</string>
+    <string name="auto_wallpaper_could_not_add_collection">コレクションが追加できませんでした</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">コレクションのリンクを入力してください：</string>
+    <string name="auto_wallpaper_collection_url">コレクションのリンク</string>
+    <string name="auto_wallpaper_add_collection">コレクションを追加</string>
+    <string name="auto_wallpaper_invalid_url">リンクが無効です</string>
+    <string name="auto_wallpaper_external_storage_title">外部ストレージにインストールされていますか？</string>
+    <string name="auto_wallpaper_external_storage_message">このアプリは現在外部ストレージにインストールされているのでシステムの制限によりオート壁紙が機能しない場合があります。</string>
+
+    <!-- Photo detail -->
+    <string name="views">閲覧</string>
+    <string name="downloads">ダウンロード</string>
+    <string name="likes">いいね</string>
+    <string name="camera">カメラ</string>
+    <string name="aperture">口径</string>
+    <string name="focal_length">焦点距離</string>
+    <string name="dimensions">サイズ</string>
+    <string name="shutter_speed">シャッタースピード</string>
+    <string name="description">解説</string>
+
+    <!-- Colletions -->
+    <string name="add_to_collection">コレクションに追加</string>
+    <string name="create_new_collection">コレクションを作成</string>
+    <string name="make_collection_private">コレクションをプライベートにする</string>
+    <string name="collection_name_hint">名称</string>
+    <string name="collection_description_hint">解説</string>
+    <string name="collection_name_required">名称を入力してください</string>
+    <string name="edit_collection">コレクションを編集</string>
+    <string name="curated_by_template">%sのコレクション</string>
+
+    <!-- User -->
+    <string name="open_portfolio_link">ポートフォリオのリンクを開く</string>
+    <string name="blank_username_error">ユーザー名を入力してください</string>
+    <string name="invalid_username_error">ユーザー名は一文字以上で文字、数字とアンダースコアのみとなっています</string>
+    <string name="username_taken_error">入力されたユーザー名は既に存在しています</string>
+    <string name="blank_first_name_error">名前を入力してください</string>
+    <string name="blank_email_error">メールアドレスを入力してください</string>
+    <string name="invalid_email_error">メールアドレスが無効です</string>
+    <string name="username_hint">ユーザー名</string>
+    <string name="username_helper_text">(文字、数字とアンダースコアのみ)</string>
+    <string name="first_name_hint">名前</string>
+    <string name="last_name_hint">氏名</string>
+    <string name="email_hint">メールアドレス</string>
+    <string name="portfolio_hint">ウェブサイト</string>
+    <string name="instagram_username_hint">インスタグラム名</string>
+    <string name="location_hint">場所</string>
+    <string name="bio_hint">自己紹介</string>
+    <string name="account_updated">アカウントが更新されました</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">検索してみましょう</string>
+    <string name="filter">フィルター</string>
+    <string name="filter_relevance">関連性</string>
+    <string name="filter_latest">最新</string>
+    <string name="content_filter">コンテンツフィルター</string>
+    <string name="filter_low">低</string>
+    <string name="filter_high">高</string>
+    <string name="orientation">画面の向き</string>
+    <string name="filter_any">すべて</string>
+    <string name="filter_portrait">縦</string>
+    <string name="filter_landscape">横</string>
+    <string name="filter_square">正方形</string>
+    <string name="filter_color">色</string>
+    <string name="filter_color_any">すべて</string>
+    <string name="filter_color_black_white">白黒</string>
+    <string name="filter_color_black">黒</string>
+    <string name="filter_color_white">白</string>
+    <string name="filter_color_yellow">黄</string>
+    <string name="filter_color_orange">オレンジ</string>
+    <string name="filter_color_red">赤</string>
+    <string name="filter_color_purple">紫</string>
+    <string name="filter_color_magenta">赤紫</string>
+    <string name="filter_color_green">緑</string>
+    <string name="filter_color_teal">ティールブルー</string>
+    <string name="filter_color_blue">青</string>
+
+    <!-- Login -->
+    <string name="login">ログイン</string>
+    <string name="create_an_account">アカウントを作成</string>
+    <string name="login_banner_title">Creation starts here</string>
+    <string name="login_banner_subtitle">他にはない無償の高画質画像を手に入れましょう</string>
+    <string name="login_success">ログインに成功しました</string>
+    <string name="need_to_log_in">ログインしてください</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">プロバージョンにアップグレード</string>
+    <string name="pro_feature_title">内容</string>
+    <string name="pro_feature_one">オート壁紙をカスタマイズ</string>
+    <string name="pro_feature_one_subtitle">白黒写真が好きな人もいれば、町より自然の写真を好む人もいます。細部までオート壁紙に使用される写真をカスタマイズしましょう</string>
+    <string name="pro_feature_two">今後の限定機能</string>
+    <string name="pro_feature_two_subtitle">今後のプロバージョン限定の機能を手に入れましょう</string>
+    <string name="pro_feature_three">開発を支援</string>
+    <string name="pro_feature_three_subtitle">プロバージョンにアップグレードしていただくとアプリ開発の支援になります</string>
+    <string name="go_pro">アップグレード</string>
+    <string name="restore_purchase">購入を復元する</string>
+    <string name="upgrade_required">プロバージョンにアップグレードしてください</string>
+
+    <!-- Donation -->
+    <string name="support_development">開発を支援</string>
+    <string name="you_are_welcome">どういたしまして</string>
+
+    <!-- About -->
+    <string name="about">情報</string>
+    <string name="licenses">ライセンス</string>
+    <string name="unsplash_summary">インターネットの無償画像の情報源</string>
+    <string name="donate_summary">数百円の課金で開発の支援をお願いします</string>
+    <string name="report_bug_title">不具合を報告</string>
+    <string name="report_bug_summary">不具合を報告・機能をリクエストする</string>
+    <string name="rate_app_title">アプリを評価</string>
+    <string name="rate_app_summary">Google Play Storeでの評価をお願いします</string>
+    <string name="github_summary">ResplashはGitHubにオープンソースソフトウェアとして公開されています</string>
+    <string name="developer_title">開発者</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="terms_and_conditions">利用規約</string>
+</resources>
