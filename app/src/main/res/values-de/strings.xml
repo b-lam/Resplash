@@ -165,6 +165,8 @@
     <string name="auto_wallpaper_collection_url">Sammlungs-URL</string>
     <string name="auto_wallpaper_add_collection">Sammlung hinzufügen</string>
     <string name="auto_wallpaper_invalid_url">Ungültige URL</string>
+    <string name="auto_wallpaper_external_storage_title">Auf SD-Karte installiert?</string>
+    <string name="auto_wallpaper_external_storage_message">Hi! Wir haben gemerkt, dass du diese App auf eine SD-Karte installiert hast. Aufgrund technischer Beschränkungen in Android kann es sein, dass Auto-Wallpaper dadurch nicht richtig funktioniert. Du wurdest gewarnt!</string>
 
     <!-- Photo Detail -->
     <string name="views">Aufrufe</string>
@@ -201,7 +203,7 @@
     <string name="last_name_hint">Nachname</string>
     <string name="email_hint">E-Mail-Adresse</string>
     <string name="portfolio_hint">Persönliche Webseite/Portfolio</string>
-    <string name="instagram_username_hint">Instagram-Benuzername</string>
+    <string name="instagram_username_hint">Instagram-Benutzername</string>
     <string name="location_hint">Standort</string>
     <string name="bio_hint">Bio</string>
     <string name="account_updated">Konto aktualisiert!</string>

@@ -147,10 +147,8 @@ class AutoWallpaperSettingsActivity :
 
     private fun showExternalStorageWarningDialog() {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Installed on SD card?")
-            .setMessage("Hey there! We've noticed you've decided to move this application to " +
-                    "the SD card. Unfortunately, due to a limitation in Android, this means that " +
-                    "the Auto Wallpaper feature might not work properly. You have been warned!")
+            .setTitle(R.string.auto_wallpaper_external_storage_title)
+            .setMessage(R.string.auto_wallpaper_external_storage_message)
             .setPositiveButton(R.string.ok, null)
             .create()
             .show()
