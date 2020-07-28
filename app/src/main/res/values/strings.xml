@@ -79,6 +79,7 @@
     <string name="language_german" translatable="false">German</string>
     <string name="language_indonesian" translatable="false">Indonesian</string>
     <string name="language_italian" translatable="false">Italian</string>
+    <string name="language_japanese" translatable="false">Japanese</string>
     <string name="language_portuguese" translatable="false">Portuguese</string>
     <string name="language_russian" translatable="false">Russian</string>
     <string name="language_serbian" translatable="false">Serbian</string>
@@ -188,7 +189,7 @@
     <string name="auto_wallpaper_add_collection">Add Collection</string>
     <string name="auto_wallpaper_invalid_url">Invalid URL</string>
     <string name="auto_wallpaper_external_storage_title">Installed on SD card?</string>
-    <string name="auto_wallpaper_external_storage_message">Hey there! We've noticed you've decided to move this application to the SD card. Unfortunately, due to a limitation in Android, this means that the Auto Wallpaper feature might not work properly. You have been warned!</string>
+    <string name="auto_wallpaper_external_storage_message">Hey there! We\'ve noticed you\'ve decided to move this application to the SD card. Unfortunately, due to a limitation in Android, this means that the Auto Wallpaper feature might not work properly. You have been warned!</string>
 
     <!-- Photo Detail -->
     <string name="location_template" translatable="false">%s, %s</string>
