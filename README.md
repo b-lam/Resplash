@@ -39,7 +39,17 @@ Then add the following to your `local.properties`:
 ```
 devAppId="<Access Key>"
 devSecret="<Secret Key>"
+releaseAppId=""
+releaseSecret=""
+googlePlayLicenseKey=""
 ```
+
+To build the app, you will need to get a `google-services.json` file from Firebase:
+
+- Go to [Firebase](https://console.firebase.google.com) and create a new project
+- In the Firebase console, add an Android app to the project with the package name `com.b_lam.resplash.debug`
+- Download the `google-services.json` config file
+- Then place the `google-services.json` file in the `app/` directory (at the root of the Android Studio app module)
 
 # Developer
 
