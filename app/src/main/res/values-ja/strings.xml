@@ -110,7 +110,7 @@
     <string name="auto_wallpaper_interval_forty_eight_hours">48時間</string>
     <string name="auto_wallpaper_source">作者</string>
     <string name="auto_wallpaper_source_title">壁紙の作者</string>
-    <string name="auto_wallpaper_source_summary">現在の壁紙の作者:</string>
+    <string name="auto_wallpaper_source_summary">現在の壁紙の作者: %s</string>
     <string name="auto_wallpaper_source_all">すべて</string>
     <string name="auto_wallpaper_source_featured">注目の写真</string>
     <string name="auto_wallpaper_source_collections">コレクション</string>
@@ -119,7 +119,7 @@
     <string name="auto_wallpaper_source_not_set">未設定</string>
     <string name="auto_wallpaper_collections_summary">使用するコレクションを選択してください</string>
     <string name="auto_wallpaper_user_title">ユーザーの写真</string>
-    <string name="auto_wallpaper_user_summary">\\@%sの写真を使用する</string>
+    <string name="auto_wallpaper_user_summary">\@%sの写真を使用する</string>
     <string name="auto_wallpaper_user_dialog_message">写真を使用したい作者のユーザー名を入力してください:</string>
     <string name="auto_wallpaper_search_terms_title">検索キーワード</string>
     <string name="auto_wallpaper_search_terms_dialog_message">以下のキーワードに関連する写真を検索</string>
@@ -135,7 +135,7 @@
     <string name="auto_wallpaper_portrait_mode_only_title">端末の向きに関する不具合</string>
     <string name="auto_wallpaper_portrait_mode_only_summary">端末が横画面の場合壁紙が正しくトリミングされない場合があります。これを選択すると端末が縦画面になるまで壁紙の更新が一時的に停止されます。</string>
     <string name="auto_wallpaper_select_screen_title">画面を選択</string>
-    <string name="auto_wallpaper_select_screen_summary">壁紙に設定</string>
+    <string name="auto_wallpaper_select_screen_summary">%s壁紙に設定</string>
     <string name="auto_wallpaper_select_screen_home_screen">ホーム画面</string>
     <string name="auto_wallpaper_select_screen_lock_screen">ロック画面</string>
     <string name="auto_wallpaper_select_screen_both">両方</string>

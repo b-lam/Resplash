@@ -164,6 +164,8 @@
     <string name="auto_wallpaper_collection_url">URL การรวบรวม</string>
     <string name="auto_wallpaper_add_collection">เพิ่มคอลเล็กชัน</string>
     <string name="auto_wallpaper_invalid_url">URL ไม่ถูกต้อง</string>
+    <string name="auto_wallpaper_external_storage_title">Installed on SD card?</string>
+    <string name="auto_wallpaper_external_storage_message">Hey there! We\'ve noticed you\'ve decided to move this application to the SD card. Unfortunately, due to a limitation in Android, this means that the Auto Wallpaper feature might not work properly. You have been warned!</string>
 
     <!-- Photo Detail -->
     <string name="views">จำนวนเข้าชม</string>
