@@ -7,6 +7,7 @@
         <item>@string/language_english</item>
         <item>@string/language_arabic</item>
         <item>@string/language_chinese</item>
+        <item>@string/language_croatian</item>
         <item>@string/language_czech</item>
         <item>@string/language_german</item>
         <item>@string/language_indonesian</item>
@@ -24,6 +25,7 @@
         <item>en</item>
         <item>ar</item>
         <item>zh</item>
+        <item>hr</item>
         <item>cs</item>
         <item>de</item>
         <item>in</item>

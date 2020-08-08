@@ -75,6 +75,7 @@
     <string name="language_english" translatable="false">English</string>
     <string name="language_arabic" translatable="false">Arabic</string>
     <string name="language_chinese" translatable="false">Chinese</string>
+    <string name="language_croatian" translatable="false">Croatian</string>
     <string name="language_czech" translatable="false">Czech</string>
     <string name="language_german" translatable="false">German</string>
     <string name="language_indonesian" translatable="false">Indonesian</string>

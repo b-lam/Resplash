@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Prekini</string>
+    <string name="search">Pretraži</string>
+    <string name="photos">Fotografije</string>
+    <string name="collections">Kolekcije</string>
+    <string name="like">Sviđa mi se</string>
+    <string name="users">Korisnici</string>
+    <string name="unknown">Nepoznato</string>
+    <string name="download">Preuzimanje</string>
+    <string name="on">Upaljeno</string>
+    <string name="off">Ugašeno</string>
+    <string name="share">Podijeli</string>
+    <string name="open_in_browser">Otvori u pretraživaču</string>
+    <string name="apply">Prihvati</string>
+    <string name="create">Kreiraj</string>
+    <string name="save">Spremi</string>
+    <string name="edit">Uredi</string>
+    <string name="delete">Izbriši</string>
+    <string name="are_you_sure">Jeste li sigurni?</string>
+    <string name="yes">Da</string>
+    <string name="no">Ne</string>
+    <string name="thanks">Hvala!</string>
+    <string name="download_started">Preuzimanje započeto</string>
+    <string name="download_complete">Preuzimanje dovršeno</string>
+    <string name="set_as_wallpaper">Postavi kao pozadinu</string>
+    <string name="setting_wallpaper">Postavljanje pozadine…</string>
+    <string name="file_exists_title">Preuzmi opet?</string>
+    <string name="file_exists_message">Ova fotografije je već preuzeta. Želite ju preuzeti opet?</string>
+    <string name="sponsored">Sponzorirano</string>
+
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="one">%d Photo</item>
+        <item quantity="few">%d Photos</item>
+        <item quantity="other">%d Photos</item>
+    </plurals>
+
+    <!-- Main -->
+    <string name="home">Početna</string>
+    <string name="header_subtitle">Omogućeno od strane kreatora iz cijelog svijeta</string>
+    <string name="add_account">Dodaj račun</string>
+    <string name="view_profile">Pogledaj profil</string>
+    <string name="edit_profile">Uredi profil</string>
+    <string name="log_out">Izlogiraj se</string>
+    <string name="sort_by">Sortiraj</string>
+    <string name="order_latest">Najnovije</string>
+    <string name="order_oldest">Najstarije</string>
+    <string name="order_popular">Popularno</string>
+    <string name="order_all">Sve</string>
+    <string name="order_featured">Istaknuto</string>
+
+    <!-- Error/Empty -->
+    <string name="oops">Ups, nešto je pošlo po krivu…</string>
+    <string name="empty_state_title">Ovdje nema ništa za vidjeti…</string>
+    <string name="error_state_title">Uh oh…</string>
+    <string name="error_setting_wallpaper">Nešto je pošlo po krivu prilikom postavljanja pozadine…</string>
+
+    <!-- Settings -->
+    <string name="settings">Postavke</string>
+    <string name="general">Opće</string>
+    <string name="clear_cache">Očisti cache memoriju</string>
+    <string name="cache_size">Veličina cache memorije: %d MB</string>
+    <string name="language">Jezik</string>
+    <string name="theme">Tema</string>
+    <string name="theme_light">Svijetla</string>
+    <string name="theme_dark">Tamna</string>
+    <string name="theme_battery">Štednja baterije</string>
+    <string name="theme_default">Sistemska</string>
+    <string name="layout">Raspored</string>
+    <string name="layout_default">Zadano</string>
+    <string name="layout_minimal">Minimalistički</string>
+    <string name="layout_grid">Mreža</string>
+    <string name="downloader">Preuzimatelj</string>
+    <string name="downloader_default">Resplash preuzimatelj</string>
+    <string name="downloader_system">Sistemski preuzimatelj</string>
+    <string name="quality">Kvaliteta</string>
+    <string name="quality_raw">Raw</string>
+    <string name="quality_full">Originalna</string>
+    <string name="quality_regular">Regularna</string>
+    <string name="quality_small">Mala</string>
+    <string name="quality_thumb">Sličica</string>
+    <string name="load_quality">Učitaj kvalitetu</string>
+    <string name="download_quality">Preuzmi kvalitetu</string>
+    <string name="wallpaper_quality">Kvaliteta pozadine</string>
+    <string name="long_press_to_download">Dugo drži za preuzimanje</string>
+    <string name="long_press_to_download_summary">Dugo drži na fotografiji za preuzimanje</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Automatska pozadina</string>
+    <string name="auto_wallpaper_info">Automatska pozadina će osvježavati vaš uređaj nasumičnom pozadinom temeljeno na postavljenim uvjetima.</string>
+    <string name="auto_wallpaper_help_title">Ne radi?</string>
+    <string name="auto_wallpaper_help_message">Pokušajte ugasiti optimizaciju baterije za Resplash u postavkama uređaja.\n\nZa detaljnije upute pogledajte sljedeću poveznicu: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">Uvjeti</string>
+    <string name="auto_wallpaper_on_wifi_title">Na Wi-Fi</string>
+    <string name="auto_wallpaper_on_wifi_summary">Uređaj mora biti spojen na Wi-Fi mrežu</string>
+    <string name="auto_wallpaper_charging_title">Na punjenju</string>
+    <string name="auto_wallpaper_charging_summary">Uređaj mora biti spojen na izvor napajanja</string>
+    <string name="auto_wallpaper_idle_title">U mirovanju</string>
+    <string name="auto_wallpaper_idle_summary">Uređaj mora biti neaktivan</string>
+    <string name="auto_wallpaper_interval_title">Interval</string>
+    <string name="auto_wallpaper_interval_summary">Mijenjaj pozadinu svakih: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 minuta</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 minuta</string>
+    <string name="auto_wallpaper_interval_one_hour">1 sat</string>
+    <string name="auto_wallpaper_interval_three_hours">3 sata</string>
+    <string name="auto_wallpaper_interval_six_hours">6 sati</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 sati</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 sata</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 sati</string>
+    <string name="auto_wallpaper_source">Izvor</string>
+    <string name="auto_wallpaper_source_title">Izvor pozadina</string>
+    <string name="auto_wallpaper_source_summary">Trenutni izvor: %s</string>
+    <string name="auto_wallpaper_source_all">Sve</string>
+    <string name="auto_wallpaper_source_featured">Istaknuto</string>
+    <string name="auto_wallpaper_source_collections">Kolekcije</string>
+    <string name="auto_wallpaper_source_user">Korisničke fotografije</string>
+    <string name="auto_wallpaper_source_search">Pretraži</string>
+    <string name="auto_wallpaper_source_not_set">Nije postavljeno</string>
+    <string name="auto_wallpaper_collections_summary">Odaberi kolekcije iz kojih želite fotografije</string>
+    <string name="auto_wallpaper_user_title">Korisničke fotografije</string>
+    <string name="auto_wallpaper_user_summary">Koristite fotografije iz: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Upišite ime korisnika čije slike tražite:</string>
+    <string name="auto_wallpaper_search_terms_title">Uvjeti pretrage</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Nađite fotografije koje sadrže sljedeće izraze:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Razdvojite različite izraze zarezima)</string>
+    <string name="auto_wallpaper_options_title">Opcije</string>
+    <string name="auto_wallpaper_crop_title">Obrezivanje pozadine</string>
+    <string name="auto_wallpaper_crop_none">Ništa</string>
+    <string name="auto_wallpaper_crop_center">Centrirano (Scroll)</string>
+    <string name="auto_wallpaper_crop_center_crop">Centrirano (Crop)</string>
+    <string name="auto_wallpaper_notification_settings_title">Postavke notifikacija</string>
+    <string name="auto_wallpaper_show_notification_title">Prikaži notifikacije</string>
+    <string name="auto_wallpaper_show_notification_summary">Prikaži notifikaciju s informacijama k trenutnoj pozadini</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Fiksirana orijentacija uređaja</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Neki uređaji će obrezati pozadinu netočno ako ju postavite u landscape modu, odabirom ove opcije odgodit će se postavljanje pozadine dok se uređaj ne prebaci u portrait mode.</string>
+    <string name="auto_wallpaper_select_screen_title">Odaberite zaslon</string>
+    <string name="auto_wallpaper_select_screen_summary">Primijenite pozadinu na: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Početni zaslon</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">Zaključani zaslon</string>
+    <string name="auto_wallpaper_select_screen_both">Početni zaslon i zaključani zaslon</string>
+    <string name="auto_wallpaper_orientation_title">Orijentacija</string>
+    <string name="auto_wallpaper_orientation_summary">Limitirajte orijentaciju pozadine na: %s</string>
+    <string name="auto_wallpaper_content_filter_title">Filter sadržaja</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Niski: Garantira da se ne prikazuje sadržaj koji sadrži golotinju ili nasilje</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Visoki: Filitrira sadržaj koji ne bi mogao biti primjeren za mlađu generaciju</string>
+    <string name="auto_wallpaper_content_filter_note">P.S. Ne možemo garantirati da će sav osjetljiv sadržaj biti uklonjen</string>
+    <string name="auto_wallpaper_history_title">Povijest automatskih pozadina</string>
+    <string name="auto_wallpaper_history_summary">Pogledaj prošle postavljene pozadine</string>
+    <string name="auto_wallpaper_history_clear_history">Očisti povijest</string>
+    <string name="auto_wallpaper_activate">Aktiviraj</string>
+    <string name="auto_wallpaper_next_wallpaper">Sljedeća pozadina</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Dodaj u automatske pozadine</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Izbriši iz automatskih pozadina</string>
+    <string name="auto_wallpaper_collection_added">Kolekcija dodana u automatske pozadine</string>
+    <string name="auto_wallpaper_collection_removed">Kolekcija izbrisana iz automatskih pozadina</string>
+    <string name="auto_wallpaper_selected_collections">Odabrano</string>
+    <string name="auto_wallpaper_no_selected_collections">Pronađi kolekcije za dodati u automatske pozadine</string>
+    <string name="auto_wallpaper_discover">Otkrij nove pozadine</string>
+    <string name="auto_wallpaper_popular">Popularne</string>
+    <string name="auto_wallpaper_add_collection_from_url">Dodaj kolekciju iz URL-a</string>
+    <string name="auto_wallpaper_could_not_add_collection">Nemoguće dodati kolekciju</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Kopiraj i zalijepi URL kolekcije:</string>
+    <string name="auto_wallpaper_collection_url">URL kolekcije</string>
+    <string name="auto_wallpaper_add_collection">Dodaj kolekciju</string>
+    <string name="auto_wallpaper_invalid_url">Neispravan URL</string>
+    <string name="auto_wallpaper_external_storage_title">Instalirano na SD karticu?</string>
+    <string name="auto_wallpaper_external_storage_message">Hej! Primijetili smo da ste odlučili premjestiti aplikaciju na SD karticu. Nažalost, zbog limitacije Android sustava, automatske pozadine možda neće pravilno raditi. Upozoreni ste!</string>
+
+    <!-- Photo Detail -->
+    <string name="views">Pregledi</string>
+    <string name="downloads">Preuzimanja</string>
+    <string name="likes">Sviđanja</string>
+    <string name="camera">Kamera</string>
+    <string name="aperture">Veličina otvora</string>
+    <string name="focal_length">Fokalna dužina</string>
+    <string name="dimensions">Dimenzije</string>
+    <string name="shutter_speed">Brzina okidača</string>
+    <string name="description">Opis</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">Dodaj kolekciji</string>
+    <string name="create_new_collection">Kreiraj kolekciju</string>
+    <string name="make_collection_private">Učini kolekciju privatnom</string>
+    <string name="collection_name_hint">Ime</string>
+    <string name="collection_description_hint">Opis (opcionalno)</string>
+    <string name="collection_name_required">Ime je potrebno</string>
+    <string name="edit_collection">Uredi kolekciju</string>
+    <string name="curated_by_template">Uređeno od %s</string>
+
+    <!-- User -->
+    <string name="open_portfolio_link">Otvori poveznicu na portfolio</string>
+    <string name="blank_username_error">Korisničko ime ne može biti prazno</string>
+    <string name="invalid_username_error">Korisničko ime mora sadržavati barem jedno slovo i mora se sastojati od slova, brojeva ili donjih crta (bez razmaka)</string>
+    <string name="username_taken_error">Korisničko ime već postoji</string>
+    <string name="blank_first_name_error">Ime ne može biti prazno</string>
+    <string name="blank_email_error">Email ne može biti prazan</string>
+    <string name="invalid_email_error">Email nije u dobrom formatu</string>
+    <string name="username_hint">Korisničko ime</string>
+    <string name="username_helper_text">(Samo slova, brojevi i donja crta)</string>
+    <string name="first_name_hint">Ime</string>
+    <string name="last_name_hint">Prezime</string>
+    <string name="email_hint">Email</string>
+    <string name="portfolio_hint">Osobna stranica/portfolio</string>
+    <string name="instagram_username_hint">Instagram korisničko ime</string>
+    <string name="location_hint">Lokacija</string>
+    <string name="bio_hint">Biografija</string>
+    <string name="account_updated">Račun ažuriran!</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">Pokušajte pretražiti nešto</string>
+    <string name="filter">Filter</string>
+    <string name="filter_relevance">Važnost</string>
+    <string name="filter_latest">Najnovije</string>
+    <string name="content_filter">Filtriraj sadržaj</string>
+    <string name="filter_low">Nisko</string>
+    <string name="filter_high">Visoko</string>
+    <string name="orientation">Orijentacija</string>
+    <string name="filter_any">Sve</string>
+    <string name="filter_portrait">Vertikalno</string>
+    <string name="filter_landscape">Horizontalno</string>
+    <string name="filter_square">Kvadrat</string>
+    <string name="filter_color">Boja</string>
+    <string name="filter_color_any">Sve</string>
+    <string name="filter_color_black_white">Crno-bijela</string>
+    <string name="filter_color_black">Crna</string>
+    <string name="filter_color_white">Bijela</string>
+    <string name="filter_color_yellow">Žuta</string>
+    <string name="filter_color_orange">Narančasta</string>
+    <string name="filter_color_red">Crvena</string>
+    <string name="filter_color_purple">Ljubičasta</string>
+    <string name="filter_color_magenta">Magenta</string>
+    <string name="filter_color_green">Zelena</string>
+    <string name="filter_color_teal">Tirkizna</string>
+    <string name="filter_color_blue">Plava</string>
+
+    <!-- Login -->
+    <string name="login">Ulogirajte se</string>
+    <string name="create_an_account">Napravite račun</string>
+    <string name="login_banner_title">Za početak kliknite ovdje</string>
+    <string name="login_banner_subtitle">Pristupite besplatnim fotografijama visoke rezolucije koje ne možete pronaći nigdje drugdje.</string>
+    <string name="login_success">Login successful</string>
+    <string name="need_to_log_in">Morate se ulogirati da biste to mogli učiniti</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">Nadogradite na Resplash Pro</string>
+    <string name="pro_feature_title">Što to znači za vas?</string>
+    <string name="pro_feature_one">Prilagodba automatskih pozadina</string>
+    <string name="pro_feature_one_subtitle">Netko preferira crno-bijele fotografije, netko radije gleda prirodu. Prilagodite automatske pozadine prema tipu fotografija koje želite vidjeti.</string>
+    <string name="pro_feature_two">Buduće ekskluzivne značajka</string>
+    <string name="pro_feature_two_subtitle">Pristup budućim ekskluzivnim pro zbačajkama</string>
+    <string name="pro_feature_three">Podržite razvoj</string>
+    <string name="pro_feature_three_subtitle">Pro verzija pomaže nastaviti razvoj Resplash aplikacije</string>
+    <string name="go_pro">Nadogradite na Pro</string>
+    <string name="restore_purchase">Povrat novaca</string>
+    <string name="upgrade_required">Resplash Pro mora biti aitiviran za tu opciju!</string>
+
+    <!-- Donate -->
+    <string name="support_development">Podržite razvoj</string>
+    <string name="you_are_welcome">You\'re welcome</string>
+
+    <!-- About -->
+    <string name="about">O proizvodu</string>
+    <string name="licenses">Licence</string>
+    <string name="unsplash_summary">Izvor besplatnih fotografija s Interneta</string>
+    <string name="donate_summary">Ako vam se stvarno sviđa Resplash, razmislite o donaciji kako bi podržali daljnji razvoj.</string>
+    <string name="report_bug_title">Prijavite grešku</string>
+    <string name="report_bug_summary">Prijavite grešku ili zatražite nove značajke</string>
+    <string name="rate_app_title">Ocijenite aplikaciju</string>
+    <string name="rate_app_summary">Ako vam se sviđa Resplasg, ocijenite ga na Trgovini Play</string>
+    <string name="github_summary">Resplash je otvorenog koda, provjerite na GitHubu</string>
+    <string name="developer_title">Developer</string>
+    <string name="privacy_policy">Politika privatnosti</string>
+    <string name="terms_and_conditions">Uvjeti korištenja</string>
+</resources>
