@@ -24,11 +24,11 @@
     <string name="no">否</string>
     <string name="thanks">谢谢!</string>
     <string name="download_started">下载开始</string>
-    <string name="download_complete">下载完毕</string>
-    <string name="setting_wallpaper">设置壁纸…</string>
+    <string name="download_complete">下载完成</string>
+    <string name="setting_wallpaper">设置壁纸中…</string>
     <string name="set_as_wallpaper">设为壁纸</string>
     <string name="file_exists_title">重新下载？</string>
-    <string name="file_exists_message">这张照片已经下载。您要重新下载这张照片吗？</string>
+    <string name="file_exists_message">这张照片已经下载过了。您要重新下载这张照片吗？</string>
     <string name="sponsored">赞助商</string>
 
     <!-- Common Plurals -->
@@ -72,8 +72,8 @@
     <string name="layout_minimal">简单</string>
     <string name="layout_grid">网格</string>
     <string name="downloader">下载器</string>
-    <string name="downloader_default">Resplash downloader</string>
-    <string name="downloader_system">System downloader</string>
+    <string name="downloader_default">Resplash 下载器</string>
+    <string name="downloader_system">系统下载器</string>
     <string name="quality">图像质量</string>
     <string name="quality_raw">原始</string>
     <string name="quality_full">完整</string>
@@ -88,9 +88,9 @@
 
     <!-- Auto Wallpaper -->
     <string name="auto_wallpaper_title">自动壁纸</string>
-    <string name="auto_wallpaper_info">自动壁纸将根据设置为您的设备应用新的随机壁纸</string>
+    <string name="auto_wallpaper_info">开启后，自动壁纸功能将根据下列设置为您的设备随机应用新壁纸</string>
     <string name="auto_wallpaper_help_title">有问题？</string>
-    <string name="auto_wallpaper_help_message">尝试在手机设置中为 Resplash 禁用空闲状态和电池优化。\n\n有关制造商的特定说明： https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_help_message">尝试在手机设置中为 Resplash 禁用空闲状态和电池优化。\n\n有关手机品牌的特定说明： https://dontkillmyapp.com/</string>
     <string name="auto_wallpaper_conditions_title">条件</string>
     <string name="auto_wallpaper_on_wifi_title">WiFi 已连接</string>
     <string name="auto_wallpaper_on_wifi_summary">设备必须连接到 WiFi 网络</string>
@@ -99,7 +99,7 @@
     <string name="auto_wallpaper_idle_title">空闲</string>
     <string name="auto_wallpaper_idle_summary">设备必须处于非活动状态</string>
     <string name="auto_wallpaper_interval_title">间隔</string>
-    <string name="auto_wallpaper_interval_summary">每隔 %s 切换壁纸</string>
+    <string name="auto_wallpaper_interval_summary">壁纸切换间隔：%s</string>
     <string name="auto_wallpaper_interval_fifteen_minutes">15 分钟</string>
     <string name="auto_wallpaper_interval_thirty_minutes">30 分钟</string>
     <string name="auto_wallpaper_interval_one_hour">1 小时</string>
@@ -125,10 +125,10 @@
     <string name="auto_wallpaper_search_terms_dialog_message">获取与以下关键词匹配的照片：</string>
     <string name="auto_wallpaper_search_terms_dialog_helper_text">（用逗号分隔多个关键词）</string>
     <string name="auto_wallpaper_options_title">选项</string>
-    <string name="auto_wallpaper_crop_title">作物壁纸</string>
-    <string name="auto_wallpaper_crop_none">没有</string>
-    <string name="auto_wallpaper_crop_center">中央</string>
-    <string name="auto_wallpaper_crop_center_crop">中心裁剪</string>
+    <string name="auto_wallpaper_crop_title">裁剪方式</string>
+    <string name="auto_wallpaper_crop_none">不处理</string>
+    <string name="auto_wallpaper_crop_center">居中（滑动）</string>
+    <string name="auto_wallpaper_crop_center_crop">居中（裁剪）</string>
     <string name="auto_wallpaper_notification_settings_title">通知设置</string>
     <string name="auto_wallpaper_show_notification_title">显示通知</string>
     <string name="auto_wallpaper_show_notification_summary">获取有关当前壁纸信息的通知</string>
@@ -164,8 +164,8 @@
     <string name="auto_wallpaper_collection_url">图集 URL</string>
     <string name="auto_wallpaper_add_collection">添加图集</string>
     <string name="auto_wallpaper_invalid_url">无效的 URL</string>
-    <string name="auto_wallpaper_external_storage_title">Installed on SD card?</string>
-    <string name="auto_wallpaper_external_storage_message">Hey there! We\'ve noticed you\'ve decided to move this application to the SD card. Unfortunately, due to a limitation in Android, this means that the Auto Wallpaper feature might not work properly. You have been warned!</string>
+    <string name="auto_wallpaper_external_storage_title">安装到了外部存储中？</string>
+    <string name="auto_wallpaper_external_storage_message">嘿！我们注意到您已决定将此应用安装到外部存储中。不幸的是，由于 Android 系统的限制，这意味着“自动壁纸”功能可能无法正常使用。</string>
 
     <!-- Photo Detail -->
     <string name="views">浏览</string>
@@ -184,7 +184,7 @@
     <string name="make_collection_private">将图集设为私密</string>
     <string name="collection_name_hint">名称</string>
     <string name="collection_description_hint">描述（可选）</string>
-    <string name="collection_name_required">名称是必需的</string>
+    <string name="collection_name_required">名称不能为空</string>
     <string name="edit_collection">编辑图集</string>
     <string name="curated_by_template">由 %s 创建</string>
 
@@ -263,12 +263,12 @@
     <string name="about">关于</string>
     <string name="licenses">开放源代码许可</string>
     <string name="unsplash_summary">互联网免费图片来源</string>
-    <string name="donate_summary">喜欢 Resplash 的话，不妨考虑打个赏钱，支持一下开发工作吧</string>
+    <string name="donate_summary">喜欢 Resplash 就请考虑打赏支持一下开发工作吧</string>
     <string name="report_bug_title">发送反馈</string>
     <string name="report_bug_summary">报告错误或者提议新功能</string>
     <string name="rate_app_title">评价</string>
     <string name="rate_app_summary">喜欢 Resplash 就请在 Google Play Store 上给个好评吧</string>
-    <string name="github_summary">Resplash 是开源的，请在 GitHub 上查看</string>
+    <string name="github_summary">在 GitHub 上查看 Resplash 开源项目</string>
     <string name="developer_title">作者</string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="terms_and_conditions">服务条款</string>
