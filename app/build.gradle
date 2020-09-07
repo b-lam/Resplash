@@ -63,18 +63,18 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Support libraries
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.browser:browser:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta8'
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.fragment:fragment:1.2.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'androidx.work:work-runtime-ktx:2.4.0-rc01'
+    implementation 'androidx.work:work-runtime-ktx:2.4.0'
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -87,7 +87,7 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.2.5'
 
     // Material components
-    implementation 'com.google.android.material:material:1.3.0-alpha01'
+    implementation 'com.google.android.material:material:1.3.0-alpha02'
 
     // Billing
     implementation 'com.android.billingclient:billing:3.0.0'
@@ -122,12 +122,16 @@ dependencies {
     implementation 'org.koin:koin-androidx-viewmodel:2.1.5'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics-ktx:17.4.4'
-    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
-    implementation 'com.google.firebase:firebase-inappmessaging-ktx:19.1.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:21.5.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+    implementation 'com.google.firebase:firebase-inappmessaging-ktx:19.1.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.6.0'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
+    // Play Core
+    implementation 'com.google.android.play:core:1.8.0'
+    implementation 'com.google.android.play:core-ktx:1.8.1'
+    
     // Lottie
     implementation 'com.airbnb.android:lottie:3.4.0'
 
@@ -144,13 +148,13 @@ dependencies {
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     // Muzei
-    implementation 'com.google.android.apps.muzei:muzei-api:3.4.0-alpha02'
+    implementation 'com.google.android.apps.muzei:muzei-api:3.4.0'
 
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
     // Unit tests
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
