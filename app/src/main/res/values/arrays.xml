@@ -106,6 +106,8 @@
         <item>@string/auto_wallpaper_interval_twelve_hours</item>
         <item>@string/auto_wallpaper_interval_twenty_four_hours</item>
         <item>@string/auto_wallpaper_interval_forty_eight_hours</item>
+        <item>@string/auto_wallpaper_interval_one_week</item>
+        <item>@string/auto_wallpaper_interval_one_month</item>
     </string-array>
     <string-array name="auto_wallpaper_interval_values">
         <item>15</item>
@@ -116,6 +118,8 @@
         <item>720</item>
         <item>1440</item>
         <item>2880</item>
+        <item>10080</item>
+        <item>43800</item>
     </string-array>
     <string name="auto_wallpaper_interval_default" translatable="false">1440</string>
 

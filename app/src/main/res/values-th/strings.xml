@@ -108,6 +108,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 ชั่วโมง</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 ชั่วโมง</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 ชั่วโมง</string>
+    <string name="auto_wallpaper_interval_one_week">1 สัปดาห์</string>
+    <string name="auto_wallpaper_interval_one_month">1 เดือน</string>
     <string name="auto_wallpaper_source">แหล่งที่มา</string>
     <string name="auto_wallpaper_source_title">แหล่งภาพพื้นหลัง</string>
     <string name="auto_wallpaper_source_summary">แหล่งที่มาปัจจุบัน: %s</string>

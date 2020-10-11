@@ -110,6 +110,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 сати</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 сати</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 сати</string>
+    <string name="auto_wallpaper_interval_one_week">1 недеља</string>
+    <string name="auto_wallpaper_interval_one_month">1 месяц</string>
     <string name="auto_wallpaper_source">Извор</string>
     <string name="auto_wallpaper_source_title">Извор позадине</string>
     <string name="auto_wallpaper_source_summary">Тренутни извор: %s</string>

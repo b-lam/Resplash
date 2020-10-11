@@ -110,6 +110,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 hodin</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 hodin</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 hodin</string>
+    <string name="auto_wallpaper_interval_one_week">1 týden</string>
+    <string name="auto_wallpaper_interval_one_month">1 měsíc</string>
     <string name="auto_wallpaper_source">Zdroj</string>
     <string name="auto_wallpaper_source_title">Zdroj tapety</string>
     <string name="auto_wallpaper_source_summary">Aktuální zdroj: %s</string>

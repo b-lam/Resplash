@@ -111,6 +111,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 часов</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 часа</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 часов</string>
+    <string name="auto_wallpaper_interval_one_week">1 неделя</string>
+    <string name="auto_wallpaper_interval_one_month">1 месяц</string>
     <string name="auto_wallpaper_source">Источник</string>
     <string name="auto_wallpaper_source_title">Источник обоев</string>
     <string name="auto_wallpaper_source_summary">Источник тока: %s</string>

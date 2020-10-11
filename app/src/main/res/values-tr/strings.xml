@@ -109,6 +109,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 Saat</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 Saat</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 Saat</string>
+    <string name="auto_wallpaper_interval_one_week">1 hafta</string>
+    <string name="auto_wallpaper_interval_one_month">1 ay</string>
     <string name="auto_wallpaper_source">Kaynak</string>
     <string name="auto_wallpaper_source_title">Duvar kağıdı kaynağı</string>
     <string name="auto_wallpaper_source_summary">Akım kaynağı: %s</string>

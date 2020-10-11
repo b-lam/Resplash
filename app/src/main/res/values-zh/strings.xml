@@ -108,6 +108,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 小时</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 小时</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 小时</string>
+    <string name="auto_wallpaper_interval_one_week">1周</string>
+    <string name="auto_wallpaper_interval_one_month">1个月</string>
     <string name="auto_wallpaper_source">来源</string>
     <string name="auto_wallpaper_source_title">壁纸来源</string>
     <string name="auto_wallpaper_source_summary">当前来源：%s</string>

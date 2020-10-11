@@ -133,6 +133,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 hours</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 hours</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 hours</string>
+    <string name="auto_wallpaper_interval_one_week">1 week</string>
+    <string name="auto_wallpaper_interval_one_month">1 month</string>
     <string name="auto_wallpaper_source">Source</string>
     <string name="auto_wallpaper_source_title">Wallpaper Source</string>
     <string name="auto_wallpaper_source_summary">Current source: %s</string>
