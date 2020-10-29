@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Visszavonás</string>
+    <string name="search">Keresés</string>
+    <string name="photos">Képek</string>
+    <string name="collections">Gyűjtemények</string>
+    <string name="like">Like</string>
+    <string name="users">Felhasználók</string>
+    <string name="unknown">Ismeretlen</string>
+    <string name="download">Letöltés</string>
+    <string name="on">Bekapcsol</string>
+    <string name="off">Kikapcsol</string>
+    <string name="share">Megosztás</string>
+    <string name="open_in_browser">Megnyitás böngészőben</string>
+    <string name="apply">Jóváhagyás</string>
+    <string name="create">Létrehozás</string>
+    <string name="save">Mentés</string>
+    <string name="edit">Szerkesztés</string>
+    <string name="delete">Törlés</string>
+    <string name="are_you_sure">Biztos vagy benne?</string>
+    <string name="yes">Igen</string>
+    <string name="no">Nem</string>
+    <string name="thanks">Köszi!</string>
+    <string name="download_started">Letöltés elkezdődött</string>
+    <string name="download_complete">Letöltés befejezve</string>
+    <string name="set_as_wallpaper">Beállítás háttérképként</string>
+    <string name="setting_wallpaper">Háttérkép beállítása…</string>
+    <string name="file_exists_title">Letöltöd még egyszer?</string>
+    <string name="file_exists_message">Ezt a képet már egyszer letöltötted. Letöltöd megint?</string>
+    <string name="sponsored">Szpontorált</string>
+
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="one">%d Képek</item>
+        <item quantity="other">%d Képek</item>
+    </plurals>
+
+    <!-- Main -->
+    <string name="home">Otthon</string>
+    <string name="header_subtitle">Powered by creators everywhere</string>
+    <string name="add_account">Fiók hozzáadása</string>
+    <string name="view_profile">Profil megtekintése</string>
+    <string name="edit_profile">Profil szerkesztése</string>
+    <string name="log_out">Kijelentkezés</string>
+    <string name="sort_by">Rendezés szempontja</string>
+    <string name="order_latest">Legfrissebb</string>
+    <string name="order_oldest">Legrégebbi</string>
+    <string name="order_popular">Népszerűség</string>
+    <string name="order_all">Mind</string>
+    <string name="order_featured">Kiemelt</string>
+
+    <!-- Error/Empty -->
+    <string name="oops">Hoppá, valami nem sikerült</string>
+    <string name="empty_state_title">Nincs itt semmi látnivaló</string>
+    <string name="error_state_title">Oh oh…</string>
+    <string name="error_setting_wallpaper">Valami nem sikerült a háttér beállítása közben</string>
+
+    <!-- Settings -->
+    <string name="settings">Beállítások</string>
+    <string name="general">Általános</string>
+    <string name="clear_cache">Gyorsítótár törlése</string>
+    <string name="cache_size">Gyorsítótár mérete: %d MB</string>
+    <string name="language">Nyelv</string>
+    <string name="theme">Téma</string>
+    <string name="theme_light">Világos</string>
+    <string name="theme_dark">Sötét</string>
+    <string name="theme_battery">Akkumlátor kímélő által beállított</string>
+    <string name="theme_default">Rendszer alapértelmezett</string>
+    <string name="layout">Elrendezés</string>
+    <string name="layout_default">Alapértelmezett</string>
+    <string name="layout_minimal">Minimális</string>
+    <string name="layout_grid">Háló</string>
+    <string name="downloader">Letöltő</string>
+    <string name="downloader_default">Resplash letöltő</string>
+    <string name="downloader_system">Rendszer letöltő</string>
+    <string name="quality">Minőség</string>
+    <string name="quality_raw">Nyers</string>
+    <string name="quality_full">Teljes</string>
+    <string name="quality_regular">Általános</string>
+    <string name="quality_small">Kicsi</string>
+    <string name="quality_thumb">Apró</string>
+    <string name="load_quality">Betöltési minőség</string>
+    <string name="download_quality">Letöltési minőség</string>
+    <string name="wallpaper_quality">Háttérkép minőség</string>
+    <string name="long_press_to_download">Hosszan nyomd a letöltéshez</string>
+    <string name="long_press_to_download_summary">Nyomj rá hosszan egy képre a letöltéshez</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Automatikus háttérkép</string>
+    <string name="auto_wallpaper_info">Az automatikus háttérkép frissíteni fogja az eszközöd háttérképét egy véletlenszerű képpel a beállított kikötések alapján</string>
+    <string name="auto_wallpaper_help_title">Nem műkődik?</string>
+    <string name="auto_wallpaper_help_message">Try disabling the Idle condition and battery optimizations for Resplash in your phone\'s settings.\n\nFor manufacturer specific instructions: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">Kikötések</string>
+    <string name="auto_wallpaper_on_wifi_title"> Wi-Fi-n</string>
+    <string name="auto_wallpaper_on_wifi_summary">Az eszköznek csatlakozva kell lennie egy WI-FI hálózathoz</string>
+    <string name="auto_wallpaper_charging_title">Töltés</string>
+    <string name="auto_wallpaper_charging_summary">Az eszköznek csatlakozva kell lennie a töltőhöz</string>
+    <string name="auto_wallpaper_idle_title">Tétlen</string>
+    <string name="auto_wallpaper_idle_summary">Az eszköznek inaktívnak lell lennie</string>
+    <string name="auto_wallpaper_interval_title">Idősáv</string>
+    <string name="auto_wallpaper_interval_summary">Háttérkép megváltoztatása minden: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 perc</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 perc</string>
+    <string name="auto_wallpaper_interval_one_hour">1 óra</string>
+    <string name="auto_wallpaper_interval_three_hours">3 óra</string>
+    <string name="auto_wallpaper_interval_six_hours">6 óra</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 óra</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 óra</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 óra</string>
+    <string name="auto_wallpaper_interval_one_week">1 hét</string>
+    <string name="auto_wallpaper_interval_one_month">1 hónap</string>
+    <string name="auto_wallpaper_source">Forrás</string>
+    <string name="auto_wallpaper_source_title">Háttérkép forrás</string>
+    <string name="auto_wallpaper_source_summary">Jelenlegi forrás: %s</string>
+    <string name="auto_wallpaper_source_all">Mind</string>
+    <string name="auto_wallpaper_source_featured">Kiemelt</string>
+    <string name="auto_wallpaper_source_collections">Gyűjtemények</string>
+    <string name="auto_wallpaper_source_user">Felhasznál képei</string>
+    <string name="auto_wallpaper_source_search">Keresőszavak</string>
+    <string name="auto_wallpaper_source_not_set">Nem meghatározott</string>
+    <string name="auto_wallpaper_collections_summary">Gyűjtemény kiválasztása képek forrásaként</string>
+    <string name="auto_wallpaper_user_title">Felhasználó képei</string>
+    <string name="auto_wallpaper_user_summary">Képeket innen használja: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Írd be a felhasználó nevét, akinek a képeit szeretnéd használni:</string>
+    <string name="auto_wallpaper_search_terms_title">Keresőszavak</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Get photos matching the following search terms:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Separate multiple terms with commas)</string>
+    <string name="auto_wallpaper_options_title">Beállítások</string>
+    <string name="auto_wallpaper_crop_title">Háttérkép vágás</string>
+    <string name="auto_wallpaper_crop_none">Semmilyen</string>
+    <string name="auto_wallpaper_crop_center">Közép (Scroll)</string>
+    <string name="auto_wallpaper_crop_center_crop">Közép (Crop)</string>
+    <string name="auto_wallpaper_notification_settings_title">Értesítés beállítások</string>
+    <string name="auto_wallpaper_show_notification_title">Mutasd az értesítéseket</string>
+    <string name="auto_wallpaper_show_notification_summary">Kapj értesítést a jelenlegi háttérkép információjával</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Eszköz orientációja fix</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Néhány eszköz rosszul vágja meg a háttérképet, amikor fekvő módban van, ezt kipipálva akkorra időzíti a feladatot, amikor az eszköz álló módban van</string>
+    <string name="auto_wallpaper_select_screen_title">Képernyő kiválasztása</string>
+    <string name="auto_wallpaper_select_screen_summary">Háttérkép beállítása : %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Kezdőképernyő</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">Zárolt képernyő</string>
+    <string name="auto_wallpaper_select_screen_both">Kezdőképernyő &amp; Zárolt képernyő</string>
+    <string name="auto_wallpaper_orientation_title">Orientáció</string>
+    <string name="auto_wallpaper_orientation_summary">Korlátozza a háttérkép orientációját erre: %s</string>
+    <string name="auto_wallpaper_content_filter_title">Tartalom szűrő</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Alacsony: garantálja, hogy nem fog olyan képet megjeleníteni, ami megsérti a feltöltési szabályokat (olyan képek, melyek meztelenséget vagy erőszakot ábzárolnak)</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Magas: a tartalom talán nem megfelelő fiatalabb közönségnek</string>
+    <string name="auto_wallpaper_content_filter_note">Nem tudjuk garantálni, hogy minden lehetséges alkalmatlan tartalom eltávolításra kerül</string>
+    <string name="auto_wallpaper_history_title">Automata háttérkép előzmények</string>
+    <string name="auto_wallpaper_history_summary">Előzőleg beállított háttérképek előzménye</string>
+    <string name="auto_wallpaper_history_clear_history">Előzmények törlése</string>
+    <string name="auto_wallpaper_activate">Aktiválás</string>
+    <string name="auto_wallpaper_next_wallpaper">Következő háttérkép</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Hozzáadás automata háttérképhez</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Eltávolítás automata háttérképből</string>
+    <string name="auto_wallpaper_collection_added">Gyűjtemény hozzáadva az automata háttérképhez</string>
+    <string name="auto_wallpaper_collection_removed">Gyűjtemény eltávolítva az automata háttéképből</string>
+    <string name="auto_wallpaper_selected_collections">Kiválasztott</string>
+    <string name="auto_wallpaper_no_selected_collections">Keress gyűjteményeket, amiket hozzáadsz az automata háttérképhez</string>
+    <string name="auto_wallpaper_discover">Felfedezés</string>
+    <string name="auto_wallpaper_popular">Népszerű</string>
+    <string name="auto_wallpaper_add_collection_from_url">Gyűjtemény hozzáadáasa URL alapján</string>
+    <string name="auto_wallpaper_could_not_add_collection">Gyűjreményhez való hozzáadás sikertelen</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Gyűjtemény URL linkjének másolása és beillesztése:</string>
+    <string name="auto_wallpaper_collection_url">Gyűjtemény URL</string>
+    <string name="auto_wallpaper_add_collection">Hozzáadás gyűjteményhez</string>
+    <string name="auto_wallpaper_invalid_url">Érvénytelen URL</string>
+    <string name="auto_wallpaper_external_storage_title">Telepíted az SD kártyára?</string>
+    <string name="auto_wallpaper_external_storage_message">Hé!Látjuk, hogy úgy döntöttél, hogy az alkalmazást az SD kártyára rakod. Sajnos, az Androidban lévő korlátozás miatt ez azt jelenti, hogy az automata háttérkép funkció talán nem fog jól működni. Mi szóltunk!</string>
+
+    <!-- Photo Detail -->
+    <string name="views">Megtekintések</string>
+    <string name="downloads">Letöltések</string>
+    <string name="likes">Kedvelések</string>
+    <string name="camera">Fényképezőgép</string>
+    <string name="aperture">Rekesz</string>
+    <string name="focal_length">Gyújtótávolság</string>
+    <string name="dimensions">Méretek</string>
+    <string name="shutter_speed">Záridő</string>
+    <string name="description">Leírás</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">Hozzáadás gyűjteményhez</string>
+    <string name="create_new_collection">Új gyűjtemény létrehozása</string>
+    <string name="make_collection_private">Gyűjtemény bizalmassá tétele</string>
+    <string name="collection_name_hint">Név</string>
+    <string name="collection_description_hint">Leírás (opcionális)</string>
+    <string name="collection_name_required">Név megadása szükséges</string>
+    <string name="edit_collection">Gyűjtemény szerkesztése</string>
+    <string name="curated_by_template">Curated by %s</string>
+
+    <!-- User -->
+    <string name="open_portfolio_link">Nyitott portfoliolink</string>
+    <string name="blank_username_error">A felhasználónév nem lehet üres</string>
+    <string name="invalid_username_error">A felhasználónévnek tartalmaznia kell legalább egy betűt és csak betűket, számokat és alsóvesszőt tartalmazhat (szóközöket nem)</string>
+    <string name="username_taken_error">A felhasználónév már használatban van</string>
+    <string name="blank_first_name_error">Keresztnév nem lehet üres</string>
+    <string name="blank_email_error">E-mail cím nem lehet üres</string>
+    <string name="invalid_email_error">Érvénytelen e-mail cím</string>
+    <string name="username_hint">Felhasználónév</string>
+    <string name="username_helper_text">(Csak betűk, számok és alsóvesszők)</string>
+    <string name="first_name_hint">Keresztnév</string>
+    <string name="last_name_hint">Vezetéknév</string>
+    <string name="email_hint">Email</string>
+    <string name="portfolio_hint">Személyes oldal/portfólió</string>
+    <string name="instagram_username_hint">Instagram felhasználónév</string>
+    <string name="location_hint">Hely</string>
+    <string name="bio_hint">Bio</string>
+    <string name="account_updated">Fiók frissítve!</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">Keress valamit</string>
+    <string name="filter">Szűrő</string>
+    <string name="filter_relevance">Relevancia</string>
+    <string name="filter_latest">Legrdissebb</string>
+    <string name="content_filter">Tartalom szűrő</string>
+    <string name="filter_low">Alacsony</string>
+    <string name="filter_high">Magas</string>
+    <string name="orientation">Elrendezés</string>
+    <string name="filter_any">Bármilyen</string>
+    <string name="filter_portrait">Portré</string>
+    <string name="filter_landscape">Fekvő</string>
+    <string name="filter_square">Négyzet</string>
+    <string name="filter_color">Szín</string>
+    <string name="filter_color_any">Bármilyen</string>
+    <string name="filter_color_black_white">Fekete-fehér</string>
+    <string name="filter_color_black">Fekete</string>
+    <string name="filter_color_white">Fehér</string>
+    <string name="filter_color_yellow">Citromsárga</string>
+    <string name="filter_color_orange">Narancsságra</string>
+    <string name="filter_color_red">Piros</string>
+    <string name="filter_color_purple">Lila</string>
+    <string name="filter_color_magenta">Magenta</string>
+    <string name="filter_color_green">Zöld</string>
+    <string name="filter_color_teal">Zöldeskék</string>
+    <string name="filter_color_blue">Kék</string>
+
+    <!-- Login -->
+    <string name="login">Bejelentkezés</string>
+    <string name="create_an_account">Fiók létrehozása</string>
+    <string name="login_banner_title">A lértehozás itt kezdődik</string>
+    <string name="login_banner_subtitle">Férj hozzá ingyenes, magas felbontású képekhez, amiket sehol máshol nem találsz meg</string>
+    <string name="login_success">Sikeres bejelentkezés</string>
+    <string name="need_to_log_in">Be kell jelentkezned ahhoz, hogy ezt csináld</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">Frissítés Resplash Pro-ra</string>
+    <string name="pro_feature_title">Miért jó ez neked?</string>
+    <string name="pro_feature_one">Automata háttérkép személyreszabása</string>
+    <string name="pro_feature_one_subtitle">Néhány ember a fekete képeket szereti &amp; fehér képeket, mások inkább természetképeket látnának városi képek helyett. Szabd személyre, hogy pontosan milyen háttérképet szeretnél az automata háttérképben</string>
+    <string name="pro_feature_two">Jövőbeli exkluzív funkciók</string>
+    <string name="pro_feature_two_subtitle">Férj hozzá jövőbeli pro funkciókhoz</string>
+    <string name="pro_feature_three">Támogasd a szerkesztést</string>
+    <string name="pro_feature_three_subtitle">A pro-ra való előfizetés segíti a szerkesztést</string>
+    <string name="go_pro">Fizess elő Pro-ra</string>
+    <string name="restore_purchase">Vásárlás visszavonása</string>
+    <string name="upgrade_required">Resplash Pro-ra van szükséged ahhoz, hogy ezt tedd!</string>
+
+    <!-- Donation -->
+    <string name="support_development">Támogasd a szerkesztést</string>
+    <string name="you_are_welcome">Szívesen</string>
+
+    <!-- About -->
+    <string name="about">Rólunk</string>
+    <string name="licenses">Licenszek</string>
+    <string name="unsplash_summary">Az internet forrása az ingyenesen használható képeknek.</string> Az internet forrása az ingyenesen használható képeknek.
+    <string name="donate_summary">Ha tetsizk a Resplash, támogasd a fejlődését azzal, hogy küldesz egy pár dollárt.</string>
+    <string name="report_bug_title">Bug bejelentése</string>
+    <string name="report_bug_summary">Bug bejelentése vagy új funkció kérése</string>
+    <string name="rate_app_title">Alkalmazás értékelése</string>
+    <string name="rate_app_summary">Ha tetzik az alkalmazás, értékeld a Google Play áruházbam</string>
+    <string name="github_summary">A Resplash nyílt forrású, nézd meg GitHub-on</string>
+    <string name="developer_title">Fejlesztő</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_and_conditions">Felhasználói &amp; Feltételek</string>
+</resources>

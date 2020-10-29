@@ -10,6 +10,7 @@
         <item>@string/language_croatian</item>
         <item>@string/language_czech</item>
         <item>@string/language_german</item>
+        <item>@string/language_hungarian</item>
         <item>@string/language_indonesian</item>
         <item>@string/language_italian</item>
         <item>@string/language_japanese</item>
@@ -28,6 +29,7 @@
         <item>hr</item>
         <item>cs</item>
         <item>de</item>
+        <item>hu</item>
         <item>in</item>
         <item>it</item>
         <item>ja</item>
