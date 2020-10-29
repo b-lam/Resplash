@@ -113,6 +113,8 @@
     <string name="auto_wallpaper_interval_twelve_hours">12 ساعة</string>
     <string name="auto_wallpaper_interval_twenty_four_hours">24 ساعة</string>
     <string name="auto_wallpaper_interval_forty_eight_hours">48 ساعة</string>
+    <string name="auto_wallpaper_interval_one_week">1 أسبوع</string>
+    <string name="auto_wallpaper_interval_one_month">1 شهر</string>
     <string name="auto_wallpaper_source">مصدر</string>
     <string name="auto_wallpaper_source_title">مصدر خلفية</string>
     <string name="auto_wallpaper_source_summary">المصدر الحالي: %s</string>
