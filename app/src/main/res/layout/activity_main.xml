@@ -12,14 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.tabs.TabLayout
+        <com.b_lam.resplash.ui.widget.AutoSizeTabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutDirection="ltr"
             app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabMaxWidth="0dp" />
+            app:tabGravity="fill" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
