@@ -10,7 +10,6 @@ import androidx.annotation.CallSuper
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ServiceLifecycleDispatcher
-import androidx.lifecycle.observe
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.b_lam.resplash.R
@@ -18,10 +17,12 @@ import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
 import com.b_lam.resplash.util.NotificationManager
 import com.b_lam.resplash.worker.AutoWallpaperWorker
-import org.koin.core.KoinComponent
-import org.koin.core.get
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
+import org.koin.core.component.inject
 
+@KoinApiExtension
 @RequiresApi(Build.VERSION_CODES.N)
 class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
 

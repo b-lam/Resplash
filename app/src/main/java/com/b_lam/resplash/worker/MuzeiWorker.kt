@@ -16,16 +16,13 @@ import com.google.android.apps.muzei.api.provider.Artwork
 import com.google.android.apps.muzei.api.provider.ProviderContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class MuzeiWorker(
     context: Context,
-    params: WorkerParameters
-) : CoroutineWorker(context, params), KoinComponent {
-
-    private val photoRepository: PhotoRepository by inject()
-    private val autoWallpaperRepository: AutoWallpaperRepository by inject()
+    params: WorkerParameters,
+    private val photoRepository: PhotoRepository,
+    private val autoWallpaperRepository: AutoWallpaperRepository
+) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO){
         try {

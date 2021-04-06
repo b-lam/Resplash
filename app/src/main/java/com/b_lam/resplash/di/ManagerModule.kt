@@ -8,6 +8,5 @@ import org.koin.dsl.module
 val managerModule = module {
 
     single(createdAtStart = true) { NotificationManager(androidContext()) }
-
     single { DownloadManagerWrapper(androidContext()) }
 }

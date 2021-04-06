@@ -18,22 +18,18 @@ import com.b_lam.resplash.util.Result.Error
 import com.b_lam.resplash.util.Result.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.koin.core.KoinComponent
-import org.koin.core.get
-import org.koin.core.inject
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 import kotlin.math.min
 
 class AutoWallpaperWorker(
     private val context: Context,
-    params: WorkerParameters
-) : CoroutineWorker(context, params), KoinComponent {
-
-    private val photoRepository: PhotoRepository by inject()
-    private val autoWallpaperRepository: AutoWallpaperRepository by inject()
-    private val downloadService: DownloadService by inject()
-    private val notificationManager: NotificationManager by inject()
+    params: WorkerParameters,
+    private val photoRepository: PhotoRepository,
+    private val autoWallpaperRepository: AutoWallpaperRepository,
+    private val downloadService: DownloadService,
+    private val notificationManager: NotificationManager
+) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         if (inputData.getBoolean(KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY, false)) {
@@ -200,6 +196,18 @@ class AutoWallpaperWorker(
             photo.id, title, subtitle, photo.urls.thumb)
     }
 
+    class FutureAutoWallpaperWorker(
+        private val context: Context,
+        params: WorkerParameters,
+        private val sharedPreferencesRepository: SharedPreferencesRepository
+    ) : Worker(context, params) {
+
+        override fun doWork(): Result {
+            scheduleAutoWallpaperJob(context, sharedPreferencesRepository)
+            return Result.success()
+        }
+    }
+
     companion object {
 
         private const val AUTO_WALLPAPER_JOB_ID = "auto_wallpaper_job_id"
@@ -321,17 +329,6 @@ class AutoWallpaperWorker(
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_SINGLE_JOB_ID)
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_FUTURE_JOB_ID)
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_JOB_ID)
-        }
-
-        class FutureAutoWallpaperWorker(
-            private val context: Context,
-            params: WorkerParameters
-        ) : Worker(context, params), KoinComponent {
-
-            override fun doWork(): Result {
-                scheduleAutoWallpaperJob(context, get())
-                return Result.success()
-            }
         }
     }
 }

@@ -23,18 +23,15 @@ import okhttp3.ResponseBody
 import okio.BufferedSink
 import okio.buffer
 import okio.sink
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import java.io.File
 import java.util.*
 
 class DownloadWorker(
     private val context: Context,
-    parameters: WorkerParameters
-) : CoroutineWorker(context, parameters), KoinComponent {
-
-    private val downloadService: DownloadService by inject()
-    private val notificationManager: NotificationManager by inject()
+    parameters: WorkerParameters,
+    private val downloadService: DownloadService,
+    private val notificationManager: NotificationManager
+) : CoroutineWorker(context, parameters) {
 
     override suspend fun doWork(): Result {
         val url = inputData.getString(KEY_INPUT_URL) ?: return Result.failure()
