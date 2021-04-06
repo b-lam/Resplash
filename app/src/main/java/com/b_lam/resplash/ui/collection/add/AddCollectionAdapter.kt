@@ -15,15 +15,14 @@ class AddCollectionAdapter(
     private var currentUserCollectionIds: List<Int>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiniCollectionViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_collection_mini, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_collection_mini, parent, false)
         return MiniCollectionViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MiniCollectionViewHolder, position: Int) {
         holder.bind(getItem(position), currentUserCollectionIds, callback)
     }
-
-    override fun getItemViewType(position: Int) = R.layout.item_collection_mini
 
     fun setCurrentUserCollectionIds(currentUserCollectionIds: List<Int>?) {
         this.currentUserCollectionIds = currentUserCollectionIds

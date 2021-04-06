@@ -4,42 +4,46 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.user.model.User
+import com.b_lam.resplash.databinding.ItemUserDefaultBinding
 import com.b_lam.resplash.util.loadPhotoUrl
 import com.b_lam.resplash.util.loadProfilePicture
-import kotlinx.android.synthetic.main.item_user_default.view.*
 
 class UserViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+
+    private val binding: ItemUserDefaultBinding by viewBinding()
 
     fun bind(
         user: User?,
         callback: UserAdapter.ItemEventCallback
     ) {
-        user?.let {
-            with(itemView) {
-                user_image_view.loadProfilePicture(user)
-                full_name_text_view.text = user.name ?: context.getString(R.string.unknown)
-                username_text_view.text =
-                    context.getString(R.string.username_template,
-                        user.username ?: context.getString(R.string.unknown))
-                setOnClickListener { callback.onUserClick(user) }
+        with(binding) {
+            user?.let {
+                userImageView.loadProfilePicture(user)
+                fullNameTextView.text = user.name ?: itemView.context.getString(R.string.unknown)
+                usernameTextView.text =
+                    itemView.context.getString(R.string.username_template,
+                        user.username ?: itemView.context.getString(R.string.unknown))
+                itemView.setOnClickListener { callback.onUserClick(user) }
                 user.photos?.let { photos ->
                     val imageViews =
-                        listOf(photo_one_image_view, photo_two_image_view, photo_three_image_view)
+                        listOf(photoOneImageView, photoTwoImageView, photoThreeImageView)
                     val cardViews =
-                        listOf(photo_one_card_view, photo_two_card_view, photo_three_card_view)
+                        listOf(photoOneCardView, photoTwoCardView, photoThreeCardView)
                     if (photos.isNotEmpty()) {
                         imageViews.forEachIndexed { index, imageView ->
                             photos.getOrNull(index)?.let { photo ->
                                 imageView.loadPhotoUrl(
                                     photo.urls.small,
-                                    ContextCompat.getColor(context, R.color.grey_400)
+                                    ContextCompat.getColor(itemView.context, R.color.grey_400)
                                 )
                                 imageView.setOnClickListener { callback.onPhotoClick(photo) }
                             } ?: run {
-                                GlideApp.with(context).clear(imageView)
+                                GlideApp.with(itemView.context).clear(imageView)
+                                imageView.setOnClickListener(null)
                             }
                         }
                     }

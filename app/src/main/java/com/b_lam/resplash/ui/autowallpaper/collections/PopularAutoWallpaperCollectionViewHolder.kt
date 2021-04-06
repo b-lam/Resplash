@@ -2,33 +2,38 @@ package com.b_lam.resplash.ui.autowallpaper.collections
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.autowallpaper.model.AutoWallpaperCollection
+import com.b_lam.resplash.databinding.ItemAutoWallpaperPopularCollectionBinding
 import com.b_lam.resplash.util.loadPhotoUrl
-import kotlinx.android.synthetic.main.item_auto_wallpaper_popular_collection.view.*
 
 class PopularAutoWallpaperCollectionViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+
+    private val binding: ItemAutoWallpaperPopularCollectionBinding by viewBinding()
 
     fun bind(
         collection: AutoWallpaperCollection?,
         selectedCollectionIds: List<Int>,
         callback: AutoWallpaperCollectionListAdapter.ItemEventCallback
     ) {
-        collection?.let {
-            with(itemView) {
-                collection_name_text_view.text = collection.title
-                user_name_text_view.text = context.getString(R.string.curated_by_template, collection.user_name)
-                collection.cover_photo?.let { collection_image_view.loadPhotoUrl(it) }
-                collection_card_view.setOnClickListener { collection.id?.let { id -> callback.onCollectionClick(id) } }
+        with(binding) {
+            collection?.let {
+                collectionNameTextView.text = collection.title
+                userNameTextView.text = itemView.context.getString(R.string.curated_by_template, collection.user_name)
+                collection.cover_photo?.let { collectionImageView.loadPhotoUrl(it) }
+                collectionCardView.setOnClickListener {
+                    collection.id?.let { id -> callback.onCollectionClick(id) }
+                }
                 val isCollectionSelected = selectedCollectionIds.contains(collection.id)
-                add_button.setImageResource(
+                addButton.setImageResource(
                     if (isCollectionSelected) {
                         R.drawable.ic_remove_circle_outline_24dp
                     } else {
                         R.drawable.ic_add_circle_outline_24dp
                     }
                 )
-                add_button.setOnClickListener {
+                addButton.setOnClickListener {
                     if (isCollectionSelected) {
                         collection.id?.let { id -> callback.onRemoveClick(id) }
                     } else {

@@ -7,20 +7,30 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.lifecycle.observe
+import by.kirich1409.viewbindingdelegate.CreateMethod
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.BottomSheetMainNavigationDrawerBinding
+import com.b_lam.resplash.databinding.MainBottomNavigationDrawerProfileContentBinding
+import com.b_lam.resplash.databinding.MainBottomNavigationDrawerProfileHeaderBinding
 import com.b_lam.resplash.util.loadProfilePicture
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.internal.NavigationMenuView
-import kotlinx.android.synthetic.main.main_bottom_navigation_drawer_layout.*
-import kotlinx.android.synthetic.main.main_bottom_navigation_drawer_profile_content.*
-import kotlinx.android.synthetic.main.main_bottom_navigation_drawer_profile_header.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MainBottomNavigationDrawer : BottomSheetDialogFragment() {
 
     private val sharedViewModel: MainViewModel by sharedViewModel()
+
+    private val navigationDrawerBinding:
+            BottomSheetMainNavigationDrawerBinding by viewBinding(CreateMethod.INFLATE)
+
+    private val navigationDrawerHeaderBinding:
+            MainBottomNavigationDrawerProfileHeaderBinding by viewBinding(R.id.bottom_navigation_header)
+
+    private val navigationDrawerContentBinding: 
+            MainBottomNavigationDrawerProfileContentBinding by viewBinding(R.id.bottom_navigation_content)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val bottomSheetDialog = super.onCreateDialog(savedInstanceState)
@@ -41,45 +51,49 @@ class MainBottomNavigationDrawer : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_bottom_navigation_drawer_layout, container, false)
-    }
+    ): View = navigationDrawerBinding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        drawer_navigation_view.setNavigationItemSelectedListener { onNavigationItemSelected(it) }
-        header_navigation_view.setNavigationItemSelectedListener { onNavigationItemSelected(it) }
-        (header_navigation_view.getChildAt(0) as? NavigationMenuView)?.isVerticalScrollBarEnabled = false
-        expandable_profile.setOnExpandChangeListener { isExpanded ->
+        navigationDrawerBinding.drawerNavigationView.setNavigationItemSelectedListener {
+            onNavigationItemSelected(it)
+        }
+        navigationDrawerContentBinding.headerNavigationView.setNavigationItemSelectedListener {
+            onNavigationItemSelected(it)
+        }
+        (navigationDrawerContentBinding.headerNavigationView.getChildAt(0) as? NavigationMenuView)
+            ?.isVerticalScrollBarEnabled = false
+        navigationDrawerBinding.expandableProfile.setOnExpandChangeListener { isExpanded ->
             val drawableRes = if (isExpanded) R.drawable.ic_expand_less_18dp else R.drawable.ic_expand_more_18dp
-            header_subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, drawableRes, 0)
+            navigationDrawerHeaderBinding.headerSubtitle
+                .setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, drawableRes, 0)
         }
 
         with(sharedViewModel) {
             resplashProLiveData.observe(viewLifecycleOwner) {
-                with(drawer_navigation_view.menu) {
+                with(navigationDrawerBinding.drawerNavigationView.menu) {
                     findItem(R.id.action_upgrade).isVisible = !(it?.entitled ?: false)
                     findItem(R.id.action_donate).isVisible = it?.entitled ?: false
                 }
             }
             authorizedLiveData.observe(viewLifecycleOwner) {
-                with(header_navigation_view.menu) {
+                with(navigationDrawerContentBinding.headerNavigationView.menu) {
                     setGroupVisible(R.id.group_unauthorized, !it)
                     setGroupVisible(R.id.group_authorized, it)
                 }
             }
             usernameLiveData.observe(viewLifecycleOwner) {
-                header_title.text = it ?: getString(R.string.app_name)
+                navigationDrawerHeaderBinding.headerTitle.text = it ?: getString(R.string.app_name)
             }
             emailLiveData.observe(viewLifecycleOwner) {
-                header_subtitle.text = it ?: getString(R.string.header_subtitle)
+                navigationDrawerHeaderBinding.headerSubtitle.text = it ?: getString(R.string.header_subtitle)
             }
             profilePictureLiveData.observe(viewLifecycleOwner) { url ->
                 url?.let {
-                    header_image_view.loadProfilePicture(it)
+                    navigationDrawerHeaderBinding.headerImageView.loadProfilePicture(it)
                 } ?: run {
-                    header_image_view.setImageResource(R.mipmap.ic_launcher_round)
+                    navigationDrawerHeaderBinding.headerImageView.setImageResource(R.mipmap.ic_launcher_round)
                 }
             }
         }
@@ -92,7 +106,7 @@ class MainBottomNavigationDrawer : BottomSheetDialogFragment() {
 
     companion object {
 
-        val TAG = MainBottomNavigationDrawer::class.java.simpleName
+        val TAG: String = MainBottomNavigationDrawer::class.java.simpleName
 
         fun newInstance() = MainBottomNavigationDrawer()
     }

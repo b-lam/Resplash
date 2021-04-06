@@ -2,19 +2,22 @@ package com.b_lam.resplash.ui.photo.detail
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.data.photo.model.Tag
-import kotlinx.android.synthetic.main.item_photo_tag.view.*
+import com.b_lam.resplash.databinding.ItemPhotoTagBinding
 
 class TagViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+
+    private val binding: ItemPhotoTagBinding by viewBinding()
 
     fun bind(
         tag: Tag?,
         callback: TagAdapter.ItemEventCallback
     ) {
-        tag?.title?.let { title ->
-            with(itemView) {
-                tag_chip.text = title
-                setOnClickListener { callback.onTagClick(title) }
+        with(binding) {
+            tag?.title?.let { title ->
+                tagChip.text = title
+                itemView.setOnClickListener { callback.onTagClick(title) }
             }
         }
     }

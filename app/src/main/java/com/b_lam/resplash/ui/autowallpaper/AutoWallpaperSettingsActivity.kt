@@ -13,14 +13,15 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.core.text.util.LinkifyCompat
-import androidx.lifecycle.observe
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.work.WorkInfo.State.*
 import androidx.work.WorkManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivityAutoWallpaperSettingsBinding
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.domain.SharedPreferencesRepository.Companion.PREFERENCE_AUTO_WALLPAPER_ENABLE_KEY
 import com.b_lam.resplash.ui.autowallpaper.collections.AutoWallpaperCollectionActivity
@@ -32,19 +33,20 @@ import com.b_lam.resplash.worker.AutoWallpaperWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_auto_wallpaper_settings.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AutoWallpaperSettingsActivity :
-    BaseActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+    BaseActivity(R.layout.activity_auto_wallpaper_settings),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     override val viewModel: AutoWallpaperSettingsViewModel by viewModel()
 
+    override val binding: ActivityAutoWallpaperSettingsBinding by viewBinding()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auto_wallpaper_settings)
 
         setupActionBar(R.id.toolbar) {
             setTitle(R.string.auto_wallpaper_title)
@@ -56,9 +58,9 @@ class AutoWallpaperSettingsActivity :
             .replace(R.id.container, SettingsFragment())
             .commit()
 
-        next_fab.setVisibility(sharedPreferencesRepository.autoWallpaperEnabled)
+        binding.nextFab.setVisibility(sharedPreferencesRepository.autoWallpaperEnabled)
 
-        val snackbar = Snackbar.make(root_container, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
+        val snackbar = Snackbar.make(binding.root, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
 
         WorkManager.getInstance(this)
             .getWorkInfosForUniqueWorkLiveData(AutoWallpaperWorker.AUTO_WALLPAPER_SINGLE_JOB_ID)
@@ -69,13 +71,13 @@ class AutoWallpaperSettingsActivity :
                         SUCCEEDED -> snackbar.dismiss()
                         FAILED, CANCELLED -> {
                             snackbar.dismiss()
-                            root_container.showSnackBar(R.string.error_setting_wallpaper)
+                            binding.root.showSnackBar(R.string.error_setting_wallpaper)
                         }
                     }
                 }
             }
 
-        next_fab.setOnClickListener {
+        binding.nextFab.setOnClickListener {
             AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this, sharedPreferencesRepository)
         }
 
@@ -111,7 +113,7 @@ class AutoWallpaperSettingsActivity :
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == PREFERENCE_AUTO_WALLPAPER_ENABLE_KEY) {
-            next_fab.setVisibility(sharedPreferencesRepository.autoWallpaperEnabled)
+            binding.nextFab.setVisibility(sharedPreferencesRepository.autoWallpaperEnabled)
         }
     }
 

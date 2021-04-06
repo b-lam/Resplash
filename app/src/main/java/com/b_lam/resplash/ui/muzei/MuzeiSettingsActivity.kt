@@ -3,12 +3,13 @@ package com.b_lam.resplash.ui.muzei
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.observe
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivityMuzeiSettingsBinding
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.autowallpaper.collections.AutoWallpaperCollectionActivity
 import com.b_lam.resplash.ui.base.BaseActivity
@@ -20,13 +21,14 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MuzeiSettingsActivity : BaseActivity() {
+class MuzeiSettingsActivity : BaseActivity(R.layout.activity_muzei_settings) {
 
     override val viewModel: MuzeiSettingsViewModel by viewModel()
 
+    override val binding: ActivityMuzeiSettingsBinding by viewBinding()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_muzei_settings)
 
         setupActionBar(R.id.toolbar) {
             setTitle(R.string.settings)

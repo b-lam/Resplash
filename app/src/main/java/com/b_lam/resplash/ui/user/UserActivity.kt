@@ -11,30 +11,28 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.observe
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.user.model.User
+import com.b_lam.resplash.databinding.ActivityUserBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.customtabs.CustomTabsHelper
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_search.tab_layout
-import kotlinx.android.synthetic.main.activity_search.view_pager
-import kotlinx.android.synthetic.main.activity_user.*
-import kotlinx.android.synthetic.main.activity_user.app_bar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserActivity : BaseActivity() {
+class UserActivity : BaseActivity(R.layout.activity_user) {
 
     override val viewModel: UserViewModel by viewModel()
+
+    override val binding: ActivityUserBinding by viewBinding()
 
     private lateinit var fragmentPagerAdapter: UserFragmentPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user)
 
         val user = intent.getParcelableExtra<User>(EXTRA_USER)
         val username = intent.getStringExtra(EXTRA_USERNAME)
@@ -79,18 +77,18 @@ class UserActivity : BaseActivity() {
         }
     }
 
-    private fun setup(user: User) {
+    private fun setup(user: User) = with(binding) {
         setupActionBar(R.id.toolbar) {
             title = user.username
             setDisplayHomeAsUpEnabled(true)
         }
-        fragmentPagerAdapter = UserFragmentPagerAdapter(this, supportFragmentManager, user)
-        view_pager.apply {
+        fragmentPagerAdapter = UserFragmentPagerAdapter(this@UserActivity, supportFragmentManager, user)
+        viewPager.apply {
             adapter = fragmentPagerAdapter
             offscreenPageLimit = 2
         }
-        tab_layout.apply {
-            setupWithViewPager(view_pager)
+        tabLayout.apply {
+            setupWithViewPager(viewPager)
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {}
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -99,27 +97,27 @@ class UserActivity : BaseActivity() {
                 }
             })
         }
-        toolbar.setOnClickListener { app_bar.setExpanded(true) }
+        toolbar.setOnClickListener { appBar.setExpanded(true) }
         invalidateOptionsMenu()
 
-        content_loading_layout.hide()
-        user_content_layout.isVisible = true
+        contentLoadingLayout.hide()
+        userContentLayout.isVisible = true
 
-        user_image_view.loadProfilePicture(user)
-        user_name_text_view.text = user.name
+        userImageView.loadProfilePicture(user)
+        userNameTextView.text = user.name
 
-        photos_count_text_view.text = user.total_photos?.toPrettyString()
-        likes_count_text_view.text = user.total_likes?.toPrettyString()
-        collections_count_text_view.text = user.total_collections?.toPrettyString()
+        photosCountTextView.text = user.total_photos?.toPrettyString()
+        likesCountTextView.text = user.total_likes?.toPrettyString()
+        collectionsCountTextView.text = user.total_collections?.toPrettyString()
 
-        photos_count_container.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.PHOTO) }
-        likes_count_container.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.LIKES) }
-        collections_count_container.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.COLLECTION) }
+        photosCountContainer.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.PHOTO) }
+        likesCountContainer.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.LIKES) }
+        collectionsCountContainer.setOnClickListener { goToTab(UserFragmentPagerAdapter.UserFragment.COLLECTION) }
 
-        location_text_view.setTextAndVisibility(user.location)
-        location_text_view.setOnClickListener { openLocationInMaps(user.location) }
+        locationTextView.setTextAndVisibility(user.location)
+        locationTextView.setOnClickListener { openLocationInMaps(user.location) }
 
-        bio_text_view.setTextAndVisibility(user.bio?.trimEnd())
+        bioTextView.setTextAndVisibility(user.bio?.trimEnd())
 
         user.username?.let { username -> viewModel.getUserListings(username) }
     }
@@ -131,8 +129,8 @@ class UserActivity : BaseActivity() {
     private fun goToTab(type: UserFragmentPagerAdapter.UserFragment) {
         val position = fragmentPagerAdapter.getFragmentIndexOfType(type)
         if (position != -1) {
-            view_pager.currentItem = position
-            app_bar.setExpanded(false)
+            binding.viewPager.currentItem = position
+            binding.appBar.setExpanded(false)
         }
     }
 
@@ -158,7 +156,7 @@ class UserActivity : BaseActivity() {
         }
 
         fun getFragment(position: Int) =
-            fm.findFragmentByTag(fragmentTags.get(position)) as? BaseSwipeRecyclerViewFragment<*>
+            fm.findFragmentByTag(fragmentTags.get(position)) as? BaseSwipeRecyclerViewFragment<*, *>
 
         fun getItemType(position: Int) = fragmentTypes[position]
 

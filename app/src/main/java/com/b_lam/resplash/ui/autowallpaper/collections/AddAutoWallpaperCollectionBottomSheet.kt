@@ -8,18 +8,22 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import by.kirich1409.viewbindingdelegate.CreateMethod
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.BottomSheetAddAutoWallpaperCollectionBinding
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_add_auto_wallpaper_collection.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AddAutoWallpaperCollectionBottomSheet : BottomSheetDialogFragment() {
 
     private val sharedViewModel: AutoWallpaperCollectionViewModel by sharedViewModel()
+
+    private val binding: BottomSheetAddAutoWallpaperCollectionBinding by viewBinding(CreateMethod.INFLATE)
 
     private val urlRegex = """https://unsplash.com/collections/(\d+).*""".toRegex()
 
@@ -42,25 +46,25 @@ class AddAutoWallpaperCollectionBottomSheet : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.bottom_sheet_add_auto_wallpaper_collection, container, false)
-    }
+    ): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        collection_url_text_input_layout.editText?.doOnTextChanged { url, _, _, _ ->
-            val isValid = isCollectionUrlValid(url.toString())
-            add_collection_button.isEnabled = isValid
-            collection_url_text_input_layout.error =
-                if (url.isNullOrBlank() || isValid) null else getString(R.string.auto_wallpaper_invalid_url)
-        }
+        with(binding) {
+            collectionUrlTextInputLayout.editText?.doOnTextChanged { url, _, _, _ ->
+                val isValid = isCollectionUrlValid(url.toString())
+                addCollectionButton.isEnabled = isValid
+                collectionUrlTextInputLayout.error =
+                    if (url.isNullOrBlank() || isValid) null else getString(R.string.auto_wallpaper_invalid_url)
+            }
 
-        add_collection_button.setOnClickListener {
-            progress_bar.isVisible = true
-            add_collection_button.isEnabled = false
-            val id = extractCollectionIdFromUrl(collection_url_text_input_layout.editText?.text.toString())
-            id?.let { sharedViewModel.getCollectionDetailsAndAdd(id) }
+            addCollectionButton.setOnClickListener {
+                progressBar.isVisible = true
+                addCollectionButton.isEnabled = false
+                val id = extractCollectionIdFromUrl(collectionUrlTextInputLayout.editText?.text.toString())
+                id?.let { sharedViewModel.getCollectionDetailsAndAdd(id) }
+            }
         }
 
         sharedViewModel.addCollectionResultLiveData.observeEvent(viewLifecycleOwner) {
@@ -77,7 +81,7 @@ class AddAutoWallpaperCollectionBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
 
-        val TAG = AddAutoWallpaperCollectionBottomSheet::class.java.simpleName
+        val TAG: String = AddAutoWallpaperCollectionBottomSheet::class.java.simpleName
 
         fun newInstance() = AddAutoWallpaperCollectionBottomSheet()
     }

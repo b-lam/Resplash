@@ -22,15 +22,14 @@ class AutoWallpaperHistoryAdapter(
         parent: ViewGroup,
         viewType: Int
     ): AutoWallpaperHistoryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_auto_wallpaper_history, parent, false)
         return AutoWallpaperHistoryViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: AutoWallpaperHistoryViewHolder, position: Int) {
         holder.bind(getItem(position), prettyTime, callback)
     }
-
-    override fun getItemViewType(position: Int): Int = R.layout.item_auto_wallpaper_history
 
     override fun onViewRecycled(holder: AutoWallpaperHistoryViewHolder) {
         super.onViewRecycled(holder)

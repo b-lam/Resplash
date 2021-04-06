@@ -13,8 +13,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.BuildConfig
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivityMainBinding
 import com.b_lam.resplash.domain.collection.CollectionDataSource
 import com.b_lam.resplash.domain.photo.PhotoDataSource
 import com.b_lam.resplash.ui.about.AboutActivity
@@ -41,35 +43,41 @@ import com.google.firebase.inappmessaging.model.CardMessage
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.inappmessaging.model.MessageType
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override val viewModel: MainViewModel by viewModel()
+
+    override val binding: ActivityMainBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Resplash_Theme_DayNight)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(bottom_app_bar)
 
-        val fragmentPagerAdapter = MainFragmentPagerAdapter(this, supportFragmentManager)
-        view_pager.adapter = fragmentPagerAdapter
-        tab_layout.apply {
-            setupWithViewPager(view_pager)
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {}
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                    fragmentPagerAdapter.getFragment(tab?.position ?: 0)?.scrollToTop()
-                }
-            })
+        with(binding) {
+            setSupportActionBar(bottomAppBar)
+
+            val fragmentPagerAdapter =
+                MainFragmentPagerAdapter(this@MainActivity, supportFragmentManager)
+            viewPager.adapter = fragmentPagerAdapter
+            tabLayout.apply {
+                setupWithViewPager(viewPager)
+                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                    override fun onTabSelected(tab: TabLayout.Tab?) {}
+                    override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                    override fun onTabReselected(tab: TabLayout.Tab?) {
+                        fragmentPagerAdapter.getFragment(tab?.position ?: 0)?.scrollToTop()
+                    }
+                })
+            }
+
+            uploadFab.setOnClickListener { openUnsplashSubmitTab() }
         }
 
-        upload_fab.setOnClickListener { openUnsplashSubmitTab() }
-
-        viewModel.navigationItemSelectedLiveData.observeEvent(this) { onBottomNavigationDrawerItemSelected(it) }
+        viewModel.navigationItemSelectedLiveData.observeEvent(this) {
+            onBottomNavigationDrawerItemSelected(it)
+        }
     }
 
     override fun onStart() {
@@ -108,7 +116,7 @@ class MainActivity : BaseActivity() {
                 true
             }
             R.id.action_order -> {
-                when (tab_layout.selectedTabPosition) {
+                when (binding.tabLayout.selectedTabPosition) {
                     0 -> showPhotoOrderDialog()
                     1 -> showCollectionOrderDialog()
                 }
@@ -239,7 +247,7 @@ class MainActivity : BaseActivity() {
         }
 
         fun getFragment(position: Int) =
-            fm.findFragmentByTag(fragmentTags.get(position)) as? BaseSwipeRecyclerViewFragment<*>
+            fm.findFragmentByTag(fragmentTags.get(position)) as? BaseSwipeRecyclerViewFragment<*, *>
 
         private fun getItemType(position: Int) = MainFragment.values()[position]
 

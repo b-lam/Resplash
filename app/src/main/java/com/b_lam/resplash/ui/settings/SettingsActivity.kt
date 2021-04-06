@@ -5,22 +5,24 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.NavUtils
-import androidx.lifecycle.observe
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivitySettingsBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.util.setupActionBar
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsActivity : BaseActivity() {
+class SettingsActivity : BaseActivity(R.layout.activity_settings) {
 
     override val viewModel: SettingsViewModel by viewModel()
 
+    override val binding: ActivitySettingsBinding by viewBinding()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
 
         setupActionBar(R.id.toolbar) {
             setTitle(R.string.settings)

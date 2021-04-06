@@ -6,14 +6,15 @@ import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
+import by.kirich1409.viewbindingdelegate.CreateMethod
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
-import kotlinx.android.synthetic.main.expandable_card_view.view.*
+import com.b_lam.resplash.databinding.ExpandableCardViewBinding
 
 class ExpandableCardView @JvmOverloads constructor(
     context: Context,
@@ -21,8 +22,10 @@ class ExpandableCardView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private lateinit var headerView: View
-    private lateinit var contentView: View
+    private val binding: ExpandableCardViewBinding by viewBinding(CreateMethod.INFLATE)
+
+    lateinit var headerView: View
+    lateinit var contentView: View
 
     @LayoutRes
     private var headerViewRes: Int = 0
@@ -38,16 +41,12 @@ class ExpandableCardView @JvmOverloads constructor(
     private var animDuration: Long
 
     private val defaultClickListener = OnClickListener {
-        if (isExpanded)
-            collapse()
-        else
-            expand()
+        if (isExpanded) collapse() else expand()
     }
 
     private var listener: OnExpandChangeListener? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.expandable_card_view, this)
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
         headerViewRes =
             typedArray.getResourceId(R.styleable.ExpandableCardView_header_view, View.NO_ID)
@@ -64,16 +63,18 @@ class ExpandableCardView @JvmOverloads constructor(
     override fun onFinishInflate() {
         super.onFinishInflate()
 
-        card_header.layoutResource = headerViewRes
-        card_content.layoutResource = contentViewRes
-        headerView = card_header.inflate()
-        contentView = card_content.inflate()
+        with(binding) {
+            cardHeader.layoutResource = headerViewRes
+            cardContent.layoutResource = contentViewRes
+            headerView = cardHeader.inflate()
+            contentView = cardContent.inflate()
+        }
 
         initClickListeners()
     }
 
-    private fun slideAnimator(start: Int, end: Int): ValueAnimator {
-        return ValueAnimator.ofInt(start, end).apply {
+    private fun slideAnimator(start: Int, end: Int): ValueAnimator =
+        ValueAnimator.ofInt(start, end).apply {
             addUpdateListener { valueAnimator ->
                 val value = valueAnimator.animatedValue as Int
                 val layoutParams = contentView.layoutParams
@@ -81,7 +82,6 @@ class ExpandableCardView @JvmOverloads constructor(
                 contentView.layoutParams = layoutParams
             }
         }
-    }
 
     private fun expand(timeAnim: Long = animDuration) {
         if (isMoving) return
@@ -90,7 +90,7 @@ class ExpandableCardView @JvmOverloads constructor(
         contentView.visibility = View.VISIBLE
 
         contentView.measure(
-            MeasureSpec.makeMeasureSpec(card_root.width, MeasureSpec.EXACTLY),
+            MeasureSpec.makeMeasureSpec(binding.root.width, MeasureSpec.EXACTLY),
             MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
         )
 
@@ -160,7 +160,7 @@ class ExpandableCardView @JvmOverloads constructor(
     }
 
     private fun initClickListeners() {
-        val views = getViewsByTag(card_root, "expand_or_collapse")
+        val views = getViewsByTag(binding.root, "expand_or_collapse")
         views.forEach {
             it.setOnClickListener(defaultClickListener)
         }
@@ -212,7 +212,7 @@ class ExpandableCardView @JvmOverloads constructor(
 
     private class ExpandedCardSavedState : BaseSavedState {
 
-        internal var isExpanded: Boolean = false
+        var isExpanded: Boolean = false
 
         constructor(superState: Parcelable) : super(superState)
 

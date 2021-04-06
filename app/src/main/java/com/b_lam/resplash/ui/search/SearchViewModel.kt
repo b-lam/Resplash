@@ -1,9 +1,6 @@
 package com.b_lam.resplash.ui.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
@@ -12,14 +9,13 @@ import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.domain.photo.SearchPhotoDataSource
 import com.b_lam.resplash.domain.user.UserRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.NetworkState
 
 class SearchViewModel(
     private val photoRepository: PhotoRepository,
     private val collectionRepository: CollectionRepository,
     private val userRepository: UserRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _queryLiveData = MutableLiveData("")
     val queryLiveData: LiveData<String> = _queryLiveData
@@ -43,7 +39,7 @@ class SearchViewModel(
     val photosLiveData = Transformations.switchMap(photoListing) { it?.pagedList }
     val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it?.networkState }
     val photosRefreshStateLiveData = Transformations.switchMap(photoListing) {
-        it?.refreshState ?: MutableLiveData<NetworkState>(NetworkState.EMPTY)
+        it?.refreshState ?: MutableLiveData(NetworkState.EMPTY)
     }
 
     private val collectionListing: LiveData<Listing<Collection>?> = Transformations.map(queryLiveData) {
@@ -56,7 +52,7 @@ class SearchViewModel(
     val collectionsLiveData = Transformations.switchMap(collectionListing) { it?.pagedList }
     val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it?.networkState }
     val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) {
-        it?.refreshState ?: MutableLiveData<NetworkState>(NetworkState.EMPTY)
+        it?.refreshState ?: MutableLiveData(NetworkState.EMPTY)
     }
 
     private val userListing: LiveData<Listing<User>?> = Transformations.map(queryLiveData) {
@@ -69,7 +65,7 @@ class SearchViewModel(
     val usersLiveData = Transformations.switchMap(userListing) { it?.pagedList }
     val usersNetworkStateLiveData = Transformations.switchMap(userListing) { it?.networkState }
     val usersRefreshStateLiveData = Transformations.switchMap(userListing) {
-        it?.refreshState ?: MutableLiveData<NetworkState>(NetworkState.EMPTY)
+        it?.refreshState ?: MutableLiveData(NetworkState.EMPTY)
     }
 
     fun updateQuery(query: String) {

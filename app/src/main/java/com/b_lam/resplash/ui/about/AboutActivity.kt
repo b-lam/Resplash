@@ -4,31 +4,33 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModel
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.BuildConfig
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivityAboutBinding
 import com.b_lam.resplash.ui.base.BaseActivity
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.setupActionBar
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import kotlinx.android.synthetic.main.activity_about.*
 
 @SuppressLint("SetTextI18n")
-class AboutActivity : BaseActivity() {
+class AboutActivity : BaseActivity(R.layout.activity_about) {
 
-    override val viewModel: BaseViewModel? = null
+    override val viewModel: ViewModel? = null
+
+    override val binding: ActivityAboutBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
 
         setupActionBar(R.id.toolbar) {
             title = getString(R.string.about)
             setDisplayHomeAsUpEnabled(true)
         }
 
-        app_version.text = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        binding.appVersion.text = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
 
         supportFragmentManager
             .beginTransaction()

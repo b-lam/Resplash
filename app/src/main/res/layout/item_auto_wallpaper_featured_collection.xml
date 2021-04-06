@@ -78,8 +78,8 @@
             android:layout_marginEnd="@dimen/keyline_8"
             android:layout_marginBottom="@dimen/keyline_7"
             android:src="@drawable/ic_add_circle_outline_24dp"
-            android:tint="@color/white"
             android:contentDescription="@string/auto_wallpaper_add_to_auto_wallpaper"
+            app:tint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/MaterialImageButton" />

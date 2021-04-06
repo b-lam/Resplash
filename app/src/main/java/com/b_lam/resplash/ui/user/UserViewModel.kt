@@ -1,9 +1,6 @@
 package com.b_lam.resplash.ui.user
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
@@ -14,7 +11,6 @@ import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.domain.photo.UserLikesDataSource
 import com.b_lam.resplash.domain.photo.UserPhotoDataSource
 import com.b_lam.resplash.domain.user.UserRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
 import kotlinx.coroutines.launch
@@ -24,7 +20,7 @@ class UserViewModel(
     private val photoRepository: PhotoRepository,
     private val collectionRepository: CollectionRepository,
     private val loginRepository: LoginRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _getUserResultLiveData = MutableLiveData<Event<Result<User>>>()
     val getUserResultLiveData: LiveData<Event<Result<User>>> = _getUserResultLiveData

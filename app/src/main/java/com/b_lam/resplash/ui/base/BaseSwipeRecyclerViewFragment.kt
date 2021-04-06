@@ -4,24 +4,26 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.FragmentSwipeRecyclerViewBinding
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
 import com.b_lam.resplash.util.*
-import kotlinx.android.synthetic.main.empty_error_state_layout.view.*
-import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
 import org.koin.android.ext.android.inject
 
-abstract class BaseSwipeRecyclerViewFragment<T : Any> : BaseFragment() {
+abstract class BaseSwipeRecyclerViewFragment<T : Any, VH: RecyclerView.ViewHolder> :
+    Fragment(R.layout.fragment_swipe_recycler_view) {
+
+    val binding: FragmentSwipeRecyclerViewBinding by viewBinding()
 
     val sharedPreferencesRepository: SharedPreferencesRepository by inject()
 
-    override val layoutId = R.layout.fragment_swipe_recycler_view
-
-    abstract val pagedListAdapter: BasePagedListAdapter<T>
+    abstract val pagedListAdapter: BasePagedListAdapter<T, VH>
 
     abstract val emptyStateTitle: String
 
@@ -34,7 +36,7 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any> : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycler_view.apply {
+        binding.recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL).apply {
                 gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
             }
@@ -56,7 +58,7 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any> : BaseFragment() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        recycler_view.setupLayoutManager(
+        binding.recyclerView.setupLayoutManager(
             orientation = newConfig.orientation,
             layout = sharedPreferencesRepository.layout,
             spacing = itemSpacing
@@ -65,25 +67,26 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any> : BaseFragment() {
         pagedListAdapter.notifyDataSetChanged()
     }
 
-    fun scrollToTop() = recycler_view.scrollToTop()
+    fun scrollToTop() = binding.recyclerView.scrollToTop()
 
     fun updateRefreshState(refreshState: NetworkState) {
         when (refreshState) {
             is NetworkState.LOADING -> showLoadingState()
             is NetworkState.EMPTY -> showEmptyState()
             is NetworkState.ERROR -> {
-                error_state_layout.empty_error_state_title.text = getString(R.string.error_state_title)
-                error_state_layout.empty_error_state_subtitle.text = refreshState.message
+                binding.errorStateLayout.emptyErrorStateTitle.text = getString(R.string.error_state_title)
+                binding.errorStateLayout.emptyErrorStateSubtitle.text = refreshState.message
                 showErrorState()
             }
         }
-        swipe_refresh_layout.isRefreshing = swipe_refresh_layout.isRefreshing && refreshState is NetworkState.LOADING
+        binding.swipeRefreshLayout.isRefreshing =
+            binding.swipeRefreshLayout.isRefreshing && refreshState is NetworkState.LOADING
     }
 
     fun updateNetworkState(networkState: NetworkState) {
         when (networkState) {
             is NetworkState.SUCCESS -> showSuccessState()
-            is NetworkState.ERROR -> swipe_refresh_layout.showSnackBar(R.string.oops)
+            is NetworkState.ERROR -> binding.swipeRefreshLayout.showSnackBar(R.string.oops)
         }
     }
 
@@ -92,35 +95,35 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any> : BaseFragment() {
     }
 
     private fun setEmptyStateText(title: String, subtitle: String) {
-        empty_state_layout.empty_error_state_title.text = title
-        empty_state_layout.empty_error_state_subtitle.text = subtitle
+        binding.emptyStateLayout.emptyErrorStateTitle.text = title
+        binding.emptyStateLayout.emptyErrorStateSubtitle.text = subtitle
     }
 
     private fun showSuccessState() {
-        recycler_view.isVisible = true
-        error_state_layout.isVisible = false
-        empty_state_layout.isVisible = false
-        content_loading_layout.hide()
+        binding.recyclerView.isVisible = true
+        binding.errorStateLayout.root.isVisible = false
+        binding.emptyStateLayout.root.isVisible = false
+        binding.contentLoadingLayout.hide()
     }
 
     private fun showErrorState() {
-        recycler_view.isVisible = false
-        error_state_layout.isVisible = true
-        empty_state_layout.isVisible = false
-        content_loading_layout.hide()
+        binding.recyclerView.isVisible = false
+        binding.errorStateLayout.root.isVisible = true
+        binding.emptyStateLayout.root.isVisible = false
+        binding.contentLoadingLayout.hide()
     }
 
     private fun showEmptyState() {
-        recycler_view.isVisible = false
-        error_state_layout.isVisible = false
-        empty_state_layout.isVisible = true
-        content_loading_layout.hide()
+        binding.recyclerView.isVisible = false
+        binding.errorStateLayout.root.isVisible = false
+        binding.emptyStateLayout.root.isVisible = true
+        binding.contentLoadingLayout.hide()
     }
 
     private fun showLoadingState() {
-        recycler_view.isVisible = false
-        error_state_layout.isVisible = false
-        empty_state_layout.isVisible = false
-        content_loading_layout.show()
+        binding.recyclerView.isVisible = false
+        binding.errorStateLayout.root.isVisible = false
+        binding.emptyStateLayout.root.isVisible = false
+        binding.contentLoadingLayout.show()
     }
 }

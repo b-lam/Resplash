@@ -2,22 +2,29 @@ package com.b_lam.resplash.ui.autowallpaper.collections
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.data.autowallpaper.model.AutoWallpaperCollection
+import com.b_lam.resplash.databinding.ItemAutoWallpaperSelectedCollectionBinding
 import com.b_lam.resplash.util.loadPhotoUrl
-import kotlinx.android.synthetic.main.item_auto_wallpaper_selected_collection.view.*
 
 class SelectedAutoWallpaperCollectionViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+
+    private val binding: ItemAutoWallpaperSelectedCollectionBinding by viewBinding()
 
     fun bind(
         collection: AutoWallpaperCollection?,
         callback: AutoWallpaperCollectionListAdapter.ItemEventCallback
     ) {
-        collection?.let {
-            with(itemView) {
-                collection_name_text_view.text = collection.title
-                collection.cover_photo?.let { collection_image_view.loadPhotoUrl(it) }
-                collection_card_view.setOnClickListener { collection.id?.let { id -> callback.onCollectionClick(id) } }
-                remove_button.setOnClickListener { collection.id?.let { id -> callback.onRemoveClick(id) } }
+        with(binding) {
+            collection?.let {
+                collectionNameTextView.text = collection.title
+                collection.cover_photo?.let { collectionImageView.loadPhotoUrl(it) }
+                collectionCardView.setOnClickListener {
+                    collection.id?.let { id -> callback.onCollectionClick(id) }
+                }
+                removeButton.setOnClickListener {
+                    collection.id?.let { id -> callback.onRemoveClick(id) }
+                }
             }
         }
     }

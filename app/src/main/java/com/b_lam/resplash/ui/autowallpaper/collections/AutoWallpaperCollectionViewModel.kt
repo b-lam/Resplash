@@ -2,6 +2,7 @@ package com.b_lam.resplash.ui.autowallpaper.collections
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.b_lam.resplash.data.autowallpaper.model.AutoWallpaperCollection
 import com.b_lam.resplash.data.autowallpaper.model.AutoWallpaperCollectionDocument
@@ -9,7 +10,6 @@ import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.domain.autowallpaper.AutoWallpaperRepository
 import com.b_lam.resplash.domain.collection.CollectionRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.error
 import com.b_lam.resplash.util.livedata.Event
@@ -22,7 +22,7 @@ class AutoWallpaperCollectionViewModel(
     private val autoWallpaperRepository: AutoWallpaperRepository,
     private val collectionRepository: CollectionRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     val selectedAutoWallpaperCollections = autoWallpaperRepository.getSelectedAutoWallpaperCollections()
 

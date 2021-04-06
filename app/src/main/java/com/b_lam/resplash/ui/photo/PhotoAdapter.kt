@@ -19,7 +19,7 @@ class PhotoAdapter(
     private val callback: ItemEventCallback,
     private val showUser: Boolean,
     sharedPreferencesRepository: SharedPreferencesRepository
-) : BasePagedListAdapter<Photo>(diffCallback) {
+) : BasePagedListAdapter<Photo, RecyclerView.ViewHolder>(diffCallback) {
 
     private val layout = sharedPreferencesRepository.layout
     private val loadQuality = sharedPreferencesRepository.loadQuality

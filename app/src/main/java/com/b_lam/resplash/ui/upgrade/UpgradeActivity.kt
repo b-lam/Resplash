@@ -2,9 +2,10 @@ package com.b_lam.resplash.ui.upgrade
 
 import android.os.Bundle
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.airbnb.lottie.LottieAnimationView
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivityUpgradeBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.loadBlurredImage
@@ -15,18 +16,18 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_upgrade.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UpgradeActivity : BaseActivity() {
+class UpgradeActivity : BaseActivity(R.layout.activity_upgrade) {
 
     override val viewModel: UpgradeViewModel by viewModel()
+
+    override val binding: ActivityUpgradeBinding by viewBinding()
 
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_upgrade)
 
         firebaseAnalytics = Firebase.analytics
 
@@ -36,11 +37,11 @@ class UpgradeActivity : BaseActivity() {
         }
 
         viewModel.bannerPhotoLiveData.observe(this) {
-            banner_image_view.loadBlurredImage(it.urls.small, it.color)
+            binding.bannerImageView.loadBlurredImage(it.urls.small, it.color)
         }
 
         viewModel.skuDetailsLiveData.observe(this) {
-            go_pro_button.isVisible = it != null && it.canPurchase
+            binding.goProButton.isVisible = it != null && it.canPurchase
         }
 
         viewModel.resplashProLiveData.observe(this) {
@@ -49,12 +50,12 @@ class UpgradeActivity : BaseActivity() {
             }
         }
 
-        go_pro_button.setOnClickListener {
+        binding.goProButton.setOnClickListener {
             observeBillingResponse()
             viewModel.makePurchase(this)
         }
 
-        restore_purchase_button.setOnClickListener {
+        binding.restorePurchaseButton.setOnClickListener {
             observeBillingResponse()
             viewModel.restorePurchase()
         }

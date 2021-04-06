@@ -1,16 +1,12 @@
 package com.b_lam.resplash.ui.photo.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.di.Properties
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.lazyMap
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +17,7 @@ class PhotoDetailViewModel(
     private val photoRepository: PhotoRepository,
     private val collectionRepository: CollectionRepository,
     private val loginRepository: LoginRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _photoDetailsLiveData: Map<String, LiveData<Photo>> = lazyMap {
         val liveData = MutableLiveData<Photo>()

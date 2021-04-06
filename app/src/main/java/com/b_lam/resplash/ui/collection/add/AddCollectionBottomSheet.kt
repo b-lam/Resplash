@@ -11,11 +11,13 @@ import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.CreateMethod
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
+import com.b_lam.resplash.databinding.BottomSheetAddCollectionBinding
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailViewModel
 import com.b_lam.resplash.ui.widget.recyclerview.RecyclerViewPaginator
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
@@ -23,13 +25,13 @@ import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_add_collection.*
-import kotlinx.android.synthetic.main.empty_error_state_layout.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AddCollectionBottomSheet : BottomSheetDialogFragment(), AddCollectionAdapter.ItemEventCallback {
 
     private val sharedViewModel: PhotoDetailViewModel by sharedViewModel()
+
+    private val binding: BottomSheetAddCollectionBinding by viewBinding(CreateMethod.INFLATE)
 
     private val collectionAdapter = AddCollectionAdapter(this)
 
@@ -62,71 +64,71 @@ class AddCollectionBottomSheet : BottomSheetDialogFragment(), AddCollectionAdapt
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.bottom_sheet_add_collection, container, false)
-    }
+    ): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        add_collection_button.setOnClickListener { showCreateLayout() }
+        with(binding) {
+            addCollectionButton.setOnClickListener { showCreateLayout() }
 
-        cancel_collection_button.setOnClickListener {
-            showAddLayout()
-            resetInput()
-        }
+            cancelCollectionButton.setOnClickListener {
+                showAddLayout()
+                resetInput()
+            }
 
-        create_collection_button.setOnClickListener {
-            if (isInputValid()) {
-                photoId?.let { photoId ->
-                    sharedViewModel.createCollection(
-                        collection_name_text_input_layout.editText?.text.toString(),
-                        collection_description_text_input_layout.editText?.text.toString(),
-                        make_collection_private_checkbox.isChecked,
-                        photoId
-                    ).observe(viewLifecycleOwner) {
-                        create_loading_layout.isVisible = it is Result.Loading
-                        when (it) {
-                            is Result.Success -> {
-                                recycler_view.scrollToPosition(0)
-                                showAddLayout()
-                                resetInput()
+            createCollectionButton.setOnClickListener {
+                if (isInputValid()) {
+                    photoId?.let { photoId ->
+                        sharedViewModel.createCollection(
+                            collectionNameTextInputLayout.editText?.text.toString(),
+                            collectionDescriptionTextInputLayout.editText?.text.toString(),
+                            makeCollectionPrivateCheckbox.isChecked,
+                            photoId
+                        ).observe(viewLifecycleOwner) {
+                            createLoadingLayout.isVisible = it is Result.Loading
+                            when (it) {
+                                is Result.Success -> {
+                                    recyclerView.scrollToPosition(0)
+                                    showAddLayout()
+                                    resetInput()
+                                }
+                                is Result.Error, Result.NetworkError -> context?.toast(R.string.oops)
                             }
-                            is Result.Error, Result.NetworkError -> context?.toast(R.string.oops)
                         }
                     }
+                } else {
+                    showErrorMessage()
                 }
-            } else {
-                showErrorMessage()
             }
-        }
 
-        recycler_view.apply {
-            adapter = collectionAdapter
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
-                addItemDecoration(SpacingItemDecoration(context, R.dimen.keyline_7, RecyclerView.HORIZONTAL))
+            recyclerView.apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
+                    addItemDecoration(SpacingItemDecoration(context, R.dimen.keyline_7, RecyclerView.HORIZONTAL))
+                }
+                adapter = collectionAdapter
+                RecyclerViewPaginator(
+                    onLoadMore = { sharedViewModel.loadMore() },
+                    isLoading = { sharedViewModel.isLoading },
+                    onLastPage = { sharedViewModel.onLastPage }
+                ).attach(this)
             }
-            RecyclerViewPaginator(
-                onLoadMore = { sharedViewModel.loadMore() },
-                isLoading = { sharedViewModel.isLoading },
-                onLastPage = { sharedViewModel.onLastPage }
-            ).attach(this)
-        }
 
-        setupEmptyState()
+            setupEmptyState()
 
-        sharedViewModel.currentUserCollectionIds.observe(viewLifecycleOwner) {
-            collectionAdapter.setCurrentUserCollectionIds(it)
-        }
+            sharedViewModel.currentUserCollectionIds.observe(viewLifecycleOwner) {
+                collectionAdapter.setCurrentUserCollectionIds(it)
+            }
 
-        sharedViewModel.userCollections.observe(viewLifecycleOwner) {
-            content_loading_layout.isVisible = it == null
-            empty_state_layout.isVisible = it?.isEmpty() ?: false
-            collectionAdapter.submitList(it) { collectionAdapter.notifyDataSetChanged() }
-        }
+            sharedViewModel.userCollections.observe(viewLifecycleOwner) {
+                contentLoadingLayout.isVisible = it == null
+                emptyStateLayout.root.isVisible = it?.isEmpty() ?: false
+                collectionAdapter.submitList(it) { collectionAdapter.notifyDataSetChanged() }
+            }
 
-        if (sharedViewModel.userCollections.value == null) {
-            sharedViewModel.refresh()
+            if (sharedViewModel.userCollections.value == null) {
+                sharedViewModel.refresh()
+            }
         }
     }
 
@@ -161,56 +163,55 @@ class AddCollectionBottomSheet : BottomSheetDialogFragment(), AddCollectionAdapt
     }
 
     private fun isInputValid(): Boolean {
-        val name = collection_name_text_input_layout.editText?.text.toString()
-        val description = collection_description_text_input_layout.editText?.text.toString()
+        val name = binding.collectionNameTextInputLayout.editText?.text.toString()
+        val description = binding.collectionDescriptionTextInputLayout.editText?.text.toString()
         return name.isNotBlank() && name.length <= 60 && description.length <= 250
     }
 
-    private fun showErrorMessage() {
-        if (collection_name_text_input_layout.editText?.text.toString().isBlank()) {
-            collection_name_text_input_layout.error = getString(R.string.collection_name_required)
-            collection_name_text_input_layout.editText?.doOnTextChanged { text, _, _, _ ->
-                if (collection_name_text_input_layout.error.toString().isNotBlank() &&
+    private fun showErrorMessage() = with(binding) {
+        if (collectionNameTextInputLayout.editText?.text.toString().isBlank()) {
+            collectionNameTextInputLayout.error = getString(R.string.collection_name_required)
+            collectionNameTextInputLayout.editText?.doOnTextChanged { text, _, _, _ ->
+                if (collectionNameTextInputLayout.error.toString().isNotBlank() &&
                     text?.isBlank() != true) {
-                    collection_name_text_input_layout.error = null
+                        collectionNameTextInputLayout.error = null
                 }
             }
         }
     }
 
-    private fun showAddLayout() {
-        add_to_collection_layout.visibility = View.VISIBLE
-        create_collection_layout.visibility = View.INVISIBLE
+    private fun showAddLayout() = with(binding) {
+        addToCollectionLayout.visibility = View.VISIBLE
+        createCollectionLayout.visibility = View.INVISIBLE
     }
 
-    private fun showCreateLayout() {
-        add_to_collection_layout.visibility = View.INVISIBLE
-        create_collection_layout.visibility = View.VISIBLE
+    private fun showCreateLayout() = with(binding) {
+        addToCollectionLayout.visibility = View.INVISIBLE
+        createCollectionLayout.visibility = View.VISIBLE
     }
 
-    private fun resetInput() {
-        collection_name_text_input_layout.editText?.setText("")
-        collection_name_text_input_layout.error = null
-        collection_description_text_input_layout.editText?.setText("")
-        make_collection_private_checkbox.isChecked = false
+    private fun resetInput() = with(binding) {
+        collectionNameTextInputLayout.editText?.setText("")
+        collectionNameTextInputLayout.error = null
+        collectionDescriptionTextInputLayout.editText?.setText("")
+        makeCollectionPrivateCheckbox.isChecked = false
     }
 
     private fun setupEmptyState() {
         context?.let {
-            empty_state_layout.setBackgroundColor(
+            binding.emptyStateLayout.root.setBackgroundColor(
                 ContextCompat.getColor(it, R.color.color_tinted_surface))
         }
-        empty_state_layout.empty_error_state_title.text = getString(R.string.empty_state_title)
+        binding.emptyStateLayout.emptyErrorStateTitle.text = getString(R.string.empty_state_title)
     }
 
     companion object {
 
-        val TAG = AddCollectionBottomSheet::class.java.simpleName
+        val TAG: String = AddCollectionBottomSheet::class.java.simpleName
 
         private const val ARGUMENT_PHOTO_ID = "argument_photo_id"
 
-        fun newInstance(id: String) = AddCollectionBottomSheet()
-            .apply {
+        fun newInstance(id: String) = AddCollectionBottomSheet().apply {
             arguments = Bundle().apply {
                 putString(ARGUMENT_PHOTO_ID, id)
             }

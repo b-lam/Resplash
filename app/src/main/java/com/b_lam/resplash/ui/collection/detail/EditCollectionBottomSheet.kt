@@ -8,19 +8,22 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.observe
+import by.kirich1409.viewbindingdelegate.CreateMethod
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.BottomSheetEditCollectionBinding
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_edit_collection.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class EditCollectionBottomSheet : BottomSheetDialogFragment() {
 
     private val sharedViewModel: CollectionDetailViewModel by sharedViewModel()
+
+    private val binding: BottomSheetEditCollectionBinding by viewBinding(CreateMethod.INFLATE)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val bottomSheetDialog = super.onCreateDialog(savedInstanceState)
@@ -41,82 +44,82 @@ class EditCollectionBottomSheet : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.bottom_sheet_edit_collection, container, false)
-    }
+    ): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.collectionLiveData.observe(viewLifecycleOwner) {
-            collection_name_text_input_layout.editText?.setText(it.title)
-            collection_description_text_input_layout.editText?.setText(it.description)
-            make_collection_private_checkbox.isChecked = it.private ?: false
-        }
+        with(binding) {
+            sharedViewModel.collectionLiveData.observe(viewLifecycleOwner) {
+                collectionNameTextInputLayout.editText?.setText(it.title)
+                collectionDescriptionTextInputLayout.editText?.setText(it.description)
+                makeCollectionPrivateCheckbox.isChecked = it.private ?: false
+            }
 
-        cancel_collection_button.setOnClickListener { dismiss() }
-        delete_collection_button.setOnClickListener {
-            are_you_sure_text_view.isVisible = true
-            delete_no_collection_button.isVisible = true
-            delete_yes_collection_button.isVisible = true
-            delete_collection_button.isVisible = false
-            cancel_collection_button.isVisible = false
-            save_collection_button.isVisible = false
-        }
-        delete_no_collection_button.setOnClickListener {
-            are_you_sure_text_view.isVisible = false
-            delete_no_collection_button.isVisible = false
-            delete_yes_collection_button.isVisible = false
-            delete_collection_button.isVisible = true
-            cancel_collection_button.isVisible = true
-            save_collection_button.isVisible = true
-        }
+            cancelCollectionButton.setOnClickListener { dismiss() }
+            deleteCollectionButton.setOnClickListener {
+                areYouSureTextView.isVisible = true
+                deleteNoCollectionButton.isVisible = true
+                deleteYesCollectionButton.isVisible = true
+                deleteCollectionButton.isVisible = false
+                cancelCollectionButton.isVisible = false
+                saveCollectionButton.isVisible = false
+            }
+            deleteNoCollectionButton.setOnClickListener {
+                areYouSureTextView.isVisible = false
+                deleteNoCollectionButton.isVisible = false
+                deleteYesCollectionButton.isVisible = false
+                deleteCollectionButton.isVisible = true
+                cancelCollectionButton.isVisible = true
+                saveCollectionButton.isVisible = true
+            }
 
-        save_collection_button.setOnClickListener {
-            if (isInputValid()) {
-                progress_bar.isVisible = true
-                delete_collection_button.isEnabled = false
-                cancel_collection_button.isEnabled = false
-                save_collection_button.isEnabled = false
-                sharedViewModel.updateCollection(
-                    collection_name_text_input_layout.editText?.text.toString(),
-                    collection_description_text_input_layout.editText?.text.toString(),
-                    make_collection_private_checkbox.isChecked
-                )
-                sharedViewModel.updateCollectionResultLiveData.observeEvent(viewLifecycleOwner) {
+            saveCollectionButton.setOnClickListener {
+                if (isInputValid()) {
+                    progressBar.isVisible = true
+                    deleteCollectionButton.isEnabled = false
+                    cancelCollectionButton.isEnabled = false
+                    saveCollectionButton.isEnabled = false
+                    sharedViewModel.updateCollection(
+                        collectionNameTextInputLayout.editText?.text.toString(),
+                        collectionDescriptionTextInputLayout.editText?.text.toString(),
+                        makeCollectionPrivateCheckbox.isChecked
+                    )
+                    sharedViewModel.updateCollectionResultLiveData.observeEvent(viewLifecycleOwner) {
+                        if (it !is Result.Success) context.toast(R.string.oops)
+                        dismiss()
+                    }
+                } else {
+                    showErrorMessage()
+                }
+            }
+
+            deleteYesCollectionButton.setOnClickListener {
+                progressBar.isVisible = true
+                deleteNoCollectionButton.isEnabled = false
+                deleteYesCollectionButton.isEnabled = false
+                sharedViewModel.deleteCollection()
+                sharedViewModel.deleteCollectionResultLiveData.observeEvent(viewLifecycleOwner) {
                     if (it !is Result.Success) context.toast(R.string.oops)
                     dismiss()
                 }
-            } else {
-                showErrorMessage()
-            }
-        }
-
-        delete_yes_collection_button.setOnClickListener {
-            progress_bar.isVisible = true
-            delete_no_collection_button.isEnabled = false
-            delete_yes_collection_button.isEnabled = false
-            sharedViewModel.deleteCollection()
-            sharedViewModel.deleteCollectionResultLiveData.observeEvent(viewLifecycleOwner) {
-                if (it !is Result.Success) context.toast(R.string.oops)
-                dismiss()
             }
         }
     }
 
     private fun isInputValid(): Boolean {
-        val name = collection_name_text_input_layout.editText?.text.toString()
-        val description = collection_description_text_input_layout.editText?.text.toString()
+        val name = binding.collectionNameTextInputLayout.editText?.text.toString()
+        val description = binding.collectionDescriptionTextInputLayout.editText?.text.toString()
         return name.isNotBlank() && name.length <= 60 && description.length <= 250
     }
 
     private fun showErrorMessage() {
-        if (collection_name_text_input_layout.editText?.text.toString().isBlank()) {
-            collection_name_text_input_layout.error = getString(R.string.collection_name_required)
-            collection_name_text_input_layout.editText?.doOnTextChanged { text, _, _, _ ->
-                if (collection_name_text_input_layout.error.toString().isNotBlank() &&
+        if (binding.collectionNameTextInputLayout.editText?.text.toString().isBlank()) {
+            binding.collectionNameTextInputLayout.error = getString(R.string.collection_name_required)
+            binding.collectionNameTextInputLayout.editText?.doOnTextChanged { text, _, _, _ ->
+                if (binding.collectionNameTextInputLayout.error.toString().isNotBlank() &&
                     text?.isBlank() != true) {
-                    collection_name_text_input_layout.error = null
+                    binding.collectionNameTextInputLayout.error = null
                 }
             }
         }
@@ -124,7 +127,7 @@ class EditCollectionBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
 
-        val TAG = EditCollectionBottomSheet::class.java.simpleName
+        val TAG: String = EditCollectionBottomSheet::class.java.simpleName
 
         fun newInstance() = EditCollectionBottomSheet()
     }

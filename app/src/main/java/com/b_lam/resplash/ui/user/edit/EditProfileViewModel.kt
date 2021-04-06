@@ -2,16 +2,16 @@ package com.b_lam.resplash.ui.user.edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.b_lam.resplash.data.user.model.Me
 import com.b_lam.resplash.domain.login.LoginRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import kotlinx.coroutines.launch
 
 class EditProfileViewModel(
     private val loginRepository: LoginRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _initialUserLiveData by lazy {
         val liveData = MutableLiveData<Result<Me>>()

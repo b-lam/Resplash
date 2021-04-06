@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.observe
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
@@ -13,10 +12,10 @@ import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.user.UserAdapter
-import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
+import com.b_lam.resplash.ui.user.UserViewHolder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class SearchUserFragment : BaseSwipeRecyclerViewFragment<User>() {
+class SearchUserFragment : BaseSwipeRecyclerViewFragment<User, UserViewHolder>() {
 
     private val sharedViewModel: SearchViewModel by sharedViewModel()
 
@@ -50,7 +49,7 @@ class SearchUserFragment : BaseSwipeRecyclerViewFragment<User>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        swipe_refresh_layout.isEnabled = false
+        binding.swipeRefreshLayout.isEnabled = false
     }
 
     override fun observeEvents() {

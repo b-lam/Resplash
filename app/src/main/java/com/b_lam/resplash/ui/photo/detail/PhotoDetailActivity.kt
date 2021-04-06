@@ -15,14 +15,15 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.updatePadding
-import androidx.lifecycle.observe
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.WorkManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
+import com.b_lam.resplash.databinding.ActivityPhotoDetailBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.collection.add.AddCollectionBottomSheet
 import com.b_lam.resplash.ui.login.LoginActivity
@@ -36,13 +37,15 @@ import com.b_lam.resplash.util.download.*
 import com.b_lam.resplash.worker.DownloadWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_photo_detail.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
+class PhotoDetailActivity :
+    BaseActivity(R.layout.activity_photo_detail), TagAdapter.ItemEventCallback {
 
     override val viewModel: PhotoDetailViewModel by viewModel()
+
+    override val binding: ActivityPhotoDetailBinding by viewBinding()
 
     private lateinit var id: String
 
@@ -52,16 +55,17 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo_detail)
 
         setupActionBar(R.id.toolbar) {
             title = ""
             setDisplayHomeAsUpEnabled(true)
         }
 
-        scroll_view.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
-        constraint_layout.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
-        photo_image_view.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
+        with(binding) {
+            scrollView.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
+            constraintLayout.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
+            photoImageView.doOnApplyWindowInsets { view, _, _ -> view.updatePadding(top = 0) }
+        }
 
         val photo = intent.getParcelableExtra<Photo>(EXTRA_PHOTO)
         val photoId = intent.getStringExtra(EXTRA_PHOTO_ID)
@@ -128,8 +132,8 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
 
     private fun setup(photo: Photo) {
         val url = getPhotoUrl(photo, sharedPreferencesRepository.loadQuality)
-        photo_image_view.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color, centerCrop = true)
-        photo_image_view.setOnClickListener {
+        binding.photoImageView.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color, centerCrop = true)
+        binding.photoImageView.setOnClickListener {
             Intent(this, PhotoZoomActivity::class.java).apply {
                 putExtra(PhotoZoomActivity.EXTRA_PHOTO_URL, url)
                 startActivity(this)
@@ -137,13 +141,13 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
         }
     }
 
-    private fun displayPhotoDetails(photo: Photo) {
-        content_loading_layout.hide()
+    private fun displayPhotoDetails(photo: Photo) = with(binding) {
+        contentLoadingLayout.hide()
         photo.user?.let { user ->
-            user_text_view.text = user.name ?: getString(R.string.unknown)
-            user_image_view.loadProfilePicture(user)
-            user_container.setOnClickListener {
-                Intent(this, UserActivity::class.java).apply {
+            userTextView.text = user.name ?: getString(R.string.unknown)
+            userImageView.loadProfilePicture(user)
+            userContainer.setOnClickListener {
+                Intent(this@PhotoDetailActivity, UserActivity::class.java).apply {
                     putExtra(UserActivity.EXTRA_USER, user)
                     startActivity(this)
                 }
@@ -158,39 +162,39 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 location.city == null && location.country != null -> location.country
                 else -> null
             }
-            location_text_view.setTextAndVisibility(locationString)
-            location_text_view.setOnClickListener { locationString?.let { openLocationInMaps(it) } }
+            locationTextView.setTextAndVisibility(locationString)
+            locationTextView.setOnClickListener { locationString?.let { openLocationInMaps(it) } }
         }
-        exif_recycler_view.apply {
+        exifRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = ExifAdapter(context).apply { setExif(photo) }
         }
-        views_count_text_view.text = (photo.views ?: 0).toPrettyString()
-        downloads_count_text_view.text = (photo.downloads ?: 0).toPrettyString()
-        likes_count_text_view.text = (photo.likes ?: 0).toPrettyString()
-        tag_recycler_view.apply {
+        viewsCountTextView.text = (photo.views ?: 0).toPrettyString()
+        downloadsCountTextView.text = (photo.downloads ?: 0).toPrettyString()
+        likesCountTextView.text = (photo.likes ?: 0).toPrettyString()
+        tagRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
                 addItemDecoration(SpacingItemDecoration(context, R.dimen.keyline_6, RecyclerView.HORIZONTAL))
             }
             adapter = TagAdapter(this@PhotoDetailActivity).apply { submitList(photo.tags) }
         }
 
-        viewModel.currentUserCollectionIds.observe(this) {
+        viewModel.currentUserCollectionIds.observe(this@PhotoDetailActivity) {
             setCollectButtonState(it ?: emptyList())
         }
-        collect_button.setOnClickListener {
+        collectButton.setOnClickListener {
             if (viewModel.isUserAuthorized()) {
                 AddCollectionBottomSheet
                     .newInstance(photo.id)
                     .show(supportFragmentManager, AddCollectionBottomSheet.TAG)
             } else {
                 toast(R.string.need_to_log_in)
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this@PhotoDetailActivity, LoginActivity::class.java))
             }
         }
 
         setLikeButtonState(photo.liked_by_user ?: false)
-        like_button.setOnClickListener {
+        likeButton.setOnClickListener {
             if (viewModel.isUserAuthorized()) {
                 if (photo.liked_by_user == true) {
                     viewModel.unlikePhoto(photo.id)
@@ -201,17 +205,17 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 setLikeButtonState(photo.liked_by_user ?: false)
             } else {
                 toast(R.string.need_to_log_in)
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this@PhotoDetailActivity, LoginActivity::class.java))
             }
         }
-        download_button.setOnClickListener {
+        downloadButton.setOnClickListener {
             if (fileExists(photo.fileName, sharedPreferencesRepository.downloader)) {
-                showFileExistsDialog(this) { downloadPhoto(photo) }
+                showFileExistsDialog(this@PhotoDetailActivity) { downloadPhoto(photo) }
             } else {
                 downloadPhoto(photo)
             }
         }
-        set_as_wallpaper_button.setOnClickListener {
+        setAsWallpaperButton.setOnClickListener {
             if (fileExists(photo.fileName, sharedPreferencesRepository.downloader)) {
                 getUriForPhoto(photo.fileName, sharedPreferencesRepository.downloader)?.let { uri ->
                     applyWallpaper(uri)
@@ -222,7 +226,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                 downloadWallpaper(photo)
             }
         }
-        set_as_wallpaper_button.show()
+        setAsWallpaperButton.show()
     }
 
     override fun onTagClick(tag: String) {
@@ -233,14 +237,14 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
     }
 
     private fun setLikeButtonState(likedByUser: Boolean) {
-        like_button.setImageResource(
+        binding.likeButton.setImageResource(
             if (likedByUser) R.drawable.ic_favorite_filled_24dp
             else R.drawable.ic_favorite_border_24dp
         )
     }
 
     private fun setCollectButtonState(currentUserCollectionIds: List<Int>) {
-        collect_button.setImageResource(
+        binding.collectButton.setImageResource(
             if (currentUserCollectionIds.isNotEmpty()) R.drawable.ic_bookmark_filled_24dp
             else R.drawable.ic_bookmark_border_24dp
         )
@@ -274,7 +278,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
             }
 
             snackbar = Snackbar
-                .make(coordinator_layout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
+                .make(binding.coordinatorLayout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.cancel) { cancelDownload() }
                 .setActionTextColor(ContextCompat.getColor(this, R.color.red_400))
                 .setAnchorView(R.id.set_as_wallpaper_button)
@@ -295,7 +299,7 @@ class PhotoDetailActivity : BaseActivity(), TagAdapter.ItemEventCallback {
                     applyWallpaper(it)
                 }
                 STATUS_FAILED ->
-                    coordinator_layout.showSnackBar(R.string.oops, anchor = R.id.set_as_wallpaper_button)
+                    binding.coordinatorLayout.showSnackBar(R.string.oops, anchor = R.id.set_as_wallpaper_button)
             }
         } else if (action == DownloadAction.DOWNLOAD) {
             when (status) {

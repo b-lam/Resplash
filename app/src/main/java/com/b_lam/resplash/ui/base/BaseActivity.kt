@@ -8,7 +8,10 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.viewbinding.ViewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.main.MainActivity
@@ -16,9 +19,11 @@ import com.b_lam.resplash.util.applyLanguage
 import com.b_lam.resplash.util.getThemeAttrColor
 import org.koin.android.ext.android.inject
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
 
-    abstract val viewModel: BaseViewModel?
+    abstract val viewModel: ViewModel?
+
+    abstract val binding: ViewBinding
 
     val sharedPreferencesRepository: SharedPreferencesRepository by inject()
 

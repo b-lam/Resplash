@@ -1,11 +1,11 @@
 package com.b_lam.resplash.ui.muzei
 
+import androidx.lifecycle.ViewModel
 import com.b_lam.resplash.domain.billing.BillingRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 
 class MuzeiSettingsViewModel(
     private val billingRepository: BillingRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     init {
         billingRepository.startDataSourceConnections()

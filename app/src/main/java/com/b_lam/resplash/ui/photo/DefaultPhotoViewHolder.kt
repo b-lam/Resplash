@@ -3,12 +3,15 @@ package com.b_lam.resplash.ui.photo
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
+import com.b_lam.resplash.databinding.ItemPhotoDefaultBinding
 import com.b_lam.resplash.util.*
-import kotlinx.android.synthetic.main.item_photo_default.view.*
 
 class DefaultPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+
+    private val binding: ItemPhotoDefaultBinding by viewBinding()
 
     fun bind(
         photo: Photo?,
@@ -17,25 +20,25 @@ class DefaultPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
         longPressDownload: Boolean,
         callback: PhotoAdapter.ItemEventCallback
     ) {
-        photo?.let {
-            with(itemView) {
+        with(binding) {
+            photo?.let {
                 if (showUser) {
-                    itemView.margin(bottom = resources.getDimensionPixelSize(R.dimen.keyline_6))
+                    itemView.margin(bottom = itemView.resources.getDimensionPixelSize(R.dimen.keyline_6))
                     photo.user?.let { user ->
-                        user_container.isVisible = true
-                        user_container.setOnClickListener { callback.onUserClick(user) }
-                        user_image_view.loadProfilePicture(user)
-                        user_text_view.text = user.name ?: context.getString(R.string.unknown)
+                        userContainer.isVisible = true
+                        userContainer.setOnClickListener { callback.onUserClick(user) }
+                        userImageView.loadProfilePicture(user)
+                        userTextView.text = user.name ?: itemView.context.getString(R.string.unknown)
                     }
-                    sponsored_text_view.isVisible = photo.sponsorship != null
+                    sponsoredTextView.isVisible = photo.sponsorship != null
                 }
                 val url = getPhotoUrl(photo, loadQuality)
-                photo_image_view.setAspectRatio(photo.width, photo.height)
-                photo_image_view.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color)
-                photo_image_view.setOnClickListener { callback.onPhotoClick(photo) }
+                photoImageView.setAspectRatio(photo.width, photo.height)
+                photoImageView.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color)
+                photoImageView.setOnClickListener { callback.onPhotoClick(photo) }
                 if (longPressDownload) {
-                    photo_image_view.setOnLongClickListener {
-                        callback.onLongClick(photo, check_animation_view)
+                    photoImageView.setOnLongClickListener {
+                        callback.onLongClick(photo, checkAnimationView)
                         true
                     }
                 }

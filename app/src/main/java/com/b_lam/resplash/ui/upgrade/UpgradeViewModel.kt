@@ -3,18 +3,18 @@ package com.b_lam.resplash.ui.upgrade
 import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.billing.BillingRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import kotlinx.coroutines.launch
 
 class UpgradeViewModel(
     private val billingRepository: BillingRepository,
     private val photoRepository: PhotoRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     init {
         billingRepository.startDataSourceConnections()

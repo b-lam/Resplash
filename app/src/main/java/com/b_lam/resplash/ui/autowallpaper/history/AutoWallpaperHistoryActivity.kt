@@ -4,25 +4,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivityAutoWallpaperHistoryBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.RECYCLER_VIEW_CACHE_SIZE
 import com.b_lam.resplash.util.setupActionBar
-import kotlinx.android.synthetic.main.fragment_swipe_recycler_view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AutoWallpaperHistoryActivity : BaseActivity(), AutoWallpaperHistoryAdapter.ItemEventCallback {
+class AutoWallpaperHistoryActivity :
+    BaseActivity(R.layout.activity_auto_wallpaper_history),
+    AutoWallpaperHistoryAdapter.ItemEventCallback {
 
     override val viewModel: AutoWallpaperHistoryViewModel by viewModel()
 
+    override val binding: ActivityAutoWallpaperHistoryBinding by viewBinding()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auto_wallpaper_history)
 
         setupActionBar(R.id.toolbar) {
             setTitle(R.string.auto_wallpaper_history_title)
@@ -31,7 +34,7 @@ class AutoWallpaperHistoryActivity : BaseActivity(), AutoWallpaperHistoryAdapter
 
         val wallpaperHistoryAdapter = AutoWallpaperHistoryAdapter(this, sharedPreferencesRepository)
 
-        recycler_view.apply {
+        binding.recyclerView.apply {
             adapter = wallpaperHistoryAdapter
             layoutManager = LinearLayoutManager(this@AutoWallpaperHistoryActivity).apply {
                 addItemDecoration(SpacingItemDecoration(this@AutoWallpaperHistoryActivity, R.dimen.keyline_7))

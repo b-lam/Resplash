@@ -7,10 +7,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.BuildConfig
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
+import com.b_lam.resplash.databinding.ActivityCollectionDetailBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.ui.user.UserActivity
@@ -23,19 +24,18 @@ import com.b_lam.resplash.worker.AutoWallpaperWorker
 import com.google.android.apps.muzei.api.isSelected
 import com.google.android.apps.muzei.api.provider.ProviderClient
 import com.google.android.apps.muzei.api.provider.ProviderContract
-import kotlinx.android.synthetic.main.activity_collection_detail.*
-import kotlinx.android.synthetic.main.activity_user.user_name_text_view
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CollectionDetailActivity : BaseActivity() {
+class CollectionDetailActivity : BaseActivity(R.layout.activity_collection_detail) {
 
     override val viewModel: CollectionDetailViewModel by viewModel()
+
+    override val binding: ActivityCollectionDetailBinding by viewBinding()
 
     private var providerClient: ProviderClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_collection_detail)
 
         val collection = intent.getParcelableExtra<Collection>(EXTRA_COLLECTION)
         val collectionId = intent.getStringExtra(EXTRA_COLLECTION_ID)
@@ -105,19 +105,19 @@ class CollectionDetailActivity : BaseActivity() {
             }
             R.id.action_add_collection -> {
                 viewModel.addCollectionToAutoWallpaper()
-                root_container.showSnackBar(R.string.auto_wallpaper_collection_added)
+                binding.rootContainer.showSnackBar(R.string.auto_wallpaper_collection_added)
                 true
             }
             R.id.action_remove_collection -> {
                 viewModel.removeCollectionFromAutoWallpaper()
-                root_container.showSnackBar(R.string.auto_wallpaper_collection_removed)
+                binding.rootContainer.showSnackBar(R.string.auto_wallpaper_collection_removed)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun initialSetup(collection: Collection) {
+    private fun initialSetup(collection: Collection) = with(binding) {
         setupToolbar(collection)
         replaceFragmentInActivity(
             R.id.root_container,
@@ -126,20 +126,20 @@ class CollectionDetailActivity : BaseActivity() {
         )
         toolbar.setOnClickListener {
             (supportFragmentManager.findFragmentByTag(CollectionDetailFragment::class.java.simpleName)
-                    as? BaseSwipeRecyclerViewFragment<*>)?.scrollToTop()
-            app_bar.setExpanded(true)
+                    as? BaseSwipeRecyclerViewFragment<*, *>)?.scrollToTop()
+            appBar.setExpanded(true)
         }
 
-        content_loading_layout.hide()
-        collection_content_layout.isVisible = true
+        contentLoadingLayout.hide()
+        collectionContentLayout.isVisible = true
 
         collection.user?.let { user ->
             val count = resources.getQuantityString(
                 R.plurals.photos, collection.total_photos, collection.total_photos)
             val name = getString(R.string.curated_by_template, user.name)
-            user_name_text_view.text = getString(R.string.bullet_template, count, name)
-            user_name_text_view.setOnClickListener {
-                Intent(this, UserActivity::class.java).apply {
+            userNameTextView.text = getString(R.string.bullet_template, count, name)
+            userNameTextView.setOnClickListener {
+                Intent(this@CollectionDetailActivity, UserActivity::class.java).apply {
                     putExtra(UserActivity.EXTRA_USER, user)
                     startActivity(this)
                 }
@@ -147,15 +147,15 @@ class CollectionDetailActivity : BaseActivity() {
         }
 
         if (isAutoWallpaperCollectionsEnabled()) {
-            viewModel.isCollectionUsedForAutoWallpaper(collection.id).observe(this) {
+            viewModel.isCollectionUsedForAutoWallpaper(collection.id).observe(this@CollectionDetailActivity) {
                 viewModel.isCollectionUsedForAutoWallpaper = it
                 invalidateOptionsMenu()
             }
         }
 
         if (viewModel.isOwnCollection()) {
-            edit_button.show()
-            edit_button.setOnClickListener {
+            editButton.show()
+            editButton.setOnClickListener {
                 EditCollectionBottomSheet
                     .newInstance()
                     .show(supportFragmentManager, EditCollectionBottomSheet.TAG)
@@ -171,7 +171,7 @@ class CollectionDetailActivity : BaseActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        description_text_view.setTextAndVisibility(collection.description?.trim())
+        binding.descriptionTextView.setTextAndVisibility(collection.description?.trim())
     }
 
     private fun openCollectionInBrowser() {

@@ -1,6 +1,7 @@
 package com.b_lam.resplash.ui.collection
 
 import android.content.Intent
+import androidx.recyclerview.widget.RecyclerView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.user.model.User
@@ -9,7 +10,7 @@ import com.b_lam.resplash.ui.collection.detail.CollectionDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.user.UserCollectionFragment
 
-abstract class CollectionFragment : BaseSwipeRecyclerViewFragment<Collection>() {
+abstract class CollectionFragment : BaseSwipeRecyclerViewFragment<Collection, RecyclerView.ViewHolder>() {
 
     abstract override val pagedListAdapter: CollectionAdapter
 

@@ -1,9 +1,6 @@
 package com.b_lam.resplash.ui.collection.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.Listing
@@ -11,7 +8,6 @@ import com.b_lam.resplash.domain.autowallpaper.AutoWallpaperRepository
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
 import kotlinx.coroutines.launch
@@ -22,7 +18,7 @@ class CollectionDetailViewModel(
     private val collectionRepository: CollectionRepository,
     private val loginRepository: LoginRepository,
     private val autoWallpaperRepository: AutoWallpaperRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _getCollectionResultLiveData = MutableLiveData<Event<Result<Collection>>>()
     val getCollectionResultLiveData: LiveData<Event<Result<Collection>>> = _getCollectionResultLiveData

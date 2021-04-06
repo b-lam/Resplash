@@ -1,27 +1,28 @@
 package com.b_lam.resplash.ui.donation
 
 import android.os.Bundle
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.airbnb.lottie.LottieAnimationView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.billing.model.AugmentedSkuDetails
+import com.b_lam.resplash.databinding.ActivityDonateBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.loadBlurredImage
 import com.b_lam.resplash.util.setupActionBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.activity_donate.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DonationActivity : BaseActivity(), DonationAdapter.ItemEventCallback {
+class DonationActivity : BaseActivity(R.layout.activity_donate), DonationAdapter.ItemEventCallback {
 
     override val viewModel: DonationViewModel by viewModel()
 
+    override val binding: ActivityDonateBinding by viewBinding()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_donate)
 
         setupActionBar(R.id.toolbar) {
             title = getString(R.string.support_development)
@@ -30,7 +31,7 @@ class DonationActivity : BaseActivity(), DonationAdapter.ItemEventCallback {
 
         val donationAdapter = DonationAdapter(this)
 
-        recycler_view.apply {
+        binding.recyclerView.apply {
             adapter = donationAdapter
             layoutManager = LinearLayoutManager(this@DonationActivity).apply {
                 addItemDecoration(SpacingItemDecoration(this@DonationActivity, R.dimen.keyline_7))
@@ -38,7 +39,7 @@ class DonationActivity : BaseActivity(), DonationAdapter.ItemEventCallback {
         }
 
         viewModel.bannerPhotoLiveData.observe(this) {
-            banner_image_view.loadBlurredImage(it.urls.small, it.color)
+            binding.bannerImageView.loadBlurredImage(it.urls.small, it.color)
         }
 
         viewModel.skuDetailsLiveData.observe(this) { skuDetailsList ->

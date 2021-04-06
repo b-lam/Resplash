@@ -1,9 +1,6 @@
 package com.b_lam.resplash.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.domain.billing.BillingRepository
@@ -12,7 +9,6 @@ import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoDataSource
 import com.b_lam.resplash.domain.photo.PhotoRepository
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
 import kotlinx.coroutines.launch
@@ -22,7 +18,7 @@ class MainViewModel(
     private val collectionRepository: CollectionRepository,
     private val loginRepository: LoginRepository,
     private val billingRepository: BillingRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     init {
         billingRepository.startDataSourceConnections()
@@ -74,20 +70,15 @@ class MainViewModel(
     }
 
     fun orderPhotosBy(selection: Int) {
-        val order = when (selection) {
-            0 -> PhotoDataSource.Companion.Order.LATEST
-            1 -> PhotoDataSource.Companion.Order.OLDEST
-            else -> PhotoDataSource.Companion.Order.POPULAR
+        PhotoDataSource.Companion.Order.values().getOrNull(selection)?.let {
+            _photoOrderLiveData.postValue(it)
         }
-        _photoOrderLiveData.postValue(order)
     }
 
     fun orderCollectionsBy(selection: Int) {
-        val order = when (selection) {
-            0 -> CollectionDataSource.Companion.Order.ALL
-            else -> CollectionDataSource.Companion.Order.FEATURED
+        CollectionDataSource.Companion.Order.values().getOrNull(selection)?.let {
+            _collectionOrderLiveData.postValue(it)
         }
-        _collectionOrderLiveData.postValue(order)
     }
 
     fun isUserLoggedIn() = loginRepository.isAuthorized()

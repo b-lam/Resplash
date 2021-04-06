@@ -3,15 +3,15 @@ package com.b_lam.resplash.ui.settings
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.b_lam.resplash.GlideApp
-import com.b_lam.resplash.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
-class SettingsViewModel(private val context: Context) : BaseViewModel() {
+class SettingsViewModel(private val context: Context) : ViewModel() {
 
     var shouldRestartMainActivity = false
 

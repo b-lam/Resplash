@@ -4,24 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.autowallpaper.model.AutoWallpaperCollection
-import com.b_lam.resplash.ui.base.BaseFragment
+import com.b_lam.resplash.databinding.FragmentSelectedAutoWallpaperCollectionBinding
 import com.b_lam.resplash.ui.collection.detail.CollectionDetailActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.showSnackBar
-import kotlinx.android.synthetic.main.empty_error_state_layout.view.*
-import kotlinx.android.synthetic.main.fragment_selected_auto_wallpaper_collection.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SelectedAutoWallpaperCollectionFragment :
-    BaseFragment(), AutoWallpaperCollectionListAdapter.ItemEventCallback {
-
-    override val layoutId =  R.layout.fragment_selected_auto_wallpaper_collection
+    Fragment(R.layout.fragment_selected_auto_wallpaper_collection),
+    AutoWallpaperCollectionListAdapter.ItemEventCallback {
 
     private val sharedViewModel: AutoWallpaperCollectionViewModel by sharedViewModel()
+
+    private val binding: FragmentSelectedAutoWallpaperCollectionBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +29,7 @@ class SelectedAutoWallpaperCollectionFragment :
         val selectedCollectionsAdapter =
             AutoWallpaperCollectionListAdapter(AutoWallpaperCollectionListAdapter.ItemType.SELECTED, this)
 
-        recycler_view.apply {
+        binding.recyclerView.apply {
             adapter = selectedCollectionsAdapter
             layoutManager = LinearLayoutManager(context).apply {
                 addItemDecoration(SpacingItemDecoration(context, R.dimen.keyline_7))
@@ -41,8 +41,8 @@ class SelectedAutoWallpaperCollectionFragment :
                 selectedCollectionsAdapter.submitList(it)
             }
             numCollectionsLiveData.observe(viewLifecycleOwner) {
-                empty_state_layout.isVisible = it == 0
-                recycler_view.isVisible = it != 0
+                binding.emptyStateLayout.root.isVisible = it == 0
+                binding.recyclerView.isVisible = it != 0
             }
         }
 
@@ -62,12 +62,12 @@ class SelectedAutoWallpaperCollectionFragment :
 
     override fun onRemoveClick(id: Int) {
         sharedViewModel.removeAutoWallpaperCollection(id)
-        recycler_view.showSnackBar(R.string.auto_wallpaper_collection_removed)
+        binding.recyclerView.showSnackBar(R.string.auto_wallpaper_collection_removed)
     }
 
     private fun setEmptyStateText() {
-        empty_state_layout.empty_error_state_title.text = getString(R.string.empty_state_title)
-        empty_state_layout.empty_error_state_subtitle.text = getString(R.string.auto_wallpaper_no_selected_collections)
+        binding.emptyStateLayout.emptyErrorStateTitle.text = getString(R.string.empty_state_title)
+        binding.emptyStateLayout.emptyErrorStateSubtitle.text = getString(R.string.auto_wallpaper_no_selected_collections)
     }
 
     companion object {

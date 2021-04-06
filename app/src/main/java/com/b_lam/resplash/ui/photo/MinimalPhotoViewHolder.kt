@@ -2,13 +2,16 @@ package com.b_lam.resplash.ui.photo
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.data.photo.model.Photo
+import com.b_lam.resplash.databinding.ItemPhotoMinimalBinding
 import com.b_lam.resplash.util.getPhotoUrl
 import com.b_lam.resplash.util.loadPhotoUrlWithThumbnail
 import com.b_lam.resplash.util.setAspectRatio
-import kotlinx.android.synthetic.main.item_photo_minimal.view.*
 
 class MinimalPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+
+    private val binding: ItemPhotoMinimalBinding by viewBinding()
 
     fun bind(
         photo: Photo?,
@@ -16,15 +19,15 @@ class MinimalPhotoViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
         longPressDownload: Boolean,
         callback: PhotoAdapter.ItemEventCallback
     ) {
-        photo?.let {
-            with(itemView) {
+        with(binding) {
+            photo?.let {
                 val url = getPhotoUrl(photo, loadQuality)
-                photo_image_view.setAspectRatio(photo.width, photo.height)
-                photo_image_view.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color)
-                photo_image_view.setOnClickListener { callback.onPhotoClick(photo) }
+                photoImageView.setAspectRatio(photo.width, photo.height)
+                photoImageView.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color)
+                photoImageView.setOnClickListener { callback.onPhotoClick(photo) }
                 if (longPressDownload) {
-                    photo_image_view.setOnLongClickListener {
-                        callback.onLongClick(photo, check_animation_view)
+                    photoImageView.setOnLongClickListener {
+                        callback.onLongClick(photo, checkAnimationView)
                         true
                     }
                 }

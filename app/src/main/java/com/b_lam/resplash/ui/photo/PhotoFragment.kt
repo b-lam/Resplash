@@ -4,6 +4,7 @@ import android.Manifest
 import android.animation.Animator
 import android.content.Intent
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
@@ -18,7 +19,7 @@ import com.b_lam.resplash.util.download.DownloadManagerWrapper
 import com.b_lam.resplash.worker.DownloadWorker
 import org.koin.android.ext.android.inject
 
-abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo>() {
+abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo, RecyclerView.ViewHolder>() {
 
     abstract override val pagedListAdapter: PhotoAdapter
 

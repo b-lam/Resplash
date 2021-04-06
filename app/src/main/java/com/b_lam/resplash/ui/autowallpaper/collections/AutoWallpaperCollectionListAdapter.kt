@@ -21,9 +21,12 @@ class AutoWallpaperCollectionListAdapter(
     ): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return when (viewType) {
-            R.layout.item_auto_wallpaper_selected_collection -> SelectedAutoWallpaperCollectionViewHolder(view)
-            R.layout.item_auto_wallpaper_featured_collection -> FeaturedAutoWallpaperCollectionViewHolder(view)
-            R.layout.item_auto_wallpaper_popular_collection -> PopularAutoWallpaperCollectionViewHolder(view)
+            R.layout.item_auto_wallpaper_selected_collection ->
+                SelectedAutoWallpaperCollectionViewHolder(view)
+            R.layout.item_auto_wallpaper_featured_collection ->
+                FeaturedAutoWallpaperCollectionViewHolder(view)
+            R.layout.item_auto_wallpaper_popular_collection ->
+                PopularAutoWallpaperCollectionViewHolder(view)
             else -> throw IllegalArgumentException("Unknown view type $viewType")
         }
     }
@@ -32,11 +35,14 @@ class AutoWallpaperCollectionListAdapter(
         with(getItem(position)) {
             when (getItemViewType(position)) {
                 R.layout.item_auto_wallpaper_selected_collection ->
-                    (holder as SelectedAutoWallpaperCollectionViewHolder).bind(this, callback)
+                    (holder as SelectedAutoWallpaperCollectionViewHolder)
+                        .bind(this, callback)
                 R.layout.item_auto_wallpaper_featured_collection ->
-                    (holder as FeaturedAutoWallpaperCollectionViewHolder).bind(this, selectedCollectionIds, callback)
+                    (holder as FeaturedAutoWallpaperCollectionViewHolder)
+                        .bind(this, selectedCollectionIds, callback)
                 R.layout.item_auto_wallpaper_popular_collection ->
-                    (holder as PopularAutoWallpaperCollectionViewHolder).bind(this, selectedCollectionIds, callback)
+                    (holder as PopularAutoWallpaperCollectionViewHolder)
+                        .bind(this, selectedCollectionIds, callback)
             }
         }
     }

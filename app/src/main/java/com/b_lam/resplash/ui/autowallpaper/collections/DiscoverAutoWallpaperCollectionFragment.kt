@@ -4,25 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.autowallpaper.model.AutoWallpaperCollection
-import com.b_lam.resplash.ui.base.BaseFragment
+import com.b_lam.resplash.databinding.FragmentDiscoverAutoWallpaperCollectionBinding
 import com.b_lam.resplash.ui.collection.detail.CollectionDetailActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.showSnackBar
 import cz.intik.overflowindicator.SimpleSnapHelper
-import kotlinx.android.synthetic.main.fragment_discover_auto_wallpaper_collection.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DiscoverAutoWallpaperCollectionFragment :
-    BaseFragment(), AutoWallpaperCollectionListAdapter.ItemEventCallback {
-
-    override val layoutId = R.layout.fragment_discover_auto_wallpaper_collection
+    Fragment(R.layout.fragment_discover_auto_wallpaper_collection),
+    AutoWallpaperCollectionListAdapter.ItemEventCallback {
 
     private val sharedViewModel: AutoWallpaperCollectionViewModel by sharedViewModel()
+
+    private val binding: FragmentDiscoverAutoWallpaperCollectionBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,17 +31,17 @@ class DiscoverAutoWallpaperCollectionFragment :
         val featuredCollectionsAdapter =
             AutoWallpaperCollectionListAdapter(AutoWallpaperCollectionListAdapter.ItemType.FEATURED, this)
 
-        featured_collection_recycler_view.apply {
+        binding.featuredCollectionRecyclerView.apply {
             adapter = featuredCollectionsAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            page_indicator.attachToRecyclerView(this)
-            SimpleSnapHelper(page_indicator).attachToRecyclerView(this)
+            binding.pageIndicator.attachToRecyclerView(this)
+            SimpleSnapHelper(binding.pageIndicator).attachToRecyclerView(this)
         }
 
         val popularCollectionsAdapter =
             AutoWallpaperCollectionListAdapter(AutoWallpaperCollectionListAdapter.ItemType.POPULAR, this)
 
-        popular_collections_recycler_view.apply {
+        binding.popularCollectionsRecyclerView.apply {
             adapter = popularCollectionsAdapter
             layoutManager = LinearLayoutManager(context).apply {
                 addItemDecoration(SpacingItemDecoration(context, R.dimen.keyline_7))
@@ -52,7 +53,7 @@ class DiscoverAutoWallpaperCollectionFragment :
                 featuredCollectionsAdapter.submitList(it)
             }
             popularCollectionLiveData.observe(viewLifecycleOwner) {
-                popular_title_text_view.isVisible = it.isNotEmpty()
+                binding.popularTitleTextView.isVisible = it.isNotEmpty()
                 popularCollectionsAdapter.submitList(it)
             }
             selectedAutoWallpaperCollectionIds.observe(viewLifecycleOwner) {
@@ -71,12 +72,12 @@ class DiscoverAutoWallpaperCollectionFragment :
 
     override fun onAddClick(collection: AutoWallpaperCollection) {
         sharedViewModel.addAutoWallpaperCollection(collection)
-        root_container.showSnackBar(R.string.auto_wallpaper_collection_added)
+        binding.root.showSnackBar(R.string.auto_wallpaper_collection_added)
     }
 
     override fun onRemoveClick(id: Int) {
         sharedViewModel.removeAutoWallpaperCollection(id)
-        root_container.showSnackBar(R.string.auto_wallpaper_collection_removed)
+        binding.root.showSnackBar(R.string.auto_wallpaper_collection_removed)
     }
 
     companion object {

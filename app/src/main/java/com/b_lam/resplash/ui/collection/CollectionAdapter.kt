@@ -3,10 +3,8 @@ package com.b_lam.resplash.ui.collection
 import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.user.model.User
@@ -20,7 +18,7 @@ class CollectionAdapter(
     private val callback: ItemEventCallback,
     private val showUser: Boolean,
     sharedPreferencesRepository: SharedPreferencesRepository
-) : BasePagedListAdapter<Collection>(diffCallback) {
+) : BasePagedListAdapter<Collection, RecyclerView.ViewHolder>(diffCallback) {
 
     private val layout = sharedPreferencesRepository.layout
     private val loadQuality = sharedPreferencesRepository.loadQuality

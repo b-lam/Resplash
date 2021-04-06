@@ -2,18 +2,15 @@ package com.b_lam.resplash.ui.routing
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.b_lam.resplash.R
-import com.b_lam.resplash.ui.base.BaseActivity
-import com.b_lam.resplash.ui.base.BaseViewModel
 import com.b_lam.resplash.ui.collection.detail.CollectionDetailActivity
 import com.b_lam.resplash.ui.main.MainActivity
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.util.toast
 
-class RoutingActivity : BaseActivity() {
-
-    override val viewModel: BaseViewModel? = null
+class RoutingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

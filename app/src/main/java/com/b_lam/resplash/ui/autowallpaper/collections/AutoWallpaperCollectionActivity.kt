@@ -7,29 +7,32 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
+import com.b_lam.resplash.databinding.ActivityAutoWallpaperCollectionBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.util.setupActionBar
-import kotlinx.android.synthetic.main.activity_auto_wallpaper_collection.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AutoWallpaperCollectionActivity : BaseActivity() {
+class AutoWallpaperCollectionActivity : BaseActivity(R.layout.activity_auto_wallpaper_collection) {
 
     override val viewModel: AutoWallpaperCollectionViewModel by viewModel()
 
+    override val binding: ActivityAutoWallpaperCollectionBinding by viewBinding()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auto_wallpaper_collection)
 
         setupActionBar(R.id.toolbar) {
             title = getString(R.string.auto_wallpaper_source_collections)
             setDisplayHomeAsUpEnabled(true)
         }
 
-        val fragmentPagerAdapter = AutoWallpaperCollectionsFragmentPagerAdapter(this, supportFragmentManager)
-        view_pager.adapter = fragmentPagerAdapter
-        tab_layout.apply {
-            setupWithViewPager(view_pager)
+        val fragmentPagerAdapter =
+            AutoWallpaperCollectionsFragmentPagerAdapter(this, supportFragmentManager)
+        binding.viewPager.adapter = fragmentPagerAdapter
+        binding.tabLayout.apply {
+            setupWithViewPager(binding.viewPager)
             for (tabPosition in 0 until tabCount) {
                 getTabAt(tabPosition)?.setIcon(fragmentPagerAdapter.getPageIcon(tabPosition))
             }
