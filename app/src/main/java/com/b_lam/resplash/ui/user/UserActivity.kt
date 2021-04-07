@@ -18,7 +18,7 @@ import com.b_lam.resplash.databinding.ActivityUserBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.util.*
-import com.b_lam.resplash.util.customtabs.CustomTabsHelper
+import com.b_lam.resplash.util.CustomTabsHelper
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel

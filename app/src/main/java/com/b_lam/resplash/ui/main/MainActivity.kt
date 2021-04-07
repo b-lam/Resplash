@@ -31,7 +31,7 @@ import com.b_lam.resplash.ui.settings.SettingsActivity
 import com.b_lam.resplash.ui.upgrade.UpgradeActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.user.edit.EditProfileActivity
-import com.b_lam.resplash.util.customtabs.CustomTabsHelper
+import com.b_lam.resplash.util.CustomTabsHelper
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.loadPhotoUrl
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

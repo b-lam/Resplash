@@ -81,7 +81,7 @@ class SettingsActivity : BaseActivity(R.layout.activity_settings) {
 
             if (key == "language") {
                 activity?.finish()
-                activity?.overridePendingTransition( 0, 0);
+                activity?.overridePendingTransition( 0, 0)
                 startActivity(activity?.intent?.apply {
                     putExtra(EXTRA_SHOULD_RESTART, true)
                     addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

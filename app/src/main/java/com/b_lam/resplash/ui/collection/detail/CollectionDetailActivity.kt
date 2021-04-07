@@ -17,7 +17,7 @@ import com.b_lam.resplash.ui.base.BaseSwipeRecyclerViewFragment
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.user.UserCollectionFragment
 import com.b_lam.resplash.util.*
-import com.b_lam.resplash.util.customtabs.CustomTabsHelper
+import com.b_lam.resplash.util.CustomTabsHelper
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.livedata.observeOnce
 import com.b_lam.resplash.worker.AutoWallpaperWorker
