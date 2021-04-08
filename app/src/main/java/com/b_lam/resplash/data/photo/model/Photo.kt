@@ -5,7 +5,7 @@ import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.common.model.PhotoStatistics
 import com.b_lam.resplash.data.user.model.User
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
@@ -16,6 +16,7 @@ data class Photo(
     val width: Int?,
     val height: Int?,
     val color: String? = "#E0E0E0",
+    val blur_hash: String?,
     val views: Int?,
     val downloads: Int?,
     val likes: Int?,

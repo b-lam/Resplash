@@ -5,7 +5,7 @@ import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.photo.model.Tag
 import com.b_lam.resplash.data.user.model.User
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)

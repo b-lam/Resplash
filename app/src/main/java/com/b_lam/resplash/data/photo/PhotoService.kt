@@ -16,13 +16,6 @@ interface PhotoService {
         @Query("order_by") order_by: String?
     ): List<Photo>
 
-    @GET("collections/{id}/photos")
-    suspend fun getCollectionPhotos(
-        @Path("id") id: Int,
-        @Query("page") page: Int?,
-        @Query("per_page") per_page: Int?
-    ): List<Photo>
-
     @GET("photos/{id}")
     suspend fun getPhoto(
         @Path("id") id: String

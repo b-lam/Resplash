@@ -15,8 +15,7 @@ class CollectionDataSource(
 
     override suspend fun getPage(page: Int, perPage: Int): List<Collection> {
         return when (order) {
-            Order.ALL -> collectionService.getAllCollections(page, perPage)
-            Order.FEATURED -> collectionService.getFeaturedCollections(page, perPage)
+            Order.ALL -> collectionService.getCollections(page, perPage)
         }
     }
 
@@ -24,7 +23,6 @@ class CollectionDataSource(
 
         enum class Order(@StringRes val titleRes: Int, val value: String) {
             ALL(R.string.order_all, "all"),
-            FEATURED(R.string.order_featured, "featured")
         }
     }
 }

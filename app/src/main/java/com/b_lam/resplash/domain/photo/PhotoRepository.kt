@@ -1,5 +1,6 @@
 package com.b_lam.resplash.domain.photo
 
+import com.b_lam.resplash.data.collection.CollectionService
 import com.b_lam.resplash.data.photo.PhotoService
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.search.SearchService
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 
 class PhotoRepository(
     private val photoService: PhotoService,
+    private val collectionService: CollectionService,
     private val searchService: SearchService,
     private val userService: UserService,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -28,7 +30,7 @@ class PhotoRepository(
         collectionId: Int,
         scope: CoroutineScope
     ): Listing<Photo> {
-        return CollectionPhotoDataSourceFactory(photoService, collectionId, scope).createListing()
+        return CollectionPhotoDataSourceFactory(collectionService, collectionId, scope).createListing()
     }
 
     fun searchPhotos(

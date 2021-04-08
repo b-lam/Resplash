@@ -2,19 +2,14 @@ package com.b_lam.resplash.data.collection
 
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.collection.model.CollectionPhotoResult
+import com.b_lam.resplash.data.photo.model.Photo
 import retrofit2.Response
 import retrofit2.http.*
 
 interface CollectionService {
 
     @GET("collections")
-    suspend fun getAllCollections(
-        @Query("page") page: Int?,
-        @Query("per_page") per_page: Int?
-    ): List<Collection>
-
-    @GET("collections/featured")
-    suspend fun getFeaturedCollections(
+    suspend fun getCollections(
         @Query("page") page: Int?,
         @Query("per_page") per_page: Int?
     ): List<Collection>
@@ -23,6 +18,13 @@ interface CollectionService {
     suspend fun getCollection(
         @Path("id") id: Int
     ): Collection
+
+    @GET("collections/{id}/photos")
+    suspend fun getCollectionPhotos(
+        @Path("id") id: Int,
+        @Query("page") page: Int?,
+        @Query("per_page") per_page: Int?
+    ): List<Photo>
 
     @GET("collections/{id}/related")
     suspend fun getRelatedCollections(
