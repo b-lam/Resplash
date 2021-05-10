@@ -63,7 +63,7 @@ class DiscoverAutoWallpaperCollectionFragment :
         }
     }
 
-    override fun onCollectionClick(id: Int) {
+    override fun onCollectionClick(id: String) {
         Intent(context, CollectionDetailActivity::class.java).apply {
             putExtra(CollectionDetailActivity.EXTRA_COLLECTION_ID, id.toString())
             startActivity(this)
@@ -75,7 +75,7 @@ class DiscoverAutoWallpaperCollectionFragment :
         binding.root.showSnackBar(R.string.auto_wallpaper_collection_added)
     }
 
-    override fun onRemoveClick(id: Int) {
+    override fun onRemoveClick(id: String) {
         sharedViewModel.removeAutoWallpaperCollection(id)
         binding.root.showSnackBar(R.string.auto_wallpaper_collection_removed)
     }

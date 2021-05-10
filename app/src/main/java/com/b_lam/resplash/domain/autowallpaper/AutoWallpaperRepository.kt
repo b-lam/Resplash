@@ -49,14 +49,14 @@ class AutoWallpaperRepository(
         return autoWallpaperCollectionDao.getSelectedAutoWallpaperCollections()
     }
 
-    fun getSelectedAutoWallpaperCollectionIds(): LiveData<List<Int>> {
+    fun getSelectedAutoWallpaperCollectionIds(): LiveData<List<String>> {
         return autoWallpaperCollectionDao.getSelectedAutoWallpaperCollectionIds()
     }
 
     suspend fun removeCollectionFromAutoWallpaper(collection: Collection) =
         removeCollectionFromAutoWallpaper(collection.id)
 
-    suspend fun removeCollectionFromAutoWallpaper(id: Int) = withContext(Dispatchers.IO) {
+    suspend fun removeCollectionFromAutoWallpaper(id: String) = withContext(Dispatchers.IO) {
         autoWallpaperCollectionDao.delete(id)
     }
 
@@ -77,13 +77,13 @@ class AutoWallpaperRepository(
         )
     }
 
-    fun isCollectionUsedForAutoWallpaper(id: Int) =
+    fun isCollectionUsedForAutoWallpaper(id: String) =
         Transformations.map(autoWallpaperCollectionDao.getCountById(id)) { it > 0 }
 
     fun getNumberOfAutoWallpaperCollectionsLiveData() =
         autoWallpaperCollectionDao.getNumberOfAutoWallpaperCollectionsLiveData()
 
-    suspend fun getRandomAutoWallpaperCollectionId(): Int? {
+    suspend fun getRandomAutoWallpaperCollectionId(): String? {
         val count = autoWallpaperCollectionDao.getNumberOfAutoWallpaperCollections()
         return if (count > 0) {
             autoWallpaperCollectionDao.getRandomAutoWallpaperCollectionId((0 until count).random())

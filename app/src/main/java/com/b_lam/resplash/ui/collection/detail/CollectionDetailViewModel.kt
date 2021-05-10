@@ -40,13 +40,13 @@ class CollectionDetailViewModel(
     val networkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
     val refreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
 
-    fun getPhotoListing(collectionId: Int) {
+    fun getPhotoListing(collectionId: String) {
         photoListing.postValue(photoRepository.getCollectionPhotos(collectionId, viewModelScope))
     }
 
     fun refreshPhotos() = photoListing.value?.refresh?.invoke()
 
-    fun getCollection(collectionId: Int) {
+    fun getCollection(collectionId: String) {
         viewModelScope.launch {
             val result = collectionRepository.getCollection(collectionId)
             if (result is Result.Success) {
@@ -60,7 +60,7 @@ class CollectionDetailViewModel(
 
     fun isOwnCollection() = collectionLiveData.value?.user?.username == loginRepository.getUsername()
 
-    fun isCollectionUsedForAutoWallpaper(id: Int) =
+    fun isCollectionUsedForAutoWallpaper(id: String) =
         autoWallpaperRepository.isCollectionUsedForAutoWallpaper(id)
 
     fun addCollectionToAutoWallpaper() {

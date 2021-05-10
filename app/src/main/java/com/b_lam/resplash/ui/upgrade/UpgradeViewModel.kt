@@ -53,6 +53,6 @@ class UpgradeViewModel(
 
     companion object {
 
-        private const val RESPLASH_COLLECTION_ID = 10548247
+        private const val RESPLASH_COLLECTION_ID = "10548247"
     }
 }

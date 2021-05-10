@@ -34,8 +34,8 @@ class PhotoDetailViewModel(
         return@lazyMap liveData
     }
 
-    private val _currentUserCollectionIds = MutableLiveData<MutableList<Int>?>()
-    val currentUserCollectionIds: LiveData<MutableList<Int>?> = _currentUserCollectionIds
+    private val _currentUserCollectionIds = MutableLiveData<MutableList<String>?>()
+    val currentUserCollectionIds: LiveData<MutableList<String>?> = _currentUserCollectionIds
 
     private val _userCollections = MutableLiveData<MutableList<Collection>?>()
     val userCollections: LiveData<MutableList<Collection>?> = _userCollections
@@ -51,7 +51,7 @@ class PhotoDetailViewModel(
 
     fun isUserAuthorized() = loginRepository.isAuthorized()
 
-    fun addPhotoToCollection(collectionId: Int, photoId: String, position: Int) =
+    fun addPhotoToCollection(collectionId: String, photoId: String, position: Int) =
         liveData(viewModelScope.coroutineContext) {
             emit(Result.Loading)
 
@@ -69,7 +69,7 @@ class PhotoDetailViewModel(
             emit(result)
         }
 
-    fun removePhotoFromCollection(collectionId: Int, photoId: String, position: Int) =
+    fun removePhotoFromCollection(collectionId: String, photoId: String, position: Int) =
         liveData(viewModelScope.coroutineContext) {
             emit(Result.Loading)
 

@@ -75,8 +75,8 @@ class AddAutoWallpaperCollectionBottomSheet : BottomSheetDialogFragment() {
 
     private fun isCollectionUrlValid(url: String) = urlRegex matches url
 
-    private fun extractCollectionIdFromUrl(url: String): Int? {
-        return urlRegex.find(url)?.destructured?.let { (id) -> id.toInt() }
+    private fun extractCollectionIdFromUrl(url: String): String? {
+        return urlRegex.find(url)?.destructured?.let { (id) -> id }
     }
 
     companion object {

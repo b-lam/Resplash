@@ -12,7 +12,7 @@ class AddCollectionAdapter(
     private val callback: ItemEventCallback
 ) : ListAdapter<Collection, MiniCollectionViewHolder>(diffCallback) {
 
-    private var currentUserCollectionIds: List<Int>? = null
+    private var currentUserCollectionIds: List<String>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiniCollectionViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,7 +24,7 @@ class AddCollectionAdapter(
         holder.bind(getItem(position), currentUserCollectionIds, callback)
     }
 
-    fun setCurrentUserCollectionIds(currentUserCollectionIds: List<Int>?) {
+    fun setCurrentUserCollectionIds(currentUserCollectionIds: List<String>?) {
         this.currentUserCollectionIds = currentUserCollectionIds
     }
 

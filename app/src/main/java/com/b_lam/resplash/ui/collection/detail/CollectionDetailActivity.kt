@@ -42,7 +42,7 @@ class CollectionDetailActivity : BaseActivity(R.layout.activity_collection_detai
 
         when {
             collection != null -> viewModel.setCollection(collection)
-            collectionId != null -> viewModel.getCollection(collectionId.toInt())
+            collectionId != null -> viewModel.getCollection(collectionId)
             else -> finish()
         }
 

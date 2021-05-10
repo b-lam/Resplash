@@ -13,7 +13,7 @@ class AutoWallpaperCollectionListAdapter(
     private val callback: ItemEventCallback
 ) : ListAdapter<AutoWallpaperCollection, RecyclerView.ViewHolder>(diffCallback) {
 
-    private var selectedCollectionIds = listOf<Int>()
+    private var selectedCollectionIds = listOf<String>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -53,7 +53,7 @@ class AutoWallpaperCollectionListAdapter(
         ItemType.POPULAR -> R.layout.item_auto_wallpaper_popular_collection
     }
 
-    fun setSelectedCollectionIds(selectedCollectionIds: List<Int>) {
+    fun setSelectedCollectionIds(selectedCollectionIds: List<String>) {
         this.selectedCollectionIds = selectedCollectionIds
         notifyDataSetChanged()
     }
@@ -66,9 +66,9 @@ class AutoWallpaperCollectionListAdapter(
 
     interface ItemEventCallback {
 
-        fun onCollectionClick(id: Int)
+        fun onCollectionClick(id: String)
         fun onAddClick(collection: AutoWallpaperCollection)
-        fun onRemoveClick(id: Int)
+        fun onRemoveClick(id: String)
     }
 
     companion object {

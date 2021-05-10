@@ -49,7 +49,7 @@ class SelectedAutoWallpaperCollectionFragment :
         setEmptyStateText()
     }
 
-    override fun onCollectionClick(id: Int) {
+    override fun onCollectionClick(id: String) {
         Intent(context, CollectionDetailActivity::class.java).apply {
             putExtra(CollectionDetailActivity.EXTRA_COLLECTION_ID, id.toString())
             startActivity(this)
@@ -60,7 +60,7 @@ class SelectedAutoWallpaperCollectionFragment :
         // Do nothing
     }
 
-    override fun onRemoveClick(id: Int) {
+    override fun onRemoveClick(id: String) {
         sharedViewModel.removeAutoWallpaperCollection(id)
         binding.recyclerView.showSnackBar(R.string.auto_wallpaper_collection_removed)
     }

@@ -46,21 +46,21 @@ class CollectionRepository(
             userService.getUserCollections(username, page, Properties.DEFAULT_PAGE_SIZE)
         }
 
-    suspend fun getCollection(collectionId: Int) =
+    suspend fun getCollection(collectionId: String) =
         safeApiCall(dispatcher) { collectionService.getCollection(collectionId) }
 
     suspend fun createCollection(title: String, description: String?, private: Boolean?) =
         safeApiCall(dispatcher) { collectionService.createCollection(title, description, private) }
 
-    suspend fun updateCollection(id: Int, title: String, description: String?, private: Boolean?) =
+    suspend fun updateCollection(id: String, title: String, description: String?, private: Boolean?) =
         safeApiCall(dispatcher) { collectionService.updateCollection(id, title, description, private) }
 
-    suspend fun deleteCollection(id: Int): Result<Response<Unit>> =
+    suspend fun deleteCollection(id: String): Result<Response<Unit>> =
         safeApiCall(dispatcher) { collectionService.deleteCollection(id) }
 
-    suspend fun addPhotoToCollection(collectionId: Int, photoId: String) =
+    suspend fun addPhotoToCollection(collectionId: String, photoId: String) =
         safeApiCall(dispatcher) { collectionService.addPhotoToCollection(collectionId, photoId) }
 
-    suspend fun removePhotoFromCollection(collectionId: Int, photoId: String) =
+    suspend fun removePhotoFromCollection(collectionId: String, photoId: String) =
         safeApiCall(dispatcher) { collectionService.removePhotoFromCollection(collectionId, photoId) }
 }
