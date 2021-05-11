@@ -6,12 +6,13 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
+import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.ui.widget.AspectRatioImageView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import jp.wasabeef.glide.transformations.SupportRSBlurTransformation
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 const val CROSS_FADE_DURATION = 350
 
@@ -54,6 +55,16 @@ fun ImageView.loadPhotoUrlWithThumbnail(
         .clearOnDetach()
 }
 
+fun ImageView.loadPhotoWithBlurHash(
+    photo: Photo
+) {
+    if (photo.width != null && photo.height != null) {
+        setImageBitmap(
+            BlurHashDecoder.decode(photo.blur_hash, photo.width, photo.height, useCache = false)
+        )
+    }
+}
+
 fun ImageView.loadBlurredImage(
     url: String,
     color: String? = null,
@@ -64,7 +75,7 @@ fun ImageView.loadBlurredImage(
         .load(url)
         .transition(DrawableTransitionOptions.withCrossFade(CROSS_FADE_DURATION))
         .addListener(requestListener)
-        .apply(RequestOptions.bitmapTransform(SupportRSBlurTransformation()))
+        .apply(RequestOptions.bitmapTransform(BlurTransformation()))
         .into(this)
         .clearOnDetach()
 }
