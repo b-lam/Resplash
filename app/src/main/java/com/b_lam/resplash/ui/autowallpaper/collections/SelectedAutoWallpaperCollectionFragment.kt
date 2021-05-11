@@ -51,7 +51,7 @@ class SelectedAutoWallpaperCollectionFragment :
 
     override fun onCollectionClick(id: String) {
         Intent(context, CollectionDetailActivity::class.java).apply {
-            putExtra(CollectionDetailActivity.EXTRA_COLLECTION_ID, id.toString())
+            putExtra(CollectionDetailActivity.EXTRA_COLLECTION_ID, id)
             startActivity(this)
         }
     }

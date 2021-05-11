@@ -33,4 +33,8 @@ interface AutoWallpaperCollectionDao {
 
     @Query("DELETE FROM auto_wallpaper_collections WHERE id = :id")
     suspend fun delete(id: String)
+
+    // Used for testing
+    @Query("SELECT * FROM auto_wallpaper_collections WHERE id = :id")
+    fun getAutoWallpaperCollection(id: String): AutoWallpaperCollection
 }

@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey
 )
 data class AutoWallpaperCollection(
 
-    @PrimaryKey val id: String,
+    @PrimaryKey val id: String = "",
     val title: String? = null,
     val user_name: String? = null,
     val cover_photo: String? = null,

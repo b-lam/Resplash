@@ -40,19 +40,7 @@ class AutoWallpaperCollectionViewModel(
         } else {
             Source.CACHE
         }
-        autoWallpaperRepository
-            .getFeaturedCollections()
-            .get(source)
-            .addOnSuccessListener { documentSnapshot  ->
-                if (!documentSnapshot.metadata.isFromCache)
-                    sharedPreferencesRepository.lastFeaturedCollectionsFetch = System.currentTimeMillis()
-                documentSnapshot.toObject<AutoWallpaperCollectionDocument>()?.collections?.let {
-                    liveData.postValue(it)
-                }
-            }
-            .addOnFailureListener { exception ->
-                error("Error getting documents", exception)
-            }
+        getFeaturedCollections(source, liveData)
         return@lazy liveData
     }
     val featuredCollectionLiveData: LiveData<List<AutoWallpaperCollection>> = _featuredCollectionLiveData
@@ -64,19 +52,7 @@ class AutoWallpaperCollectionViewModel(
         } else {
             Source.CACHE
         }
-        autoWallpaperRepository
-            .getPopularCollections()
-            .get(source)
-            .addOnSuccessListener { documentSnapshot  ->
-                if (!documentSnapshot.metadata.isFromCache)
-                    sharedPreferencesRepository.lastPopularCollectionsFetch = System.currentTimeMillis()
-                documentSnapshot.toObject<AutoWallpaperCollectionDocument>()?.collections?.let {
-                    liveData.postValue(it)
-                }
-            }
-            .addOnFailureListener { exception ->
-                error("Error getting documents", exception)
-            }
+        getPopularCollections(source, liveData)
         return@lazy liveData
     }
     val popularCollectionLiveData: LiveData<List<AutoWallpaperCollection>> = _popularCollectionLiveData
@@ -103,11 +79,60 @@ class AutoWallpaperCollectionViewModel(
         }
     }
 
+    private fun getFeaturedCollections(
+        source: Source,
+        liveData: MutableLiveData<List<AutoWallpaperCollection>>,
+        retryCount: Int = 0
+    ) {
+        if (retryCount <= MAX_RETRIES) {
+            autoWallpaperRepository
+                .getFeaturedCollections()
+                .get(source)
+                .addOnSuccessListener { documentSnapshot ->
+                    if (!documentSnapshot.metadata.isFromCache)
+                        sharedPreferencesRepository.lastFeaturedCollectionsFetch =
+                            System.currentTimeMillis()
+                    documentSnapshot.toObject<AutoWallpaperCollectionDocument>()?.collections?.let {
+                        liveData.postValue(it)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    error("Error getting documents", exception)
+                    getFeaturedCollections(Source.SERVER, liveData, retryCount + 1)
+                }
+        }
+    }
+
+    private fun getPopularCollections(
+        source: Source,
+        liveData: MutableLiveData<List<AutoWallpaperCollection>>,
+        retryCount: Int = 0
+    ) {
+        if (retryCount <= MAX_RETRIES) {
+            autoWallpaperRepository
+                .getPopularCollections()
+                .get(source)
+                .addOnSuccessListener { documentSnapshot ->
+                    if (!documentSnapshot.metadata.isFromCache)
+                        sharedPreferencesRepository.lastPopularCollectionsFetch =
+                            System.currentTimeMillis()
+                    documentSnapshot.toObject<AutoWallpaperCollectionDocument>()?.collections?.let {
+                        liveData.postValue(it)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    error("Error getting documents", exception)
+                    getPopularCollections(Source.SERVER, liveData, retryCount + 1)
+                }
+        }
+    }
+
     private fun areSuggestedCollectionsStale(lastFetch: Long) =
         System.currentTimeMillis() - lastFetch > ONE_DAY
 
     companion object {
 
+        private const val MAX_RETRIES = 1
         private val ONE_DAY = TimeUnit.DAYS.toMillis(1)
     }
 }

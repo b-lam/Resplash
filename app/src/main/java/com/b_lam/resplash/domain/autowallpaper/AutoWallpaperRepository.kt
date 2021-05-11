@@ -93,8 +93,8 @@ class AutoWallpaperRepository(
     }
 
     fun getFeaturedCollections(): DocumentReference =
-        fireStore.document("/autowallpaper/featured")
+        fireStore.document("/autowallpaper/featured_v2")
 
     fun getPopularCollections(): DocumentReference =
-        fireStore.document("/autowallpaper/popular")
+        fireStore.document("/autowallpaper/popular_v2")
 }

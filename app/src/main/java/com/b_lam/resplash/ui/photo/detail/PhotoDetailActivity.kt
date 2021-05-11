@@ -32,7 +32,6 @@ import com.b_lam.resplash.ui.search.SearchActivity
 import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.*
-import com.b_lam.resplash.util.CustomTabsHelper
 import com.b_lam.resplash.util.download.*
 import com.b_lam.resplash.worker.DownloadWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
