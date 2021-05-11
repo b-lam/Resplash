@@ -12,13 +12,13 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdkVersion 30
-    buildToolsVersion '29.0.2'
+    buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId 'com.b_lam.resplash'
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 47
-        versionName '3.2.4'
+        versionCode 49
+        versionName '3.3.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField("String", "RELEASE_APP_ID", localProperties['releaseAppId'])
         buildConfigField("String", "RELEASE_SECRET", localProperties['releaseSecret'])
@@ -142,7 +142,7 @@ dependencies {
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // View binding
-    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.4'
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.6'
     
     // Lottie
     implementation 'com.airbnb.android:lottie:3.5.0'

@@ -84,7 +84,8 @@ class CollectionDetailViewModel(
             viewModelScope.launch {
                 val result = collectionRepository.updateCollection(it, title, description, private)
                 if (result is Result.Success) {
-                    _collectionLiveData.postValue(result.value)
+                    val collection = result.value
+                    _collectionLiveData.postValue(collection)
                 }
                 _updateCollectionResultLiveData.postValue(Event(result))
             }
