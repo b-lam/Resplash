@@ -14,10 +14,10 @@ interface AutoWallpaperCollectionDao {
     fun getSelectedAutoWallpaperCollections(): LiveData<List<AutoWallpaperCollection>>
 
     @Query("SELECT id FROM auto_wallpaper_collections")
-    fun getSelectedAutoWallpaperCollectionIds(): LiveData<List<Int>>
+    fun getSelectedAutoWallpaperCollectionIds(): LiveData<List<String>>
 
     @Query("SELECT id FROM auto_wallpaper_collections LIMIT 1 OFFSET :offset")
-    suspend fun getRandomAutoWallpaperCollectionId(offset: Int): Int?
+    suspend fun getRandomAutoWallpaperCollectionId(offset: Int): String?
 
     @Query("SELECT COUNT(*) FROM auto_wallpaper_collections")
     suspend fun getNumberOfAutoWallpaperCollections(): Int
@@ -26,11 +26,11 @@ interface AutoWallpaperCollectionDao {
     fun getNumberOfAutoWallpaperCollectionsLiveData(): LiveData<Int>
 
     @Query("SELECT COUNT(*) FROM auto_wallpaper_collections WHERE id = :id")
-    fun getCountById(id: Int): LiveData<Int>
+    fun getCountById(id: String): LiveData<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(collection: AutoWallpaperCollection)
 
     @Query("DELETE FROM auto_wallpaper_collections WHERE id = :id")
-    suspend fun delete(id: Int)
+    suspend fun delete(id: String)
 }

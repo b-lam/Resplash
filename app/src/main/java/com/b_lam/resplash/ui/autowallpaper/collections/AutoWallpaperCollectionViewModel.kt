@@ -87,13 +87,13 @@ class AutoWallpaperCollectionViewModel(
         }
     }
 
-    fun removeAutoWallpaperCollection(id: Int) {
+    fun removeAutoWallpaperCollection(id: String) {
         viewModelScope.launch {
             autoWallpaperRepository.removeCollectionFromAutoWallpaper(id)
         }
     }
 
-    fun getCollectionDetailsAndAdd(id: Int) {
+    fun getCollectionDetailsAndAdd(id: String) {
         viewModelScope.launch {
             val result = collectionRepository.getCollection(id)
             if (result is Result.Success) {

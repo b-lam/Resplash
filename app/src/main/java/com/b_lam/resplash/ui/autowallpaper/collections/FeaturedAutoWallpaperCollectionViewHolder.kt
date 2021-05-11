@@ -14,7 +14,7 @@ class FeaturedAutoWallpaperCollectionViewHolder(parent: View) : RecyclerView.Vie
 
     fun bind(
         collection: AutoWallpaperCollection?,
-        selectedCollectionIds: List<Int>,
+        selectedCollectionIds: List<String>,
         callback: AutoWallpaperCollectionListAdapter.ItemEventCallback
     ) {
         with(binding) {
@@ -23,7 +23,7 @@ class FeaturedAutoWallpaperCollectionViewHolder(parent: View) : RecyclerView.Vie
                 userNameTextView.text = itemView.context.getString(R.string.curated_by_template, collection.user_name)
                 collection.cover_photo?.let { collectionImageView.loadPhotoUrl(it) }
                 collectionCardView.setOnClickListener {
-                    collection.id?.let { id -> callback.onCollectionClick(id) }
+                    callback.onCollectionClick(collection.id)
                 }
                 val isCollectionSelected = selectedCollectionIds.contains(collection.id)
                 addButton.setImageResource(
@@ -35,7 +35,7 @@ class FeaturedAutoWallpaperCollectionViewHolder(parent: View) : RecyclerView.Vie
                 )
                 addButton.setOnClickListener {
                     if (isCollectionSelected) {
-                        collection.id?.let { id -> callback.onRemoveClick(id) }
+                        callback.onRemoveClick(collection.id)
                     } else {
                         callback.onAddClick(collection)
                     }

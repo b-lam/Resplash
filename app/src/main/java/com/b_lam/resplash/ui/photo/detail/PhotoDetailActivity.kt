@@ -243,7 +243,7 @@ class PhotoDetailActivity :
         )
     }
 
-    private fun setCollectButtonState(currentUserCollectionIds: List<Int>) {
+    private fun setCollectButtonState(currentUserCollectionIds: List<String>) {
         binding.collectButton.setImageResource(
             if (currentUserCollectionIds.isNotEmpty()) R.drawable.ic_bookmark_filled_24dp
             else R.drawable.ic_bookmark_border_24dp

@@ -10,7 +10,7 @@ import com.b_lam.resplash.data.autowallpaper.model.AutoWallpaperHistory
         AutoWallpaperHistory::class,
         AutoWallpaperCollection::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AutoWallpaperDatabase : RoomDatabase() {

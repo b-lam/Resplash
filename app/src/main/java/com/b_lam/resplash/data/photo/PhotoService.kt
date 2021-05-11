@@ -23,7 +23,7 @@ interface PhotoService {
 
     @GET("photos/random")
     suspend fun getRandomPhotos(
-        @Query("collections") collectionsId: Int?,
+        @Query("collections") collectionsId: String?,
         @Query("featured") featured: Boolean?,
         @Query("username") username: String?,
         @Query("query") query: String?,

@@ -20,10 +20,10 @@ class SelectedAutoWallpaperCollectionViewHolder(parent: View) : RecyclerView.Vie
                 collectionNameTextView.text = collection.title
                 collection.cover_photo?.let { collectionImageView.loadPhotoUrl(it) }
                 collectionCardView.setOnClickListener {
-                    collection.id?.let { id -> callback.onCollectionClick(id) }
+                    callback.onCollectionClick(collection.id)
                 }
                 removeButton.setOnClickListener {
-                    collection.id?.let { id -> callback.onRemoveClick(id) }
+                    callback.onRemoveClick(collection.id)
                 }
             }
         }

@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 
 class CollectionPhotoDataSource(
     private val collectionService: CollectionService,
-    private val collectionId: Int,
+    private val collectionId: String,
     scope: CoroutineScope
 ) : BaseDataSource<Photo>(scope) {
 

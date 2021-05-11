@@ -27,7 +27,7 @@ class PhotoRepository(
     }
 
     fun getCollectionPhotos(
-        collectionId: Int,
+        collectionId: String,
         scope: CoroutineScope
     ): Listing<Photo> {
         return CollectionPhotoDataSourceFactory(collectionService, collectionId, scope).createListing()
@@ -72,7 +72,7 @@ class PhotoRepository(
     suspend fun getPhotoDetails(id: String) = safeApiCall(dispatcher) { photoService.getPhoto(id) }
 
     suspend fun getRandomPhoto(
-        collectionId: Int? = null,
+        collectionId: String? = null,
         featured: Boolean? = false,
         username: String? = null,
         query: String? = null,
@@ -84,7 +84,7 @@ class PhotoRepository(
     }
 
     suspend fun getRandomPhotos(
-        collectionId: Int? = null,
+        collectionId: String? = null,
         featured: Boolean? = false,
         username: String? = null,
         query: String? = null,

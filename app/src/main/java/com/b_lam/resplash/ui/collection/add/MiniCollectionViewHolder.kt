@@ -17,7 +17,7 @@ class MiniCollectionViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
 
     fun bind(
         collection: Collection?,
-        currentUserCollectionIds: List<Int>?,
+        currentUserCollectionIds: List<String>?,
         callback: AddCollectionAdapter.ItemEventCallback
     ) {
         with(binding) {
