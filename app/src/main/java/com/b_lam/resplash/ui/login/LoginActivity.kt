@@ -22,6 +22,7 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
     private var customTabsClient: CustomTabsClient? = null
     private var customTabsSession: CustomTabsSession? = null
+    private var shouldUnbindCustomTabService = false
 
     private val customTabsServiceConnection = object : CustomTabsServiceConnection() {
         override fun onCustomTabsServiceConnected(
@@ -56,7 +57,10 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
     override fun onDestroy() {
         super.onDestroy()
-        unbindService(customTabsServiceConnection)
+        if (shouldUnbindCustomTabService) {
+            unbindService(customTabsServiceConnection)
+            shouldUnbindCustomTabService = false
+        }
         customTabsClient = null
         customTabsSession = null
     }
@@ -88,22 +92,24 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
     private fun setupCustomTabs() {
         CustomTabsHelper.getPackageNameToUse(this)?.let { customTabsPackageName ->
-            CustomTabsClient
-                .bindCustomTabsService(this, customTabsPackageName, customTabsServiceConnection)
-            customTabsClient?.warmup(0)
-            customTabsSession = customTabsClient?.newSession(CustomTabsCallback())?.apply {
-                mayLaunchUrl(
-                    Uri.parse(viewModel.loginUrl),
-                    null,
-                    mutableListOf(
-                        Bundle().apply {
-                            putParcelable(
-                                CustomTabsService.KEY_URL,
-                                Uri.parse(getString(R.string.unsplash_join_url))
-                            )
-                        }
+            if (CustomTabsClient.bindCustomTabsService(
+                    this, customTabsPackageName, customTabsServiceConnection)) {
+                shouldUnbindCustomTabService = true
+                customTabsClient?.warmup(0)
+                customTabsSession = customTabsClient?.newSession(CustomTabsCallback())?.apply {
+                    mayLaunchUrl(
+                        Uri.parse(viewModel.loginUrl),
+                        null,
+                        mutableListOf(
+                            Bundle().apply {
+                                putParcelable(
+                                    CustomTabsService.KEY_URL,
+                                    Uri.parse(getString(R.string.unsplash_join_url))
+                                )
+                            }
+                        )
                     )
-                )
+                }
             }
         }
     }
