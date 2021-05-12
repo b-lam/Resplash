@@ -126,9 +126,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     // Koin
-    implementation 'org.koin:koin-android:2.2.2'
-    implementation 'org.koin:koin-androidx-viewmodel:2.2.2'
-    implementation 'org.koin:koin-androidx-workmanager:2.2.2'
+    implementation 'io.insert-koin:koin-android:3.0.1'
+    implementation 'io.insert-koin:koin-android-ext:3.0.1'
+    implementation 'io.insert-koin:koin-androidx-workmanager:3.0.1'
 
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:18.0.3'

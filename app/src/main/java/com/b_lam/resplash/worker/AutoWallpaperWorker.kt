@@ -196,18 +196,6 @@ class AutoWallpaperWorker(
             photo.id, title, subtitle, photo.urls.thumb)
     }
 
-    class FutureAutoWallpaperWorker(
-        private val context: Context,
-        params: WorkerParameters,
-        private val sharedPreferencesRepository: SharedPreferencesRepository
-    ) : Worker(context, params) {
-
-        override fun doWork(): Result {
-            scheduleAutoWallpaperJob(context, sharedPreferencesRepository)
-            return Result.success()
-        }
-    }
-
     companion object {
 
         private const val AUTO_WALLPAPER_JOB_ID = "auto_wallpaper_job_id"
@@ -330,5 +318,17 @@ class AutoWallpaperWorker(
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_FUTURE_JOB_ID)
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_JOB_ID)
         }
+    }
+}
+
+class FutureAutoWallpaperWorker(
+    private val context: Context,
+    params: WorkerParameters,
+    private val sharedPreferencesRepository: SharedPreferencesRepository
+) : Worker(context, params) {
+
+    override fun doWork(): Result {
+        AutoWallpaperWorker.scheduleAutoWallpaperJob(context, sharedPreferencesRepository)
+        return Result.success()
     }
 }

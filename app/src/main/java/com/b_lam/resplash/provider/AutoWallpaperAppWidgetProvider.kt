@@ -11,11 +11,9 @@ import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
 import com.b_lam.resplash.util.toast
 import com.b_lam.resplash.worker.AutoWallpaperWorker
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 class AutoWallpaperAppWidgetProvider : AppWidgetProvider(), KoinComponent {
 
     override fun onReceive(context: Context?, intent: Intent?) {

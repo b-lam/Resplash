@@ -17,12 +17,10 @@ import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
 import com.b_lam.resplash.util.NotificationManager
 import com.b_lam.resplash.worker.AutoWallpaperWorker
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
 
-@KoinApiExtension
 @RequiresApi(Build.VERSION_CODES.N)
 class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
 
