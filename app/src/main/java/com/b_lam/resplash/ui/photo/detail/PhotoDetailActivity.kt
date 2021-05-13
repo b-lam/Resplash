@@ -274,7 +274,10 @@ class PhotoDetailActivity :
             } else {
                 viewModel.downloadUUID = DownloadWorker.enqueueDownload(
                     applicationContext,
-                    DownloadAction.DOWNLOAD, url, photo.fileName, photo.id
+                    DownloadAction.DOWNLOAD,
+                    url,
+                    photo.fileName,
+                    photo.id
                 )
             }
         } else {
