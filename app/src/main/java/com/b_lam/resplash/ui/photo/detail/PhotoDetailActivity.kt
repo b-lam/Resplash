@@ -37,6 +37,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.IOException
+import java.lang.Exception
 import java.util.concurrent.Executors
 
 class PhotoDetailActivity :
@@ -361,11 +363,20 @@ class PhotoDetailActivity :
 
     private fun setWallpaperWithBitmap(bitmap: Bitmap) {
         lifecycleScope.launch {
+            var isWallpaperSet = false
             withContext((Executors.newSingleThreadExecutor().asCoroutineDispatcher())) {
-                wallpaperManager.setBitmap(bitmap)
+                try {
+                    wallpaperManager.setBitmap(bitmap)
+                    isWallpaperSet = true
+                } catch (exception: IOException) {
+                    error("Error setting wallpaper bitmap: $exception")
+                }
             }
             withContext(Dispatchers.Main) {
-                this@PhotoDetailActivity.toast("Wallpaper set successfully")
+                val resultMessage = if (isWallpaperSet) {
+                    "Wallpaper set successfully"
+                } else "Error setting wallpaper"
+                this@PhotoDetailActivity.toast(resultMessage)
             }
         }
     }
