@@ -6,15 +6,13 @@ import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.updatePadding
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,8 +34,10 @@ import com.b_lam.resplash.util.download.*
 import com.b_lam.resplash.worker.DownloadWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.Executors
 
 class PhotoDetailActivity :
     BaseActivity(R.layout.activity_photo_detail), TagAdapter.ItemEventCallback {
@@ -51,6 +51,8 @@ class PhotoDetailActivity :
     private var downloadReceiver: BroadcastReceiver? = null
 
     private var snackbar: Snackbar? = null
+
+    private val wallpaperManager: WallpaperManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,10 +75,12 @@ class PhotoDetailActivity :
             photo != null -> id = photo.id
             photoId != null -> id = photoId
             else -> null
-        } ?.let {
+        }?.let {
             if (photo != null) setup(photo)
             viewModel.photoDetailsLiveData(id).observe(this) { photoDetails ->
-                if (photo == null) { setup(photoDetails) }
+                if (photo == null) {
+                    setup(photoDetails)
+                }
                 displayPhotoDetails(photoDetails)
             }
         } ?: run {
@@ -131,7 +135,12 @@ class PhotoDetailActivity :
 
     private fun setup(photo: Photo) {
         val url = getPhotoUrl(photo, sharedPreferencesRepository.loadQuality)
-        binding.photoImageView.loadPhotoUrlWithThumbnail(url, photo.urls.thumb, photo.color, centerCrop = true)
+        binding.photoImageView.loadPhotoUrlWithThumbnail(
+            url,
+            photo.urls.thumb,
+            photo.color,
+            centerCrop = true
+        )
         binding.photoImageView.setOnClickListener {
             Intent(this, PhotoZoomActivity::class.java).apply {
                 putExtra(PhotoZoomActivity.EXTRA_PHOTO_URL, url)
@@ -173,7 +182,13 @@ class PhotoDetailActivity :
         likesCountTextView.text = (photo.likes ?: 0).toPrettyString()
         tagRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
-                addItemDecoration(SpacingItemDecoration(context, R.dimen.keyline_6, RecyclerView.HORIZONTAL))
+                addItemDecoration(
+                    SpacingItemDecoration(
+                        context,
+                        R.dimen.keyline_6,
+                        RecyclerView.HORIZONTAL
+                    )
+                )
             }
             adapter = TagAdapter(this@PhotoDetailActivity).apply { submitList(photo.tags) }
         }
@@ -257,8 +272,10 @@ class PhotoDetailActivity :
                 val downloadManagerWrapper: DownloadManagerWrapper by inject()
                 viewModel.downloadId = downloadManagerWrapper.downloadPhoto(url, photo.fileName)
             } else {
-                viewModel.downloadUUID = DownloadWorker.enqueueDownload(applicationContext,
-                    DownloadAction.DOWNLOAD, url, photo.fileName, photo.id)
+                viewModel.downloadUUID = DownloadWorker.enqueueDownload(
+                    applicationContext,
+                    DownloadAction.DOWNLOAD, url, photo.fileName, photo.id
+                )
             }
         } else {
             requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, requestCode = 0)
@@ -272,12 +289,18 @@ class PhotoDetailActivity :
                 val downloadManagerWrapper: DownloadManagerWrapper by inject()
                 viewModel.downloadId = downloadManagerWrapper.downloadWallpaper(url, photo.fileName)
             } else {
-                viewModel.downloadUUID = DownloadWorker.enqueueDownload(applicationContext,
-                    DownloadAction.WALLPAPER, url, photo.fileName, photo.id)
+                viewModel.downloadUUID = DownloadWorker.enqueueDownload(
+                    applicationContext,
+                    DownloadAction.WALLPAPER, url, photo.fileName, photo.id
+                )
             }
 
             snackbar = Snackbar
-                .make(binding.coordinatorLayout, R.string.setting_wallpaper, Snackbar.LENGTH_INDEFINITE)
+                .make(
+                    binding.coordinatorLayout,
+                    R.string.setting_wallpaper,
+                    Snackbar.LENGTH_INDEFINITE
+                )
                 .setAction(R.string.cancel) { cancelDownload() }
                 .setActionTextColor(ContextCompat.getColor(this, R.color.red_400))
                 .setAnchorView(R.id.set_as_wallpaper_button)
@@ -298,7 +321,10 @@ class PhotoDetailActivity :
                     applyWallpaper(it)
                 }
                 STATUS_FAILED ->
-                    binding.coordinatorLayout.showSnackBar(R.string.oops, anchor = R.id.set_as_wallpaper_button)
+                    binding.coordinatorLayout.showSnackBar(
+                        R.string.oops,
+                        anchor = R.id.set_as_wallpaper_button
+                    )
             }
         } else if (action == DownloadAction.DOWNLOAD) {
             when (status) {
@@ -310,22 +336,30 @@ class PhotoDetailActivity :
 
     private fun applyWallpaper(uri: Uri) {
         try {
-            startActivity(WallpaperManager.getInstance(this).getCropAndSetWallpaperIntent(uri))
+            startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
         } catch (e: IllegalArgumentException) {
-            var bitmap: Bitmap? = null
-            try {
-                bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
-                } else {
-                    MediaStore.Images.Media.getBitmap(contentResolver, uri)
-                }
-                WallpaperManager.getInstance(applicationContext).setBitmap(bitmap)
-                toast("Wallpaper set successfully")
-            } catch (e: Exception) {
-                error("Error setting wallpaper", e)
+            viewModel.prepareBitmapFromUri(contentResolver, uri)
+            observerWallpaperBitmapResult()
+        }
+    }
+
+    private fun observerWallpaperBitmapResult() {
+        viewModel.wallpaperBitmap.observe(this) { result ->
+            if (result is Result.Success) {
+                setWallpaperWithBitmap(result.value)
+            } else {
                 toast("Failed to set wallpaper")
-            } finally {
-                bitmap?.recycle()
+            }
+        }
+    }
+
+    private fun setWallpaperWithBitmap(bitmap: Bitmap) {
+        lifecycleScope.launch {
+            withContext((Executors.newSingleThreadExecutor().asCoroutineDispatcher())) {
+                wallpaperManager.setBitmap(bitmap)
+            }
+            withContext(Dispatchers.Main) {
+                this@PhotoDetailActivity.toast("Wallpaper set successfully")
             }
         }
     }
