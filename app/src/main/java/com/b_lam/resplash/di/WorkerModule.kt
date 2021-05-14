@@ -1,5 +1,6 @@
 package com.b_lam.resplash.di
 
+import androidx.work.WorkerParameters
 import com.b_lam.resplash.worker.AutoWallpaperWorker
 import com.b_lam.resplash.worker.DownloadWorker
 import com.b_lam.resplash.worker.FutureAutoWallpaperWorker
@@ -9,8 +10,37 @@ import org.koin.dsl.module
 
 val workerModule = module {
 
-    worker { AutoWallpaperWorker(get(), get(), get(), get(), get(), get()) }
-    worker { FutureAutoWallpaperWorker(get(), get(), get()) }
-    worker { DownloadWorker(get(), get(), get(), get()) }
-    worker { MuzeiWorker(get(), get(), get(), get()) }
+    worker { (workerParams: WorkerParameters) ->
+        AutoWallpaperWorker(
+            context = get(),
+            params = workerParams,
+            photoRepository = get(),
+            autoWallpaperRepository = get(),
+            downloadService = get(),
+            notificationManager = get()
+        )
+    }
+    worker { (workerParams: WorkerParameters) ->
+        FutureAutoWallpaperWorker(
+            context = get(),
+            params = workerParams,
+            sharedPreferencesRepository = get()
+        )
+    }
+    worker { (workerParams: WorkerParameters) ->
+        DownloadWorker(
+            context = get(),
+            params = workerParams,
+            downloadService = get(),
+            notificationManager = get()
+        )
+    }
+    worker { (workerParams: WorkerParameters) ->
+        MuzeiWorker(
+            context = get(),
+            params = workerParams,
+            photoRepository = get(),
+            autoWallpaperRepository = get()
+        )
+    }
 }

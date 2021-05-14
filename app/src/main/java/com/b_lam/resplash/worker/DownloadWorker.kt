@@ -28,10 +28,10 @@ import java.util.*
 
 class DownloadWorker(
     private val context: Context,
-    parameters: WorkerParameters,
+    params: WorkerParameters,
     private val downloadService: DownloadService,
     private val notificationManager: NotificationManager
-) : CoroutineWorker(context, parameters) {
+) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
         val url = inputData.getString(KEY_INPUT_URL) ?: return Result.failure()
