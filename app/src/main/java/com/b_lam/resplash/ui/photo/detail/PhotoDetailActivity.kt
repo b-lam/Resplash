@@ -38,7 +38,6 @@ import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
-import java.lang.Exception
 import java.util.concurrent.Executors
 
 class PhotoDetailActivity :
@@ -347,11 +346,11 @@ class PhotoDetailActivity :
             startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
         } catch (e: IllegalArgumentException) {
             viewModel.prepareBitmapFromUri(contentResolver, uri)
-            observerWallpaperBitmapResult()
+            observeWallpaperBitmapResult()
         }
     }
 
-    private fun observerWallpaperBitmapResult() {
+    private fun observeWallpaperBitmapResult() {
         viewModel.wallpaperBitmap.observe(this) { result ->
             if (result is Result.Success) {
                 setWallpaperWithBitmap(result.value)
@@ -364,7 +363,7 @@ class PhotoDetailActivity :
     private fun setWallpaperWithBitmap(bitmap: Bitmap) {
         lifecycleScope.launch {
             var isWallpaperSet = false
-            withContext((Executors.newSingleThreadExecutor().asCoroutineDispatcher())) {
+            withContext(Executors.newSingleThreadExecutor().asCoroutineDispatcher()) {
                 try {
                     wallpaperManager.setBitmap(bitmap)
                     isWallpaperSet = true
@@ -375,7 +374,9 @@ class PhotoDetailActivity :
             withContext(Dispatchers.Main) {
                 val resultMessage = if (isWallpaperSet) {
                     "Wallpaper set successfully"
-                } else "Error setting wallpaper"
+                } else  {
+                    "Error setting wallpaper"
+                }
                 this@PhotoDetailActivity.toast(resultMessage)
             }
         }
