@@ -31,6 +31,7 @@ import com.b_lam.resplash.ui.user.UserActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
 import com.b_lam.resplash.util.*
 import com.b_lam.resplash.util.download.*
+import com.b_lam.resplash.util.livedata.observeOnce
 import com.b_lam.resplash.worker.DownloadWorker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -351,7 +352,7 @@ class PhotoDetailActivity :
     }
 
     private fun observeWallpaperBitmapResult() {
-        viewModel.wallpaperBitmap.observe(this) { result ->
+        viewModel.wallpaperBitmap.observeOnce(this) { result ->
             if (result is Result.Success) {
                 setWallpaperWithBitmap(result.value)
             } else {
