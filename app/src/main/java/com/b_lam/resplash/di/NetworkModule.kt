@@ -5,6 +5,7 @@ import com.b_lam.resplash.data.collection.CollectionService
 import com.b_lam.resplash.data.download.DownloadService
 import com.b_lam.resplash.data.photo.PhotoService
 import com.b_lam.resplash.data.search.SearchService
+import com.b_lam.resplash.data.topic.TopicService
 import com.b_lam.resplash.data.user.UserService
 import com.b_lam.resplash.domain.login.AccessTokenInterceptor
 import com.b_lam.resplash.domain.login.AccessTokenProvider
@@ -30,6 +31,7 @@ val networkModule = module {
     factory { createConverterFactory() }
     factory { createService<PhotoService>(get(), get()) }
     factory { createService<CollectionService>(get(), get()) }
+    factory { createService<TopicService>(get(), get()) }
     factory { createService<UserService>(get(), get()) }
     factory { createService<SearchService>(get(), get()) }
     factory { createService<AuthorizationService>(get(), get(), UNSPLASH_BASE_URL) }

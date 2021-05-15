@@ -13,6 +13,7 @@
     <string name="cancel">Cancel</string>
     <string name="search">Search</string>
     <string name="photos">Photos</string>
+    <string name="topics">Topics</string>
     <string name="collections">Collections</string>
     <string name="like">Like</string>
     <string name="users">Users</string>
@@ -218,6 +219,10 @@
     <string name="edit_collection">Edit collection</string>
     <string name="curated_by_template">Curated by %s</string>
     <string name="bullet_template" translatable="false">%s \u2022 %s</string>
+
+    <!-- Topics -->
+    <string name="topic_status_open">Open</string>
+    <string name="topic_status_closed">Closed</string>
 
     <!-- User -->
     <string name="username_template" translatable="false">\@%s</string>

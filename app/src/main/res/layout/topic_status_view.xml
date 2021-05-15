@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/keyline_5"
+    android:background="@drawable/topic_status_background"
+    android:drawablePadding="@dimen/keyline_5"
+    android:textSize="12sp"
+    android:textColor="@color/black"
+    app:drawableStartCompat="@drawable/topic_status_dot"
+    app:drawableTintMode="src_atop"
+    tools:text="Open" />

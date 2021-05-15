@@ -9,6 +9,8 @@ import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoDataSource
 import com.b_lam.resplash.domain.photo.PhotoRepository
+import com.b_lam.resplash.domain.topic.TopicDataSource
+import com.b_lam.resplash.domain.topic.TopicRepository
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
 import kotlinx.coroutines.launch
@@ -16,6 +18,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(
     private val photoRepository: PhotoRepository,
     private val collectionRepository: CollectionRepository,
+    private val topicRepository: TopicRepository,
     private val loginRepository: LoginRepository,
     private val billingRepository: BillingRepository
 ) : ViewModel() {
@@ -47,6 +50,9 @@ class MainViewModel(
     private val _collectionOrderLiveData = MutableLiveData(CollectionDataSource.Companion.Order.ALL)
     val collectionOrderLiveData: LiveData<CollectionDataSource.Companion.Order> = _collectionOrderLiveData
 
+    private val _topicOrderLiveData = MutableLiveData(TopicDataSource.Companion.Order.POSITION)
+    val topicOrderLiveData: LiveData<TopicDataSource.Companion.Order> = _topicOrderLiveData
+
     private val photoListing: LiveData<Listing<Photo>> = Transformations.map(_photoOrderLiveData) {
         photoRepository.getPhotos(it, viewModelScope)
     }
@@ -60,6 +66,13 @@ class MainViewModel(
     val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagedList }
     val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it.networkState }
     val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) { it.refreshState }
+
+    private val topicListing = Transformations.map(_topicOrderLiveData) {
+        topicRepository.getTopics(it, viewModelScope)
+    }
+    val topicsLiveData = Transformations.switchMap(topicListing) { it.pagedList }
+    val topicsNetworkStateLiveData = Transformations.switchMap(topicListing) { it.networkState }
+    val topicsRefreshStateLiveData = Transformations.switchMap(topicListing) { it.refreshState }
 
     fun refreshPhotos() = photoListing.value?.refresh?.invoke()
 

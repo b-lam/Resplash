@@ -280,4 +280,9 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="green_overlay">#A6145A00</color>
+
+    <color name="topic_status_open_background">#C2EBD3</color>
+    <color name="topic_status_open_dot">#3CB46E</color>
+    <color name="topic_status_closed_background">#EF9A9A</color>
+    <color name="topic_status_closed_dot">#F44336</color>
 </resources>

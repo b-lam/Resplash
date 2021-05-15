@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -60,7 +61,10 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
             val fragmentPagerAdapter =
                 MainFragmentPagerAdapter(this@MainActivity, supportFragmentManager)
-            viewPager.adapter = fragmentPagerAdapter
+            viewPager.apply {
+                adapter = fragmentPagerAdapter
+                offscreenPageLimit = 2
+            }
             tabLayout.apply {
                 setupWithViewPager(viewPager)
                 addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -241,9 +245,10 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
         private val fragmentTags = SparseArray<String>()
 
-        enum class MainFragment(val titleRes: Int) {
+        enum class MainFragment(@StringRes val titleRes: Int) {
             HOME(R.string.home),
-            COLLECTION(R.string.collections)
+            COLLECTION(R.string.collections),
+            TOPIC(R.string.topics)
         }
 
         fun getFragment(position: Int) =
@@ -255,6 +260,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             return when (getItemType(position)) {
                 MainFragment.HOME -> MainPhotoFragment.newInstance()
                 MainFragment.COLLECTION -> MainCollectionFragment.newInstance()
+                MainFragment.TOPIC -> MainTopicFragment.newInstance()
             }
         }
 

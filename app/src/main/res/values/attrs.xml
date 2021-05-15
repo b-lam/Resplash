@@ -5,7 +5,6 @@
     <attr name="alphaEmphasisMedium" format="float"/>
     <attr name="alphaEmphasisDisabled" format="float"/>
 
-    <!--Expandable CardView-->
     <declare-styleable name="ExpandableCardView">
         <attr name="header_view" format="reference"/>
         <attr name="content_view" format="reference"/>
@@ -13,4 +12,10 @@
         <attr name="animation_duration" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="TopicStatusView">
+        <attr name="status" format="enum">
+            <enum name="open" value="0" />
+            <enum name="closed" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

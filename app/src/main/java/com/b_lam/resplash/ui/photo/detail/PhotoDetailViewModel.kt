@@ -30,8 +30,7 @@ class PhotoDetailViewModel(
     private val _photoDetailsLiveData: Map<String, LiveData<Photo>> = lazyMap {
         val liveData = MutableLiveData<Photo>()
         viewModelScope.launch {
-            val result = photoRepository.getPhotoDetails(it)
-            when (result) {
+            when (val result = photoRepository.getPhotoDetails(it)) {
                 is Result.Success -> {
                     liveData.postValue(result.value)
                     _currentUserCollectionIds.postValue(
