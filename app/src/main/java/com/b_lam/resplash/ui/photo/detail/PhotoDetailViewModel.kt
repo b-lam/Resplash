@@ -1,5 +1,11 @@
 package com.b_lam.resplash.ui.photo.detail
 
+import android.content.ContentResolver
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import androidx.lifecycle.*
 import com.b_lam.resplash.data.collection.model.Collection
 import com.b_lam.resplash.data.photo.model.Photo
@@ -8,9 +14,11 @@ import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.util.Result
+import com.b_lam.resplash.util.error
 import com.b_lam.resplash.util.livedata.lazyMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class PhotoDetailViewModel(
@@ -39,6 +47,9 @@ class PhotoDetailViewModel(
 
     private val _userCollections = MutableLiveData<MutableList<Collection>?>()
     val userCollections: LiveData<MutableList<Collection>?> = _userCollections
+
+    private val _wallpaperBitmap = MutableLiveData<Result<Bitmap>>()
+    val wallpaperBitmap: LiveData<Result<Bitmap>> = _wallpaperBitmap
 
     var downloadId: Long? = null
     var downloadUUID: UUID? = null
@@ -142,6 +153,36 @@ class PhotoDetailViewModel(
         }
 
         emit(createResult)
+    }
+
+    fun prepareBitmapFromUri(
+        contentResolver: ContentResolver,
+        uri: Uri
+    ) {
+        viewModelScope.launch {
+            val bitmapResult = decodeBitmap(contentResolver, uri)
+            _wallpaperBitmap.postValue(bitmapResult)
+        }
+    }
+
+    private suspend fun decodeBitmap(
+        contentResolver: ContentResolver,
+        uri: Uri
+    ): Result<Bitmap> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, uri))
+                } else {
+                    MediaStore.Images.Media.getBitmap(contentResolver, uri)
+                }
+                Result.Success(bitmap)
+            } catch (e: Exception) {
+                val message = "Error decoding bitmap"
+                error(message, e)
+                Result.Error(error = message)
+            }
+        }
     }
 }
 
