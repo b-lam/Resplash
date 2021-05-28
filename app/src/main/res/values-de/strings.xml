@@ -275,4 +275,6 @@
     <string name="developer_title">Entwickler</string>
     <string name="privacy_policy">Datenschutzerklärung</string>
     <string name="terms_and_conditions">Allgemeine Geschäftsbedingungen</string>
+    <string name="auto_wallpaper_persist_notification_title">Benachrichtigung beibehalten</string>
+    <string name="auto_wallpaper_persist_notification_summary">Zeigen Sie immer die aktuelle Hintergrundbenachrichtigung an</string>
 </resources>

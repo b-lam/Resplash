@@ -276,4 +276,6 @@
     <string name="developer_title">Аутор</string>
     <string name="privacy_policy">Правила о приватности</string>
     <string name="terms_and_conditions">Услови</string>
+    <string name="auto_wallpaper_persist_notification_title">Упорно обавештавање</string>
+    <string name="auto_wallpaper_persist_notification_summary">Увек прикажи тренутно обавештење о позадини</string>
 </resources>

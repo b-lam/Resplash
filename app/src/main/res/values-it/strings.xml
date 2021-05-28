@@ -275,4 +275,6 @@
     <string name="developer_title">Autore</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_and_conditions">Termini e Condizioni</string>
+    <string name="auto_wallpaper_persist_notification_title">Notifica persistente</string>
+    <string name="auto_wallpaper_persist_notification_summary">Mostra sempre la notifica dello sfondo corrente</string>
 </resources>

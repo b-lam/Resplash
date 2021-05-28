@@ -274,4 +274,6 @@
     <string name="developer_title">Pembuat</string>
     <string name="privacy_policy">Kebijakan Privasi</string>
     <string name="terms_and_conditions">Syarat dan ketentuan</string>
+    <string name="auto_wallpaper_persist_notification_title">Pemberitahuan Tetap</string>
+    <string name="auto_wallpaper_persist_notification_summary">Selalu tampilkan notifikasi wallpaper saat ini</string>
 </resources>
