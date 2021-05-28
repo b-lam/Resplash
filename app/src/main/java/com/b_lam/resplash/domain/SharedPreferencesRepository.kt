@@ -99,6 +99,11 @@ class SharedPreferencesRepository(context: Context) {
             PREFERENCE_AUTO_WALLPAPER_SHOW_NOTIFICATION_KEY,
             PREFERENCE_AUTO_WALLPAPER_SHOW_NOTIFICATION_DEFAULT_VALUE)
 
+    val autoWallpaperPersistNotification: Boolean
+        get() = sharedPreferences.getBoolean(
+            PREFERENCE_AUTO_WALLPAPER_PERSIST_NOTIFICATION_KEY,
+            PREFERENCE_AUTO_WALLPAPER_PERSIST_NOTIFICATION_DEFAULT_VALUE)
+
     val autoWallpaperPortraitModeOnly: Boolean
         get() = sharedPreferences.getBoolean(
             PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_KEY,
@@ -228,6 +233,9 @@ class SharedPreferencesRepository(context: Context) {
 
         private const val PREFERENCE_AUTO_WALLPAPER_SHOW_NOTIFICATION_KEY = "auto_wallpaper_show_notification"
         private const val PREFERENCE_AUTO_WALLPAPER_SHOW_NOTIFICATION_DEFAULT_VALUE = true
+
+        private const val PREFERENCE_AUTO_WALLPAPER_PERSIST_NOTIFICATION_KEY = "auto_wallpaper_persist_notification"
+        private const val PREFERENCE_AUTO_WALLPAPER_PERSIST_NOTIFICATION_DEFAULT_VALUE = true
 
         private const val PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_KEY = "auto_wallpaper_portrait_mode_only"
         private const val PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_DEFAULT_VALUE = false

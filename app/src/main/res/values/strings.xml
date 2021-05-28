@@ -159,6 +159,8 @@
     <string name="auto_wallpaper_crop_center_crop">Center (Crop)</string>
     <string name="auto_wallpaper_notification_settings_title">Notification Settings</string>
     <string name="auto_wallpaper_show_notification_title">Show Notification</string>
+    <string name="auto_wallpaper_persist_notification_title">Persist Notification</string>
+    <string name="auto_wallpaper_persist_notification_summary">Always show the current wallpaper notification</string>
     <string name="auto_wallpaper_show_notification_summary">Get a notification with the current wallpaper info</string>
     <string name="auto_wallpaper_portrait_mode_only_title">Device Orientation Fix</string>
     <string name="auto_wallpaper_portrait_mode_only_summary">Some devices will crop the wallpaper incorrectly if it is set while the device is in landscape mode, checking this will reschedule the task until the device is in portrait mode</string>

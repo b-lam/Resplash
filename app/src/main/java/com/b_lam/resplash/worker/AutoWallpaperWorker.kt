@@ -193,7 +193,12 @@ class AutoWallpaperWorker(
         val title = photo.description ?: photo.alt_description?.capitalize() ?: "Untitled"
         val subtitle = photo.user?.name
         notificationManager.showNewAutoWallpaperNotification(
-            photo.id, title, subtitle, photo.urls.thumb)
+            photo.id,
+            title,
+            subtitle,
+            photo.urls.thumb,
+            inputData.getBoolean(KEY_AUTO_WALLPAPER_PERSIST_NOTIFICATION, false)
+        )
     }
 
     companion object {
@@ -209,6 +214,7 @@ class AutoWallpaperWorker(
         private const val KEY_AUTO_WALLPAPER_SEARCH_TERMS = "key_auto_wallpaper_search_terms"
         private const val KEY_AUTO_WALLPAPER_CROP = "key_auto_wallpaper_crop"
         private const val KEY_AUTO_WALLPAPER_SHOW_NOTIFICATION = "key_auto_wallpaper_show_notification"
+        private const val KEY_AUTO_WALLPAPER_PERSIST_NOTIFICATION = "key_auto_wallpaper_persist_notification"
         private const val KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY = "key_auto_wallpaper_portrait_mode_only"
         private const val KEY_AUTO_WALLPAPER_SELECT_SCREEN = "key_auto_wallpaper_select_screen"
         private const val KEY_AUTO_WALLPAPER_ORIENTATION = "key_auto_wallpaper_orientation"
@@ -307,6 +313,7 @@ class AutoWallpaperWorker(
             KEY_AUTO_WALLPAPER_SEARCH_TERMS to sharedPreferencesRepository.autoWallpaperSearchTerms,
             KEY_AUTO_WALLPAPER_CROP to sharedPreferencesRepository.autoWallpaperCrop,
             KEY_AUTO_WALLPAPER_SHOW_NOTIFICATION to sharedPreferencesRepository.autoWallpaperShowNotification,
+            KEY_AUTO_WALLPAPER_PERSIST_NOTIFICATION to sharedPreferencesRepository.autoWallpaperPersistNotification,
             KEY_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY to sharedPreferencesRepository.autoWallpaperPortraitModeOnly,
             KEY_AUTO_WALLPAPER_SELECT_SCREEN to sharedPreferencesRepository.autoWallpaperSelectScreen,
             KEY_AUTO_WALLPAPER_ORIENTATION to sharedPreferencesRepository.autoWallpaperOrientation,

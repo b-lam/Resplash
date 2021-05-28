@@ -94,6 +94,12 @@
             app:summary="@string/auto_wallpaper_show_notification_summary"
             app:defaultValue="true" />
 
+        <CheckBoxPreference
+            app:key="auto_wallpaper_persist_notification"
+            app:title="@string/auto_wallpaper_persist_notification_title"
+            app:summary="@string/auto_wallpaper_persist_notification_summary"
+            app:defaultValue="false" />
+
         <ListPreference
             app:key="auto_wallpaper_crop"
             app:title="@string/auto_wallpaper_crop_title"

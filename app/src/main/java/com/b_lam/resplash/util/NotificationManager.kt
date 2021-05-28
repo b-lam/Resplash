@@ -111,7 +111,8 @@ class NotificationManager(private val context: Context) {
         id: String,
         title: String?,
         subtitle: String?,
-        previewUrl: String?
+        previewUrl: String?,
+        persist: Boolean?
     ) {
         val builder = NotificationCompat.Builder(context, NEW_AUTO_WALLPAPER_CHANNEL_ID).apply {
             priority = NotificationCompat.PRIORITY_MIN
@@ -126,6 +127,7 @@ class NotificationManager(private val context: Context) {
                 GlideApp.with(context).clear(futureTarget)
             }
         }
+        builder.setOngoing(persist == true)
         notificationManager.notify(NEW_AUTO_WALLPAPER_NOTIFICATION_ID, builder.build())
     }
 
