@@ -25,7 +25,7 @@ class AddAutoWallpaperCollectionBottomSheet : BottomSheetDialogFragment() {
 
     private val binding: BottomSheetAddAutoWallpaperCollectionBinding by viewBinding(CreateMethod.INFLATE)
 
-    private val urlRegex = """https://unsplash.com/collections/(\d+).*""".toRegex()
+    private val urlRegex = """https://unsplash.com/collections/(\w+).*""".toRegex()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val bottomSheetDialog = super.onCreateDialog(savedInstanceState)
