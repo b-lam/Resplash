@@ -235,7 +235,7 @@ class SharedPreferencesRepository(context: Context) {
         private const val PREFERENCE_AUTO_WALLPAPER_SHOW_NOTIFICATION_DEFAULT_VALUE = true
 
         private const val PREFERENCE_AUTO_WALLPAPER_PERSIST_NOTIFICATION_KEY = "auto_wallpaper_persist_notification"
-        private const val PREFERENCE_AUTO_WALLPAPER_PERSIST_NOTIFICATION_DEFAULT_VALUE = true
+        private const val PREFERENCE_AUTO_WALLPAPER_PERSIST_NOTIFICATION_DEFAULT_VALUE = false
 
         private const val PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_KEY = "auto_wallpaper_portrait_mode_only"
         private const val PREFERENCE_AUTO_WALLPAPER_PORTRAIT_MODE_ONLY_DEFAULT_VALUE = false
