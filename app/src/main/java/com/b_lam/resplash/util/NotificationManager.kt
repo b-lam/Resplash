@@ -112,13 +112,13 @@ class NotificationManager(private val context: Context) {
         title: String?,
         subtitle: String?,
         previewUrl: String?,
-        persist: Boolean?
+        persist: Boolean
     ) {
         val builder = NotificationCompat.Builder(context, NEW_AUTO_WALLPAPER_CHANNEL_ID).apply {
             priority = NotificationCompat.PRIORITY_MIN
             setSmallIcon(R.drawable.ic_resplash_24dp)
             setContentIntent(getCurrentWallpaperPendingIntent(id))
-            setAutoCancel(true)
+            setAutoCancel(persist)
             title?.let { setContentTitle(it) }
             subtitle?.let { setContentText(it) }
             previewUrl?.let {
@@ -126,8 +126,8 @@ class NotificationManager(private val context: Context) {
                 setLargeIcon(futureTarget.get())
                 GlideApp.with(context).clear(futureTarget)
             }
+            setOngoing(persist)
         }
-        builder.setOngoing(persist == true)
         notificationManager.notify(NEW_AUTO_WALLPAPER_NOTIFICATION_ID, builder.build())
     }
 
