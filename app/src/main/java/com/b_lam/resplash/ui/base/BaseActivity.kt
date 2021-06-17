@@ -15,6 +15,7 @@ import androidx.viewbinding.ViewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.main.MainActivity
+import com.b_lam.resplash.util.NotificationManager
 import com.b_lam.resplash.util.applyLanguage
 import com.b_lam.resplash.util.getThemeAttrColor
 import org.koin.android.ext.android.inject
@@ -26,6 +27,7 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
     abstract val binding: ViewBinding
 
     val sharedPreferencesRepository: SharedPreferencesRepository by inject()
+    val notificationManager: NotificationManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -235,7 +235,8 @@ class AutoWallpaperWorker(
         //Schedule wallpaper to change now regardless of conditions and schedule future change
         fun scheduleSingleAutoWallpaperJob(
             context: Context,
-            sharedPreferencesRepository: SharedPreferencesRepository
+            sharedPreferencesRepository: SharedPreferencesRepository,
+            notificationManager: NotificationManager
         ) {
             with(sharedPreferencesRepository) {
                 if (autoWallpaperEnabled) {
@@ -264,7 +265,7 @@ class AutoWallpaperWorker(
                         requestFuture
                     )
                 } else {
-                    cancelAllWork(context)
+                    cancelAllWork(context, notificationManager)
                 }
             }
         }
@@ -272,7 +273,8 @@ class AutoWallpaperWorker(
         //Schedule wallpaper to change with configured conditions
         fun scheduleAutoWallpaperJob(
             context: Context,
-            sharedPreferencesRepository: SharedPreferencesRepository
+            sharedPreferencesRepository: SharedPreferencesRepository,
+            notificationManager: NotificationManager
         ) {
             with(sharedPreferencesRepository) {
                 if (autoWallpaperEnabled) {
@@ -298,7 +300,7 @@ class AutoWallpaperWorker(
                         request
                     )
                 } else {
-                    cancelAllWork(context)
+                    cancelAllWork(context, notificationManager)
                 }
             }
         }
@@ -320,10 +322,11 @@ class AutoWallpaperWorker(
             KEY_AUTO_WALLPAPER_CONTENT_FILTER to sharedPreferencesRepository.autoWallpaperContentFilter
         )
 
-        private fun cancelAllWork(context: Context) {
+        private fun cancelAllWork(context: Context, notificationManager: NotificationManager) {
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_SINGLE_JOB_ID)
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_FUTURE_JOB_ID)
             WorkManager.getInstance(context).cancelUniqueWork(AUTO_WALLPAPER_JOB_ID)
+            notificationManager.hideNewAutoWallpaperNotification()
         }
     }
 }
@@ -331,11 +334,12 @@ class AutoWallpaperWorker(
 class FutureAutoWallpaperWorker(
     private val context: Context,
     params: WorkerParameters,
-    private val sharedPreferencesRepository: SharedPreferencesRepository
+    private val sharedPreferencesRepository: SharedPreferencesRepository,
+    private val notificationManager: NotificationManager
 ) : Worker(context, params) {
 
     override fun doWork(): Result {
-        AutoWallpaperWorker.scheduleAutoWallpaperJob(context, sharedPreferencesRepository)
+        AutoWallpaperWorker.scheduleAutoWallpaperJob(context, sharedPreferencesRepository, notificationManager)
         return Result.success()
     }
 }

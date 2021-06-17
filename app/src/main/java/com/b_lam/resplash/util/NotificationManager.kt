@@ -131,6 +131,10 @@ class NotificationManager(private val context: Context) {
         notificationManager.notify(NEW_AUTO_WALLPAPER_NOTIFICATION_ID, builder.build())
     }
 
+    fun hideNewAutoWallpaperNotification() {
+        notificationManager.cancel(NEW_AUTO_WALLPAPER_NOTIFICATION_ID)
+    }
+
     fun isNewAutoWallpaperNotificationEnabled(preferenceValue: Boolean): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = notificationManager.getNotificationChannel(NEW_AUTO_WALLPAPER_CHANNEL_ID)

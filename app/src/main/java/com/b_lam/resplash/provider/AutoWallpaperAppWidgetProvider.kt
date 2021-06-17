@@ -9,6 +9,7 @@ import android.widget.RemoteViews
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
+import com.b_lam.resplash.util.NotificationManager
 import com.b_lam.resplash.util.toast
 import com.b_lam.resplash.worker.AutoWallpaperWorker
 import org.koin.core.component.KoinComponent
@@ -20,13 +21,13 @@ class AutoWallpaperAppWidgetProvider : AppWidgetProvider(), KoinComponent {
         super.onReceive(context, intent)
 
         val sharedPreferencesRepository: SharedPreferencesRepository by inject()
+        val notificationManager: NotificationManager by inject()
 
         if (context != null && intent?.action == ACTION_WIDGET_NEXT) {
             with(context) {
                 if (sharedPreferencesRepository.autoWallpaperEnabled) {
                     toast(R.string.setting_wallpaper)
-                    AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(
-                        this, sharedPreferencesRepository)
+                    AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this, sharedPreferencesRepository, notificationManager)
                 } else {
                     toast("Auto Wallpaper is not enabled")
                     Intent(this, AutoWallpaperSettingsActivity::class.java).apply {
