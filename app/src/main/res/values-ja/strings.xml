@@ -274,4 +274,6 @@
     <string name="developer_title">開発者</string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="terms_and_conditions">利用規約</string>
+    <string name="auto_wallpaper_persist_notification_title">通知を永続化する</string>
+    <string name="auto_wallpaper_persist_notification_summary">常に現在の壁紙通知を表示する</string>
 </resources>

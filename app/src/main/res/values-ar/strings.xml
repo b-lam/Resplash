@@ -279,4 +279,6 @@
     <string name="developer_title">الناشر</string>
     <string name="privacy_policy">سياسة الخصوية</string>
     <string name="terms_and_conditions">الأحكام والشروط</string>
+    <string name="auto_wallpaper_persist_notification_title">استمرار الإخطار</string>
+    <string name="auto_wallpaper_persist_notification_summary">اعرض دائمًا إشعار الخلفية الحالي</string>
 </resources>

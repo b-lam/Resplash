@@ -275,4 +275,6 @@
     <string name="developer_title">Yazar</string>
     <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="terms_and_conditions">Şartlar ve koşullar</string>
+    <string name="auto_wallpaper_persist_notification_title">Kalıcı Bildirim</string>
+    <string name="auto_wallpaper_persist_notification_summary">Her zaman mevcut duvar kağıdı bildirimini göster</string>
 </resources>

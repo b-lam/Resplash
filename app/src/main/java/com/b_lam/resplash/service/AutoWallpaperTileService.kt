@@ -35,7 +35,7 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
             when (it.state) {
                 Tile.STATE_ACTIVE -> {
                     notificationManager.showTileServiceDownloadingNotification()
-                    AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this@AutoWallpaperTileService, get())
+                    AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this@AutoWallpaperTileService, get(), get())
                 }
                 else -> unlockAndRun {
                     Intent(this@AutoWallpaperTileService, AutoWallpaperSettingsActivity::class.java).apply {

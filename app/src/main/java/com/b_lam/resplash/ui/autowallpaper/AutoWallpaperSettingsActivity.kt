@@ -78,7 +78,7 @@ class AutoWallpaperSettingsActivity :
             }
 
         binding.nextFab.setOnClickListener {
-            AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this, sharedPreferencesRepository)
+            AutoWallpaperWorker.scheduleSingleAutoWallpaperJob(this, sharedPreferencesRepository, notificationManager)
         }
 
         if (isInstalledOnExternalStorage()) {
@@ -162,6 +162,7 @@ class AutoWallpaperSettingsActivity :
         private val sharedViewModel: AutoWallpaperSettingsViewModel by sharedViewModel()
 
         private val sharedPreferencesRepository: SharedPreferencesRepository by inject()
+        private val notificationManager: NotificationManager by inject()
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.auto_wallpaper_preferences, rootKey)
@@ -281,7 +282,7 @@ class AutoWallpaperSettingsActivity :
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
             if (key?.contains("auto_wallpaper") == true) {
                 context?.let {
-                    AutoWallpaperWorker.scheduleAutoWallpaperJob(it, sharedPreferencesRepository)
+                    AutoWallpaperWorker.scheduleAutoWallpaperJob(it, sharedPreferencesRepository, notificationManager)
                 }
             }
         }

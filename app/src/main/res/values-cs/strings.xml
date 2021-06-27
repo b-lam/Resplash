@@ -276,4 +276,6 @@
     <string name="developer_title">Vývojář</string>
     <string name="privacy_policy">Zásady ochrany osobních údajů</string>
     <string name="terms_and_conditions">Pravidla a podmínky</string>
+    <string name="auto_wallpaper_persist_notification_title">Trvalé oznámení</string>
+    <string name="auto_wallpaper_persist_notification_summary">Vždy zobrazit aktuální oznámení tapety</string>
 </resources>

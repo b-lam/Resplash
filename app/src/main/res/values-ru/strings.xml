@@ -277,4 +277,6 @@
     <string name="developer_title">Разработчик</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="terms_and_conditions">Условия и положения</string>
+    <string name="auto_wallpaper_persist_notification_title">Постоянное уведомление</string>
+    <string name="auto_wallpaper_persist_notification_summary">Всегда показывать текущее уведомление обоев</string>
 </resources>

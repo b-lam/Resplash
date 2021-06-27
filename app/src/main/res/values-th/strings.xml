@@ -274,4 +274,6 @@
     <string name="developer_title">ผู้จัดทำ</string>
     <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
     <string name="terms_and_conditions">ข้อกำหนดและเงื่อนไข</string>
+    <string name="auto_wallpaper_persist_notification_title">การแจ้งเตือนคงอยู่</string>
+    <string name="auto_wallpaper_persist_notification_summary">แสดงการแจ้งเตือนวอลเปเปอร์ปัจจุบันเสมอ</string>
 </resources>

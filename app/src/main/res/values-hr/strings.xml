@@ -276,4 +276,6 @@
     <string name="developer_title">Developer</string>
     <string name="privacy_policy">Politika privatnosti</string>
     <string name="terms_and_conditions">Uvjeti korištenja</string>
+    <string name="auto_wallpaper_persist_notification_title">Trajna obavijest</string>
+    <string name="auto_wallpaper_persist_notification_summary">Uvijek prikaži trenutnu obavijest o pozadini</string>
 </resources>

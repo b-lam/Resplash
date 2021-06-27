@@ -275,4 +275,6 @@
     <string name="developer_title">Fejlesztő</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_and_conditions">Felhasználói &amp; Feltételek</string>
+    <string name="auto_wallpaper_persist_notification_title">Tartós értesítés</string>
+    <string name="auto_wallpaper_persist_notification_summary">Mindig jelenítse meg az aktuális háttérkép-értesítést</string>
 </resources>

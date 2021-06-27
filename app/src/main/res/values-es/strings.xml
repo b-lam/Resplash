@@ -194,7 +194,7 @@
     <!-- User -->
     <string name="open_portfolio_link">Abrir enlace de portafolio</string>
     <string name="blank_username_error">Necesitamos saber como llamarte</string>
-    <string name="invalid_username_error">El nombre de usuario debe tener al menos un caracter y contener solo letras, dígitos o guiones bajos (sin espacios)</string>
+    <string name="invalid_username_error">El nombre de usuario debe tener al menos un carácter y contener solo letras, dígitos o guiones bajos (sin espacios)</string>
     <string name="username_taken_error">Nombre de usuario ya tomado</string>
     <string name="blank_first_name_error">El nombre no puede estar en blanco</string>
     <string name="blank_email_error">Email no puede estar en blanco</string>
@@ -275,4 +275,6 @@
     <string name="developer_title">Autor</string>
     <string name="privacy_policy">Política de privacidad</string>
     <string name="terms_and_conditions">Términos y condiciones</string>
+    <string name="auto_wallpaper_persist_notification_title">Notificación persistente</string>
+    <string name="auto_wallpaper_persist_notification_summary">Mostrar siempre la notificación de fondo de pantalla actual</string>
 </resources>

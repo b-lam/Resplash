@@ -24,7 +24,8 @@ val workerModule = module {
         FutureAutoWallpaperWorker(
             context = get(),
             params = workerParams,
-            sharedPreferencesRepository = get()
+            sharedPreferencesRepository = get(),
+            notificationManager = get()
         )
     }
     worker { (workerParams: WorkerParameters) ->

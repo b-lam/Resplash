@@ -274,4 +274,6 @@
     <string name="developer_title">作者</string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="terms_and_conditions">服务条款</string>
+    <string name="auto_wallpaper_persist_notification_title">持续通知</string>
+    <string name="auto_wallpaper_persist_notification_summary">始终显示当前墙纸通知</string>
 </resources>

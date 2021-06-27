@@ -275,4 +275,6 @@
     <string name="developer_title">Autor</string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="terms_and_conditions">Termos e Condições</string>
+    <string name="auto_wallpaper_persist_notification_title">Persistir Notificação</string>
+    <string name="auto_wallpaper_persist_notification_summary">Sempre mostrar a notificação de papel de parede atual</string>
 </resources>
