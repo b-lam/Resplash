@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.room.Room
 import com.b_lam.resplash.data.autowallpaper.AutoWallpaperDatabase
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.domain.login.AccessTokenProvider
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -16,7 +15,6 @@ val storageModule = module {
             androidContext()
         )
     }
-    single(createdAtStart = true) { AccessTokenProvider(androidContext()) }
 
     single { createWallpaperDatabase(androidApplication()) }
     single { get<AutoWallpaperDatabase>().autoWallpaperHistoryDao() }

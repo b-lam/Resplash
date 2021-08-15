@@ -11,6 +11,7 @@ import com.b_lam.resplash.domain.login.AccessTokenProvider
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -26,6 +27,7 @@ private const val UNSPLASH_API_BASE_URL = "https://api.unsplash.com/"
 val networkModule = module {
 
     single(createdAtStart = true) { createOkHttpClient(get()) }
+    single(createdAtStart = true) { AccessTokenProvider(androidContext()) }
     factory { createAccessTokenInterceptor(get()) }
     factory { createConverterFactory() }
     factory { createService<PhotoService>(get(), get()) }
