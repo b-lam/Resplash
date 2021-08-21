@@ -133,7 +133,11 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
     implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
-    implementation 'com.google.firebase:firebase-inappmessaging-ktx:20.0.0'
+    implementation('com.google.firebase:firebase-inappmessaging-ktx:20.0.0', {
+        exclude group: 'io.grpc', module: 'grpc-okhttp'
+    })
+    // Workaround for https://github.com/firebase/firebase-android-sdk/issues/2642
+    implementation 'io.grpc:grpc-okhttp:1.32.2'
     implementation 'com.google.firebase:firebase-firestore-ktx:23.0.3'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
