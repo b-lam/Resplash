@@ -17,8 +17,8 @@ android {
         applicationId 'com.b_lam.resplash'
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 54
-        versionName '3.3.3'
+        versionCode 55
+        versionName '3.3.4'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField("String", "RELEASE_APP_ID", localProperties['releaseAppId'])
         buildConfigField("String", "RELEASE_SECRET", localProperties['releaseSecret'])
@@ -170,7 +170,7 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     // Unit tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
