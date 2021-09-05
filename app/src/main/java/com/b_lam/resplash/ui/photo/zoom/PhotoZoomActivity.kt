@@ -26,7 +26,7 @@ class PhotoZoomActivity : BaseActivity(R.layout.activity_photo_zoom) {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        toggleSystemUI(false)
+        toggleSystemUi(false)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.decorView.setOnApplyWindowInsetsListener { view, windowInsets ->
@@ -44,7 +44,7 @@ class PhotoZoomActivity : BaseActivity(R.layout.activity_photo_zoom) {
         }
 
         binding.zoomImageView.setOnClickListener {
-            toggleSystemUI(!isSystemUiVisible)
+            toggleSystemUi(!isSystemUiVisible)
         }
 
         val url = intent.getStringExtra(EXTRA_PHOTO_URL)
@@ -57,10 +57,10 @@ class PhotoZoomActivity : BaseActivity(R.layout.activity_photo_zoom) {
         }
     }
 
-    private fun toggleSystemUI(showSystemUI: Boolean) {
+    private fun toggleSystemUi(showSystemUi: Boolean) {
         WindowInsetsControllerCompat(window, binding.root).let {
             it.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            if (showSystemUI) {
+            if (showSystemUi) {
                 it.show(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
             } else {
                 it.hide(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars())
