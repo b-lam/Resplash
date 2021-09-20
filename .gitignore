@@ -66,3 +66,6 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 lint/reports/
+
+# misc
+.DS_Store
