@@ -1,6 +1,5 @@
 package com.b_lam.resplash.util
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,6 +8,7 @@ import android.os.Build
 import android.text.TextUtils
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsService
+import com.b_lam.resplash.ui.webview.WebViewActivity
 
 object CustomTabsHelper {
 
@@ -53,17 +53,15 @@ object CustomTabsHelper {
 
             try {
                 customTabsIntent.launchUrl(context, uri)
-            } catch (e: ActivityNotFoundException) {
+            } catch (e: Exception) {
                 launchFallback(context, uri)
             }
         }
     }
 
     private fun launchFallback(context: Context, uri: Uri) {
-        val intent = Intent(Intent.ACTION_VIEW, uri)
-        if (context.packageManager.queryIntentActivities(intent, 0).isNotEmpty()) {
-            context.startActivity(intent)
-        }
+        val intent = WebViewActivity.createIntent(context, uri)
+        context.startActivity(intent)
     }
 
     /**

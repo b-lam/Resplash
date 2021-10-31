@@ -32,6 +32,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Resplash.Theme.DayNight">
+        <activity android:name=".ui.webview.WebViewActivity" />
         <activity
             android:name=".ui.muzei.MuzeiSettingsActivity"
             android:exported="true" />
@@ -44,7 +45,8 @@
         <activity android:name=".ui.upgrade.UpgradeActivity" />
         <activity android:name=".ui.autowallpaper.history.AutoWallpaperHistoryActivity" />
         <activity android:name=".ui.autowallpaper.collections.AutoWallpaperCollectionActivity" />
-        <activity android:name=".ui.autowallpaper.AutoWallpaperSettingsActivity"
+        <activity
+            android:name=".ui.autowallpaper.AutoWallpaperSettingsActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
@@ -75,8 +77,8 @@
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <data
                     android:host="unsplash-auth-callback"
@@ -90,8 +92,8 @@
         </activity>
         <activity
             android:name=".ui.routing.RoutingActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <data
                     android:host="unsplash.com"
@@ -140,8 +142,8 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Resplash.Theme.DayNight.Launcher"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Resplash.Theme.DayNight.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -155,10 +157,10 @@
 
         <service
             android:name=".service.AutoWallpaperTileService"
+            android:exported="true"
             android:icon="@drawable/ic_resplash_24dp"
             android:label="@string/auto_wallpaper_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -189,9 +191,10 @@
                 android:value="com.b_lam.resplash.ui.muzei.MuzeiSettingsActivity" />
         </provider>
 
-        <receiver android:name=".provider.AutoWallpaperAppWidgetProvider"
-            android:label="@string/auto_wallpaper_next_wallpaper"
-            android:exported="true">
+        <receiver
+            android:name=".provider.AutoWallpaperAppWidgetProvider"
+            android:exported="true"
+            android:label="@string/auto_wallpaper_next_wallpaper">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -206,4 +209,5 @@
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove" />
     </application>
+
 </manifest>
