@@ -57,7 +57,9 @@
         <activity
             android:name=".ui.collection.detail.CollectionDetailActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".ui.photo.zoom.PhotoZoomActivity" />
+        <activity
+            android:name=".ui.photo.zoom.PhotoZoomActivity"
+            android:theme="@style/Resplash.Theme.DayNight.PhotoZoom" />
         <activity
             android:name=".ui.photo.detail.PhotoDetailActivity"
             android:theme="@style/Resplash.Theme.DayNight.PhotoDetail" />
