@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="auto_wallpaper_widget_background_color">@color/accent_2_800</color>
+    <color name="auto_wallpaper_widget_icon_color">@color/accent_2_50</color>
+</resources>

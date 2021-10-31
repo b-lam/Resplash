@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.widget.RemoteViews
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
@@ -64,7 +65,12 @@ class AutoWallpaperAppWidgetProvider : AppWidgetProvider(), KoinComponent {
         val intent = Intent(context, AutoWallpaperAppWidgetProvider::class.java).apply {
             action = ACTION_WIDGET_NEXT
         }
-        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+        return PendingIntent.getBroadcast(context, 0, intent, flags)
     }
 
     companion object {

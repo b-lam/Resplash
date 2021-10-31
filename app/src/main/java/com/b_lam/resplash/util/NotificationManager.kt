@@ -148,8 +148,12 @@ class NotificationManager(private val context: Context) {
         val intent = Intent(context, PhotoDetailActivity::class.java).apply {
             putExtra(PhotoDetailActivity.EXTRA_PHOTO_ID, id)
         }
-
-        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_CANCEL_CURRENT
+        } else {
+            PendingIntent.FLAG_CANCEL_CURRENT
+        }
+        return PendingIntent.getActivity(context, 0, intent, flags)
     }
 
     private fun getViewPendingIntent(uri: Uri): PendingIntent {
@@ -159,10 +163,13 @@ class NotificationManager(private val context: Context) {
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
             setDataAndType(uri, "image/*")
         }
-
         val chooser = Intent.createChooser(viewIntent, "Open with")
-
-        return PendingIntent.getActivity(context, 0, chooser, PendingIntent.FLAG_UPDATE_CURRENT)
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+        return PendingIntent.getActivity(context, 0, chooser, flags)
     }
 
     companion object {

@@ -33,4 +33,7 @@
     <color name="color_tinted_surface">#ffffff</color>
 
     <color name="immersive_sys_ui">#33000000</color>
+
+    <color name="auto_wallpaper_widget_background_color">@color/white</color>
+    <color name="auto_wallpaper_widget_icon_color">@color/black</color>
 </resources>

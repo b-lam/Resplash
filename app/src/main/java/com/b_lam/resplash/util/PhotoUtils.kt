@@ -21,4 +21,4 @@ fun getPhotoUrl(photo: Photo, quality: String?): String {
 }
 
 val Photo.fileName: String
-    get() = "${this.user?.name?.toLowerCase(Locale.ROOT)?.replace(" ", "-")}-${this.id}.jpg"
+    get() = "${this.user?.name?.lowercase(Locale.ROOT)?.replace(" ", "-")}-${this.id}.jpg"

@@ -18,6 +18,7 @@ import com.b_lam.resplash.util.Result.Error
 import com.b_lam.resplash.util.Result.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 import kotlin.math.min
@@ -190,7 +191,9 @@ class AutoWallpaperWorker(
 
     @SuppressLint("DefaultLocale")
     private fun showNotification(photo: Photo) {
-        val title = photo.description ?: photo.alt_description?.capitalize() ?: "Untitled"
+        val title = photo.description ?: photo.alt_description?.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+        } ?: "Untitled"
         val subtitle = photo.user?.name
         notificationManager.showNewAutoWallpaperNotification(
             photo.id,

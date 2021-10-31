@@ -3,13 +3,13 @@
 
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/grey_100" />
+            <solid android:color="@color/auto_wallpaper_widget_background_color" />
             <size
                 android:width="48dp"
                 android:height="48dp" />
         </shape>
     </item>
 
-    <item android:drawable="@drawable/ic_skip_next_24dp"
+    <item android:drawable="@drawable/ic_skip_next_widget_24dp"
         android:gravity="center" />
 </layer-list>

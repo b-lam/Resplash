@@ -16,6 +16,7 @@ import com.google.android.apps.muzei.api.provider.Artwork
 import com.google.android.apps.muzei.api.provider.ProviderContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class MuzeiWorker(
     context: Context,
@@ -71,7 +72,9 @@ class MuzeiWorker(
         val url = getPhotoUrl(this, inputData.getString(KEY_MUZEI_QUALITY))
         return Artwork(
             token = id,
-            title = description ?: alt_description?.capitalize() ?: "Untitled",
+            title = description ?: alt_description?.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            } ?: "Untitled",
             byline = user?.name,
             persistentUri = url.toUri(),
             webUri = links?.html?.toUri(),

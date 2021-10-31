@@ -36,8 +36,10 @@ class AutoWallpaperHistoryViewHolder(parent: View) : RecyclerView.ViewHolder(par
                 userContainer.setOnClickListener {
                     wallpaper.username?.let { username -> callback.onUserClick(username) }
                 }
-                wallpaper.date?.let {
-                    setDateTextView.text = prettyTime.format(Date(it)).capitalize()
+                wallpaper.date?.let { date ->
+                    setDateTextView.text = prettyTime.format(Date(date)).replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                    }
                 }
             }
         }

@@ -42,8 +42,8 @@ class ExifAdapter(
     private fun formCameraName(make: String?, model: String): String {
         val makeList = make?.split(" ")?.map { it.trim() }
         val modelList = model.split(" ").map { it.trim() }
-        return if (makeList?.map { it.toLowerCase(Locale.ROOT) }
-                ?.intersect(modelList.map { it.toLowerCase(Locale.ROOT) })
+        return if (makeList?.map { it.lowercase(Locale.ROOT) }
+                ?.intersect(modelList.map { it.lowercase(Locale.ROOT) })
                 ?.isEmpty() == true) {
             "${makeList.first()} $model"
         } else {

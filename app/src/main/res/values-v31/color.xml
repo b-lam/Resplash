@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="auto_wallpaper_widget_background_color">@color/accent_2_100</color>
+    <color name="auto_wallpaper_widget_icon_color">@color/accent_2_700</color>
+
+    <color name="accent_1_0">@android:color/system_accent1_0</color>
+    <color name="accent_1_10">@android:color/system_accent1_10</color>
+    <color name="accent_1_50">@android:color/system_accent1_50</color>
+    <color name="accent_1_100">@android:color/system_accent1_100</color>
+    <color name="accent_1_200">@android:color/system_accent1_200</color>
+    <color name="accent_1_300">@android:color/system_accent1_300</color>
+    <color name="accent_1_400">@android:color/system_accent1_400</color>
+    <color name="accent_1_500">@android:color/system_accent1_500</color>
+    <color name="accent_1_600">@android:color/system_accent1_600</color>
+    <color name="accent_1_700">@android:color/system_accent1_700</color>
+    <color name="accent_1_800">@android:color/system_accent1_800</color>
+    <color name="accent_1_900">@android:color/system_accent1_900</color>
+    <color name="accent_1_1000">@android:color/system_accent1_1000</color>
+
+    <color name="accent_2_0">@android:color/system_accent2_0</color>
+    <color name="accent_2_10">@android:color/system_accent2_10</color>
+    <color name="accent_2_50">@android:color/system_accent2_50</color>
+    <color name="accent_2_100">@android:color/system_accent2_100</color>
+    <color name="accent_2_200">@android:color/system_accent2_200</color>
+    <color name="accent_2_300">@android:color/system_accent2_300</color>
+    <color name="accent_2_400">@android:color/system_accent2_400</color>
+    <color name="accent_2_500">@android:color/system_accent2_500</color>
+    <color name="accent_2_600">@android:color/system_accent2_600</color>
+    <color name="accent_2_700">@android:color/system_accent2_700</color>
+    <color name="accent_2_800">@android:color/system_accent2_800</color>
+    <color name="accent_2_900">@android:color/system_accent2_900</color>
+    <color name="accent_2_1000">@android:color/system_accent2_1000</color>
+
+    <color name="accent_3_0">@android:color/system_accent3_0</color>
+    <color name="accent_3_10">@android:color/system_accent3_10</color>
+    <color name="accent_3_50">@android:color/system_accent3_50</color>
+    <color name="accent_3_100">@android:color/system_accent3_100</color>
+    <color name="accent_3_200">@android:color/system_accent3_200</color>
+    <color name="accent_3_300">@android:color/system_accent3_300</color>
+    <color name="accent_3_400">@android:color/system_accent3_400</color>
+    <color name="accent_3_500">@android:color/system_accent3_500</color>
+    <color name="accent_3_600">@android:color/system_accent3_600</color>
+    <color name="accent_3_700">@android:color/system_accent3_700</color>
+    <color name="accent_3_800">@android:color/system_accent3_800</color>
+    <color name="accent_3_900">@android:color/system_accent3_900</color>
+    <color name="accent_3_1000">@android:color/system_accent3_1000</color>
+
+    <color name="neutral_1_0">@android:color/system_neutral1_0</color>
+    <color name="neutral_1_10">@android:color/system_neutral1_10</color>
+    <color name="neutral_1_50">@android:color/system_neutral1_50</color>
+    <color name="neutral_1_100">@android:color/system_neutral1_100</color>
+    <color name="neutral_1_200">@android:color/system_neutral1_200</color>
+    <color name="neutral_1_300">@android:color/system_neutral1_300</color>
+    <color name="neutral_1_400">@android:color/system_neutral1_400</color>
+    <color name="neutral_1_500">@android:color/system_neutral1_500</color>
+    <color name="neutral_1_600">@android:color/system_neutral1_600</color>
+    <color name="neutral_1_700">@android:color/system_neutral1_700</color>
+    <color name="neutral_1_800">@android:color/system_neutral1_800</color>
+    <color name="neutral_1_900">@android:color/system_neutral1_900</color>
+    <color name="neutral_1_1000">@android:color/system_neutral1_1000</color>
+
+    <color name="neutral_2_0">@android:color/system_neutral2_0</color>
+    <color name="neutral_2_10">@android:color/system_neutral2_10</color>
+    <color name="neutral_2_50">@android:color/system_neutral2_50</color>
+    <color name="neutral_2_100">@android:color/system_neutral2_100</color>
+    <color name="neutral_2_200">@android:color/system_neutral2_200</color>
+    <color name="neutral_2_300">@android:color/system_neutral2_300</color>
+    <color name="neutral_2_400">@android:color/system_neutral2_400</color>
+    <color name="neutral_2_500">@android:color/system_neutral2_500</color>
+    <color name="neutral_2_600">@android:color/system_neutral2_600</color>
+    <color name="neutral_2_700">@android:color/system_neutral2_700</color>
+    <color name="neutral_2_800">@android:color/system_neutral2_800</color>
+    <color name="neutral_2_900">@android:color/system_neutral2_900</color>
+    <color name="neutral_2_1000">@android:color/system_neutral2_1000</color>
+</resources>

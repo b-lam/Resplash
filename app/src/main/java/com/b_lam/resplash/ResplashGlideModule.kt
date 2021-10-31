@@ -13,8 +13,8 @@ import com.bumptech.glide.request.RequestOptions
 class ResplashGlideModule : AppGlideModule() {
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val diskCacheSizeBytes: Long = 1024 * 1024 * 500 // 500 MB
-        builder.setDiskCache(InternalCacheDiskCacheFactory(context, diskCacheSizeBytes))
+        val diskCacheSizeBytes = 1024 * 1024 * 500 // 500 MB
+        builder.setDiskCache(InternalCacheDiskCacheFactory(context, diskCacheSizeBytes.toLong()))
 
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
         if (activityManager?.isLowRamDevice == true) {

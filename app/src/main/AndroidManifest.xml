@@ -44,7 +44,8 @@
         <activity android:name=".ui.upgrade.UpgradeActivity" />
         <activity android:name=".ui.autowallpaper.history.AutoWallpaperHistoryActivity" />
         <activity android:name=".ui.autowallpaper.collections.AutoWallpaperCollectionActivity" />
-        <activity android:name=".ui.autowallpaper.AutoWallpaperSettingsActivity">
+        <activity android:name=".ui.autowallpaper.AutoWallpaperSettingsActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
@@ -72,7 +73,8 @@
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:exported="true">
             <intent-filter>
                 <data
                     android:host="unsplash-auth-callback"
@@ -86,7 +88,8 @@
         </activity>
         <activity
             android:name=".ui.routing.RoutingActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:exported="true">
             <intent-filter>
                 <data
                     android:host="unsplash.com"
@@ -135,7 +138,8 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Resplash.Theme.DayNight.Launcher">
+            android:theme="@style/Resplash.Theme.DayNight.Launcher"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -151,7 +155,8 @@
             android:name=".service.AutoWallpaperTileService"
             android:icon="@drawable/ic_resplash_24dp"
             android:label="@string/auto_wallpaper_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -183,7 +188,8 @@
         </provider>
 
         <receiver android:name=".provider.AutoWallpaperAppWidgetProvider"
-            android:label="@string/auto_wallpaper_next_wallpaper">
+            android:label="@string/auto_wallpaper_next_wallpaper"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
