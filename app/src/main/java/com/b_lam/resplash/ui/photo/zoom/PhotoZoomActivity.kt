@@ -26,7 +26,9 @@ class PhotoZoomActivity : BaseActivity(R.layout.activity_photo_zoom) {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        toggleSystemUi(false)
+        window.decorView.post {
+            toggleSystemUi(false)
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.decorView.setOnApplyWindowInsetsListener { view, windowInsets ->
