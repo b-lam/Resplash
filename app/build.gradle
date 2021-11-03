@@ -17,8 +17,8 @@ android {
         applicationId 'com.b_lam.resplash'
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 56
-        versionName '3.3.5'
+        versionCode 57
+        versionName '3.3.6'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField("String", "RELEASE_APP_ID", localProperties['releaseAppId'])
         buildConfigField("String", "RELEASE_SECRET", localProperties['releaseSecret'])
