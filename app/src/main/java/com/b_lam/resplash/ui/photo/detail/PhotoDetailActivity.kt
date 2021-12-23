@@ -39,7 +39,6 @@ import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
-import java.util.concurrent.Executors
 
 class PhotoDetailActivity :
     BaseActivity(R.layout.activity_photo_detail), TagAdapter.ItemEventCallback {
@@ -234,6 +233,14 @@ class PhotoDetailActivity :
         setAsWallpaperButton.setOnClickListener {
             if (fileExists(photo.fileName, sharedPreferencesRepository.downloader)) {
                 getUriForPhoto(photo.fileName, sharedPreferencesRepository.downloader)?.let { uri ->
+                    snackbar = Snackbar
+                        .make(
+                            binding.coordinatorLayout,
+                            R.string.setting_wallpaper,
+                            Snackbar.LENGTH_INDEFINITE
+                        )
+                        .setAnchorView(R.id.set_as_wallpaper_button)
+                    snackbar?.show()
                     applyWallpaper(uri)
                 } ?: run {
                     downloadWallpaper(photo)
@@ -323,16 +330,17 @@ class PhotoDetailActivity :
         val status = intent.getIntExtra(DOWNLOAD_STATUS, -1)
 
         if (action == DownloadAction.WALLPAPER) {
-            snackbar?.dismiss()
             when (status) {
                 STATUS_SUCCESSFUL -> intent.getParcelableExtra<Uri>(DATA_URI)?.let {
                     applyWallpaper(it)
                 }
-                STATUS_FAILED ->
+                STATUS_FAILED -> {
+                    snackbar?.dismiss()
                     binding.coordinatorLayout.showSnackBar(
                         R.string.oops,
                         anchor = R.id.set_as_wallpaper_button
                     )
+                }
             }
         } else if (action == DownloadAction.DOWNLOAD) {
             when (status) {
@@ -342,12 +350,14 @@ class PhotoDetailActivity :
         }
     }
 
+    // TODO: Put all of this wallpaper logic into a worker
     private fun applyWallpaper(uri: Uri) {
         try {
             startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
+            snackbar?.dismiss()
         } catch (e: IllegalArgumentException) {
-            viewModel.prepareBitmapFromUri(contentResolver, uri)
             observeWallpaperBitmapResult()
+            viewModel.prepareBitmapFromUri(contentResolver, uri)
         }
     }
 
@@ -356,21 +366,20 @@ class PhotoDetailActivity :
             if (result is Result.Success) {
                 setWallpaperWithBitmap(result.value)
             } else {
+                snackbar?.dismiss()
                 toast("Failed to set wallpaper")
             }
         }
     }
 
     private fun setWallpaperWithBitmap(bitmap: Bitmap) {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Default) {
             var isWallpaperSet = false
-            withContext(Executors.newSingleThreadExecutor().asCoroutineDispatcher()) {
-                try {
-                    wallpaperManager.setBitmap(bitmap)
-                    isWallpaperSet = true
-                } catch (exception: IOException) {
-                    error("Error setting wallpaper bitmap: $exception")
-                }
+            try {
+                wallpaperManager.setBitmap(bitmap)
+                isWallpaperSet = true
+            } catch (exception: IOException) {
+                error("Error setting wallpaper bitmap: $exception")
             }
             withContext(Dispatchers.Main) {
                 val resultMessage = if (isWallpaperSet) {
@@ -379,6 +388,7 @@ class PhotoDetailActivity :
                     "Error setting wallpaper"
                 }
                 this@PhotoDetailActivity.toast(resultMessage)
+                snackbar?.dismiss()
             }
         }
     }
