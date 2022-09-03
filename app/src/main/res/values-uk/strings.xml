@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="ok">Ок</string>
+    <string name="cancel">Скасувати</string>
+    <string name="photos">Фотографії</string>
+    <string name="collections">Колекції</string>
+    <string name="like">Вподобати</string>
+    <string name="users">Користувачі</string>
+    <string name="unknown">Невідомо</string>
+    <string name="download">Завантажити</string>
+    <string name="on">Включено</string>
+    <string name="off">Виключено</string>
+    <string name="share">Поділитись</string>
+    <string name="search">Пошук</string>
+    <string name="open_in_browser">Відкрити в браузері</string>
+    <string name="apply">Застосувати</string>
+    <string name="create">Створити</string>
+    <string name="save">Зберегти</string>
+    <string name="edit">Редагувати</string>
+    <string name="delete">Видалити</string>
+    <string name="are_you_sure">Ви впевнені?</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+    <string name="thanks">Дякую!</string>
+    <string name="download_started">Завантаження розпочате</string>
+    <string name="download_complete">Завантаження завершене</string>
+    <string name="set_as_wallpaper">Встановити обої</string>
+    <string name="setting_wallpaper">Встановлення фонового малюнку…</string>
+    <string name="file_exists_title">Завантажити знову?</string>
+    <string name="file_exists_message">Дане фото вже було завантажено раніше. Бажаєте завантажити знову?</string>
+    <string name="sponsored">Оплачено</string>
+
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="one">%d Фото</item>
+        <item quantity="other">%d Фото</item>
+        <item quantity="few">%d Фото</item>
+        <item quantity="many">%d Фото</item>
+    </plurals>
+
+    <!-- Main -->
+    <string name="home">Нові</string>
+    <string name="header_subtitle">Створено творчими особами звідусіль</string>
+    <string name="add_account">Додати аккаунт</string>
+    <string name="view_profile">Переглянути профіль</string>
+    <string name="edit_profile">Редагувати профіль</string>
+    <string name="log_out">Вийти</string>
+    <string name="sort_by">Сортування</string>
+    <string name="order_latest">Спочатку нові</string>
+    <string name="order_oldest">Спочатку старі</string>
+    <string name="order_popular">За популярністю</string>
+    <string name="order_all">Всі</string>
+    <string name="order_featured">Рекомендовані</string>
+
+    <!-- Error/Empty -->
+    <string name="oops">От халепа, щось пішло не так…</string>
+    <string name="empty_state_title">Нічого не знайдено…</string>
+    <string name="error_state_title">От халепа…</string>
+    <string name="error_setting_wallpaper">Щось пішло не так при встановлені фонового зображення…</string>
+
+    <!-- Settings -->
+    <string name="settings">Налаштування</string>
+    <string name="general">Основне</string>
+    <string name="clear_cache">Очистити кеш</string>
+    <string name="cache_size">Розмір кешу: %d MB</string>
+    <string name="language">Мова</string>
+    <string name="theme">Тема</string>
+    <string name="theme_light">Світла</string>
+    <string name="theme_dark">Темна</string>
+    <string name="theme_battery">На основі режиму енергоефективності</string>
+    <string name="theme_default">На основі системних налаштувань</string>
+    <string name="layout">Розташування</string>
+    <string name="layout_default">Стандартне</string>
+    <string name="layout_minimal">Без рамок</string>
+    <string name="layout_grid">Сітка</string>
+    <string name="downloader">Завантаження</string>
+    <string name="downloader_default">Resplash завантаження</string>
+    <string name="downloader_system">Системне завантаження</string>
+    <string name="quality">Якість</string>
+    <string name="quality_raw">Оригінальна</string>
+    <string name="quality_full">Висока</string>
+    <string name="quality_regular">Стандартна</string>
+    <string name="quality_small">Низька</string>
+    <string name="quality_thumb">Дуже низька</string>
+    <string name="load_quality">Якість передогляду</string>
+    <string name="download_quality">Якість завантаження</string>
+    <string name="wallpaper_quality">Якість фонового малюнку</string>
+    <string name="long_press_to_download">Утримувати щоб завантажити</string>
+    <string name="long_press_to_download_summary">Утримуйте щоб розпочати завантаження фото</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">Auto Wallpaper</string>
+    <string name="auto_wallpaper_info">Auto Wallpaper буде автоматично оновлювати ваш фоновий малюнок в залежності від встановлених параметрів</string>
+    <string name="auto_wallpaper_help_title">Не працює?</string>
+    <string name="auto_wallpaper_help_message">Спробуйте виключити оптимізацію роботи батареї для Resplash в налаштуваннях вашого Пристрою.\n\nДля пошуку інструкції: https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">Параметри</string>
+    <string name="auto_wallpaper_on_wifi_title">При підключенні до мережі Wi-Fi</string>
+    <string name="auto_wallpaper_on_wifi_summary">Пристрій повинен бути підключений до мережі Wi-Fi</string>
+    <string name="auto_wallpaper_charging_title">При підключенні до джерела живлення</string>
+    <string name="auto_wallpaper_charging_summary">Пристрій повинен бути підключений до джерела живлення</string>
+    <string name="auto_wallpaper_idle_title">При неактивності</string>
+    <string name="auto_wallpaper_idle_summary">Пристрій повинен бути не активним</string>
+    <string name="auto_wallpaper_interval_title">Інтервал</string>
+    <string name="auto_wallpaper_interval_summary">Міняти фоновий малюнок кожні: %s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 хвилин</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 хвилин</string>
+    <string name="auto_wallpaper_interval_one_hour">60 хвилин</string>
+    <string name="auto_wallpaper_interval_three_hours">3 години</string>
+    <string name="auto_wallpaper_interval_six_hours">6 годин</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 годин</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 години</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 годин</string>
+    <string name="auto_wallpaper_interval_one_week">7 днів</string>
+    <string name="auto_wallpaper_interval_one_month">30 днів</string>
+    <string name="auto_wallpaper_source">Джерело</string>
+    <string name="auto_wallpaper_source_title">Джерело фонового малюнка</string>
+    <string name="auto_wallpaper_source_summary">Поточне джерело: %s</string>
+    <string name="auto_wallpaper_source_all">Всі</string>
+    <string name="auto_wallpaper_source_featured">Рекомендовані</string>
+    <string name="auto_wallpaper_source_collections">Колекції</string>
+    <string name="auto_wallpaper_source_user">Фото користувача</string>
+    <string name="auto_wallpaper_source_search">Параметри пошуку</string>
+    <string name="auto_wallpaper_source_not_set">Не встановлено</string>
+    <string name="auto_wallpaper_collections_summary">Оберіть колекцію щоб встановити фоновий малюнок з неї</string>
+    <string name="auto_wallpaper_user_title">Фото користувача</string>
+    <string name="auto_wallpaper_user_summary">Використовувати фото від: \@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">Введіть ім\'я користувача для вибору фото:</string>
+    <string name="auto_wallpaper_search_terms_title">Параметри пошуку</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">Знайдіть фото, які відповідають наступним умовам пошуку:</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">(Здійснюйте розділення використовуючи кому)</string>
+    <string name="auto_wallpaper_options_title">Налаштування</string>
+    <string name="auto_wallpaper_crop_title">Заміщення фонового малюнка</string>
+    <string name="auto_wallpaper_crop_none">Без змін</string>
+    <string name="auto_wallpaper_crop_center">По центру</string>
+    <string name="auto_wallpaper_crop_center_crop">По центру (зі збільшенням)</string>
+    <string name="auto_wallpaper_notification_settings_title">Налаштування сповіщень</string>
+    <string name="auto_wallpaper_show_notification_title">Надсилати сповіщення</string>
+    <string name="auto_wallpaper_persist_notification_title">Постійне сповіщення</string>
+    <string name="auto_wallpaper_persist_notification_summary">Завжди показувати сповіщення про роботу Додатку</string>
+    <string name="auto_wallpaper_show_notification_summary">Отримувати інформацію про поточне фото через сповіщення</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">Проблема з орієнтацією пристрою</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">Деякі Пристрої можуть не коректно застосовувати фонове зображення коли Пристрій знаходиться в горизонтальній орієнтації. Дане налаштування дозволяє відкласти встановлення фонового зображення до моменту коли Пристрій не буде в портретній орієнтації</string>
+    <string name="auto_wallpaper_select_screen_title">Обрати екран</string>
+    <string name="auto_wallpaper_select_screen_summary">Застосувати фоновий малюнок до: %s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">Головний екран</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">Заблокований екран</string>
+    <string name="auto_wallpaper_select_screen_both">Головний екран та екран блокування</string>
+    <string name="auto_wallpaper_orientation_title">Орієнтація екрану</string>
+    <string name="auto_wallpaper_orientation_summary">Обмежити орієнтацію фонового малюнка: %s</string>
+    <string name="auto_wallpaper_content_filter_title">Фільтр небажаного контенту</string>
+    <string name="auto_wallpaper_content_filter_low_summary">Низький: Гарантує що фотографії які не відповідають правилам спільноти (наприклад фотографії з оголеними частинами тіла чи насилля) не будуть показані</string>
+    <string name="auto_wallpaper_content_filter_high_summary">Високий: Фільтр гарантує що будуть виключені фотографії, котрі можуть бути небажаними для не підготовленої аудиторії</string>
+    <string name="auto_wallpaper_content_filter_note">Примітка: ми не можемо гарантувати що потенційно не бажаний контент буде вилучено</string>
+    <string name="auto_wallpaper_history_title">Історія Auto Wallpaper</string>
+    <string name="auto_wallpaper_history_summary">Переглянути попередні фонові малюнки</string>
+    <string name="auto_wallpaper_history_clear_history">Очистити історію</string>
+    <string name="auto_wallpaper_activate">Активувати</string>
+    <string name="auto_wallpaper_next_wallpaper">Наступний фоновий малюнок</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">Додати до Auto Wallpaper</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">Видалити з Auto Wallpaper</string>
+    <string name="auto_wallpaper_add_collection_from_url">Додати колекцію за веб посиланням</string>
+    <string name="auto_wallpaper_collection_added">Колекція додана до Auto Wallpaper</string>
+    <string name="auto_wallpaper_collection_removed">Колекція видалена з Auto Wallpaper</string>
+    <string name="auto_wallpaper_selected_collections">Обрані колекції</string>
+    <string name="auto_wallpaper_no_selected_collections">Оберіть декілька варіантів щоб додати до Auto Wallpaper</string>
+    <string name="auto_wallpaper_discover">Досліджуй</string>
+    <string name="auto_wallpaper_popular">Популярні</string>
+    <string name="auto_wallpaper_could_not_add_collection">Неможливо додати колекцію</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">Скопіюйте та вставте веб-посилання на колекцію:</string>
+    <string name="auto_wallpaper_collection_url">Веб-посилання на колекцію</string>
+    <string name="auto_wallpaper_add_collection">Додати колекцію</string>
+    <string name="auto_wallpaper_invalid_url">Не правильне веб-посилання</string>
+    <string name="auto_wallpaper_external_storage_title">Переміщено на карту пам\'ять?</string>
+    <string name="auto_wallpaper_external_storage_message">Привіт! Ми виявили що Додаток був переміщений на карту пам\'яті. Нажаль, виходячи з обмежень Android, це означає що функціонал Auto Wallpaper може працювати не коректно. Прийміть це будь-ласка до уваги! Дякуємо!</string>
+
+    <!-- Photo Detail -->
+    <string name="views">Переглядів</string>
+    <string name="downloads">Завантажень</string>
+    <string name="likes">Вподобань</string>
+    <string name="camera">Камера</string>
+    <string name="aperture">Діафрагма</string>
+    <string name="focal_length">Фокусна відстань</string>
+    <string name="dimensions">Розширення</string>
+    <string name="shutter_speed">Витримка</string>
+    <string name="description">Опис</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">Додати до колекції</string>
+    <string name="create_new_collection">Створити нову колекцію</string>
+    <string name="make_collection_private">Зробити колекцію приватною</string>
+    <string name="collection_name_hint">Назва</string>
+    <string name="collection_description_hint">Опис (не обов\'язково)</string>
+    <string name="collection_name_required">Обов\'язкове поле</string>
+    <string name="edit_collection">Редагувати колекцію</string>
+    <string name="curated_by_template">Автор %s</string>
+
+    <!-- User -->
+    <string name="open_portfolio_link">Посилання на портфоліо</string>
+    <string name="blank_username_error">Обов\'язкове поле</string>
+    <string name="invalid_username_error">Ім\'я користувача повинно бути не меншим за 1 символ, а також складатися з букв, цифр або символу підкреслення (без проміжків)</string>
+    <string name="username_taken_error">Дане ім\'я користувача вже використовується</string>
+    <string name="blank_first_name_error">Обов\'язкове поле</string>
+    <string name="blank_email_error">Обов\'язкове поле</string>
+    <string name="invalid_email_error">Не вірний формат електронної пошти</string>
+    <string name="username_hint">Ім\'я користувача</string>
+    <string name="username_helper_text">(Тільки букви, цифри та символ підкреслення)</string>
+    <string name="first_name_hint">Ім\'я</string>
+    <string name="last_name_hint">Прізвище</string>
+    <string name="email_hint">Електронна пошта</string>
+    <string name="portfolio_hint">Персональний веб-сайт/портфоліо</string>
+    <string name="instagram_username_hint">Ім\'я користувача в мережі Instagram</string>
+    <string name="location_hint">Адреса</string>
+    <string name="bio_hint">Про мене</string>
+    <string name="account_updated">Профіль оновлено!</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">Спробуйте пошукати щось інше</string>
+    <string name="filter">Фільтр</string>
+    <string name="filter_relevance">Актуальні</string>
+    <string name="filter_latest">Останні</string>
+    <string name="content_filter">Фільтр небажаного контенту</string>
+    <string name="filter_low">Низький</string>
+    <string name="filter_high">Високий</string>
+    <string name="orientation">Орієнтація</string>
+    <string name="filter_any">Будь-яка</string>
+    <string name="filter_portrait">Портретна</string>
+    <string name="filter_landscape">Горизонтальна</string>
+    <string name="filter_square">Квадрат</string>
+    <string name="filter_color">Колір</string>
+    <string name="filter_color_any">Будь-який</string>
+    <string name="filter_color_black_white">Чорно-білий</string>
+    <string name="filter_color_black">Чорний</string>
+    <string name="filter_color_white">Білий</string>
+    <string name="filter_color_yellow">Жовтий</string>
+    <string name="filter_color_orange">Оранжевий</string>
+    <string name="filter_color_red">Червоний</string>
+    <string name="filter_color_purple">Фіолетовий</string>
+    <string name="filter_color_magenta">Пурпурний</string>
+    <string name="filter_color_green">Зелений</string>
+    <string name="filter_color_teal">Бірюзовий</string>
+    <string name="filter_color_blue">Голубий</string>
+
+    <!-- Login -->
+    <string name="login">Увійти</string>
+    <string name="create_an_account">Створити аккаунт</string>
+    <string name="login_banner_title">Творчість розпочинається тут</string>
+    <string name="login_banner_subtitle">Безкоштовний доступ до фотографій високої якості, які Ви не знайдете більше ніде</string>
+    <string name="login_success">Вхід виконано успішно</string>
+    <string name="need_to_log_in">Вам потрібно авторизуватись щоб зробити це</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">Оновитись до Resplash Pro</string>
+    <string name="pro_feature_title">Що саме Ви отримаєте?</string>
+    <string name="pro_feature_one">Додаткові налаштування для Auto Wallpaper</string>
+    <string name="pro_feature_one_subtitle">Дехто надає перевагу чорно-білим фото, дехто навпаки, був би радий побачити фото природи в природніх кольорах. Налаштуй які саме фонові малюнки ти хочеш бачити на своєму пристрої з Auto Wallpaper</string>
+    <string name="pro_feature_two">Майбутній унікальний функціонал</string>
+    <string name="pro_feature_two_subtitle">Отримай доступ до майбутнього унікального функціоналу</string>
+    <string name="pro_feature_three">Підтримати розробку</string>
+    <string name="pro_feature_three_subtitle">Стаючи Pro Ви підтримуєте розбробку Resplash</string>
+    <string name="go_pro">Перейти на Resplash Pro</string>
+    <string name="restore_purchase">Відновити покупки</string>
+    <string name="upgrade_required">Вам потрібно Resplash Pro щоб зробити це!</string>
+
+    <!-- Donation -->
+    <string name="support_development">Підтримати розробку</string>
+    <string name="you_are_welcome">Дякую Вам!</string>
+
+    <!-- About -->
+    <string name="about">Про Додаток</string>
+    <string name="licenses">Ліцензії</string>
+    <string name="unsplash_summary">Джерело безкоштовних фотографій з вільним доступом до них</string>
+    <string name="donate_summary">Якщо вам подобається Resplash, Ви можете підтримати розробку тут</string>
+    <string name="report_bug_title">Повідомити про проблему</string>
+    <string name="report_bug_summary">Повідомити про проблему або ж запропонувати новий функціонал</string>
+    <string name="rate_app_title">Оцінити Додаток</string>
+    <string name="rate_app_summary">Якщо вам подобається Resplash, оцініть на Play Маркеті</string>
+    <string name="github_summary">Resplash це Додаток з відкритим програмним кодом, перевірте це на GitHub</string>
+    <string name="developer_title">Розробник</string>
+    <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="terms_and_conditions">Загальні правила та положення</string>
+</resources>

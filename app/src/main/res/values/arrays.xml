@@ -20,6 +20,7 @@
         <item>@string/language_spanish</item>
         <item>@string/language_thai</item>
         <item>@string/language_turkish</item>
+        <item>@string/language_ukrainian</item>
     </string-array>
     <string-array name="language_values">
         <item>default</item>
@@ -39,6 +40,7 @@
         <item>es</item>
         <item>th</item>
         <item>tr</item>
+        <item>uk</item>
     </string-array>
     <string name="default_language_value" translatable="false">default</string>
 
