@@ -88,6 +88,7 @@
     <string name="language_spanish" translatable="false">Spanish</string>
     <string name="language_thai" translatable="false">Thai</string>
     <string name="language_turkish" translatable="false">Turkish</string>
+    <string name="language_ukrainian" translatable="false">Ukrainian</string>
     <string name="theme">Theme</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
