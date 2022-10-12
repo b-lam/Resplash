@@ -4,8 +4,9 @@
     <!-- Top level DayNight theme to be used in AndroidManifest.xml -->
     <style name="Resplash.Theme.DayNight" parent="Base.Theme" />
 
-    <style name="Resplash.Theme.DayNight.Launcher">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
+    <style name="Resplash.Theme.Starting" parent="Theme.SplashScreen.IconBackground">
+        <item name="windowSplashScreenIconBackgroundColor">?android:attr/colorBackground</item>
+        <item name="postSplashScreenTheme">@style/Resplash.Theme.DayNight</item>
     </style>
 
     <style name="Resplash.Theme.DayNight.ActionBar">

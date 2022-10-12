@@ -143,7 +143,7 @@
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
-            android:theme="@style/Resplash.Theme.DayNight.Launcher">
+            android:theme="@style/Resplash.Theme.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

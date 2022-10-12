@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -52,7 +53,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     override val binding: ActivityMainBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Resplash_Theme_DayNight)
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         with(binding) {
