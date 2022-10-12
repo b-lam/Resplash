@@ -11,12 +11,12 @@ def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId 'com.b_lam.resplash'
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 58
         versionName '3.3.7'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -25,7 +25,7 @@ android {
         buildConfigField("String", "DEV_APP_ID", localProperties['devAppId'])
         buildConfigField("String", "DEV_SECRET", localProperties['devSecret'])
         buildConfigField("String", "GOOGLE_PLAY_LICENSE_KEY", localProperties['googlePlayLicenseKey'])
-        renderscriptTargetApi 31 as int
+        renderscriptTargetApi 33 as int
         renderscriptSupportModeEnabled true
         javaCompileOptions {
             annotationProcessorOptions {
@@ -55,9 +55,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    lintOptions {
-        disable 'MissingTranslation'
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -65,90 +62,93 @@ android {
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
+    lint {
+        disable 'MissingTranslation'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Support libraries
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.browser:browser:1.4.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.fragment:fragment-ktx:1.5.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
-    implementation 'androidx.preference:preference-ktx:1.2.0-rc01'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-service:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-service:2.5.1'
 
     // Room
-    implementation 'androidx.room:room-runtime:2.4.0'
-    implementation 'androidx.room:room-ktx:2.4.0'
-    kapt 'androidx.room:room-compiler:2.4.0'
+    implementation 'androidx.room:room-runtime:2.4.3'
+    implementation 'androidx.room:room-ktx:2.4.3'
+    kapt 'androidx.room:room-compiler:2.4.3'
 
     // Material components
-    implementation 'com.google.android.material:material:1.6.0-alpha01'
+    implementation 'com.google.android.material:material:1.8.0-alpha01'
 
     // Billing
     implementation 'com.android.billingclient:billing:3.0.3'
     implementation 'com.android.billingclient:billing-ktx:3.0.3'
 
     // Kotlin coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     // OkHttp
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.10'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10'
 
     // Okio
-    implementation 'com.squareup.okio:okio:2.10.0'
+    implementation 'com.squareup.okio:okio:3.2.0'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
 
     // Moshi
-    implementation 'com.squareup.moshi:moshi:1.12.0'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.12.0'
+    implementation 'com.squareup.moshi:moshi:1.14.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     // Koin
-    implementation 'io.insert-koin:koin-android:3.1.4'
-    implementation 'io.insert-koin:koin-androidx-workmanager:3.1.4'
+    implementation 'io.insert-koin:koin-android:3.2.0'
+    implementation 'io.insert-koin:koin-androidx-workmanager:3.2.0'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.2'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.6'
-    implementation('com.google.firebase:firebase-inappmessaging-ktx:20.1.0', {
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.1.1'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.13'
+    implementation('com.google.firebase:firebase-inappmessaging-ktx:20.1.3', {
         exclude group: 'io.grpc', module: 'grpc-okhttp'
     })
     // Workaround for https://github.com/firebase/firebase-android-sdk/issues/2642
-    implementation 'io.grpc:grpc-okhttp:1.41.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.0'
+    implementation 'io.grpc:grpc-okhttp:1.49.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.3.1'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     // Play Core
-    implementation 'com.google.android.play:core:1.10.2'
+    implementation 'com.google.android.play:core:1.10.3'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // View binding
-    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.7'
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.6'
     
     // Lottie
-    implementation 'com.airbnb.android:lottie:3.5.0'
+    implementation 'com.airbnb.android:lottie:5.2.0'
 
     // PhotoView
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
@@ -157,23 +157,23 @@ dependencies {
     implementation 'com.github.intik:overflow-pager-indicator:3.1.0'
 
     // PrettyTime
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.4.Final'
 
     // Open source notices
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     // Muzei
-    implementation 'com.google.android.apps.muzei:muzei-api:3.4.0'
+    implementation 'com.google.android.apps.muzei:muzei-api:3.4.1'
 
     // LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
     // Unit tests
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
 
     // Room testing
-    androidTestImplementation "androidx.room:room-testing:2.4.0"
+    androidTestImplementation "androidx.room:room-testing:2.4.3"
 }

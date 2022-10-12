@@ -15,6 +15,7 @@ import androidx.work.WorkManager
 import com.b_lam.resplash.R
 import com.b_lam.resplash.domain.SharedPreferencesRepository
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
+import com.b_lam.resplash.util.NOOP
 import com.b_lam.resplash.util.NotificationManager
 import com.b_lam.resplash.worker.AutoWallpaperWorker
 import org.koin.core.component.KoinComponent
@@ -75,6 +76,7 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
                             notificationManager.hideTileServiceNotification()
                         WorkInfo.State.FAILED, WorkInfo.State.CANCELLED ->
                             notificationManager.showTileServiceErrorNotification()
+                        else -> NOOP("Not needed")
                     }
                 }
             }
@@ -92,7 +94,7 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
         return super.onBind(intent)
     }
 
-    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
     @CallSuper
     override fun onStart(intent: Intent?, startId: Int) {
         dispatcher.onServicePreSuperOnStart()

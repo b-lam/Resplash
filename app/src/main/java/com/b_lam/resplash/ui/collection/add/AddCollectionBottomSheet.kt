@@ -21,6 +21,7 @@ import com.b_lam.resplash.databinding.BottomSheetAddCollectionBinding
 import com.b_lam.resplash.ui.photo.detail.PhotoDetailViewModel
 import com.b_lam.resplash.ui.widget.recyclerview.RecyclerViewPaginator
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
+import com.b_lam.resplash.util.NOOP
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -94,6 +95,7 @@ class AddCollectionBottomSheet : BottomSheetDialogFragment(), AddCollectionAdapt
                                     resetInput()
                                 }
                                 is Result.Error, Result.NetworkError -> context?.toast(R.string.oops)
+                                else -> NOOP("Not needed")
                             }
                         }
                     }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.NavUtils
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -33,15 +34,17 @@ class SettingsActivity : BaseActivity(R.layout.activity_settings) {
             .beginTransaction()
             .replace(R.id.container, SettingsFragment())
             .commit()
-    }
 
-    override fun onBackPressed() {
-        if (viewModel.shouldRestartMainActivity ||
-            intent.getBooleanExtra(EXTRA_SHOULD_RESTART, false)) {
-            NavUtils.navigateUpFromSameTask(this)
-        } else {
-            super.onBackPressed()
-        }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (viewModel.shouldRestartMainActivity ||
+                    intent.getBooleanExtra(EXTRA_SHOULD_RESTART, false)) {
+                    NavUtils.navigateUpFromSameTask(this@SettingsActivity)
+                } else {
+                    finish()
+                }
+            }
+        })
     }
 
     companion object {

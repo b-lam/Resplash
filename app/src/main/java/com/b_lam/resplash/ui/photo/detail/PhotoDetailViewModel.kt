@@ -13,6 +13,7 @@ import com.b_lam.resplash.di.Properties
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
+import com.b_lam.resplash.util.NOOP
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.error
 import com.b_lam.resplash.util.livedata.lazyMap
@@ -37,6 +38,7 @@ class PhotoDetailViewModel(
                     _currentUserCollectionIds.postValue(
                         result.value.current_user_collections?.map { it.id }?.toMutableList())
                 }
+                else -> NOOP("Not needed")
             }
         }
         return@lazyMap liveData

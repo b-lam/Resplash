@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,15 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
 
         setRecentAppsHeaderColor()
         applyLanguage(sharedPreferencesRepository.locale)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isTaskRoot && this@BaseActivity !is MainActivity) {
+                    startActivity(Intent(this@BaseActivity, MainActivity::class.java))
+                }
+                finish()
+            }
+        })
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -48,19 +58,10 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onBackPressed() {
-        if (isTaskRoot && this !is MainActivity) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } else {
-            super.onBackPressed()
         }
     }
 

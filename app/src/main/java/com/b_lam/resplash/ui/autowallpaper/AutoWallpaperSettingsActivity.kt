@@ -73,6 +73,7 @@ class AutoWallpaperSettingsActivity :
                             snackbar.dismiss()
                             binding.root.showSnackBar(R.string.error_setting_wallpaper)
                         }
+                        else -> NOOP("Not needed")
                     }
                 }
             }

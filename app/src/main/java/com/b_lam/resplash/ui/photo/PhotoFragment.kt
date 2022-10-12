@@ -69,10 +69,10 @@ abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo, RecyclerView
         animationView.isVisible = true
         animationView.playAnimation()
         animationView.addAnimatorListener(object : Animator.AnimatorListener {
-            override fun onAnimationRepeat(animation: Animator?) {}
-            override fun onAnimationCancel(animation: Animator?) {}
-            override fun onAnimationStart(animation: Animator?) {}
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationRepeat(animation: Animator) {}
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationStart(animation: Animator) {}
+            override fun onAnimationEnd(animation: Animator) {
                 animationView.removeAnimatorListener(this)
                 animationView.isVisible = false
             }
