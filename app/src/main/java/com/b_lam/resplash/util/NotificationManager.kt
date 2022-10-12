@@ -118,7 +118,7 @@ class NotificationManager(private val context: Context) {
             priority = NotificationCompat.PRIORITY_MIN
             setSmallIcon(R.drawable.ic_resplash_24dp)
             setContentIntent(getCurrentWallpaperPendingIntent(id))
-            setAutoCancel(persist)
+            setAutoCancel(!persist)
             title?.let { setContentTitle(it) }
             subtitle?.let { setContentText(it) }
             previewUrl?.let {
