@@ -3,6 +3,7 @@ package com.b_lam.resplash.data.billing
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.SkuDetails
 import com.b_lam.resplash.data.billing.model.AugmentedSkuDetails
 
@@ -55,6 +56,24 @@ interface AugmentedSkuDetailsDao {
                 )
             )
         }
+    }
+
+    @Transaction
+    fun insertOrUpdate(productDetails: ProductDetails) = productDetails.apply {
+        val result = getById(productDetails)
+        val bool = result?.canPurchase ?: true
+        val originalJson = toString().substring("SkuDetails: ".length)
+        val detail = AugmentedSkuDetails(
+            bool,
+            sku,
+            type,
+            title,
+            description,
+            price,
+            priceAmountMicros,
+            originalJson
+        )
+        insert(detail)
     }
 
     @Query("SELECT * FROM AugmentedSkuDetails WHERE sku = :sku")

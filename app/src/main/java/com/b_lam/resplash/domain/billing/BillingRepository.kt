@@ -2,25 +2,34 @@ package com.b_lam.resplash.domain.billing
 
 import android.app.Activity
 import android.app.Application
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.billingclient.api.*
 import com.b_lam.resplash.data.billing.LocalBillingDatabase
 import com.b_lam.resplash.data.billing.model.*
-import com.b_lam.resplash.domain.billing.BillingRepository.Sku.INAPP_SKUS
+import com.b_lam.resplash.domain.billing.BillingRepository.Sku.INAPP_PRODUCTS
 import com.b_lam.resplash.util.debug
 import com.b_lam.resplash.util.error
 import com.b_lam.resplash.util.livedata.Event
 import com.b_lam.resplash.util.warn
 import kotlinx.coroutines.*
+import java.lang.Long.min
 import java.util.*
+
+private const val RECONNECT_TIMER_START_MILLISECONDS = 1L * 1000L
+private const val RECONNECT_TIMER_MAX_TIME_MILLISECONDS = 1000L * 60L * 15L // 15 minutes
 
 class BillingRepository(
     private val application: Application
 ) : PurchasesUpdatedListener, BillingClientStateListener {
 
-    private lateinit var playStoreBillingClient: BillingClient
+    // How long before the data source tries to reconnect to Google Play
+    private var reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
+
+    private lateinit var billingClient: BillingClient
 
     private lateinit var localCacheBillingClient: LocalBillingDatabase
 
@@ -28,7 +37,7 @@ class BillingRepository(
         if (!::localCacheBillingClient.isInitialized) {
             localCacheBillingClient = LocalBillingDatabase.getInstance(application)
         }
-        localCacheBillingClient.skuDetailsDao().getSkuDetailsLiveDataInList(Sku.CONSUMABLE_SKUS)
+        localCacheBillingClient.skuDetailsDao().getSkuDetailsLiveDataInList(Sku.CONSUMABLE_PRODUCTS)
     }
 
     val resplashProSkuDetailsLiveData: LiveData<AugmentedSkuDetails?> by lazy {
@@ -66,7 +75,20 @@ class BillingRepository(
 
     private fun launchBillingFlow(activity: Activity, skuDetails: SkuDetails) {
         val purchaseParams = BillingFlowParams.newBuilder().setSkuDetails(skuDetails).build()
-        playStoreBillingClient.launchBillingFlow(activity, purchaseParams)
+        billingClient.launchBillingFlow(activity, purchaseParams)
+    }
+
+    private fun launchBillingFlow(activity: Activity, productDetails: ProductDetails) {
+        val params = BillingFlowParams.newBuilder()
+            .setProductDetailsParamsList(
+                listOf(
+                    BillingFlowParams.ProductDetailsParams.newBuilder()
+                        .setProductDetails(productDetails)
+                        .build()
+                )
+            )
+            .build()
+        billingClient.launchBillingFlow(activity, params)
     }
 
     fun startDataSourceConnections() {
@@ -77,11 +99,11 @@ class BillingRepository(
 
     fun endDataSourceConnections() {
         debug("endDataSourceConnections")
-        playStoreBillingClient.endConnection()
+        billingClient.endConnection()
     }
 
     private fun instantiateAndConnectToPlayBillingService() {
-        playStoreBillingClient = BillingClient.newBuilder(application.applicationContext)
+        billingClient = BillingClient.newBuilder(application.applicationContext)
             .enablePendingPurchases()
             .setListener(this).build()
         connectToPlayBillingService()
@@ -89,8 +111,8 @@ class BillingRepository(
 
     private fun connectToPlayBillingService(): Boolean {
         debug("connectToPlayBillingService")
-        if (!playStoreBillingClient.isReady) {
-            playStoreBillingClient.startConnection(this)
+        if (!billingClient.isReady) {
+            billingClient.startConnection(this)
             return true
         }
         return false
@@ -100,18 +122,37 @@ class BillingRepository(
         when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
                 debug("onBillingSetupFinished successfully")
-                querySkuDetailsAsync(BillingClient.SkuType.INAPP, INAPP_SKUS)
+                queryProductDetailsAsync()
                 queryPurchasesAsync()
             }
-            BillingClient.BillingResponseCode.BILLING_UNAVAILABLE -> debug(billingResult.debugMessage)
+            BillingClient.BillingResponseCode.BILLING_UNAVAILABLE ->
+                debug(billingResult.debugMessage)
             else -> debug(billingResult.debugMessage)
         }
     }
 
+    /**
+     * This is a pretty unusual occurrence. It happens primarily if the Google Play Store
+     * self-upgrades or is force closed.
+     */
     override fun onBillingServiceDisconnected() {
         debug("onBillingServiceDisconnected")
-        // TODO: Try connecting again with exponential backoff.
-        // billingClient.startConnection(this)
+        retryBillingServiceConnectionWithExponentialBackoff()
+    }
+
+    /**
+     * Retries the billing service connection with exponential backoff, maxing out at the time
+     * specified by RECONNECT_TIMER_MAX_TIME_MILLISECONDS.
+     */
+    private fun retryBillingServiceConnectionWithExponentialBackoff() {
+        handler.postDelayed(
+            { billingClient.startConnection(this@BillingRepository) },
+            reconnectMilliseconds
+        )
+        reconnectMilliseconds = min(
+            reconnectMilliseconds * 2,
+            RECONNECT_TIMER_MAX_TIME_MILLISECONDS
+        )
     }
 
     override fun onPurchasesUpdated(
@@ -119,7 +160,8 @@ class BillingRepository(
         purchases: MutableList<Purchase>?
     ) {
         when (billingResult.responseCode) {
-            BillingClient.BillingResponseCode.OK -> purchases?.apply { processPurchases(this.toSet()) }
+            BillingClient.BillingResponseCode.OK ->
+                purchases?.apply { processPurchases(this.toSet()) }
             BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> queryPurchasesAsync()
             else -> debug("${billingResult.responseCode}: ${billingResult.debugMessage}")
         }
@@ -127,27 +169,39 @@ class BillingRepository(
 
     fun queryPurchasesAsync(restore: Boolean = false) {
         debug("queryPurchasesAsync called")
-        val purchasesResult = HashSet<Purchase>()
-        val result = playStoreBillingClient.queryPurchases(BillingClient.SkuType.INAPP)
-        debug("queryPurchasesAsync INAPP results: ${result.purchasesList?.size}")
-        result.purchasesList?.apply { purchasesResult.addAll(this) }
-        if (restore && result.purchasesList.isNullOrEmpty()) {
-            _billingMessageLiveData.postValue(Event("No purchases found"))
-        }
-        processPurchases(purchasesResult)
-    }
-
-    private fun querySkuDetailsAsync(
-        @BillingClient.SkuType skuType: String,
-        skuList: List<String>
-    ) {
-        debug("querySkuDetailsAsync for $skuType")
-        val params = SkuDetailsParams.newBuilder().setSkusList(skuList).setType(skuType).build()
-        playStoreBillingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
+        val params = QueryPurchasesParams.newBuilder()
+            .setProductType(BillingClient.ProductType.INAPP)
+            .build()
+        billingClient.queryPurchasesAsync(params) { billingResult, purchasesList ->
             when (billingResult.responseCode) {
                 BillingClient.BillingResponseCode.OK -> {
-                    if (skuDetailsList.orEmpty().isNotEmpty()) {
-                        skuDetailsList?.forEach {
+                    debug("queryPurchasesAsync INAPP results: ${purchasesList.size}")
+                    if (restore && purchasesList.isEmpty()) {
+                        _billingMessageLiveData.postValue(Event("No purchases found"))
+                    }
+                    processPurchases(purchasesList.toSet())
+                }
+                else -> error(billingResult.debugMessage)
+            }
+        }
+    }
+
+    private fun queryProductDetailsAsync() {
+        debug("querySkuDetailsAsync")
+        val productList = INAPP_PRODUCTS.map {
+            QueryProductDetailsParams.Product.newBuilder()
+                .setProductId(it)
+                .setProductType(BillingClient.ProductType.INAPP)
+                .build()
+        }
+        val params = QueryProductDetailsParams.newBuilder()
+            .setProductList(productList)
+            .build()
+        billingClient.queryProductDetailsAsync(params) { billingResult, productDetailsList ->
+            when (billingResult.responseCode) {
+                BillingClient.BillingResponseCode.OK -> {
+                    if (productDetailsList.isNotEmpty()) {
+                        productDetailsList.forEach {
                             CoroutineScope(Job() + Dispatchers.IO).launch {
                                 localCacheBillingClient.skuDetailsDao().insertOrUpdate(it)
                             }
@@ -183,7 +237,7 @@ class BillingRepository(
                 }
             }
             val (consumables, nonConsumables) = validPurchases.partition {
-                Sku.CONSUMABLE_SKUS.contains(it.sku)
+                Sku.CONSUMABLE_PRODUCTS.contains(it.sku)
             }
             debug("processPurchases consumables content $consumables")
             debug("processPurchases non-consumables content $nonConsumables")
@@ -200,9 +254,9 @@ class BillingRepository(
         consumables.forEach {
             debug("handleConsumablePurchasesAsync foreach it is $it")
             val params = ConsumeParams.newBuilder().setPurchaseToken(it.purchaseToken).build()
-            playStoreBillingClient.consumeAsync(params) { billingResult, purchaseToken ->
+            billingClient.consumeAsync(params) { billingResult, _ ->
                 when (billingResult.responseCode) {
-                    BillingClient.BillingResponseCode.OK -> purchaseToken.apply { disburseConsumableEntitlements(it) }
+                    BillingClient.BillingResponseCode.OK -> disburseConsumableEntitlements(it)
                     else -> {
                         val message = "${billingResult.responseCode}: ${billingResult.debugMessage}"
                         warn(message)
@@ -219,10 +273,13 @@ class BillingRepository(
         nonConsumables.forEach { purchase ->
             debug("handleConsumablePurchasesAsync foreach purchase is $purchase")
             if (!purchase.isAcknowledged) {
-                val params = AcknowledgePurchaseParams.newBuilder().setPurchaseToken(purchase.purchaseToken).build()
-                playStoreBillingClient.acknowledgePurchase(params) { billingResult ->
+                val params = AcknowledgePurchaseParams.newBuilder()
+                    .setPurchaseToken(purchase.purchaseToken)
+                    .build()
+                billingClient.acknowledgePurchase(params) { billingResult ->
                     when (billingResult.responseCode) {
-                        BillingClient.BillingResponseCode.OK -> disburseNonConsumableEntitlement(purchase)
+                        BillingClient.BillingResponseCode.OK ->
+                            disburseNonConsumableEntitlement(purchase)
                         else -> {
                             val message = "${billingResult.responseCode}: ${billingResult.debugMessage}"
                             warn(message)
@@ -239,27 +296,31 @@ class BillingRepository(
 
     private fun disburseConsumableEntitlements(purchase: Purchase) =
         CoroutineScope(Job() + Dispatchers.IO).launch {
-            if (Sku.CONSUMABLE_SKUS.contains(purchase.sku)) {
-                when (purchase.sku) {
-                    Sku.COFFEE -> updateDonations(purchase.sku, Donation(LEVEL_COFFEE))
-                    Sku.SMOOTHIE -> updateDonations(purchase.sku, Donation(LEVEL_SMOOTHIE))
-                    Sku.PIZZA -> updateDonations(purchase.sku, Donation(LEVEL_PIZZA))
-                    Sku.FANCY_MEAL -> updateDonations(purchase.sku, Donation(LEVEL_FANCY_MEAL))
+            for (product in purchase.products) {
+                if (Sku.CONSUMABLE_PRODUCTS.contains(product)) {
+                    when (product) {
+                        Sku.COFFEE -> updateDonations(product, Donation(LEVEL_COFFEE))
+                        Sku.SMOOTHIE -> updateDonations(product, Donation(LEVEL_SMOOTHIE))
+                        Sku.PIZZA -> updateDonations(product, Donation(LEVEL_PIZZA))
+                        Sku.FANCY_MEAL -> updateDonations(product, Donation(LEVEL_FANCY_MEAL))
+                    }
                 }
-                _purchaseCompleteLiveData.postValue(Event(purchase))
             }
+            _purchaseCompleteLiveData.postValue(Event(purchase))
             localCacheBillingClient.purchaseDao().delete(purchase)
         }
 
     private fun disburseNonConsumableEntitlement(purchase: Purchase) {
         debug("disburseNonConsumableEntitlement")
         CoroutineScope(Job() + Dispatchers.IO).launch {
-            when (purchase.sku) {
-                Sku.RESPLASH_PRO -> {
-                    val resplashPro = ResplashPro(true)
-                    insert(resplashPro)
-                    localCacheBillingClient.skuDetailsDao()
-                        .insertOrUpdate(purchase.sku, resplashPro.mayPurchase())
+            for (product in purchase.products) {
+                when (product) {
+                    Sku.RESPLASH_PRO -> {
+                        val resplashPro = ResplashPro(true)
+                        insert(resplashPro)
+                        localCacheBillingClient.skuDetailsDao()
+                            .insertOrUpdate(product, resplashPro.mayPurchase())
+                    }
                 }
             }
             localCacheBillingClient.purchaseDao().delete(purchase)
@@ -267,7 +328,7 @@ class BillingRepository(
     }
 
     @WorkerThread
-    suspend fun updateDonations(sku: String, donation: Donation) = withContext(Dispatchers.IO) {
+    suspend fun updateDonations(product: String, donation: Donation) = withContext(Dispatchers.IO) {
         debug("updateDonations")
         var update = donation
         donationLiveData.value?.apply {
@@ -284,7 +345,7 @@ class BillingRepository(
             localCacheBillingClient.entitlementsDao().insert(update)
             debug("We just added from null donation with level: ${donation.level}")
         }
-        localCacheBillingClient.skuDetailsDao().insertOrUpdate(sku, update.mayPurchase())
+        localCacheBillingClient.skuDetailsDao().insertOrUpdate(product, update.mayPurchase())
         debug("Updated AugmentedSkuDetails as well")
     }
 
@@ -301,7 +362,11 @@ class BillingRepository(
         const val PIZZA = "pizza"
         const val FANCY_MEAL = "meal"
 
-        val INAPP_SKUS = listOf(RESPLASH_PRO, COFFEE, SMOOTHIE, PIZZA, FANCY_MEAL)
-        val CONSUMABLE_SKUS = listOf(COFFEE, SMOOTHIE, PIZZA, FANCY_MEAL)
+        val INAPP_PRODUCTS = listOf(RESPLASH_PRO, COFFEE, SMOOTHIE, PIZZA, FANCY_MEAL)
+        val CONSUMABLE_PRODUCTS = listOf(COFFEE, SMOOTHIE, PIZZA, FANCY_MEAL)
+    }
+
+    companion object {
+        private val handler = Handler(Looper.getMainLooper())
     }
 }
