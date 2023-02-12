@@ -1,15 +1,13 @@
 package com.b_lam.resplash.ui.upgrade
 
 import android.app.Activity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.b_lam.resplash.data.billing.Sku
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.billing.BillingRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.util.Result
+import com.b_lam.resplash.util.livedata.combineWith
 import kotlinx.coroutines.launch
 
 class UpgradeViewModel(
@@ -21,9 +19,15 @@ class UpgradeViewModel(
         billingRepository.startDataSourceConnections()
     }
 
-    val productDetailsLiveData = billingRepository.productsWithProductDetails
+    private val productDetailsLiveData = billingRepository.productsWithProductDetails
 
     val resplashProLiveData = billingRepository.resplashProLiveData
+
+    val canPurchaseLiveData = productDetailsLiveData.combineWith(resplashProLiveData).map {
+        val resplashProProductDetails = it.first?.get(Sku.RESPLASH_PRO)
+        val entitled = it.second?.entitled
+        return@map resplashProProductDetails != null && entitled != true
+    }
 
     val billingMessageLiveData = billingRepository.billingMessageLiveData
 
