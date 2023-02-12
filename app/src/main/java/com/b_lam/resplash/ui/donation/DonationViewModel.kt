@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.b_lam.resplash.data.billing.model.AugmentedSkuDetails
+import com.android.billingclient.api.ProductDetails
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.billing.BillingRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
@@ -21,7 +21,7 @@ class DonationViewModel(
         billingRepository.startDataSourceConnections()
     }
 
-    val skuDetailsLiveData = billingRepository.consumableSkuDetailsListLiveData
+    val productDetailsLiveData = billingRepository.productsWithProductDetails
 
     val purchaseCompleteLiveData = billingRepository.purchaseCompleteLiveData
 
@@ -35,8 +35,8 @@ class DonationViewModel(
     }
     val bannerPhotoLiveData: LiveData<Photo> = _bannerPhotoLiveData
 
-    fun makePurchase(activity: Activity, skuDetails: AugmentedSkuDetails) {
-        billingRepository.launchBillingFlow(activity, skuDetails)
+    fun makePurchase(activity: Activity, productDetails: ProductDetails) {
+        billingRepository.launchBillingFlow(activity, productDetails)
     }
 
     override fun onCleared() {

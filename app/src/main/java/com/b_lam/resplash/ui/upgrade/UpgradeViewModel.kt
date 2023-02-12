@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.b_lam.resplash.data.billing.Sku
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.billing.BillingRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
@@ -20,7 +21,7 @@ class UpgradeViewModel(
         billingRepository.startDataSourceConnections()
     }
 
-    val skuDetailsLiveData = billingRepository.resplashProSkuDetailsLiveData
+    val productDetailsLiveData = billingRepository.productsWithProductDetails
 
     val resplashProLiveData = billingRepository.resplashProLiveData
 
@@ -39,7 +40,7 @@ class UpgradeViewModel(
     val bannerPhotoLiveData: LiveData<Photo> = _bannerPhotoLiveData
 
     fun makePurchase(activity: Activity) {
-        skuDetailsLiveData.value?.let {
+        productDetailsLiveData.value?.get(Sku.RESPLASH_PRO)?.let {
             billingRepository.launchBillingFlow(activity, it)
         }
     }

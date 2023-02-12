@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.android.billingclient.api.ProductDetails
 import com.b_lam.resplash.R
-import com.b_lam.resplash.data.billing.model.AugmentedSkuDetails
 
 class DonationAdapter(
     private val callback: ItemEventCallback
-) : ListAdapter<AugmentedSkuDetails, DonationViewHolder>(diffCallback) {
+) : ListAdapter<ProductDetails, DonationViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_donation, parent, false)
@@ -22,14 +22,18 @@ class DonationAdapter(
 
     interface ItemEventCallback {
 
-        fun onSkuDetailsClick(augmentedSkuDetails: AugmentedSkuDetails)
+        fun onProductDetailsClick(productDetails: ProductDetails)
     }
 
         companion object {
 
-        private val diffCallback = object : DiffUtil.ItemCallback<AugmentedSkuDetails>() {
-            override fun areItemsTheSame(oldItem: AugmentedSkuDetails, newItem: AugmentedSkuDetails) = oldItem.sku == newItem.sku
-            override fun areContentsTheSame(oldItem: AugmentedSkuDetails, newItem: AugmentedSkuDetails) = oldItem == newItem
+        private val diffCallback = object : DiffUtil.ItemCallback<ProductDetails>() {
+
+            override fun areItemsTheSame(oldItem: ProductDetails, newItem: ProductDetails) =
+                oldItem.productId == newItem.productId
+
+            override fun areContentsTheSame(oldItem: ProductDetails, newItem: ProductDetails) =
+                oldItem == newItem
         }
     }
 }
