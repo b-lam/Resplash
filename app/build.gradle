@@ -12,13 +12,13 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdkVersion 33
-    buildToolsVersion '30.0.3'
+    buildToolsVersion '33.0.1'
     defaultConfig {
         applicationId 'com.b_lam.resplash'
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 58
-        versionName '3.3.7'
+        versionCode 59
+        versionName '3.4.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField("String", "RELEASE_APP_ID", localProperties['releaseAppId'])
         buildConfigField("String", "RELEASE_SECRET", localProperties['releaseSecret'])
