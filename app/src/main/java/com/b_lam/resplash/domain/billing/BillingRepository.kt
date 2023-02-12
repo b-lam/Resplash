@@ -192,11 +192,11 @@ class BillingRepository(
         BillingSecurity.BASE_64_ENCODED_PUBLIC_KEY, purchase.originalJson, purchase.signature
     )
 
-    private fun processPurchases(purchasesResult: Set<Purchase>) =
+    private fun processPurchases(purchases: Set<Purchase>) =
         CoroutineScope(Job() + Dispatchers.IO).launch {
-            val validPurchases = HashSet<Purchase>(purchasesResult.size)
-            debug("processPurchases newBatch content $purchasesResult")
-            purchasesResult.forEach { purchase ->
+            val validPurchases = HashSet<Purchase>(purchases.size)
+            debug("processPurchases newBatch content $purchases")
+            purchases.forEach { purchase ->
                 if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
                     if (isSignatureValid(purchase)) {
                         validPurchases.add(purchase)
@@ -210,8 +210,9 @@ class BillingRepository(
                     debug("Received an UNSPECIFIED_STATE purchase: $purchase")
                 }
             }
-            val (consumables, nonConsumables) = validPurchases.partition {
-                Sku.CONSUMABLE_PRODUCTS.contains(it.products[0]) // TODO: properly partition
+            // Purchases cannot contain a mixture of consumable and non-consumable items
+            val (consumables, nonConsumables) = validPurchases.partition { purchase ->
+                purchase.products.any { Sku.CONSUMABLE_PRODUCTS.contains(it) }
             }
             debug("processPurchases consumables content $consumables")
             debug("processPurchases non-consumables content $nonConsumables")
