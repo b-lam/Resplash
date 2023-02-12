@@ -2,13 +2,14 @@ package com.b_lam.resplash.util.livedata
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 
 inline fun <T> LiveData<Event<T>>.observeEvent(
     owner: LifecycleOwner,
     crossinline onEventUnhandledContent: (T) -> Unit
 ) {
-    observe(owner, Observer { it?.getContentIfNotHandled()?.let(onEventUnhandledContent) })
+    observe(owner) { it?.getContentIfNotHandled()?.let(onEventUnhandledContent) }
 }
 
 inline fun <T> LiveData<T>.observeOnce(
@@ -45,3 +46,9 @@ fun <K, V> lazyMap(initializer: (K) -> V): Map<K, V> {
         return@withDefault newValue
     }
 }
+
+fun <T, S> LiveData<T?>.combineWith(other: LiveData<S?>): LiveData<Pair<T?, S?>> =
+    MediatorLiveData<Pair<T?, S?>>().apply {
+        addSource(this@combineWith) { value = Pair(it, other.value) }
+        addSource(other) { value = Pair(this@combineWith.value, it) }
+    }

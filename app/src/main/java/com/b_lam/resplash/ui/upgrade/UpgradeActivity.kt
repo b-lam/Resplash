@@ -40,8 +40,8 @@ class UpgradeActivity : BaseActivity(R.layout.activity_upgrade) {
             binding.bannerImageView.loadBlurredImage(it.urls.small, it.color)
         }
 
-        viewModel.skuDetailsLiveData.observe(this) {
-            binding.goProButton.isVisible = it != null && it.canPurchase
+        viewModel.canPurchaseLiveData.observe(this) { canPurchase ->
+            binding.goProButton.isVisible = canPurchase
         }
 
         viewModel.resplashProLiveData.observe(this) {

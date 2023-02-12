@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.airbnb.lottie.LottieAnimationView
+import com.android.billingclient.api.ProductDetails
 import com.b_lam.resplash.R
-import com.b_lam.resplash.data.billing.model.AugmentedSkuDetails
+import com.b_lam.resplash.data.billing.Sku
 import com.b_lam.resplash.databinding.ActivityDonateBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.ui.widget.recyclerview.SpacingItemDecoration
@@ -42,8 +43,11 @@ class DonationActivity : BaseActivity(R.layout.activity_donate), DonationAdapter
             binding.bannerImageView.loadBlurredImage(it.urls.small, it.color)
         }
 
-        viewModel.skuDetailsLiveData.observe(this) { skuDetailsList ->
-            donationAdapter.submitList(skuDetailsList.sortedBy { it.priceAmountMicros })
+        viewModel.productDetailsLiveData.observe(this) { productDetails ->
+            val sortedConsumableProductDetails = Sku.CONSUMABLE_PRODUCTS
+                .mapNotNull { productDetails[it] }
+                .sortedBy { it.oneTimePurchaseOfferDetails?.priceAmountMicros }
+            donationAdapter.submitList(sortedConsumableProductDetails)
         }
 
         viewModel.purchaseCompleteLiveData.observeEvent(this) { showThanksDialog() }
@@ -62,7 +66,7 @@ class DonationActivity : BaseActivity(R.layout.activity_donate), DonationAdapter
             .show()
     }
 
-    override fun onSkuDetailsClick(augmentedSkuDetails: AugmentedSkuDetails) {
-        viewModel.makePurchase(this, augmentedSkuDetails)
+    override fun onProductDetailsClick(productDetails: ProductDetails) {
+        viewModel.makePurchase(this, productDetails)
     }
 }

@@ -9,7 +9,6 @@ import com.b_lam.resplash.data.billing.model.ResplashPro
 @Dao
 interface EntitlementsDao {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(resplashPro: ResplashPro)
 

@@ -1,27 +1,27 @@
 package com.b_lam.resplash.data.billing
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.b_lam.resplash.data.billing.model.*
+import androidx.room.*
+import androidx.room.migration.AutoMigrationSpec
+import com.b_lam.resplash.data.billing.model.Donation
+import com.b_lam.resplash.data.billing.model.ResplashPro
 
 @Database(
     entities = [
-        AugmentedSkuDetails::class,
-        CachedPurchase::class,
         Donation::class,
         ResplashPro::class
     ],
-    version = 1,
-    exportSchema = false
+    version = 2,
+    autoMigrations = [
+        AutoMigration (from = 1, to = 2, spec = LocalBillingDatabase.BillingV5AutoMigration::class)
+    ]
 )
-@TypeConverters(PurchaseTypeConverter::class)
 abstract class LocalBillingDatabase : RoomDatabase() {
-    abstract fun purchaseDao(): PurchaseDao
     abstract fun entitlementsDao(): EntitlementsDao
-    abstract fun skuDetailsDao(): AugmentedSkuDetailsDao
+
+    @DeleteTable(tableName = "AugmentedSkuDetails")
+    @DeleteTable(tableName = "purchase_table")
+    class BillingV5AutoMigration : AutoMigrationSpec
 
     companion object {
 
