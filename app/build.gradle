@@ -130,6 +130,7 @@ dependencies {
     implementation 'io.insert-koin:koin-androidx-workmanager:3.2.0'
 
     // Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
     implementation 'com.google.firebase:firebase-crashlytics:18.3.4'
     implementation('com.google.firebase:firebase-inappmessaging-ktx:20.1.3', {

@@ -1,10 +1,8 @@
 package com.b_lam.resplash.data.billing
 
 import android.content.Context
-import androidx.room.AutoMigration
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import androidx.room.migration.AutoMigrationSpec
 import com.b_lam.resplash.data.billing.model.Donation
 import com.b_lam.resplash.data.billing.model.ResplashPro
 
@@ -14,10 +12,16 @@ import com.b_lam.resplash.data.billing.model.ResplashPro
         ResplashPro::class
     ],
     version = 2,
-    autoMigrations = [AutoMigration (from = 1, to = 2)]
+    autoMigrations = [
+        AutoMigration (from = 1, to = 2, spec = LocalBillingDatabase.BillingV5AutoMigration::class)
+    ]
 )
 abstract class LocalBillingDatabase : RoomDatabase() {
     abstract fun entitlementsDao(): EntitlementsDao
+
+    @DeleteTable(tableName = "AugmentedSkuDetails")
+    @DeleteTable(tableName = "purchase_table")
+    class BillingV5AutoMigration : AutoMigrationSpec
 
     companion object {
 

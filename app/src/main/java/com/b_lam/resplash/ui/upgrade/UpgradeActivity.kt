@@ -5,6 +5,7 @@ import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.airbnb.lottie.LottieAnimationView
 import com.b_lam.resplash.R
+import com.b_lam.resplash.data.billing.Sku
 import com.b_lam.resplash.databinding.ActivityUpgradeBinding
 import com.b_lam.resplash.ui.base.BaseActivity
 import com.b_lam.resplash.util.livedata.observeEvent
@@ -40,8 +41,8 @@ class UpgradeActivity : BaseActivity(R.layout.activity_upgrade) {
             binding.bannerImageView.loadBlurredImage(it.urls.small, it.color)
         }
 
-        viewModel.skuDetailsLiveData.observe(this) {
-            binding.goProButton.isVisible = it != null && it.canPurchase
+        viewModel.productDetailsLiveData.observe(this) { productDetails ->
+            binding.goProButton.isVisible = productDetails[Sku.RESPLASH_PRO] != null
         }
 
         viewModel.resplashProLiveData.observe(this) {
