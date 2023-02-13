@@ -15,10 +15,6 @@ class UpgradeViewModel(
     private val photoRepository: PhotoRepository
 ) : ViewModel() {
 
-    init {
-        billingRepository.startDataSourceConnections()
-    }
-
     private val productDetailsLiveData = billingRepository.productsWithProductDetails
 
     val resplashProLiveData = billingRepository.resplashProLiveData
@@ -50,11 +46,6 @@ class UpgradeViewModel(
     }
 
     fun restorePurchase() = billingRepository.queryPurchasesAsync(restore = true)
-
-    override fun onCleared() {
-        super.onCleared()
-        billingRepository.endDataSourceConnections()
-    }
 
     companion object {
 

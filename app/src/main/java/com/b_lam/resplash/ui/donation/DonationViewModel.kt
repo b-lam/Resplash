@@ -17,10 +17,6 @@ class DonationViewModel(
     private val photoRepository: PhotoRepository
 ) : ViewModel() {
 
-    init {
-        billingRepository.startDataSourceConnections()
-    }
-
     val productDetailsLiveData = billingRepository.productsWithProductDetails
 
     val purchaseCompleteLiveData = billingRepository.purchaseCompleteLiveData
@@ -37,10 +33,5 @@ class DonationViewModel(
 
     fun makePurchase(activity: Activity, productDetails: ProductDetails) {
         billingRepository.launchBillingFlow(activity, productDetails)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        billingRepository.endDataSourceConnections()
     }
 }

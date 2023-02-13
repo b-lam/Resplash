@@ -17,12 +17,8 @@ class MainViewModel(
     private val photoRepository: PhotoRepository,
     private val collectionRepository: CollectionRepository,
     private val loginRepository: LoginRepository,
-    private val billingRepository: BillingRepository
+    billingRepository: BillingRepository
 ) : ViewModel() {
-
-    init {
-        billingRepository.startDataSourceConnections()
-    }
 
     private val _navigationItemSelectedLiveData = MutableLiveData<Event<Int>>()
     val navigationItemSelectedLiveData: LiveData<Event<Int>> = _navigationItemSelectedLiveData
@@ -109,10 +105,5 @@ class MainViewModel(
         _usernameLiveData.postValue(username)
         _emailLiveData.postValue(email)
         _profilePictureLiveData.postValue(profilePicture)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        billingRepository.endDataSourceConnections()
     }
 }

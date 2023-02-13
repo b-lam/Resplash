@@ -58,44 +58,34 @@ class BillingRepository(
         localCacheBillingClient.entitlementsDao().getResplashPro()
     }
 
-    fun launchBillingFlow(activity: Activity, productDetails: ProductDetails) {
-        val params = BillingFlowParams.newBuilder()
-            .setProductDetailsParamsList(
-                listOf(
-                    BillingFlowParams.ProductDetailsParams.newBuilder()
-                        .setProductDetails(productDetails)
-                        .build()
-                )
-            )
-            .build()
-        billingClient.launchBillingFlow(activity, params)
+    init {
+        startDataSourceConnections()
     }
 
-    fun startDataSourceConnections() {
+    private fun startDataSourceConnections() {
+        debug("startDataSourceConnections")
         instantiateAndConnectToPlayBillingService()
         localCacheBillingClient = LocalBillingDatabase.getInstance(application)
     }
 
-    fun endDataSourceConnections() {
+    // Not needed since BillingRepository should be a singleton
+    private fun endDataSourceConnections() {
+        debug("endDataSourceConnections")
         billingClient.endConnection()
     }
 
     private fun instantiateAndConnectToPlayBillingService() {
         billingClient = BillingClient.newBuilder(application.applicationContext)
             .enablePendingPurchases()
-            .setListener(this).build()
-        connectToPlayBillingService()
-    }
-
-    private fun connectToPlayBillingService(): Boolean {
+            .setListener(this)
+            .build()
         if (!billingClient.isReady) {
             billingClient.startConnection(this)
-            return true
         }
-        return false
     }
 
     override fun onBillingSetupFinished(billingResult: BillingResult) {
+        debug("onBillingSetupFinished")
         when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
                 queryProductDetailsAsync()
@@ -112,6 +102,7 @@ class BillingRepository(
      * self-upgrades or is force closed.
      */
     override fun onBillingServiceDisconnected() {
+        debug("onBillingServiceDisconnected")
         retryBillingServiceConnectionWithExponentialBackoff()
     }
 
@@ -134,22 +125,23 @@ class BillingRepository(
         billingResult: BillingResult,
         purchases: MutableList<Purchase>?
     ) {
+        debug("onPurchasesUpdated: ${billingResult.responseCode} ${billingResult.debugMessage}")
         when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK ->
                 purchases?.apply { processPurchases(this.toSet()) }
             BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> queryPurchasesAsync()
-            else -> debug("${billingResult.responseCode}: ${billingResult.debugMessage}")
         }
     }
 
     fun queryPurchasesAsync(restore: Boolean = false) {
+        debug("queryPurchasesAsync")
         val params = QueryPurchasesParams.newBuilder()
             .setProductType(BillingClient.ProductType.INAPP)
             .build()
         billingClient.queryPurchasesAsync(params) { billingResult, purchasesList ->
             when (billingResult.responseCode) {
                 BillingClient.BillingResponseCode.OK -> {
-                    debug("queryPurchasesAsync INAPP results: ${purchasesList.size}")
+                    debug("Inapp purchases: $purchasesList")
                     if (restore && purchasesList.isEmpty()) {
                         _billingMessageLiveData.postValue(Event("No purchases found"))
                     }
@@ -161,6 +153,7 @@ class BillingRepository(
     }
 
     private fun queryProductDetailsAsync() {
+        debug("queryProductDetailsAsync")
         val productList = INAPP_PRODUCTS.map {
             QueryProductDetailsParams.Product.newBuilder()
                 .setProductId(it)
@@ -221,6 +214,7 @@ class BillingRepository(
         }
 
     private fun handleConsumablePurchasesAsync(consumables: List<Purchase>) {
+        debug("handleConsumablePurchasesAsync")
         consumables.forEach {
             val params = ConsumeParams.newBuilder().setPurchaseToken(it.purchaseToken).build()
             billingClient.consumeAsync(params) { billingResult, _ ->
@@ -238,17 +232,20 @@ class BillingRepository(
     }
 
     private fun acknowledgeNonConsumablePurchasesAsync(nonConsumables: List<Purchase>) {
+        debug("acknowledgeNonConsumablePurchasesAsync")
         nonConsumables.forEach { purchase ->
             if (!purchase.isAcknowledged) {
                 val params = AcknowledgePurchaseParams.newBuilder()
                     .setPurchaseToken(purchase.purchaseToken)
                     .build()
                 billingClient.acknowledgePurchase(params) { billingResult ->
+                    val message = "Response code ${billingResult.responseCode}: ${billingResult.debugMessage}"
                     when (billingResult.responseCode) {
-                        BillingClient.BillingResponseCode.OK ->
+                        BillingClient.BillingResponseCode.OK -> {
+                            debug(message)
                             disburseNonConsumableEntitlement(purchase)
+                        }
                         else -> {
-                            val message = "${billingResult.responseCode}: ${billingResult.debugMessage}"
                             warn(message)
                             _billingMessageLiveData.postValue(Event(message))
                             _billingErrorLiveData.postValue(Event(billingResult))
@@ -263,6 +260,7 @@ class BillingRepository(
 
     private fun disburseConsumableEntitlements(purchase: Purchase) =
         CoroutineScope(Job() + Dispatchers.IO).launch {
+            debug("disburseConsumableEntitlements: ${purchase.products}")
             for (product in purchase.products) {
                 if (Sku.CONSUMABLE_PRODUCTS.contains(product)) {
                     when (product) {
@@ -276,15 +274,15 @@ class BillingRepository(
             _purchaseCompleteLiveData.postValue(Event(purchase))
         }
 
-    private fun disburseNonConsumableEntitlement(purchase: Purchase) {
+    private fun disburseNonConsumableEntitlement(purchase: Purchase) =
         CoroutineScope(Job() + Dispatchers.IO).launch {
+            debug("disburseNonConsumableEntitlement: ${purchase.products}")
             for (product in purchase.products) {
                 when (product) {
                     Sku.RESPLASH_PRO -> insert(ResplashPro(true))
                 }
             }
         }
-    }
 
     @WorkerThread
     suspend fun updateDonations(donation: Donation) = withContext(Dispatchers.IO) {
@@ -308,6 +306,19 @@ class BillingRepository(
     @WorkerThread
     private suspend fun insert(entitlement: Entitlement) = withContext(Dispatchers.IO) {
         localCacheBillingClient.entitlementsDao().insert(entitlement)
+    }
+
+    fun launchBillingFlow(activity: Activity, productDetails: ProductDetails) {
+        val params = BillingFlowParams.newBuilder()
+            .setProductDetailsParamsList(
+                listOf(
+                    BillingFlowParams.ProductDetailsParams.newBuilder()
+                        .setProductDetails(productDetails)
+                        .build()
+                )
+            )
+            .build()
+        billingClient.launchBillingFlow(activity, params)
     }
 
     companion object {
