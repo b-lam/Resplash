@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.b_lam.resplash.util.NetworkState
 
-data class Listing<T>(
+data class Listing<T : Any>(
     val pagedList: LiveData<PagedList<T>>,
     val networkState: LiveData<NetworkState>,
     val refresh: () -> Unit,

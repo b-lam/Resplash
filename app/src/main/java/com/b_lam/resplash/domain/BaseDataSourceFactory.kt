@@ -7,7 +7,7 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import com.b_lam.resplash.di.Properties
 
-abstract class BaseDataSourceFactory<T> : DataSource.Factory<Int, T>() {
+abstract class BaseDataSourceFactory<T : Any> : DataSource.Factory<Int, T>() {
 
     private val sourceLiveData = MutableLiveData<BaseDataSource<T>>()
 

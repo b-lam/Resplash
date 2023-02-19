@@ -6,7 +6,7 @@ import com.b_lam.resplash.util.NetworkState
 import com.b_lam.resplash.util.error
 import kotlinx.coroutines.*
 
-abstract class BaseDataSource<T>(
+abstract class BaseDataSource<T : Any>(
     private val scope: CoroutineScope
 ) : PageKeyedDataSource<Int, T>() {
 
