@@ -4,10 +4,10 @@ import androidx.lifecycle.*
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.domain.billing.BillingRepository
-import com.b_lam.resplash.domain.collection.CollectionDataSource
+import com.b_lam.resplash.domain.collection.CollectionPagingSource
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
-import com.b_lam.resplash.domain.photo.PhotoDataSource
+import com.b_lam.resplash.domain.photo.PhotoPagingSource
 import com.b_lam.resplash.domain.photo.PhotoRepository
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
@@ -37,25 +37,23 @@ class MainViewModel(
     private val _profilePictureLiveData = MutableLiveData<String?>()
     val profilePictureLiveData: LiveData<String?> = _profilePictureLiveData
 
-    private val _photoOrderLiveData = MutableLiveData(PhotoDataSource.Companion.Order.LATEST)
-    val photoOrderLiveData: LiveData<PhotoDataSource.Companion.Order> = _photoOrderLiveData
+    private val _photoOrderLiveData = MutableLiveData(PhotoPagingSource.Companion.Order.LATEST)
+    val photoOrderLiveData: LiveData<PhotoPagingSource.Companion.Order> = _photoOrderLiveData
 
-    private val _collectionOrderLiveData = MutableLiveData(CollectionDataSource.Companion.Order.ALL)
-    val collectionOrderLiveData: LiveData<CollectionDataSource.Companion.Order> = _collectionOrderLiveData
+    private val _collectionOrderLiveData = MutableLiveData(CollectionPagingSource.Companion.Order.ALL)
+    val collectionOrderLiveData: LiveData<CollectionPagingSource.Companion.Order> = _collectionOrderLiveData
 
     private val photoListing: LiveData<Listing<Photo>> = Transformations.map(_photoOrderLiveData) {
-        photoRepository.getPhotos(it, viewModelScope)
+        photoRepository.getPhotos(it)
     }
-    val photosLiveData = Transformations.switchMap(photoListing) { it.pagedList }
+    val photosLiveData = Transformations.switchMap(photoListing) { it.pagingData }
     val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
-    val photosRefreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
 
     private val collectionListing = Transformations.map(_collectionOrderLiveData) {
-        collectionRepository.getCollections(it, viewModelScope)
+        collectionRepository.getCollections(it)
     }
-    val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagedList }
+    val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagingData }
     val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it.networkState }
-    val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) { it.refreshState }
 
     fun refreshPhotos() = photoListing.value?.refresh?.invoke()
 
@@ -66,13 +64,13 @@ class MainViewModel(
     }
 
     fun orderPhotosBy(selection: Int) {
-        PhotoDataSource.Companion.Order.values().getOrNull(selection)?.let {
+        PhotoPagingSource.Companion.Order.values().getOrNull(selection)?.let {
             _photoOrderLiveData.postValue(it)
         }
     }
 
     fun orderCollectionsBy(selection: Int) {
-        CollectionDataSource.Companion.Order.values().getOrNull(selection)?.let {
+        CollectionPagingSource.Companion.Order.values().getOrNull(selection)?.let {
             _collectionOrderLiveData.postValue(it)
         }
     }

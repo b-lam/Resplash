@@ -2,14 +2,12 @@ package com.b_lam.resplash.domain.photo
 
 import com.b_lam.resplash.data.collection.CollectionService
 import com.b_lam.resplash.data.photo.model.Photo
-import com.b_lam.resplash.domain.BaseDataSource
-import kotlinx.coroutines.CoroutineScope
+import com.b_lam.resplash.domain.BasePagingSource
 
-class CollectionPhotoDataSource(
+class CollectionPhotoPagingSource(
     private val collectionService: CollectionService,
-    private val collectionId: String,
-    scope: CoroutineScope
-) : BaseDataSource<Photo>(scope) {
+    private val collectionId: String
+) : BasePagingSource<Photo>() {
 
     override suspend fun getPage(page: Int, perPage: Int): List<Photo> {
         return collectionService.getCollectionPhotos(

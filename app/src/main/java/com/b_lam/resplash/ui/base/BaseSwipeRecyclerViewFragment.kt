@@ -5,15 +5,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.paging.PagedList
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.databinding.FragmentSwipeRecyclerViewBinding
+import com.b_lam.resplash.domain.PagingNetworkState
 import com.b_lam.resplash.domain.SharedPreferencesRepository
-import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
-import com.b_lam.resplash.util.*
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagingDataAdapter
+import com.b_lam.resplash.util.RECYCLER_VIEW_CACHE_SIZE
+import com.b_lam.resplash.util.scrollToTop
+import com.b_lam.resplash.util.setupLayoutManager
+import com.b_lam.resplash.util.showSnackBar
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 abstract class BaseSwipeRecyclerViewFragment<T : Any, VH: RecyclerView.ViewHolder> :
@@ -23,7 +29,7 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any, VH: RecyclerView.ViewHolde
 
     val sharedPreferencesRepository: SharedPreferencesRepository by inject()
 
-    abstract val pagedListAdapter: BasePagedListAdapter<T, VH>
+    abstract val pagingDataAdapter: BasePagingDataAdapter<T, VH>
 
     abstract val emptyStateTitle: String
 
@@ -40,7 +46,7 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any, VH: RecyclerView.ViewHolde
             layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL).apply {
                 gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
             }
-            adapter = pagedListAdapter.apply {
+            adapter = pagingDataAdapter.apply {
                 orientation = resources.configuration.orientation
             }
             setupLayoutManager(
@@ -63,37 +69,33 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any, VH: RecyclerView.ViewHolde
             layout = sharedPreferencesRepository.layout,
             spacing = itemSpacing
         )
-        pagedListAdapter.orientation = newConfig.orientation
-        pagedListAdapter.notifyDataSetChanged()
+        pagingDataAdapter.orientation = newConfig.orientation
+        pagingDataAdapter.notifyDataSetChanged()
     }
 
     fun scrollToTop() = binding.recyclerView.scrollToTop()
 
-    fun updateRefreshState(refreshState: NetworkState) {
-        when (refreshState) {
-            is NetworkState.LOADING -> showLoadingState()
-            is NetworkState.EMPTY -> showEmptyState()
-            is NetworkState.ERROR -> {
+    fun updateNetworkState(networkState: PagingNetworkState) {
+        when (networkState) {
+            is PagingNetworkState.Refreshing -> showRefreshingState()
+            is PagingNetworkState.Empty -> showEmptyState()
+            is PagingNetworkState.Success -> showSuccessState()
+            is PagingNetworkState.PageError ->
+                binding.swipeRefreshLayout.showSnackBar(R.string.oops)
+            is PagingNetworkState.RefreshError -> {
                 binding.errorStateLayout.emptyErrorStateTitle.text = getString(R.string.error_state_title)
-                binding.errorStateLayout.emptyErrorStateSubtitle.text = refreshState.message
+                binding.errorStateLayout.emptyErrorStateSubtitle.text = networkState.message
                 showErrorState()
             }
-            else -> NOOP("Not needed")
         }
         binding.swipeRefreshLayout.isRefreshing =
-            binding.swipeRefreshLayout.isRefreshing && refreshState is NetworkState.LOADING
+            binding.swipeRefreshLayout.isRefreshing && networkState is PagingNetworkState.Refreshing
     }
 
-    fun updateNetworkState(networkState: NetworkState) {
-        when (networkState) {
-            is NetworkState.SUCCESS -> showSuccessState()
-            is NetworkState.ERROR -> binding.swipeRefreshLayout.showSnackBar(R.string.oops)
-            else -> NOOP("Not needed")
+    fun updatePagingData(pagingData: PagingData<T>) {
+        lifecycleScope.launch {
+            pagingDataAdapter.submitData(pagingData)
         }
-    }
-
-    fun updatePagedList(pagedList: PagedList<T>) {
-        pagedListAdapter.submitList(pagedList)
     }
 
     private fun setEmptyStateText(title: String, subtitle: String) {
@@ -122,7 +124,7 @@ abstract class BaseSwipeRecyclerViewFragment<T : Any, VH: RecyclerView.ViewHolde
         binding.contentLoadingLayout.hide()
     }
 
-    private fun showLoadingState() {
+    private fun showRefreshingState() {
         binding.recyclerView.isVisible = false
         binding.errorStateLayout.root.isVisible = false
         binding.emptyStateLayout.root.isVisible = false

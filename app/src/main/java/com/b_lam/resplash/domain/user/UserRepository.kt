@@ -6,7 +6,6 @@ import com.b_lam.resplash.data.user.model.User
 import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
 class UserRepository(
@@ -18,10 +17,7 @@ class UserRepository(
     suspend fun getUserPublicProfile(username: String) =
         safeApiCall(dispatcher) { userService.getUserPublicProfile(username) }
 
-    fun searchUsers(
-        query: String,
-        scope: CoroutineScope
-    ): Listing<User> {
-        return SearchUserDataSourceFactory(searchService, query, scope).createListing()
+    fun searchUsers(query: String): Listing<User> {
+        return SearchUserPagingSourceFactory(searchService, query).createListing()
     }
 }

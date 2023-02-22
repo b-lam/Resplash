@@ -36,7 +36,7 @@ class SearchUserFragment : BaseSwipeRecyclerViewFragment<User, UserViewHolder>()
         }
     }
 
-    override val pagedListAdapter = UserAdapter(itemEventCallback)
+    override val pagingDataAdapter = UserAdapter(itemEventCallback)
 
     override val emptyStateTitle: String
         get() = getString(R.string.empty_state_title)
@@ -54,9 +54,8 @@ class SearchUserFragment : BaseSwipeRecyclerViewFragment<User, UserViewHolder>()
 
     override fun observeEvents() {
         with(sharedViewModel) {
-            usersRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
             usersNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            usersLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+            usersLiveData.observe(viewLifecycleOwner) { updatePagingData(it) }
         }
     }
 

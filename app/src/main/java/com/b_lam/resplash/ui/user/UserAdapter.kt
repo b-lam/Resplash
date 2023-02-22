@@ -8,11 +8,11 @@ import com.b_lam.resplash.GlideApp
 import com.b_lam.resplash.R
 import com.b_lam.resplash.data.photo.model.Photo
 import com.b_lam.resplash.data.user.model.User
-import com.b_lam.resplash.ui.widget.recyclerview.BasePagedListAdapter
+import com.b_lam.resplash.ui.widget.recyclerview.BasePagingDataAdapter
 
 class UserAdapter(
     private val callback: ItemEventCallback
-) : BasePagedListAdapter<User, UserViewHolder>(diffCallback) {
+) : BasePagingDataAdapter<User, UserViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_default, parent, false)

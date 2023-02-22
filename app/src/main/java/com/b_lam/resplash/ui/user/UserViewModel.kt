@@ -8,8 +8,8 @@ import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.domain.collection.CollectionRepository
 import com.b_lam.resplash.domain.login.LoginRepository
 import com.b_lam.resplash.domain.photo.PhotoRepository
-import com.b_lam.resplash.domain.photo.UserLikesDataSource
-import com.b_lam.resplash.domain.photo.UserPhotoDataSource
+import com.b_lam.resplash.domain.photo.UserLikesPagingSource
+import com.b_lam.resplash.domain.photo.UserPhotoPagingSource
 import com.b_lam.resplash.domain.user.UserRepository
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.livedata.Event
@@ -30,21 +30,18 @@ class UserViewModel(
 
     private val photoListing = MutableLiveData<Listing<Photo>>()
 
-    val photosLiveData = Transformations.switchMap(photoListing) { it.pagedList }
+    val photosLiveData = Transformations.switchMap(photoListing) { it.pagingData }
     val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
-    val photosRefreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
 
     private val likesListing = MutableLiveData<Listing<Photo>>()
 
-    val likesLiveData = Transformations.switchMap(likesListing) { it.pagedList }
+    val likesLiveData = Transformations.switchMap(likesListing) { it.pagingData }
     val likesNetworkStateLiveData = Transformations.switchMap(likesListing) { it.networkState }
-    val likesRefreshStateLiveData = Transformations.switchMap(likesListing) { it.refreshState }
 
     private val collectionListing = MutableLiveData<Listing<Collection>>()
 
-    val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagedList }
+    val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagingData }
     val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it.networkState }
-    val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) { it.refreshState }
 
     fun getUser(username: String) {
         viewModelScope.launch {
@@ -62,26 +59,22 @@ class UserViewModel(
         photoListing.postValue(
             photoRepository.getUserPhotos(
                 username,
-                UserPhotoDataSource.Companion.Order.LATEST,
+                UserPhotoPagingSource.Companion.Order.LATEST,
                 false,
                 null,
                 null,
-                UserPhotoDataSource.Companion.Orientation.ALL,
-                viewModelScope)
+                UserPhotoPagingSource.Companion.Orientation.ALL
+            )
         )
         likesListing.postValue(
             photoRepository.getUserLikes(
                 username,
-                UserLikesDataSource.Companion.Order.LATEST,
-                UserLikesDataSource.Companion.Orientation.ALL,
-                viewModelScope
+                UserLikesPagingSource.Companion.Order.LATEST,
+                UserLikesPagingSource.Companion.Orientation.ALL
             )
         )
         collectionListing.postValue(
-            collectionRepository.getUserCollections(
-                username,
-                viewModelScope
-            )
+            collectionRepository.getUserCollections(username)
         )
     }
 

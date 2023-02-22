@@ -8,15 +8,14 @@ class UserLikesFragment : PhotoFragment() {
     
     private val sharedViewModel: UserViewModel by sharedViewModel()
 
-    override val pagedListAdapter =
+    override val pagingDataAdapter =
         PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override fun observeEvents() {
         with(sharedViewModel) {
             binding.swipeRefreshLayout.setOnRefreshListener { refreshLikes() }
-            likesRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
             likesNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            likesLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+            likesLiveData.observe(viewLifecycleOwner) { updatePagingData(it) }
         }
     }
 

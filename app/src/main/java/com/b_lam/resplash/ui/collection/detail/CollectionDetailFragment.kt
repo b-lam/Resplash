@@ -11,12 +11,11 @@ class CollectionDetailFragment : PhotoFragment() {
 
     private val sharedViewModel: CollectionDetailViewModel by sharedViewModel()
 
-    override val pagedListAdapter =
+    override val pagingDataAdapter =
         PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         sharedViewModel.collectionLiveData.observeOnce(this) {
             binding.swipeRefreshLayout.isEnabled = sharedViewModel.isOwnCollection()
         }
@@ -25,9 +24,8 @@ class CollectionDetailFragment : PhotoFragment() {
     override fun observeEvents() {
         with(sharedViewModel) {
             binding.swipeRefreshLayout.setOnRefreshListener { refreshPhotos() }
-            refreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
             networkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            photosLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+            photosLiveData.observe(viewLifecycleOwner) { updatePagingData(it) }
         }
     }
 

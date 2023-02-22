@@ -13,7 +13,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.R
 import com.b_lam.resplash.databinding.BottomSheetSearchPhotoFilterBinding
-import com.b_lam.resplash.domain.photo.SearchPhotoDataSource
+import com.b_lam.resplash.domain.photo.SearchPhotoPagingSource
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -52,15 +52,15 @@ class SearchPhotoFilterBottomSheet : BottomSheetDialogFragment() {
 
         with(binding) {
             val orderButtonId = when (sharedViewModel.order) {
-                SearchPhotoDataSource.Companion.Order.RELEVANT -> R.id.order_relevance_button
+                SearchPhotoPagingSource.Companion.Order.RELEVANT -> R.id.order_relevance_button
                 else -> R.id.order_latest_button
             }
             orderByToggleGroup.check(orderButtonId)
             orderByToggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
                 if (isChecked) {
                     val order = when (checkedId) {
-                        R.id.order_relevance_button -> SearchPhotoDataSource.Companion.Order.RELEVANT
-                        else -> SearchPhotoDataSource.Companion.Order.LATEST
+                        R.id.order_relevance_button -> SearchPhotoPagingSource.Companion.Order.RELEVANT
+                        else -> SearchPhotoPagingSource.Companion.Order.LATEST
                     }
                     sharedViewModel.order = order
                     searchParametersChanged = true
@@ -68,22 +68,22 @@ class SearchPhotoFilterBottomSheet : BottomSheetDialogFragment() {
             }
 
             val contentFilterButtonId = when (sharedViewModel.contentFilter) {
-                SearchPhotoDataSource.Companion.ContentFilter.LOW -> R.id.content_filter_low_button
+                SearchPhotoPagingSource.Companion.ContentFilter.LOW -> R.id.content_filter_low_button
                 else -> R.id.content_filter_high_button
             }
             contentFilterToggleGroup.check(contentFilterButtonId)
             contentFilterToggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
                 if (isChecked) {
                     val contentFilter = when (checkedId) {
-                        R.id.content_filter_low_button -> SearchPhotoDataSource.Companion.ContentFilter.LOW
-                        else -> SearchPhotoDataSource.Companion.ContentFilter.HIGH
+                        R.id.content_filter_low_button -> SearchPhotoPagingSource.Companion.ContentFilter.LOW
+                        else -> SearchPhotoPagingSource.Companion.ContentFilter.HIGH
                     }
                     sharedViewModel.contentFilter = contentFilter
                     searchParametersChanged = true
                 }
             }
 
-            val items = enumValues<SearchPhotoDataSource.Companion.Color>()
+            val items = enumValues<SearchPhotoPagingSource.Companion.Color>()
             val titles = items.map { getString(it.titleRes) }
             val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown_list, titles)
             val colorFilterDropdownMenu = colorFilterDropdownMenu.editText as? AutoCompleteTextView
@@ -98,19 +98,19 @@ class SearchPhotoFilterBottomSheet : BottomSheetDialogFragment() {
             }
 
             val orientationButtonId = when (sharedViewModel.orientation) {
-                SearchPhotoDataSource.Companion.Orientation.ANY -> R.id.orientation_any_button
-                SearchPhotoDataSource.Companion.Orientation.PORTRAIT -> R.id.orientation_portrait_button
-                SearchPhotoDataSource.Companion.Orientation.LANDSCAPE -> R.id.orientation_landscape_button
+                SearchPhotoPagingSource.Companion.Orientation.ANY -> R.id.orientation_any_button
+                SearchPhotoPagingSource.Companion.Orientation.PORTRAIT -> R.id.orientation_portrait_button
+                SearchPhotoPagingSource.Companion.Orientation.LANDSCAPE -> R.id.orientation_landscape_button
                 else -> R.id.orientation_square_button
             }
             orientationToggleGroup.check(orientationButtonId)
             orientationToggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
                 if (isChecked) {
                     val orientation = when (checkedId) {
-                        R.id.orientation_any_button -> SearchPhotoDataSource.Companion.Orientation.ANY
-                        R.id.orientation_portrait_button -> SearchPhotoDataSource.Companion.Orientation.PORTRAIT
-                        R.id.orientation_landscape_button -> SearchPhotoDataSource.Companion.Orientation.LANDSCAPE
-                        else -> SearchPhotoDataSource.Companion.Orientation.SQUARISH
+                        R.id.orientation_any_button -> SearchPhotoPagingSource.Companion.Orientation.ANY
+                        R.id.orientation_portrait_button -> SearchPhotoPagingSource.Companion.Orientation.PORTRAIT
+                        R.id.orientation_landscape_button -> SearchPhotoPagingSource.Companion.Orientation.LANDSCAPE
+                        else -> SearchPhotoPagingSource.Companion.Orientation.SQUARISH
                     }
                     sharedViewModel.orientation = orientation
                     searchParametersChanged = true

@@ -8,15 +8,14 @@ class MainPhotoFragment : PhotoFragment() {
 
     private val sharedViewModel: MainViewModel by sharedViewModel()
 
-    override val pagedListAdapter =
+    override val pagingDataAdapter =
         PhotoAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override fun observeEvents() {
         with(sharedViewModel) {
             binding.swipeRefreshLayout.setOnRefreshListener { refreshPhotos() }
-            photosRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
             photosNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            photosLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+            photosLiveData.observe(viewLifecycleOwner) { updatePagingData(it) }
         }
     }
 

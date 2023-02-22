@@ -8,15 +8,14 @@ class MainCollectionFragment : CollectionFragment() {
 
     private val sharedViewModel: MainViewModel by sharedViewModel()
 
-    override val pagedListAdapter =
+    override val pagingDataAdapter =
         CollectionAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override fun observeEvents() {
         with(sharedViewModel) {
             binding.swipeRefreshLayout.setOnRefreshListener { refreshCollections() }
-            collectionsRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
             collectionsNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            collectionsLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+            collectionsLiveData.observe(viewLifecycleOwner) { updatePagingData(it) }
         }
     }
 

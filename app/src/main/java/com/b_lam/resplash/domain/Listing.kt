@@ -1,13 +1,10 @@
 package com.b_lam.resplash.domain
 
 import androidx.lifecycle.LiveData
-import androidx.paging.PagedList
-import com.b_lam.resplash.util.NetworkState
+import androidx.paging.PagingData
 
 data class Listing<T : Any>(
-    val pagedList: LiveData<PagedList<T>>,
-    val networkState: LiveData<NetworkState>,
-    val refresh: () -> Unit,
-    val refreshState: LiveData<NetworkState>,
-    val retry: () -> Unit
+    val pagingData: LiveData<PagingData<T>>,
+    val networkState: LiveData<PagingNetworkState>,
+    val refresh: () -> Unit
 )

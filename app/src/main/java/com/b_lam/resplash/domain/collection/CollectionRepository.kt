@@ -9,7 +9,6 @@ import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.util.Result
 import com.b_lam.resplash.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Response
 
@@ -20,25 +19,16 @@ class CollectionRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    fun getCollections(
-        order: CollectionDataSource.Companion.Order,
-        scope: CoroutineScope
-    ): Listing<Collection> {
-        return CollectionDataSourceFactory(collectionService, order, scope).createListing()
+    fun getCollections(order: CollectionPagingSource.Companion.Order): Listing<Collection> {
+        return CollectionPagingSourceFactory(collectionService, order).createListing()
     }
 
-    fun searchCollections(
-        query: String,
-        scope: CoroutineScope
-    ): Listing<Collection> {
-        return SearchCollectionDataSourceFactory(searchService, query, scope).createListing()
+    fun searchCollections(query: String, ): Listing<Collection> {
+        return SearchCollectionPagingSourceFactory(searchService, query).createListing()
     }
 
-    fun getUserCollections(
-        username: String,
-        scope: CoroutineScope
-    ): Listing<Collection> {
-        return UserCollectionDataSourceFactory(userService, username, scope).createListing()
+    fun getUserCollections(username: String): Listing<Collection> {
+        return UserCollectionPagingSourceFactory(userService, username).createListing()
     }
 
     suspend fun getUserCollections(username: String, page: Int) =

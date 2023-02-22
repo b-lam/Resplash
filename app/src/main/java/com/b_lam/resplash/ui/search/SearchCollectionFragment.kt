@@ -11,7 +11,7 @@ class SearchCollectionFragment : CollectionFragment() {
 
     private val sharedViewModel: SearchViewModel by sharedViewModel()
 
-    override val pagedListAdapter =
+    override val pagingDataAdapter =
         CollectionAdapter(itemEventCallback, true, sharedPreferencesRepository)
 
     override val emptyStateSubtitle: String
@@ -24,9 +24,8 @@ class SearchCollectionFragment : CollectionFragment() {
 
     override fun observeEvents() {
         with(sharedViewModel) {
-            collectionsRefreshStateLiveData.observe(viewLifecycleOwner) { updateRefreshState(it) }
             collectionsNetworkStateLiveData.observe(viewLifecycleOwner) { updateNetworkState(it) }
-            collectionsLiveData.observe(viewLifecycleOwner) { updatePagedList(it) }
+            collectionsLiveData.observe(viewLifecycleOwner) { updatePagingData(it) }
         }
     }
 

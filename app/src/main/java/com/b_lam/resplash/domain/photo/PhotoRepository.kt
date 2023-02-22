@@ -8,7 +8,6 @@ import com.b_lam.resplash.data.user.UserService
 import com.b_lam.resplash.domain.Listing
 import com.b_lam.resplash.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
 class PhotoRepository(
@@ -19,53 +18,44 @@ class PhotoRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    fun getPhotos(
-        order: PhotoDataSource.Companion.Order,
-        scope: CoroutineScope
-    ): Listing<Photo> {
-        return PhotoDataSourceFactory(photoService, order, scope).createListing()
+    fun getPhotos(order: PhotoPagingSource.Companion.Order): Listing<Photo> {
+        return PhotoPagingSourceFactory(photoService, order).createListing()
     }
 
-    fun getCollectionPhotos(
-        collectionId: String,
-        scope: CoroutineScope
-    ): Listing<Photo> {
-        return CollectionPhotoDataSourceFactory(collectionService, collectionId, scope).createListing()
+    fun getCollectionPhotos(collectionId: String): Listing<Photo> {
+        return CollectionPhotoPagingSourceFactory(collectionService, collectionId).createListing()
     }
 
     fun searchPhotos(
         query: String,
-        order: SearchPhotoDataSource.Companion.Order?,
+        order: SearchPhotoPagingSource.Companion.Order?,
         collections: String?,
-        contentFilter: SearchPhotoDataSource.Companion.ContentFilter?,
-        color: SearchPhotoDataSource.Companion.Color?,
-        orientation: SearchPhotoDataSource.Companion.Orientation?,
-        scope: CoroutineScope
+        contentFilter: SearchPhotoPagingSource.Companion.ContentFilter?,
+        color: SearchPhotoPagingSource.Companion.Color?,
+        orientation: SearchPhotoPagingSource.Companion.Orientation?
     ): Listing<Photo> {
-        return SearchPhotoDataSourceFactory(searchService, query, order, collections,
-            contentFilter, color, orientation, scope).createListing()
+        return SearchPhotoPagingSourceFactory(searchService, query, order, collections,
+            contentFilter, color, orientation).createListing()
     }
 
     fun getUserPhotos(
         username: String,
-        order: UserPhotoDataSource.Companion.Order?,
+        order: UserPhotoPagingSource.Companion.Order?,
         stats: Boolean,
-        resolution: UserPhotoDataSource.Companion.Resolution?,
+        resolution: UserPhotoPagingSource.Companion.Resolution?,
         quantity: Int?,
-        orientation: UserPhotoDataSource.Companion.Orientation?,
-        scope: CoroutineScope
+        orientation: UserPhotoPagingSource.Companion.Orientation?
     ): Listing<Photo> {
-        return UserPhotoDataSourceFactory(userService, username, order, stats, resolution,
-            quantity, orientation, scope).createListing()
+        return UserPhotoPagingSourceFactory(userService, username, order, stats, resolution,
+            quantity, orientation).createListing()
     }
 
     fun getUserLikes(
         username: String,
-        order: UserLikesDataSource.Companion.Order?,
-        orientation: UserLikesDataSource.Companion.Orientation?,
-        scope: CoroutineScope
+        order: UserLikesPagingSource.Companion.Order?,
+        orientation: UserLikesPagingSource.Companion.Orientation?
     ): Listing<Photo> {
-        return UserLikesDataSourceFactory(userService, username, order, orientation, scope)
+        return UserLikesPagingSourceFactory(userService, username, order, orientation)
             .createListing()
     }
 

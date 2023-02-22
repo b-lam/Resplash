@@ -21,7 +21,7 @@ import org.koin.android.ext.android.inject
 
 abstract class PhotoFragment : BaseSwipeRecyclerViewFragment<Photo, RecyclerView.ViewHolder>() {
 
-    abstract override val pagedListAdapter: PhotoAdapter
+    abstract override val pagingDataAdapter: PhotoAdapter
 
     val itemEventCallback = object : PhotoAdapter.ItemEventCallback {
 

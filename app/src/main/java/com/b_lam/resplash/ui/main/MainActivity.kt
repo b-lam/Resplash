@@ -18,8 +18,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.b_lam.resplash.BuildConfig
 import com.b_lam.resplash.R
 import com.b_lam.resplash.databinding.ActivityMainBinding
-import com.b_lam.resplash.domain.collection.CollectionDataSource
-import com.b_lam.resplash.domain.photo.PhotoDataSource
+import com.b_lam.resplash.domain.collection.CollectionPagingSource
+import com.b_lam.resplash.domain.photo.PhotoPagingSource
 import com.b_lam.resplash.ui.about.AboutActivity
 import com.b_lam.resplash.ui.autowallpaper.AutoWallpaperSettingsActivity
 import com.b_lam.resplash.ui.base.BaseActivity
@@ -164,7 +164,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     private fun showPhotoOrderDialog() {
-        val orderOptions = enumValues<PhotoDataSource.Companion.Order>()
+        val orderOptions = enumValues<PhotoPagingSource.Companion.Order>()
             .map { getString(it.titleRes) }.toTypedArray()
         val currentSelection = viewModel.photoOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)
@@ -178,7 +178,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     private fun showCollectionOrderDialog() {
-        val orderOptions = enumValues<CollectionDataSource.Companion.Order>()
+        val orderOptions = enumValues<CollectionPagingSource.Companion.Order>()
             .map { getString(it.titleRes) }.toTypedArray()
         val currentSelection = viewModel.collectionOrderLiveData.value?.ordinal ?: 0
         MaterialAlertDialogBuilder(this)
