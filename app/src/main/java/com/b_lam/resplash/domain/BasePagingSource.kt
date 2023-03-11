@@ -13,7 +13,6 @@ abstract class BasePagingSource<T : Any> : PagingSource<Int, T>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
         val pageNumber = params.key ?: 1
         return try {
-            // Start refresh at page 1 if undefined.
             if (pageNumber == 1) {
                 networkState.postValue(PagingNetworkState.Refreshing)
             }
@@ -25,7 +24,7 @@ abstract class BasePagingSource<T : Any> : PagingSource<Int, T>() {
             }
             LoadResult.Page(
                 data = response,
-                prevKey = null, // Only paging forward.
+                prevKey = if (pageNumber == 1) null else pageNumber - 1,
                 nextKey = if (response.size < params.loadSize) null else pageNumber + 1
             )
         } catch (e: Exception) {
