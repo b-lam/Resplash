@@ -1,8 +1,10 @@
 package com.b_lam.resplash.ui.main
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.Menu
@@ -35,6 +37,7 @@ import com.b_lam.resplash.ui.user.edit.EditProfileActivity
 import com.b_lam.resplash.util.CustomTabsHelper
 import com.b_lam.resplash.util.livedata.observeEvent
 import com.b_lam.resplash.util.loadPhotoUrl
+import com.b_lam.resplash.util.requestPermission
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplay
@@ -58,6 +61,10 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
         with(binding) {
             setSupportActionBar(bottomAppBar)
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                requestPermission(Manifest.permission.POST_NOTIFICATIONS, requestCode = 1)
+            }
 
             val fragmentPagerAdapter =
                 MainFragmentPagerAdapter(this@MainActivity, supportFragmentManager)
