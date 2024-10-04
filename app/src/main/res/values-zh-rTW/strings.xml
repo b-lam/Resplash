@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="ok">好</string>
+    <string name="cancel">取消</string>
+    <string name="search">搜尋</string>
+    <string name="photos">照片</string>
+    <string name="collections">收藏</string>
+    <string name="like">喜愛</string>
+    <string name="users">用戶</string>
+    <string name="unknown">未知</string>
+    <string name="download">下載</string>
+    <string name="on">開啟</string>
+    <string name="off">關閉</string>
+    <string name="share">分享</string>
+    <string name="open_in_browser">在瀏覽器中開啟</string>
+    <string name="apply">應用</string>
+    <string name="create">新增</string>
+    <string name="save">儲存</string>
+    <string name="edit">編輯</string>
+    <string name="delete">刪除</string>
+    <string name="are_you_sure">您確定嗎？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="thanks">謝謝!</string>
+    <string name="download_started">下載開始</string>
+    <string name="download_complete">下載完成</string>
+    <string name="setting_wallpaper">設置桌布中…</string>
+    <string name="set_as_wallpaper">設為桌布</string>
+    <string name="file_exists_title">重新下載？</string>
+    <string name="file_exists_message">這張照片已經下載過了。您要重新下載這張照片嗎？</string>
+    <string name="sponsored">贊助商</string>
+
+    <!-- Common Plurals -->
+    <plurals name="photos">
+        <item quantity="other">%d 張照片</item>
+    </plurals>
+
+    <!-- Main -->
+    <string name="home">最新</string>
+    <string name="header_subtitle">由世界各地的創作者提供支持</string>
+    <string name="add_account">新增帳戶</string>
+    <string name="view_profile">查看帳戶</string>
+    <string name="edit_profile">管理帳戶</string>
+    <string name="log_out">登出</string>
+    <string name="sort_by">排序方式</string>
+    <string name="order_latest">最新</string>
+    <string name="order_oldest">最舊</string>
+    <string name="order_popular">最流行</string>
+    <string name="order_all">所有</string>
+    <string name="order_featured">精選</string>
+
+    <!-- Error/Empty -->
+    <string name="oops">哎呀! 出錯了…</string>
+    <string name="empty_state_title">這裡空空如也…</string>
+    <string name="error_state_title">呃哦…</string>
+    <string name="error_setting_wallpaper">設定桌布時出了點問題…</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="general">一般</string>
+    <string name="clear_cache">清空快取</string>
+    <string name="cache_size">快取大小：%d MB</string>
+    <string name="language">語言</string>
+    <string name="theme">主題</string>
+    <string name="theme_light">淺色主題</string>
+    <string name="theme_dark">深色主題</string>
+    <string name="theme_battery">由省電模式決定</string>
+    <string name="theme_default">系統預設</string>
+    <string name="layout">版面配置</string>
+    <string name="layout_default">預設</string>
+    <string name="layout_minimal">極簡</string>
+    <string name="layout_grid">網格</string>
+    <string name="downloader">下載工具</string>
+    <string name="downloader_default">Resplash 下載工具</string>
+    <string name="downloader_system">系統下載工具</string>
+    <string name="quality">圖片品質</string>
+    <string name="quality_raw">原始</string>
+    <string name="quality_full">完整</string>
+    <string name="quality_regular">一般</string>
+    <string name="quality_small">小圖</string>
+    <string name="quality_thumb">縮圖</string>
+    <string name="load_quality">載入圖片品質</string>
+    <string name="download_quality">下載圖片品質</string>
+    <string name="wallpaper_quality">桌布圖片品質</string>
+    <string name="long_press_to_download">長按下載</string>
+    <string name="long_press_to_download_summary">長按照片開始下載</string>
+
+    <!-- Auto Wallpaper -->
+    <string name="auto_wallpaper_title">自動桌布</string>
+    <string name="auto_wallpaper_info">開啟後，自動桌布功能將根據下列設定為您的裝置隨機應用新桌布</string>
+    <string name="auto_wallpaper_help_title">有問題？</string>
+    <string name="auto_wallpaper_help_message">嘗試在手機設定中為 Resplash 禁用閒置狀態和電池最佳化。\n\n有關手機品牌的特定說明： https://dontkillmyapp.com/</string>
+    <string name="auto_wallpaper_conditions_title">條件</string>
+    <string name="auto_wallpaper_on_wifi_title">WiFi 已連接</string>
+    <string name="auto_wallpaper_on_wifi_summary">裝置必須連接到 WiFi 網路</string>
+    <string name="auto_wallpaper_charging_title">電源已連接</string>
+    <string name="auto_wallpaper_charging_summary">裝置必須連接到電源</string>
+    <string name="auto_wallpaper_idle_title">閒置</string>
+    <string name="auto_wallpaper_idle_summary">裝置必須處於非活動狀態</string>
+    <string name="auto_wallpaper_interval_title">間隔</string>
+    <string name="auto_wallpaper_interval_summary">桌布切換間隔：%s</string>
+    <string name="auto_wallpaper_interval_fifteen_minutes">15 分鐘</string>
+    <string name="auto_wallpaper_interval_thirty_minutes">30 分鐘</string>
+    <string name="auto_wallpaper_interval_one_hour">1 小時</string>
+    <string name="auto_wallpaper_interval_three_hours">3 小時</string>
+    <string name="auto_wallpaper_interval_six_hours">6 小時</string>
+    <string name="auto_wallpaper_interval_twelve_hours">12 小時</string>
+    <string name="auto_wallpaper_interval_twenty_four_hours">24 小時</string>
+    <string name="auto_wallpaper_interval_forty_eight_hours">48 小時</string>
+    <string name="auto_wallpaper_interval_one_week">1週</string>
+    <string name="auto_wallpaper_interval_one_month">1個月</string>
+    <string name="auto_wallpaper_source">來源</string>
+    <string name="auto_wallpaper_source_title">桌布來源</string>
+    <string name="auto_wallpaper_source_summary">目前來源：%s</string>
+    <string name="auto_wallpaper_source_all">所有</string>
+    <string name="auto_wallpaper_source_featured">精選</string>
+    <string name="auto_wallpaper_source_collections">收藏</string>
+    <string name="auto_wallpaper_source_user">使用者照片</string>
+    <string name="auto_wallpaper_source_search">關鍵字</string>
+    <string name="auto_wallpaper_source_not_set">未設定</string>
+    <string name="auto_wallpaper_collections_summary">選擇用於獲取照片的圖集</string>
+    <string name="auto_wallpaper_user_title">用戶照片</string>
+    <string name="auto_wallpaper_user_summary">使用來自以下用戶的照片：\@%s</string>
+    <string name="auto_wallpaper_user_dialog_message">輸入用於獲取照片的用戶名：</string>
+    <string name="auto_wallpaper_search_terms_title">關鍵字</string>
+    <string name="auto_wallpaper_search_terms_dialog_message">獲取與以下關鍵字符合的照片：</string>
+    <string name="auto_wallpaper_search_terms_dialog_helper_text">（用逗號分隔多個關鍵字）</string>
+    <string name="auto_wallpaper_options_title">選項</string>
+    <string name="auto_wallpaper_crop_title">裁切方式</string>
+    <string name="auto_wallpaper_crop_none">保持原樣</string>
+    <string name="auto_wallpaper_crop_center">居中（滑動）</string>
+    <string name="auto_wallpaper_crop_center_crop">居中（裁切）</string>
+    <string name="auto_wallpaper_notification_settings_title">通知設定</string>
+    <string name="auto_wallpaper_show_notification_title">顯示通知</string>
+    <string name="auto_wallpaper_show_notification_summary">取得有關當下桌布資訊的通知</string>
+    <string name="auto_wallpaper_portrait_mode_only_title">裝置方向修正</string>
+    <string name="auto_wallpaper_portrait_mode_only_summary">如果某些裝置在橫向時設置了桌布，則會錯誤地裁切桌布，選取此項將在裝置直向時重新安排任務</string>
+    <string name="auto_wallpaper_select_screen_title">選擇螢幕</string>
+    <string name="auto_wallpaper_select_screen_summary">將桌布套用到：%s</string>
+    <string name="auto_wallpaper_select_screen_home_screen">主螢幕</string>
+    <string name="auto_wallpaper_select_screen_lock_screen">鎖定螢幕</string>
+    <string name="auto_wallpaper_select_screen_both">主螢幕和鎖定螢幕</string>
+    <string name="auto_wallpaper_orientation_title">桌布方向</string>
+    <string name="auto_wallpaper_orientation_summary">將桌布方向限制為：%s</string>
+    <string name="auto_wallpaper_content_filter_title">內容過濾器</string>
+    <string name="auto_wallpaper_content_filter_low_summary">低：保證不會顯示任何違反提交準則的內容（例如包含裸露或暴力行為的圖片）</string>
+    <string name="auto_wallpaper_content_filter_high_summary">高：過濾可能不適合年輕受眾的內容</string>
+    <string name="auto_wallpaper_content_filter_note">請注意，我們不能保證刪除所有可能不適當的內容</string>
+    <string name="auto_wallpaper_history_title">自動桌布歷史</string>
+    <string name="auto_wallpaper_history_summary">查看以前設置的桌布</string>
+    <string name="auto_wallpaper_history_clear_history">清除歷史記錄</string>
+    <string name="auto_wallpaper_activate">啟用</string>
+    <string name="auto_wallpaper_next_wallpaper">下一張桌布</string>
+    <string name="auto_wallpaper_add_to_auto_wallpaper">添加到自動桌布</string>
+    <string name="auto_wallpaper_remove_from_auto_wallpaper">從自動桌布刪除</string>
+    <string name="auto_wallpaper_collection_added">圖集已添加到自動桌布</string>
+    <string name="auto_wallpaper_collection_removed">圖集已從自動桌布中刪除</string>
+    <string name="auto_wallpaper_selected_collections">已選</string>
+    <string name="auto_wallpaper_no_selected_collections">添加一些圖集到自動桌布</string>
+    <string name="auto_wallpaper_discover">發現</string>
+    <string name="auto_wallpaper_popular">流行</string>
+    <string name="auto_wallpaper_add_collection_from_url">從 URL 添加集錦</string>
+    <string name="auto_wallpaper_could_not_add_collection">無法添加至集錦</string>
+    <string name="auto_wallpaper_copy_and_paste_a_collection_url">複製並貼上集錦 URL：</string>
+    <string name="auto_wallpaper_collection_url">收藏 URL</string>
+    <string name="auto_wallpaper_add_collection">添加集錦</string>
+    <string name="auto_wallpaper_invalid_url">無效的 URL</string>
+    <string name="auto_wallpaper_external_storage_title">安裝到了外部儲存中？</string>
+    <string name="auto_wallpaper_external_storage_message">嘿！我們注意到您已決定將此應用程式安裝到外部儲存中。不幸的是，由於 Android 系統的限制，這意味著「自動桌布」功能可能無法正常使用。</string>
+
+    <!-- Photo Detail -->
+    <string name="views">瀏覽</string>
+    <string name="downloads">下載</string>
+    <string name="likes">喜愛</string>
+    <string name="camera">相機</string>
+    <string name="aperture">光圈</string>
+    <string name="focal_length">焦距</string>
+    <string name="dimensions">尺寸</string>
+    <string name="shutter_speed">曝光時間</string>
+    <string name="description">描述</string>
+
+    <!-- Collections -->
+    <string name="add_to_collection">添加到收藏</string>
+    <string name="create_new_collection">建立新收藏</string>
+    <string name="make_collection_private">將收藏設為私密</string>
+    <string name="collection_name_hint">名稱</string>
+    <string name="collection_description_hint">描述（選填）</string>
+    <string name="collection_name_required">必須填寫名稱</string>
+    <string name="edit_collection">編輯收藏</string>
+    <string name="curated_by_template">由 %s 策劃</string>
+
+    <!-- User -->
+    <string name="open_portfolio_link">開啟作品集連結</string>
+    <string name="blank_username_error">使用者名稱不能為空</string>
+    <string name="invalid_username_error">使用者名稱必須至少包含一個字母，只能包含字母、數字或下劃線（不能有空格）</string>
+    <string name="username_taken_error">使用者名稱已被使用</string>
+    <string name="blank_first_name_error">名字不能為空</string>
+    <string name="blank_email_error">電子郵件不能為空</string>
+    <string name="invalid_email_error">電子郵件無效</string>
+    <string name="username_hint">使用者名稱</string>
+    <string name="username_helper_text">（僅限字母、數字和下劃線）</string>
+    <string name="first_name_hint">名字</string>
+    <string name="last_name_hint">姓氏</string>
+    <string name="email_hint">電子郵件</string>
+    <string name="portfolio_hint">個人網站/作品集</string>
+    <string name="instagram_username_hint">Instagram 使用者名稱</string>
+    <string name="location_hint">位置</string>
+    <string name="bio_hint">簡介</string>
+    <string name="account_updated">帳戶已更新！</string>
+
+    <!-- Search -->
+    <string name="no_search_results_subtitle">嘗試搜尋其他內容</string>
+    <string name="filter">篩選</string>
+    <string name="filter_relevance">相關度</string>
+    <string name="filter_latest">最新</string>
+    <string name="content_filter">內容篩選</string>
+    <string name="filter_low">低</string>
+    <string name="filter_high">高</string>
+    <string name="orientation">方向</string>
+    <string name="filter_any">任意</string>
+    <string name="filter_portrait">縱向</string>
+    <string name="filter_landscape">橫向</string>
+    <string name="filter_square">正方形</string>
+    <string name="filter_color">顏色</string>
+    <string name="filter_color_any">任意</string>
+    <string name="filter_color_black_white">黑白</string>
+    <string name="filter_color_black">黑色</string>
+    <string name="filter_color_white">白色</string>
+    <string name="filter_color_yellow">黃色</string>
+    <string name="filter_color_orange">橙色</string>
+    <string name="filter_color_red">紅色</string>
+    <string name="filter_color_purple">紫色</string>
+    <string name="filter_color_magenta">洋紅</string>
+    <string name="filter_color_green">綠色</string>
+    <string name="filter_color_teal">青色</string>
+    <string name="filter_color_blue">藍色</string>
+
+    <!-- Login -->
+    <string name="login">登入</string>
+    <string name="create_an_account">建立帳戶</string>
+    <string name="login_banner_title">創作從這裡開始</string>
+    <string name="login_banner_subtitle">取得其他地方找不到的免費高解析度照片</string>
+    <string name="login_success">登入成功</string>
+    <string name="need_to_log_in">您需要登入才能執行此操作</string>
+
+    <!-- Upgrade -->
+    <string name="upgrade_to_resplash_pro">升級到 Resplash Pro</string>
+    <string name="pro_feature_title">有什麼好處？</string>
+    <string name="pro_feature_one">自定義自動桌布</string>
+    <string name="pro_feature_one_subtitle">有些人喜歡黑白照片，有些人更喜歡看自然景觀而不是城市風景。自定義您想在自動桌布中看到的確切壁紙類型</string>
+    <string name="pro_feature_two">未來專屬功能</string>
+    <string name="pro_feature_two_subtitle">獲取未來的專業版獨家功能</string>
+    <string name="pro_feature_three">支持開發</string>
+    <string name="pro_feature_three_subtitle">升級到專業版可以支持 Resplash 的開發</string>
+    <string name="go_pro">升級到專業版</string>
+    <string name="restore_purchase">恢復購買</string>
+    <string name="upgrade_required">您需要 Resplash Pro 才能執行此操作！</string>
+
+    <!-- Donation -->
+    <string name="support_development">支持開發</string>
+    <string name="you_are_welcome">不客氣</string>
+
+    <!-- About -->
+    <string name="about">關於</string>
+    <string name="licenses">授權</string>
+    <string name="unsplash_summary">互聯網上免費使用圖片的來源</string>
+    <string name="donate_summary">如果您真的喜歡 Resplash，可以考慮向我捐贈幾美元來支持其開發</string>
+    <string name="report_bug_title">報告錯誤</string>
+    <string name="report_bug_summary">報告錯誤或請求新功能</string>
+    <string name="rate_app_title">評分應用</string>
+    <string name="rate_app_summary">如果您喜歡 Resplash，請在 Google Play 商店給予評分</string>
+    <string name="github_summary">Resplash 是開源的，可以在 GitHub 上查看</string>
+    <string name="developer_title">開發者</string>
+    <string name="privacy_policy">隱私政策</string>
+    <string name="terms_and_conditions">條款和條件</string>
+</resources>
