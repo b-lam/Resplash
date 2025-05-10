@@ -15,7 +15,7 @@ android {
     buildToolsVersion '33.0.1'
     defaultConfig {
         applicationId 'com.b_lam.resplash'
-        minSdkVersion 21
+        minSdkVersion 30
         targetSdkVersion 33
         versionCode 61
         versionName '3.4.1'
@@ -53,11 +53,11 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
