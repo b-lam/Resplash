@@ -1,7 +1,7 @@
 package com.b_lam.resplash.domain.autowallpaper
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import androidx.paging.Config
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
@@ -78,7 +78,7 @@ class AutoWallpaperRepository(
     }
 
     fun isCollectionUsedForAutoWallpaper(id: String) =
-        Transformations.map(autoWallpaperCollectionDao.getCountById(id)) { it > 0 }
+        autoWallpaperCollectionDao.getCountById(id).map { it > 0 }
 
     fun getNumberOfAutoWallpaperCollectionsLiveData() =
         autoWallpaperCollectionDao.getNumberOfAutoWallpaperCollectionsLiveData()

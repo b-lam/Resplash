@@ -8,6 +8,7 @@ import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import androidx.annotation.CallSuper
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.work.WorkInfo
@@ -22,8 +23,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
 
-@RequiresApi(Build.VERSION_CODES.N)
-class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
+class AutoWallpaperTileService(override val lifecycle: Lifecycle) : TileService(), LifecycleOwner, KoinComponent {
 
     private val dispatcher = ServiceLifecycleDispatcher(this)
 
@@ -112,6 +112,4 @@ class AutoWallpaperTileService: TileService(), LifecycleOwner, KoinComponent {
         notificationManager.hideTileServiceNotification()
         super.onDestroy()
     }
-
-    override fun getLifecycle() = dispatcher.lifecycle
 }

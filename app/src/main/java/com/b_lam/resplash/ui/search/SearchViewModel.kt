@@ -28,7 +28,7 @@ class SearchViewModel(
     var color = SearchPhotoDataSource.Companion.Color.ANY
     var orientation = SearchPhotoDataSource.Companion.Orientation.ANY
 
-    private val photoListing: LiveData<Listing<Photo>?> = Transformations.map(queryPhotoLiveData) {
+    private val photoListing: LiveData<Listing<Photo>?> = queryPhotoLiveData.map {
         if (it.isNotBlank()) {
             photoRepository.searchPhotos(
                 it, order, null, contentFilter, color, orientation, viewModelScope)
@@ -36,35 +36,35 @@ class SearchViewModel(
             null
         }
     }
-    val photosLiveData = Transformations.switchMap(photoListing) { it?.pagedList }
-    val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it?.networkState }
-    val photosRefreshStateLiveData = Transformations.switchMap(photoListing) {
+    val photosLiveData = photoListing.switchMap { it?.pagedList }
+    val photosNetworkStateLiveData = photoListing.switchMap { it?.networkState }
+    val photosRefreshStateLiveData = photoListing.switchMap {
         it?.refreshState ?: MutableLiveData(NetworkState.EMPTY)
     }
 
-    private val collectionListing: LiveData<Listing<Collection>?> = Transformations.map(queryLiveData) {
+    private val collectionListing: LiveData<Listing<Collection>?> = queryLiveData.map {
         if (it.isNotBlank()) {
             collectionRepository.searchCollections(it, viewModelScope)
         } else {
             null
         }
     }
-    val collectionsLiveData = Transformations.switchMap(collectionListing) { it?.pagedList }
-    val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it?.networkState }
-    val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) {
+    val collectionsLiveData = collectionListing.switchMap { it?.pagedList }
+    val collectionsNetworkStateLiveData = collectionListing.switchMap { it?.networkState }
+    val collectionsRefreshStateLiveData = collectionListing.switchMap {
         it?.refreshState ?: MutableLiveData(NetworkState.EMPTY)
     }
 
-    private val userListing: LiveData<Listing<User>?> = Transformations.map(queryLiveData) {
+    private val userListing: LiveData<Listing<User>?> = queryLiveData.map {
         if (it.isNotBlank()) {
             userRepository.searchUsers(it, viewModelScope)
         } else {
             null
         }
     }
-    val usersLiveData = Transformations.switchMap(userListing) { it?.pagedList }
-    val usersNetworkStateLiveData = Transformations.switchMap(userListing) { it?.networkState }
-    val usersRefreshStateLiveData = Transformations.switchMap(userListing) {
+    val usersLiveData = userListing.switchMap { it?.pagedList }
+    val usersNetworkStateLiveData = userListing.switchMap { it?.networkState }
+    val usersRefreshStateLiveData = userListing.switchMap {
         it?.refreshState ?: MutableLiveData(NetworkState.EMPTY)
     }
 

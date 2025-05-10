@@ -11,12 +11,11 @@ def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion '33.0.1'
+    compileSdk 35
     defaultConfig {
         applicationId 'com.b_lam.resplash'
         minSdkVersion 30
-        targetSdkVersion 33
+        targetSdkVersion 35
         versionCode 61
         versionName '3.4.1'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -46,6 +45,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
     bundle {
         language {
@@ -53,11 +53,11 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
@@ -65,6 +65,7 @@ android {
     lint {
         disable 'MissingTranslation'
     }
+    namespace 'com.b_lam.resplash'
 }
 
 dependencies {
@@ -83,12 +84,12 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'androidx.work:work-runtime-ktx:2.8.0'
+    implementation 'androidx.work:work-runtime-ktx:2.10.1'
 
     // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-service:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.9.0'
+    implementation 'androidx.lifecycle:lifecycle-service:2.9.0'
 
     // Room
     implementation 'androidx.room:room-runtime:2.5.0'
@@ -96,10 +97,10 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.5.0'
 
     // Material components
-    implementation 'com.google.android.material:material:1.9.0-alpha02'
+    implementation 'com.google.android.material:material:1.12.0'
 
     // Billing
-    implementation 'com.android.billingclient:billing-ktx:5.1.0'
+    implementation 'com.android.billingclient:billing-ktx:7.1.1'
 
     // Kotlin coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
@@ -141,9 +142,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.4'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
-    // Play Core
-    implementation 'com.google.android.play:core:1.10.3'
-    implementation 'com.google.android.play:core-ktx:1.8.1'
+    // Play
+    implementation 'com.google.android.play:asset-delivery:2.3.0'
+    implementation 'com.google.android.play:asset-delivery-ktx:2.3.0'
+    implementation 'com.google.android.play:feature-delivery:2.1.0'
+    implementation 'com.google.android.play:feature-delivery-ktx:2.1.0'
+    implementation 'com.google.android.play:review:2.0.2'
+    implementation 'com.google.android.play:review-ktx:2.0.2'
+    implementation 'com.google.android.play:app-update:2.1.0'
+    implementation 'com.google.android.play:app-update-ktx:2.1.0'
 
     // View binding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.6'
