@@ -80,6 +80,20 @@
 -keep class org.ocpsoft.prettytime.** { *; }
 -dontwarn org.ocpsoft.prettytime.**
 
+# Fix java.lang.ClassCastException: java.lang.Class cannot be cast to java.lang.reflect.ParameterizedType
+# https://github.com/square/retrofit/issues/3751#issuecomment-1192043644
+# With R8 full mode generic signatures are stripped for classes that are not
+# kept. Suspend functions are wrapped in continuations where the type argument
+# is used.
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+
+# R8 full mode strips generic signatures from return types if not kept.
+-if interface * { @retrofit2.http.* public *** *(...); }
+-keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+
+# With R8 full mode generic signatures are stripped for classes that are not kept.
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+
 # Uncomment for logs
 #-printusage usage.txt
 #-printseeds seeds.txt
