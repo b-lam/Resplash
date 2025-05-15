@@ -30,7 +30,7 @@ data class Collection(
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Links(
-    val self: String,
-    val html: String,
-    val photos: String
+    val self: String?,
+    val html: String?,
+    val photos: String?
 ) : Parcelable
