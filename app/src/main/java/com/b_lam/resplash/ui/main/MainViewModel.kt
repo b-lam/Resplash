@@ -43,19 +43,19 @@ class MainViewModel(
     private val _collectionOrderLiveData = MutableLiveData(CollectionDataSource.Companion.Order.ALL)
     val collectionOrderLiveData: LiveData<CollectionDataSource.Companion.Order> = _collectionOrderLiveData
 
-    private val photoListing: LiveData<Listing<Photo>> = Transformations.map(_photoOrderLiveData) {
+    private val photoListing: LiveData<Listing<Photo>> = _photoOrderLiveData.map {
         photoRepository.getPhotos(it, viewModelScope)
     }
-    val photosLiveData = Transformations.switchMap(photoListing) { it.pagedList }
-    val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
-    val photosRefreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
+    val photosLiveData = photoListing.switchMap{ it.pagedList }
+    val photosNetworkStateLiveData = photoListing.switchMap { it.networkState }
+    val photosRefreshStateLiveData = photoListing.switchMap { it.refreshState }
 
-    private val collectionListing = Transformations.map(_collectionOrderLiveData) {
+    private val collectionListing = _collectionOrderLiveData.map {
         collectionRepository.getCollections(it, viewModelScope)
     }
-    val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagedList }
-    val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it.networkState }
-    val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) { it.refreshState }
+    val collectionsLiveData = collectionListing.switchMap { it.pagedList }
+    val collectionsNetworkStateLiveData = collectionListing.switchMap { it.networkState }
+    val collectionsRefreshStateLiveData = collectionListing.switchMap { it.refreshState }
 
     fun refreshPhotos() = photoListing.value?.refresh?.invoke()
 

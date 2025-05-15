@@ -1,7 +1,7 @@
 package com.b_lam.resplash.domain
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 import androidx.paging.Config
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
@@ -28,13 +28,11 @@ abstract class BaseDataSourceFactory<T> : DataSource.Factory<Int, T>() {
 
     fun createListing() = Listing<T>(
         pagedList = LivePagedListBuilder(this, config).build(),
-        networkState = Transformations.switchMap(
-            this.sourceLiveData,
+        networkState = this.sourceLiveData.switchMap(
             BaseDataSource<T>::networkState
         ),
         refresh = { this.sourceLiveData.value?.invalidate() },
-        refreshState = Transformations.switchMap(
-            this.sourceLiveData,
+        refreshState = this.sourceLiveData.switchMap(
             BaseDataSource<T>::initialLoadState
         ),
         retry = {}

@@ -30,21 +30,21 @@ class UserViewModel(
 
     private val photoListing = MutableLiveData<Listing<Photo>>()
 
-    val photosLiveData = Transformations.switchMap(photoListing) { it.pagedList }
-    val photosNetworkStateLiveData = Transformations.switchMap(photoListing) { it.networkState }
-    val photosRefreshStateLiveData = Transformations.switchMap(photoListing) { it.refreshState }
+    val photosLiveData = photoListing.switchMap { it.pagedList }
+    val photosNetworkStateLiveData = photoListing.switchMap { it.networkState }
+    val photosRefreshStateLiveData = photoListing.switchMap { it.refreshState }
 
     private val likesListing = MutableLiveData<Listing<Photo>>()
 
-    val likesLiveData = Transformations.switchMap(likesListing) { it.pagedList }
-    val likesNetworkStateLiveData = Transformations.switchMap(likesListing) { it.networkState }
-    val likesRefreshStateLiveData = Transformations.switchMap(likesListing) { it.refreshState }
+    val likesLiveData = likesListing.switchMap { it.pagedList }
+    val likesNetworkStateLiveData = likesListing.switchMap { it.networkState }
+    val likesRefreshStateLiveData = likesListing.switchMap { it.refreshState }
 
     private val collectionListing = MutableLiveData<Listing<Collection>>()
 
-    val collectionsLiveData = Transformations.switchMap(collectionListing) { it.pagedList }
-    val collectionsNetworkStateLiveData = Transformations.switchMap(collectionListing) { it.networkState }
-    val collectionsRefreshStateLiveData = Transformations.switchMap(collectionListing) { it.refreshState }
+    val collectionsLiveData = collectionListing.switchMap { it.pagedList }
+    val collectionsNetworkStateLiveData = collectionListing.switchMap { it.networkState }
+    val collectionsRefreshStateLiveData = collectionListing.switchMap { it.refreshState }
 
     fun getUser(username: String) {
         viewModelScope.launch {
