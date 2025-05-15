@@ -7,7 +7,7 @@ import android.os.Build
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.b_lam.resplash.util.applyTheme
-import java.util.*
+import java.util.Locale
 
 class SharedPreferencesRepository(context: Context) {
 
@@ -163,7 +163,12 @@ class SharedPreferencesRepository(context: Context) {
                 ?: PREFERENCE_LANGUAGE_DEFAULT_VALUE
             return when (value) {
                 "default" -> null
-                else -> Locale(value)
+                else -> value.split("-").let {
+                    when (it.size) {
+                        2 -> Locale(it[0], it[1])
+                        else -> Locale(it[0])
+                    }
+                }
             }
         }
 

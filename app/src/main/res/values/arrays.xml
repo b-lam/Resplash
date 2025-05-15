@@ -18,6 +18,7 @@
         <item>@string/language_russian</item>
         <item>@string/language_serbian</item>
         <item>@string/language_spanish</item>
+        <item>@string/language_taiwanese</item>
         <item>@string/language_thai</item>
         <item>@string/language_turkish</item>
         <item>@string/language_ukrainian</item>
@@ -38,6 +39,7 @@
         <item>ru</item>
         <item>sr</item>
         <item>es</item>
+        <item>zh-tw</item>
         <item>th</item>
         <item>tr</item>
         <item>uk</item>
