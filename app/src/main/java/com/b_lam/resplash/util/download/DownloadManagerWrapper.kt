@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import androidx.collection.LongSparseArray
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.b_lam.resplash.util.RESPLASH_DIRECTORY
 import com.b_lam.resplash.util.error
@@ -26,7 +27,12 @@ class DownloadManagerWrapper(private val context: Context) {
     init {
         val downloadStatusReceiver = DownloadStatusReceiver()
         val intentFilter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-        context.registerReceiver(downloadStatusReceiver, intentFilter)
+        ContextCompat.registerReceiver(
+            context,
+            downloadStatusReceiver,
+            intentFilter,
+            ContextCompat.RECEIVER_EXPORTED
+        )
     }
 
     fun downloadPhoto(url: String, fileName: String): Long {

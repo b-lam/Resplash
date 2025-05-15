@@ -3,6 +3,7 @@ package com.b_lam.resplash.worker
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
@@ -48,7 +49,12 @@ class DownloadWorker(
         val notificationBuilder =
             notificationManager.getProgressNotificationBuilder(fileName, cancelIntent)
 
-        setForeground(ForegroundInfo(notificationId, notificationBuilder.build()))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            setForeground(ForegroundInfo(notificationId, notificationBuilder.build(),
+                FOREGROUND_SERVICE_TYPE_DATA_SYNC))
+        } else {
+            setForeground(ForegroundInfo(notificationId, notificationBuilder.build()))
+        }
 
         download(url, fileName, downloadAction, notificationId, notificationBuilder)
 
